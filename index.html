@@ -7,86 +7,753 @@
 <meta name="robots" content="noindex, nofollow">
 <title>릴리랑 | 2분 영어 그림책</title>
 <meta name="description" content="아이와 함께 2분, 듣고 누르며 노는 영어 그림책. 4~7세 아이와 부모님을 위한 릴리랑.">
-<link rel="icon" href="brand/favicon.ico" sizes="any"><link rel="icon" href="brand/favicon-32.png" type="image/png" sizes="32x32"><link rel="icon" href="brand/favicon-16.png" type="image/png" sizes="16x16"><link rel="icon" href="brand/icon-192.png" type="image/png" sizes="192x192"><link rel="apple-touch-icon" href="brand/apple-touch-icon.png">
-<meta property="og:type" content="website"><meta property="og:site_name" content="릴리랑"><meta property="og:locale" content="ko_KR">
-<meta property="og:url" content="https://read.wspace.ai.kr/lily/"><meta property="og:title" content="릴리랑 | 2분 영어 그림책"><meta property="og:description" content="아이와 함께 2분, 듣고 누르며 노는 영어 그림책. 4~7세 아이와 부모님을 위한 릴리랑.">
-<meta property="og:image" content="https://read.wspace.ai.kr/lily/og.jpg"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta property="og:image:alt" content="릴리랑 로고와 욕실에서 올려다보며 웃는 릴리">
-<meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="릴리랑 | 2분 영어 그림책"><meta name="twitter:description" content="아이와 함께 2분, 듣고 누르며 노는 영어 그림책. 4~7세 아이와 부모님을 위한 릴리랑."><meta name="twitter:image" content="https://read.wspace.ai.kr/lily/og.jpg">
 
+<!-- favicons -->
+<link rel="icon" href="brand/favicon.ico" sizes="any">
+<link rel="icon" href="brand/favicon-32.png" type="image/png" sizes="32x32">
+<link rel="icon" href="brand/favicon-16.png" type="image/png" sizes="16x16">
+<link rel="icon" href="brand/icon-192.png" type="image/png" sizes="192x192">
+<link rel="apple-touch-icon" href="brand/apple-touch-icon.png">
+
+<!-- OG / Twitter -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="릴리랑">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:url" content="https://lily.wspace.ai.kr/">
+<meta property="og:title" content="릴리랑 | 2분 영어 그림책">
+<meta property="og:description" content="아이와 함께 2분, 듣고 누르며 노는 영어 그림책. 4~7세 아이와 부모님을 위한 릴리랑.">
+<meta property="og:image" content="https://lily.wspace.ai.kr/og.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="릴리랑 로고와 욕실에서 올려다보며 웃는 릴리">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="릴리랑 | 2분 영어 그림책">
+<meta name="twitter:description" content="아이와 함께 2분, 듣고 누르며 노는 영어 그림책. 4~7세 아이와 부모님을 위한 릴리랑.">
+<meta name="twitter:image" content="https://lily.wspace.ai.kr/og.jpg">
+
+<!-- Fonts: preconnect + async load to avoid render-blocking -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Andika:wght@400;700&family=Gowun+Dodum&display=swap" onload="this.onload=null;this.rel='stylesheet'">
 <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Andika:wght@400;700&family=Gowun+Dodum&display=swap"></noscript>
+
+<!-- Hero image preload - 첫 화면 25KB -->
+<link rel="preload" as="image" href="ep03/art/bg-0-intro.webp" fetchpriority="high">
+
 <style>
-/* EP03 페이지와 같은 그림책(t-book) 색. 이 페이지에는 누르는 장난감이 없어서 노랑(--touch)은 쓰지 않는다 */
+/* ── 설계 원칙 ──────────────────────────────────────────
+   L3 첫화면 놀이 시안(L05 모바일 390px, L06 데스크톱 1280px) 구현.
+   휴대폰 < 640 / 태블릿 640-1023 / 데스크톱 1024+
+   태블릿은 늘린 폰이 아니라 넓어진 공간을 사용하는 배치.
+   터치 대상 최소 48px (놀이 버튼 64px).
+   노란색은 아이가 누르는 버튼에만.
+   ──────────────────────────────────────────────────── */
+
+/* ── 폰트 폴백 CLS 방지 ── */
+@font-face {
+  font-family: 'GowunFallback';
+  src: local('Apple SD Gothic Neo Regular'), local('AppleSDGothicNeo-Regular'),
+       local('Malgun Gothic'), local('MalgunGothic'), local('Arial');
+  size-adjust: 106%;
+  ascent-override: 94%;
+  descent-override: 24%;
+  line-gap-override: 0%;
+}
+
+/* ── 토큰 ── */
 :root {
-  --t-bg: #eaf2f7; --t-surface: #ffffff; --t-ink: #24323d; --t-sub: #5b6b78; --t-accent: #2f7d6d; --t-soft: #d7ebe4;
-  --t-wash-1: #bfe0f2; --t-wash-2: #ffd6c2;
-  --kr: "Gowun Dodum", "Apple SD Gothic Neo", "Noto Sans KR", sans-serif;
-  --en: "Andika", "Gowun Dodum", sans-serif;
+  --t-bg:      #eaf2f7;
+  --t-surface: #ffffff;
+  --t-ink:     #1e2a30;
+  --t-sub:     #5b6b78;
+  --t-muted:   #8ca0ad;
+  --t-accent:  #2f7d6d;
+  --t-soft:    #d7ebe4;
+  --t-touch:   #ffcc00;  /* 노란색: 아이가 누르는 것에만 */
+  --t-lock:    #c8d8e0;
+  --kr: "Gowun Dodum", "GowunFallback", "Apple SD Gothic Neo", "Noto Sans KR", sans-serif;
+  --en: "Andika", "GowunFallback", "Apple SD Gothic Neo", sans-serif;
+  /* 화면 최대 너비 */
+  --max-w: 1280px;
+  /* 양쪽 여백 */
+  --px: clamp(20px, 5vw, 80px);
 }
-* { box-sizing: border-box; }
-body { margin: 0; background: var(--t-bg); color: var(--t-ink); font-family: var(--kr); font-size: 16px; line-height: 1.6; word-break: keep-all; overflow-wrap: anywhere; }
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  background: var(--t-bg);
+  color: var(--t-ink);
+  font-family: var(--kr);
+  font-size: 16px;
+  line-height: 1.65;
+  word-break: keep-all;
+  overflow-wrap: anywhere;
+  -webkit-font-smoothing: antialiased;
+}
+img { display: block; max-width: 100%; }
 :focus-visible { outline: 3px solid var(--t-accent); outline-offset: 2px; }
-main {
-  max-width: 560px; margin: 0 auto; display: flex; flex-direction: column; gap: 12px;
-  padding: 20px max(16px, env(safe-area-inset-right, 0px)) calc(40px + env(safe-area-inset-bottom, 0px)) max(16px, env(safe-area-inset-left, 0px));
+
+/* 링크 기본: 밑줄 없음 */
+a { text-decoration: none; color: inherit; }
+
+/* ── 버튼 베이스 ── */
+.btn {
+  display: block; width: 100%;
+  padding: 0 20px;
+  min-height: 52px;
+  border: none; border-radius: 6px;
+  font-family: var(--kr); font-size: 17px; font-weight: 700;
+  text-align: center; cursor: pointer;
+  text-decoration: none;  /* 버튼 텍스트 밑줄 없음 */
+  display: flex; align-items: center; justify-content: center;
+  -webkit-appearance: none;
 }
-.hero { text-align: center; padding: 8px 8px 4px; }
-.hero img { display: block; width: 150px; height: auto; margin: 0 auto 10px; }
-.hero h1 { margin: 0; font-size: 21px; font-weight: 400; line-height: 1.45; }
-.who { display: inline-block; margin-top: 10px; padding: 3px 14px; border-radius: 99px; background: var(--t-soft); color: var(--t-accent); font-size: 14px; }
-.card { background: var(--t-surface); border-radius: 20px; padding: 20px; }
-h2 { margin: 0 0 12px; font-size: 18px; font-weight: 400; }
-.steps { margin: 0; padding: 0; list-style: none; display: grid; gap: 12px; }
-.steps li { display: grid; grid-template-columns: 36px 1fr; gap: 12px; align-items: start; }
-.steps .n { width: 36px; height: 36px; border-radius: 50%; display: grid; place-items: center; background: var(--t-wash-1); font-family: var(--en); font-weight: 700; color: var(--t-ink); }
-.steps b { display: block; font-weight: 400; font-size: 16px; }
-.steps span span { font-size: 14px; color: var(--t-sub); }
-.ep { display: grid; grid-template-columns: 112px 1fr; gap: 14px; align-items: center; text-decoration: none; color: inherit; border-radius: 16px; padding: 10px; background: var(--t-bg); }
-.ep img { width: 112px; height: 112px; object-fit: cover; object-position: center 20%; border-radius: 12px; display: block; background: var(--t-wash-1); }
-.ep .no { font-family: var(--en); font-weight: 700; font-size: 12px; color: var(--t-accent); }
-.ep .tt { display: block; font-family: var(--en); font-weight: 700; font-size: 20px; line-height: 1.25; margin: 2px 0 4px; }
-.ep .meta { font-size: 14px; color: var(--t-sub); }
-.ep .go { display: inline-block; margin-top: 8px; font-size: 14px; color: var(--t-accent); }
-.ep:active { background: var(--t-soft); }
-.soon { margin: 12px 0 0; font-size: 14px; color: var(--t-sub); }
-.maker { margin: 8px 4px 0; font-size: 13px; text-align: center; }
-.maker a { color: var(--t-accent); }
+.btn-play {
+  background: var(--t-touch); color: #2c2017;
+  box-shadow: 0 2px 0 rgba(180,140,0,.25);
+}
+.btn-join {
+  background: transparent;
+  border: 1.5px solid var(--t-accent);
+  color: var(--t-accent);
+}
+.btn:active { opacity: .88; }
+
+/* ══════════════════════════════════════════════════════
+   1. 무대 (Stage hero)
+   ══════════════════════════════════════════════════════ */
+.stage {
+  position: relative;
+  width: 100%;
+  /* 폰: 뷰포트 높이 55~60%. 태블릿 이상: 고정 높이 */
+  height: min(60svh, 480px);
+  overflow: hidden;
+  background: #1a2830; /* 이미지 로드 전 */
+}
+@media (min-width: 640px)  { .stage { height: 440px; } }
+@media (min-width: 1024px) { .stage { height: 560px; } }
+
+.stage__bg {
+  position: absolute; inset: 0;
+  background: url(ep03/art/bg-0-intro.webp) center 18% / cover no-repeat;
+  /* 이미지 preload로 LCP 최적화 */
+}
+/* 하단 베일 */
+.stage::after {
+  content: '';
+  position: absolute; inset: auto 0 0 0;
+  height: 75%;
+  background: linear-gradient(to top,
+    rgba(15,24,30,.96) 0%,
+    rgba(15,24,30,.6) 50%,
+    transparent 100%);
+  z-index: 1;
+  pointer-events: none;
+}
+
+/* 상단 내비 */
+.stage__nav {
+  position: absolute; top: 0; left: 0; right: 0; z-index: 2;
+  padding: max(16px, env(safe-area-inset-top)) var(--px) 16px;
+  display: flex; align-items: center; justify-content: space-between;
+}
+.stage__logo {
+  height: 36px; width: auto;
+}
+@media (min-width: 640px) { .stage__logo { height: 42px; } }
+.stage__ep-pill {
+  font-family: var(--en); font-size: 11px; font-weight: 700;
+  color: rgba(255,255,255,.8); letter-spacing: .1em;
+  background: rgba(255,255,255,.12); padding: 5px 12px; border-radius: 3px;
+  white-space: nowrap;
+}
+
+/* 하단 콘텐츠 */
+.stage__bottom {
+  position: absolute; bottom: 0; left: 0; right: 0; z-index: 2;
+  padding: 0 var(--px) max(24px, env(safe-area-inset-bottom));
+}
+/* 폰: 타이틀 + 재생 버튼 세로 배치 */
+.stage__title {
+  font-family: var(--en); font-size: clamp(26px, 6vw, 52px); font-weight: 700;
+  color: #fff; line-height: 1.15; margin-bottom: 6px;
+}
+.stage__ko {
+  font-size: clamp(13px, 2vw, 17px); color: rgba(255,255,255,.75); margin-bottom: 20px;
+}
+.stage__play-row {
+  display: flex; align-items: center; gap: 16px;
+}
+.play-circle {
+  flex-shrink: 0;
+  width: 64px; height: 64px; border-radius: 50%;
+  background: var(--t-touch); border: none; cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  box-shadow: 0 0 0 7px rgba(255,204,0,.2);
+  -webkit-appearance: none;
+}
+.play-circle svg { width: 26px; height: 26px; fill: #1e2a30; margin-left: 4px; }
+.play-circle:active { opacity: .85; }
+.stage__play-label { color: rgba(255,255,255,.92); font-size: 16px; line-height: 1.4; }
+.stage__play-label small { display: block; font-size: 13px; color: rgba(255,255,255,.55); }
+
+/* 태블릿 이상: 무대 하단을 가로 배치 (타이틀+재생 | 가입 버튼) */
+@media (min-width: 640px) {
+  .stage__bottom {
+    display: flex; align-items: flex-end;
+    justify-content: space-between; gap: 40px;
+  }
+  .stage__main { flex: 1; }
+  .stage__side { flex-shrink: 0; }
+  .btn-join-stage {
+    padding: 14px 28px; min-height: 52px; min-width: 200px;
+    background: rgba(255,255,255,.12);
+    border: 1.5px solid rgba(255,255,255,.35);
+    color: #fff; border-radius: 6px;
+    font-family: var(--kr); font-size: 15px;
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer; -webkit-appearance: none;
+    backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
+    text-decoration: none;
+  }
+  .btn-join-stage:active { opacity: .85; }
+  /* 폰 전용 가입 버튼 숨김 (상단에 별도 CTA가 있음) */
+  .stage__side-mobile { display: none; }
+}
+/* 폰: stage 내 가입 버튼 없음 */
+@media (max-width: 639px) {
+  .stage__side { display: none; }
+}
+
+/* ══════════════════════════════════════════════════════
+   2. CTA 띠
+   ══════════════════════════════════════════════════════ */
+.cta-band {
+  background: var(--t-surface);
+  padding: 22px var(--px);
+  border-bottom: 1px solid #d7e8f0;
+}
+/* 폰: 세로 */
+.cta-band__inner {
+  display: flex; flex-direction: column; gap: 16px;
+}
+/* 태블릿+: 가로 배치 */
+@media (min-width: 640px) {
+  .cta-band__inner {
+    flex-direction: row; align-items: center; justify-content: space-between;
+    gap: 40px;
+    max-width: var(--max-w); margin: 0 auto;
+  }
+  .cta-band__text { flex: 1; }
+  .cta-band__btns { display: flex; gap: 12px; flex-shrink: 0; }
+  .cta-band__btns .btn { width: auto; min-width: 180px; white-space: nowrap; }
+}
+.cta-band h2 { font-size: clamp(17px, 2.5vw, 20px); font-weight: 400; margin-bottom: 3px; }
+.cta-band .sub { font-size: 14px; color: var(--t-sub); }
+
+/* ══════════════════════════════════════════════════════
+   3. 이렇게 놀아요 (3단계)
+   ══════════════════════════════════════════════════════ */
+.how-section {
+  background: var(--t-surface);
+  padding: 32px var(--px);
+  border-top: 1px solid #e0eaf0;
+}
+.how-section h2 {
+  font-size: clamp(18px, 2.5vw, 22px); font-weight: 400; margin-bottom: 20px;
+}
+/* 폰: 단계 행 (가로 이미지 + 텍스트) */
+.step-list { display: flex; flex-direction: column; gap: 0; }
+.step-row {
+  display: flex; align-items: stretch; gap: 0;
+  border: 1.5px solid #e0eaf0; border-radius: 6px; overflow: hidden;
+  margin-bottom: 10px;
+}
+.step-row:last-child { margin-bottom: 0; }
+.step-img {
+  width: 100px; flex-shrink: 0; object-fit: cover;
+  display: block; background: #daedf7;
+}
+.step-img-ph {
+  width: 100px; flex-shrink: 0;
+  background: #daedf7; display: flex; align-items: center; justify-content: center;
+}
+.step-img-ph img { width: 60px; height: auto; opacity: .6; }
+.step-body { padding: 14px 16px; display: flex; flex-direction: column; justify-content: center; }
+.step-n {
+  font-family: var(--en); font-size: 11px; font-weight: 700;
+  color: var(--t-accent); display: block; margin-bottom: 3px;
+}
+.step-title { font-size: 15px; font-weight: 700; display: block; margin-bottom: 3px; }
+.step-desc { font-size: 13px; color: var(--t-sub); line-height: 1.6; }
+
+/* 태블릿+: 3열 가로 배치 */
+@media (min-width: 640px) {
+  .how-section { padding: 40px var(--px); }
+  .step-list {
+    flex-direction: row; gap: 16px;
+    max-width: var(--max-w); margin: 0 auto;
+  }
+  .step-row {
+    flex: 1; flex-direction: column; margin-bottom: 0;
+  }
+  .step-img { width: 100%; height: 160px; }
+  .step-img-ph { width: 100%; height: 160px; }
+  .step-img-ph img { width: 72px; }
+}
+/* 데스크톱: 섹션 제목 + 스텝 목록을 별도 열로 (중간 섹션에서 처리) */
+
+/* ══════════════════════════════════════════════════════
+   4. 이번 주 7편 (에피소드 그리드)
+   ══════════════════════════════════════════════════════ */
+.ep-section {
+  background: var(--t-bg);
+  padding: 28px var(--px) 32px;
+}
+.ep-section h2 {
+  font-size: clamp(18px, 2.5vw, 22px); font-weight: 400; margin-bottom: 16px;
+}
+/* 폰: 2열 */
+.ep-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+}
+/* 태블릿 세로: 3열 */
+@media (min-width: 640px) {
+  .ep-grid { grid-template-columns: repeat(3, 1fr); }
+}
+/* 태블릿 가로 / 데스크톱: 4열 */
+@media (min-width: 900px) {
+  .ep-grid { grid-template-columns: repeat(4, 1fr); }
+}
+.ep-card {
+  border-radius: 8px; overflow: hidden;
+  background: var(--t-surface);
+}
+.ep-card--open { outline: 2.5px solid var(--t-touch); }
+.ep-thumb {
+  width: 100%; aspect-ratio: 1 / 1;
+  object-fit: cover; object-position: center 20%; display: block;
+  background: var(--t-lock);
+}
+.ep-thumb-lock {
+  width: 100%; aspect-ratio: 1 / 1;
+  background: var(--t-lock);
+  display: flex; align-items: center; justify-content: center;
+  color: #7090a0;
+}
+.ep-thumb-lock svg { width: 22px; height: 22px; }
+/* 마지막 에피소드: 2칸 (폰), 4칸 (태블릿+) */
+.ep-card--wide { grid-column: span 2; }
+.ep-card--wide .ep-thumb,
+.ep-card--wide .ep-thumb-lock { aspect-ratio: 2 / 1; }
+@media (min-width: 900px) {
+  .ep-card--wide { grid-column: span 4; }
+  .ep-card--wide .ep-thumb,
+  .ep-card--wide .ep-thumb-lock { aspect-ratio: 4 / 1; height: 100px; }
+}
+.ep-foot { padding: 8px 10px 12px; }
+.ep-num {
+  font-family: var(--en); font-size: 10px; font-weight: 700;
+  color: var(--t-accent); display: block; margin-bottom: 2px;
+}
+.ep-title {
+  font-family: var(--en); font-size: 12px; font-weight: 700;
+  line-height: 1.3; display: block; color: var(--t-ink);
+}
+.ep-ko { font-size: 11px; color: var(--t-sub); display: block; margin-top: 1px; }
+.ep-badge-free {
+  display: inline-block; margin-top: 5px;
+  font-family: var(--kr); font-size: 10px; font-weight: 700;
+  padding: 2px 7px; border-radius: 3px;
+  background: var(--t-touch); color: #1e2a30;
+}
+.ep-badge-soon {
+  display: inline-block; margin-top: 5px;
+  font-size: 10px; color: var(--t-muted);
+}
+.ep-join-notice {
+  grid-column: 1 / -1;
+  margin-top: 4px; padding: 10px 14px;
+  background: var(--t-soft); border-radius: 5px;
+  font-size: 13px; color: #2f5a4a;
+}
+
+/* ══════════════════════════════════════════════════════
+   5. 데스크톱 중간 열 배치
+   ══════════════════════════════════════════════════════ */
+/* 폰/태블릿: 이렇게 놀아요 + 에피소드를 따로 세로 배치 (기본)
+   데스크톱(1024+): 나란히 2열 */
+@media (min-width: 1024px) {
+  /* 중간 섹션 컨테이너 */
+  .mid-wrapper {
+    display: grid;
+    grid-template-columns: 340px 1fr;
+    gap: 0;
+    background: var(--t-surface);
+    border-top: 1px solid #e0eaf0;
+    max-width: var(--max-w); /* 너비 제한 없이 전체 */
+  }
+  .mid-wrapper { max-width: none; }
+  .how-section {
+    /* 왼쪽 열 */
+    border-right: 1px solid #e0eaf0; border-top: none;
+    padding: 52px var(--px);
+  }
+  .step-list {
+    flex-direction: column; gap: 0; max-width: none; margin: 0;
+  }
+  .step-row {
+    flex-direction: row; margin-bottom: 0;
+    border-top: none; border-left: none; border-right: none;
+    border-bottom: 1px solid #e0eaf0; border-radius: 0;
+  }
+  .step-row:first-child { border-top: none; }
+  .step-row:last-child { border-bottom: none; }
+  .step-img { width: 120px; height: 90px; }
+  .step-img-ph { width: 120px; height: 90px; }
+  .step-img-ph img { width: 56px; }
+  .ep-section {
+    border-top: none;
+    padding: 52px var(--px);
+  }
+  .ep-section h2 { margin-bottom: 16px; }
+  .ep-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  .ep-card--wide { grid-column: span 3; }
+  .ep-card--wide .ep-thumb,
+  .ep-card--wide .ep-thumb-lock { aspect-ratio: 3 / 1; height: auto; }
+}
+
+/* ══════════════════════════════════════════════════════
+   6. 부모님께
+   ══════════════════════════════════════════════════════ */
+.parent-section {
+  background: var(--t-surface);
+  padding: 32px var(--px);
+  border-top: 1px solid #e0eaf0;
+}
+.parent-section h2 {
+  font-size: clamp(18px, 2.5vw, 22px); font-weight: 400; margin-bottom: 20px;
+}
+.why-list { display: flex; flex-direction: column; }
+.why-item {
+  padding: 14px 0; border-bottom: 1px solid #e0eaf0;
+}
+.why-item:last-child { border-bottom: none; }
+.why-title { font-size: 15px; font-weight: 700; display: block; margin-bottom: 5px; }
+.why-desc { font-size: 14px; color: var(--t-sub); line-height: 1.8; }
+
+/* 태블릿+: 3열 */
+@media (min-width: 640px) {
+  .parent-section { padding: 40px var(--px); }
+  .why-list {
+    flex-direction: row; gap: 32px;
+    max-width: var(--max-w); margin: 0 auto;
+  }
+  .why-item {
+    flex: 1; border-bottom: none; padding: 0 0 0 16px;
+    border-left: 3px solid var(--t-soft);
+  }
+}
+
+/* ══════════════════════════════════════════════════════
+   7. 자주 묻는 질문
+   ══════════════════════════════════════════════════════ */
+.qa-section {
+  background: var(--t-bg);
+  padding: 32px var(--px);
+  border-top: 1px solid #d0dce4;
+}
+.qa-section h2 {
+  font-size: clamp(18px, 2.5vw, 22px); font-weight: 400; margin-bottom: 16px;
+}
+.qa-list { display: flex; flex-direction: column; }
+.qa-item {
+  padding: 14px 0; border-bottom: 1px solid #d0dce4;
+}
+.qa-item:last-child { border-bottom: none; }
+.qa-q { font-size: 15px; font-weight: 700; margin-bottom: 4px; }
+.qa-a { font-size: 14px; color: var(--t-sub); line-height: 1.75; }
+
+/* 태블릿+: 2열 */
+@media (min-width: 640px) {
+  .qa-section { padding: 40px var(--px); }
+  .qa-list {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 0 48px;
+    max-width: var(--max-w); margin: 0 auto;
+  }
+  .qa-item { border-right: none; }
+}
+
+/* ══════════════════════════════════════════════════════
+   8. 부모님께 + FAQ 데스크톱 2열
+   ══════════════════════════════════════════════════════ */
+@media (min-width: 1024px) {
+  .bottom-wrapper {
+    display: grid; grid-template-columns: 1fr 1fr;
+    border-top: 1px solid #d0dce4;
+  }
+  .parent-section {
+    border-top: none; border-right: 1px solid #d0dce4;
+    padding: 52px var(--px);
+  }
+  .why-list { flex-direction: column; gap: 0; max-width: none; margin: 0; }
+  .why-item { flex: none; border-left: 3px solid var(--t-soft); padding: 14px 0 14px 16px; border-bottom: 1px solid #e0eaf0; }
+  .why-item:last-child { border-bottom: none; }
+  .qa-section {
+    border-top: none;
+    padding: 52px var(--px);
+  }
+  .qa-list { display: flex; flex-direction: column; max-width: none; margin: 0; }
+}
+
+/* ══════════════════════════════════════════════════════
+   9. 바닥글
+   ══════════════════════════════════════════════════════ */
+.site-footer {
+  background: #1e2a30;
+  color: rgba(255,255,255,.5);
+  padding: 24px var(--px);
+  font-size: 13px;
+  display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px;
+}
+.site-footer img { opacity: .4; height: 22px; width: auto; }
+.site-footer a { color: rgba(255,255,255,.65); }
+
+/* ══════════════════════════════════════════════════════
+   10. 섹션 max-width 정렬 (데스크톱)
+   ══════════════════════════════════════════════════════ */
+@media (min-width: 1024px) {
+  .how-section h2,
+  .ep-section h2,
+  .parent-section h2,
+  .qa-section h2 { max-width: none; }
+  .cta-band__inner { max-width: var(--max-w); margin: 0 auto; }
+  .ep-grid { max-width: none; }
+}
 </style>
 </head>
 <body>
-<main>
-  <header class="hero">
-    <img src="brand/logo-v.svg" width="275" height="332" alt="릴리랑 2분 영어 그림책" fetchpriority="high">
-    <h1>아이와 함께 2분, 듣고 누르며 노는 영어 그림책</h1>
-    <span class="who">4~7세 아이와 부모님</span>
-  </header>
 
-  <section class="card" aria-labelledby="h-how">
+<!-- ── 1. 무대 ── -->
+<section class="stage" aria-label="EP01 미리보기">
+  <div class="stage__bg" role="img" aria-label="릴리가 세면대에서 올려다보는 그림"></div>
+  <nav class="stage__nav">
+    <img class="stage__logo" src="brand/logo-h.svg" alt="릴리랑" width="90" height="30">
+    <span class="stage__ep-pill">EP01</span>
+  </nav>
+  <div class="stage__bottom">
+    <div class="stage__main">
+      <h1 class="stage__title">Brush, Brush,<br>Brush!</h1>
+      <p class="stage__ko">이 닦기 이야기</p>
+      <div class="stage__play-row">
+        <a href="/ep01/" class="play-circle" aria-label="맛보기 재생">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>
+        </a>
+        <span class="stage__play-label">
+          맛보기 바로 듣기
+          <small>2분, 무료</small>
+        </span>
+      </div>
+    </div>
+    <div class="stage__side">
+      <a href="/join/" class="btn-join-stage">가입하고 7편 모두 보기</a>
+    </div>
+  </div>
+</section>
+
+<!-- ── 2. CTA 띠 ── -->
+<div class="cta-band">
+  <div class="cta-band__inner">
+    <div class="cta-band__text">
+      <h2>아이 하루에 2분, 영어가 쌓여요</h2>
+      <p class="sub">4~7세 아이와 부모를 위한 그림책 7편</p>
+    </div>
+    <div class="cta-band__btns">
+      <a href="/ep01/" class="btn btn-play">맛보기 1편 바로 듣기</a>
+      <a href="/join/" class="btn btn-join">가입하고 7편 모두 보기</a>
+    </div>
+  </div>
+</div>
+
+<!-- ── 3+4. 이렇게 놀아요 + 에피소드 (데스크톱: 나란히) ── -->
+<div class="mid-wrapper">
+
+  <!-- 이렇게 놀아요 -->
+  <section class="how-section" aria-labelledby="h-how">
     <h2 id="h-how">이렇게 놀아요</h2>
-    <ol class="steps">
-      <li><span class="n">1</span><span><b>듣기</b><span>릴리 이야기를 2분 동안 같이 들어요.</span></span></li>
-      <li><span class="n">2</span><span><b>누르며 놀기</b><span>릴리가 기다리면 그림을 눌러요. 누르면 이야기가 이어져요.</span></span></li>
-      <li><span class="n">3</span><span><b>학습지</b><span>인쇄해서 그림 찾기, 단어 카드, 스티커를 같이 해요.</span></span></li>
-    </ol>
+    <div class="step-list" role="list">
+      <div class="step-row" role="listitem">
+        <img class="step-img" src="ep03/art/bg-1-find.webp" alt="" loading="lazy" decoding="async" width="120" height="90">
+        <div class="step-body">
+          <span class="step-n">1</span>
+          <span class="step-title">같이 들어요</span>
+          <span class="step-desc">릴리가 이야기를 들려줘요. 2분이면 한 편이에요.</span>
+        </div>
+      </div>
+      <div class="step-row" role="listitem">
+        <img class="step-img" src="ep03/art/bg-4-clean.webp" alt="" loading="lazy" decoding="async" width="120" height="90">
+        <div class="step-body">
+          <span class="step-n">2</span>
+          <span class="step-title">그림을 눌러요</span>
+          <span class="step-desc">릴리가 기다리면 아이가 그림을 눌러요.</span>
+        </div>
+      </div>
+      <div class="step-row" role="listitem">
+        <div class="step-img-ph" aria-hidden="true">
+          <img src="ep03/art/paper.webp" alt="" width="56" height="56" loading="lazy" decoding="async">
+        </div>
+        <div class="step-body">
+          <span class="step-n">3</span>
+          <span class="step-title">학습지로 다시 만나요</span>
+          <span class="step-desc">인쇄해서 그림 찾기, 단어 카드, 스티커를 해요.</span>
+        </div>
+      </div>
+    </div>
   </section>
 
-  <section class="card" aria-labelledby="h-eps">
-    <h2 id="h-eps">이야기</h2>
-    <a class="ep" href="ep03/">
-      <img src="ep03/art/bg-0-intro.webp" width="112" height="112" alt="" loading="lazy" decoding="async">
-      <span>
-        <span class="no">EP03</span>
-        <span class="tt">Brush, Brush, Brush!</span>
-        <span class="meta">이 닦기, 2분</span><br>
-        <span class="go">들으러 가기</span>
-      </span>
-    </a>
-    <p class="soon">새 이야기가 곧 나와요.</p>
+  <!-- 이번 주 7편 -->
+  <section class="ep-section" aria-labelledby="h-eps">
+    <h2 id="h-eps">이번 주 7편</h2>
+    <div class="ep-grid">
+      <!-- EP01 - 무료 개방 -->
+      <a class="ep-card ep-card--open" href="/ep01/" aria-label="EP01 Brush Brush Brush 이 닦기 무료">
+        <img class="ep-thumb" src="ep03/art/bg-0-intro.webp" alt="EP01 표지 이미지" loading="eager" decoding="async" width="200" height="200">
+        <div class="ep-foot">
+          <span class="ep-num">EP01</span>
+          <span class="ep-title">Brush, Brush, Brush!</span>
+          <span class="ep-ko">이 닦기</span>
+          <span class="ep-badge-free">무료</span>
+        </div>
+      </a>
+      <!-- EP02~06 잠금 -->
+      <div class="ep-card" aria-label="EP02 Wake Up 일어나기 잠김">
+        <div class="ep-thumb-lock" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none"><rect x="5" y="11" width="14" height="10" rx="2" fill="currentColor"/><path d="M8 11V7a4 4 0 0 1 8 0v4" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/></svg>
+        </div>
+        <div class="ep-foot">
+          <span class="ep-num">EP02</span>
+          <span class="ep-title">Wake Up!</span>
+          <span class="ep-ko">일어나기</span>
+          <span class="ep-badge-soon">곧 나와요</span>
+        </div>
+      </div>
+      <div class="ep-card" aria-label="EP03 Wash Your Face 세수하기 잠김">
+        <div class="ep-thumb-lock" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none"><rect x="5" y="11" width="14" height="10" rx="2" fill="currentColor"/><path d="M8 11V7a4 4 0 0 1 8 0v4" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/></svg>
+        </div>
+        <div class="ep-foot">
+          <span class="ep-num">EP03</span>
+          <span class="ep-title">Wash Your Face</span>
+          <span class="ep-ko">세수하기</span>
+          <span class="ep-badge-soon">곧 나와요</span>
+        </div>
+      </div>
+      <div class="ep-card" aria-label="EP04 Breakfast Time 아침 먹기 잠김">
+        <div class="ep-thumb-lock" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none"><rect x="5" y="11" width="14" height="10" rx="2" fill="currentColor"/><path d="M8 11V7a4 4 0 0 1 8 0v4" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/></svg>
+        </div>
+        <div class="ep-foot">
+          <span class="ep-num">EP04</span>
+          <span class="ep-title">Breakfast Time</span>
+          <span class="ep-ko">아침 먹기</span>
+          <span class="ep-badge-soon">곧 나와요</span>
+        </div>
+      </div>
+      <div class="ep-card" aria-label="EP05 Get Dressed 옷 입기 잠김">
+        <div class="ep-thumb-lock" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none"><rect x="5" y="11" width="14" height="10" rx="2" fill="currentColor"/><path d="M8 11V7a4 4 0 0 1 8 0v4" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/></svg>
+        </div>
+        <div class="ep-foot">
+          <span class="ep-num">EP05</span>
+          <span class="ep-title">Get Dressed</span>
+          <span class="ep-ko">옷 입기</span>
+          <span class="ep-badge-soon">곧 나와요</span>
+        </div>
+      </div>
+      <div class="ep-card" aria-label="EP06 Bath Time 목욕하기 잠김">
+        <div class="ep-thumb-lock" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none"><rect x="5" y="11" width="14" height="10" rx="2" fill="currentColor"/><path d="M8 11V7a4 4 0 0 1 8 0v4" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/></svg>
+        </div>
+        <div class="ep-foot">
+          <span class="ep-num">EP06</span>
+          <span class="ep-title">Bath Time</span>
+          <span class="ep-ko">목욕하기</span>
+          <span class="ep-badge-soon">곧 나와요</span>
+        </div>
+      </div>
+      <!-- EP07 와이드 -->
+      <div class="ep-card ep-card--wide" aria-label="EP07 Goodnight Story 잠자리 책 잠김">
+        <div class="ep-thumb-lock" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none"><rect x="5" y="11" width="14" height="10" rx="2" fill="currentColor"/><path d="M8 11V7a4 4 0 0 1 8 0v4" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/></svg>
+        </div>
+        <div class="ep-foot">
+          <span class="ep-num">EP07</span>
+          <span class="ep-title">Goodnight Story</span>
+          <span class="ep-ko">잠자리 책</span>
+          <span class="ep-badge-soon">곧 나와요</span>
+        </div>
+      </div>
+      <p class="ep-join-notice">가입하면 새 편이 나올 때마다 알림을 받아요.</p>
+    </div>
   </section>
 
-  <p class="maker"><a href="/">릴리랑은 매일 외국어 읽기가 만들어요</a></p>
-</main>
+</div><!-- /.mid-wrapper -->
+
+<!-- ── 5+6. 부모님께 + 자주 묻는 질문 (데스크톱: 나란히) ── -->
+<div class="bottom-wrapper">
+
+  <section class="parent-section" aria-labelledby="h-parent">
+    <h2 id="h-parent">부모님께</h2>
+    <div class="why-list">
+      <div class="why-item">
+        <span class="why-title">왜 2분인가요?</span>
+        <p class="why-desc">아이의 집중 시간은 짧아요. 짧게 자주 만나는 게 긴 한 번보다 기억에 남아요.</p>
+      </div>
+      <div class="why-item">
+        <span class="why-title">왜 한국어와 영어를 섞나요?</span>
+        <p class="why-desc">익숙한 한국어가 영어의 뜻을 잡아줘요. 억지로 따라 하지 않아도 귀에 쌓여요.</p>
+      </div>
+      <div class="why-item">
+        <span class="why-title">따라 말 못 해도 괜찮아요</span>
+        <p class="why-desc">지금은 그냥 듣는 것만으로 충분해요.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="qa-section" aria-labelledby="h-qa">
+    <h2 id="h-qa">자주 묻는 질문</h2>
+    <div class="qa-list">
+      <div class="qa-item">
+        <p class="qa-q">몇 살부터 할 수 있나요?</p>
+        <p class="qa-a">4~7세가 가장 잘 맞아요. 3세도 그림 누르는 걸 즐기면 같이 해도 좋아요.</p>
+      </div>
+      <div class="qa-item">
+        <p class="qa-q">화면 시간이 걱정돼요</p>
+        <p class="qa-a">한 편이 2분이에요. 책 한 권 읽는 것처럼 짧게 만나도록 만들었어요.</p>
+      </div>
+      <div class="qa-item">
+        <p class="qa-q">아이 개인정보를 받나요?</p>
+        <p class="qa-a">아이 이름, 사진, 학교 정보를 받지 않아요. 부모님 계정만 있어요.</p>
+      </div>
+      <div class="qa-item">
+        <p class="qa-q">무료인가요?</p>
+        <p class="qa-a">EP01은 무료예요. 가입하면 새 편이 나올 때 알림을 받아요.</p>
+      </div>
+    </div>
+  </section>
+
+</div><!-- /.bottom-wrapper -->
+
+<!-- ── 바닥글 ── -->
+<footer class="site-footer">
+  <img src="brand/logo-h.svg" alt="릴리랑" width="80" height="26">
+  <span>매일 외국어 읽기가 만들어요</span>
+  <a href="#">개인정보처리방침</a>
+</footer>
+
 </body>
 </html>
