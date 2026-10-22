@@ -22,7 +22,7 @@ python3 tests/lily/behave.py http://127.0.0.1:4441/ep01/
 - 마지막 줄 `SUMMARY 통과 / 전체`, 하나라도 실패하면 종료 코드 1
 - 레인 D 파일(`lily-config.js`, `auth.js`, `gate.js`)이 아직 없는 브랜치에서는 그 404만 따로 보고하게 `--allow-missing lily-config.js,auth.js,gate.js`를 붙입니다. 합친 뒤에는 이 옵션 없이 통과해야 합니다.
 
-화면 크기는 `--size 너비x높이`(기본 390x844). 태블릿(700px 이상)에서는 무대 비율, 첫 화면 전체가 스크롤 없이 보이는지, 아이 대상 64px 이상을 더 봅니다. 모든 크기에서 가로 스크롤 0을 봅니다.
+화면 크기는 `--size 너비x높이`(기본 390x844). 태블릿(700px 이상)에서는 무대 비율, 첫 화면 전체가 스크롤 없이 보이는지를 더 봅니다. 모든 크기에서 가로 스크롤 0과 아이 대상 64px 이상을 봅니다.
 
 ```sh
 for s in 390x844 768x1024 834x1194 1024x768 1194x834; do python3 tests/lily/behave.py http://127.0.0.1:4441/ep01/ --size $s; done

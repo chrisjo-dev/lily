@@ -129,7 +129,7 @@ async def main():
             await pg.evaluate(f"seekTo({sc['from'] + 1})"); await pg.wait_for_timeout(100)
             smallest += await pg.evaluate("[...document.querySelectorAll('.scene:not([hidden]) .hit')].map(n=>{const b=n.getBoundingClientRect();return Math.round(Math.min(b.width,b.height))}).filter(v=>v>0)")
         print("TARGETS smallest hit px", sorted(smallest)[:5])
-        if VW >= 700: ok("tablet: child targets >= 64px", min(smallest) >= 64, str(min(smallest)))
+        ok("child targets >= 64px", min(smallest) >= 64, str(min(smallest)))
 
         # 2 기다림 지점마다: 정확히 멈추고, 그 종류대로 누르면 이어짐
         board = next((f for f in free if f["type"] == "say-sticker"), None)
