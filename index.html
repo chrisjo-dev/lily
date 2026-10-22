@@ -551,6 +551,10 @@ a { text-decoration: none; color: inherit; }
   .qa-section h2 { max-width: none; }
   .ep-grid { max-width: none; }
 }
+
+/* 첫 화면 놀이 무대: 누르다가 글자나 그림이 파랗게 선택되거나 끌려 나오지 않게 */
+.stage, .stage * { -webkit-user-select: none; user-select: none; -webkit-touch-callout: none; -webkit-tap-highlight-color: transparent; }
+.stage img { -webkit-user-drag: none; user-drag: none; }
 </style>
 </head>
 <body>

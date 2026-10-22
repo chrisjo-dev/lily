@@ -21,6 +21,9 @@ button { font-family: inherit; color: inherit; }
 .en { font-family: var(--en); font-weight: 700; color: var(--t-accent); }
 
 /* ===== 아이 화면 (첫 화면) ===== */
+/* 아이 영역: 누르고 문지르다 글자나 그림이 파랗게 선택되거나, 길게 눌러 메뉴가 뜨거나, 그림이 끌려 나오지 않게 한다(부모님 영역은 그대로 선택 가능) */
+.kid, .kid * { -webkit-user-select: none; user-select: none; -webkit-touch-callout: none; }
+.kid img, .kid image { -webkit-user-drag: none; user-drag: none; }
 .kid { max-width: 480px; margin: 0 auto; min-height: 100vh; min-height: 100dvh; display: flex; flex-direction: column; background: var(--t-bg); }
 .top {
   display: flex; align-items: center; justify-content: space-between; gap: 8px; height: 48px; flex: none;

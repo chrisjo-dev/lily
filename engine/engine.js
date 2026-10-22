@@ -47,6 +47,8 @@ function buildShell() {
   </g></svg>`);
   const kid = document.createElement("div");
   kid.className = "kid"; kid.id = "kid";
+  // 아이가 누르고 문지를 때 선택, 길게 누르기 메뉴, 그림 끌기가 생기지 않게(CSS만으로는 안드로이드와 SVG 그림이 남는다)
+  for (const ev of ["selectstart", "contextmenu", "dragstart"]) kid.addEventListener(ev, (e) => e.preventDefault());
   st.before(kid);
   kid.innerHTML = `<header class="top">
     <div class="brand">
