@@ -24,7 +24,7 @@ const PLAY_PATH = "M6.5 4.3v11.4a.8.8 0 0 0 1.2.7l9.2-5.7a.8.8 0 0 0 0-1.4L7.7 3
 const AUTO_MS = 8000;
 
 // ---- 편 설정에서 채우는 값 ----
-let EP, LINES, WAITS, SCENES, SCENE_AT, END_AT, audio, stage, rows;
+let EP, LINES, WAITS, SCENES, SCENE_AT, END_AT, END_WAIT = -1, audio, stage, rows;
 let mods = [], waitMod = [];
 const sceneAt = (t) => { let s = 0; SCENE_AT.forEach((a, i) => { if (t >= a) s = i; }); return s; };
 
@@ -211,7 +211,9 @@ function seekTo(t) {
   innerSeekTo = t; audio.currentTime = t;
   done = WAITS.map((w) => w.at < t - 0.05);
   setScene(sceneAt(t));
+  endReady = false;
   each("seek", t);
+  if (END_WAIT >= 0 && done[END_WAIT]) endReady = true;
   line = -2; setLine(t); setTime(t);
   showEnd(endReady && t >= END_AT);
 }
@@ -280,7 +282,8 @@ function makeApi() {
     get scene() { return scene; },
     get endAt() { return END_AT; },
     isDone: (i) => i >= 0 && done[i],
-    setDone: (i) => { if (i >= 0) done[i] = true; },
+    // "end": true인 기다림이 채워지면(누름이든 8초 자동이든) lamp-end처럼 끝 카드를 준비한다
+    setDone: (i) => { if (i >= 0) { done[i] = true; if (i === END_WAIT) endReady = true; } },
     setEndReady: (on) => { endReady = on; },
     sceneIndex: (id) => SCENES.findIndex((s) => s.id === id),
     sceneEl: (k) => $(SCENES[k].id),
@@ -306,7 +309,9 @@ function lilyMount() {
   EP = window.LILY_EPISODE = window.LILY_EPISODE || JSON.parse(data.textContent);
   LINES = EP.lines; WAITS = EP.waits || []; SCENES = EP.scenes;
   SCENE_AT = SCENES.map((s) => s.from);
-  END_AT = EP.end && EP.end.at != null ? EP.end.at : LINES[LINES.length - 1][1] - 0.1;
+  END_WAIT = WAITS.findIndex((w) => w.end === true);
+  END_AT = EP.end && EP.end.at != null ? EP.end.at
+    : END_WAIT >= 0 ? WAITS[END_WAIT].at - 0.1 : LINES[LINES.length - 1][1] - 0.1;
   done = WAITS.map(() => false);
   buildShell();
   audio = $("audio"); stage = $("stage");
