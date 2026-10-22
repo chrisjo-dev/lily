@@ -346,21 +346,12 @@ a { text-decoration: none; color: inherit; }
   object-fit: cover; object-position: center 20%; display: block;
   background: var(--t-lock);
 }
-.ep-thumb-lock {
-  width: 100%; aspect-ratio: 1 / 1;
-  background: var(--t-lock);
-  display: flex; align-items: center; justify-content: center;
-  color: #7090a0;
-}
-.ep-thumb-lock svg { width: 22px; height: 22px; }
 /* 마지막 에피소드: 2칸 (폰), 4칸 (태블릿+) */
 .ep-card--wide { grid-column: span 2; }
-.ep-card--wide .ep-thumb,
-.ep-card--wide .ep-thumb-lock { aspect-ratio: 2 / 1; }
+.ep-card--wide .ep-thumb { aspect-ratio: 2 / 1; }
 @media (min-width: 900px) {
   .ep-card--wide { grid-column: span 4; }
-  .ep-card--wide .ep-thumb,
-  .ep-card--wide .ep-thumb-lock { aspect-ratio: 4 / 1; height: 100px; }
+  .ep-card--wide .ep-thumb { aspect-ratio: 4 / 1; height: 100px; }
 }
 .ep-foot { padding: 8px 10px 12px; }
 .ep-num {
@@ -378,10 +369,12 @@ a { text-decoration: none; color: inherit; }
   padding: 2px 7px; border-radius: 3px;
   background: var(--t-touch); color: #1e2a30;
 }
-.ep-badge-soon {
-  display: inline-block; margin-top: 5px;
-  font-size: 10px; color: var(--t-muted);
+/* 잠긴 편: 자물쇠와 "가입하면 열려요" (편은 열어 볼 수 있고 맛보기 뒤에 잠김) */
+.ep-badge-lock {
+  display: inline-flex; align-items: center; gap: 3px; margin-top: 5px;
+  font-size: 10px; color: var(--t-sub);
 }
+.ep-badge-lock svg { width: 11px; height: 11px; flex-shrink: 0; }
 .ep-join-notice {
   grid-column: 1 / -1;
   margin-top: 4px; padding: 14px 16px;
@@ -441,8 +434,7 @@ a { text-decoration: none; color: inherit; }
     grid-template-columns: repeat(3, 1fr);
   }
   .ep-card--wide { grid-column: span 3; }
-  .ep-card--wide .ep-thumb,
-  .ep-card--wide .ep-thumb-lock { aspect-ratio: 3 / 1; height: auto; }
+  .ep-card--wide .ep-thumb { aspect-ratio: 3 / 1; height: auto; }
 }
 
 /* ══════════════════════════════════════════════════════
@@ -643,74 +635,61 @@ a { text-decoration: none; color: inherit; }
           <span class="ep-badge-free">무료</span>
         </div>
       </a>
-      <!-- EP02~06 잠금 -->
-      <div class="ep-card" aria-label="EP02 Wake Up 일어나기 잠김">
-        <div class="ep-thumb-lock" aria-hidden="true">
-          <svg viewBox="0 0 24 24" fill="none"><rect x="5" y="11" width="14" height="10" rx="2" fill="currentColor"/><path d="M8 11V7a4 4 0 0 1 8 0v4" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/></svg>
-        </div>
+      <!-- EP02~07: 비회원은 맛보기까지 듣고 가입하면 끝까지. 그림은 tools/build_og_episodes.py가 만든 thumb.webp(늦게 받음) -->
+      <a class="ep-card" href="/ep02/" aria-label="EP02 Wake Up! 일어나기, 가입하면 열려요">
+        <img class="ep-thumb" src="/ep02/thumb.webp" alt="" loading="lazy" decoding="async" width="200" height="200">
         <div class="ep-foot">
           <span class="ep-num">EP02</span>
           <span class="ep-title">Wake Up!</span>
           <span class="ep-ko">일어나기</span>
-          <span class="ep-badge-soon">곧 나와요</span>
+          <span class="ep-badge-lock"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="5" y="11" width="14" height="10" rx="2" fill="currentColor"/><path d="M8 11V7a4 4 0 0 1 8 0v4" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/></svg>가입하면 열려요</span>
         </div>
-      </div>
-      <div class="ep-card" aria-label="EP03 Wash Your Face 세수하기 잠김">
-        <div class="ep-thumb-lock" aria-hidden="true">
-          <svg viewBox="0 0 24 24" fill="none"><rect x="5" y="11" width="14" height="10" rx="2" fill="currentColor"/><path d="M8 11V7a4 4 0 0 1 8 0v4" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/></svg>
-        </div>
+      </a>
+      <a class="ep-card" href="/ep03/" aria-label="EP03 Splash, Splash! 세수하기, 가입하면 열려요">
+        <img class="ep-thumb" src="/ep03/thumb.webp" alt="" loading="lazy" decoding="async" width="200" height="200">
         <div class="ep-foot">
           <span class="ep-num">EP03</span>
-          <span class="ep-title">Wash Your Face</span>
+          <span class="ep-title">Splash, Splash!</span>
           <span class="ep-ko">세수하기</span>
-          <span class="ep-badge-soon">곧 나와요</span>
+          <span class="ep-badge-lock"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="5" y="11" width="14" height="10" rx="2" fill="currentColor"/><path d="M8 11V7a4 4 0 0 1 8 0v4" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/></svg>가입하면 열려요</span>
         </div>
-      </div>
-      <div class="ep-card" aria-label="EP04 Breakfast Time 아침 먹기 잠김">
-        <div class="ep-thumb-lock" aria-hidden="true">
-          <svg viewBox="0 0 24 24" fill="none"><rect x="5" y="11" width="14" height="10" rx="2" fill="currentColor"/><path d="M8 11V7a4 4 0 0 1 8 0v4" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/></svg>
-        </div>
+      </a>
+      <a class="ep-card" href="/ep04/" aria-label="EP04 Yummy, Yummy! 아침 먹기, 가입하면 열려요">
+        <img class="ep-thumb" src="/ep04/thumb.webp" alt="" loading="lazy" decoding="async" width="200" height="200">
         <div class="ep-foot">
           <span class="ep-num">EP04</span>
-          <span class="ep-title">Breakfast Time</span>
+          <span class="ep-title">Yummy, Yummy!</span>
           <span class="ep-ko">아침 먹기</span>
-          <span class="ep-badge-soon">곧 나와요</span>
+          <span class="ep-badge-lock"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="5" y="11" width="14" height="10" rx="2" fill="currentColor"/><path d="M8 11V7a4 4 0 0 1 8 0v4" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/></svg>가입하면 열려요</span>
         </div>
-      </div>
-      <div class="ep-card" aria-label="EP05 Get Dressed 옷 입기 잠김">
-        <div class="ep-thumb-lock" aria-hidden="true">
-          <svg viewBox="0 0 24 24" fill="none"><rect x="5" y="11" width="14" height="10" rx="2" fill="currentColor"/><path d="M8 11V7a4 4 0 0 1 8 0v4" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/></svg>
-        </div>
+      </a>
+      <a class="ep-card" href="/ep05/" aria-label="EP05 Put On, Ready! 옷 입기, 가입하면 열려요">
+        <img class="ep-thumb" src="/ep05/thumb.webp" alt="" loading="lazy" decoding="async" width="200" height="200">
         <div class="ep-foot">
           <span class="ep-num">EP05</span>
-          <span class="ep-title">Get Dressed</span>
+          <span class="ep-title">Put On, Ready!</span>
           <span class="ep-ko">옷 입기</span>
-          <span class="ep-badge-soon">곧 나와요</span>
+          <span class="ep-badge-lock"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="5" y="11" width="14" height="10" rx="2" fill="currentColor"/><path d="M8 11V7a4 4 0 0 1 8 0v4" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/></svg>가입하면 열려요</span>
         </div>
-      </div>
-      <div class="ep-card" aria-label="EP06 Bath Time 목욕하기 잠김">
-        <div class="ep-thumb-lock" aria-hidden="true">
-          <svg viewBox="0 0 24 24" fill="none"><rect x="5" y="11" width="14" height="10" rx="2" fill="currentColor"/><path d="M8 11V7a4 4 0 0 1 8 0v4" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/></svg>
-        </div>
+      </a>
+      <a class="ep-card" href="/ep06/" aria-label="EP06 Rub-a-Dub, Bath Time! 목욕하기, 가입하면 열려요">
+        <img class="ep-thumb" src="/ep06/thumb.webp" alt="" loading="lazy" decoding="async" width="200" height="200">
         <div class="ep-foot">
           <span class="ep-num">EP06</span>
-          <span class="ep-title">Bath Time</span>
+          <span class="ep-title">Rub-a-Dub, Bath Time!</span>
           <span class="ep-ko">목욕하기</span>
-          <span class="ep-badge-soon">곧 나와요</span>
+          <span class="ep-badge-lock"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="5" y="11" width="14" height="10" rx="2" fill="currentColor"/><path d="M8 11V7a4 4 0 0 1 8 0v4" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/></svg>가입하면 열려요</span>
         </div>
-      </div>
-      <!-- EP07 와이드 -->
-      <div class="ep-card ep-card--wide" aria-label="EP07 Goodnight Story 잠자리 책 잠김">
-        <div class="ep-thumb-lock" aria-hidden="true">
-          <svg viewBox="0 0 24 24" fill="none"><rect x="5" y="11" width="14" height="10" rx="2" fill="currentColor"/><path d="M8 11V7a4 4 0 0 1 8 0v4" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/></svg>
-        </div>
+      </a>
+      <a class="ep-card ep-card--wide" href="/ep07/" aria-label="EP07 Sweet Dreams 잠자리 책, 가입하면 열려요">
+        <img class="ep-thumb" src="/ep07/thumb.webp" alt="" loading="lazy" decoding="async" width="400" height="200">
         <div class="ep-foot">
           <span class="ep-num">EP07</span>
-          <span class="ep-title">Goodnight Story</span>
+          <span class="ep-title">Sweet Dreams</span>
           <span class="ep-ko">잠자리 책</span>
-          <span class="ep-badge-soon">곧 나와요</span>
+          <span class="ep-badge-lock"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="5" y="11" width="14" height="10" rx="2" fill="currentColor"/><path d="M8 11V7a4 4 0 0 1 8 0v4" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/></svg>가입하면 열려요</span>
         </div>
-      </div>
+      </a>
       <div class="ep-join-notice">
         <span>가입하면 잠긴 편을 모두 볼 수 있어요.</span>
         <a href="/join/" class="ep-join-btn">가입하기</a>
