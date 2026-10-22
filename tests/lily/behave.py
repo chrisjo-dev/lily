@@ -12,6 +12,7 @@ ap = argparse.ArgumentParser()
 ap.add_argument("url")
 ap.add_argument("--config-from", help="설정이 없는 페이지를 시험할 때 설정을 읽어 올 편 주소")
 ap.add_argument("--headed", action="store_true")
+ap.add_argument("--allow-missing", default="", help="아직 없는 다른 레인 파일 이름(쉼표). 그 404와 콘솔 오류만 따로 세어 보고")
 A = ap.parse_args()
 B = A.url if A.url.endswith("/") else A.url + "/"
 AUTO_MS = 8000          # 엔진의 자동 진행 시간
@@ -67,9 +68,18 @@ async def main():
         pg = await br.new_page(viewport={"width": 390, "height": 844})
         await pg.add_init_script(INIT)
         errs, bad = [], []
-        pg.on("console", lambda m: errs.append(m.text) if m.type == "error" else None)
+        miss, allowed = [x for x in A.allow_missing.split(",") if x], []
+        def on_resp(r):
+            if r.status < 400: return
+            (allowed if any(r.url.endswith("/" + m) for m in miss) else bad).append(f"{r.status} {r.url}")
+        def on_console(m):
+            if m.type != "error": return
+            # 없는 파일 404는 Chrome이 위치 없이 "Failed to load resource"로 남긴다
+            if miss and "Failed to load resource" in m.text and any(m.location.get("url", "").endswith("/" + x) for x in miss): return
+            errs.append(m.text)
+        pg.on("console", on_console)
         pg.on("pageerror", lambda e: errs.append(str(e)))
-        pg.on("response", lambda r: bad.append(f"{r.status} {r.url}") if r.status >= 400 else None)
+        pg.on("response", on_resp)
 
         if A.config_from:
             await pg.goto(A.config_from)
@@ -251,6 +261,7 @@ async def main():
             ok("bubble fps>=55", bub["fps"] >= 55, f"{bub['fps']:.1f}")
 
         print("console errors:", errs); print("bad responses:", bad)
+        if allowed: print("allowed missing (다른 레인 파일):", len(allowed), sorted(set(allowed)))
         ok("no console errors", not errs)
         ok("no 4xx/5xx responses", not bad)
         npass = sum(r[0] == "PASS" for r in res)

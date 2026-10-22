@@ -5,7 +5,7 @@
 ## 새 편 만들기
 
 1. `/ep01/index.html`을 복사해 `/epNN/index.html`로 둡니다.
-2. `<head>`: 제목, 설명, OG(`https://lily.wspace.ai.kr/epNN/...`), canonical, 첫 장면 그림 preload만 바꿉니다. 엔진 CSS와 스크립트 줄은 그대로 둡니다. 잠금을 쓰는 편이면 `gate.js`(와 그것이 쓰는 `auth.js`)를 `gate-default.js`보다 **앞에** 넣습니다.
+2. `<head>`: 제목, 설명, OG(`https://lily.wspace.ai.kr/epNN/...`), canonical, 첫 장면 그림 preload만 바꿉니다. 엔진 CSS와 스크립트 줄(아래 "잠금 훅"의 순서)은 그대로 둡니다.
 3. `<body>`:
    - 단어 그림 `<symbol id="i-...">`(부모님 화면 단어 버튼용, 그림 파일을 쓰면 생략)
    - `<div class="stage" id="stage">` 안에 장면마다 `<svg class="scene" id="scN" viewBox="그림 픽셀">`. 첫 장면 그림만 `href`, 나머지는 `data-src`(엔진이 장면 직전에 받아 둠). 첫 장면 말고는 `hidden`.
@@ -69,8 +69,10 @@ LilyInteractions["my-kind"] = (api, specs, episode) => {
 
 - 엔진은 재생 중 매 프레임 `window.lilyGate.canPlayPast(t, episode)`를 묻고, `false`면 멈춘 뒤 `window.lilyGate.onBlocked(t, episode, resume)`를 한 번 부릅니다. `resume()`은 그 자리에서 이어 재생합니다(다시 묻기 때문에 그때는 `true`여야 함).
 - 매 프레임 불리므로 `canPlayPast`는 동기이고 가벼워야 합니다(로그인 여부는 미리 받아 둔 값으로).
+- 허락을 기억하지 않습니다. 잠금 카드를 "나중에"로 닫고 다시 재생을 누르면 다음 프레임에 또 묻고, 여전히 `false`면 다시 멈추고 `onBlocked`를 부릅니다.
+- 선택 훅: 시작할 때 `typeof lilyGate.resumeAt === "function"`이면 `lilyGate.resumeAt(편id)`를 부르고, 숫자를 돌려주면 그 시각에서 멈춘 채 엽니다(같은 탭에서 가입하고 돌아온 사람이 막혔던 자리부터). 주소에 `?t=`가 있으면 그쪽이 우선입니다.
 - `engine/gate-default.js`는 `window.lilyGate`가 없을 때만 "항상 허용"을 넣습니다. 실제 잠금은 `engine/gate.js`가 그보다 먼저 `window.lilyGate`를 둡니다.
-- 불러오는 순서: `gate.js`(있으면) → `gate-default.js` → `engine.js` → `interactions/*.js`.
+- 불러오는 순서(모든 편 같음): `lily-config.js` → `auth.js` → `gate.js` → `gate-default.js` → `engine.js` → `interactions/*.js`. 앞의 셋은 레인 D 파일이라 없거나 404여도 페이지는 깨지지 않습니다(그 경우 항상 허용).
 
 ## 확인용 주소
 

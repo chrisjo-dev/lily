@@ -382,6 +382,9 @@ function lilyMount() {
   // 확인용: ?t=초 로 그 장면에서 멈춘 채 열기, &w=1 이면 다음 기다림 화면까지
   setScene(0);
   const q = new URLSearchParams(location.search);
+  // 잠금 훅(선택): 같은 탭에서 가입하고 돌아오면 막혔던 자리부터. 숫자를 돌려주면 그 시각에서 멈춘 채 연다
+  const g = window.lilyGate, back = g && typeof g.resumeAt === "function" ? g.resumeAt(EP.id) : null;
+  if (!q.has("t") && typeof back === "number" && back > 0) q.set("t", back);
   if (q.has("t")) {
     const t = Number(q.get("t")) || 0;
     started = true; updateBigPlay();
