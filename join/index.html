@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.117.3/dist/umd/supabase.js; connect-src 'self' https://supabase-project-ref.invalid; style-src 'self' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self'; form-action 'self'; base-uri 'self'; object-src 'none'">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="color-scheme" content="light only">
+<meta name="robots" content="noindex, nofollow">
+<title>가입하기 | 릴리랑</title>
+<link rel="icon" href="/brand/favicon.ico" sizes="any"><link rel="icon" href="/brand/favicon-32.png" type="image/png" sizes="32x32"><link rel="apple-touch-icon" href="/brand/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" id="fonts" media="print" href="https://fonts.googleapis.com/css2?family=Andika:wght@400;700&family=Gowun+Dodum&family=Jua&display=swap">
+<link rel="stylesheet" href="/join/pages.css">
+</head>
+<body>
+<div class="wrap">
+  <header class="top"><a class="logo" href="/"><img src="/brand/emblem.png" width="52" height="40" alt="">릴리랑</a></header>
+  <main>
+    <h1>릴리랑 가입하기</h1>
+    <p class="lead">가입하면 모든 편을 끝까지 들을 수 있어요. 가입은 무료예요.</p>
+
+    <p class="msg" id="notReady" hidden>가입은 아직 준비 중이에요. 그동안 <a href="/ep01/">맛보기 편</a>을 끝까지 들어 보세요.</p>
+    <div class="msg" id="already" hidden>이미 로그인돼 있어요. <a id="alreadyNext" href="/">이어서 듣기</a> 또는 <a href="/me/">내 정보</a></div>
+
+    <section class="card" id="joinBox" aria-labelledby="agreeTitle">
+      <h2 id="agreeTitle" class="sr-title">동의</h2>
+      <label class="check"><input type="checkbox" id="agree"><span><b>[필수]</b> 개인정보 수집과 이용에 동의해요</span></label>
+      <p class="agree-detail">보호자 계정(이메일 또는 카카오 계정 정보, 닉네임)만 받아요. 로그인과 이어 듣기에 쓰고, 탈퇴하면 바로 지워요. <a href="/privacy/">자세히 보기</a></p>
+      <label class="check"><input type="checkbox" id="marketing"><span><b>[선택]</b> 새 편 소식과 안내를 받을게요</span></label>
+      <p class="agree-detail">동의하지 않아도 가입할 수 있어요. 내 정보에서 언제든 바꿀 수 있어요.</p>
+      <p class="note">만 14세 이상 보호자만 가입할 수 있어요. 아이 이름이나 사진은 받지 않아요.</p>
+
+      <div class="or">로그인 방법</div>
+      <button class="btn kakao" type="button" id="kakao" disabled>
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 3C6.48 3 2 6.48 2 10.8c0 2.78 1.86 5.22 4.66 6.6l-.95 3.5c-.08.3.26.54.52.37l4.13-2.74c.54.06 1.08.1 1.64.1 5.52 0 10-3.48 10-7.83S17.52 3 12 3z"/></svg>
+        카카오로 시작하기
+      </button>
+
+      <div class="or">또는</div>
+      <form id="emailForm" novalidate>
+        <label class="field">이메일
+          <input type="email" id="email" name="email" autocomplete="email" inputmode="email" maxlength="254" required>
+        </label>
+        <button class="btn line" type="submit" id="emailBtn" disabled>이메일로 로그인 링크 받기</button>
+      </form>
+      <p class="msg" id="msg" role="status" aria-live="polite" hidden></p>
+    </section>
+  </main>
+  <footer class="foot"><a href="/privacy/">개인정보처리방침</a></footer>
+</div>
+<script src="/join/fonts.js"></script>
+<script src="/engine/lily-config.js"></script>
+<script src="/engine/auth.js"></script>
+<script src="/join/join.js"></script>
+</body>
+</html>

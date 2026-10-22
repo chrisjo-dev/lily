@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.117.3/dist/umd/supabase.js; connect-src 'self' https://supabase-project-ref.invalid; style-src 'self' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self'; form-action 'self'; base-uri 'self'; object-src 'none'">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="color-scheme" content="light only">
+<meta name="robots" content="noindex, nofollow">
+<title>내 정보 | 릴리랑</title>
+<link rel="icon" href="/brand/favicon.ico" sizes="any"><link rel="icon" href="/brand/favicon-32.png" type="image/png" sizes="32x32"><link rel="apple-touch-icon" href="/brand/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" id="fonts" media="print" href="https://fonts.googleapis.com/css2?family=Andika:wght@400;700&family=Gowun+Dodum&family=Jua&display=swap">
+<link rel="stylesheet" href="/join/pages.css">
+</head>
+<body>
+<div class="wrap">
+  <header class="top"><a class="logo" href="/"><img src="/brand/emblem.png" width="52" height="40" alt="">릴리랑</a></header>
+  <main>
+    <h1>내 정보</h1>
+    <p class="msg" id="notReady" hidden>가입은 아직 준비 중이에요. 그동안 <a href="/ep01/">맛보기 편</a>을 끝까지 들어 보세요.</p>
+    <div id="signedOut" hidden>
+      <p class="lead">로그인하면 들은 편과 내 정보를 볼 수 있어요.</p>
+      <a class="btn main" href="/join/?next=%2Fme%2F">로그인하기</a>
+    </div>
+    <p class="lead" id="loading">불러오고 있어요.</p>
+
+    <div id="signedIn" hidden>
+      <section class="card" aria-labelledby="profTitle">
+        <h2 id="profTitle" class="sr-title">프로필</h2>
+        <p class="note" id="who"></p>
+        <form id="profile" novalidate>
+          <label class="field">닉네임 (20자까지)
+            <input type="text" id="nickname" maxlength="20" autocomplete="nickname">
+          </label>
+          <fieldset>
+            <legend>아이 나이대 (선택)</legend>
+            <div class="seg">
+              <label><input type="radio" name="age" value="4-5"><span>4~5세</span></label>
+              <label><input type="radio" name="age" value="6-7"><span>6~7세</span></label>
+              <label><input type="radio" name="age" value=""><span>선택 안 함</span></label>
+            </div>
+          </fieldset>
+          <label class="check"><input type="checkbox" id="marketing"><span><b>[선택]</b> 새 편 소식과 안내를 받을게요</span></label>
+          <button class="btn main" type="submit" id="save">저장하기</button>
+        </form>
+        <p class="msg" id="saveMsg" role="status" aria-live="polite" hidden></p>
+      </section>
+
+      <section class="card" aria-labelledby="epsTitle">
+        <h2 id="epsTitle">끝까지 들은 편</h2>
+        <ul class="eps" id="eps"></ul>
+        <p class="note" id="epsEmpty" hidden>아직 끝까지 들은 편이 없어요.</p>
+      </section>
+
+      <section class="card" aria-labelledby="acctTitle">
+        <h2 id="acctTitle" class="sr-title">계정</h2>
+        <button class="btn line" type="button" id="logout">로그아웃</button>
+        <button class="btn quiet" type="button" id="leave">탈퇴하기</button>
+        <div id="confirm" hidden>
+          <p class="msg err">탈퇴하면 계정과 들은 기록이 바로 지워지고 되돌릴 수 없어요.</p>
+          <button class="btn danger" type="button" id="leaveYes">탈퇴할게요</button>
+          <button class="btn quiet" type="button" id="leaveNo">그만둘게요</button>
+        </div>
+        <p class="msg" id="acctMsg" role="status" aria-live="polite" hidden></p>
+      </section>
+    </div>
+  </main>
+  <footer class="foot"><a href="/privacy/">개인정보처리방침</a></footer>
+</div>
+<script src="/join/fonts.js"></script>
+<script src="/engine/lily-config.js"></script>
+<script src="/engine/auth.js"></script>
+<script src="/me/me.js"></script>
+</body>
+</html>

@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.117.3/dist/umd/supabase.js; connect-src 'self' https://supabase-project-ref.invalid; style-src 'self'; img-src 'self'; form-action 'none'; base-uri 'self'; object-src 'none'">
+<meta name="referrer" content="no-referrer">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="color-scheme" content="light only">
+<meta name="robots" content="noindex, nofollow">
+<title>로그인 중 | 릴리랑</title>
+<link rel="icon" href="/brand/favicon.ico" sizes="any">
+<link rel="stylesheet" href="/join/pages.css">
+</head>
+<body>
+<div class="wrap">
+  <header class="top"><a class="logo" href="/"><img src="/brand/emblem.png" width="52" height="40" alt="">릴리랑</a></header>
+  <main>
+    <h1 id="title">로그인하고 있어요</h1>
+    <p class="lead" id="status" role="status" aria-live="polite">잠깐만 기다려 주세요.</p>
+    <p id="retry" hidden><a class="btn main" id="retryLink" href="/join/">다시 로그인하기</a></p>
+  </main>
+</div>
+<script src="/engine/lily-config.js"></script>
+<script src="/engine/auth.js"></script>
+<script src="/join/callback/callback.js"></script>
+</body>
+</html>
