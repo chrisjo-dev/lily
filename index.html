@@ -155,38 +155,42 @@ a { text-decoration: none; color: inherit; }
   .stage__side { display: none; }
 }
 
-/* ── 태블릿 세로 (768+, portrait): 액자형 + 콘텐츠 세로 배치 ── */
+/* ── 태블릿 세로 (768+, portrait): 페이퍼 배경, 액자 + 콘텐츠 한 열 ── */
 @media (min-width: 768px) and (orientation: portrait) {
   .stage {
-    display: flex; flex-direction: column;
-    padding-top: max(16px, env(safe-area-inset-top));
+    display: flex; flex-direction: column; align-items: center;
+    background: url(/ep01/art/paper.webp) center / cover, var(--t-bg);
+    padding: max(24px, env(safe-area-inset-top)) var(--px) max(32px, env(safe-area-inset-bottom));
+    gap: 20px;
   }
   .stage__bg { display: none; }
   .stage__art-img {
-    display: block; align-self: center;
-    height: min(62vh, 520px); width: auto;
-    max-width: min(375px, 68vw);
+    display: block; flex-shrink: 0;
+    height: min(56vh, 480px); width: auto;
+    max-width: min(340px, 68vw);
     object-fit: cover; object-position: center top;
     border-radius: 14px;
+    box-shadow: 0 8px 28px rgba(30,42,48,.18);
   }
-  .stage__inner { position: static; display: flex; flex-direction: column; }
-  .stage__nav {
-    padding: 0 var(--px) 14px;
-    display: flex; align-items: center;
+  .stage__inner {
+    position: static; display: flex; flex-direction: column;
+    width: 100%; max-width: 440px;
   }
+  .stage__nav { padding: 0 0 10px; display: flex; align-items: center; }
   .stage__bottom {
-    padding: 20px var(--px) max(28px, env(safe-area-inset-bottom));
-    display: flex; flex-direction: column; gap: 14px;
+    padding: 0;
+    display: flex; flex-direction: column; gap: 12px;
   }
   .stage__side { display: block; }
 }
 
-/* ── 태블릿 가로 + 데스크톱 (1024+ 또는 768+ landscape): 좌우 배치 ── */
+/* ── 태블릿 가로 + 데스크톱 (1024+ 또는 768+ landscape): 좌우 배치, 페이퍼 배경 ── */
 @media (min-width: 1024px),
        (min-width: 768px) and (orientation: landscape) {
   .stage {
     display: flex; flex-direction: row;
-    height: min(86vh, 640px); overflow: hidden;
+    background: url(/ep01/art/paper.webp) center / cover, var(--t-bg);
+    height: min(86vh, 620px); overflow: hidden;
   }
   .stage__bg { display: none; }
   .stage__art-img {
@@ -194,6 +198,7 @@ a { text-decoration: none; color: inherit; }
     width: min(355px, 34vw); flex-shrink: 0; height: 100%;
     object-fit: cover; object-position: center top;
     border-radius: 0 16px 16px 0;
+    box-shadow: 4px 0 24px rgba(30,42,48,.12);
   }
   .stage__inner {
     flex: 1; position: static;
@@ -213,7 +218,7 @@ a { text-decoration: none; color: inherit; }
 .stage__logo { height: 36px; width: auto; }
 @media (min-width: 768px) { .stage__logo { height: 42px; } }
 
-/* 타이틀 + 재생 공통 */
+/* 타이틀 + 재생: 폰(어두운 배경) */
 .stage__title {
   font-family: var(--en); font-size: clamp(26px, 5vw, 52px); font-weight: 700;
   color: #fff; line-height: 1.15; margin-bottom: 6px;
@@ -235,15 +240,22 @@ a { text-decoration: none; color: inherit; }
 .stage__play-label { color: rgba(255,255,255,.92); font-size: 16px; line-height: 1.4; }
 .stage__play-label small { display: block; font-size: 13px; color: rgba(255,255,255,.55); }
 
+/* 태블릿+ 라이트 팔레트: 잉크 색상으로 전환 */
+@media (min-width: 768px) {
+  .stage__title { color: var(--t-ink); }
+  .stage__ko { color: var(--t-sub); }
+  .stage__play-label { color: var(--t-ink); }
+  .stage__play-label small { color: var(--t-sub); }
+}
+
 .btn-join-stage {
   padding: 14px 28px; min-height: 52px; min-width: 200px;
-  background: rgba(255,255,255,.12);
-  border: 1.5px solid rgba(255,255,255,.35);
-  color: #fff; border-radius: 6px;
+  background: transparent;
+  border: 1.5px solid var(--t-accent);
+  color: var(--t-accent); border-radius: 6px;
   font-family: var(--kr); font-size: 15px;
   display: inline-flex; align-items: center; justify-content: center;
   cursor: pointer; -webkit-appearance: none;
-  backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
   text-decoration: none; white-space: nowrap;
 }
 .btn-join-stage:active { opacity: .85; }
