@@ -6,7 +6,9 @@
       "w": 390,
       "h": 2600,
       "title": "L01-L1-book-mobile",
-      "group": "L1 그림책"
+      "group": "L1 그림책",
+      "status": "rejected",
+      "note": "L3 선택으로 보류"
     },
     "L02-L1-book-desktop.html": {
       "x": 430,
@@ -14,7 +16,9 @@
       "w": 1280,
       "h": 2800,
       "title": "L02-L1-book-desktop",
-      "group": "L1 그림책"
+      "group": "L1 그림책",
+      "status": "rejected",
+      "note": "L3 선택으로 보류"
     },
     "L03-L2-timeline-mobile.html": {
       "x": 1750,
@@ -22,7 +26,9 @@
       "w": 390,
       "h": 2700,
       "title": "L03-L2-timeline-mobile",
-      "group": "L2 하루 시간표"
+      "group": "L2 하루 시간표",
+      "status": "rejected",
+      "note": "L3 선택으로 보류"
     },
     "L04-L2-timeline-desktop.html": {
       "x": 2180,
@@ -30,7 +36,9 @@
       "w": 1280,
       "h": 2600,
       "title": "L04-L2-timeline-desktop",
-      "group": "L2 하루 시간표"
+      "group": "L2 하루 시간표",
+      "status": "rejected",
+      "note": "L3 선택으로 보류"
     },
     "L05-L3-preview-mobile.html": {
       "x": 3500,
@@ -38,7 +46,16 @@
       "w": 390,
       "h": 2800,
       "title": "L05-L3-preview-mobile",
-      "group": "L3 첫화면 놀이"
+      "group": "L3 첫화면 놀이",
+      "status": "approved",
+      "note": "사용자 선택(2026-10-22): L3 첫 화면 놀이. 휴대폰과 태블릿 친화적으로 구현",
+      "impl": {
+        "route": "/",
+        "files": [
+          "index.html"
+        ],
+        "updated": "2026-10-22T08:00:01Z"
+      }
     },
     "L06-L3-preview-desktop.html": {
       "x": 3930,
@@ -46,7 +63,16 @@
       "w": 1280,
       "h": 2600,
       "title": "L06-L3-preview-desktop",
-      "group": "L3 첫화면 놀이"
+      "group": "L3 첫화면 놀이",
+      "status": "approved",
+      "note": "사용자 선택(2026-10-22): L3 첫 화면 놀이. 휴대폰과 태블릿 친화적으로 구현",
+      "impl": {
+        "route": "/",
+        "files": [
+          "index.html"
+        ],
+        "updated": "2026-10-22T08:00:01Z"
+      }
     }
   },
   "groups": [
