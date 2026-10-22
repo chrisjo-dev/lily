@@ -12,8 +12,10 @@ ap = argparse.ArgumentParser()
 ap.add_argument("url")
 ap.add_argument("--config-from", help="설정이 없는 페이지를 시험할 때 설정을 읽어 올 편 주소")
 ap.add_argument("--headed", action="store_true")
+ap.add_argument("--size", default="390x844", help="화면 크기 너비x높이(휴대폰 390x844, 태블릿 768x1024, 1024x768 등)")
 ap.add_argument("--allow-missing", default="", help="아직 없는 다른 레인 파일 이름(쉼표). 그 404와 콘솔 오류만 따로 세어 보고")
 A = ap.parse_args()
+VW, VH = map(int, A.size.lower().split("x"))
 B = A.url if A.url.endswith("/") else A.url + "/"
 AUTO_MS = 8000          # 엔진의 자동 진행 시간
 RESUME_MS = 450         # 자동 진행 뒤 이어 재생까지
@@ -65,7 +67,7 @@ def scene_at(cfg, t):
 async def main():
     async with async_playwright() as p:
         br = await p.chromium.launch(channel="chrome", headless=not A.headed, args=["--autoplay-policy=no-user-gesture-required"])
-        pg = await br.new_page(viewport={"width": 390, "height": 844})
+        pg = await br.new_page(viewport={"width": VW, "height": VH})
         await pg.add_init_script(INIT)
         errs, bad = [], []
         miss, allowed = [x for x in A.allow_missing.split(",") if x], []
@@ -113,7 +115,21 @@ async def main():
         art = await pg.evaluate("performance.getEntriesByType('resource').filter(e=>e.name.includes('/art/')).map(e=>[e.name.split('/art/')[1],e.transferSize||e.encodedBodySize])")
         print("ART all scenes", len(art), "files", sum(x[1] for x in art), "bytes")
         ok("all art images decoded", await pg.evaluate("[...document.querySelectorAll('.stage image, .endcard img')].every(n=>!n.hasAttribute('data-src'))"))
-        ok("stage height 55-60% of viewport", 0.54 <= stageH <= 0.61, f"{stageH:.3f}")
+        if VW < 700:
+            ok("stage height 55-60% of viewport", 0.54 <= stageH <= 0.61, f"{stageH:.3f}")
+        else:
+            # 태블릿: 그림이 휴대폰과 같은 비율로 잘리도록 무대 비율 유지, 첫 화면 전체가 스크롤 없이
+            r = await pg.evaluate("(()=>{const b=$('stage').getBoundingClientRect();return [b.width/b.height,b.bottom,document.querySelector('.hintrow').getBoundingClientRect().bottom,innerHeight]})()")
+            ok("tablet: stage keeps phone aspect 0.78-0.82", 0.78 <= r[0] <= 0.82, f"{r[0]:.3f}")
+            ok("tablet: whole first screen fits without scrolling", r[1] <= r[3] + 0.5 and r[2] <= r[3] + 0.5, str(r))
+        ok("no horizontal scroll", await pg.evaluate("document.documentElement.scrollWidth<=innerWidth"))
+        # 아이가 누르는 대상(.hit) 중 가장 작은 것의 화면 크기. 장면마다 열어 잰다
+        smallest = []
+        for sc in SC[1:]:
+            await pg.evaluate(f"seekTo({sc['from'] + 1})"); await pg.wait_for_timeout(100)
+            smallest += await pg.evaluate("[...document.querySelectorAll('.scene:not([hidden]) .hit')].map(n=>{const b=n.getBoundingClientRect();return Math.round(Math.min(b.width,b.height))}).filter(v=>v>0)")
+        print("TARGETS smallest hit px", sorted(smallest)[:5])
+        if VW >= 700: ok("tablet: child targets >= 64px", min(smallest) >= 64, str(min(smallest)))
 
         # 2 기다림 지점마다: 정확히 멈추고, 그 종류대로 누르면 이어짐
         board = next((f for f in free if f["type"] == "say-sticker"), None)

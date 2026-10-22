@@ -218,6 +218,51 @@ details[open] summary > svg { transform: rotate(180deg); }
 .maker { margin: 4px 4px 0; font-size: 13px; }
 .maker a { color: var(--t-accent); }
 
+/* ===== 태블릿 =====
+   장면 그림은 무대 비율에 맞춰 잘린다(preserveAspectRatio slice). 휴대폰(390x490 안팎)과 같은 비율을 지켜야
+   누르는 대상이 잘려 나가지 않으므로, 태블릿에서는 무대를 넓히는 대신 같은 비율로 키운다.
+   누르는 대상은 장면 svg 안에 있어 무대와 함께 커지고 그림과 어긋나지 않는다. */
+@media (min-width: 700px) and (orientation: portrait) {
+  /* 세로: 한 줄 배치 그대로, 화면 높이에 맞춰 무대를 크게. 340px = 머리줄 + 자막 + 조작 줄 + 안내 줄 */
+  .kid { max-width: min(100%, calc((100dvh - 340px) * 0.796)); }
+  .stage { height: auto; aspect-ratio: 390 / 490; }
+  .cap { height: 104px; padding: 14px 28px 10px; }
+  .cap p { font-size: 20px; }
+  .cap .en { font-size: 21px; }
+  .wtag { font-size: 14px; padding: 4px 14px; }
+  .ctl { padding: 12px 20px 6px; }
+  .pp { width: 52px; height: 52px; }
+  .pp svg { width: 22px; height: 22px; }
+  .time { font-size: 14px; min-width: 38px; }
+  #seek { height: 52px; }
+  .row2 { gap: 12px; margin-top: 8px; }
+  .tool { height: 52px; font-size: 16px; }
+  .hintrow { font-size: 14px; }
+}
+@media (min-width: 900px) and (min-height: 600px) and (orientation: landscape) {
+  /* 가로: 왼쪽 무대(화면 높이 가득), 오른쪽 자막과 부모님 조작. 첫 화면이 스크롤 없이 다 보인다 */
+  .kid {
+    max-width: none; height: 100vh; height: 100dvh; min-height: 0;
+    display: grid; grid-template-columns: auto minmax(0, 1fr); grid-template-rows: 48px minmax(0, 1fr) auto auto;
+    grid-template-areas: "top top" "stage cap" "stage ctl" "stage hint";
+  }
+  .top { grid-area: top; }
+  .stage { grid-area: stage; height: calc(100vh - 48px); height: calc(100dvh - 48px); width: auto; aspect-ratio: 390 / 490; }
+  .cap { grid-area: cap; height: auto; padding: 32px 36px 24px; border-top: 0; border-left: 1.5px solid var(--t-soft); }
+  .cap p { font-size: 24px; -webkit-line-clamp: 6; }
+  .cap .en { font-size: 25px; }
+  .wtag { top: 22px; transform: translateX(-50%); font-size: 15px; padding: 4px 16px; }
+  .ctl { grid-area: ctl; padding: 18px 28px 8px; }
+  .pp { width: 56px; height: 56px; }
+  .pp svg { width: 24px; height: 24px; }
+  .time { font-size: 14px; min-width: 38px; }
+  #seek { height: 56px; }
+  .row2 { gap: 12px; margin-top: 10px; }
+  .tool { height: 56px; font-size: 16px; }
+  .hintrow { grid-area: hint; font-size: 14px; padding: 6px 28px 16px; }
+  .parent { max-width: 760px; }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .tgt .halo, .tgt .pulse, .bob, .hand > g, .big-play::before, .wtag i { animation: none !important; }
   .bounce, .nope { animation: none; }

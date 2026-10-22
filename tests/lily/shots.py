@@ -1,4 +1,4 @@
-"""장면 캡처: 첫 화면, 장면마다 한 장(기다림이 있으면 기다림 화면), 끝 카드. 390x844 @2x.
+"""장면 캡처: 첫 화면, 장면마다 한 장(기다림이 있으면 기다림 화면), 끝 카드. 기본 390x844 @2x, --size로 바꿈.
 
     python3 tests/lily/shots.py http://127.0.0.1:4441/ep01/ 저장폴더 [--config-from 설정있는편주소] [--freeze]
 
@@ -10,7 +10,9 @@ from playwright.async_api import async_playwright
 ap = argparse.ArgumentParser()
 ap.add_argument("url"); ap.add_argument("out")
 ap.add_argument("--config-from"); ap.add_argument("--freeze", action="store_true")
+ap.add_argument("--size", default="390x844")
 A = ap.parse_args()
+VW, VH = map(int, A.size.lower().split("x"))
 B = A.url if A.url.endswith("/") else A.url + "/"
 FREEZE = "document.getAnimations().forEach(a=>{a.pause();a.currentTime=0})"
 
@@ -18,7 +20,7 @@ async def main():
     os.makedirs(A.out, exist_ok=True)
     async with async_playwright() as p:
         b = await p.chromium.launch(channel="chrome", args=["--autoplay-policy=no-user-gesture-required"])
-        pg = await b.new_page(viewport={"width": 390, "height": 844}, device_scale_factor=2)
+        pg = await b.new_page(viewport={"width": VW, "height": VH}, device_scale_factor=2)
         errs = []
         pg.on("console", lambda m: errs.append(m.text) if m.type == "error" else None)
         pg.on("pageerror", lambda e: errs.append(str(e)))
@@ -52,6 +54,6 @@ async def main():
             if A.freeze: await pg.evaluate(FREEZE); await pg.wait_for_timeout(100)
             await pg.screenshot(path=f"{A.out}/{name}.png")
             print("shot", name, qs)
-        print("errors:", errs)
+        print("errors:", [e for e in errs if "Failed to load resource" not in e], "load failures:", sum("Failed to load resource" in e for e in errs))
         await b.close()
 asyncio.run(main())
