@@ -255,7 +255,8 @@ async def main():
         # 10 키보드: 첫 찾기 대상에 Enter
         fi = next((i for i, w in enumerate(W) if w["type"] in ("find", "lamp-end")), None)
         if fi is not None:
-            await open_at(pg, W[fi]["at"] - 4.6)
+            # 대상 장면이 보이는 시각(장면이 기다림 4.6초 안쪽에서 시작하는 편도 있음)
+            await open_at(pg, max(W[fi]["at"] - 4.6, SC[scene_at(cfg, W[fi]["at"])]["from"] + 0.2))
             await pg.focus(f"#{W[fi]['target']}"); await pg.keyboard.press("Enter")
             ok(f"keyboard Enter on {W[fi]['target']} works", await pg.evaluate(f"done[{fi}] && $('{W[fi]['target']}').classList.contains('done')"))
 
