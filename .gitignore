@@ -2,3 +2,4 @@
 node_modules/
 __pycache__/
 *.log
+design/landing/render/.thumbs/

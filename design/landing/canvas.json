@@ -1,0 +1,67 @@
+{
+  "boards": {
+    "L01-L1-book-mobile.html": {
+      "x": 0,
+      "y": 0,
+      "w": 390,
+      "h": 2600,
+      "title": "L01-L1-book-mobile",
+      "group": "L1 그림책"
+    },
+    "L02-L1-book-desktop.html": {
+      "x": 430,
+      "y": 0,
+      "w": 1280,
+      "h": 2800,
+      "title": "L02-L1-book-desktop",
+      "group": "L1 그림책"
+    },
+    "L03-L2-timeline-mobile.html": {
+      "x": 1750,
+      "y": 0,
+      "w": 390,
+      "h": 2700,
+      "title": "L03-L2-timeline-mobile",
+      "group": "L2 하루 시간표"
+    },
+    "L04-L2-timeline-desktop.html": {
+      "x": 2180,
+      "y": 0,
+      "w": 1280,
+      "h": 2600,
+      "title": "L04-L2-timeline-desktop",
+      "group": "L2 하루 시간표"
+    },
+    "L05-L3-preview-mobile.html": {
+      "x": 3500,
+      "y": 0,
+      "w": 390,
+      "h": 2800,
+      "title": "L05-L3-preview-mobile",
+      "group": "L3 첫화면 놀이"
+    },
+    "L06-L3-preview-desktop.html": {
+      "x": 3930,
+      "y": 0,
+      "w": 1280,
+      "h": 2600,
+      "title": "L06-L3-preview-desktop",
+      "group": "L3 첫화면 놀이"
+    }
+  },
+  "groups": [
+    {
+      "id": "L1 그림책",
+      "label": "L1 그림책"
+    },
+    {
+      "id": "L2 하루 시간표",
+      "label": "L2 하루 시간표"
+    },
+    {
+      "id": "L3 첫화면 놀이",
+      "label": "L3 첫화면 놀이"
+    }
+  ],
+  "links": []
+}
