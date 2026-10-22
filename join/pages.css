@@ -17,7 +17,7 @@ button, input, select { font-family: inherit; color: inherit; font-size: 16px; }
 :focus-visible { outline: 3px solid var(--t-accent); outline-offset: 2px; }
 a { color: var(--t-accent); }
 
-.wrap { max-width: 480px; margin: 0 auto; min-height: 100vh; min-height: 100dvh; display: flex; flex-direction: column; }
+.wrap { --col: 480px; margin: 0; min-height: 100vh; min-height: 100dvh; display: flex; flex-direction: column; }
 .top {
   display: flex; align-items: center; height: 48px; flex: none;
   padding: 0 max(12px, env(safe-area-inset-right, 0px)) 0 max(14px, env(safe-area-inset-left, 0px));
@@ -25,10 +25,14 @@ a { color: var(--t-accent); }
 }
 .logo { display: inline-flex; align-items: center; gap: 4px; text-decoration: none; color: var(--t-accent); font-family: "Jua", var(--kr); font-size: 18px; line-height: 1; }
 .logo img { width: 52px; height: 40px; }
-main { flex: 1; padding: 20px 16px 32px; }
+main { flex: 1; width: 100%; max-width: calc(var(--col) + 32px); margin: 0 auto; padding: 20px 16px 32px; }
+/* 머리띠는 화면 끝까지, 로고는 본문 칸 왼쪽 끝에 맞춘다 */
+.top { padding-left: max(14px, env(safe-area-inset-left, 0px), calc((100% - var(--col)) / 2)); }
+.wide { --col: 720px; }
 h1 { margin: 0 0 6px; font-size: 24px; font-weight: 400; line-height: 1.35; }
 h2 { margin: 24px 0 8px; font-size: 18px; font-weight: 400; }
 .lead { margin: 0 0 18px; color: var(--t-sub); font-size: 15px; }
+.card h2 { margin-top: 0; }
 .card { background: var(--t-surface); border: 1.5px solid var(--t-soft); border-radius: 18px; padding: 18px 16px; margin: 0 0 14px; }
 .note { margin: 10px 0 0; font-size: 13px; color: var(--t-sub); }
 .msg { margin: 12px 0 0; padding: 10px 12px; border-radius: 12px; background: var(--t-soft); font-size: 14px; }
@@ -41,16 +45,16 @@ h2 { margin: 24px 0 8px; font-size: 18px; font-weight: 400; }
 .btn + .btn { margin-top: 8px; }
 .btn.main { background: var(--t-accent); color: #fff; }
 .btn.line { background: var(--t-surface); border-color: var(--t-soft); color: var(--t-accent); }
-.btn.quiet { background: none; color: var(--t-sub); font-size: 14px; min-height: 44px; }
+.btn.quiet { background: none; color: var(--t-sub); font-size: 14px; min-height: 48px; }
 .btn.danger { background: var(--t-warn); color: #fff; }
 .btn.kakao { background: #fee500; color: rgba(0, 0, 0, .85); }
 .btn.kakao svg { width: 18px; height: 18px; }
 .btn:disabled { opacity: .45; cursor: not-allowed; }
 
-.check { display: flex; gap: 10px; align-items: flex-start; padding: 6px 0; font-size: 15px; cursor: pointer; }
+.check { display: flex; gap: 10px; align-items: flex-start; padding: 12px 0; font-size: 15px; cursor: pointer; }
 .check input { width: 22px; height: 22px; margin: 1px 0 0; flex: none; accent-color: var(--t-accent); }
 .check b { font-weight: 400; color: var(--t-accent); }
-.agree-detail { margin: 2px 0 8px 32px; font-size: 13px; color: var(--t-sub); }
+.agree-detail { margin: -8px 0 8px 32px; font-size: 13px; color: var(--t-sub); }
 .or { display: flex; align-items: center; gap: 10px; margin: 16px 0; font-size: 13px; color: var(--t-sub); }
 .or::before, .or::after { content: ""; flex: 1; height: 1.5px; background: var(--t-soft); }
 
@@ -62,16 +66,16 @@ label.field { display: block; margin: 0 0 12px; font-size: 14px; color: var(--t-
 fieldset { margin: 0 0 12px; padding: 0; border: 0; }
 legend { padding: 0; margin-bottom: 4px; font-size: 14px; color: var(--t-sub); }
 .seg { display: flex; gap: 8px; }
-.seg label { flex: 1; display: flex; align-items: center; justify-content: center; min-height: 44px; border: 1.5px solid var(--t-soft); border-radius: 12px; cursor: pointer; font-size: 15px; }
+.seg label { flex: 1; display: flex; align-items: center; justify-content: center; min-height: 48px; border: 1.5px solid var(--t-soft); border-radius: 12px; cursor: pointer; font-size: 15px; }
 .seg input { position: absolute; opacity: 0; pointer-events: none; }
 .seg input:checked + span { color: var(--t-accent); }
 .seg label:has(input:checked) { border-color: var(--t-accent); background: var(--t-soft); }
 .seg label:has(input:focus-visible) { outline: 3px solid var(--t-accent); outline-offset: 2px; }
 
 .eps { margin: 0; padding: 0; list-style: none; }
-.eps li { display: flex; justify-content: space-between; gap: 8px; padding: 8px 0; border-bottom: 1px solid var(--t-soft); font-size: 15px; }
+.eps li { display: flex; justify-content: space-between; align-items: center; gap: 8px; padding: 0; border-bottom: 1px solid var(--t-soft); font-size: 15px; }
 .eps li:last-child { border-bottom: 0; }
-.eps .en { font-family: var(--en); font-weight: 700; color: var(--t-accent); }
+.eps .en { display: inline-flex; align-items: center; min-height: 48px; min-width: 64px; font-family: var(--en); font-weight: 700; color: var(--t-accent); }
 .eps time { color: var(--t-sub); font-size: 13px; }
 
 /* 개인정보처리방침 */
@@ -82,5 +86,32 @@ legend { padding: 0; margin-bottom: 4px; font-size: 14px; color: var(--t-sub); }
 .doc th, .doc td { border: 1px solid var(--t-soft); padding: 8px; text-align: left; vertical-align: top; }
 .doc th { background: var(--t-soft); font-weight: 400; }
 .foot { padding: 16px; font-size: 13px; color: var(--t-sub); text-align: center; }
-.foot a { color: var(--t-sub); }
+.foot a { display: inline-block; padding: 14px 8px; color: var(--t-sub); }
 .sr-title { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; margin: 0; }
+
+/* 태블릿과 큰 화면: 늘린 휴대폰이 아니라 가운데 읽기 좋은 칸, 글자와 누르는 곳을 조금 크게 */
+@media (min-width: 768px) {
+  .wrap { --col: 520px; }
+  .wrap.wide { --col: 720px; }
+  body { font-size: 17px; }
+  .top { height: 56px; }
+  main { padding-top: 48px; padding-bottom: 48px; }
+  h1 { font-size: 30px; margin-bottom: 8px; }
+  .lead { font-size: 17px; margin-bottom: 24px; }
+  .card { padding: 24px 24px; border-radius: 22px; }
+  .btn { min-height: 56px; font-size: 18px; }
+  .btn.quiet { min-height: 48px; font-size: 15px; }
+  .check { font-size: 16px; padding: 14px 0; }
+  .agree-detail, .note { font-size: 14px; }
+  .field input[type="email"], .field input[type="text"] { height: 54px; font-size: 17px; }
+  .seg label { min-height: 52px; font-size: 16px; }
+  .doc p, .doc li { font-size: 16px; line-height: 1.75; }
+  .doc table { font-size: 15px; }
+  .doc th, .doc td { padding: 10px 12px; }
+}
+/* 가로로 낮은 화면(태블릿 가로): 위 여백을 줄여 첫 화면에 버튼까지 보이게 */
+@media (min-width: 768px) and (max-height: 860px) {
+  main { padding-top: 28px; }
+}
+/* 표가 좁은 휴대폰에서 넘치지 않게 */
+.doc table { table-layout: fixed; word-break: keep-all; overflow-wrap: anywhere; }

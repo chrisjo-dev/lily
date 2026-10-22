@@ -92,20 +92,22 @@
 
   function show() {
     if (card) return;
-    var BTN = "display:flex;align-items:center;justify-content:center;min-height:52px;border-radius:14px;" +
-      "font-size:17px;text-decoration:none;cursor:pointer;font-family:inherit;";
-    card = el("div", "position:fixed;inset:0;z-index:50;display:flex;align-items:flex-end;justify-content:center;" +
-      "padding:16px;background:rgba(25,31,40,.45);");
+    // 휴대폰은 아래에서 올라오는 카드, 태블릿 이상은 가운데 카드(조금 더 크게)
+    var big = window.matchMedia && window.matchMedia("(min-width: 768px)").matches;
+    var BTN = "display:flex;align-items:center;justify-content:center;border-radius:14px;" +
+      (big ? "min-height:58px;font-size:18px;" : "min-height:52px;font-size:17px;") + "text-decoration:none;cursor:pointer;font-family:inherit;";
+    card = el("div", "position:fixed;inset:0;z-index:50;display:flex;justify-content:center;" +
+      "align-items:" + (big ? "center" : "flex-end") + ";padding:16px;background:rgba(25,31,40,.45);");
     card.id = "lilyGateCard";
-    var box = el("div", "width:100%;max-width:448px;margin-bottom:max(8px,env(safe-area-inset-bottom,0px));" +
-      "padding:22px 18px 18px;border-radius:20px;background:var(--t-surface,#fff);color:var(--t-ink,#24323d);" +
+    var box = el("div", "width:100%;max-width:" + (big ? "480px;" : "448px;") + "margin-bottom:max(8px,env(safe-area-inset-bottom,0px));" +
+      (big ? "padding:32px 28px 24px;" : "padding:22px 18px 18px;") + "border-radius:20px;background:var(--t-surface,#fff);color:var(--t-ink,#24323d);" +
       "font-family:var(--kr,sans-serif);box-shadow:0 8px 28px rgba(25,31,40,.18);");
     box.setAttribute("role", "dialog");
     box.setAttribute("aria-modal", "true");
     box.setAttribute("aria-labelledby", "lilyGateTitle");
-    var title = el("h2", "margin:0 0 6px;font-size:20px;font-weight:400;line-height:1.4;", "가입하면 이어서 들을 수 있어요");
+    var title = el("h2", "margin:0 0 6px;font-size:" + (big ? "24px" : "20px") + ";font-weight:400;line-height:1.4;", "가입하면 이어서 들을 수 있어요");
     title.id = "lilyGateTitle";
-    var sub = el("p", "margin:0 0 16px;font-size:14px;color:var(--t-sub,#5b6b78);line-height:1.6;",
+    var sub = el("p", "margin:0 0 20px;font-size:" + (big ? "16px" : "14px") + ";color:var(--t-sub,#5b6b78);line-height:1.6;",
       "여기까지는 누구나 들을 수 있는 맛보기예요. 가입은 무료이고, 가입하면 지금 멈춘 곳부터 이어서 들려줘요.");
     var join = el("a", BTN + "background:var(--t-accent,#2f7d6d);color:#fff;margin-bottom:8px;", "가입하고 이어 듣기");
     join.id = "lilyGateJoin";
@@ -115,7 +117,7 @@
       "맛보기 편 끝까지 듣기");
     free.id = "lilyGateFree";
     free.href = FREE_URL;
-    var later = el("button", BTN + "width:100%;border:0;background:none;color:var(--t-sub,#5b6b78);font-size:14px;min-height:44px;", "나중에 할게요");
+    var later = el("button", BTN + "width:100%;border:0;background:none;color:var(--t-sub,#5b6b78);font-size:15px;min-height:48px;", "나중에 할게요");
     later.type = "button";
     later.id = "lilyGateLater";
     later.addEventListener("click", function () { pending = null; hide(); });

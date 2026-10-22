@@ -65,6 +65,7 @@ async def main():
         async with async_playwright() as p:
             br = await p.chromium.launch(channel="chrome", args=["--autoplay-policy=no-user-gesture-required"])
             await run(br)
+            await sizes(br)
             await br.close()
     finally:
         srv.terminate(); srv.wait(5)
@@ -73,7 +74,8 @@ async def main():
     sys.exit(1 if fails else 0)
 
 async def page(br, **kw):
-    ctx = await br.new_context(viewport={"width": 390, "height": 844}, **kw)
+    kw.setdefault("viewport", {"width": 390, "height": 844})
+    ctx = await br.new_context(**kw)
     pg = await ctx.new_page()
     await pg.add_init_script(INIT)
     pg.errs = []
@@ -289,5 +291,53 @@ async def run(br):
     await pg.evaluate("__play()"); await pg.wait_for_timeout(2200)
     ok("free episode: non-member plays through", await pg.evaluate("__audio.currentTime") > 1.8 and not await pg.query_selector("#lilyGateCard"))
     await ctx.close()
+
+SIZES = [(375, 812), (390, 844), (430, 932), (768, 1024), (834, 1194), (1024, 768), (1194, 834), (1280, 800)]
+SHOTS = os.environ.get("LILY_D_SHOTS", "")  # 지정하면 크기별 캡처를 그 폴더에 남긴다
+
+LAYOUT = """(() => {
+  const vis = n => { const r = n.getBoundingClientRect(); const s = getComputedStyle(n); return r.width > 0 && r.height > 0 && s.visibility !== 'hidden'; };
+  const small = [...document.querySelectorAll('button, .btn, input[type=email], input[type=text], .seg label, .check, .foot a, .eps a, #lilyGateCard a, #lilyGateCard button')]
+    .filter(vis).filter(n => n.getBoundingClientRect().height < 47.5).map(n => (n.id || n.className || n.tagName) + ':' + Math.round(n.getBoundingClientRect().height));
+  const m = document.querySelector('main');
+  const r = m ? m.getBoundingClientRect() : {left: 0, right: innerWidth, width: innerWidth};
+  const clipped = [...document.querySelectorAll('h1, h2, p, li, td, th, label, a, button')].filter(n => !n.classList.contains('sr-title')).filter(vis).filter(n => n.scrollWidth > n.clientWidth + 1 && getComputedStyle(n).overflow !== 'visible').map(n => (n.id || n.className || n.tagName) + ':' + n.scrollWidth + '/' + n.clientWidth);
+  return {hscroll: document.documentElement.scrollWidth > innerWidth, small, mainW: Math.round(r.width), centered: Math.abs(r.left - (innerWidth - r.right)) <= 2, clipped};
+})()"""
+
+async def sizes(br):
+    uid = "aaaaaaaa-0000-0000-0000-000000000001"
+    access = fake_jwt({"sub": uid, "role": "authenticated", "exp": int(time.time()) + 3600, "aud": "authenticated"})
+    sess = {"access_token": access, "token_type": "bearer", "expires_in": 3600, "expires_at": int(time.time()) + 3600, "refresh_token": "r1",
+            "user": {"id": uid, "aud": "authenticated", "role": "authenticated", "email": "parent@example.test", "created_at": "2026-10-01T00:00:00Z", "app_metadata": {}, "user_metadata": {}}}
+    async def rest(route):
+        u = route.request.url
+        if "/profiles" in u: body = {"nickname": "하늘맘", "child_age_band": "4-5", "marketing_opt_in": False}
+        else: body = [{"episode": "ep0%d" % i, "completed_at": "2026-10-2%dT09:00:00Z" % i} for i in (1, 2, 3)]
+        await route.fulfill(status=200, content_type="application/json", body=json.dumps(body))
+    pages = [("join", "/join/?next=/ep02/", True, None), ("join-empty", "/join/", False, None), ("callback", "/join/callback/?error=access_denied", True, None),
+             ("me", "/me/", True, "#signedIn:not([hidden])"), ("privacy", "/privacy/", False, None), ("gate", "/tests/auth/gate-harness.html?until=1", False, "#lilyGateCard")]
+    for w, h in SIZES:
+        for name, path, configured, wait in pages:
+            ctx, pg = await page(br, viewport={"width": w, "height": h})
+            if configured:
+                await use_config(pg, SB, ANON)
+                await pg.route(SB + "/rest/v1/**", rest)
+                if name == "me":
+                    await pg.goto(B + "/privacy/")
+                    await pg.evaluate("s => localStorage.setItem('lilyrang-auth', s)", json.dumps(sess))
+            await pg.goto(B + path); await pg.wait_for_load_state("load")
+            if name == "join": await pg.check("#agree")
+            if name == "gate": await pg.evaluate("__play()")
+            if wait: await pg.wait_for_selector(wait, timeout=8000)
+            await pg.wait_for_timeout(400)
+            L = await pg.evaluate(LAYOUT)
+            col = 760 if name == "privacy" else 560
+            good = not L["hscroll"] and not L["small"] and L["clipped"] == [] and L["centered"] and (name == "gate" or L["mainW"] <= col)
+            ok(f"layout {name} {w}x{h}: no h-scroll, targets >= 48px, centered column", good, str(L))
+            if SHOTS:
+                os.makedirs(SHOTS, exist_ok=True)
+                await pg.screenshot(path=os.path.join(SHOTS, f"{name}-{w}x{h}.png"), full_page=(name != "gate"))
+            await ctx.close()
 
 asyncio.run(main())
