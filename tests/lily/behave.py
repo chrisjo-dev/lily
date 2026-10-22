@@ -109,8 +109,16 @@ async def main():
         ok("first screen loads only scene 0 and 1 art", sorted(x[0] for x in art0) == want, str(want))
         lt0 = await pg.evaluate("window.__lt")
         ok("no long task >= 100ms on load", all(d < 100 for d in lt0), str(lt0))
+        chips = []
         for sc in SC[1:]:
             await pg.evaluate(f"seekTo({sc['from'] + 1})"); await pg.wait_for_timeout(250)
+            chips.append(await pg.evaluate("$('chip').hidden ? '' : $('chip').textContent"))
+        # 학습지 스위치: 설정에 worksheet가 없으면 학습지 칸, 칩, 팁, 링크가 모두 없어야 함(대사와 대본은 음성 그대로)
+        sheet = await pg.evaluate("[!!document.getElementById('h-sheet'), !!document.querySelector('a[href$=\".pdf\"]'), [...document.querySelectorAll('.parent .card:not(details)')].map(c=>c.innerText).join(' ').includes('학습지')]")
+        if cfg.get("worksheet"):
+            ok("worksheet card shown when configured", sheet[0] and sheet[1], str(sheet))
+        else:
+            ok("worksheet hidden: no card, link, chip or tip", sheet == [False, False, False] and not any("학습지" in c for c in chips), f"{sheet} chips={chips}")
         await pg.evaluate("showEnd(true)"); await pg.wait_for_timeout(600)
         art = await pg.evaluate("performance.getEntriesByType('resource').filter(e=>e.name.includes('/art/')).map(e=>[e.name.split('/art/')[1],e.transferSize||e.encodedBodySize])")
         print("ART all scenes", len(art), "files", sum(x[1] for x in art), "bytes")

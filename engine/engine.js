@@ -95,8 +95,12 @@ function buildShell() {
   </div>
   <audio id="audio" src="${esc(EP.audio)}" preload="metadata"></audio>`);
 
+  // 학습지는 설정에 worksheet가 있을 때만. 없으면 학습지 칸, 학습지 칩, 학습지 팁을 모두 뺀다
   const icon = (i) => i.startsWith("#") ? `<svg aria-hidden="true"><use href="${esc(i)}"/></svg>` : `<img src="${esc(i)}" alt="" width="64" height="54">`;
-  const tip = (p) => Array.isArray(p) ? `<p><b>${esc(p[0])}</b> ${esc(p[1])}</p>` : `<p>${esc(p)}</p>`;
+  const tip = (p) => {
+    if (p && p.worksheet !== undefined) { if (!ws) return ""; p = p.text; }
+    return Array.isArray(p) ? `<p><b>${esc(p[0])}</b> ${esc(p[1])}</p>` : `<p>${esc(p)}</p>`;
+  };
   kid.insertAdjacentHTML("afterend", `<main class="parent" id="parent">
   <section class="card" aria-labelledby="h-words">
     <h2 id="h-words">오늘의 단어</h2>
@@ -160,7 +164,7 @@ function setScene(s) {
   SCENES.forEach((sc, i) => $(sc.id).toggleAttribute("hidden", i !== s));
   document.querySelectorAll("#dots i").forEach((d, i) => { d.className = i + 1 < s ? "past" : i + 1 === s ? "now" : ""; });
   $("dots").setAttribute("aria-label", s ? `장면 ${s}/${SCENES.length - 1} ${SCENES[s].name || ""}` : "장면 시작 전");
-  chip(SCENES[s].chip || "");
+  chip(SCENES[s].chip || (EP.worksheet && SCENES[s].worksheetChip) || "");
   each("scene", s);
 }
 function setLine(t) {
