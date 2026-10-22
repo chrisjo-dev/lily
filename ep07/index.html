@@ -1,0 +1,237 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="color-scheme" content="light only">
+<meta name="robots" content="noindex, nofollow">
+<!-- 인라인 코드와 style 속성 없이 돈다. supabase 주소는 가입 레인과 함께 메인이 바꿈 -->
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.117.3/dist/umd/supabase.js; style-src 'self' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; media-src 'self'; connect-src 'self' https://supabase-project-ref.invalid; base-uri 'self'; object-src 'none'">
+<title>Sweet Dreams | 릴리랑 2분 영어 그림책</title>
+<meta name="description" content="아이와 함께 2분 영어 듣기. 잠자기 전 책 읽는 시간, 오늘의 단어 3개.">
+<link rel="icon" href="/brand/favicon.ico" sizes="any"><link rel="icon" href="/brand/favicon-32.png" type="image/png" sizes="32x32"><link rel="icon" href="/brand/favicon-16.png" type="image/png" sizes="16x16"><link rel="icon" href="/brand/icon-192.png" type="image/png" sizes="192x192"><link rel="apple-touch-icon" href="/brand/apple-touch-icon.png">
+<meta property="og:type" content="website"><meta property="og:site_name" content="릴리랑"><meta property="og:locale" content="ko_KR">
+<link rel="canonical" href="https://lily.wspace.ai.kr/ep07/">
+<meta property="og:url" content="https://lily.wspace.ai.kr/ep07/"><meta property="og:title" content="Sweet Dreams | 릴리랑"><meta property="og:description" content="잠자기 전 책 읽는 시간, 릴리랑 같이 듣고 누르며 노는 2분 영어 그림책. 4~7세 아이와 부모님.">
+<!-- OG 그림은 이 편 것이 생길 때까지 EP01 것을 같이 씀 -->
+<meta property="og:image" content="https://lily.wspace.ai.kr/ep01/og.jpg"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta property="og:image:alt" content="릴리랑 그림책 표지 그림">
+<meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="Sweet Dreams | 릴리랑"><meta name="twitter:description" content="잠자기 전 책 읽는 시간, 릴리랑 같이 듣고 누르며 노는 2분 영어 그림책. 4~7세 아이와 부모님."><meta name="twitter:image" content="https://lily.wspace.ai.kr/ep01/og.jpg">
+
+<link rel="preload" as="image" href="art/bg-0-intro.webp" fetchpriority="high">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link id="lily-fonts" rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Andika:wght@400;700&family=Gowun+Dodum&family=Jua&display=swap">
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Andika:wght@400;700&family=Gowun+Dodum&family=Jua&display=swap"></noscript>
+<link rel="stylesheet" href="/engine/engine.css">
+<!-- 가입과 맛보기(레인 D): 설정, 로그인, 잠금. 없으면 gate-default.js가 항상 허용 -->
+<script src="/engine/lily-config.js"></script>
+<script src="/engine/auth.js"></script>
+<script src="/engine/gate.js"></script>
+<script src="/engine/gate-default.js"></script>
+<script src="/engine/engine.js"></script>
+<script src="/engine/interactions/find.js"></script>
+<script src="/engine/interactions/lamp-end.js"></script>
+<script src="/engine/interactions/say-sticker.js"></script>
+<script src="/engine/interactions/tap-sparkle.js"></script>
+</head>
+<body>
+<!-- 단어 그림: 부모님 화면 단어 버튼에서 쓴다(손 모양 #hand-shape는 엔진이 넣음) -->
+<svg class="sprite" width="0" height="0" aria-hidden="true">
+  <symbol id="i-read" viewBox="0 0 120 100">
+    <path class="fS sI" stroke-width="3" stroke-linejoin="round" d="M60 26 q-20 -12 -46 -8 v58 q26 -4 46 8 q20 -12 46 -8 v-58 q-26 -4 -46 8 z M60 26 v58"/>
+    <path class="fO sA" stroke-width="2.5" d="M84 46 q-6 -6 -6 -10 q0 -4 4 -4 q2 0 2 3 q0 -3 2 -3 q4 0 4 4 q0 4 -6 10 z"/>
+  </symbol>
+  <symbol id="i-page" viewBox="0 0 120 100">
+    <path class="fS sI" stroke-width="3" stroke-linejoin="round" d="M60 30 q-20 -12 -46 -8 v58 q26 -4 46 8 q20 -12 46 -8 v-58 q-26 -4 -46 8 z M60 30 v58"/>
+    <path class="fO sA" stroke-width="3" stroke-linejoin="round" d="M60 30 q16 -22 34 -20 q-6 26 -34 50 z"/>
+  </symbol>
+  <symbol id="i-dreams" viewBox="0 0 120 100">
+    <path class="fO sA" stroke-width="3" d="M64 14 a36 36 0 1 0 34 50 a28 28 0 1 1 -34 -50 z"/>
+    <path class="sA" stroke-width="3" stroke-linecap="round" d="M96 16 v12 M90 22 h12 M20 26 v10 M15 31 h10"/>
+  </symbol>
+</svg>
+
+<div class="stage" id="stage">
+  <!-- 그림은 art/의 배경 한 장(1024x1536) + 누르는 레이어. 좌표는 그림 픽셀의 절반(viewBox 512x768, 그림도 512x768로 놓음).
+       엔진의 스티커(66), 반짝 별, 거품 글자, 손 모양 크기가 400~500 폭 좌표에 맞춰져 있어서 EP01과 같은 눈금을 씀 -->
+  <!-- 처음: 이불 속에 들어간 릴리 (아래 1/4 침대 발판은 큰 재생 단추 자리) -->
+  <svg class="scene" id="sc0" viewBox="0 0 512 768" preserveAspectRatio="xMidYMid slice">
+    <image href="art/bg-0-intro.webp" width="512" height="768"/>
+  </svg>
+
+  <!-- 장면 1: 책 찾기 (자는 비스킷 오른쪽 옆 이불 위로 나온 책 모서리) -->
+  <svg class="scene" id="sc1" viewBox="0 0 512 768" preserveAspectRatio="xMidYMid slice" hidden>
+    <image data-src="art/bg-1-find.webp" width="512" height="768"/>
+    <g class="tgt" id="t-book" role="button" tabindex="0" aria-label="비스킷 옆 책 누르기">
+      <circle class="halo" cx="432" cy="440" r="50"/>
+      <g class="pulse"><g id="book"><g transform="translate(432 440) rotate(14)">
+        <image class="art" data-src="art/L-book.webp" x="-44" y="-44" width="88" height="88"/>
+      </g></g></g>
+      <circle class="hit" cx="430" cy="440" r="58"/>
+    </g>
+    <g class="hand" transform="translate(452 498) scale(1.3)"><g><use href="#hand-shape"/></g></g>
+  </svg>
+
+  <!-- 장면 2: 책 펼치기 (오른쪽 아래 책장 모서리를 누르면 반짝하고 이어짐) -->
+  <svg class="scene" id="sc2" viewBox="0 0 512 768" preserveAspectRatio="xMidYMid slice" hidden>
+    <image data-src="art/bg-2-book.webp" width="512" height="768"/>
+    <g class="tgt" id="t-corner" role="button" tabindex="0" aria-label="책장 모서리 누르기">
+      <circle class="halo" cx="456" cy="510" r="46"/>
+      <g class="pulse"><path class="fN sT" stroke-width="4" stroke-linejoin="round" d="M478 470 V528 H420 Z"/></g>
+      <circle class="hit" cx="450" cy="505" r="60"/>
+    </g>
+    <g id="sparks1"></g>
+    <g class="hand" transform="translate(426 566) scale(1.3)"><g><use href="#hand-shape"/></g></g>
+  </svg>
+
+  <!-- 장면 3: 별 이야기 (책 속 밤하늘 아무 곳이나 누르면 반짝. 노란 별 셋은 누를 수 있다는 표시) -->
+  <svg class="scene" id="sc3" viewBox="0 0 512 768" preserveAspectRatio="xMidYMid slice" hidden>
+    <image data-src="art/bg-3-stars.webp" width="512" height="768"/>
+    <g class="tgt" id="t-sky" role="button" tabindex="0" aria-label="하늘의 별 누르기">
+      <circle class="halo" cx="200" cy="150" r="30"/><circle class="halo" cx="342" cy="112" r="30"/><circle class="halo" cx="432" cy="236" r="30"/>
+      <g class="pulse fT sE" stroke-width="1.5">
+        <path d="M200 134 L205 145 L216 150 L205 155 L200 166 L195 155 L184 150 L195 145 Z"/>
+        <path d="M342 96 L347 107 L358 112 L347 117 L342 128 L337 117 L326 112 L337 107 Z"/>
+        <path d="M432 220 L437 231 L448 236 L437 241 L432 252 L427 241 L416 236 L427 231 Z"/>
+      </g>
+      <rect class="hit" x="100" y="62" width="412" height="250"/>
+    </g>
+    <g id="sparks2"></g>
+  </svg>
+
+  <!-- 장면 4: 다 읽었다 (누를 것 없음) -->
+  <svg class="scene" id="sc4" viewBox="0 0 512 768" preserveAspectRatio="xMidYMid slice" hidden>
+    <image data-src="art/bg-4-done.webp" width="512" height="768"/>
+  </svg>
+
+  <!-- 장면 5: 친구 차례 (위 오른쪽 빈 벽: 말풍선, 아래 판: 말했어요 단추와 스티커판) -->
+  <svg class="scene" id="sc5" viewBox="0 0 512 768" preserveAspectRatio="xMidYMid slice" hidden>
+    <image data-src="art/bg-5-turn.webp" width="512" height="768"/>
+    <rect class="fS sO" stroke-width="2" x="300" y="140" width="176" height="72" rx="22"/>
+    <path class="fS" d="M318 200 l-52 30 l74 -22 z"/>
+    <text class="fA" id="say-word" x="388" y="184" font-size="21" text-anchor="middle">Your turn!</text>
+    <g class="tgt" id="t-say" role="button" tabindex="0" aria-label="말했어요">
+      <circle class="halo" cx="112" cy="560" r="78"/>
+      <g class="pulse">
+        <circle class="fT sE" stroke-width="3" cx="112" cy="560" r="64"/>
+        <text class="kr fI" x="112" y="558" font-size="23" text-anchor="middle">말했어요</text>
+        <text class="fI" x="112" y="584" font-size="15" text-anchor="middle">I said it!</text>
+      </g>
+    </g>
+    <g class="hand" transform="translate(160 618) scale(1.4)"><g><use href="#hand-shape"/></g></g>
+    <!-- 스티커판: 엔진 스티커(66)를 1.2배로 보이게 판 전체를 키움. from은 이 판 좌표의 단추 중심 -->
+    <g transform="translate(218 492) scale(1.2)">
+      <text class="kr fI" x="111" y="0" font-size="12" text-anchor="middle">오늘의 스티커</text>
+      <g class="fN sI" stroke-width="2" stroke-dasharray="6 4">
+        <rect x="0" y="12" width="62" height="62" rx="31"/><rect x="80" y="12" width="62" height="62" rx="31"/><rect x="160" y="12" width="62" height="62" rx="31"/>
+      </g>
+      <g id="stickers"></g>
+      <g class="fI" font-size="10" text-anchor="middle"><text x="31" y="90">read a book</text><text x="111" y="90">turn the page</text><text x="191" y="90">sweet dreams</text></g>
+    </g>
+  </svg>
+
+  <!-- 장면 6: 잘 자 (오른쪽 협탁 스탠드 기둥 위에 램프 갓 레이어, EP01 그림) -->
+  <svg class="scene" id="sc6" viewBox="0 0 512 768" preserveAspectRatio="xMidYMid slice" hidden>
+    <image data-src="art/bg-6-night.webp" width="512" height="768"/>
+    <text class="fS" x="318" y="196" font-size="34" text-anchor="middle">Good night!</text>
+    <g class="tgt" id="t-lamp" role="button" tabindex="0" aria-label="램프 끄기">
+      <circle class="halo" cx="474" cy="250" r="50"/>
+      <image class="lamp-off-img" data-src="art/L-lamp-off.png" x="436" y="212" width="76" height="74"/>
+      <g class="pulse"><image class="lamp-on-img" data-src="art/L-lamp-on.png" x="436" y="218" width="76" height="67"/></g>
+      <rect class="hit" x="418" y="186" width="94" height="134"/>
+    </g>
+    <g class="hand" transform="translate(444 330) scale(1.3)"><g><use href="#hand-shape"/></g></g>
+    <rect class="dim fI" x="0" y="0" width="512" height="768"/>
+  </svg>
+</div>
+
+<!-- 편 설정(JSON). 형식은 /engine/README.md. 시각은 초(음악 도입 2.5초 포함), [[...]]는 오늘의 단어, 좌표는 장면 viewBox(그림 픽셀의 절반) -->
+<script type="application/json" id="lily-episode">
+{
+  "id": "ep07",
+  "title": "Sweet Dreams",
+  "audio": "ep07.mp3",
+  "duration": 119,
+  "offset": 2.5,
+  "free": false,
+  "previewUntil": 28.34,
+  "lines": [
+    [2.5, 4.59, "Hello, hello! It's Lily time!"],
+    [4.99, 10.17, "Hi, friend! 나는 릴리야. 잠옷 입고 이불 속에 쏙 들어왔어."],
+    [12.57, 16.4, "잠자기 전에 뭐 할까? 친구는 자기 전에 뭐 해?"],
+    [18.8, 23.65, "맞아, 책 읽기! [[Read a book]]. 책 읽어요. [[Read a book]]!"],
+    [24.05, 28.34, "그런데 내 책이 어디 갔지? 친구가 같이 찾아 줄래?"],
+    [31.74, 39.61, "찾았다! 비스킷이 책 위에서 먼저 자고 있었네! 비스킷, 같이 [[read a book]] 하자. 멍."],
+    [40.01, 44.02, "책을 펼치면, 우와, 달님이랑 작은 토끼가 나와."],
+    [44.42, 49.94, "다음은 어떻게 될까? [[Turn the page]]. 책장을 넘겨요. [[Turn the page]]!"],
+    [50.34, 53.51, "친구가 오른쪽 아래 모서리를 톡 눌러 줄래?"],
+    [55.31, 60.52, "토끼가 하늘을 봤어. 별이 반짝반짝. 친구도 별을 톡 눌러 봐."],
+    [62.92, 67.23, "한 장 더, [[turn the page]]. 토끼가 하품을 해. 하아암."],
+    [69.03, 74.95, "토끼가 달님한테 말했어. [[Sweet dreams]]. 좋은 꿈 꿔. [[Sweet dreams]]."],
+    [75.35, 81.4, "끝! 오늘도 [[read a book]] 했다. 비스킷은 벌써 쿨쿨. 멍, 쿨."],
+    [83.8, 90.39, "이제 친구 차례야. 내가 말하면 작게 따라 해 봐. 말할 때마다 스티커가 하나씩 붙어."],
+    [90.79, 91.87, "[[Read a book]]."],
+    [94.27, 95.4, "[[Turn the page]]."],
+    [97.8, 99.09, "[[Sweet dreams]]."],
+    [101.49, 107.78, "잘했어. 한 번 더, 자장가처럼. [[Read a book]], [[turn the page]]. [[Sweet dreams]], [[sweet dreams]]."],
+    [108.18, 112.32, "이제 불을 끌 시간이야. 친구가 램프를 톡 눌러 줘."],
+    [112.72, 115.2, "Good night, friend! [[Sweet dreams]]. Bye-bye."]
+  ],
+  "scenes": [
+    { "id": "sc0", "from": 0 },
+    { "id": "sc1", "from": 23.8, "name": "책 찾기" },
+    { "id": "sc2", "from": 39.8, "name": "책 펼치기" },
+    { "id": "sc3", "from": 55.1, "name": "별 이야기" },
+    { "id": "sc4", "from": 75.1, "name": "다 읽었다" },
+    { "id": "sc5", "from": 83.6, "name": "친구 차례" },
+    { "id": "sc6", "from": 107.9, "name": "잘 자" }
+  ],
+  "waits": [
+    { "at": 28.34, "type": "find", "target": "t-book", "bounce": "book" },
+    { "at": 53.51, "type": "tap-sparkle", "target": "t-corner", "into": "sparks1", "keyArea": [420, 500, 56] },
+    { "at": 91.87, "type": "say-sticker", "sticker": 0 },
+    { "at": 95.4, "type": "say-sticker", "sticker": 1 },
+    { "at": 99.09, "type": "say-sticker", "sticker": 2 },
+    { "at": 115.2, "type": "lamp-end", "target": "t-lamp" }
+  ],
+  "free_play": [
+    { "scene": "sc3", "type": "tap-sparkle", "target": "t-sky", "into": "sparks2", "keyArea": [150, 180, 300] },
+    {
+      "scene": "sc5",
+      "type": "say-sticker",
+      "target": "t-say",
+      "label": "say-word",
+      "words": {"13": "Your turn!", "14": "Read a book.", "15": "Turn the page.", "16": "Sweet dreams.", "17": "Great job!"},
+      "into": "stickers",
+      "from": [-88, 57],
+      "slots": [[0, 12], [80, 12], [160, 12]],
+      "images": ["art/L-sticker-read.webp", "art/L-sticker-page.webp", "art/L-sticker-dreams.webp"]
+    }
+  ],
+  "end": {
+    "at": 115.1,
+    "title": "Good night!",
+    "sub": "오늘 모은 스티커",
+    "bg": "art/paper.webp",
+    "stickers": [
+      { "img": "art/L-sticker-read.webp", "label": "read a book" },
+      { "img": "art/L-sticker-page.webp", "label": "turn the page" },
+      { "img": "art/L-sticker-dreams.webp", "label": "sweet dreams" }
+    ]
+  },
+  "words": [
+    { "en": "read a book", "ko": "책 읽어요", "line": 3, "icon": "#i-read" },
+    { "en": "turn the page", "ko": "책장을 넘겨요", "line": 7, "icon": "#i-page" },
+    { "en": "sweet dreams", "ko": "좋은 꿈 꿔", "line": 11, "icon": "#i-dreams" }
+  ],
+  "worksheet": null,
+  "tips": [
+    ["여러 번 들려주세요.", "해석해 주기보다 같은 이야기를 반복해서 듣는 게 오늘의 목표예요. '3번 이어 듣기'를 켜면 끝나고 처음부터 다시 나와요."],
+    ["잠자리 책 읽을 때 한 번만.", "\"Turn the page!\", \"Sweet dreams!\" 하고 그 상황에 말해 주면 소리와 상황이 이어져 더 오래 기억해요."],
+    ["따라 하지 않아도 괜찮아요.", "듣는 것만으로도 충분한 노출이에요."],
+    ["멈춰서 기다리는 곳이 있어요.", "아이가 화면을 누르면 이어져요. 그냥 들으려면 그냥 듣기를 켜 주세요."]
+  ]
+}
+</script>
+</body>
+</html>
