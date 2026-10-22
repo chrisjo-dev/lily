@@ -139,6 +139,15 @@ async def main():
         print("TARGETS smallest hit px", sorted(smallest)[:5])
         ok("child targets >= 64px", min(smallest) >= 64, str(min(smallest)))
 
+        # 맛보기 편이 아니면(free: false): 비회원은 previewUntil에서 멈추고 가입 카드. 그 뒤 시험은 gate.js를 비워 회원처럼(gate-default가 항상 허용)
+        if cfg.get("free") is False:
+            pu = cfg["previewUntil"]
+            await open_at(pg, pu - 1.0); await pg.click("#play")
+            hit = await until(pg, "!!document.getElementById('lilyGateCard')", 5000)
+            t = await pg.evaluate("audio.currentTime")
+            ok(f"gate: non-member stops at previewUntil {pu} with join card", hit and pu <= t <= pu + 0.2 and await pg.evaluate("audio.paused && waiting===-1"), f"t={t:.3f}")
+            await pg.route("**/engine/gate.js", lambda r: r.fulfill(status=200, content_type="text/javascript", body="// 시험: 회원처럼"))
+
         # 2 기다림 지점마다: 정확히 멈추고, 그 종류대로 누르면 이어짐
         board = next((f for f in free if f["type"] == "say-sticker"), None)
         bub = None
