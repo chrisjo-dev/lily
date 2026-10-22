@@ -37,7 +37,9 @@ async def main():
         for name, qs, act in cases:
             await pg.goto(B + qs)
             # 글꼴 stylesheet가 늦게 붙어 fonts.ready만으로는 부족하다. 본문 두 글꼴이 실제로 준비될 때까지 기다림
-            await pg.wait_for_function("""['Gowun Dodum','Andika'].every(f=>[...document.fonts].some(x=>x.family.replace(/"/g,'')===f&&x.status==='loaded'))""", timeout=10000)
+            for _ in range(200):   # wait_for_function은 CSP(unsafe-eval 없음)에 막혀 직접 기다림
+                if await pg.evaluate("""['Gowun Dodum','Andika'].every(f=>[...document.fonts].some(x=>x.family.replace(/"/g,'')===f&&x.status==='loaded'))"""): break
+                await pg.wait_for_timeout(50)
             await pg.evaluate("document.fonts.ready"); await pg.wait_for_timeout(900)
             if act == "end":
                 await pg.evaluate(f"document.querySelector('#{lamp['target']} .hit').dispatchEvent(new PointerEvent('pointerdown',{{bubbles:true}}))" if lamp else "showEnd(true)")

@@ -10,6 +10,7 @@
 }
 * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
 [hidden] { display: none !important; }
+.sprite { position: absolute; }
 html { -webkit-text-size-adjust: 100%; }
 body {
   margin: 0; background: var(--t-bg); color: var(--t-ink); font-family: var(--kr);

@@ -1,6 +1,7 @@
 // 릴리랑 엔진: 어느 편이든 같은 것만 둔다(재생, 진행 막대, 기다림, 그냥 듣기, 3번 이어 듣기, 조금 천천히,
 // 바깥 되감기, 장면 전환, 자막, 단어 버튼, 대본, 부모 화면, 미리 불러오기, 잠금 훅).
-// 편 HTML은 장면 마크업(#stage)과 window.LILY_EPISODE만 두고 끝에서 lilyMount()를 부른다. 형식은 engine/README.md.
+// 편 HTML은 장면 마크업(#stage)과 설정 JSON(<script type="application/json" id="lily-episode">)만 둔다. 형식은 engine/README.md.
+// 실행되는 인라인 코드가 없어야 CSP에서 'unsafe-inline' 없이 돈다. 문서를 다 읽으면(DOMContentLoaded) 스스로 시작한다.
 // 상호작용은 engine/interactions/*.js가 window.LilyInteractions[종류]로 등록한다.
 // 시험(tests/lily)이 쓰는 상태(audio, waiting, done, scene, endShown, playsLeft, seekTo, showEnd, enterWait)는 전역으로 둔다.
 window.LilyInteractions = window.LilyInteractions || {};
@@ -13,7 +14,8 @@ const plain = (s) => s.replace(/\[\[|\]\]/g, "");
 const capHTML = (s) => esc(plain(s)).replace(/[A-Za-z][A-Za-z'\-]*(?:[ ,.!?]*[A-Za-z][A-Za-z'\-]*)*[.!?,]*/g, (m) => `<span class="en">${m}</span>`);
 function el(tag, attrs, parent) {
   const n = document.createElementNS(NS, tag);
-  for (const k in attrs) n.setAttribute(k, attrs[k]);
+  // style 속성은 CSP가 막으므로 CSSOM으로 넣는다
+  for (const k in attrs) k === "style" ? (n.style.cssText = attrs[k]) : n.setAttribute(k, attrs[k]);
   if (parent) parent.appendChild(n);
   return n;
 }
@@ -37,7 +39,7 @@ const each = (hook, ...a) => { for (const m of mods) if (m[hook]) m[hook](...a);
 // ---- 셸: 머리줄, 무대 위 조각, 자막, 조작 줄, 부모님 화면 ----
 function buildShell() {
   const st = $("stage"), end = EP.end || {}, ws = EP.worksheet;
-  document.body.insertAdjacentHTML("afterbegin", `<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  document.body.insertAdjacentHTML("afterbegin", `<svg class="sprite" width="0" height="0" aria-hidden="true">
   <g id="hand-shape">
     <ellipse class="fK sI" stroke-width="1.5" cx="0" cy="12" rx="10" ry="14"/>
     <rect class="fK sI" stroke-width="1" x="-6" y="0" width="7" height="12" rx="3"/>
@@ -295,7 +297,9 @@ function makeApi() {
 
 // ---- 시작 ----
 function lilyMount() {
-  EP = window.LILY_EPISODE;
+  // 설정은 JSON 데이터 블록에서 읽고, 다른 레인(gate.js, 시험)이 보도록 window.LILY_EPISODE에도 둔다
+  const data = $("lily-episode");
+  EP = window.LILY_EPISODE = window.LILY_EPISODE || JSON.parse(data.textContent);
   LINES = EP.lines; WAITS = EP.waits || []; SCENES = EP.scenes;
   SCENE_AT = SCENES.map((s) => s.from);
   END_AT = EP.end && EP.end.at != null ? EP.end.at : LINES[LINES.length - 1][1] - 0.1;
@@ -395,3 +399,14 @@ function lilyMount() {
     if (audio.readyState >= 1) go(); else { go(); audio.addEventListener("loadedmetadata", go, { once: true }); }
   }
 }
+
+// 글꼴 stylesheet는 preload로 받아 다 받으면 붙인다(그리기를 막지 않게). onload 속성은 CSP가 막아 여기서 단다
+(function () {
+  const f = document.getElementById("lily-fonts");
+  if (!f) return;
+  const on = () => { f.rel = "stylesheet"; };
+  f.addEventListener("load", on, { once: true });
+  window.addEventListener("load", on, { once: true });   // 이 스크립트보다 먼저 받아 버렸을 때
+})();
+if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", lilyMount, { once: true });
+else lilyMount();

@@ -5,6 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="color-scheme" content="light only">
 <meta name="robots" content="noindex, nofollow">
+<!-- 인라인 코드와 style 속성 없이 돈다. supabase 주소는 가입 레인과 함께 메인이 바꿈 -->
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.117.3/dist/umd/supabase.js; style-src 'self' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; media-src 'self'; connect-src 'self' https://supabase-project-ref.invalid; base-uri 'self'; object-src 'none'">
 <title>Brush, Brush, Brush! | 릴리랑 2분 영어 그림책</title>
 <meta name="description" content="아이와 함께 2분 영어 듣기. 이 닦기 시간, 오늘의 단어 3개, 인쇄용 학습지.">
 <link rel="icon" href="/brand/favicon.ico" sizes="any"><link rel="icon" href="/brand/favicon-32.png" type="image/png" sizes="32x32"><link rel="icon" href="/brand/favicon-16.png" type="image/png" sizes="16x16"><link rel="icon" href="/brand/icon-192.png" type="image/png" sizes="192x192"><link rel="apple-touch-icon" href="/brand/apple-touch-icon.png">
@@ -17,7 +19,7 @@
 <link rel="preload" as="image" href="art/bg-0-intro.webp" fetchpriority="high">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Andika:wght@400;700&family=Gowun+Dodum&family=Jua&display=swap" onload="this.onload=null;this.rel='stylesheet'">
+<link id="lily-fonts" rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Andika:wght@400;700&family=Gowun+Dodum&family=Jua&display=swap">
 <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Andika:wght@400;700&family=Gowun+Dodum&family=Jua&display=swap"></noscript>
 <link rel="stylesheet" href="/engine/engine.css">
 <!-- 가입과 맛보기(레인 D): 설정, 로그인, 잠금. 없으면 gate-default.js가 항상 허용 -->
@@ -35,7 +37,7 @@
 </head>
 <body>
 <!-- 단어 그림: 부모님 화면 단어 버튼에서 쓴다(손 모양 #hand-shape는 엔진이 넣음) -->
-<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+<svg class="sprite" width="0" height="0" aria-hidden="true">
   <symbol id="i-brush" viewBox="0 0 120 100">
     <path class="fS sI" stroke-width="3" d="M30 18 q-18 0 -18 24 q0 16 7 34 q4 12 9 0 l4 -16 q2 -6 4 0 l4 16 q5 12 9 0 q7 -18 7 -34 q0 -24 -18 -24 q-4 2 -9 2 q-5 0 -9 -2 z"/>
     <rect class="fA" x="66" y="54" width="50" height="9" rx="4.5" transform="rotate(-28 91 58)"/>
@@ -151,20 +153,24 @@
   </svg>
 </div>
 
-<script>
-// 편 설정. 형식은 /engine/README.md. 시각은 초(음악 도입 2.5초 포함), [[...]]는 오늘의 단어
-window.LILY_EPISODE = {
-  id: "ep01", title: "Brush, Brush, Brush!", audio: "ep01.mp3", duration: 139, offset: 2.5,
-  free: true,
-  previewUntil: 40.6,
-  lines: [
+<!-- 편 설정(JSON). 형식은 /engine/README.md. 시각은 초(음악 도입 2.5초 포함), [[...]]는 오늘의 단어, 좌표는 그림 픽셀 -->
+<script type="application/json" id="lily-episode">
+{
+  "id": "ep01",
+  "title": "Brush, Brush, Brush!",
+  "audio": "ep01.mp3",
+  "duration": 139,
+  "offset": 2.5,
+  "free": true,
+  "previewUntil": 40.6,
+  "lines": [
     [2.5, 5.02, "Hello, hello! It's Lily time!"],
     [5.42, 9.53, "Hi, friend! 나는 릴리야. 오늘도 같이 할까?"],
     [11.93, 17.88, "하아암. 벌써 밤이네. 자기 전에 해야 할 게 있지? 뭘까?"],
     [20.28, 26.7, "맞아! 이 닦기! [[Brush my teeth]]. 이를 닦아요. [[Brush my teeth]]!"],
     [27.1, 31.42, "사실 나도 가끔은 이 닦기 싫어. 친구도 그래?"],
     [33.82, 40.6, "그래도 같이 하면 재밌어. 칫솔이 어디 있지? 학습지 1번 그림에서 칫솔을 찾아볼까?"],
-    [44.0, 50.82, "찾았다! 그런데 어? 우리 강아지 비스킷이 칫솔을 물고 있어! 멍! 멍!"],
+    [44, 50.82, "찾았다! 그런데 어? 우리 강아지 비스킷이 칫솔을 물고 있어! 멍! 멍!"],
     [51.22, 59.32, "비스킷, 그건 내 칫솔이야! 이리 줘! 자, 이제 시작! [[Brush my teeth]]!"],
     [61.62, 67.22, "Brush, brush, brush. 친구도 같이! Brush, brush, brush."],
     [67.62, 71.82, "와! [[Bubbles]]! 거품이야! [[Bubbles]]!"],
@@ -177,65 +183,94 @@ window.LILY_EPISODE = {
     [111.79, 112.53, "[[Bubbles]]."],
     [114.93, 115.99, "[[All clean]]!"],
     [118.39, 127.86, "잘했어! 한 번 더, 노래처럼! Brush, brush, [[brush my teeth]]. [[Bubbles]], [[bubbles]], [[all clean]]!"],
-    [128.26, 135.4, "Good night, friend! 오늘 밤 이 닦을 때 말해 봐. [[Brush my teeth]]! Bye-bye!"],
+    [128.26, 135.4, "Good night, friend! 오늘 밤 이 닦을 때 말해 봐. [[Brush my teeth]]! Bye-bye!"]
   ],
-  // 장면 시작 시각 순. name은 진행 점의 읽기 글, chip은 무대 왼쪽 위 작은 표
-  scenes: [
-    { id: "sc0", from: 0 },
-    { id: "sc1", from: 33, name: "칫솔 찾기", chip: "학습지 1번" },
-    { id: "sc2", from: 51, name: "이 닦기" },
-    { id: "sc3", from: 67.4, name: "거품" },
-    { id: "sc4", from: 88.6, name: "깨끗해" },
-    { id: "sc5", from: 100.5, name: "친구 차례", chip: "학습지 3번에도 붙여요" },
-    { id: "sc6", from: 128, name: "잘 자" },
+  "scenes": [
+    { "id": "sc0", "from": 0 },
+    { "id": "sc1", "from": 33, "name": "칫솔 찾기", "chip": "학습지 1번" },
+    { "id": "sc2", "from": 51, "name": "이 닦기" },
+    { "id": "sc3", "from": 67.4, "name": "거품" },
+    { "id": "sc4", "from": 88.6, "name": "깨끗해" },
+    { "id": "sc5", "from": 100.5, "name": "친구 차례", "chip": "학습지 3번에도 붙여요" },
+    { "id": "sc6", "from": 128, "name": "잘 자" }
   ],
-  // 멈춰 기다리는 곳: 그 줄이 끝나는 시각. 좌표는 그림 픽셀
-  waits: [
-    { at: 40.6, type: "find", target: "t-brush", bounce: "brush1" },
-    { at: 79.8, type: "pop", into: "bubs", img: "art/L-bubble.png",
-      bubbles: [[110, 245, 50], [330, 228, 48], [225, 345, 56], [398, 368, 40], [78, 382, 38]] },
-    { at: 109.39, type: "say-sticker", sticker: 0 },
-    { at: 112.53, type: "say-sticker", sticker: 1 },
-    { at: 115.99, type: "say-sticker", sticker: 2 },
-    { at: 135.4, type: "lamp-end", target: "t-lamp" },
+  "waits": [
+    { "at": 40.6, "type": "find", "target": "t-brush", "bounce": "brush1" },
+    {
+      "at": 79.8,
+      "type": "pop",
+      "into": "bubs",
+      "img": "art/L-bubble.png",
+      "bubbles": [[110, 245, 50], [330, 228, 48], [225, 345, 56], [398, 368, 40], [78, 382, 38]]
+    },
+    { "at": 109.39, "type": "say-sticker", "sticker": 0 },
+    { "at": 112.53, "type": "say-sticker", "sticker": 1 },
+    { "at": 115.99, "type": "say-sticker", "sticker": 2 },
+    { "at": 135.4, "type": "lamp-end", "target": "t-lamp" }
   ],
-  free_play: [
-    { scene: "sc2", type: "scrub", target: "t-scrub", brush: "brush2", home: [640, 760], into: "germs", floats: "floats",
-      img: "art/L-germ.png", word: "Brush!", reach: 40,
-      germs: [[255, 530, 28], [345, 524, 28], [445, 520, 30], [545, 524, 28], [628, 534, 26], [310, 616, 26], [432, 624, 28], [560, 620, 26]] },
-    { scene: "sc4", type: "tap-sparkle", target: "t-teeth", into: "sparks", keyArea: [180, 290, 76] },
-    { scene: "sc5", type: "say-sticker", target: "t-say", label: "say-word",
-      words: { 14: "Your turn!", 15: "Brush my teeth.", 16: "Bubbles.", 17: "All clean!", 18: "Great job!" },
-      into: "stickers", from: [100, 472], slots: [[190, 440], [266, 440], [342, 440]],
-      images: ["art/L-sticker-brush.webp", "art/L-sticker-bubbles.webp", "art/L-sticker-clean.webp"] },
+  "free_play": [
+    {
+      "scene": "sc2",
+      "type": "scrub",
+      "target": "t-scrub",
+      "brush": "brush2",
+      "home": [640, 760],
+      "into": "germs",
+      "floats": "floats",
+      "img": "art/L-germ.png",
+      "word": "Brush!",
+      "reach": 40,
+      "germs": [[255, 530, 28], [345, 524, 28], [445, 520, 30], [545, 524, 28], [628, 534, 26], [310, 616, 26], [432, 624, 28], [560, 620, 26]]
+    },
+    {
+      "scene": "sc4",
+      "type": "tap-sparkle",
+      "target": "t-teeth",
+      "into": "sparks",
+      "keyArea": [180, 290, 76]
+    },
+    {
+      "scene": "sc5",
+      "type": "say-sticker",
+      "target": "t-say",
+      "label": "say-word",
+      "words": { "14": "Your turn!", "15": "Brush my teeth.", "16": "Bubbles.", "17": "All clean!", "18": "Great job!" },
+      "into": "stickers",
+      "from": [100, 472],
+      "slots": [[190, 440], [266, 440], [342, 440]],
+      "images": ["art/L-sticker-brush.webp", "art/L-sticker-bubbles.webp", "art/L-sticker-clean.webp"]
+    }
   ],
-  end: {
-    at: 135.3, title: "Good night!", sub: "오늘 모은 스티커", bg: "art/paper.webp",
-    stickers: [
-      { img: "art/L-sticker-brush.webp", label: "brush my teeth" },
-      { img: "art/L-sticker-bubbles.webp", label: "bubbles" },
-      { img: "art/L-sticker-clean.webp", label: "all clean" },
-    ],
+  "end": {
+    "at": 135.3,
+    "title": "Good night!",
+    "sub": "오늘 모은 스티커",
+    "bg": "art/paper.webp",
+    "stickers": [
+      { "img": "art/L-sticker-brush.webp", "label": "brush my teeth" },
+      { "img": "art/L-sticker-bubbles.webp", "label": "bubbles" },
+      { "img": "art/L-sticker-clean.webp", "label": "all clean" }
+    ]
   },
-  words: [
-    { en: "brush my teeth", ko: "이를 닦아요", line: 3, icon: "#i-brush" },
-    { en: "bubbles", ko: "거품", line: 9, icon: "#i-bubbles" },
-    { en: "all clean", ko: "깨끗해", line: 13, icon: "#i-clean" },
+  "words": [
+    { "en": "brush my teeth", "ko": "이를 닦아요", "line": 3, "icon": "#i-brush" },
+    { "en": "bubbles", "ko": "거품", "line": 9, "icon": "#i-bubbles" },
+    { "en": "all clean", "ko": "깨끗해", "line": 13, "icon": "#i-clean" }
   ],
-  worksheet: {
-    pdf: "ep01-worksheet.pdf", preview: "worksheet.png",
-    alt: "EP01 학습지 미리보기: 칫솔 찾기, 단어 카드, 스티커 칸, 색칠하기",
-    items: ["그림에서 칫솔 찾기", "오려서 노는 단어 카드", "말할 때마다 스티커", "릴리 색칠하기"],
-    hint: "음성에서 \"학습지 1번\", \"3번\"이라고 하면 그 칸을 같이 해요.",
+  "worksheet": {
+    "pdf": "ep01-worksheet.pdf",
+    "preview": "worksheet.png",
+    "alt": "EP01 학습지 미리보기: 칫솔 찾기, 단어 카드, 스티커 칸, 색칠하기",
+    "items": ["그림에서 칫솔 찾기", "오려서 노는 단어 카드", "말할 때마다 스티커", "릴리 색칠하기"],
+    "hint": "음성에서 \"학습지 1번\", \"3번\"이라고 하면 그 칸을 같이 해요."
   },
-  tips: [
+  "tips": [
     ["여러 번 들려주세요.", "해석해 주기보다 같은 이야기를 반복해서 듣는 게 오늘의 목표예요. '3번 이어 듣기'를 켜면 끝나고 처음부터 다시 나와요."],
     ["실제 양치 시간에 한 번만.", "\"Brush my teeth!\" 하고 말해 주면 소리와 상황이 이어져 더 오래 기억해요."],
     ["따라 하지 않아도 괜찮아요.", "듣는 것만으로도 충분한 노출이에요."],
-    ["멈춰서 기다리는 곳이 있어요.", "아이가 화면을 누르면 이어져요. 그냥 들으려면 그냥 듣기를 켜 주세요."],
-  ],
-};
-lilyMount();
+    ["멈춰서 기다리는 곳이 있어요.", "아이가 화면을 누르면 이어져요. 그냥 들으려면 그냥 듣기를 켜 주세요."]
+  ]
+}
 </script>
 </body>
 </html>

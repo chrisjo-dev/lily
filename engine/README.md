@@ -9,9 +9,10 @@
 3. `<body>`:
    - 단어 그림 `<symbol id="i-...">`(부모님 화면 단어 버튼용, 그림 파일을 쓰면 생략)
    - `<div class="stage" id="stage">` 안에 장면마다 `<svg class="scene" id="scN" viewBox="그림 픽셀">`. 첫 장면 그림만 `href`, 나머지는 `data-src`(엔진이 장면 직전에 받아 둠). 첫 장면 말고는 `hidden`.
-   - `window.LILY_EPISODE = {...}` 다음 `lilyMount();`
-4. 머리줄, 칩, 고리, 큰 재생 단추, 끝 카드, 자막, 조작 줄, 부모님 화면, 손 모양(`#hand-shape`)은 엔진이 만듭니다. 마크업에 넣지 않습니다.
-5. 시험: `python3 tests/lily/behave.py http://127.0.0.1:4441/epNN/` 전부 통과(tests/lily/README.md).
+   - 설정 JSON 블록 `<script type="application/json" id="lily-episode">{...}</script>`. 실행되는 코드가 아니라 데이터라 CSP에 걸리지 않습니다. JSON이라 주석과 끝 쉼표는 못 씁니다. 엔진이 문서를 다 읽은 뒤 스스로 시작하고, 읽은 설정을 `window.LILY_EPISODE`에도 둡니다.
+4. CSP: head의 `Content-Security-Policy` meta를 그대로 둡니다(`'unsafe-inline'` 없음). 그래서 인라인 `<script>` 코드, `onload=` 같은 속성, `style=` 속성, `<style>`을 쓰지 않습니다. 모양은 `engine.css`의 클래스로, 동적 스타일은 모듈에서 `api.el(..., { style: "..." })`(CSSOM으로 넣음)로 합니다. 글꼴 링크는 `id="lily-fonts"`인 preload를 엔진이 붙입니다.
+5. 머리줄, 칩, 고리, 큰 재생 단추, 끝 카드, 자막, 조작 줄, 부모님 화면, 손 모양(`#hand-shape`)은 엔진이 만듭니다. 마크업에 넣지 않습니다.
+6. 시험: `python3 tests/lily/behave.py http://127.0.0.1:4441/epNN/` 전부 통과(tests/lily/README.md).
 
 ## 설정 필드
 

@@ -17,7 +17,7 @@ A = ap.parse_args()
 B = A.url if A.url.endswith("/") else A.url + "/"
 AUTO_MS = 8000          # 엔진의 자동 진행 시간
 RESUME_MS = 450         # 자동 진행 뒤 이어 재생까지
-INIT = """window.__lt=[];try{new PerformanceObserver(l=>{for(const e of l.getEntries())window.__lt.push(e.duration)}).observe({type:'longtask',buffered:true})}catch(e){}"""
+INIT = """document.addEventListener('securitypolicyviolation',e=>console.error('CSP violation',e.violatedDirective,e.blockedURI));window.__lt=[];try{new PerformanceObserver(l=>{for(const e of l.getEntries())window.__lt.push(e.duration)}).observe({type:'longtask',buffered:true})}catch(e){}"""
 FPS_START = "window.__stop=0;window.__f=[];(function f(ts){__f.push(ts);if(!window.__stop)requestAnimationFrame(f)})(performance.now())"
 FPS_STOP = "window.__stop=1;(()=>{const f=__f;const g=f.slice(1).map((v,i)=>v-f[i]).sort((a,b)=>a-b);return {fps:(f.length-1)/((f[f.length-1]-f[0])/1000),max:g[g.length-1],p95:g[Math.floor(g.length*.95)]}})()"
 
@@ -94,7 +94,7 @@ async def main():
 
         # 1 첫 화면
         await pg.goto(B); await pg.wait_for_load_state("load")
-        await pg.wait_for_function("performance.getEntriesByName('first-contentful-paint').length>0", timeout=5000)
+        await until(pg, "performance.getEntriesByName('first-contentful-paint').length>0", 5000)   # wait_for_function은 CSP(unsafe-eval 없음)에 막힘
         fcp = await pg.evaluate("(performance.getEntriesByName('first-contentful-paint')[0]||{}).startTime")
         nav = json.loads(await pg.evaluate("JSON.stringify(performance.getEntriesByType('navigation')[0].toJSON())"))
         ok("first screen: big play visible, no scroll", await pg.evaluate("!$('bigPlay').hidden && document.querySelector('.hintrow').getBoundingClientRect().bottom<=innerHeight"), f"FCP={fcp:.0f}ms load={nav['loadEventEnd']:.0f}ms")
@@ -264,6 +264,8 @@ async def main():
         if allowed: print("allowed missing (다른 레인 파일):", len(allowed), sorted(set(allowed)))
         ok("no console errors", not errs)
         ok("no 4xx/5xx responses", not bad)
+        csp = await pg.evaluate("document.querySelector('meta[http-equiv=\"Content-Security-Policy\"]')?.content || ''")
+        print("CSP", csp or "(없음)")
         npass = sum(r[0] == "PASS" for r in res)
         print("SUMMARY", npass, "/", len(res))
         await br.close()
