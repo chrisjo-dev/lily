@@ -1,0 +1,349 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>L2 하루 시간표 - 모바일</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Andika:wght@400;700&family=Gowun+Dodum&display=swap">
+<link rel="stylesheet" href="../shared/tokens.css">
+<style>
+/* ── L2: 하루 시간표 ──
+   아침부터 밤까지 색의 온도가 바뀐다.
+   납작한 색 띠, 그라디언트 없음, 아이 하루의 빛과 분위기. */
+body { width: 390px; font-family: var(--kr); font-size: 16px; line-height: 1.65; color: #1e2a30; }
+
+/* ── 아침 히어로: 밝고 따뜻한 크림 ── */
+.hero {
+  background: #fffcf0;
+  padding: 40px 24px 32px;
+  text-align: center;
+  border-bottom: 1px solid #f0e8c8;
+}
+.hero img.logo { width: 90px; height: auto; margin-bottom: 14px; }
+.hero h1 { font-size: 22px; font-weight: 400; line-height: 1.5; margin: 0 0 8px; color: #2c2c1a; }
+.hero .sub { font-size: 14px; color: #7a7050; margin: 0 0 24px; }
+/* 지금 시간 표시 */
+.now-band {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 6px 14px; background: #f7e98e; border-radius: 4px;
+  font-size: 13px; color: #5a4a00;
+  margin-bottom: 20px;
+}
+.now-dot { width: 7px; height: 7px; border-radius: 50%; background: #c8a000; }
+
+.btn-play {
+  display: block; width: 100%; padding: 15px; border-radius: 4px; border: none;
+  background: var(--t-touch); color: #2c2c1a;
+  font-size: 16px; font-weight: 700; text-align: center;
+  margin-bottom: 10px; cursor: pointer;
+}
+.btn-join {
+  display: block; width: 100%; padding: 12px; border-radius: 4px;
+  background: transparent; border: 1.5px solid #c8b88a; color: #7a6a40;
+  font-size: 14px; text-align: center; cursor: pointer;
+}
+
+/* ── 하루 흐름: 시간대별 색 띠 ── */
+/* 각 시간대는 색으로 구분. 줄이 에피소드를 감싼다. */
+
+.band { padding: 16px 24px; }
+.band-label {
+  font-size: 11px; font-weight: 700; color: currentColor;
+  text-transform: none; letter-spacing: .05em;
+  opacity: .6; margin-bottom: 10px; display: block;
+}
+.band + .band { border-top: none; }
+
+/* 아침: 따뜻한 크림 */
+.band-morning { background: #fffcf0; }
+/* 오전: 부드러운 하늘 */
+.band-midmorning { background: #f0f8fd; }
+/* 낮: 신선한 흰색 */
+.band-noon { background: #f6fbf6; }
+/* 오후: 복숭아 */
+.band-afternoon { background: #fff5ef; }
+/* 저녁: 따뜻한 살구 */
+.band-evening { background: #fef0e4; }
+/* 밤: 차분한 라벤더 */
+.band-night { background: #f2f0f8; }
+
+/* 에피소드 행 */
+.ep-row {
+  display: grid; grid-template-columns: 64px 1fr auto;
+  gap: 12px; align-items: center;
+  padding: 10px 0;
+}
+.ep-thumb {
+  width: 64px; height: 64px; border-radius: 6px;
+  object-fit: cover; display: block; background: #e8e0d0;
+}
+.ep-thumb-lock {
+  width: 64px; height: 64px; border-radius: 6px;
+  background: #ddd8cc; display: flex; align-items: center; justify-content: center;
+  color: #a09080;
+}
+.ep-num { font-family: var(--en); font-size: 10px; font-weight: 700; color: #a09080; display: block; }
+.ep-title { font-family: var(--en); font-size: 14px; font-weight: 700; line-height: 1.3; }
+.ep-ko { font-size: 12px; color: #7a7060; }
+.ep-badge {
+  font-size: 10px; padding: 3px 8px; border-radius: 3px;
+  background: var(--t-touch); color: #2c2c1a; font-weight: 700;
+  white-space: nowrap;
+}
+.ep-badge.soon {
+  background: transparent; border: 1px solid #c8c0b0; color: #a09080;
+}
+
+/* 활성 에피소드 강조 */
+.ep-row.active .ep-title { color: #1e2a30; }
+
+.toc-notice {
+  margin: 8px 0 0; padding: 10px 14px;
+  background: rgba(0,0,0,.04); border-radius: 4px;
+  font-size: 12px; color: #7a7060;
+}
+
+/* 섹션 구분선 */
+.band-sep { height: 3px; background: #f0ece0; }
+
+/* ── 이렇게 놀아요: 오전의 빛 속에서 ── */
+.how-section {
+  background: #f0f8fd; padding: 32px 24px;
+}
+.how-section h2 { font-size: 19px; font-weight: 400; margin: 0 0 20px; }
+.how-row {
+  display: flex; gap: 14px; margin-bottom: 18px; align-items: flex-start;
+}
+.how-row:last-child { margin-bottom: 0; }
+.how-img {
+  width: 72px; height: 72px; flex-shrink: 0; border-radius: 6px;
+  object-fit: cover; display: block; background: #daedf7;
+}
+.step-num-circle {
+  width: 22px; height: 22px; border-radius: 50%;
+  background: #c0e0f0; display: inline-flex; align-items: center; justify-content: center;
+  font-family: var(--en); font-size: 11px; font-weight: 700; color: #2870a0;
+  flex-shrink: 0; margin-top: 2px;
+}
+.how-body { flex: 1; }
+.how-title { font-size: 15px; font-weight: 700; display: block; margin-bottom: 4px; }
+.how-desc { font-size: 13px; color: #4a6070; line-height: 1.7; }
+
+/* ── 부모님께: 저녁 빛, 따뜻한 살구 ── */
+.parent-section {
+  background: #fef0e4; padding: 32px 24px;
+  border-top: 1px solid #f0d8c0;
+}
+.parent-section h2 { font-size: 19px; font-weight: 400; margin: 0 0 20px; color: #3a2010; }
+.why-item { margin-bottom: 20px; padding-left: 16px; border-left: 3px solid #e0b090; }
+.why-item:last-child { margin-bottom: 0; }
+.why-title { font-size: 15px; font-weight: 700; display: block; margin-bottom: 5px; color: #3a2010; }
+.why-desc { font-size: 13px; color: #7a5040; line-height: 1.75; }
+
+/* ── 자주 묻는 질문: 밤의 차분함 ── */
+.qa-section {
+  background: #f2f0f8; padding: 32px 24px;
+  border-top: 1px solid #e0dcea;
+}
+.qa-section h2 { font-size: 19px; font-weight: 400; margin: 0 0 18px; }
+.qa-item { padding: 14px 0; border-bottom: 1px solid #e0dcea; }
+.qa-item:last-child { border-bottom: none; }
+.qa-q { font-size: 14px; font-weight: 700; margin: 0 0 5px; color: #1e2a30; }
+.qa-a { font-size: 13px; color: #506070; margin: 0; line-height: 1.7; }
+
+/* ── 바닥글 ── */
+footer {
+  background: #1e2a30; color: rgba(255,255,255,.55);
+  padding: 24px; font-size: 12px;
+  display: flex; flex-direction: column; gap: 8px;
+}
+footer a { color: rgba(255,255,255,.65); }
+</style>
+</head>
+<body>
+
+<!-- 히어로: 아침 빛 -->
+<section class="hero" aria-label="첫 화면">
+  <img class="logo" src="../assets/logo-v.svg" alt="릴리랑">
+  <h1>아이 하루와 함께하는<br>2분 영어 이야기</h1>
+  <p class="sub">일어나기부터 잠들기까지, 7편</p>
+  <div class="now-band">
+    <span class="now-dot"></span>
+    지금 들을 수 있는 편이 있어요
+  </div>
+  <a href="#"><button class="btn-play">맛보기 1편 바로 듣기</button></a>
+  <a href="#"><button class="btn-join">가입하고 7편 모두 보기</button></a>
+</section>
+
+<!-- 하루 시간표 -->
+<section aria-labelledby="h-tl">
+  <div class="band band-morning">
+    <span class="band-label">아침</span>
+    <div class="ep-row active">
+      <img class="ep-thumb" src="../assets/bg-0-intro.webp" alt="EP01">
+      <span>
+        <span class="ep-num">EP01</span>
+        <span class="ep-title">Brush, Brush, Brush!</span>
+        <span class="ep-ko">이 닦기</span>
+      </span>
+      <span class="ep-badge">무료</span>
+    </div>
+  </div>
+
+  <div class="band-sep"></div>
+
+  <div class="band band-midmorning">
+    <span class="band-label">아침</span>
+    <div class="ep-row">
+      <div class="ep-thumb-lock">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><rect x="5" y="11" width="14" height="10" rx="2" fill="currentColor"/><path d="M8 11V7a4 4 0 0 1 8 0v4" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/></svg>
+      </div>
+      <span>
+        <span class="ep-num">EP02</span>
+        <span class="ep-title">Wake Up!</span>
+        <span class="ep-ko">일어나기</span>
+      </span>
+      <span class="ep-badge soon">곧 나와요</span>
+    </div>
+    <div class="ep-row">
+      <div class="ep-thumb-lock">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><rect x="5" y="11" width="14" height="10" rx="2" fill="currentColor"/><path d="M8 11V7a4 4 0 0 1 8 0v4" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/></svg>
+      </div>
+      <span>
+        <span class="ep-num">EP03</span>
+        <span class="ep-title">Wash Your Face</span>
+        <span class="ep-ko">세수하기</span>
+      </span>
+      <span class="ep-badge soon">곧 나와요</span>
+    </div>
+  </div>
+
+  <div class="band-sep"></div>
+
+  <div class="band band-noon">
+    <span class="band-label">오전</span>
+    <div class="ep-row">
+      <div class="ep-thumb-lock">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><rect x="5" y="11" width="14" height="10" rx="2" fill="currentColor"/><path d="M8 11V7a4 4 0 0 1 8 0v4" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/></svg>
+      </div>
+      <span>
+        <span class="ep-num">EP04</span>
+        <span class="ep-title">Breakfast Time</span>
+        <span class="ep-ko">아침 먹기</span>
+      </span>
+      <span class="ep-badge soon">곧 나와요</span>
+    </div>
+    <div class="ep-row">
+      <div class="ep-thumb-lock">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><rect x="5" y="11" width="14" height="10" rx="2" fill="currentColor"/><path d="M8 11V7a4 4 0 0 1 8 0v4" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/></svg>
+      </div>
+      <span>
+        <span class="ep-num">EP05</span>
+        <span class="ep-title">Get Dressed</span>
+        <span class="ep-ko">옷 입기</span>
+      </span>
+      <span class="ep-badge soon">곧 나와요</span>
+    </div>
+  </div>
+
+  <div class="band-sep"></div>
+
+  <div class="band band-evening">
+    <span class="band-label">저녁</span>
+    <div class="ep-row">
+      <div class="ep-thumb-lock">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><rect x="5" y="11" width="14" height="10" rx="2" fill="currentColor"/><path d="M8 11V7a4 4 0 0 1 8 0v4" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/></svg>
+      </div>
+      <span>
+        <span class="ep-num">EP06</span>
+        <span class="ep-title">Bath Time</span>
+        <span class="ep-ko">목욕하기</span>
+      </span>
+      <span class="ep-badge soon">곧 나와요</span>
+    </div>
+  </div>
+
+  <div class="band-sep"></div>
+
+  <div class="band band-night">
+    <span class="band-label">밤</span>
+    <div class="ep-row">
+      <div class="ep-thumb-lock">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><rect x="5" y="11" width="14" height="10" rx="2" fill="currentColor"/><path d="M8 11V7a4 4 0 0 1 8 0v4" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/></svg>
+      </div>
+      <span>
+        <span class="ep-num">EP07</span>
+        <span class="ep-title">Goodnight Story</span>
+        <span class="ep-ko">잠자리 책</span>
+      </span>
+      <span class="ep-badge soon">곧 나와요</span>
+    </div>
+    <div class="toc-notice">가입하면 새 편이 나올 때마다 알림을 받아요.</div>
+  </div>
+</section>
+
+<!-- 이렇게 놀아요 -->
+<section class="how-section" aria-labelledby="h-how">
+  <h2 id="h-how">이렇게 놀아요</h2>
+  <div class="how-row">
+    <img class="how-img" src="../assets/bg-1-find.webp" alt="듣기">
+    <div class="how-body">
+      <span class="step-num-circle">1</span>
+      <span class="how-title">같이 들어요</span>
+      <p class="how-desc">릴리가 이야기를 들려줘요. 2분이면 한 편이에요.</p>
+    </div>
+  </div>
+  <div class="how-row">
+    <img class="how-img" src="../assets/bg-4-clean.webp" alt="누르기">
+    <div class="how-body">
+      <span class="step-num-circle">2</span>
+      <span class="how-title">그림을 눌러요</span>
+      <p class="how-desc">릴리가 기다리면 아이가 그림을 눌러요.</p>
+    </div>
+  </div>
+  <div class="how-row">
+    <div class="how-img" style="background:#e8f4f0;display:flex;align-items:center;justify-content:center;"><img src="../assets/worksheet.png" alt="학습지" style="width:52px;height:auto;opacity:.7;"></div>
+    <div class="how-body">
+      <span class="step-num-circle">3</span>
+      <span class="how-title">학습지로 다시 만나요</span>
+      <p class="how-desc">인쇄해서 그림 찾기, 단어 카드, 스티커를 해요.</p>
+    </div>
+  </div>
+</section>
+
+<!-- 부모님께 -->
+<section class="parent-section" aria-labelledby="h-parent">
+  <h2 id="h-parent">부모님께</h2>
+  <div class="why-item">
+    <span class="why-title">왜 2분인가요?</span>
+    <p class="why-desc">아이의 집중 시간은 짧아요. 짧게 자주 만나는 게 긴 한 번보다 기억에 남아요.</p>
+  </div>
+  <div class="why-item">
+    <span class="why-title">왜 한국어와 영어를 섞나요?</span>
+    <p class="why-desc">익숙한 한국어가 영어의 뜻을 잡아줘요. 억지로 따라 하지 않아도 귀에 쌓여요.</p>
+  </div>
+  <div class="why-item">
+    <span class="why-title">따라 말 못 해도 괜찮아요</span>
+    <p class="why-desc">6~7세가 돼야 발음을 따라 할 준비가 돼요. 지금은 그냥 듣는 것만으로 충분해요.</p>
+  </div>
+</section>
+
+<!-- 자주 묻는 질문 -->
+<section class="qa-section" aria-labelledby="h-qa">
+  <h2 id="h-qa">자주 묻는 질문</h2>
+  <div class="qa-item"><p class="qa-q">몇 살부터 할 수 있나요?</p><p class="qa-a">4~7세가 가장 잘 맞아요.</p></div>
+  <div class="qa-item"><p class="qa-q">화면 시간이 걱정돼요</p><p class="qa-a">한 편이 2분이에요.</p></div>
+  <div class="qa-item"><p class="qa-q">아이 개인정보를 받나요?</p><p class="qa-a">아이 이름, 사진, 학교 정보를 받지 않아요.</p></div>
+  <div class="qa-item"><p class="qa-q">무료인가요?</p><p class="qa-a">EP01은 무료예요. 가입하면 새 편 알림을 받아요.</p></div>
+</section>
+
+<footer>
+  <img src="../assets/logo-h.svg" alt="릴리랑" width="80" style="opacity:.45">
+  <span>매일 외국어 읽기가 만들어요</span>
+  <a href="#">개인정보처리방침</a>
+</footer>
+
+</body>
+</html>
