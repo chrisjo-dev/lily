@@ -21,4 +21,4 @@ sleep 1  # 이미지 초기화 뒤 서버가 한 번 다시 시작한다
 psql() { docker exec -i "$name" psql -U postgres -d postgres -v ON_ERROR_STOP=1 -q "$@"; }
 psql < "$here/mock_auth.sql"
 psql < "$root/supabase/migrations/0001_init.sql"
-psql < "$here/rls.sql" 2>&1 | sed 's/^psql:<stdin>:[0-9]*: //' | grep -v '^$'
+psql -t -A < "$here/rls.sql" 2>&1 | sed 's/^psql:<stdin>:[0-9]*: //' | grep -v '^$'

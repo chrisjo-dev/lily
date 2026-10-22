@@ -1,10 +1,10 @@
 -- RLS 시험. 마이그레이션을 올린 DB에서 슈퍼유저로 실행한다(역할은 시험 안에서 바꾼다).
 -- 실행: supabase/tests/run-local.sh (docker postgres + mock_auth.sql)
+--   또는 Supabase SQL Editor에 통째로 붙여 실행. 전체가 한 트랜잭션이고 끝에 rollback 하므로 시험 사용자와 스키마는 남지 않는다.
+--   성공하면 마지막 결과가 'ALL RLS TESTS PASSED', 실패하면 'FAIL ...' 오류로 멈춘다.
 -- 결과: 시험마다 "PASS ..." NOTICE. 하나라도 어긋나면 "FAIL ..." 예외로 멈춘다(ON_ERROR_STOP).
-\set ON_ERROR_STOP 1
-set client_min_messages = notice;
-\pset tuples_only on
-\pset format unaligned
+begin;
+set local client_min_messages = notice;
 
 create schema t;
 grant usage on schema t to anon, authenticated;
@@ -47,7 +47,7 @@ insert into auth.users (id, email, raw_user_meta_data) values
   ('bbbbbbbb-0000-0000-0000-000000000002', 'b@example.test', '{}');
 
 select t.ok('trigger: profiles rows created for A and B',
-  (select count(*) from public.profiles) = 2);
+  (select count(*) from public.profiles where user_id in ('aaaaaaaa-0000-0000-0000-000000000001','bbbbbbbb-0000-0000-0000-000000000002')) = 2);
 select t.ok('trigger: nickname cut to 20 chars',
   (select char_length(nickname) from public.profiles where user_id = 'aaaaaaaa-0000-0000-0000-000000000001') = 20);
 select t.ok('all public tables have RLS on (dashboard check equivalent)',
@@ -106,6 +106,8 @@ select t.must_fail('A: change own progress user_id to B rejected',
   $q$update public.progress set user_id = 'bbbbbbbb-0000-0000-0000-000000000002' where episode = 'ep01'$q$, array['42501']);
 select t.rows_are('A: insert own event',
   $q$insert into public.events (user_id, name, episode) values ('aaaaaaaa-0000-0000-0000-000000000001','episode_complete','ep01')$q$, 1);
+select t.must_fail('A: delete own events denied (only delete_my_account removes them)',
+  $q$delete from public.events where user_id = 'aaaaaaaa-0000-0000-0000-000000000001'$q$, array['42501']);
 select t.must_fail('A: own event with unknown name rejected',
   $q$insert into public.events (user_id, name) values ('aaaaaaaa-0000-0000-0000-000000000001','buy')$q$, array['42501','23514']);
 select t.rows_are('A: update own profile fields',
@@ -137,10 +139,11 @@ select t.ok('delete: B untouched',
   and (select count(*) from public.progress where user_id = 'bbbbbbbb-0000-0000-0000-000000000002') = 1
   and (select count(*) from auth.users where id = 'bbbbbbbb-0000-0000-0000-000000000002') = 1);
 select t.ok('delete: anonymous delete_account event recorded',
-  (select count(*) from public.events where name = 'delete_account' and user_id is null) = 1);
+  (select count(*) from public.events where name = 'delete_account' and user_id is null and at = now()) = 1);
 
 set role authenticated;  -- sub 비어 있음 = 로그인 안 된 토큰
 select t.must_fail('delete: without uid rejected', 'select public.delete_my_account()', array['42501']);
 reset role;
 
 select 'ALL RLS TESTS PASSED' as result;
+rollback;

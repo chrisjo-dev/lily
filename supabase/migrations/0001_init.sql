@@ -53,7 +53,8 @@ grant update (nickname, child_age_band, marketing_opt_in) on public.profiles to 
 
 grant select, insert, update, delete on public.progress to authenticated;
 
-grant select, insert, delete on public.events to authenticated;
+-- 이벤트는 본인도 지우지 못한다(기록 보존). 탈퇴 때는 delete_my_account 가 definer 권한으로 지운다.
+grant select, insert on public.events to authenticated;
 -- 비로그인은 이벤트 기록만. user_id 칸은 아예 쓸 수 없다(칸 단위 권한).
 grant insert (name, episode) on public.events to anon;
 
@@ -65,7 +66,7 @@ alter table public.profiles enable row level security;
 alter table public.progress enable row level security;
 alter table public.events   enable row level security;
 
--- 네 가지 정책을 세 테이블에 똑같이. (select auth.uid()) 는 행마다 다시 계산하지 않게 한다.
+-- 네 가지 정책을 세 테이블에 똑같이(events 는 DELETE 정책 없음). (select auth.uid()) 는 행마다 다시 계산하지 않게 한다.
 create policy profiles_select on public.profiles for select to authenticated
   using ((select auth.uid()) = user_id);
 create policy profiles_insert on public.profiles for insert to authenticated
@@ -90,8 +91,6 @@ create policy events_insert on public.events for insert to authenticated
   with check ((select auth.uid()) = user_id);
 create policy events_update on public.events for update to authenticated
   using ((select auth.uid()) = user_id) with check ((select auth.uid()) = user_id);
-create policy events_delete on public.events for delete to authenticated
-  using ((select auth.uid()) = user_id);
 
 -- 비로그인 이벤트: INSERT만, user_id 없이, 이름 목록 안에서만.
 create policy events_insert_anon on public.events for insert to anon
