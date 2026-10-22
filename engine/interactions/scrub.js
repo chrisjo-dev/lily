@@ -1,6 +1,7 @@
 // scrub: 문지르면 세균이 사라지고 글자가 떠오른다. 그 장면에 들어올 때마다 세균이 다시 생긴다.
 // 자유 놀이: { scene: "sc2", type: "scrub", target: "t-scrub", brush: "brush2", home: [x, y], into: "germs", floats: "floats",
-//   img: "art/L-germ.png", word: "Brush!", reach: 40, germs: [[x, y, r], ...] }
+//   img: "art/L-germ.png", word: "Brush!", reach: 40, germs: [[x, y, r], ...], rest: [x, y] }
+// rest(선택): 손을 떼면 brush가 가 있을 자리(얼굴을 가리지 않게 턱 아래 같은 곳). 없으면 마지막 자리에 둔다
 // 기다림으로도 쓸 수 있다: { at, type: "scrub", ...위와 같음 } 세균을 다 지우면 이어짐
 // 장면 마크업: 빈 <g id="germs">, <g id="floats">, target 안에 따라 움직일 <g id="brush2">와 넓은 .hit.scrub
 LilyInteractions.scrub = (api, specs) => {
@@ -48,14 +49,15 @@ LilyInteractions.scrub = (api, specs) => {
       movePt = api.toSvg(e, inv);
       if (!moveRaf) moveRaf = requestAnimationFrame(() => { moveRaf = 0; if (movePt) scrubAt(movePt); });
     });
-    const end = () => { scrubbing = false; inv = null; };
+    const rest = () => { if (s.rest) brush.setAttribute("transform", `translate(${s.rest[0]} ${s.rest[1]})`); };
+    const end = () => { if (scrubbing) rest(); scrubbing = false; inv = null; };
     node.addEventListener("pointerup", end);
     node.addEventListener("pointercancel", end);
     node.addEventListener("keydown", (e) => {
       if (e.key !== "Enter" && e.key !== " ") return;
       e.preventDefault();
       const g = germs.find((x) => !x.gone);
-      if (g) scrubAt({ x: g.x, y: g.y });
+      if (g) { scrubAt({ x: g.x, y: g.y }); rest(); }
     });
     return {
       wait: s.wait,

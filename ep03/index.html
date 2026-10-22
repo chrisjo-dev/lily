@@ -68,15 +68,16 @@
     <text class="fA" x="256" y="668" font-size="52" text-anchor="middle">Splash!</text>
   </svg>
 
-  <!-- 장면 2: 얼굴 닦기 (볼, 코, 턱의 얼룩을 비누 수건으로 문지르기. 수건 처음 자리는 오른쪽 아래 세면대 위) -->
+  <!-- 장면 2: 얼굴 닦기 (이마와 볼의 얼룩을 비누 수건으로 문지르기. 수건 처음 자리는 오른쪽 아래 세면대 위,
+       손을 떼면 턱 아래로 가서 눈, 코, 입을 가리지 않음(scrub의 rest). 수건은 얼굴보다 작게 76x56) -->
   <svg class="scene" id="sc2" viewBox="0 0 512 768" preserveAspectRatio="xMidYMid slice" hidden>
     <image data-src="art/bg-2-face.webp" width="512" height="768"/>
     <g id="smudges"></g>
     <g id="floats"></g>
     <g class="tgt" id="t-scrub" role="button" tabindex="0" aria-label="얼굴 닦기, 볼을 문질러 보세요">
       <g id="cloth" transform="translate(420 640)">
-        <circle class="halo" cx="0" cy="0" r="54"/>
-        <g class="pulse"><image data-src="art/L-cloth.webp" x="-56" y="-41" width="112" height="82"/></g>
+        <circle class="halo" cx="0" cy="0" r="42"/>
+        <g class="pulse"><image data-src="art/L-cloth.webp" x="-38" y="-28" width="76" height="56"/></g>
       </g>
       <rect class="hit scrub" x="0" y="120" width="512" height="600"/>
     </g>
@@ -208,7 +209,8 @@
       "img": "art/L-smudge.webp",
       "word": "Wash!",
       "reach": 34,
-      "germs": [[206, 318, 18], [322, 316, 18], [262, 298, 13], [262, 362, 14]]
+      "rest": [262, 404],
+      "germs": [[214, 250, 15], [306, 250, 15], [194, 318, 16], [332, 310, 16]]
     },
     { "scene": "sc4", "type": "tap-sparkle", "target": "t-cheeks", "into": "sparks", "keyArea": [190, 360, 144] },
     {
