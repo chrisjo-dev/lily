@@ -169,8 +169,8 @@ body > .stage { visibility: hidden; }
 .row2 { display: flex; gap: 8px; margin-top: 6px; }
 .tool { flex: 1; height: 44px; border: 1.5px solid var(--t-soft); border-radius: 12px; background: var(--t-surface); color: var(--t-sub); font-size: 14px; cursor: pointer; }
 .tool[aria-pressed="true"] { background: var(--t-accent); border-color: var(--t-accent); color: var(--t-surface); }
-.hintrow { flex: none; display: flex; justify-content: center; align-items: center; padding: 4px 16px 10px; font-size: 12px; color: var(--t-sub); }
-.hintrow a { color: var(--t-sub); text-decoration: none; display: inline-flex; align-items: center; gap: 4px; min-height: 32px; }
+.hintrow { flex: none; display: flex; justify-content: center; align-items: center; padding: 0 16px; font-size: 12px; color: var(--t-sub); }
+.hintrow a { color: var(--t-sub); text-decoration: none; display: inline-flex; align-items: center; gap: 4px; min-height: 48px; }
 .hintrow svg { width: 12px; height: 12px; }
 
 /* ===== 부모님 화면 ===== */
@@ -223,8 +223,8 @@ details[open] summary > svg { transform: rotate(180deg); }
    누르는 대상이 잘려 나가지 않으므로, 태블릿에서는 무대를 넓히는 대신 같은 비율로 키운다.
    누르는 대상은 장면 svg 안에 있어 무대와 함께 커지고 그림과 어긋나지 않는다. */
 @media (min-width: 700px) and (orientation: portrait) {
-  /* 세로: 한 줄 배치 그대로, 화면 높이에 맞춰 무대를 크게. 340px = 머리줄 + 자막 + 조작 줄 + 안내 줄 */
-  .kid { max-width: min(100%, calc((100dvh - 340px) * 0.796)); }
+  /* 세로: 한 줄 배치 그대로, 화면 높이에 맞춰 무대를 크게. 342px = 머리줄 + 자막 + 조작 줄 + 안내 줄 */
+  .kid { max-width: min(100%, calc((100dvh - 342px) * 0.796)); }
   .stage { height: auto; aspect-ratio: 390 / 490; }
   .cap { height: 104px; padding: 14px 28px 10px; }
   .cap p { font-size: 20px; }
@@ -259,7 +259,7 @@ details[open] summary > svg { transform: rotate(180deg); }
   #seek { height: 56px; }
   .row2 { gap: 12px; margin-top: 10px; }
   .tool { height: 56px; font-size: 16px; }
-  .hintrow { grid-area: hint; font-size: 14px; padding: 6px 28px 16px; }
+  .hintrow { grid-area: hint; font-size: 14px; padding: 0 28px 8px; }
   .parent { max-width: 760px; }
 }
 
