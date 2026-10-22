@@ -1,0 +1,77 @@
+# 릴리랑 엔진
+
+편마다 같은 동작(재생, 진행 막대, 기다림과 8초 자동 진행, 그냥 듣기, 3번 이어 듣기, 조금 천천히, 바깥 되감기, 장면 전환, 자막, 단어 버튼, 대본, 부모님 화면, 그림 미리 받기, 잠금 훅)은 여기 있고, 편 HTML에는 **장면 그림 마크업과 설정 하나**만 둡니다. 예시는 `/ep01/index.html`.
+
+## 새 편 만들기
+
+1. `/ep01/index.html`을 복사해 `/epNN/index.html`로 둡니다.
+2. `<head>`: 제목, 설명, OG(`https://lily.wspace.ai.kr/epNN/...`), canonical, 첫 장면 그림 preload만 바꿉니다. 엔진 CSS와 스크립트 줄은 그대로 둡니다. 잠금을 쓰는 편이면 `gate.js`(와 그것이 쓰는 `auth.js`)를 `gate-default.js`보다 **앞에** 넣습니다.
+3. `<body>`:
+   - 단어 그림 `<symbol id="i-...">`(부모님 화면 단어 버튼용, 그림 파일을 쓰면 생략)
+   - `<div class="stage" id="stage">` 안에 장면마다 `<svg class="scene" id="scN" viewBox="그림 픽셀">`. 첫 장면 그림만 `href`, 나머지는 `data-src`(엔진이 장면 직전에 받아 둠). 첫 장면 말고는 `hidden`.
+   - `window.LILY_EPISODE = {...}` 다음 `lilyMount();`
+4. 머리줄, 칩, 고리, 큰 재생 단추, 끝 카드, 자막, 조작 줄, 부모님 화면, 손 모양(`#hand-shape`)은 엔진이 만듭니다. 마크업에 넣지 않습니다.
+5. 시험: `python3 tests/lily/behave.py http://127.0.0.1:4441/epNN/` 전부 통과(tests/lily/README.md).
+
+## 설정 필드
+
+| 필드 | 뜻 |
+|---|---|
+| `id`, `title` | 편 id(`ep01`), 머리줄 제목 |
+| `audio`, `duration` | 음원 파일(편 폴더 기준), 길이(초, 메타데이터 받기 전 진행 막대용) |
+| `offset` | 음악 도입 길이(기록용, 시각은 이미 포함) |
+| `free`, `previewUntil` | 맛보기 편이면 `free: true`. 아니면 비회원이 들을 수 있는 끝(초). 엔진은 쓰지 않고 잠금 훅(gate.js)이 읽음 |
+| `lines` | `[시작, 끝, "대사"]`. `[[단어]]`는 대본에서 강조 |
+| `scenes` | `{ id, from, name, chip }` 시작 시각 순. `name`은 진행 점의 읽기 글, `chip`은 무대 왼쪽 위 작은 표(없으면 숨김) |
+| `waits` | 멈춰 기다리는 곳 `{ at, type, ... }`. `at`은 보통 그 줄의 끝 시각. 아래 상호작용 표 |
+| `free_play` | 기다리지 않고 언제든 노는 것 `{ scene, type, ... }` |
+| `end` | 끝 카드 `{ at, title, sub, bg, stickers: [{ img, label }] }`. `at`부터(마지막 기다림이 채워졌을 때) 카드가 나옴 |
+| `words` | 오늘의 단어 `{ en, ko, line, icon }`. `line`은 `lines`의 번호(0부터), `icon`은 `#symbol-id` 또는 그림 경로 |
+| `worksheet` | `{ pdf, preview, alt, items: [...], hint }` 없으면 학습지 칸을 빼요 |
+| `tips` | 부모님께 문단. `["굵은 첫 문장", "나머지"]` 또는 글 하나 |
+
+좌표는 모두 그 장면 그림의 픽셀(= viewBox)입니다.
+
+## 상호작용 6종 (`engine/interactions/`)
+
+각 파일 맨 위 주석에 설정 모양과 필요한 마크업이 있습니다. 기다림에 쓰면 아이가 끝내야 이어지고, 8초 동안 아무것도 안 하면 엔진이 대신 끝내고 이어 갑니다.
+
+| 종류 | 하는 일 | 쓰는 곳 | 주요 설정 |
+|---|---|---|---|
+| `find` | 숨은 것을 찾아 누르면 통통 튀고 흐려짐 | waits | `target`, `bounce` |
+| `pop` | 거품 여러 개 터뜨리기, 칩에 개수 | waits | `into`, `img`, `bubbles: [[x, y, r]]` |
+| `say-sticker` | "말했어요" 누르면 스티커가 판으로 | 판은 free_play 하나, 스티커마다 waits | 판: `target`, `label`, `words`, `into`, `from`, `slots`, `images` / 기다림: `sticker` |
+| `lamp-end` | 불을 끄면 어두워지고 끝 카드 | waits(마지막) | `target` |
+| `scrub` | 문지르면 세균이 사라지고 글자가 떠오름 | free_play(waits도 가능) | `target`, `brush`, `home`, `into`, `floats`, `img`, `word`, `germs` |
+| `tap-sparkle` | 누른 곳에 별 반짝 | free_play(waits도 가능) | `target`, `into`, `keyArea` |
+
+누를 것은 `<g class="tgt" role="button" tabindex="0" aria-label="...">` 안에 `.halo`(숨쉬는 노란 테두리), `.pulse`, 넓은 `.hit`을 둡니다. 노란색(`fT`, `--touch`)은 아이가 누르는 것에만 씁니다. 손 모양 안내는 `<g class="hand" transform="..."><g><use href="#hand-shape"/></g></g>`(기다릴 때만 보임).
+
+새 종류가 필요하면 파일 하나를 더합니다.
+
+```js
+// engine/interactions/my-kind.js, 편 head에서 engine.js 다음에 불러옴
+LilyInteractions["my-kind"] = (api, specs, episode) => {
+  // specs: 이 종류의 설정 전부. 기다림이면 wait(번호), 자유 놀이면 wait = -1
+  return {
+    act(i) {},        // 기다림 i를 대신 끝냄(8초 자동, 조작 줄 재생 단추)
+    scene(k) {},      // 장면 k로 바뀜
+    seek(t) {},       // 되감기 뒤 api.isDone(i)로 상태를 다시 맞춤
+    line(k, j) {},    // 자막 줄이 바뀜(k = -1이면 줄 사이로 옮김, j는 바로 앞 줄)
+    ended() {},       // 소리가 끝남
+  };
+};
+```
+
+`api`: `$`, `el`, `onTap(node, fn)`, `toSvg(e, 장면svg)`, `replay(node, 클래스)`, `chip(글)`, `isDone(i)`, `setDone(i)`, `waiting`, `scene`, `audio`, `lines`, `sceneAt(t)`, `sceneIndex(id)`, `sceneEl(k)`, `finishWait(auto)`, `armTimer()`, `showEnd(on)`, `setEndReady(on)`, `endAt`.
+
+## 잠금 훅
+
+- 엔진은 재생 중 매 프레임 `window.lilyGate.canPlayPast(t, episode)`를 묻고, `false`면 멈춘 뒤 `window.lilyGate.onBlocked(t, episode, resume)`를 한 번 부릅니다. `resume()`은 그 자리에서 이어 재생합니다(다시 묻기 때문에 그때는 `true`여야 함).
+- 매 프레임 불리므로 `canPlayPast`는 동기이고 가벼워야 합니다(로그인 여부는 미리 받아 둔 값으로).
+- `engine/gate-default.js`는 `window.lilyGate`가 없을 때만 "항상 허용"을 넣습니다. 실제 잠금은 `engine/gate.js`가 그보다 먼저 `window.lilyGate`를 둡니다.
+- 불러오는 순서: `gate.js`(있으면) → `gate-default.js` → `engine.js` → `interactions/*.js`.
+
+## 확인용 주소
+
+`?t=초`는 그 시각에서 멈춘 채 열고, `&w=1`이면 다음 기다림 화면까지 띄웁니다(캡처와 좌표 맞춤용).
