@@ -106,9 +106,10 @@ button { font-family: inherit; color: inherit; }
 /* lamp-end: 불 끄기 */
 .dim { opacity: 0; transition: opacity .8s; pointer-events: none; }
 .lamp-off .dim { opacity: .55; }
-.lamp-on-img { filter: drop-shadow(0 0 10px var(--touch)); transition: opacity .4s; }
+/* .vanish-on-done: 누르는 대상 안의 그림 레이어. 노란 빛을 두르고, 다 하면(.tgt.done) 흐려져 사라짐(커튼, 그릇, 문, 마개 같은 것) */
+.lamp-on-img, .vanish-on-done { filter: drop-shadow(0 0 10px var(--touch)); transition: opacity .4s; }
 .lamp-off-img { opacity: 0; transition: opacity .4s; }
-.tgt.done .lamp-on-img { opacity: 0; }
+.tgt.done .lamp-on-img, .tgt.done .vanish-on-done { opacity: 0; }
 .tgt.done .lamp-off-img { opacity: 1; }
 
 /* 엔진이 만들기 전에는 무대를 숨긴다(셸이 붙기 전 한 프레임 깜빡임 방지) */

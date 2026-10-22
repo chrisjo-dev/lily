@@ -66,7 +66,7 @@
 | `scrub` | 문지르면 세균이 사라지고 글자가 떠오름 | free_play(waits도 가능) | `target`, `brush`, `home`, `into`, `floats`, `img`, `word`, `germs` |
 | `tap-sparkle` | 누른 곳에 별 반짝 | free_play(waits도 가능) | `target`, `into`, `keyArea` |
 
-누를 것은 `<g class="tgt" role="button" tabindex="0" aria-label="...">` 안에 `.halo`(숨쉬는 노란 테두리), `.pulse`, 넓은 `.hit`을 둡니다. 노란색(`fT`, `--touch`)은 아이가 누르는 것에만 씁니다. 손 모양 안내는 `<g class="hand" transform="..."><g><use href="#hand-shape"/></g></g>`(기다릴 때만 보임).
+누를 것은 `<g class="tgt" role="button" tabindex="0" aria-label="...">` 안에 `.halo`(숨쉬는 노란 테두리), `.pulse`, 넓은 `.hit`을 둡니다. 다 하면 사라질 그림 레이어(커튼, 그릇, 문, 마개처럼 치우는 것)는 그 `<image>`에 `class="vanish-on-done"`을 붙입니다. 노란 빛을 두르고, 기다림이 채워져 대상에 `.done`이 붙으면 0.4초 동안 흐려져 사라집니다(종류와 상관없이 `find`, `tap-sparkle` 등에 모두 씀). `lamp-end`의 켠 그림 `.lamp-on-img`도 같은 모양이고, 끈 그림 `.lamp-off-img`는 그때 나타납니다. 노란색(`fT`, `--touch`)은 아이가 누르는 것에만 씁니다. 손 모양 안내는 `<g class="hand" transform="..."><g><use href="#hand-shape"/></g></g>`(기다릴 때만 보임).
 
 새 종류가 필요하면 파일 하나를 더합니다.
 
