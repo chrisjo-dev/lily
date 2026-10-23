@@ -1,0 +1,666 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=390">
+  <title>R41 개선안 HomePhone</title>
+  <link rel="stylesheet" href="../shared/tokens.css">
+  <style>
+    html, body { margin: 0; width: 390px; }
+    a { color: inherit; }
+
+    /* HERO */
+    .hero {
+      position: relative;
+      width: 390px;
+      height: 560px;
+      overflow: hidden;
+    }
+    .hero-art {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center 15%;
+    }
+    .hero-gradient {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 360px;
+      background: linear-gradient(to bottom, transparent 0%, var(--paper) 82%);
+    }
+    .hero-nav {
+      position: absolute;
+      top: 20px;
+      left: 24px;
+      z-index: 2;
+      background: rgba(251,246,236,0.80);
+      border-radius: 10px;
+      padding: 6px 12px;
+    }
+    .hero-nav img { height: 30px; width: auto; display: block; }
+    .hero-copy {
+      position: absolute;
+      bottom: 32px;
+      left: 24px;
+      right: 24px;
+      z-index: 2;
+    }
+    .hero-ep-label {
+      font-family: var(--font-kr);
+      font-size: 12px;
+      color: var(--ink-2);
+      margin: 0 0 8px;
+    }
+    .hero-title {
+      font-family: var(--font-en);
+      font-weight: 700;
+      font-size: 38px;
+      color: var(--ink);
+      line-height: 1.12;
+      margin: 0 0 4px;
+    }
+    .hero-kr {
+      font-family: var(--font-kr);
+      font-size: 14px;
+      color: var(--ink-2);
+      margin: 0 0 20px;
+    }
+    .hero-play {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      background: var(--touch);
+      border: 2px solid var(--touch-edge);
+      border-radius: var(--r-btn);
+      padding: 10px 18px 10px 10px;
+      text-decoration: none;
+      cursor: pointer;
+    }
+    .play-circle {
+      width: 44px;
+      height: 44px;
+      min-width: 44px;
+      background: var(--touch-edge);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .play-label strong {
+      display: block;
+      font-family: var(--font-kr);
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--ink);
+    }
+    .play-label span {
+      font-family: var(--font-kr);
+      font-size: 12px;
+      color: var(--brown);
+    }
+
+    /* SECTION */
+    .sec {
+      padding: 36px 24px;
+      background: var(--paper);
+    }
+    .sec-label {
+      font-family: var(--font-kr);
+      font-size: 11px;
+      color: var(--ink-2);
+      letter-spacing: 0.05em;
+      margin: 0 0 5px;
+    }
+    .sec-title {
+      font-family: var(--font-kr);
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--ink);
+      margin: 0 0 20px;
+    }
+
+    /* HOW BOOK: single picture-book strip — one frame, brown lines */
+    .how-book {
+      border: 1.5px solid var(--brown);
+      border-radius: var(--r-frame);
+      overflow: hidden;
+    }
+    .how-book-imgs {
+      display: flex;
+      height: 140px;
+    }
+    .how-book-img-cell {
+      flex: 0 0 calc(100% / 3);
+      width: calc(100% / 3);
+      height: 140px;
+      overflow: hidden;
+    }
+    .how-book-img-cell + .how-book-img-cell {
+      border-left: 1px solid var(--brown);
+    }
+    .how-book-img-cell img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    .how-book-img-cell:nth-child(1) img {
+      object-position: center 60%;
+    }
+    .how-book-img-cell:nth-child(2) img {
+      object-position: center 20%;
+    }
+    .how-char-cell {
+      flex: 0 0 calc(100% / 3);
+      width: calc(100% / 3);
+      height: 140px;
+      border-left: 1px solid var(--brown);
+      overflow: hidden;
+    }
+    .how-char-bg {
+      width: 100%;
+      height: 100%;
+      background: var(--peach);
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+      overflow: hidden;
+    }
+    .how-char-bg img {
+      height: 90%;
+      width: auto;
+      object-fit: contain;
+      display: block;
+    }
+    .how-book-caps {
+      display: flex;
+      border-top: 1px solid var(--brown);
+      background: var(--paper-2);
+    }
+    .how-cap {
+      flex: 1 1 0;
+      padding: 8px 9px 10px;
+    }
+    .how-cap + .how-cap {
+      border-left: 1px solid var(--brown);
+    }
+    .how-step {
+      display: inline-block;
+      font-family: var(--font-kr);
+      font-size: 10px;
+      font-weight: 700;
+      color: var(--teal);
+      margin: 0 0 3px;
+    }
+    .how-cap-title {
+      display: block;
+      font-family: var(--font-kr);
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--ink);
+      margin: 0 0 2px;
+    }
+    .how-cap-desc {
+      font-family: var(--font-kr);
+      font-size: 10px;
+      color: var(--ink-2);
+      line-height: 1.45;
+      margin: 0;
+    }
+
+    /* EPISODE TIMELINE */
+    .ep-sec {
+      padding: 4px 24px 36px;
+    }
+    .ep-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 16px;
+      padding-top: 16px;
+    }
+    .ep-title {
+      font-family: var(--font-kr);
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--ink);
+      margin: 0;
+    }
+    .ep-note {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      font-family: var(--font-kr);
+      font-size: 11px;
+      color: var(--teal);
+      margin: 0;
+    }
+    .time-band {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin: 14px 0 10px;
+    }
+    .time-label {
+      font-family: var(--font-kr);
+      font-size: 10px;
+      color: var(--ink-2);
+      white-space: nowrap;
+    }
+    .time-line {
+      flex: 1;
+      height: 1px;
+      background: var(--line);
+    }
+    .ep-row {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 2px;
+    }
+    .ep-spacer { flex: 1 1 0; }
+
+    /* Small 3-column episode card */
+    .ep-card {
+      flex: 1 1 0;
+      border-radius: var(--r-frame);
+      overflow: hidden;
+      border: 1.5px solid var(--line);
+      background: var(--paper-2);
+      position: relative;
+    }
+    .ep-card.free { border-color: var(--touch); border-width: 2px; }
+    .ep-card-thumb {
+      width: 100%;
+      aspect-ratio: 4/3;
+      object-fit: cover;
+      display: block;
+    }
+    .ep-card-body {
+      padding: 5px 7px 8px;
+    }
+    .ep-card-en {
+      font-family: var(--font-en);
+      font-size: 9px;
+      font-weight: 700;
+      color: var(--teal);
+      margin: 0 0 2px;
+      line-height: 1.3;
+    }
+    .ep-card-kr {
+      font-family: var(--font-kr);
+      font-size: 9px;
+      color: var(--ink-2);
+      margin: 0;
+    }
+    .ep-lock {
+      position: absolute;
+      top: 5px;
+      right: 5px;
+      width: 18px;
+      height: 18px;
+      background: rgba(251,246,236,0.88);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .ep-free-badge {
+      position: absolute;
+      top: 5px;
+      left: 5px;
+      background: var(--touch);
+      border: 1.5px solid var(--touch-edge);
+      border-radius: 4px;
+      font-family: var(--font-kr);
+      font-size: 8px;
+      font-weight: 700;
+      color: var(--brown);
+      padding: 1px 4px;
+    }
+
+    /* Wide horizontal card (낮, 밤 solo episodes) */
+    .ep-wide {
+      display: flex;
+      border-radius: var(--r-frame);
+      overflow: hidden;
+      border: 1.5px solid var(--line);
+      background: var(--paper-2);
+      position: relative;
+      margin-bottom: 2px;
+    }
+    .ep-wide-thumb {
+      width: 36%;
+      flex-shrink: 0;
+      object-fit: cover;
+      display: block;
+    }
+    .ep-wide-body {
+      flex: 1;
+      padding: 14px 14px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    .ep-wide-body .ep-card-en { font-size: 12px; margin-bottom: 4px; }
+    .ep-wide-body .ep-card-kr { font-size: 11px; }
+
+    /* PARENT QA */
+    .parent-sec {
+      padding: 36px 24px;
+      background: var(--paper-2);
+      border-top: 1px solid var(--line);
+    }
+    .qa-item { margin-bottom: 20px; }
+    .qa-item:last-child { margin-bottom: 0; }
+    .qa-q {
+      font-family: var(--font-kr);
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--teal);
+      margin: 0 0 4px;
+    }
+    .qa-a {
+      font-family: var(--font-kr);
+      font-size: 13px;
+      color: var(--ink);
+      line-height: 1.7;
+      margin: 0;
+    }
+
+    /* FAQ */
+    .faq-sec {
+      padding: 36px 24px;
+      background: var(--paper);
+      border-top: 1px solid var(--line);
+    }
+    .faq-item {
+      border-bottom: 1px solid var(--line);
+      padding: 13px 0;
+    }
+    .faq-item:first-child { padding-top: 0; }
+    .faq-item:last-child { border-bottom: none; padding-bottom: 0; }
+    .faq-q {
+      font-family: var(--font-kr);
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--ink);
+      margin: 0 0 5px;
+    }
+    .faq-a {
+      font-family: var(--font-kr);
+      font-size: 12px;
+      color: var(--ink-2);
+      line-height: 1.65;
+      margin: 0;
+    }
+
+    /* FOOTER */
+    footer {
+      padding: 24px;
+      background: var(--paper-2);
+      border-top: 1px solid var(--line);
+    }
+    .footer-links {
+      display: flex;
+      gap: 20px;
+      margin-bottom: 8px;
+    }
+    .footer-links a {
+      font-family: var(--font-kr);
+      font-size: 11px;
+      color: var(--ink-2);
+      text-decoration: none;
+    }
+    .footer-by {
+      font-family: var(--font-kr);
+      font-size: 10px;
+      color: var(--ink-2);
+      margin: 0;
+    }
+
+    /* lock SVG shorthand */
+    .lock-svg { display: block; }
+  </style>
+</head>
+<body>
+
+  <!-- HERO -->
+  <section class="hero">
+    <img class="hero-art" src="../assets/ep01-bg-0-intro.webp" alt="">
+    <div class="hero-gradient"></div>
+    <nav class="hero-nav" aria-label="릴리랑">
+      <img src="../assets/brand-logo-h.svg" alt="릴리랑">
+    </nav>
+    <div class="hero-copy">
+      <p class="hero-ep-label">이번 주 이야기</p>
+      <h1 class="hero-title">Brush, Brush,<br>Brush!</h1>
+      <p class="hero-kr">이 닦기 이야기</p>
+      <a class="hero-play" href="#" role="button" aria-label="맛보기 바로 듣기 2분 무료">
+        <div class="play-circle" aria-hidden="true">
+          <svg width="13" height="16" viewBox="0 0 13 16" fill="none">
+            <path d="M2 1.5L12 8L2 14.5V1.5Z" fill="#fbf6ec" stroke="#fbf6ec" stroke-width="0.5"/>
+          </svg>
+        </div>
+        <div class="play-label">
+          <strong>맛보기 바로 듣기</strong>
+          <span>2분, 무료</span>
+        </div>
+      </a>
+    </div>
+  </section>
+
+  <!-- 이렇게 놀아요: picture-book strip -->
+  <section class="sec">
+    <p class="sec-label">릴리랑과 함께하면</p>
+    <h2 class="sec-title">이렇게 놀아요</h2>
+    <div class="how-book" role="list" aria-label="이렇게 놀아요">
+      <div class="how-book-imgs">
+        <div class="how-book-img-cell" role="presentation">
+          <img src="../assets/ep01-bg-1-find.webp" alt="듣는 장면">
+        </div>
+        <div class="how-book-img-cell" role="presentation">
+          <img src="../assets/ep01-bg-5-turn.webp" alt="누르는 장면">
+        </div>
+        <div class="how-char-cell" role="presentation">
+          <div class="how-char-bg">
+            <img src="../assets/ep01-L-brush.png" alt="생활에서 쓰는 장면">
+          </div>
+        </div>
+      </div>
+      <div class="how-book-caps">
+        <div class="how-cap" role="listitem">
+          <span class="how-step">1</span>
+          <strong class="how-cap-title">같이 들어요</strong>
+          <p class="how-cap-desc">릴리와 함께 이야기를 들어요</p>
+        </div>
+        <div class="how-cap" role="listitem">
+          <span class="how-step">2</span>
+          <strong class="how-cap-title">그림을 눌러요</strong>
+          <p class="how-cap-desc">릴리가 부르면 아이가 눌러요</p>
+        </div>
+        <div class="how-cap" role="listitem">
+          <span class="how-step">3</span>
+          <strong class="how-cap-title">생활에서 한 번 더</strong>
+          <p class="how-cap-desc">양치할 때 "Brush my teeth!"</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 이번 주 7편: 아침부터 밤까지 -->
+  <section class="ep-sec">
+    <div class="ep-header">
+      <h2 class="ep-title">이번 주 7편</h2>
+      <p class="ep-note" aria-label="가입하면 모두 들을 수 있어요">
+        <svg width="11" height="13" viewBox="0 0 11 13" fill="none" aria-hidden="true">
+          <rect x="0.75" y="5.5" width="9.5" height="6.75" rx="1.75" stroke="currentColor" stroke-width="1.25"/>
+          <path d="M2.5 5.5V3.75a3 3 0 016 0V5.5" stroke="currentColor" stroke-width="1.25" stroke-linecap="round"/>
+        </svg>
+        가입하면 모두 들을 수 있어요
+      </p>
+    </div>
+
+    <!-- 아침 -->
+    <div class="time-band">
+      <span class="time-label">아침</span><div class="time-line"></div>
+    </div>
+    <div class="ep-row">
+      <div class="ep-card">
+        <img class="ep-card-thumb" src="../assets/ep02-thumb.webp" alt="EP02 Wake Up!">
+        <div class="ep-lock" aria-label="가입 후 이용">
+          <svg class="lock-svg" width="9" height="11" viewBox="0 0 9 11" fill="none" aria-hidden="true">
+            <rect x="0.5" y="4.5" width="8" height="6" rx="1.25" stroke="#6b4a36" stroke-width="1.1"/>
+            <path d="M2 4.5V3A2.5 2.5 0 017 3v1.5" stroke="#6b4a36" stroke-width="1.1" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <div class="ep-card-body">
+          <p class="ep-card-en">Wake Up!</p>
+          <p class="ep-card-kr">일어나기</p>
+        </div>
+      </div>
+      <div class="ep-card">
+        <img class="ep-card-thumb" src="../assets/ep03-thumb.webp" alt="EP03 Splash, Splash!">
+        <div class="ep-lock" aria-label="가입 후 이용">
+          <svg class="lock-svg" width="9" height="11" viewBox="0 0 9 11" fill="none" aria-hidden="true">
+            <rect x="0.5" y="4.5" width="8" height="6" rx="1.25" stroke="#6b4a36" stroke-width="1.1"/>
+            <path d="M2 4.5V3A2.5 2.5 0 017 3v1.5" stroke="#6b4a36" stroke-width="1.1" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <div class="ep-card-body">
+          <p class="ep-card-en">Splash, Splash!</p>
+          <p class="ep-card-kr">세수하기</p>
+        </div>
+      </div>
+      <div class="ep-card">
+        <img class="ep-card-thumb" src="../assets/ep04-thumb.webp" alt="EP04 Yummy, Yummy!">
+        <div class="ep-lock" aria-label="가입 후 이용">
+          <svg class="lock-svg" width="9" height="11" viewBox="0 0 9 11" fill="none" aria-hidden="true">
+            <rect x="0.5" y="4.5" width="8" height="6" rx="1.25" stroke="#6b4a36" stroke-width="1.1"/>
+            <path d="M2 4.5V3A2.5 2.5 0 017 3v1.5" stroke="#6b4a36" stroke-width="1.1" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <div class="ep-card-body">
+          <p class="ep-card-en">Yummy, Yummy!</p>
+          <p class="ep-card-kr">아침 먹기</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- 낮 -->
+    <div class="time-band">
+      <span class="time-label">낮</span><div class="time-line"></div>
+    </div>
+    <div class="ep-wide">
+      <img class="ep-wide-thumb" src="../assets/ep05-thumb.webp" alt="EP05 Put On, Ready!">
+      <div class="ep-lock" aria-label="가입 후 이용">
+        <svg class="lock-svg" width="9" height="11" viewBox="0 0 9 11" fill="none" aria-hidden="true">
+          <rect x="0.5" y="4.5" width="8" height="6" rx="1.25" stroke="#6b4a36" stroke-width="1.1"/>
+          <path d="M2 4.5V3A2.5 2.5 0 017 3v1.5" stroke="#6b4a36" stroke-width="1.1" stroke-linecap="round"/>
+        </svg>
+      </div>
+      <div class="ep-wide-body">
+        <p class="ep-card-en">Put On, Ready!</p>
+        <p class="ep-card-kr">옷 입기</p>
+      </div>
+    </div>
+
+    <!-- 저녁 -->
+    <div class="time-band">
+      <span class="time-label">저녁</span><div class="time-line"></div>
+    </div>
+    <div class="ep-row">
+      <div class="ep-card free">
+        <img class="ep-card-thumb" src="../assets/ep01-bg-0-intro.webp" alt="EP01 Brush, Brush, Brush!" style="object-position: center 20%;">
+        <div class="ep-free-badge">무료</div>
+        <div class="ep-card-body">
+          <p class="ep-card-en">Brush, Brush, Brush!</p>
+          <p class="ep-card-kr">이 닦기</p>
+        </div>
+      </div>
+      <div class="ep-card">
+        <img class="ep-card-thumb" src="../assets/ep06-thumb.webp" alt="EP06 Rub-a-Dub, Bath Time!">
+        <div class="ep-lock" aria-label="가입 후 이용">
+          <svg class="lock-svg" width="9" height="11" viewBox="0 0 9 11" fill="none" aria-hidden="true">
+            <rect x="0.5" y="4.5" width="8" height="6" rx="1.25" stroke="#6b4a36" stroke-width="1.1"/>
+            <path d="M2 4.5V3A2.5 2.5 0 017 3v1.5" stroke="#6b4a36" stroke-width="1.1" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <div class="ep-card-body">
+          <p class="ep-card-en">Rub-a-Dub, Bath Time!</p>
+          <p class="ep-card-kr">목욕하기</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- 밤 -->
+    <div class="time-band">
+      <span class="time-label">밤</span><div class="time-line"></div>
+    </div>
+    <div class="ep-wide">
+      <img class="ep-wide-thumb" src="../assets/ep07-thumb.webp" alt="EP07 Sweet Dreams">
+      <div class="ep-lock" aria-label="가입 후 이용">
+        <svg class="lock-svg" width="9" height="11" viewBox="0 0 9 11" fill="none" aria-hidden="true">
+          <rect x="0.5" y="4.5" width="8" height="6" rx="1.25" stroke="#6b4a36" stroke-width="1.1"/>
+          <path d="M2 4.5V3A2.5 2.5 0 017 3v1.5" stroke="#6b4a36" stroke-width="1.1" stroke-linecap="round"/>
+        </svg>
+      </div>
+      <div class="ep-wide-body">
+        <p class="ep-card-en">Sweet Dreams</p>
+        <p class="ep-card-kr">잠자리 책</p>
+      </div>
+    </div>
+
+    <p style="font-family:var(--font-kr);font-size:13px;color:var(--ink-2);text-align:center;margin:22px 0 0;line-height:1.55;">
+      가입하면 7편 모두 들을 수 있어요.<br>
+      <a href="R43-Join.html" style="color:var(--teal);text-decoration:none;font-weight:700;">지금 시작하기</a>
+    </p>
+  </section>
+
+  <!-- 부모님께 -->
+  <section class="parent-sec">
+    <h2 class="sec-title" style="margin-bottom:20px;">부모님께</h2>
+    <div class="qa-item">
+      <p class="qa-q">왜 2분인가요?</p>
+      <p class="qa-a">아이의 집중 시간은 짧아요. 자주 짧게 듣는 게 오래 한 번 듣는 것보다 낫습니다.</p>
+    </div>
+    <div class="qa-item">
+      <p class="qa-q">왜 영어와 한국어를 섞나요?</p>
+      <p class="qa-a">처음 한 번만 한국어로 뜻을 짚어 주고, 그 뒤로는 영어만 들려요. 소리와 의미가 자연스럽게 붙습니다.</p>
+    </div>
+    <div class="qa-item">
+      <p class="qa-q">화면 시간이 걱정돼요</p>
+      <p class="qa-a">한 편 2분이에요. 양치할 때 틀어 주면 되고, 끝나면 화면도 꺼집니다.</p>
+    </div>
+  </section>
+
+  <!-- 자주 묻는 질문 -->
+  <section class="faq-sec">
+    <h2 class="sec-title">자주 묻는 질문</h2>
+    <div class="faq-item">
+      <p class="faq-q">몇 살부터 할 수 있나요?</p>
+      <p class="faq-a">4~7세가 가장 잘 맞아요. 3세도 그림 보는 걸 좋아하면 함께 할 수 있어요.</p>
+    </div>
+    <div class="faq-item">
+      <p class="faq-q">아이 정보를 받나요?</p>
+      <p class="faq-a">아이 이름, 사진, 학교 정보는 받지 않아요. 부모님 계정만 만들면 됩니다.</p>
+    </div>
+    <div class="faq-item">
+      <p class="faq-q">무료인가요?</p>
+      <p class="faq-a">EP01은 무료로 들을 수 있어요. 가입하면 7편 모두 들을 수 있습니다.</p>
+    </div>
+  </section>
+
+  <footer>
+    <div class="footer-links">
+      <a href="#">개인정보처리방침</a>
+      <a href="#">문의</a>
+    </div>
+    <p class="footer-by">매일 외국어 읽기가 만들어요</p>
+  </footer>
+
+</body>
+</html>

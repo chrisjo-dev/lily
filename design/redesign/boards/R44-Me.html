@@ -1,0 +1,324 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=390">
+  <title>R44 개선안 Me</title>
+  <link rel="stylesheet" href="../shared/tokens.css">
+  <style>
+    html, body { margin: 0; width: 390px; min-height: 844px; background: var(--paper); }
+
+    /* Header */
+    .me-nav {
+      display: flex;
+      align-items: center;
+      padding: 16px 24px;
+      border-bottom: 1px solid var(--line);
+    }
+    .me-nav-title {
+      font-family: var(--font-kr);
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--ink);
+      margin: 0;
+    }
+
+    /* Profile section */
+    .me-profile {
+      padding: 24px 24px 0;
+    }
+    .me-account {
+      font-family: var(--font-kr);
+      font-size: 12px;
+      color: var(--ink-2);
+      margin: 0 0 18px;
+    }
+
+    .field-label {
+      font-family: var(--font-kr);
+      font-size: 12px;
+      color: var(--ink-2);
+      display: block;
+      margin-bottom: 6px;
+    }
+    .field-input {
+      width: 100%;
+      height: 48px;
+      border: 1.5px solid var(--line);
+      border-radius: var(--r-btn);
+      background: var(--paper);
+      font-family: var(--font-kr);
+      font-size: 15px;
+      color: var(--ink);
+      padding: 0 14px;
+      box-sizing: border-box;
+      display: block;
+    }
+
+    .age-label {
+      font-family: var(--font-kr);
+      font-size: 12px;
+      color: var(--ink-2);
+      display: block;
+      margin: 16px 0 8px;
+    }
+    .age-row {
+      display: flex;
+      gap: 10px;
+    }
+    .age-btn {
+      flex: 1;
+      height: 48px;
+      border: 1.5px solid var(--line);
+      border-radius: var(--r-btn);
+      background: var(--paper);
+      font-family: var(--font-kr);
+      font-size: 14px;
+      color: var(--ink-2);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .age-btn.selected {
+      border-color: var(--teal);
+      background: var(--teal-soft);
+      color: var(--teal);
+      font-weight: 700;
+    }
+
+    .save-btn {
+      display: block;
+      width: 100%;
+      height: 52px;
+      background: var(--teal);
+      border: none;
+      border-radius: var(--r-btn);
+      font-family: var(--font-kr);
+      font-size: 16px;
+      font-weight: 700;
+      color: #fff;
+      cursor: pointer;
+      margin-top: 20px;
+      box-sizing: border-box;
+      text-align: center;
+      line-height: 52px;
+      text-decoration: none;
+    }
+
+    /* Sticker book section */
+    .sticker-sec {
+      margin-top: 24px;
+      padding: 24px 24px 28px;
+      background: var(--paper-2);
+      border-top: 1px solid var(--line);
+    }
+    .sticker-heading {
+      font-family: var(--font-kr);
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--ink);
+      margin: 0 0 3px;
+    }
+    .sticker-sub {
+      font-family: var(--font-kr);
+      font-size: 12px;
+      color: var(--ink-2);
+      margin: 0 0 18px;
+    }
+
+    .sticker-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+    }
+    .sticker-slot {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 5px;
+    }
+    .sticker-frame {
+      width: 64px;
+      height: 64px;
+      border-radius: var(--r-frame);
+      overflow: hidden;
+      border: 1.5px solid var(--line);
+      background: var(--paper);
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .sticker-frame.done {
+      border-color: var(--teal);
+    }
+    .sticker-frame.done::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: rgba(47,125,109,0.07);
+      pointer-events: none;
+    }
+    .sticker-frame img.thumb {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    /* Sticker overlay sits in the corner */
+    .sticker-frame img.overlay {
+      position: absolute;
+      bottom: 2px;
+      right: 2px;
+      width: 24px;
+      height: 24px;
+      object-fit: contain;
+      z-index: 1;
+    }
+    /* Empty slot: inset shadow, no dashing */
+    .sticker-frame.empty {
+      background: var(--paper-2);
+      border-style: solid;
+      border-color: var(--line);
+      box-shadow: inset 0 2px 6px rgba(107,74,54,0.10), inset 0 1px 2px rgba(107,74,54,0.06);
+    }
+    .sticker-ep {
+      font-family: var(--font-en);
+      font-size: 8px;
+      font-weight: 700;
+      color: var(--ink-2);
+      text-align: center;
+    }
+    .sticker-kr {
+      font-family: var(--font-kr);
+      font-size: 8px;
+      color: var(--ink-2);
+      text-align: center;
+    }
+
+    /* Bottom actions */
+    .me-actions {
+      padding: 20px 24px 32px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 14px;
+      border-top: 1px solid var(--line);
+    }
+    .logout-btn {
+      width: 100%;
+      height: 48px;
+      background: var(--paper);
+      border: 1.5px solid var(--teal);
+      border-radius: var(--r-btn);
+      font-family: var(--font-kr);
+      font-size: 15px;
+      color: var(--teal);
+      cursor: pointer;
+      text-align: center;
+    }
+    .withdraw-link {
+      font-family: var(--font-kr);
+      font-size: 12px;
+      color: var(--ink-2);
+      text-decoration: none;
+    }
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <nav class="me-nav">
+    <h1 class="me-nav-title">내 정보</h1>
+  </nav>
+
+  <!-- Profile -->
+  <div class="me-profile">
+    <p class="me-account">parent@example.test 로 로그인했어요</p>
+
+    <label class="field-label" for="nickname">닉네임 (20자까지)</label>
+    <input class="field-input" id="nickname" type="text" value="하늘맘" aria-label="닉네임">
+
+    <span class="age-label">아이 나이대 <span style="font-size:10px;">(선택)</span></span>
+    <div class="age-row" role="group" aria-label="아이 나이대">
+      <button class="age-btn selected" type="button" aria-pressed="true">4~5세</button>
+      <button class="age-btn" type="button" aria-pressed="false">6~7세</button>
+      <button class="age-btn" type="button" aria-pressed="false">선택 안 함</button>
+    </div>
+
+    <button class="save-btn" type="button">저장하기</button>
+  </div>
+
+  <!-- Sticker collection -->
+  <section class="sticker-sec">
+    <h2 class="sticker-heading">들은 편 스티커</h2>
+    <p class="sticker-sub">EP01, 02, 03을 완료했어요</p>
+
+    <div class="sticker-grid" role="list">
+      <!-- EP01 (listened) -->
+      <div class="sticker-slot" role="listitem">
+        <div class="sticker-frame done">
+          <img class="thumb" src="../assets/ep01-bg-0-intro.webp" alt="EP01" style="object-position: center 20%;">
+          <img class="overlay" src="../assets/ep01-L-sticker-brush.webp" alt="">
+        </div>
+        <span class="sticker-ep">EP01</span>
+        <span class="sticker-kr">이 닦기</span>
+      </div>
+
+      <!-- EP02 (listened) -->
+      <div class="sticker-slot" role="listitem">
+        <div class="sticker-frame done">
+          <img class="thumb" src="../assets/ep02-thumb.webp" alt="EP02">
+          <img class="overlay" src="../assets/ep01-L-sticker-bubbles.webp" alt="">
+        </div>
+        <span class="sticker-ep">EP02</span>
+        <span class="sticker-kr">일어나기</span>
+      </div>
+
+      <!-- EP03 (listened) -->
+      <div class="sticker-slot" role="listitem">
+        <div class="sticker-frame done">
+          <img class="thumb" src="../assets/ep03-thumb.webp" alt="EP03">
+          <img class="overlay" src="../assets/ep01-L-sticker-clean.webp" alt="">
+        </div>
+        <span class="sticker-ep">EP03</span>
+        <span class="sticker-kr">세수하기</span>
+      </div>
+
+      <!-- EP04 (not listened) -->
+      <div class="sticker-slot" role="listitem">
+        <div class="sticker-frame empty" aria-label="아직 듣지 않음"></div>
+        <span class="sticker-ep">EP04</span>
+        <span class="sticker-kr">아침 먹기</span>
+      </div>
+
+      <!-- EP05 (not listened) -->
+      <div class="sticker-slot" role="listitem">
+        <div class="sticker-frame empty" aria-label="아직 듣지 않음"></div>
+        <span class="sticker-ep">EP05</span>
+        <span class="sticker-kr">옷 입기</span>
+      </div>
+
+      <!-- EP06 (not listened) -->
+      <div class="sticker-slot" role="listitem">
+        <div class="sticker-frame empty" aria-label="아직 듣지 않음"></div>
+        <span class="sticker-ep">EP06</span>
+        <span class="sticker-kr">목욕하기</span>
+      </div>
+
+      <!-- EP07 (not listened) -->
+      <div class="sticker-slot" role="listitem">
+        <div class="sticker-frame empty" aria-label="아직 듣지 않음"></div>
+        <span class="sticker-ep">EP07</span>
+        <span class="sticker-kr">잠자리 책</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Bottom actions -->
+  <div class="me-actions">
+    <button class="logout-btn" type="button">로그아웃</button>
+    <a class="withdraw-link" href="#">탈퇴하기</a>
+  </div>
+</body>
+</html>

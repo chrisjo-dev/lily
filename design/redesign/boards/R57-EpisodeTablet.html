@@ -1,0 +1,402 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=1024">
+  <title>R57 개선안 2 EpisodeTablet</title>
+  <link rel="stylesheet" href="../shared/tokens.css">
+  <style>
+    html, body { margin: 0; width: 1024px; height: 768px; overflow: hidden; background: #c4b49a; }
+
+    /* 책 감싸기: 아래 겹친 종이 장 효과 */
+    .book-wrap {
+      position: relative;
+      width: 1024px;
+      height: 768px;
+    }
+    .paper-layer-a {
+      position: absolute;
+      bottom: 6px;
+      left: 0; right: 0;
+      height: 14px;
+      background: #f0e8dc;
+      border-radius: 0 0 5px 5px;
+      z-index: 1;
+    }
+    .paper-layer-b {
+      position: absolute;
+      bottom: 0;
+      left: 18px; right: 18px;
+      height: 12px;
+      background: #e4d9c6;
+      border-radius: 0 0 5px 5px;
+      z-index: 0;
+    }
+
+    /* 책 본체 */
+    .book {
+      position: absolute;
+      top: 0; left: 0;
+      display: flex;
+      width: 1024px;
+      height: 748px;
+      z-index: 2;
+      box-shadow: 0 6px 28px rgba(50,28,8,0.26);
+    }
+
+    /* ── 왼쪽 쪽 (그림) ── */
+    .page-left {
+      width: 504px;
+      height: 748px;
+      position: relative;
+      overflow: hidden;
+      flex-shrink: 0;
+      background: var(--sky);
+      border-radius: 3px 0 0 3px;
+    }
+    .page-bg {
+      position: absolute;
+      inset: 0;
+      background: url('../assets/ep01-bg-1-find.webp') center top / cover no-repeat;
+    }
+
+    /* 칫솔 터치 대상 */
+    .target-zone {
+      position: absolute;
+      top: 200px;
+      left: 215px;
+      width: 148px;
+      height: 148px;
+      z-index: 3;
+    }
+    /* 진행 고리 (8초) */
+    .wait-ring {
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      pointer-events: none;
+    }
+    /* 갈색 손그림 빛살 */
+    .sunrays {
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      pointer-events: none;
+    }
+    /* 노란 터치 원 단추 */
+    .touch-circle {
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      width: 112px; height: 112px;
+      border-radius: 50%;
+      background: var(--touch);
+      border: 3px solid var(--brown);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 5;
+      box-shadow: 0 4px 18px rgba(107,74,54,0.3);
+    }
+    .touch-circle img {
+      width: 76px; height: auto;
+      display: block;
+    }
+    /* 손 힌트 */
+    .hand-hint {
+      position: absolute;
+      bottom: -18px;
+      right: -28px;
+      width: 62px; height: auto;
+      transform: scaleX(-1);
+      z-index: 6;
+      pointer-events: none;
+    }
+
+    /* 왼쪽 하단 찢은 종이 가장자리 */
+    .left-torn {
+      position: absolute;
+      bottom: -1px; left: 0; right: 0;
+      z-index: 4;
+      pointer-events: none;
+    }
+
+    /* ── 책 등 (spine) ── */
+    .spine {
+      width: 10px;
+      flex-shrink: 0;
+      background: linear-gradient(to right,
+        rgba(48,24,6,0.6) 0%,
+        rgba(107,74,54,0.32) 40%,
+        rgba(107,74,54,0.06) 100%);
+    }
+
+    /* ── 오른쪽 쪽 (본문) ── */
+    .page-right {
+      flex: 1;
+      height: 748px;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      overflow: hidden;
+      border-radius: 0 3px 3px 0;
+    }
+    /* 종이 질감 + 기본 색상 */
+    .page-right-bg {
+      position: absolute;
+      inset: 0;
+      background: var(--paper) url('../assets/ep01-paper.webp') center / cover;
+      opacity: 0.5;
+      z-index: 0;
+    }
+    .page-right-color {
+      position: absolute;
+      inset: 0;
+      background: var(--paper);
+      z-index: 0;
+      opacity: 0.6;
+    }
+    .page-right > *:not(.page-right-bg):not(.page-right-color) {
+      position: relative;
+      z-index: 1;
+    }
+    /* 노트 세로선 */
+    .margin-line {
+      position: absolute;
+      left: 52px; top: 0; bottom: 0;
+      width: 1px;
+      background: rgba(107,74,54,0.07);
+      z-index: 1;
+      pointer-events: none;
+    }
+
+    /* 장면 진행 점 */
+    .page-dots {
+      padding: 22px 56px 14px;
+      display: flex;
+      gap: 8px;
+      align-items: center;
+      flex-shrink: 0;
+    }
+    .dot {
+      width: 7px; height: 7px;
+      border-radius: 50%;
+      background: var(--line);
+    }
+    .dot.active {
+      width: 22px;
+      border-radius: 3px;
+      background: var(--teal);
+    }
+
+    /* 본문 텍스트 영역 */
+    .book-text {
+      flex: 1;
+      padding: 28px 52px 28px 64px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 0;
+    }
+
+    /* 이야기 줄 (Gowun Batang) */
+    .story-kr {
+      font-family: var(--font-book);
+      font-size: 30px;
+      line-height: 2;
+      color: var(--ink);
+      margin: 0 0 18px;
+      border-bottom: 1.5px solid var(--line);
+      padding-bottom: 22px;
+    }
+    .story-en {
+      font-family: var(--font-en);
+      font-size: 22px;
+      color: var(--ink-2);
+      font-style: normal;
+      margin: 0 0 36px;
+      line-height: 1.7;
+    }
+
+    /* 오늘의 표현 */
+    .expression-block {
+      border-top: 1.5px solid var(--line);
+      padding-top: 24px;
+    }
+    .expression-label {
+      font-family: var(--font-kr);
+      font-size: 11px;
+      color: var(--ink-2);
+      letter-spacing: 0.06em;
+      margin: 0 0 9px;
+    }
+    /* 밑줄 친 책 글씨 */
+    .expression-word {
+      display: inline-block;
+      font-family: var(--font-en);
+      font-size: 42px;
+      font-weight: 700;
+      color: var(--ink);
+      text-decoration: underline;
+      text-decoration-color: var(--brown);
+      text-underline-offset: 7px;
+      text-decoration-thickness: 2.5px;
+      letter-spacing: -0.01em;
+    }
+
+    /* ── 부모 조작 스트립 (하단) ── */
+    .parent-strip {
+      flex-shrink: 0;
+      background: var(--paper-2);
+      border-top: 1.5px solid var(--line);
+      padding: 10px 24px 14px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      min-height: 68px;
+    }
+    /* 재생 단추 48px 청록 */
+    .play-btn {
+      width: 48px; height: 48px;
+      border-radius: 50%;
+      background: var(--teal);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      box-shadow: 0 2px 8px rgba(47,125,109,0.28);
+    }
+    .play-btn svg { fill: white; display: block; margin-left: 3px; }
+
+    .strip-sep {
+      width: 1px; height: 32px;
+      background: var(--line);
+      flex-shrink: 0;
+    }
+    .strip-actions {
+      display: flex;
+      gap: 20px;
+      align-items: center;
+    }
+    .action-item {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+    }
+    .action-item img {
+      width: 32px; height: 32px;
+      object-fit: contain;
+      display: block;
+      opacity: 0.72;
+    }
+    .action-label {
+      font-family: var(--font-kr);
+      font-size: 11px;
+      color: var(--ink-2);
+      white-space: nowrap;
+    }
+  </style>
+</head>
+<body>
+<div class="book-wrap">
+  <div class="paper-layer-a"></div>
+  <div class="paper-layer-b"></div>
+
+  <div class="book">
+
+    <!-- 왼쪽 쪽: 그림 무대 -->
+    <div class="page-left">
+      <div class="page-bg"></div>
+
+      <!-- 칫솔 터치 대상 -->
+      <div class="target-zone">
+        <!-- 8초 진행 고리 -->
+        <svg class="wait-ring" xmlns="http://www.w3.org/2000/svg" width="192" height="192" viewBox="0 0 192 192">
+          <circle cx="96" cy="96" r="84" fill="none" stroke="rgba(255,200,61,0.22)" stroke-width="3.5"/>
+          <circle cx="96" cy="96" r="84" fill="none" stroke="var(--touch)" stroke-width="3.5"
+                  stroke-linecap="round" stroke-dasharray="528" stroke-dashoffset="132"
+                  transform="rotate(-90 96 96)"/>
+        </svg>
+
+        <!-- 갈색 손그림 빛살 4개 (정적, 노랑 아님) -->
+        <svg class="sunrays" xmlns="http://www.w3.org/2000/svg" width="220" height="220" viewBox="0 0 220 220">
+          <line x1="110" y1="48" x2="110" y2="30" stroke="var(--brown)" stroke-width="2.5" stroke-linecap="round" opacity="0.55"/>
+          <line x1="160" y1="64" x2="174" y2="50" stroke="var(--brown)" stroke-width="2.5" stroke-linecap="round" opacity="0.5"/>
+          <line x1="60" y1="64" x2="46" y2="50" stroke="var(--brown)" stroke-width="2.5" stroke-linecap="round" opacity="0.5"/>
+          <line x1="172" y1="110" x2="190" y2="110" stroke="var(--brown)" stroke-width="2" stroke-linecap="round" opacity="0.45"/>
+        </svg>
+
+        <!-- 노란 원 터치 단추 -->
+        <div class="touch-circle">
+          <img src="../assets/ep01-L-brush.png" alt="칫솔">
+        </div>
+
+        <!-- 손 힌트 -->
+        <img class="hand-hint" src="../assets/engine-ui-hand-tap.webp" alt="">
+      </div>
+
+      <!-- 하단 찢은 종이 가장자리 -->
+      <svg class="left-torn" xmlns="http://www.w3.org/2000/svg"
+           preserveAspectRatio="none" viewBox="0 0 504 26" width="504" height="26">
+        <path d="M0,14 Q14,4 28,13 Q42,22 56,9 Q70,0 84,11 Q98,20 112,8 Q126,1 140,12 Q154,22 168,10 Q182,2 196,13 Q210,22 224,9 Q238,0 252,12 Q266,22 280,10 Q294,2 308,13 Q322,22 336,10 Q350,2 364,14 Q378,24 392,11 Q406,2 420,13 Q434,22 448,10 Q462,2 476,14 Q490,24 504,14 L504,26 L0,26 Z" fill="var(--paper)"/>
+      </svg>
+    </div>
+
+    <!-- 책 등 -->
+    <div class="spine"></div>
+
+    <!-- 오른쪽 쪽: 본문 -->
+    <div class="page-right">
+      <div class="page-right-bg"></div>
+      <div class="page-right-color"></div>
+      <div class="margin-line"></div>
+
+      <!-- 장면 진행 점 -->
+      <div class="page-dots">
+        <div class="dot"></div>
+        <div class="dot active"></div>
+        <div class="dot"></div>
+        <div class="dot"></div>
+        <div class="dot"></div>
+      </div>
+
+      <!-- 본문 -->
+      <div class="book-text">
+        <p class="story-kr">그래도 같이 하면 재밌어.<br>칫솔이 어디 있지?</p>
+        <p class="story-en">Where is the toothbrush?</p>
+
+        <div class="expression-block">
+          <p class="expression-label">오늘의 표현</p>
+          <span class="expression-word">brush my teeth</span>
+        </div>
+      </div>
+
+      <!-- 부모 조작 스트립 -->
+      <div class="parent-strip">
+        <div class="play-btn" role="button" aria-label="재생">
+          <svg width="18" height="18" viewBox="0 0 18 18"><path d="M4 2.5L15 9L4 15.5V2.5Z"/></svg>
+        </div>
+
+        <div class="strip-sep"></div>
+
+        <div class="strip-actions">
+          <div class="action-item">
+            <img src="../assets/ic-repeat.png" alt="">
+            <span class="action-label">반복</span>
+          </div>
+          <div class="action-item">
+            <img src="../assets/ic-slow.png" alt="">
+            <span class="action-label">천천히</span>
+          </div>
+          <div class="action-item">
+            <img src="../assets/ic-listen.png" alt="">
+            <span class="action-label">그냥 듣기</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+</body>
+</html>

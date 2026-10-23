@@ -6,3 +6,5 @@ design/landing/render/.thumbs/
 .omc/
 dist/
 .wrangler/
+design/*/render/
+design/*/compare/

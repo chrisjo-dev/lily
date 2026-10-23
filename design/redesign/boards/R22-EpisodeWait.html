@@ -1,0 +1,196 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=390">
+  <title>R22 개선안 EpisodeWait</title>
+  <link rel="stylesheet" href="../shared/tokens.css">
+  <style>
+    html, body { margin: 0; width: 390px; min-height: 844px; background: var(--paper); }
+
+    /* 헤더 */
+    .hdr {
+      display: flex; align-items: center; gap: 10px;
+      padding: 8px 16px; height: 52px;
+      background: var(--paper); border-bottom: 1px solid var(--line);
+    }
+    .hdr .emblem {
+      width: 34px; height: 34px; border-radius: 50%;
+      object-fit: cover; border: 1.5px solid var(--line); flex-shrink: 0;
+    }
+    .ep-info { flex: 1; }
+    .ep-num { font-size: 10px; color: var(--ink-2); font-family: var(--font-en); }
+    .ep-title { font-size: 13px; font-weight: 700; color: var(--ink); font-family: var(--font-en); }
+    .dots { display: flex; gap: 5px; align-items: center; }
+    .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--line); }
+    .dot.on { background: var(--teal); width: 14px; border-radius: 3px; }
+
+    /* 무대 */
+    .stage {
+      position: relative; width: 390px; height: 600px;
+      overflow: hidden; background: var(--sky);
+    }
+    .stage-art { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+    /* 칫솔 터치 타겟 */
+    .brush-wrap {
+      position: absolute;
+      right: 52px; bottom: 160px;
+      width: 96px; height: 96px;
+      display: flex; align-items: center; justify-content: center;
+    }
+
+    /* 숨쉬는 빛 (아이 신호: CSS-only) */
+    .glow {
+      position: absolute; inset: -20px;
+      background: var(--touch);
+      border-radius: 50%;
+      opacity: 0;
+      animation: breathe 2.4s ease-in-out infinite;
+    }
+    @keyframes breathe {
+      0%, 100% { opacity: 0.0; transform: scale(0.85); }
+      50% { opacity: 0.3; transform: scale(1.1); }
+    }
+
+    /* 8초 고리 */
+    .ring-svg {
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 3;
+      width: 136px; height: 136px;
+    }
+    .ring-track {
+      fill: none;
+      stroke: var(--line);
+      stroke-width: 3;
+    }
+    .ring-count {
+      fill: none;
+      stroke: var(--touch);
+      stroke-width: 3.5;
+      stroke-linecap: round;
+      stroke-dasharray: 377;
+      stroke-dashoffset: 0;
+      transform-origin: center;
+      transform: rotate(-90deg);
+      animation: countdown 8s linear forwards;
+    }
+    @keyframes countdown {
+      from { stroke-dashoffset: 0; }
+      to { stroke-dashoffset: 377; }
+    }
+
+    /* 칫솔 이미지 */
+    .brush-img {
+      position: relative; z-index: 4;
+      width: 88px; height: 88px;
+      object-fit: contain;
+    }
+
+    /* 손 힌트 */
+    .hand-hint {
+      position: absolute;
+      bottom: -10px; right: -16px;
+      width: 44px; height: 44px;
+      object-fit: contain;
+      z-index: 5;
+    }
+
+    /* 릴리가 기다려요 레이블 */
+    .wait-cue {
+      position: absolute;
+      bottom: 16px; left: 50%;
+      transform: translateX(-50%);
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: var(--r-pill);
+      padding: 4px 14px;
+      white-space: nowrap;
+    }
+    .wait-cue span {
+      font-family: var(--font-kr); font-size: 12px; color: var(--ink-2);
+    }
+
+    /* 본문 줄 */
+    .text-strip {
+      height: 140px; background: var(--paper);
+      border-top: 2px solid var(--line);
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      padding: 0 28px; gap: 6px;
+    }
+    .body-kr {
+      font-family: var(--font-kr); font-size: 18px;
+      color: var(--ink); margin: 0; text-align: center; line-height: 1.6;
+    }
+    .body-en {
+      font-family: var(--font-en); font-size: 15px;
+      color: var(--ink-2); margin: 0; text-align: center;
+    }
+
+    /* 서랍 손잡이 */
+    .drawer-pull {
+      height: 52px; background: var(--paper-2);
+      border-top: 1.5px solid var(--line);
+      display: flex; align-items: center; justify-content: center; gap: 10px;
+    }
+    .pull-bar { width: 32px; height: 3px; background: var(--line); border-radius: 2px; }
+    .pull-label { font-size: 12px; color: var(--teal); font-family: var(--font-kr); }
+    .pull-chevron {
+      width: 8px; height: 8px;
+      border-left: 1.5px solid var(--teal);
+      border-top: 1.5px solid var(--teal);
+      transform: rotate(45deg); margin-top: 3px;
+    }
+  </style>
+</head>
+<body>
+  <header class="hdr">
+    <img class="emblem" src="../assets/brand-emblem.png" alt="릴리랑">
+    <div class="ep-info">
+      <div class="ep-num">EP01</div>
+      <div class="ep-title">Brush, Brush, Brush!</div>
+    </div>
+    <div class="dots">
+      <span class="dot"></span>
+      <span class="dot on"></span>
+      <span class="dot"></span>
+      <span class="dot"></span>
+      <span class="dot"></span>
+      <span class="dot"></span>
+    </div>
+  </header>
+
+  <div class="stage">
+    <img class="stage-art" src="../assets/ep01-bg-1-find.webp" alt="칫솔을 찾아봐요">
+
+    <!-- 칫솔 터치 타겟: 신호 모두 대상 위에 -->
+    <div class="brush-wrap">
+      <div class="glow"></div>
+      <svg class="ring-svg" viewBox="0 0 136 136">
+        <circle class="ring-track" cx="68" cy="68" r="60"/>
+        <circle class="ring-count" cx="68" cy="68" r="60"/>
+      </svg>
+      <img class="brush-img" src="../assets/ep01-L-brush.png" alt="칫솔">
+      <img class="hand-hint" src="../assets/engine-ui-hand-tap.webp" alt="">
+    </div>
+
+    <div class="wait-cue">
+      <span>릴리가 기다려요</span>
+    </div>
+  </div>
+
+  <div class="text-strip">
+    <p class="body-kr">칫솔이 어디 있지?</p>
+    <p class="body-en">Where is the toothbrush?</p>
+  </div>
+
+  <div class="drawer-pull">
+    <div class="pull-bar"></div>
+    <span class="pull-label">부모 화면 열기</span>
+    <div class="pull-chevron"></div>
+  </div>
+</body>
+</html>

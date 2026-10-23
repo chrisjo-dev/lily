@@ -1,0 +1,175 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=390">
+  <title>R24 개선안 EpisodeEnd</title>
+  <link rel="stylesheet" href="../shared/tokens.css">
+  <style>
+    html, body { margin: 0; width: 390px; height: 844px; overflow: hidden; background: var(--paper); }
+
+    /* 종이 질감 배경 */
+    .page {
+      width: 390px; height: 844px;
+      position: relative;
+      display: flex; flex-direction: column;
+    }
+    .paper-bg {
+      position: absolute; inset: 0;
+      width: 100%; height: 100%;
+      object-fit: cover; display: block; z-index: 0;
+    }
+
+    /* 주 내용 */
+    .page-body {
+      position: relative; z-index: 1;
+      flex: 1;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      padding: 24px 24px 0;
+      gap: 16px;
+    }
+
+    /* 둥근 액자 */
+    .scene-circle {
+      width: 156px; height: 156px;
+      border-radius: 50%;
+      overflow: hidden;
+      border: 3px solid var(--line);
+      box-shadow: 0 3px 14px rgba(107,74,54,0.13);
+      flex-shrink: 0;
+    }
+    .scene-circle img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+    }
+
+    /* 제목 묶음 */
+    .end-title-block { text-align: center; }
+    .end-ep {
+      font-family: var(--font-en); font-size: 11px;
+      color: var(--ink-2); margin: 0 0 4px;
+    }
+    .end-title {
+      font-family: var(--font-en); font-size: 19px;
+      font-weight: 700; color: var(--ink); margin: 0 0 8px;
+    }
+    .end-msg {
+      font-family: var(--font-kr); font-size: 15px;
+      color: var(--ink); margin: 0; line-height: 1.6;
+    }
+
+    /* 스티커 */
+    .sticker-section { text-align: center; }
+    .sticker-heading {
+      font-family: var(--font-kr); font-size: 12px;
+      color: var(--ink-2); margin: 0 0 10px;
+    }
+    .sticker-row {
+      display: flex; gap: 14px; justify-content: center; align-items: flex-start;
+    }
+    .sticker-col {
+      display: flex; flex-direction: column; align-items: center; gap: 5px;
+    }
+    .sticker-img {
+      width: 80px; height: 80px; object-fit: contain;
+      filter: drop-shadow(0 2px 5px rgba(107,74,54,0.14));
+    }
+    .sticker-word {
+      font-family: var(--font-en); font-size: 10px; color: var(--ink-2);
+    }
+
+    /* 버튼 묶음 */
+    .btn-block {
+      width: 100%; display: flex; flex-direction: column;
+      align-items: center; gap: 10px;
+    }
+    .btn-again {
+      width: 260px; height: 68px;
+      background: var(--touch);
+      border: 3px solid var(--touch-edge);
+      border-radius: var(--r-btn);
+      display: flex; align-items: center; justify-content: center;
+    }
+    .btn-again span {
+      font-family: var(--font-kr); font-size: 20px;
+      font-weight: 700; color: var(--touch-edge);
+    }
+    .btn-parent {
+      height: 44px;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .btn-parent span {
+      font-family: var(--font-kr); font-size: 15px; color: var(--teal);
+      border-bottom: 1px solid var(--teal-soft);
+      padding-bottom: 1px;
+    }
+
+    /* 생활 장면 연결 띠 (부모용) */
+    .parent-tip {
+      position: relative; z-index: 1;
+      background: var(--paper-2);
+      border-top: 1.5px solid var(--line);
+      padding: 14px 28px;
+      text-align: center;
+    }
+    .tip-text {
+      font-family: var(--font-kr); font-size: 13px;
+      color: var(--ink-2); line-height: 1.65; margin: 0;
+    }
+    .tip-en {
+      font-family: var(--font-en); font-size: 13px;
+      font-style: italic;
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <img class="paper-bg" src="../assets/ep01-paper.webp" alt="">
+
+    <div class="page-body">
+      <!-- 둥근 액자 -->
+      <div class="scene-circle">
+        <img src="../assets/ep01-bg-5-turn.webp" alt="이 닦기 이야기">
+      </div>
+
+      <!-- 제목 -->
+      <div class="end-title-block">
+        <p class="end-ep">EP01</p>
+        <p class="end-title">Brush, Brush, Brush!</p>
+        <p class="end-msg">이 닦기 이야기를 다 들었어요.</p>
+      </div>
+
+      <!-- 스티커 세 장 -->
+      <div class="sticker-section">
+        <p class="sticker-heading">오늘의 스티커</p>
+        <div class="sticker-row">
+          <div class="sticker-col">
+            <img class="sticker-img" src="../assets/ep01-L-sticker-brush.webp" alt="">
+            <span class="sticker-word">brush my teeth</span>
+          </div>
+          <div class="sticker-col">
+            <img class="sticker-img" src="../assets/ep01-L-sticker-bubbles.webp" alt="">
+            <span class="sticker-word">bubbles</span>
+          </div>
+          <div class="sticker-col">
+            <img class="sticker-img" src="../assets/ep01-L-sticker-clean.webp" alt="">
+            <span class="sticker-word">all clean</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- 버튼 -->
+      <div class="btn-block">
+        <div class="btn-again"><span>한 번 더</span></div>
+        <div class="btn-parent"><span>부모님께</span></div>
+      </div>
+    </div>
+
+    <!-- 생활 장면 연결 (부모용 한 줄) -->
+    <div class="parent-tip">
+      <p class="tip-text">오늘 양치할 때 <span class="tip-en">Brush my teeth!</span> 한 번 더 말해 주세요.</p>
+    </div>
+  </div>
+</body>
+</html>

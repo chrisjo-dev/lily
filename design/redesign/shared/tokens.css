@@ -1,0 +1,42 @@
+/* 릴리랑 디자인 토큰 (docs/DESIGN.md 4. 시각 체계). 시안은 이 변수만 쓴다. */
+@import url("https://fonts.googleapis.com/css2?family=Gowun+Dodum&family=Gowun+Batang:wght@400;700&family=Jua&family=Andika:wght@400;700&display=swap");
+
+:root {
+  /* 낮 (기본) */
+  --paper: #fbf6ec;          /* 종이 크림 */
+  --paper-2: #f3ece0;        /* 종이 그늘 */
+  --sky: #e7f1f6;            /* 옅은 하늘 */
+  --mint: #dcefe7;
+  --peach: #fde4d6;
+  --ink: #24323d;            /* 글자 */
+  --ink-2: #5b6b78;          /* 보조 글자 */
+  --line: #e2d8c8;           /* 종이 위 선 */
+  --brown: #6b4a36;          /* 그림 외곽선 색, 손그림 선 */
+  --teal: #2f7d6d;           /* 부모 조작, 링크, 지금 재생 */
+  --teal-soft: #d7ebe4;
+  --touch: #ffc83d;          /* 아이가 누를 곳 전용 */
+  --touch-edge: #6b4a36;
+  --coral: #ef8a78;          /* 따뜻한 포인트(자물쇠, 머리끈) */
+  --card: #ffffff;
+
+  /* 밤 (목욕, 잠자리 편) */
+  --night: #1f2a44;
+  --night-2: #2b3858;
+  --night-ink: #f3ead8;
+  --night-ink-2: #b9b2c9;
+  --lamp: #ffd98a;           /* 밤의 따뜻한 빛(누를 곳 노랑과 구분되는 옅은 빛) */
+
+  /* 글꼴 */
+  --font-logo: "Jua", sans-serif;
+  --font-kr: "Gowun Dodum", sans-serif;
+  --font-en: "Andika", sans-serif;
+  --font-book: "Gowun Batang", serif;   /* 본문 줄, 책 글씨 (개선안 2) */
+
+  /* 크기, 간격(4의 배수), 모서리 */
+  --s1: 4px; --s2: 8px; --s3: 12px; --s4: 16px; --s5: 20px; --s6: 24px; --s8: 32px; --s10: 40px;
+  --r-frame: 16px; --r-card: 20px; --r-btn: 14px; --r-pill: 999px;
+  --kid-target: 64px; --parent-target: 48px;
+}
+
+* { box-sizing: border-box; }
+body { margin: 0; font-family: var(--font-kr); color: var(--ink); background: var(--paper); -webkit-font-smoothing: antialiased; word-break: keep-all; }

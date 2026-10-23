@@ -1,0 +1,469 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=1024">
+<title>R31 개선안 EpisodeTabletLandscape</title>
+<link rel="stylesheet" href="../shared/tokens.css">
+<style>
+html, body { margin: 0; width: 1024px; height: 768px; overflow: hidden; background: var(--paper); }
+
+/* ── 책 펼침 레이아웃 ── */
+.book {
+  display: flex;
+  width: 1024px;
+  height: 768px;
+}
+
+/* ── 왼쪽 쪽: 무대 ── */
+.stage-page {
+  width: 510px;
+  height: 768px;
+  position: relative;
+  overflow: hidden;
+  background: var(--sky);
+  flex-shrink: 0;
+}
+
+.stage-bg {
+  position: absolute;
+  inset: 0;
+  background: url('../assets/ep01-bg-1-find.webp') center top / cover no-repeat;
+}
+
+/* 책 머리줄 (storybook header) */
+.book-header {
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  padding: 14px 18px 10px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: linear-gradient(to bottom, rgba(251,246,236,0.88) 0%, transparent 100%);
+  z-index: 2;
+}
+.book-emblem {
+  width: 30px; height: 30px;
+  border-radius: 8px;
+  overflow: hidden;
+  flex-shrink: 0;
+  border: 1.5px solid var(--line);
+}
+.book-emblem img { width: 30px; height: 30px; object-fit: contain; }
+.book-meta { line-height: 1.25; }
+.book-ep-num {
+  font-family: var(--font-en);
+  font-size: 10px;
+  color: var(--ink-2);
+
+}
+.book-ep-title {
+  font-family: var(--font-en);
+  font-size: 14px;
+
+  color: var(--ink);
+}
+
+/* 대기 신호가 모인 터치 대상 */
+.target-zone {
+  position: absolute;
+  top: 210px;
+  left: 230px;
+  width: 160px;
+  height: 190px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 3;
+}
+
+/* 8초 고리 */
+.wait-ring {
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  width: 184px; height: 184px;
+}
+.wait-ring svg { width: 184px; height: 184px; transform: rotate(-90deg); }
+.ring-track { fill: none; stroke: rgba(255,200,61,0.18); stroke-width: 3.5; }
+.ring-fill  { fill: none; stroke: var(--touch); stroke-width: 3.5; stroke-linecap: round;
+              stroke-dasharray: 514; stroke-dashoffset: 128; /* ~75% = 6초 */ }
+
+/* 숨쉬기 빛 */
+.target-glow {
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  width: 110px; height: 110px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255,200,61,0.5) 0%, rgba(255,200,61,0) 70%);
+  animation: breathe 2.2s ease-in-out infinite;
+}
+@keyframes breathe {
+  0%, 100% { transform: translate(-50%,-50%) scale(1); opacity: 0.65; }
+  50%       { transform: translate(-50%,-50%) scale(1.18); opacity: 1; }
+}
+
+/* 칫솔 이미지 */
+.brush-img {
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  width: 108px; height: auto;
+  filter: drop-shadow(0 0 10px rgba(255,200,61,0.7));
+}
+
+/* 손 힌트 */
+.hand-hint {
+  position: absolute;
+  bottom: -18px; right: -28px;
+  width: 68px; height: auto;
+  transform: scaleX(-1);
+}
+
+/* ── 책 등 (spine) ── */
+.spine {
+  width: 6px;
+  flex-shrink: 0;
+  background: linear-gradient(to right, var(--brown) 0%, rgba(107,74,54,0.4) 40%, rgba(107,74,54,0.15) 100%);
+  position: relative;
+}
+.spine::after {
+  content: '';
+  position: absolute;
+  right: 0; top: 0; bottom: 0;
+  width: 1.5px;
+  background: rgba(107,74,54,0.1);
+}
+
+/* ── 오른쪽 쪽: 본문 ── */
+.content-page {
+  flex: 1;
+  height: 768px;
+  display: flex;
+  flex-direction: column;
+  background: var(--paper);
+  position: relative;
+  overflow: hidden;
+}
+
+/* 왼쪽 마진 세로선 (공책 느낌) */
+.content-page::before {
+  content: '';
+  position: absolute;
+  left: 44px; top: 0; bottom: 0;
+  width: 1px;
+  background: rgba(107,74,54,0.07);
+  pointer-events: none;
+}
+
+/* 페이지 머리 */
+.page-header {
+  padding: 20px 32px 12px 52px;
+  border-bottom: 1.5px solid var(--line);
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  flex-shrink: 0;
+}
+.ep-num-label {
+  font-family: var(--font-en);
+  font-size: 10px;
+
+
+
+  flex-shrink: 0;
+}
+.ep-title-label {
+  font-family: var(--font-en);
+  font-size: 14px;
+
+  color: var(--ink);
+}
+.ep-subtitle-label {
+  font-family: var(--font-kr);
+  font-size: 12px;
+  color: var(--ink-2);
+}
+
+/* 책장 점 (장면 진행) */
+.page-dots {
+  padding: 14px 52px 0;
+  display: flex;
+  gap: 7px;
+  align-items: center;
+  flex-shrink: 0;
+}
+.dot {
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: var(--line);
+}
+.dot.active {
+  width: 22px;
+  border-radius: 4px;
+  background: var(--teal);
+}
+
+/* 본문 줄 (책 본문처럼) */
+.book-text {
+  flex: 1;
+  padding: 32px 44px 28px 52px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  gap: 28px;
+}
+.text-line {
+  border-bottom: 1.5px solid var(--line);
+  padding-bottom: 22px;
+}
+.subtitle-kr {
+  font-family: var(--font-kr);
+  font-size: 28px;
+  line-height: 1.8;
+  color: var(--ink);
+}
+.word-label {
+  font-family: var(--font-kr);
+  font-size: 11px;
+  color: var(--ink-2);
+  letter-spacing: 0.05em;
+  margin-bottom: 6px;
+}
+.word-en {
+  display: inline-block;
+  font-family: var(--font-en);
+  font-size: 38px;
+
+  color: var(--ink);
+  border-bottom: 3px solid var(--touch-edge);
+  padding-bottom: 3px;
+}
+.word-divider {
+  margin-top: auto;
+  border-top: 1.5px solid var(--line);
+  padding-top: 14px;
+}
+.word-list {
+  font-family: var(--font-en);
+  font-size: 14px;
+  color: var(--ink-2);
+  letter-spacing: 0.01em;
+}
+
+/* ── 부모 서랍 ── */
+.parent-drawer {
+  flex-shrink: 0;
+  border-top: 1.5px solid var(--line);
+  background: var(--paper-2);
+}
+
+/* 손잡이 */
+.drawer-handle {
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
+  cursor: pointer;
+  position: relative;
+}
+.handle-pill {
+  width: 40px; height: 4px;
+  border-radius: 2px;
+  background: var(--line);
+}
+.listen-toggle {
+  position: absolute;
+  right: 20px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--font-kr);
+  font-size: 11px;
+  color: var(--ink-2);
+}
+.toggle-pill {
+  width: 34px; height: 18px;
+  border-radius: 9px;
+  background: var(--line);
+  position: relative;
+}
+.toggle-pill::after {
+  content: '';
+  position: absolute;
+  top: 2px; left: 2px;
+  width: 14px; height: 14px;
+  border-radius: 50%;
+  background: white;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.15);
+}
+
+/* 재생 줄 */
+.drawer-play {
+  padding: 8px 20px 8px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.play-btn {
+  width: var(--parent-target);
+  height: var(--parent-target);
+  border-radius: 50%;
+  background: var(--teal);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.play-btn svg { fill: white; width: 22px; height: 22px; margin-left: 3px; }
+
+.progress-track {
+  flex: 1;
+  height: 4px;
+  background: var(--line);
+  border-radius: 2px;
+  position: relative;
+}
+.progress-fill {
+  position: absolute;
+  inset-block: 0; left: 0;
+  width: 28%;
+  background: var(--teal);
+  border-radius: 2px;
+}
+.progress-thumb {
+  position: absolute;
+  top: 50%; left: 28%;
+  transform: translate(-50%, -50%);
+  width: 12px; height: 12px;
+  border-radius: 50%;
+  background: var(--teal);
+}
+.time-label {
+  font-family: var(--font-en);
+  font-size: 11px;
+  color: var(--ink-2);
+  flex-shrink: 0;
+  white-space: nowrap;
+}
+
+/* 부모 조작 단추들 */
+.drawer-actions {
+  padding: 0 20px 16px;
+  display: flex;
+  gap: 8px;
+}
+.action-btn {
+  height: var(--parent-target);
+  padding: 0 16px;
+  border-radius: var(--r-btn);
+  border: 1.5px solid var(--line);
+  background: var(--paper);
+  font-family: var(--font-kr);
+  font-size: 13px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  white-space: nowrap;
+}
+</style>
+</head>
+<body>
+<div class="book">
+
+  <!-- 왼쪽 쪽: 무대 -->
+  <div class="stage-page">
+    <div class="stage-bg"></div>
+
+    <div class="book-header">
+      <div class="book-emblem">
+        <img src="../assets/brand-emblem.png" alt="릴리랑">
+      </div>
+      <div class="book-meta">
+        <div class="book-ep-num">EP01</div>
+        <div class="book-ep-title">Brush, Brush, Brush!</div>
+      </div>
+    </div>
+
+    <!-- 기다림 신호가 모인 터치 대상 -->
+    <div class="target-zone">
+      <div class="wait-ring">
+        <svg viewBox="0 0 184 184">
+          <circle class="ring-track" cx="92" cy="92" r="82"/>
+          <circle class="ring-fill"  cx="92" cy="92" r="82"/>
+        </svg>
+      </div>
+      <div class="target-glow"></div>
+      <img class="brush-img" src="../assets/ep01-L-brush.png" alt="칫솔">
+      <img class="hand-hint" src="../assets/engine-ui-hand-tap.webp" alt="">
+    </div>
+  </div>
+
+  <!-- 책 등 -->
+  <div class="spine"></div>
+
+  <!-- 오른쪽 쪽: 본문 -->
+  <div class="content-page">
+
+    <div class="page-header">
+      <span class="ep-num-label">EP01</span>
+      <span class="ep-title-label">Brush, Brush, Brush!</span>
+      <span class="ep-subtitle-label">이 닦기</span>
+    </div>
+
+    <div class="page-dots">
+      <div class="dot active"></div>
+      <div class="dot"></div>
+      <div class="dot"></div>
+      <div class="dot"></div>
+      <div class="dot"></div>
+      <div class="dot"></div>
+    </div>
+
+    <div class="book-text">
+      <div class="text-line">
+        <div class="subtitle-kr">그래도 같이 하면 재밌어.<br>칫솔이 어디 있지?</div>
+      </div>
+      <div>
+        <div class="word-label">오늘의 표현</div>
+        <span class="word-en">brush my teeth</span>
+      </div>
+      <div class="word-divider">
+        <div class="word-list">brush &nbsp;/&nbsp; bubbles &nbsp;/&nbsp; all clean</div>
+      </div>
+    </div>
+
+    <!-- 부모 서랍 -->
+    <div class="parent-drawer">
+      <div class="drawer-handle">
+        <div class="handle-pill"></div>
+        <div class="listen-toggle">
+          <span>그냥 듣기</span>
+          <div class="toggle-pill"></div>
+        </div>
+      </div>
+
+      <div class="drawer-play">
+        <div class="play-btn">
+          <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+        </div>
+        <div class="progress-track">
+          <div class="progress-fill"></div>
+          <div class="progress-thumb"></div>
+        </div>
+        <div class="time-label">0:38 &nbsp;/&nbsp; 2:19</div>
+      </div>
+
+      <div class="drawer-actions">
+        <div class="action-btn">3번 이어 듣기</div>
+        <div class="action-btn">조금 천천히</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,372 @@
+{
+  "boards": {
+    "R01-HomePhone.html": {
+      "x": 0,
+      "y": 0,
+      "w": 390,
+      "h": 3383,
+      "title": "R01-HomePhone",
+      "group": "지금"
+    },
+    "R02-HomeTablet.html": {
+      "x": 430,
+      "y": 0,
+      "w": 1024,
+      "h": 768,
+      "title": "R02-HomeTablet",
+      "group": "지금"
+    },
+    "R03-EpisodeFirst.html": {
+      "x": 1494,
+      "y": 0,
+      "w": 390,
+      "h": 844,
+      "title": "R03-EpisodeFirst",
+      "group": "지금"
+    },
+    "R04-EpisodeWait.html": {
+      "x": 1924,
+      "y": 0,
+      "w": 390,
+      "h": 844,
+      "title": "R04-EpisodeWait",
+      "group": "지금"
+    },
+    "R05-EpisodeTurn.html": {
+      "x": 2354,
+      "y": 0,
+      "w": 390,
+      "h": 844,
+      "title": "R05-EpisodeTurn",
+      "group": "지금"
+    },
+    "R06-EpisodeNight.html": {
+      "x": 2784,
+      "y": 0,
+      "w": 390,
+      "h": 844,
+      "title": "R06-EpisodeNight",
+      "group": "지금"
+    },
+    "R07-EpisodeTablet.html": {
+      "x": 3214,
+      "y": 0,
+      "w": 1024,
+      "h": 768,
+      "title": "R07-EpisodeTablet",
+      "group": "지금"
+    },
+    "R08-Ep07Night.html": {
+      "x": 4278,
+      "y": 0,
+      "w": 390,
+      "h": 844,
+      "title": "R08-Ep07Night",
+      "group": "지금"
+    },
+    "R09-EpisodeParent.html": {
+      "x": 4708,
+      "y": 0,
+      "w": 390,
+      "h": 1803,
+      "title": "R09-EpisodeParent",
+      "group": "지금"
+    },
+    "R10-GateCard.html": {
+      "x": 5138,
+      "y": 0,
+      "w": 390,
+      "h": 844,
+      "title": "R10-GateCard",
+      "group": "지금"
+    },
+    "R11-Join.html": {
+      "x": 5568,
+      "y": 0,
+      "w": 390,
+      "h": 877,
+      "title": "R11-Join",
+      "group": "지금"
+    },
+    "R12-Me.html": {
+      "x": 5998,
+      "y": 0,
+      "w": 390,
+      "h": 970,
+      "title": "R12-Me",
+      "group": "지금"
+    },
+    "R13-Privacy.html": {
+      "x": 6428,
+      "y": 0,
+      "w": 390,
+      "h": 2185,
+      "title": "R13-Privacy",
+      "group": "지금"
+    },
+    "R21-EpisodeFirst.html": {
+      "x": 6858,
+      "y": 0,
+      "w": 390,
+      "h": 844,
+      "title": "R21-EpisodeFirst",
+      "group": "개선안"
+    },
+    "R22-EpisodeWait.html": {
+      "x": 7288,
+      "y": 0,
+      "w": 390,
+      "h": 844,
+      "title": "R22-EpisodeWait",
+      "group": "개선안"
+    },
+    "R23-EpisodeTurn.html": {
+      "x": 7718,
+      "y": 0,
+      "w": 390,
+      "h": 844,
+      "title": "R23-EpisodeTurn",
+      "group": "개선안"
+    },
+    "R24-EpisodeEnd.html": {
+      "x": 8148,
+      "y": 0,
+      "w": 390,
+      "h": 844,
+      "title": "R24-EpisodeEnd",
+      "group": "개선안"
+    },
+    "R25-EpisodeNight.html": {
+      "x": 8578,
+      "y": 0,
+      "w": 390,
+      "h": 844,
+      "title": "R25-EpisodeNight",
+      "group": "개선안"
+    },
+    "R26-ParentDrawer.html": {
+      "x": 9008,
+      "y": 0,
+      "w": 390,
+      "h": 844,
+      "title": "R26-ParentDrawer",
+      "group": "개선안"
+    },
+    "R41-HomePhone.html": {
+      "x": 9438,
+      "y": 0,
+      "w": 390,
+      "h": 2573,
+      "title": "R41-HomePhone",
+      "group": "개선안"
+    },
+    "R42-HomeTablet.html": {
+      "x": 9868,
+      "y": 0,
+      "w": 1024,
+      "h": 768,
+      "title": "R42-HomeTablet",
+      "group": "개선안"
+    },
+    "R43-Join.html": {
+      "x": 10932,
+      "y": 0,
+      "w": 390,
+      "h": 844,
+      "title": "R43-Join",
+      "group": "개선안"
+    },
+    "R44-Me.html": {
+      "x": 11362,
+      "y": 0,
+      "w": 390,
+      "h": 844,
+      "title": "R44-Me",
+      "group": "개선안"
+    },
+    "R31-EpisodeTabletLandscape.html": {
+      "x": 11792,
+      "y": 0,
+      "w": 1024,
+      "h": 768,
+      "title": "R31-EpisodeTabletLandscape"
+    },
+    "R32-EpisodeTabletPortrait.html": {
+      "x": 12856,
+      "y": 0,
+      "w": 834,
+      "h": 1194,
+      "title": "R32-EpisodeTabletPortrait",
+      "group": "개선안"
+    },
+    "R33-GateCard.html": {
+      "x": 13730,
+      "y": 0,
+      "w": 390,
+      "h": 844,
+      "title": "R33-GateCard",
+      "group": "개선안"
+    },
+    "R51-EpisodeFirst.html": {
+      "x": 14160,
+      "y": 0,
+      "w": 390,
+      "h": 844,
+      "title": "R51-EpisodeFirst",
+      "group": "개선안 2",
+      "status": "approved",
+      "note": "2026-10-23 사용자 승인: 개선안 2 방향으로 엔진과 홈 코드에 반영"
+    },
+    "R52-EpisodeWait.html": {
+      "x": 14590,
+      "y": 0,
+      "w": 390,
+      "h": 844,
+      "title": "R52-EpisodeWait",
+      "group": "개선안 2",
+      "status": "approved",
+      "note": "2026-10-23 사용자 승인: 개선안 2 방향으로 엔진과 홈 코드에 반영"
+    },
+    "R53-EpisodeTurn.html": {
+      "x": 15020,
+      "y": 0,
+      "w": 390,
+      "h": 844,
+      "title": "R53-EpisodeTurn",
+      "group": "개선안 2",
+      "status": "approved",
+      "note": "2026-10-23 사용자 승인: 개선안 2 방향으로 엔진과 홈 코드에 반영"
+    },
+    "R54-EpisodeEnd.html": {
+      "x": 15450,
+      "y": 0,
+      "w": 390,
+      "h": 844,
+      "title": "R54-EpisodeEnd",
+      "group": "개선안 2",
+      "status": "approved",
+      "note": "2026-10-23 사용자 승인: 개선안 2 방향으로 엔진과 홈 코드에 반영"
+    },
+    "R55-EpisodeNight.html": {
+      "x": 15880,
+      "y": 0,
+      "w": 390,
+      "h": 844,
+      "title": "R55-EpisodeNight",
+      "group": "개선안 2",
+      "status": "approved",
+      "note": "2026-10-23 사용자 승인: 개선안 2 방향으로 엔진과 홈 코드에 반영"
+    },
+    "R56-ParentDrawer.html": {
+      "x": 16310,
+      "y": 0,
+      "w": 390,
+      "h": 844,
+      "title": "R56-ParentDrawer",
+      "group": "개선안 2",
+      "status": "approved",
+      "note": "2026-10-23 사용자 승인: 개선안 2 방향으로 엔진과 홈 코드에 반영"
+    },
+    "R57-EpisodeTablet.html": {
+      "x": 16740,
+      "y": 0,
+      "w": 1024,
+      "h": 768,
+      "title": "R57-EpisodeTablet",
+      "group": "개선안 2",
+      "status": "approved",
+      "note": "2026-10-23 사용자 승인: 개선안 2 방향으로 엔진과 홈 코드에 반영"
+    },
+    "R58-HomePhone.html": {
+      "x": 17804,
+      "y": 0,
+      "w": 390,
+      "h": 844,
+      "title": "R58-HomePhone",
+      "group": "개선안 2",
+      "status": "approved",
+      "note": "2026-10-23 사용자 승인: 개선안 2 방향으로 엔진과 홈 코드에 반영"
+    },
+    "R59-GateCard.html": {
+      "x": 18234,
+      "y": 0,
+      "w": 390,
+      "h": 844,
+      "title": "R59-GateCard",
+      "group": "개선안 2",
+      "status": "approved",
+      "note": "2026-10-23 사용자 승인: 개선안 2 방향으로 엔진과 홈 코드에 반영"
+    }
+  },
+  "groups": [
+    {
+      "id": "지금",
+      "label": "지금"
+    },
+    {
+      "id": "개선안",
+      "label": "개선안"
+    },
+    {
+      "id": "개선안 2",
+      "label": "개선안 2"
+    }
+  ],
+  "links": [
+    {
+      "from": "R21-EpisodeFirst.html",
+      "to": "R22-EpisodeWait.html",
+      "label": "재생"
+    },
+    {
+      "from": "R22-EpisodeWait.html",
+      "to": "R23-EpisodeTurn.html",
+      "label": "찾았어요"
+    },
+    {
+      "from": "R23-EpisodeTurn.html",
+      "to": "R24-EpisodeEnd.html",
+      "label": "스티커 3개"
+    },
+    {
+      "from": "R21-EpisodeFirst.html",
+      "to": "R26-ParentDrawer.html",
+      "label": "서랍 열기"
+    },
+    {
+      "from": "R41-HomePhone.html",
+      "to": "R43-Join.html",
+      "label": "가입"
+    },
+    {
+      "from": "R43-Join.html",
+      "to": "R44-Me.html",
+      "label": "가입"
+    },
+    {
+      "from": "R51-EpisodeFirst.html",
+      "to": "R52-EpisodeWait.html",
+      "label": "재생"
+    },
+    {
+      "from": "R52-EpisodeWait.html",
+      "to": "R53-EpisodeTurn.html",
+      "label": "찾았어요"
+    },
+    {
+      "from": "R53-EpisodeTurn.html",
+      "to": "R54-EpisodeEnd.html",
+      "label": "말했어요"
+    },
+    {
+      "from": "R51-EpisodeFirst.html",
+      "to": "R56-ParentDrawer.html",
+      "label": "부모님"
+    },
+    {
+      "from": "R58-HomePhone.html",
+      "to": "R51-EpisodeFirst.html",
+      "label": "맛보기 바로 듣기"
+    }
+  ]
+}
