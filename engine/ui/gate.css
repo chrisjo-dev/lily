@@ -1,0 +1,42 @@
+/* 맛보기 잠금 카드(R59): 아이 구역(그림)은 가리지 않고 아래에 찢은 종이 한 장. gate.js가 불러온다.
+   편 페이지가 아닌 곳(시험 페이지)에서도 쓰이므로 토큰을 직접 가져온다 */
+@import url("tokens.css");
+#lilyGateCard {
+  position: fixed; inset: 0; z-index: 50; display: flex; flex-direction: column; align-items: center; justify-content: flex-end;
+  font-family: var(--font-kr); color: var(--ink); line-height: 1.6; word-break: keep-all;
+}
+#lilyGateCard * { box-sizing: border-box; }
+.gate-badge { margin: 0 16px 144px; padding: 6px 16px; border-radius: var(--r-pill); background: var(--shade); color: var(--paper); font-size: 12px; white-space: nowrap; }
+.gate-paper { position: relative; width: 100%; max-width: 480px; padding: 14px 24px calc(28px + env(safe-area-inset-bottom, 0px)); background: var(--paper); }
+/* 찢은 종이 윗가장자리 */
+.gate-paper::before {
+  content: ""; position: absolute; left: 0; right: 0; top: -28px; height: 30px; background: var(--paper);
+  -webkit-mask: url(torn-wave.svg) 0 0 / 100% 100% no-repeat; mask: url(torn-wave.svg) 0 0 / 100% 100% no-repeat;
+}
+.gate-brand { display: flex; align-items: center; gap: 8px; margin: 0; font-family: var(--font-logo); font-size: 14px; color: var(--ink-2); }
+.gate-brand img { width: 20px; height: 20px; object-fit: contain; opacity: .55; }
+#lilyGateTitle { margin: 0; padding: 12px 0 16px; font-size: 21px; font-weight: 400; line-height: 1.6; color: var(--ink); }
+.gate-more {
+  display: grid; place-items: center; height: 42px; margin: 0; padding-bottom: 4px;
+  background: url(ribbon.webp) 0 0 / 100% 100% no-repeat; font-size: 13px; font-weight: 700; color: var(--ink);
+}
+.gate-eps { display: flex; gap: 8px; margin-top: 8px; }
+.gate-eps img { flex: 1; min-width: 0; height: 38px; object-fit: cover; border-radius: 5px; border: 1px solid var(--line); background: var(--paper-2); }
+.gate-safe { display: flex; align-items: center; gap: 6px; margin: 10px 0 0; font-size: 12px; color: var(--ink-2); }
+.gate-safe::before { content: ""; flex: none; width: 5px; height: 5px; border-radius: 50%; background: var(--teal); opacity: .7; }
+.gate-act { display: flex; flex-direction: column; gap: 10px; margin-top: 24px; }
+.gate-act a, .gate-act button {
+  display: flex; align-items: center; justify-content: center; width: 100%; border-radius: var(--r-btn);
+  font-family: inherit; text-decoration: none; cursor: pointer;
+}
+#lilyGateJoin { min-height: 56px; background: var(--teal); color: var(--card); font-size: 17px; font-weight: 700; box-shadow: 0 3px 10px var(--shadow); }
+#lilyGateFree { min-height: 50px; border: 1.5px solid var(--line); background: var(--paper); color: var(--ink-2); font-size: 15px; }
+#lilyGateLater { min-height: 48px; border: 0; background: none; color: var(--ink-2); font-size: 13px; }
+/* 태블릿 이상: 가운데 카드 */
+@media (min-width: 768px) {
+  #lilyGateCard { justify-content: center; padding: 16px; background: color-mix(in srgb, var(--ink) 28%, transparent); }
+  .gate-badge { margin-bottom: 40px; font-size: 14px; }
+  .gate-paper { border-radius: 0 0 var(--r-card) var(--r-card); padding: 20px 32px 28px; }
+  #lilyGateTitle { font-size: 24px; }
+  #lilyGateJoin { font-size: 18px; min-height: 58px; }
+}

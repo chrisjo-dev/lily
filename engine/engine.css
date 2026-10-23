@@ -1,64 +1,49 @@
-/* 릴리랑 엔진 공통 스타일. 편 HTML은 이 파일을 불러오고 장면 마크업만 둔다.
-   그림책(t-book) 색과 그림체. 무대 위 노란색(--touch)은 아이가 누를 수 있는 것에만 쓴다 */
+/* 릴리랑 엔진 공통 스타일. 편 HTML은 이 파일과 ui/tokens.css(화면 토큰)를 불러오고 장면 마크업만 둔다.
+   화면 장치(종이 띠, 찢은 종이, 리본, 서랍)는 토큰만 쓴다. 무대 위 노란색(--touch)은 아이가 누를 수 있는 것에만 쓴다 */
 :root {
-  --t-bg: #eaf2f7; --t-surface: #ffffff; --t-ink: #24323d; --t-sub: #5b6b78; --t-accent: #2f7d6d; --t-soft: #d7ebe4;
+  /* 편 그림(장면 svg) 색. 그림 레이어만 쓴다 */
   --t-wash-1: #bfe0f2; --t-wash-2: #ffd6c2; --t-wash-3: #fff0a8;
-  --skin: #ffe1c9; --cheek: #ffb3a7; --hair: #6b4226; --dog: #f3d1a2; --ink: #191f28; --card: #ffffff;
-  --touch: #ffc83d; --touch-edge: var(--ink);
-  --kr: "Gowun Dodum", "Apple SD Gothic Neo", "Noto Sans KR", sans-serif;
-  --en: "Andika", "Gowun Dodum", sans-serif;
+  --skin: #ffe1c9; --cheek: #ffb3a7; --hair: #6b4226; --dog: #f3d1a2; --art-ink: #191f28;
+  /* 예전 이름을 화면 토큰에 잇는다(그림 레이어와 부모님 화면이 쓴다) */
+  --t-bg: var(--paper); --t-surface: var(--card); --t-ink: var(--ink); --t-sub: var(--ink-2); --t-accent: var(--teal); --t-soft: var(--teal-soft);
+  --kr: var(--font-kr); --en: var(--font-en);
 }
 * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
 [hidden] { display: none !important; }
 .sprite { position: absolute; }
 html { -webkit-text-size-adjust: 100%; }
 body {
-  margin: 0; background: var(--t-bg); color: var(--t-ink); font-family: var(--kr);
+  margin: 0; background: var(--paper); color: var(--ink); font-family: var(--font-kr);
   font-size: 16px; line-height: 1.6; word-break: keep-all; overflow-wrap: anywhere;
 }
 button { font-family: inherit; color: inherit; }
-:focus-visible { outline: 3px solid var(--t-accent); outline-offset: 2px; }
-.en { font-family: var(--en); font-weight: 700; color: var(--t-accent); }
+:focus-visible { outline: 3px solid var(--teal); outline-offset: 2px; }
+.en { font-family: var(--font-en); }
 
-/* ===== 아이 화면 (첫 화면) ===== */
+/* ===== 아이 화면 ===== */
 /* 아이 영역: 누르고 문지르다 글자나 그림이 파랗게 선택되거나, 길게 눌러 메뉴가 뜨거나, 그림이 끌려 나오지 않게 한다(부모님 영역은 그대로 선택 가능) */
 .kid, .kid * { -webkit-user-select: none; user-select: none; -webkit-touch-callout: none; }
 .kid img, .kid image { -webkit-user-drag: none; user-drag: none; }
-.kid { max-width: 480px; margin: 0 auto; min-height: 100vh; min-height: 100dvh; display: flex; flex-direction: column; background: var(--t-bg); }
-.top {
-  display: flex; align-items: center; justify-content: space-between; gap: 8px; height: 48px; flex: none;
-  padding: 0 max(12px, env(safe-area-inset-right, 0px)) 0 max(14px, env(safe-area-inset-left, 0px));
-  background: var(--t-surface); border-bottom: 1.5px solid var(--t-soft);
+.kid {
+  position: relative; max-width: 480px; margin: 0 auto; height: 100vh; height: 100dvh; min-height: 520px;
+  display: flex; flex-direction: column; background: var(--paper);
 }
-/* 릴리랑 표시: 엠블럼 + 글자, 아래에 이야기 제목 */
-.brand { position: relative; display: flex; flex-direction: column; justify-content: center; min-width: 0; height: 48px; padding-left: 56px; }
-.logo { display: inline-flex; align-items: center; text-decoration: none; color: var(--t-accent); font-family: "Jua", var(--kr); font-size: 18px; line-height: 1.1; }
-.logo img { position: absolute; left: 0; top: 4px; width: 52px; height: 40px; }
-.top h1 { margin: 0; font-family: var(--en); font-weight: 700; font-size: 11px; line-height: 1.3; color: var(--t-sub); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-.dots { display: flex; align-items: center; gap: 5px; }
-.dots i { width: 8px; height: 8px; border-radius: 4px; background: var(--t-soft); transition: width .25s, background-color .25s; }
-.dots i.past { background: var(--t-accent); opacity: .38; }
-.dots i.now { width: 22px; background: var(--t-accent); }
-.sw { display: flex; flex: none; white-space: nowrap; align-items: center; gap: 6px; height: 44px; padding: 0 2px; border: 0; background: none; cursor: pointer; font-size: 12px; color: var(--t-sub); }
-.sw .trk { position: relative; width: 34px; height: 20px; border-radius: 10px; background: var(--t-soft); transition: background-color .2s; }
-.sw .thm { position: absolute; left: 2px; top: 2px; width: 16px; height: 16px; border-radius: 50%; background: var(--t-surface); transition: transform .2s; }
-.sw[aria-checked="true"] .trk { background: var(--t-accent); }
-.sw[aria-checked="true"] .thm { transform: translateX(14px); }
-
-.stage {
-  position: relative; overflow: hidden; flex: none; background: var(--t-wash-1);
-  height: max(240px, min(58vh, calc(100vh - 292px)));
-  height: max(240px, min(58dvh, calc(100dvh - 292px)));
+/* 무대는 그림 비율(2:3)보다 길어지지 않게: 더 길면 slice로 양옆이 잘려 가장자리의 누를 것(램프 같은)이 가려진다. 남는 높이는 본문 줄이 받는다 */
+.stage { position: relative; overflow: hidden; flex: 100 1 0; min-height: 240px; max-height: calc(min(100vw, 480px) * 1.5); background: var(--sky); }
+/* 무대 아래 찢은 종이 가장자리(본문 줄 종이가 그림 위로 살짝 올라옴) */
+.stage::after {
+  content: ""; position: absolute; left: 0; right: 0; bottom: -1px; height: 40px; pointer-events: none;
+  background: var(--paper); -webkit-mask: url(ui/torn.svg) 0 0 / 100% 100% no-repeat; mask: url(ui/torn.svg) 0 0 / 100% 100% no-repeat;
 }
 .stage > svg { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
 .stage svg { stroke-linecap: round; stroke-linejoin: round; }
 .stage text { font-family: var(--en); font-weight: 700; }
 .stage text.kr { font-family: var(--kr); font-weight: 400; }
 /* 그림 색: 토큰만 */
-.fS { fill: var(--t-surface); } .fI { fill: var(--ink); } .fK { fill: var(--skin); } .fC { fill: var(--cheek); }
+.fS { fill: var(--t-surface); } .fI { fill: var(--art-ink); } .fK { fill: var(--skin); } .fC { fill: var(--cheek); }
 .fH { fill: var(--hair); } .fD { fill: var(--dog); } .fA { fill: var(--t-accent); } .f1 { fill: var(--t-wash-1); }
 .f2 { fill: var(--t-wash-2); } .fO { fill: var(--t-soft); } .fU { fill: var(--t-sub); } .fT { fill: var(--touch); } .fN { fill: none; }
-.sI { stroke: var(--ink); } .sO { stroke: var(--t-soft); } .sA { stroke: var(--t-accent); } .sS { stroke: var(--t-surface); }
+.sI { stroke: var(--art-ink); } .sO { stroke: var(--t-soft); } .sA { stroke: var(--t-accent); } .sS { stroke: var(--t-surface); }
 .sU { stroke: var(--t-sub); } .sT { stroke: var(--touch); } .sE { stroke: var(--touch-edge); }
 .hit { fill: transparent; }
 
@@ -117,70 +102,174 @@ button { font-family: inherit; color: inherit; }
 .tgt.done .lamp-on-img, .tgt.done .vanish-on-done { opacity: 0; }
 .tgt.done .lamp-off-img { opacity: 1; }
 
+
+/* 아이 차례의 "말했어요"(HTML 단추, 본문 줄 아래) */
+.saybtn {
+  position: relative; width: 128px; height: 128px; padding: 0; border-radius: 50%; cursor: pointer;
+  border: 3px solid var(--touch-edge); background: var(--touch); box-shadow: 0 5px 20px var(--shadow);
+}
+.saybtn::before {
+  content: ""; position: absolute; left: 50%; top: 50%; width: 200px; height: 200px; margin: -100px 0 0 -100px; pointer-events: none;
+  background: var(--brown); -webkit-mask: url(ui/rays-said.svg) 0 0 / 100% 100% no-repeat; mask: url(ui/rays-said.svg) 0 0 / 100% 100% no-repeat;
+}
+.saybtn .halo { position: absolute; inset: -14px; border-radius: 50%; background: var(--touch); opacity: .3; animation: halo 1.8s ease-in-out infinite; }
+.saybtn .pulse { position: relative; z-index: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 5px; height: 100%; }
+.saybtn .ic { width: 36px; height: 36px; background: var(--brown); -webkit-mask: url(ui/ic-said.svg) 0 0 / 100% 100% no-repeat; mask: url(ui/ic-said.svg) 0 0 / 100% 100% no-repeat; }
+.saybtn b { font-family: var(--font-logo); font-weight: 400; font-size: 20px; line-height: 1; color: var(--touch-edge); }
+.saybtn:active { transform: scale(.96); }
+.rib { font-family: var(--font-logo); font-weight: 400; fill: var(--brown); font-size: 14px; }
+
 /* 엔진이 만들기 전에는 무대를 숨긴다(셸이 붙기 전 한 프레임 깜빡임 방지) */
 body > .stage { visibility: hidden; }
 
-/* 무대 위 HTML 조각 */
+/* 무대 위 조각: 엠블럼(처음으로), 제목 종이 띠, 진행 점, 칩 */
+.logo { position: absolute; z-index: 5; top: 2px; left: 8px; width: 48px; height: 48px; display: grid; place-items: center; }
+.logo img { width: 32px; height: 32px; border-radius: 50%; object-fit: cover; box-shadow: 0 0 0 1.5px var(--paper); }
+/* 제목 띠: 시작 전(R51)에는 종이 띠, 서랍을 열면 어두운 막 위 글(R56), 그 밖에는 화면 읽기에만 */
+.eplabel { position: absolute; z-index: 5; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+.eplabel h1 { margin: 0; font: inherit; }
+.eplabel .epn { display: block; font-family: var(--font-en); font-size: 10px; line-height: 1.3; color: var(--ink-2); }
+.fresh .eplabel {
+  width: auto; height: auto; overflow: visible; top: 16px; left: 56px; max-width: calc(100% - 140px); padding: 5px 13px 6px;
+  background: var(--paper); border: 1px solid var(--brown); transform: rotate(-1.5deg); box-shadow: 1px 2px 8px var(--shadow);
+  clip-path: polygon(1% 10%, 0% 0%, 98% 2%, 100% 0%, 99% 90%, 100% 100%, 3% 98%, 0% 100%);
+}
+.fresh .eplabel h1, .drawer-open .eplabel h1 { font-family: var(--font-logo); font-size: 14px; line-height: 1.3; color: var(--ink); overflow: hidden; text-overflow: ellipsis; }
+.drawer-open .eplabel { z-index: 22; width: auto; height: auto; top: 10px; left: 56px; overflow: visible; clip-path: none; transform: none; border: 0; background: none; box-shadow: none; padding: 0; }
+.drawer-open .eplabel h1 { font-size: 13px; color: var(--night-ink); }
+.drawer-open .eplabel .epn { color: var(--night-ink-2); }
+.drawer-open .logo { z-index: 22; opacity: .7; }
+.dots { position: absolute; z-index: 5; top: 14px; right: 16px; display: flex; align-items: center; gap: 5px; height: 20px; }
+.dots i { width: 6px; height: 6px; border-radius: 3px; background: var(--line); transition: width .25s, background-color .25s; }
+.dots i.past { background: var(--brown); opacity: .4; }
+.dots i.now { width: 14px; background: var(--brown); }
 .chip {
-  position: absolute; left: 12px; top: 12px; padding: 3px 12px; border-radius: 99px;
-  background: var(--t-surface); color: var(--t-accent); font-size: 13px; border: 1.5px solid var(--t-soft); pointer-events: none;
+  position: absolute; z-index: 5; left: 16px; top: 52px; padding: 3px 12px; border-radius: var(--r-pill);
+  background: var(--paper); color: var(--teal); font-size: 13px; border: 1px solid var(--line); pointer-events: none;
 }
-.ring { position: absolute; top: 12px; right: 12px; width: 40px; height: 40px; border-radius: 50%; box-shadow: inset 0 0 0 3px var(--t-soft); pointer-events: none; }
-.ring .h { position: absolute; top: 0; width: 20px; height: 40px; overflow: hidden; }
-.ring .r { right: 0; } .ring .l { left: 0; }
-.ring i { position: absolute; top: 0; width: 40px; height: 40px; border-radius: 50%; border: 3px solid transparent; transform: rotate(45deg); }
-.ring .r i { left: -20px; border-top-color: var(--t-accent); border-right-color: var(--t-accent); animation: drain 4s linear forwards; }
-.ring .l i { left: 0; border-bottom-color: var(--t-accent); border-left-color: var(--t-accent); animation: drain 4s linear 4s forwards; }
-@keyframes drain { to { transform: rotate(225deg); } }
+/* 8초 고리: 기다리는 대상 둘레(엔진이 자리를 잰다). 대상이 여럿이면 오른쪽 위 작은 고리 */
+.ring { position: absolute; z-index: 6; pointer-events: none; }
+.ring svg { display: block; width: 100%; height: 100%; }
+.ring circle { fill: none; stroke-width: 3.5; }
+.ring .trk { stroke: var(--line); opacity: .7; }
+.ring .cnt { stroke: var(--touch); stroke-linecap: round; stroke-dasharray: 377; transform: rotate(-90deg); transform-origin: center; animation: drain 8s linear forwards; }
+.ring.corner { top: 44px; right: 16px; width: 40px; height: 40px; }
+.ring.corner .cnt { stroke: var(--teal); }   /* 누를 수 없는 구석 고리는 노랑이 아님(P2) */
+@keyframes drain { to { stroke-dashoffset: 377; } }
+/* 처음 재생 단추: 노란 동그라미 + 갈색 손그림 빛살(움직이지 않음) */
 .big-play {
-  position: absolute; left: 50%; bottom: 22px; width: 104px; height: 104px; margin-left: -52px; border-radius: 50%;
-  border: 4px solid var(--touch-edge); background: var(--touch); color: var(--ink); cursor: pointer; display: grid; place-items: center; padding: 0;
+  position: absolute; z-index: 4; right: 71px; bottom: 97px; width: 96px; height: 96px; padding: 0; border-radius: 50%; cursor: pointer;
+  border: 3px solid var(--touch-edge); background: var(--touch); color: var(--touch-edge); display: grid; place-items: center; box-shadow: 0 4px 20px var(--shadow);
 }
-.big-play::before { content: ""; position: absolute; inset: -16px; border-radius: 50%; background: var(--touch); opacity: .3; animation: halo 1.8s ease-in-out infinite; z-index: -1; }
-.big-play svg { width: 44px; height: 44px; margin-left: 6px; }
+.big-play::before {
+  content: ""; position: absolute; left: 50%; top: 50%; width: 150px; height: 150px; margin: -75px 0 0 -75px; pointer-events: none;
+  background: var(--brown); -webkit-mask: url(ui/rays.svg) 0 0 / 100% 100% no-repeat; mask: url(ui/rays.svg) 0 0 / 100% 100% no-repeat;
+}
+.big-play svg { width: 40px; height: 40px; margin-left: 5px; }
 .big-play:active { transform: scale(.95); }
-.endcard {
-  position: absolute; left: 12px; right: 12px; bottom: 12px; padding: 14px 14px 16px; border-radius: 20px;
-  background: var(--t-surface) center / cover no-repeat; text-align: center; animation: rise .4s ease-out;
-}
-@keyframes rise { from { opacity: 0; transform: translateY(16px); } }
-.endcard .gn { margin: 0; font-family: var(--en); font-weight: 700; font-size: 26px; color: var(--t-accent); line-height: 1.2; }
-.endcard .sm { margin: 2px 0 8px; font-size: 13px; color: var(--t-sub); }
-.estk { display: flex; justify-content: center; gap: 10px; margin-bottom: 12px; }
-.estk span { width: 84px; padding: 6px 4px 4px; border-radius: 14px; background: var(--t-soft); font-family: var(--en); font-weight: 700; font-size: 11px; color: var(--t-accent); line-height: 1.2; }
-.estk img { display: block; width: 52px; height: 52px; margin: 0 auto 2px; }
-.ebtn { display: flex; gap: 10px; }
-.eb { flex: 1; min-height: 64px; border-radius: 16px; font-size: 17px; cursor: pointer; }
-.eb.y { background: var(--touch); border: 2px solid var(--touch-edge); color: var(--ink); }
-.eb.o { background: var(--t-surface); border: 4px solid var(--touch); color: var(--ink); }
 
-/* 자막 띠 */
+/* 본문 줄: 한국어는 책 글씨(Gowun Batang), 영어는 그 아래 */
 .cap {
-  position: relative; flex: none; height: 92px; padding: 14px 20px 10px; display: flex; align-items: center; justify-content: center;
-  background: var(--t-surface); border-top: 1.5px solid var(--t-soft); border-bottom: 1.5px solid var(--t-soft);
+  position: relative; flex: 1 0 152px; padding: 20px 32px 10px; display: flex; flex-direction: column; align-items: center; justify-content: center;
+  background: var(--paper);
 }
-.cap p { margin: 0; font-size: 17px; line-height: 1.5; text-align: center; color: var(--t-ink); display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
-.cap .en { font-size: 18px; }
-.wtag {
-  position: absolute; left: 50%; top: 0; transform: translate(-50%, -50%); display: inline-flex; align-items: center; gap: 6px;
-  padding: 3px 12px; border-radius: 99px; background: var(--t-soft); color: var(--t-accent); font-size: 12px; white-space: nowrap;
-}
-.wtag i { width: 6px; height: 6px; border-radius: 50%; background: var(--t-accent); animation: blink 1.6s ease-in-out infinite; }
-@keyframes blink { 50% { opacity: .25; } }
+.cap p { margin: 0; display: flex; flex-direction: column; align-items: center; gap: 6px; text-align: center; }
+.cap .kr, .cap .en { display: -webkit-box; -webkit-box-orient: vertical; overflow: hidden; }
+.cap .kr { font-family: var(--font-book); font-size: 19px; line-height: 1.6; color: var(--ink); -webkit-line-clamp: 3; }
+.cap .en { font-size: 17px; line-height: 1.4; color: var(--ink-2); -webkit-line-clamp: 2; }
+.expr { display: none; }
+/* 기다림 표시는 화면 읽기에만(보이는 신호는 대상 둘레의 고리와 숨쉬는 빛) */
+.wtag { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
 
-/* 부모님 조작 줄 */
-.ctl { flex: none; padding: 10px 16px 6px; }
-.ctl .row { display: flex; align-items: center; gap: 10px; }
-.pp { flex: none; width: 44px; height: 44px; border-radius: 50%; border: 0; background: var(--t-accent); color: var(--t-surface); display: grid; place-items: center; cursor: pointer; }
-.pp svg { width: 18px; height: 18px; }
-.time { font-family: var(--en); font-size: 12px; color: var(--t-sub); font-variant-numeric: tabular-nums; min-width: 30px; text-align: center; }
-#seek { flex: 1; min-width: 0; margin: 0; height: 44px; accent-color: var(--t-accent); }
-.row2 { display: flex; gap: 8px; margin-top: 6px; }
-.tool { flex: 1; height: 44px; border: 1.5px solid var(--t-soft); border-radius: 12px; background: var(--t-surface); color: var(--t-sub); font-size: 14px; cursor: pointer; }
-.tool[aria-pressed="true"] { background: var(--t-accent); border-color: var(--t-accent); color: var(--t-surface); }
-.hintrow { flex: none; display: flex; justify-content: center; align-items: center; padding: 0 16px; font-size: 12px; color: var(--t-sub); }
-.hintrow a { color: var(--t-sub); text-decoration: none; display: inline-flex; align-items: center; gap: 4px; min-height: 48px; }
-.hintrow svg { width: 12px; height: 12px; }
+/* 아이 차례 장면: 무대를 줄이고 본문 줄은 영어 먼저, 아래에 큰 "말했어요" */
+.said { display: none; }
+.turn .cap { flex: 1 0 80px; padding: 0 32px; }
+.turn .cap p { flex-direction: column-reverse; gap: 4px; }
+.turn .cap .en { font-weight: 700; font-size: 20px; color: var(--ink); -webkit-line-clamp: 1; }
+.turn .cap .kr { font-size: 14px; line-height: 1.5; color: var(--ink-2); -webkit-line-clamp: 2; }
+.turn .said { display: flex; flex: none; height: 180px; align-items: center; justify-content: center; border-top: 1px solid var(--line); background: var(--paper); }
+
+/* 접힌 부모 서랍 손잡이 */
+.hintrow {
+  position: relative; flex: none; width: 100%; height: 56px; display: flex; align-items: center; justify-content: center; gap: 10px; padding: 0;
+  border: 0; border-top: 1.5px solid var(--line); background: var(--paper-2); color: var(--teal); font-size: 13px; cursor: pointer;
+}
+.hintrow::after { content: ""; position: absolute; top: 0; right: 0; border-style: solid; border-width: 0 20px 20px 0; border-color: transparent var(--paper) transparent transparent; }
+.hintrow .bar { width: 32px; height: 3px; border-radius: 2px; background: var(--line); }
+.hintrow .chev { width: 8px; height: 8px; margin-top: 4px; border-left: 1.5px solid currentColor; border-top: 1.5px solid currentColor; transform: rotate(45deg); }
+
+/* 부모 서랍(종이 시트): 휴대폰, 태블릿 세로에서는 아래에서 올라온다 */
+.scrim { position: fixed; inset: 0; z-index: 20; background: var(--shade); }
+.drawer {
+  position: fixed; z-index: 21; left: 0; right: 0; bottom: 0; max-width: 480px; margin: 0 auto;
+  padding: 0 20px calc(16px + env(safe-area-inset-bottom, 0px)); border-radius: 22px 22px 0 0; background: var(--paper); box-shadow: 0 -6px 24px var(--shadow);
+  transform: translateY(100%); visibility: hidden; transition: transform .28s ease, visibility 0s linear .28s;
+}
+.drawer-open .drawer { transform: none; visibility: visible; transition: transform .28s ease; }
+.grab { display: flex; align-items: center; justify-content: center; width: 100%; height: 48px; padding: 0; border: 0; background: none; cursor: pointer; }
+.grab i { width: 40px; height: 4px; border-radius: 2px; background: var(--line); }
+.prow { display: flex; align-items: center; gap: 14px; padding: 2px 0 16px; border-bottom: 1px solid var(--line); }
+.pp { flex: none; width: 64px; height: 64px; border-radius: 50%; border: 0; background: var(--teal); color: var(--paper); display: grid; place-items: center; cursor: pointer; box-shadow: 0 3px 10px var(--shadow); }
+.pp svg { width: 26px; height: 26px; }
+.prog { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 4px; }
+.times { display: flex; justify-content: space-between; }
+.time { font-family: var(--font-en); font-size: 12px; color: var(--ink-2); font-variant-numeric: tabular-nums; }
+#seek { --p: 0%; -webkit-appearance: none; appearance: none; width: 100%; height: 32px; margin: 0; background: none; cursor: pointer; }
+#seek::-webkit-slider-runnable-track { height: 4px; border-radius: 2px; background: linear-gradient(var(--teal), var(--teal)) 0 0 / var(--p) 100% no-repeat, var(--line); }
+#seek::-webkit-slider-thumb { -webkit-appearance: none; width: 16px; height: 16px; margin-top: -6px; border-radius: 50%; background: var(--teal); border: 2px solid var(--paper); }
+#seek::-moz-range-track { height: 4px; border-radius: 2px; background: var(--line); }
+#seek::-moz-range-progress { height: 4px; border-radius: 2px; background: var(--teal); }
+#seek::-moz-range-thumb { width: 12px; height: 12px; border-radius: 50%; background: var(--teal); border: 2px solid var(--paper); }
+.opts { border-bottom: 1px solid var(--line); }
+.opt {
+  display: flex; align-items: center; gap: 12px; width: 100%; min-height: 56px; padding: 0; border: 0; background: none;
+  text-align: left; color: var(--ink); text-decoration: none; cursor: pointer;
+}
+.opt img { flex: none; width: 32px; height: 32px; object-fit: contain; }
+.opt .lab { flex: 1; min-width: 0; line-height: 1.35; }
+.opt .lab b { display: block; font-weight: 400; font-size: 15px; }
+.opt .lab .short { display: none; }
+.opt .lab small { display: block; margin-top: 1px; font-size: 12px; color: var(--ink-2); }
+.tog { position: relative; flex: none; width: 44px; height: 26px; border-radius: 13px; background: var(--line); transition: background-color .2s; }
+.tog::after { content: ""; position: absolute; top: 3px; left: 3px; width: 20px; height: 20px; border-radius: 50%; background: var(--paper); box-shadow: 0 1px 3px var(--shadow); transition: transform .2s; }
+.opt[aria-pressed="true"] .tog, .opt[aria-checked="true"] .tog { background: var(--teal); }
+.opt[aria-pressed="true"] .tog::after, .opt[aria-checked="true"] .tog::after { transform: translateX(18px); }
+.opt.link { min-height: 52px; margin-top: 4px; }
+.opt.link img { opacity: .7; }
+.opt.link b { color: var(--teal); }
+.opt .chev { width: 8px; height: 8px; margin-right: 4px; border-right: 1.5px solid var(--teal); border-top: 1.5px solid var(--teal); transform: rotate(45deg); opacity: .5; }
+
+/* 끝 카드: 종이 한 장 위 찢은 액자, 오늘의 스티커, 한 번 더 */
+/* 아래 서랍 손잡이는 남긴다(끝 카드에서도 부모가 재생, 그냥 듣기를 바꿀 수 있게) */
+.endcard { position: absolute; inset: 0 0 56px; z-index: 10; display: flex; flex-direction: column; background: var(--paper) center / cover no-repeat; animation: rise .4s ease-out; }
+@keyframes rise { from { opacity: 0; transform: translateY(16px); } }
+.ebody { flex: 1; min-height: 0; overflow-y: auto; display: flex; flex-direction: column; align-items: center; gap: 14px; padding: 28px 24px 16px; }
+.eframe { flex: none; width: 170px; height: 170px; -webkit-mask: url(ui/torn-round.svg) center / 100% 100% no-repeat; mask: url(ui/torn-round.svg) center / 100% 100% no-repeat; }
+.eframe img { display: block; width: 100%; height: 100%; object-fit: cover; object-position: center 20%; }
+.ehead { text-align: center; }
+.ehead p { margin: 0; }
+.ehead .epn { font-family: var(--font-en); font-size: 11px; color: var(--ink-2); margin-bottom: 3px; }
+.etitle { font-family: var(--font-logo); font-size: 20px; color: var(--ink); line-height: 1.3; margin-bottom: 8px !important; }
+.emsg { font-family: var(--font-book); font-size: 15px; line-height: 1.65; color: var(--ink); }
+.ribbon {
+  flex: none; display: grid; place-items: center; width: 220px; height: 38px; margin: 0; padding-bottom: 4px;
+  background: url(ui/ribbon.webp) 0 0 / 100% 100% no-repeat; font-family: var(--font-logo); font-size: 14px; color: var(--brown);
+}
+.estk { display: flex; justify-content: center; align-items: flex-start; gap: 14px; margin-top: -4px; }
+.estk span { display: flex; flex-direction: column; align-items: center; gap: 5px; width: 78px; font-family: var(--font-en); font-size: 10px; line-height: 1.2; color: var(--ink-2); text-align: center; }
+.spot { display: grid; place-items: center; width: 78px; height: 78px; background: url(ui/sticker-spot.webp) center / contain no-repeat; }
+.spot img { display: block; width: 66px; height: 66px; object-fit: contain; }
+.again {
+  position: relative; flex: none; width: 160px; height: 64px; margin-top: 8px; border-radius: 32px; cursor: pointer;
+  border: 3px solid var(--touch-edge); background: var(--touch); color: var(--touch-edge); font-family: var(--font-logo); font-size: 20px; box-shadow: 0 4px 14px var(--shadow);
+}
+.again::before {
+  content: ""; position: absolute; left: 50%; top: 50%; width: 200px; height: 80px; margin: -48px 0 0 -100px; pointer-events: none;
+  background: var(--brown); -webkit-mask: url(ui/rays-again.svg) 0 0 / 100% 100% no-repeat; mask: url(ui/rays-again.svg) 0 0 / 100% 100% no-repeat;
+}
+.again:active { transform: scale(.96); }
+.toparent { flex: none; min-height: 48px; padding: 0 12px; border: 0; background: none; cursor: pointer; font-size: 15px; color: var(--teal); text-decoration: underline; text-decoration-color: var(--teal-soft); text-underline-offset: 4px; }
+.etip { flex: none; margin: 0; padding: 14px 28px calc(14px + env(safe-area-inset-bottom, 0px)); border-top: 1.5px solid var(--line); background: var(--paper-2); text-align: center; font-size: 13px; line-height: 1.65; color: var(--ink-2); }
 
 /* ===== 부모님 화면 ===== */
 .parent {
@@ -228,59 +317,125 @@ details[open] summary > svg { transform: rotate(180deg); }
 .maker { margin: 4px 4px 0; font-size: 13px; }
 .maker a { color: var(--t-accent); }
 
-/* ===== 태블릿 =====
-   장면 그림은 무대 비율에 맞춰 잘린다(preserveAspectRatio slice). 휴대폰(390x490 안팎)과 같은 비율을 지켜야
-   누르는 대상이 잘려 나가지 않으므로, 태블릿에서는 무대를 넓히는 대신 같은 비율로 키운다.
-   누르는 대상은 장면 svg 안에 있어 무대와 함께 커지고 그림과 어긋나지 않는다. */
+/* ===== 밤 편, 밤 장면(R55): 화면 장치도 어둡고 낮게 ===== */
+.night { background: var(--night); }
+.night .stage { background: var(--night); }
+.night .stage::after, .night .cap, .night.turn .said { background: var(--night-2); }
+.night .cap .kr { color: var(--night-ink); }
+.night .cap .en { color: var(--night-ink-2); }
+.night .dots i { background: var(--night-ink-2); opacity: .5; }
+.night .dots i.past { background: var(--night-ink); opacity: .5; }
+.night .dots i.now { background: var(--night-ink); opacity: 1; }
+.night .ring .trk { stroke: var(--night-2); opacity: 1; }
+.night .ring .cnt { stroke: var(--lamp); }
+.night .ring.corner .cnt { stroke: var(--night-ink-2); }
+.night .tgt .halo { fill: var(--lamp); }
+.night .hintrow { background: var(--night); border-top: 1px solid var(--night-2); color: var(--lamp); }
+.night .hintrow .bar { background: var(--night-2); }
+.night .hintrow::after { border-color: transparent var(--night-2) transparent transparent; }
+.night .logo { opacity: .85; }
+.night .chip { background: var(--night-2); border-color: var(--night-2); color: var(--night-ink); }
+.night.fresh .eplabel { background: var(--night-2); border-color: var(--night-ink-2); }
+.night.fresh .eplabel h1 { color: var(--night-ink); }
+.night.fresh .eplabel .epn { color: var(--night-ink-2); }
+
+/* ===== 태블릿 세로: 휴대폰 배치 그대로, 화면 높이에 맞춰 무대를 크게(그림이 덜 잘리는 비율) ===== */
 @media (min-width: 700px) and (orientation: portrait) {
-  /* 세로: 한 줄 배치 그대로, 화면 높이에 맞춰 무대를 크게. 342px = 머리줄 + 자막 + 조작 줄 + 안내 줄 */
-  .kid { max-width: min(100%, calc((100dvh - 342px) * 0.796)); }
-  .stage { height: auto; aspect-ratio: 390 / 490; }
-  .cap { height: 104px; padding: 14px 28px 10px; }
-  .cap p { font-size: 20px; }
-  .cap .en { font-size: 21px; }
-  .wtag { font-size: 14px; padding: 4px 14px; }
-  .ctl { padding: 12px 20px 6px; }
-  .pp { width: 52px; height: 52px; }
-  .pp svg { width: 22px; height: 22px; }
-  .time { font-size: 14px; min-width: 38px; }
-  #seek { height: 52px; }
-  .row2 { gap: 12px; margin-top: 8px; }
-  .tool { height: 52px; font-size: 16px; }
-  .hintrow { font-size: 14px; }
+  .kid { max-width: min(100%, calc((100dvh - 224px) * .7)); }
+  .stage { max-height: none; }
+  .cap { flex-basis: 168px; padding: 20px 40px 12px; }
+  .cap .kr { font-size: 23px; }
+  .cap .en { font-size: 20px; }
+  .turn .cap { flex-basis: 96px; }
+  .turn .cap .en { font-size: 24px; }
+  .turn .cap .kr { font-size: 16px; }
+  .drawer { max-width: 560px; padding: 0 28px calc(20px + env(safe-area-inset-bottom, 0px)); }
+  .opt .lab b { font-size: 17px; }
+  .opt .lab small { font-size: 13px; }
+  .hintrow { font-size: 15px; }
 }
+
+/* ===== 태블릿 가로(R57): 펼친 그림책. 왼쪽 쪽은 그림(아이), 오른쪽 쪽은 본문과 부모 조작 줄 =====
+   서랍은 늘 펼친 채 오른쪽 아래 줄이 된다. 같은 요소를 격자 칸으로 옮길 뿐 동작은 그대로 */
 @media (min-width: 900px) and (min-height: 600px) and (orientation: landscape) {
-  /* 가로: 왼쪽 무대(화면 높이 가득), 오른쪽 자막과 부모님 조작. 첫 화면이 스크롤 없이 다 보인다 */
   .kid {
-    max-width: none; height: 100vh; height: 100dvh; min-height: 0;
-    display: grid; grid-template-columns: auto minmax(0, 1fr); grid-template-rows: 48px minmax(0, 1fr) auto auto;
-    grid-template-areas: "top top" "stage cap" "stage ctl" "stage hint";
+    --pw: calc((100dvh - 20px) * .674);
+    max-width: none; height: 100vh; height: 100dvh; min-height: 0; padding-bottom: 20px;
+    display: grid; grid-template-columns: var(--pw) 10px minmax(0, 1fr); grid-template-rows: auto minmax(0, 1fr) auto;
+    grid-template-areas: "stage spine dots" "stage spine cap" "stage spine ctl";
+    /* 아래 겹친 종이 장 두 겹과 책상 */
+    background: linear-gradient(var(--leaf-1), var(--leaf-1)) 0 calc(100% - 6px) / 100% 14px no-repeat,
+      linear-gradient(var(--leaf-2), var(--leaf-2)) 18px 100% / calc(100% - 36px) 12px no-repeat, var(--desk);
   }
-  .top { grid-area: top; }
-  .stage { grid-area: stage; height: calc(100vh - 48px); height: calc(100dvh - 48px); width: auto; aspect-ratio: 390 / 490; }
-  .cap { grid-area: cap; height: auto; padding: 32px 36px 24px; border-top: 0; border-left: 1.5px solid var(--t-soft); }
-  .cap p { font-size: 24px; -webkit-line-clamp: 6; }
-  .cap .en { font-size: 25px; }
-  .wtag { top: 22px; transform: translateX(-50%); font-size: 15px; padding: 4px 16px; }
-  .ctl { grid-area: ctl; padding: 18px 28px 8px; }
-  .pp { width: 56px; height: 56px; }
-  .pp svg { width: 24px; height: 24px; }
-  .time { font-size: 14px; min-width: 38px; }
-  #seek { height: 56px; }
-  .row2 { gap: 12px; margin-top: 10px; }
-  .tool { height: 56px; font-size: 16px; }
-  .hintrow { grid-area: hint; font-size: 14px; padding: 0 28px 8px; }
+  /* 오른쪽 쪽 종이와 책 등 */
+  .kid::before { content: ""; grid-row: 1 / 4; grid-column: 3; background: var(--paper); border-radius: 0 3px 3px 0; }
+  .kid::after { content: ""; grid-row: 1 / 4; grid-column: 2; background: linear-gradient(to right, color-mix(in srgb, var(--brown) 70%, var(--ink)), color-mix(in srgb, var(--brown) 32%, transparent) 40%, color-mix(in srgb, var(--brown) 6%, transparent)); }
+  .stage { grid-area: stage; min-height: 0; max-height: none; border-radius: 3px 0 0 3px; }
+  .dots { grid-area: dots; position: static; padding: 22px 56px 14px; height: auto; gap: 8px; }
+  .dots i { width: 7px; height: 7px; }
+  .dots i.now { width: 22px; background: var(--teal); }
+  .dots i.past { background: var(--teal); opacity: .38; }
+  .cap { grid-area: cap; min-height: 0; padding: 28px 52px 28px 64px; align-items: stretch; background: none; }
+  .cap p { align-items: stretch; gap: 0; text-align: left; }
+  .cap .kr { font-size: 30px; line-height: 2; -webkit-line-clamp: 4; padding-bottom: 22px; margin-bottom: 18px; border-bottom: 1.5px solid var(--line); }
+  .cap .en { font-size: 22px; line-height: 1.7; -webkit-line-clamp: 3; margin-bottom: 36px; }
+  .expr { display: block; padding-top: 24px; border-top: 1.5px solid var(--line); }
+  .expr p { margin: 0; }
+  .xlab { font-size: 11px; color: var(--ink-2); margin-bottom: 9px !important; }
+  .xword { display: inline-block; font-family: var(--font-en); font-size: 42px; font-weight: 700; line-height: 1.3; color: var(--ink); text-decoration: underline 2.5px var(--brown); text-underline-offset: 7px; }
+  .turn .cap { padding: 28px 52px 28px 64px; }
+  .turn .cap p { flex-direction: column; }
+  .turn .cap .kr { font-size: 26px; -webkit-line-clamp: 3; }
+  .turn .cap .en { font-size: 30px; -webkit-line-clamp: 2; }
+  /* 아이 차례 단추는 아이 쪽(왼쪽 그림) 아래에 */
+  .turn .said { grid-area: stage; z-index: 4; align-self: end; justify-self: center; height: auto; margin-bottom: 40px; border: 0; background: none; }
+  .night.turn .said { background: none; }
+  .hintrow, .scrim, .grab, .opt.link { display: none !important; }
+  .drawer {
+    grid-area: ctl; position: static; z-index: auto; max-width: none; margin: 0; transform: none; visibility: visible; transition: none;
+    border-radius: 0 0 3px 0; box-shadow: none; border-top: 1.5px solid var(--line); background: var(--paper-2);
+    display: grid; grid-template-columns: auto minmax(0, 1fr); grid-template-areas: "seek seek" "play opts"; align-items: center; column-gap: 16px;
+    padding: 4px 24px 12px;
+  }
+  .prow { display: contents; }
+  .prog { grid-area: seek; flex-direction: row-reverse; align-items: center; gap: 12px; }
+  .times { flex: none; gap: 6px; }
+  .times .time + .time::before { content: "/ "; }
+  #seek { height: 28px; }
+  .pp { grid-area: play; width: 48px; height: 48px; box-shadow: 0 2px 8px var(--shadow); }
+  .pp svg { width: 20px; height: 20px; }
+  .opts { grid-area: opts; display: flex; gap: 12px; align-items: center; border: 0; padding-left: 16px; border-left: 1px solid var(--line); }
+  .opt { width: auto; min-height: 48px; gap: 7px; padding: 0 8px; border-radius: var(--r-btn); }
+  .opt img { opacity: .72; }
+  .opt .lab .long, .opt .lab small, .opt .tog { display: none; }
+  .opt .lab .short { display: block; font-size: 12px; color: var(--ink-2); white-space: nowrap; }
+  .opt[aria-pressed="true"], .opt[aria-checked="true"] { background: var(--teal-soft); }
+  .opt[aria-pressed="true"] img, .opt[aria-checked="true"] img { opacity: 1; }
+  .opt[aria-pressed="true"] .short, .opt[aria-checked="true"] .short { color: var(--teal); }
+  .endcard { grid-row: 1 / 3; grid-column: 1 / 4; inset: 0; }
+  .ebody { justify-content: center; }
   .parent { max-width: 760px; }
+  /* 밤 편: 오른쪽 쪽도 밤 종이 */
+  .night.kid::before { background: var(--night-2); }
+  .night .cap { background: none; }
+  .night .cap .kr { border-color: var(--night); }
+  .night .expr { border-color: var(--night); }
+  .night .xlab { color: var(--night-ink-2); }
+  .night .xword { color: var(--night-ink); text-decoration-color: var(--lamp); }
+  .night .drawer { background: var(--night); border-color: var(--night-2); color: var(--night-ink); }
+  .night .opt { color: var(--night-ink); }
+  .night .opt .lab .short, .night .time { color: var(--night-ink-2); }
+  .night .opts { border-color: var(--night-2); }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .tgt .halo, .tgt .pulse, .bob, .hand > g, .big-play::before, .wtag i { animation: none !important; }
+  .tgt .halo, .tgt .pulse, .bob, .hand > g, .saybtn .halo { animation: none !important; }
   .bounce, .nope { animation: none; }
   .floaty, .spark, .bub.popped .burst { animation-name: fadeOut; }
   .fly, .endcard { animation-name: fadeIn; }
   .germ > g { transition: opacity .3s; }
   .germ.gone > g { transform: none; }
-  .sw .thm, .sw .trk, .dots i, summary > svg { transition: none; }
+  .tog, .tog::after, .dots i, summary > svg, .drawer { transition: none; }
 }
 @keyframes fadeOut { from { opacity: 1; } to { opacity: 0; } }
 @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }

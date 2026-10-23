@@ -11,7 +11,6 @@ const NS = "http://www.w3.org/2000/svg";
 const fmt = (t) => `${Math.floor(t / 60)}:${String(Math.floor(t % 60)).padStart(2, "0")}`;
 const esc = (s) => String(s).replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
 const plain = (s) => s.replace(/\[\[|\]\]/g, "");
-const capHTML = (s) => esc(plain(s)).replace(/[A-Za-z][A-Za-z'\-]*(?:[ ,.!?]*[A-Za-z][A-Za-z'\-]*)*[.!?,]*/g, (m) => `<span class="en">${m}</span>`);
 function el(tag, attrs, parent) {
   const n = document.createElementNS(NS, tag);
   // style 속성은 CSP가 막으므로 CSSOM으로 넣는다
@@ -20,7 +19,7 @@ function el(tag, attrs, parent) {
   return n;
 }
 const PLAY_PATH = "M6.5 4.3v11.4a.8.8 0 0 0 1.2.7l9.2-5.7a.8.8 0 0 0 0-1.4L7.7 3.6a.8.8 0 0 0-1.2.7z";
-// 4~7세가 찾고 누를 시간. 고리 애니메이션(.ring, 4s + 4s)과 같이 바꾼다
+// 4~7세가 찾고 누를 시간. 고리 애니메이션(.ring .cnt, 8s)과 같이 바꾼다
 const AUTO_MS = 8000;
 // 화면 그림(손 안내, 반짝 별, 거품 터짐)은 engine/ui/에 있다. 편 주소와 상관없이 engine.js가 있는 곳을 기준으로 찾는다
 const UI = ((document.currentScript && document.currentScript.src) || "/engine/engine.js").replace(/[^/]*$/, "") + "ui/";
@@ -38,9 +37,31 @@ let playsLeft = 0, justListen = false, started = false, raf = 0, endShown = fals
 let innerSeekTo = -1, wordBtn = null;
 const each = (hook, ...a) => { for (const m of mods) if (m[hook]) m[hook](...a); };
 
-// ---- 셸: 머리줄, 무대 위 조각, 자막, 조작 줄, 부모님 화면 ----
+// ---- 셸: 무대 위 조각(엠블럼, 제목 띠, 진행 점), 본문 줄, 아이 차례 단추, 부모 서랍, 끝 카드, 부모님 화면 ----
+// 휴대폰: 위 무대(그림) + 본문 줄 + 접힌 서랍 손잡이. 서랍을 열면 재생, 3번 이어 듣기, 조금 천천히, 그냥 듣기, 대본.
+// 태블릿 가로: 펼친 책(왼쪽 그림, 오른쪽 본문과 부모 조작 줄). 같은 요소를 CSS 격자로 옮겨 놓는다(engine.css)
+const EN_RE = /[A-Za-z][A-Za-z'\-]*(?:[ ,.!?]*[A-Za-z][A-Za-z'\-]*)*[.!?,]*/g;
+// 본문 줄: 한국어와 영어를 두 줄로 나눈다. 같은 영어가 되풀이되면 한 번만(예: "Brush my teeth. ... Brush my teeth!")
+function capHTML(s) {
+  const en = [], keys = [];
+  const kr = plain(s).replace(EN_RE, (m) => {
+    const k = m.toLowerCase().replace(/[^a-z' ]/g, "").trim();
+    if (!keys.some((x) => x.includes(k))) { keys.push(k); en.push(m); }
+    return " ";
+  }).replace(/\s+/g, " ").replace(/\s([.,!?])/g, "$1").trim();
+  return (kr ? `<span class="kr">${esc(kr)}</span>` : "") + (en.length ? `<span class="en">${esc(en.join(" "))}</span>` : "");
+}
+// 부모님 글(팁) 안의 영어만 영어 글꼴로
+function tipHTML(s) {
+  const t = plain(s);
+  let out = "", i = 0;
+  t.replace(EN_RE, (m, at) => { out += `${esc(t.slice(i, at))}<span class="en">${esc(m)}</span>`; i = at + m.length; return m; });
+  return out + esc(t.slice(i));
+}
+const SAY = () => (EP.free_play || []).find((f) => f.type === "say-sticker");
+
 function buildShell() {
-  const st = $("stage"), end = EP.end || {}, ws = EP.worksheet;
+  const st = $("stage"), end = EP.end || {}, ws = EP.worksheet, num = esc(String(EP.id || "").toUpperCase());
   // 화면 그림은 sprite에 한 번만 두고 장면에서는 <use>로 가리킨다(장면마다 같은 그림을 다시 받지 않음).
   // 손 #hand-shape(누르기)와 #hand-rub(문지르기)는 손끝이 (0, -2)에 오는 크기, 별과 터짐은 symbol이라 <use>의 x, y, width, height로 놓는다.
   // href는 첫 재생이나 첫 기다림에서 넣는다(loadUi). 첫 화면에서 받는 양은 그대로
@@ -51,54 +72,63 @@ function buildShell() {
   <symbol id="ui-pop" viewBox="0 0 256 234"><image class="ui" data-ui="pop.webp" width="256" height="234"/></symbol>
   </svg>`);
   const kid = document.createElement("div");
-  kid.className = "kid"; kid.id = "kid";
+  kid.className = "kid fresh"; kid.id = "kid";
   // 아이가 누르고 문지를 때 선택, 길게 누르기 메뉴, 그림 끌기가 생기지 않게(CSS만으로는 안드로이드와 SVG 그림이 남는다)
   for (const ev of ["selectstart", "contextmenu", "dragstart"]) kid.addEventListener(ev, (e) => e.preventDefault());
   st.before(kid);
-  kid.innerHTML = `<header class="top">
-    <div class="brand">
-      <a class="logo" href="/"><img src="/brand/emblem.png" width="52" height="40" alt="">릴리랑</a>
-      <h1>${esc(EP.title)}</h1>
-    </div>
-    <div class="dots" id="dots" role="img" aria-label="장면 시작 전">${"<i></i>".repeat(SCENES.length - 1)}</div>
-    <button class="sw" id="justListen" type="button" role="switch" aria-checked="false"><span>그냥 듣기</span><span class="trk"><span class="thm"></span></span></button>
-  </header>`;
+  kid.innerHTML = `<a class="logo" href="/" aria-label="릴리랑 처음으로"><img src="/brand/emblem.png" width="32" height="32" alt=""></a>
+    <div class="eplabel" id="eplabel"><span class="epn">${num}</span><h1>${esc(EP.title)}</h1></div>
+    <div class="dots" id="dots" role="img" aria-label="장면 시작 전">${"<i></i>".repeat(SCENES.length - 1)}</div>`;
   kid.appendChild(st);
   st.insertAdjacentHTML("beforeend", `<span class="chip" id="chip" hidden></span>
-    <div class="ring" id="ring" hidden aria-hidden="true"><span class="h r"><i></i></span><span class="h l"><i></i></span></div>
     <button class="big-play" id="bigPlay" type="button" aria-label="이야기 듣기 시작">
       <svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="${PLAY_PATH}"/></svg>
-    </button>
-    <div class="endcard" id="endcard" hidden>
-      <p class="gn">${esc(end.title || "Good night!")}</p>
-      ${end.stickers ? `<p class="sm">${esc(end.sub || "오늘 모은 스티커")}</p>
-      <div class="estk">${end.stickers.map((s) => `<span><img data-src="${esc(s.img)}" alt="" width="52" height="52">${esc(s.label)}</span>`).join("")}</div>` : ""}
-      <div class="ebtn">
-        <button class="eb y" id="again" type="button">한 번 더 듣기</button>
-        <button class="eb o" id="toParent" type="button">부모님 화면</button>
-      </div>
-    </div>`);
-  kid.insertAdjacentHTML("beforeend", `<div class="cap" id="cap">
-    <span class="wtag" id="wtag" hidden><i></i>릴리가 기다려요</span>
-    <p id="capText" aria-live="polite">노란 동그라미를 누르면 릴리 이야기가 시작돼요.</p>
+    </button>`);
+  // 서랍 줄: 그림 아이콘 + 이름(휴대폰은 긴 이름과 설명, 태블릿 가로 줄은 짧은 이름) + 스위치
+  const opt = (id, icon, name, short, sub, state) => `<button class="opt" id="${id}" type="button" ${state}>
+      <img src="${UI}${icon}.webp" width="32" height="32" alt="" loading="lazy" decoding="async">
+      <span class="lab"><b class="long">${name}</b><b class="short">${short}</b><small>${sub}</small></span><span class="tog" aria-hidden="true"></span>
+    </button>`;
+  const tips = EP.tips || [], t1 = end.tip || (Array.isArray(tips[1]) ? tips[1].join(" ") : tips[1] || "");
+  const art0 = $(SCENES[0].id).querySelector("image"), frame = art0 ? art0.getAttribute("href") || art0.dataset.src : "";
+  kid.insertAdjacentHTML("beforeend", `<div class="ring" id="ring" hidden aria-hidden="true"><svg viewBox="0 0 136 136"><circle class="trk" cx="68" cy="68" r="60"/><circle class="cnt" cx="68" cy="68" r="60"/></svg></div>
+  <div class="cap" id="cap">
+    <span class="wtag" id="wtag" hidden>릴리가 기다려요</span>
+    <p id="capText" aria-live="polite"><span class="kr">노란 동그라미를 누르면<br>릴리 이야기가 시작돼요.</span></p>
+    <div class="expr"><p class="xlab">오늘의 표현</p><p class="xword" id="xword">${esc(((EP.words || [])[0] || {}).en || "")}</p></div>
   </div>
-  <div class="ctl">
-    <div class="row">
+  ${SAY() ? `<div class="said" id="said"></div>` : ""}
+  <button class="hintrow" id="drawerOpen" type="button" aria-controls="drawer" aria-expanded="false"><i class="bar"></i><span>부모 화면 열기</span><i class="chev"></i></button>
+  <div class="scrim" id="scrim" hidden></div>
+  <section class="drawer" id="drawer" aria-label="부모님 조작">
+    <button class="grab" id="drawerClose" type="button" aria-label="부모 화면 닫기"><i></i></button>
+    <div class="prow">
       <button class="pp" id="play" type="button" aria-label="재생">
         <svg id="ic-play" viewBox="0 0 20 20" fill="currentColor"><path d="${PLAY_PATH}"/></svg>
         <svg id="ic-pause" viewBox="0 0 20 20" fill="currentColor" hidden><rect x="5" y="4" width="3.6" height="12" rx="1.2"/><rect x="11.4" y="4" width="3.6" height="12" rx="1.2"/></svg>
       </button>
-      <span class="time" id="cur">0:00</span>
-      <input id="seek" type="range" min="0" max="${EP.duration}" step="0.1" value="0" aria-label="재생 위치">
-      <span class="time" id="dur">${fmt(EP.duration)}</span>
+      <div class="prog">
+        <div class="times"><span class="time" id="cur">0:00</span><span class="time" id="dur">${fmt(EP.duration)}</span></div>
+        <input id="seek" type="range" min="0" max="${EP.duration}" step="0.1" value="0" aria-label="재생 위치">
+      </div>
     </div>
-    <div class="row2">
-      <button class="tool" id="times3" type="button" aria-pressed="false">3번 이어 듣기</button>
-      <button class="tool" id="slow" type="button" aria-pressed="false">조금 천천히</button>
+    <div class="opts">
+      ${opt("times3", "ic-repeat", "3번 이어 듣기", "반복", "끝나면 처음부터 다시 들어요", 'aria-pressed="false"')}
+      ${opt("slow", "ic-slow", "조금 천천히", "천천히", "재생 속도 0.85x", 'aria-pressed="false"')}
+      ${opt("justListen", "ic-listen", "그냥 듣기", "그냥 듣기", "아이 차례에도 멈추지 않아요", 'role="switch" aria-checked="false"')}
     </div>
-  </div>
-  <div class="hintrow">
-    <a href="#parent">아래로 내리면 부모님 화면 <svg viewBox="0 0 12 12" aria-hidden="true"><path d="M2 4 l4 4 l4 -4" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></a>
+    <a class="opt link" id="toScript" href="#parent"><img src="${UI}ic-script.webp" width="32" height="32" alt="" loading="lazy" decoding="async"><span class="lab"><b>대본 보기</b></span><i class="chev"></i></a>
+  </section>
+  <div class="endcard" id="endcard" hidden>
+    <div class="ebody">
+      <div class="eframe"><img data-src="${esc(frame)}" alt="" width="170" height="170"></div>
+      <div class="ehead"><p class="epn">${num}</p><p class="etitle">${esc(EP.title)}</p><p class="emsg">${esc(end.done || "오늘 이야기를 다 들었어요.")}</p></div>
+      ${end.stickers ? `<p class="ribbon">${esc(end.sub || "오늘의 스티커")}</p>
+      <div class="estk">${end.stickers.map((s) => `<span><i class="spot"><img data-src="${esc(s.img)}" alt="" width="66" height="66"></i>${esc(s.label)}</span>`).join("")}</div>` : ""}
+      <button class="again" id="again" type="button">한 번 더</button>
+      <button class="toparent" id="toParent" type="button">부모님께</button>
+    </div>
+    ${t1 ? `<p class="etip">${tipHTML(t1)}</p>` : ""}
   </div>
   <audio id="audio" src="${esc(EP.audio)}" preload="metadata"></audio>`);
 
@@ -133,9 +163,9 @@ function buildShell() {
   </section>` : ""}
   <section class="card tips" aria-labelledby="h-tips">
     <h2 id="h-tips">부모님께</h2>
-    ${(EP.tips || []).map(tip).join("")}
+    ${tips.map(tip).join("")}
   </section>
-  <details class="card">
+  <details class="card" id="scriptCard">
     <summary><span><span class="t">대본 보기</span><span class="s">부모님용, 줄을 누르면 그 부분부터 들려요</span></span>
       <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 7.5l5 5 5-5"/></svg></summary>
     <div class="script" id="script"></div>
@@ -143,6 +173,48 @@ function buildShell() {
   <p class="maker"><a href="https://read.wspace.ai.kr/">릴리랑은 매일 외국어 읽기가 만들어요</a></p>
   <footer class="site-footer"><a href="https://www.wspace.ai.kr/">wspace 홈</a><a href="https://www.wspace.ai.kr/about/">소개</a><a href="https://www.wspace.ai.kr/privacy/">개인정보처리방침</a><a href="https://www.wspace.ai.kr/contact/">연락처</a></footer>
 </main>`);
+}
+
+// 아이 차례(say-sticker) 장면: 편 그림 안의 "말했어요" 단추를 본문 줄 아래 큰 단추(같은 id)로 옮기고,
+// 점선 스티커 자리는 종이 자리 그림으로, "오늘의 스티커" 글은 리본으로 바꿔 판을 가운데에 둔다. 동작(say-sticker.js)은 그대로
+let sayScene = -1;
+function decorateSay() {
+  const B = SAY(), old = B && $(B.target);
+  if (!old) return;
+  const sc = old.closest(".scene");
+  sayScene = SCENES.findIndex((s) => s.id === sc.id);
+  old.remove();
+  sc.querySelectorAll(".hand").forEach((h) => h.remove());
+  $("said").innerHTML = `<button class="tgt saybtn" id="${esc(B.target)}" type="button" aria-label="말했어요"><span class="halo"></span><span class="pulse"><i class="ic"></i><b>말했어요</b></span></button>`;
+  const into = $(B.into), P = into.parentNode;
+  const dash = [...P.children].find((n) => n.hasAttribute("stroke-dasharray"));
+  const label = [...P.children].find((n) => n.tagName === "text" && n.classList.contains("kr"));
+  const names = into.nextElementSibling && into.nextElementSibling.tagName === "g" ? into.nextElementSibling : null;
+  // 판 좌표를 장면 좌표로(판이 translate, scale 묶음 안에 있는 편이 있다)
+  let m = sc.createSVGMatrix();
+  for (let n = P; n !== sc; n = n.parentNode) { const c = n.transform.baseVal.consolidate(); if (c) m = c.matrix.multiply(m); }
+  const moved = [];
+  let lo = Infinity, hi = -Infinity;
+  if (dash) {
+    for (const r of dash.querySelectorAll("rect")) {
+      const [x, y, w, h] = ["x", "y", "width", "height"].map((a) => Number(r.getAttribute(a)));
+      const spot = el("image", { class: "ui", "data-ui": "sticker-spot.webp", x: x - w * 0.06, y: y - h * 0.06, width: w * 1.12, height: h * 1.12 });
+      P.insertBefore(spot, into); moved.push(spot);
+      lo = Math.min(lo, m.a * x + m.e); hi = Math.max(hi, m.a * (x + w) + m.e);
+    }
+    dash.remove();
+  }
+  if (label) {
+    const x = Number(label.getAttribute("x")), y = Number(label.getAttribute("y")) - 8;
+    label.setAttribute("y", y); label.classList.add("rib");
+    const rib = el("image", { class: "ui", "data-ui": "ribbon.webp", x: x - 95, y: y - 22, width: 190, height: 34, preserveAspectRatio: "none" });
+    P.insertBefore(rib, label); moved.unshift(rib, label);
+  }
+  if (lo < hi) {
+    const vb = sc.viewBox.baseVal, g = el("g", { transform: `translate(${(vb.x + vb.width / 2 - (lo + hi) / 2).toFixed(1)} 0)` });
+    if (P === sc) { P.insertBefore(g, moved[0] || into); for (const n of [...moved, into, names]) if (n) g.appendChild(n); }
+    else { P.before(g); g.appendChild(P); }
+  }
 }
 
 // ---- 장면 상태 그리기 ----
@@ -169,6 +241,9 @@ function setScene(s) {
   scene = s;
   warm(s); warm(s + 1);
   SCENES.forEach((sc, i) => $(sc.id).toggleAttribute("hidden", i !== s));
+  // 밤 편(설정 night: true)이나 밤 장면(장면 night: true)은 화면 장치도 어둡게, 아이 차례 장면은 큰 "말했어요" 단추
+  $("kid").classList.toggle("night", EP.night === true || SCENES[s].night === true);
+  $("kid").classList.toggle("turn", s === sayScene);
   document.querySelectorAll("#dots i").forEach((d, i) => { d.className = i + 1 < s ? "past" : i + 1 === s ? "now" : ""; });
   $("dots").setAttribute("aria-label", s ? `장면 ${s}/${SCENES.length - 1} ${SCENES[s].name || ""}` : "장면 시작 전");
   chip(SCENES[s].chip || (EP.worksheet && SCENES[s].worksheetChip) || "");
@@ -186,24 +261,48 @@ function setLine(t) {
     if (!jumped) return;
     let j = -1;
     for (let i = 0; i < LINES.length; i++) if (LINES[i][0] <= t) j = i;
-    if (j >= 0) $("capText").innerHTML = capHTML(LINES[j][2]);
+    if (j >= 0) { $("capText").innerHTML = capHTML(LINES[j][2]); setWord(j); }
     each("line", -1, j);
     return;
   }
   rows[k].classList.add("now");
   $("capText").innerHTML = capHTML(LINES[k][2]);
+  setWord(k);
   each("line", k, k);
 }
+// 오늘의 표현(태블릿 가로 책): 지금 줄까지 나온 단어 중 마지막
+function setWord(k) {
+  const w = (EP.words || []).filter((x) => x.line <= k).pop() || (EP.words || [])[0];
+  if (w) $("xword").textContent = w.en;
+}
 function setTime(t) {
-  $("seek").value = t;
+  const sk = $("seek");
+  sk.value = t;
+  sk.style.setProperty("--p", `${(t / (Number(sk.max) || 1)) * 100}%`);
   const sec = Math.floor(t);
   if (sec !== lastSec) { lastSec = sec; $("cur").textContent = fmt(t); }
 }
 function showEnd(on) {
   endShown = on; $("endcard").hidden = !on;
+  if (on) drawer(false);
   updateBigPlay();
 }
-function updateBigPlay() { $("bigPlay").hidden = started || endShown; }
+// fresh: 아직 시작 전(제목 종이 띠와 큰 재생 단추가 보이는 첫 화면)
+function updateBigPlay() { $("bigPlay").hidden = started || endShown; $("kid").classList.toggle("fresh", !started && !endShown); }
+
+// 부모 서랍: 휴대폰과 태블릿 세로에서는 접힌 손잡이를 누르면 아래에서 올라온다. 태블릿 가로(펼친 책)에서는 늘 펼쳐 있다
+const BOOK = matchMedia("(min-width: 900px) and (min-height: 600px) and (orientation: landscape)");
+function drawer(on) {
+  if (BOOK.matches) on = false;
+  const focusIn = $("drawer").contains(document.activeElement);
+  $("kid").classList.toggle("drawer-open", on);
+  $("scrim").hidden = !on;
+  $("drawerOpen").setAttribute("aria-expanded", String(on));
+  $("drawer").inert = !on && !BOOK.matches;
+  // 키보드 사용자: 열면 서랍 안 재생으로, 닫히면(inert로 포커스가 사라지므로) 손잡이로 돌려준다
+  if (on && document.activeElement === $("drawerOpen")) $("play").focus({ preventScroll: true });
+  if (!on && focusIn && !BOOK.matches) $("drawerOpen").focus({ preventScroll: true });
+}
 
 // 첫 화면 뒤에 받는 그림: 화면 그림(손, 별, 터짐)과 오늘의 단어 스티커. 첫 재생, 첫 기다림, 첫 누름이나 스크롤 중 먼저 오는 때 한 번
 let lateLoaded = false;
@@ -263,6 +362,7 @@ function tick() {
 function enterWait(i) {
   loadLater();
   waiting = i;
+  drawer(false);                            // 아이 차례: 서랍이 열려 있으면 닫아 무대를 보이게
   audio.pause();
   stage.classList.add("waiting");
   $("wtag").hidden = false;
@@ -273,7 +373,32 @@ function armTimer() {
   waitTimer = setTimeout(autoResolve, AUTO_MS);
   const ring = $("ring");
   ring.hidden = true;                       // 다시 보이게 하면 CSS 애니메이션이 처음부터 돈다
-  requestAnimationFrame(() => { if (waiting >= 0) ring.hidden = false; });
+  requestAnimationFrame(() => { if (waiting >= 0) { placeRing(); ring.hidden = false; } });
+}
+// 8초 고리: 기다리는 대상(누를 것)을 둘러싼다. 대상이 여럿인 기다림(거품)은 무대 오른쪽 위 작은 고리
+function placeRing() {
+  const w = WAITS[waiting], B = SAY(), ring = $("ring");
+  const t = $(w.target || (w.type === "say-sticker" && B ? B.target : "")) || null;
+  let x = 0, y = 0, d = 0;
+  if (t) {
+    const h = t.querySelector(".halo");
+    if (h && h.getBBox) {
+      // 숨쉬는 빛(.halo)의 애니메이션 크기가 아니라 원래 크기로
+      const b = h.getBBox(), m = h.parentNode.getScreenCTM();
+      x = m.a * (b.x + b.width / 2) + m.c * (b.y + b.height / 2) + m.e;
+      y = m.b * (b.x + b.width / 2) + m.d * (b.y + b.height / 2) + m.f;
+      d = Math.max(b.width * m.a, b.height * m.d) * 1.3;
+    } else {
+      const r = t.getBoundingClientRect();
+      x = r.left + r.width / 2; y = r.top + r.height / 2; d = Math.max(r.width, r.height) + 32;
+    }
+  }
+  ring.classList.toggle("corner", !d);
+  if (!d) { ring.style.left = ring.style.top = ring.style.width = ring.style.height = ""; return; }
+  d = Math.min(Math.max(d, 96), 240);
+  const k = $("kid").getBoundingClientRect();
+  ring.style.width = ring.style.height = `${d}px`;
+  ring.style.left = `${x - k.left - d / 2}px`; ring.style.top = `${y - k.top - d / 2}px`;
 }
 function clearWait() {
   waiting = -1;
@@ -332,6 +457,7 @@ function lilyMount() {
     : END_WAIT >= 0 ? WAITS[END_WAIT].at - 0.1 : LINES[LINES.length - 1][1] - 0.1;
   done = WAITS.map(() => false);
   buildShell();
+  decorateSay();
   audio = $("audio"); stage = $("stage");
   for (const ev of ["pointerdown", "keydown", "scroll"]) window.addEventListener(ev, loadLater, { once: true, capture: true, passive: true });
   // 손 안내: 문지르는 장면(.hit.scrub가 있는 장면)의 손은 문지르기 손으로
@@ -363,13 +489,22 @@ function lilyMount() {
   // ---- 부모님 조작 ----
   $("bigPlay").addEventListener("click", () => { stopAt = null; play(); });
   $("play").addEventListener("click", () => {
-    if (waiting >= 0) { doAction(waiting); finishWait(false); return; }
+    if (waiting >= 0) { doAction(waiting); finishWait(false); return drawer(false); }
     if (!audio.paused) return audio.pause();
+    drawer(false);                          // 재생을 누르면 서랍을 닫고 이야기로
     if (endShown || audio.ended) return restart();
     stopAt = null; play();
   });
   $("again").addEventListener("click", restart);
-  $("toParent").addEventListener("click", () => $("parent").scrollIntoView({ behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth" }));
+  const toParent = (node) => node.scrollIntoView({ behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth" });
+  $("toParent").addEventListener("click", () => toParent($("parent")));
+  $("drawerOpen").addEventListener("click", () => drawer(true));
+  $("drawerClose").addEventListener("click", () => drawer(false));
+  $("scrim").addEventListener("click", () => drawer(false));
+  document.addEventListener("keydown", (e) => { if (e.key === "Escape" && $("kid").classList.contains("drawer-open")) drawer(false); });
+  $("toScript").addEventListener("click", (e) => { e.preventDefault(); drawer(false); $("scriptCard").open = true; toParent($("scriptCard")); });
+  BOOK.addEventListener("change", () => drawer(false));
+  drawer(false);
   $("seek").addEventListener("input", (e) => { const p = !audio.paused; seekTo(Number(e.target.value)); if (p) play(); });
   // 그냥 듣기는 기기에 기억해 둔다(양치 시간마다 틀어 두는 부모용). 저장소를 못 쓰면 꺼진 채로 시작
   try { if (localStorage.getItem("lily.justListen") === "1") { justListen = true; $("justListen").setAttribute("aria-checked", "true"); } } catch (_) {}
@@ -423,6 +558,7 @@ function lilyMount() {
     const t = Number(q.get("t")) || 0;
     started = true; updateBigPlay();
     const go = () => {
+      loadLater();
       seekTo(t);
       if (q.get("w") === "1") { const i = done.findIndex((d) => !d); if (i >= 0) enterWait(i); }
     };

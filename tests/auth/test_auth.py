@@ -249,7 +249,7 @@ async def run(br):
     await pg.wait_for_selector("#lilyGateCard", timeout=8000)
     at = await pg.evaluate("__blockedAt")
     ok("non-member: stops at previewUntil and shows card", 2.0 <= at <= 2.25 and await pg.evaluate("__audio.paused"), f"blockedAt={at:.3f}")
-    ok("card text and links", "가입하면 이어서 들을 수 있어요" in await pg.inner_text("#lilyGateCard")
+    ok("card text and links", "가입하면 바로 이어 들을 수 있어요" in await pg.inner_text("#lilyGateCard")
        and await pg.get_attribute("#lilyGateJoin", "href") == "/join/?next=%2Ftests%2Fauth%2Fgate-harness.html"
        and await pg.get_attribute("#lilyGateFree", "href") == "/ep01/")
     f_card = await fps(pg)

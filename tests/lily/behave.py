@@ -42,6 +42,14 @@ async def tap(pg, sel):
     x, y = await center(pg, sel)
     await pg.mouse.click(x, y)
 
+async def ctl(pg, sel):
+    """부모 조작(재생, 그냥 듣기, 3번 이어 듣기, 조금 천천히)은 서랍 안에 있다. 손잡이로 열고 누른 뒤 닫는다(태블릿 가로 책은 늘 펼쳐 있음)"""
+    if await pg.is_visible("#drawerOpen"):
+        await pg.click("#drawerOpen")
+    await pg.click(sel)
+    if await pg.evaluate("$('kid').classList.contains('drawer-open')"):
+        await pg.click("#drawerClose")
+
 async def open_at(pg, t=None):
     await pg.goto(B + ("" if t is None else f"?t={t:.2f}"))
     await pg.wait_for_timeout(300)
@@ -124,11 +132,12 @@ async def main():
         print("ART all scenes", len(art), "files", sum(x[1] for x in art), "bytes")
         ok("all art images decoded", await pg.evaluate("[...document.querySelectorAll('.stage image, .endcard img')].every(n=>!n.hasAttribute('data-src'))"))
         if VW < 700:
-            ok("stage height 55-60% of viewport", 0.54 <= stageH <= 0.61, f"{stageH:.3f}")
+            # 개선안 2(R51): 그림이 화면 대부분. 단 무대는 너비의 1.5배를 넘지 않아 그림(2:3) 가장자리의 대상이 잘리지 않음
+            ok("stage height 62-76% of viewport", 0.62 <= stageH <= 0.76, f"{stageH:.3f}")
         else:
-            # 태블릿: 그림이 휴대폰과 같은 비율로 잘리도록 무대 비율 유지, 첫 화면 전체가 스크롤 없이
+            # 태블릿: 무대 비율이 그림(2:3)보다 조금 넓어 가장자리 대상이 잘리지 않음(세로 0.70, 가로 펼친 책 0.674), 첫 화면 전체가 스크롤 없이
             r = await pg.evaluate("(()=>{const b=$('stage').getBoundingClientRect();return [b.width/b.height,b.bottom,document.querySelector('.hintrow').getBoundingClientRect().bottom,innerHeight]})()")
-            ok("tablet: stage keeps phone aspect 0.78-0.82", 0.78 <= r[0] <= 0.82, f"{r[0]:.3f}")
+            ok("tablet: stage aspect 0.66-0.72 (art 2:3 not cropped at sides)", 0.66 <= r[0] <= 0.72, f"{r[0]:.3f}")
             ok("tablet: whole first screen fits without scrolling", r[1] <= r[3] + 0.5 and r[2] <= r[3] + 0.5, str(r))
         ok("no horizontal scroll", await pg.evaluate("document.documentElement.scrollWidth<=innerWidth"))
         # 아이가 누르는 대상(.hit) 중 가장 작은 것의 화면 크기. 장면마다 열어 잰다
@@ -142,7 +151,7 @@ async def main():
         # 맛보기 편이 아니면(free: false): 비회원은 previewUntil에서 멈추고 가입 카드. 그 뒤 시험은 gate.js를 비워 회원처럼(gate-default가 항상 허용)
         if cfg.get("free") is False:
             pu = cfg["previewUntil"]
-            await open_at(pg, pu - 1.0); await pg.click("#play")
+            await open_at(pg, pu - 1.0); await ctl(pg, "#play")
             hit = await until(pg, "!!document.getElementById('lilyGateCard')", 5000)
             t = await pg.evaluate("audio.currentTime")
             ok(f"gate: non-member stops at previewUntil {pu} with join card", hit and pu <= t <= pu + 0.2 and await pg.evaluate("audio.paused && waiting===-1"), f"t={t:.3f}")
@@ -152,7 +161,7 @@ async def main():
         board = next((f for f in free if f["type"] == "say-sticker"), None)
         bub = None
         for i, w in enumerate(W):
-            await open_at(pg, w["at"] - 1.0); await pg.click("#play")
+            await open_at(pg, w["at"] - 1.0); await ctl(pg, "#play")
             hit = await until(pg, f"waiting==={i}"); await pg.wait_for_timeout(120)
             t = await pg.evaluate("audio.currentTime")
             ok(f"wait {i} ({w['type']}) pauses at {w['at']}", hit and w["at"] <= t <= w["at"] + 0.15 and await pg.evaluate("audio.paused && !$('wtag').hidden && !$('ring').hidden"), f"t={t:.3f}")
@@ -189,7 +198,7 @@ async def main():
 
         # 3 8초 자동 진행: 기다림 하나(거품이 있으면 거품)에서 아무것도 안 누름
         ai = next((i for i, w in enumerate(W) if w["type"] == "pop"), 0)
-        await open_at(pg, W[ai]["at"] - 1.0); await pg.click("#play")
+        await open_at(pg, W[ai]["at"] - 1.0); await ctl(pg, "#play")
         await until(pg, f"waiting==={ai}"); t0 = await pg.evaluate("audio.currentTime")
         await pg.wait_for_timeout(AUTO_MS - 300)
         still = await pg.evaluate(f"waiting==={ai} && audio.paused")
@@ -200,18 +209,18 @@ async def main():
 
         # 4 소리가 끝나면 끝 카드(끝 카드가 나오는 시각보다 앞에서 시작해야 재생 단추가 처음부터 다시가 아님)
         end_at = (cfg.get("end") or {}).get("at", LINES[-1][1] - 0.1)
-        await open_at(pg, end_at - 1); await pg.click("#justListen"); await pg.click("#play")
+        await open_at(pg, end_at - 1); await ctl(pg, "#justListen"); await ctl(pg, "#play")
         ok("audio end shows end card", await until(pg, "endShown && audio.paused", int((cfg["duration"] - end_at + 4) * 1000)))
-        await pg.click("#justListen")
+        await ctl(pg, "#justListen")
 
         # 5 그냥 듣기: 기다림을 건너뛰고, 다시 열어도 기억함
         await open_at(pg, W[0]["at"] - 1.1)
-        await pg.click("#justListen"); await pg.click("#play"); await pg.wait_for_timeout(2200)
+        await ctl(pg, "#justListen"); await ctl(pg, "#play"); await pg.wait_for_timeout(2200)
         t = await pg.evaluate("audio.currentTime")
         ok("그냥 듣기 skips waits", t > W[0]["at"] + 0.5 and await pg.evaluate("!audio.paused && waiting===-1"), f"t={t:.3f}")
         await open_at(pg)
         ok("그냥 듣기 remembered after reload", await pg.evaluate("justListen && $('justListen').getAttribute('aria-checked')==='true'"))
-        await pg.click("#justListen")
+        await ctl(pg, "#justListen")
 
         # 6 되감기: 앞 기다림은 채움, 뒤는 다시 대기(화면 조작과 바깥 조작 둘 다)
         if len(W) >= 2:
@@ -245,11 +254,11 @@ async def main():
 
         # 9 3번 이어 듣기, 조금 천천히
         await open_at(pg, end_at - 1)
-        await pg.click("#times3"); await pg.click("#justListen"); await pg.click("#play")
+        await ctl(pg, "#times3"); await ctl(pg, "#justListen"); await ctl(pg, "#play")
         await until(pg, "audio.currentTime<3 && !audio.paused && audio.currentTime>0.2", int((cfg["duration"] - end_at + 6) * 1000))
         ok("3번 이어 듣기 restarts after end", await pg.evaluate("playsLeft===1 && !audio.paused && !endShown"))
-        await pg.click("#justListen")
-        await pg.click("#slow"); ok("조금 천천히 rate 0.85", await pg.evaluate("audio.playbackRate") == 0.85)
+        await ctl(pg, "#justListen")
+        await ctl(pg, "#slow"); ok("조금 천천히 rate 0.85", await pg.evaluate("audio.playbackRate") == 0.85)
         await pg.evaluate("audio.pause()")
 
         # 10 키보드: 첫 찾기 대상에 Enter
@@ -273,7 +282,7 @@ async def main():
             if f["type"] != "scrub": continue
             k = next(j for j, s in enumerate(SC) if s["id"] == f["scene"])
             mid = (SC[k]["from"] + SC[k + 1]["from"]) / 2
-            await pg.goto(B + f"?t={mid:.2f}"); await pg.wait_for_timeout(400); await pg.click("#play")
+            await pg.goto(B + f"?t={mid:.2f}"); await pg.wait_for_timeout(400); await ctl(pg, "#play")
             sc = await scrub_path(pg, f["into"])
             gone = await pg.evaluate(f"document.querySelectorAll('#{f['into']} .germ.gone').length")
             ok("scrub clears germs", gone >= math.ceil(len(f["germs"]) * 0.75), f"{gone}/{len(f['germs'])}")
@@ -283,7 +292,7 @@ async def main():
             print("PERF scrub", sc)
             # CPU 4배 느리게
             cdp = await pg.context.new_cdp_session(pg); await cdp.send("Emulation.setCPUThrottlingRate", {"rate": 4})
-            await pg.goto(B + f"?t={mid:.2f}"); await pg.wait_for_timeout(400); await pg.click("#play")
+            await pg.goto(B + f"?t={mid:.2f}"); await pg.wait_for_timeout(400); await ctl(pg, "#play")
             sc4 = await scrub_path(pg, f["into"])
             lt4 = await pg.evaluate("window.__lt")
             fcp4 = await pg.evaluate("(performance.getEntriesByName('first-contentful-paint')[0]||{}).startTime")

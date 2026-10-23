@@ -19,6 +19,12 @@ async def until(pg, expr, timeout):
         await pg.wait_for_timeout(50)
     return False
 
+async def ctl(pg, sel):
+    """부모 조작은 서랍 안: 손잡이로 열고 누른 뒤 닫는다"""
+    if await pg.is_visible("#drawerOpen"): await pg.click("#drawerOpen")
+    await pg.click(sel)
+    if await pg.evaluate("$('kid').classList.contains('drawer-open')"): await pg.click("#drawerClose")
+
 async def main():
     async with async_playwright() as p:
         br = await p.chromium.launch(channel="chrome", args=["--autoplay-policy=no-user-gesture-required"])
@@ -38,7 +44,7 @@ async def main():
 
         at = 40.6
         # 1 누르면 바로 끝 카드(소리가 끝날 때까지 기다리지 않음)
-        await pg.goto(B + "?t=39.6"); await pg.wait_for_timeout(300); await pg.click("#play")
+        await pg.goto(B + "?t=39.6"); await pg.wait_for_timeout(300); await ctl(pg, "#play")
         await until(pg, "waiting===0", 5000)
         b = await pg.locator("#t-brush .hit").bounding_box()
         await pg.mouse.click(b["x"] + b["width"] / 2, b["y"] + b["height"] / 2)
@@ -49,14 +55,14 @@ async def main():
         ok("seek back hides end card and resets", await pg.evaluate("!endShown && !endReady && !done[0]"))
         await pg.evaluate("audio.pause()")
         # 3 8초 자동 진행도 끝 카드
-        await pg.goto(B + "?t=39.6"); await pg.wait_for_timeout(300); await pg.click("#play")
+        await pg.goto(B + "?t=39.6"); await pg.wait_for_timeout(300); await ctl(pg, "#play")
         await until(pg, "waiting===0", 5000)
         ok("end wait: auto-continue after 8s shows end card", await until(pg, "endShown", 10000), f"t={await pg.evaluate('audio.currentTime'):.2f}")
         # 4 그냥 듣기로 건너뛰면 끝 카드는 소리가 끝날 때(lamp-end와 같음)
         await pg.goto(B + "?t=39.6"); await pg.wait_for_timeout(300)
-        await pg.click("#justListen"); await pg.click("#play"); await pg.wait_for_timeout(2000)
+        await ctl(pg, "#justListen"); await ctl(pg, "#play"); await pg.wait_for_timeout(2000)
         ok("just-listen skip does not show end card early", await pg.evaluate("!endShown && !audio.paused && done[0]"))
-        await pg.click("#justListen"); await pg.evaluate("audio.pause()")
+        await ctl(pg, "#justListen"); await pg.evaluate("audio.pause()")
         ok("no page errors", not errs, str(errs))
         print("SUMMARY", sum(res), "/", len(res))
         await br.close()

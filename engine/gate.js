@@ -83,46 +83,62 @@
     } catch (e) { return null; }
   }
 
-  function el(tag, css, text) {
+  // 카드 모양은 ui/gate.css(토큰만 씀). 인라인 style 없이 클래스만 붙인다
+  var MORE = ["ep02", "ep03", "ep04", "ep05", "ep06", "ep07"]; // 가입하면 이어지는 편(홈 목록과 같은 순서)
+  (function css() {
+    if (document.querySelector('link[href="/engine/ui/gate.css"]')) return;
+    var l = document.createElement("link");
+    l.rel = "stylesheet"; l.href = "/engine/ui/gate.css";
+    document.head.appendChild(l);
+  })();
+
+  function el(tag, cls, text) {
     var n = document.createElement(tag);
-    if (css) n.style.cssText = css; // CSSOM이라 CSP style-src 에 'unsafe-inline' 이 없어도 된다
+    if (cls) n.className = cls;
     if (text) n.textContent = text;
     return n;
   }
 
   function show() {
     if (card) return;
-    // 휴대폰은 아래에서 올라오는 카드, 태블릿 이상은 가운데 카드(조금 더 크게)
-    var big = window.matchMedia && window.matchMedia("(min-width: 768px)").matches;
-    var BTN = "display:flex;align-items:center;justify-content:center;border-radius:14px;" +
-      (big ? "min-height:58px;font-size:18px;" : "min-height:52px;font-size:17px;") + "text-decoration:none;cursor:pointer;font-family:inherit;";
-    card = el("div", "position:fixed;inset:0;z-index:50;display:flex;justify-content:center;" +
-      "align-items:" + (big ? "center" : "flex-end") + ";padding:16px;background:rgba(25,31,40,.45);");
+    card = el("div");
     card.id = "lilyGateCard";
-    var box = el("div", "width:100%;max-width:" + (big ? "480px;" : "448px;") + "margin-bottom:max(8px,env(safe-area-inset-bottom,0px));" +
-      (big ? "padding:32px 28px 24px;" : "padding:22px 18px 18px;") + "border-radius:20px;background:var(--t-surface,#fff);color:var(--t-ink,#24323d);" +
-      "font-family:var(--kr,sans-serif);box-shadow:0 8px 28px rgba(25,31,40,.18);");
+    var badge = el("p", "gate-badge", "맛보기 편이 여기서 끝나요");
+    var box = el("div", "gate-paper");
     box.setAttribute("role", "dialog");
     box.setAttribute("aria-modal", "true");
     box.setAttribute("aria-labelledby", "lilyGateTitle");
-    var title = el("h2", "margin:0 0 6px;font-size:" + (big ? "24px" : "20px") + ";font-weight:400;line-height:1.4;", "가입하면 이어서 들을 수 있어요");
+    var brand = el("p", "gate-brand");
+    var lock = el("img");
+    lock.src = "/engine/ui/lock.webp"; lock.alt = ""; lock.width = 20; lock.height = 20;
+    brand.appendChild(lock); brand.appendChild(document.createTextNode("릴리랑"));
+    var title = el("h2", "", "이야기가 계속돼요.");
     title.id = "lilyGateTitle";
-    var sub = el("p", "margin:0 0 20px;font-size:" + (big ? "16px" : "14px") + ";color:var(--t-sub,#5b6b78);line-height:1.6;",
-      "여기까지는 누구나 들을 수 있는 맛보기예요. 가입은 무료이고, 가입하면 지금 멈춘 곳부터 이어서 들려줘요.");
-    var join = el("a", BTN + "background:var(--t-accent,#2f7d6d);color:#fff;margin-bottom:8px;", "가입하고 이어 듣기");
+    title.appendChild(el("br")); title.appendChild(document.createTextNode("가입하면 바로 이어 들을 수 있어요."));
+    var more = el("p", "gate-more", MORE.length + "편 더 있어요");
+    var eps = el("div", "gate-eps");
+    eps.setAttribute("aria-hidden", "true");
+    MORE.forEach(function (id) {
+      var im = el("img");
+      im.src = "/" + id + "/thumb.webp"; im.alt = ""; im.width = 52; im.height = 38; im.decoding = "async";
+      eps.appendChild(im);
+    });
+    var safe = el("p", "gate-safe", "아이 정보는 받지 않아요");
+    var act = el("div", "gate-act");
+    var join = el("a", "", "가입하고 이어 듣기");
     join.id = "lilyGateJoin";
     join.href = "/join/?next=" + encodeURIComponent(location.pathname);
     join.addEventListener("click", function () { saveResume(); log("gate_join_click"); });
-    var free = el("a", BTN + "border:1.5px solid var(--t-soft,#d7ebe4);color:var(--t-accent,#2f7d6d);background:var(--t-surface,#fff);margin-bottom:4px;",
-      "맛보기 편 끝까지 듣기");
+    var free = el("a", "", "맛보기 다시 듣기");
     free.id = "lilyGateFree";
     free.href = FREE_URL;
-    var later = el("button", BTN + "width:100%;border:0;background:none;color:var(--t-sub,#5b6b78);font-size:15px;min-height:48px;", "나중에 할게요");
+    var later = el("button", "", "나중에");
     later.type = "button";
     later.id = "lilyGateLater";
     later.addEventListener("click", function () { pending = null; hide(); });
-    box.appendChild(title); box.appendChild(sub); box.appendChild(join); box.appendChild(free); box.appendChild(later);
-    card.appendChild(box);
+    act.appendChild(join); act.appendChild(free); act.appendChild(later);
+    [brand, title, more, eps, safe, act].forEach(function (n) { box.appendChild(n); });
+    card.appendChild(badge); card.appendChild(box);
     document.body.appendChild(card);
     join.focus();
     log("gate_shown");

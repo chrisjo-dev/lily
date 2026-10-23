@@ -1,0 +1,41 @@
+/* 릴리랑 화면 토큰(design/redesign/shared/tokens.css를 옮긴 것, docs/DESIGN.md 4. 시각 체계).
+   엔진(engine.css)과 잠금 카드(gate.css)는 색, 글꼴, 모서리를 여기 변수로만 쓴다. 값을 바꿀 때는 이 파일 한 곳만 */
+:root {
+  /* 낮 (기본) */
+  --paper: #fbf6ec;          /* 종이 크림 */
+  --paper-2: #f3ece0;        /* 종이 그늘 */
+  --sky: #e7f1f6;            /* 옅은 하늘 */
+  --mint: #dcefe7;
+  --ink: #24323d;            /* 글자 */
+  --ink-2: #5b6b78;          /* 보조 글자 */
+  --line: #e2d8c8;           /* 종이 위 선 */
+  --brown: #6b4a36;          /* 그림 외곽선, 손그림 선 */
+  --teal: #2f7d6d;           /* 부모 조작, 링크, 지금 재생 */
+  --teal-soft: #d7ebe4;
+  --touch: #ffc83d;          /* 아이가 누를 곳 전용 */
+  --touch-edge: #6b4a36;
+  --card: #ffffff;
+  --shade: rgba(36, 50, 61, .52);       /* 서랍 뒤 아이 구역을 가리는 막 */
+  --shadow: rgba(107, 74, 54, .24);     /* 종이 그림자(작게만) */
+
+  /* 밤 (목욕, 잠자리 편) */
+  --night: #1f2a44;
+  --night-2: #2b3858;
+  --night-ink: #f3ead8;
+  --night-ink-2: #b9b2c9;
+  --lamp: #ffd98a;           /* 밤의 따뜻한 빛(누를 곳 노랑과 구분되는 옅은 빛) */
+
+  /* 태블릿 가로 책: 책상과 아래 겹친 종이 장 */
+  --desk: #c4b49a;
+  --leaf-1: #f0e8dc;
+  --leaf-2: #e4d9c6;
+
+  /* 글꼴 */
+  --font-logo: "Jua", "Gowun Dodum", sans-serif;
+  --font-kr: "Gowun Dodum", "Apple SD Gothic Neo", "Noto Sans KR", sans-serif;
+  --font-en: "Andika", "Gowun Dodum", sans-serif;
+  --font-book: "Gowun Batang", "Gowun Dodum", serif;   /* 본문 줄, 책 글씨 */
+
+  /* 모서리 */
+  --r-frame: 16px; --r-card: 20px; --r-btn: 14px; --r-pill: 999px;
+}
