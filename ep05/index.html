@@ -35,22 +35,6 @@
 <script src="/engine/interactions/tap-sparkle.js"></script>
 </head>
 <body>
-<!-- 단어 그림: 부모님 화면 단어 버튼에서 쓴다(손 모양 #hand-shape는 엔진이 넣음) -->
-<svg class="sprite" width="0" height="0" aria-hidden="true">
-  <symbol id="i-puton" viewBox="0 0 120 100">
-    <path class="fS sI" stroke-width="3" stroke-linejoin="round" d="M40 14 l-28 16 l10 18 l12 -6 v46 h52 v-46 l12 6 l10 -18 l-28 -16 q-10 10 -20 0 z"/>
-    <path class="sA" stroke-width="3" stroke-linecap="round" d="M60 46 v18 M51 55 h18"/>
-  </symbol>
-  <symbol id="i-socks" viewBox="0 0 120 100">
-    <path class="fS sI" stroke-width="3" stroke-linejoin="round" d="M44 8 h28 v46 q0 10 8 14 l12 6 q10 6 4 16 q-4 6 -14 4 l-30 -12 q-10 -4 -10 -16 z"/>
-    <path class="sA" stroke-width="3" d="M44 20 h28"/>
-  </symbol>
-  <symbol id="i-ready" viewBox="0 0 120 100">
-    <circle class="fS sI" stroke-width="3" cx="60" cy="50" r="36"/>
-    <path class="fN sA" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" d="M42 52 l12 12 l24 -26"/>
-  </symbol>
-</svg>
-
 <div class="stage" id="stage">
   <!-- 그림은 art/의 배경 한 장(1024x1536) + 누르는 레이어. 좌표는 그림 픽셀의 절반(viewBox 512x768, 그림도 512x768로 놓음).
        엔진의 스티커(66), 반짝 별, 거품 글자, 손 모양 크기가 400~500 폭 좌표에 맞춰져 있어서 EP01과 같은 눈금을 씀 -->
@@ -228,9 +212,9 @@
     ]
   },
   "words": [
-    { "en": "put on", "ko": "입어요", "line": 3, "icon": "#i-puton" },
-    { "en": "my socks", "ko": "내 양말", "line": 8, "icon": "#i-socks" },
-    { "en": "ready", "ko": "준비 끝", "line": 12, "icon": "#i-ready" }
+    { "en": "put on", "ko": "입어요", "line": 3, "icon": "art/L-sticker-puton.webp" },
+    { "en": "my socks", "ko": "내 양말", "line": 8, "icon": "art/L-sticker-socks.webp" },
+    { "en": "ready", "ko": "준비 끝", "line": 12, "icon": "art/L-sticker-ready.webp" }
   ],
   "worksheet": null,
   "tips": [

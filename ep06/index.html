@@ -36,25 +36,6 @@
 <script src="/engine/interactions/tap-sparkle.js"></script>
 </head>
 <body>
-<!-- 단어 그림: 부모님 화면 단어 버튼에서 쓴다(손 모양 #hand-shape는 엔진이 넣음) -->
-<svg class="sprite" width="0" height="0" aria-hidden="true">
-  <symbol id="i-bath" viewBox="0 0 120 100">
-    <path class="fS sI" stroke-width="3" d="M12 50 h96 v8 q0 26 -30 26 h-36 q-30 0 -30 -26 z"/>
-    <path class="fN sI" stroke-width="3" stroke-linecap="round" d="M24 50 v-30 q0 -10 10 -10 q8 0 9 8 M30 84 l-4 8 M90 84 l4 8"/>
-    <g class="fO sA" stroke-width="2.5"><circle cx="60" cy="40" r="9"/><circle cx="78" cy="36" r="7"/><circle cx="92" cy="44" r="5"/></g>
-  </symbol>
-  <symbol id="i-rub" viewBox="0 0 120 100">
-    <rect class="fO sI" stroke-width="3" x="26" y="32" width="68" height="44" rx="20"/>
-    <path class="fN sA" stroke-width="3" stroke-linecap="round" d="M14 22 q8 -8 16 0 M90 20 q8 -8 16 0 M16 88 q10 6 20 0 M84 88 q10 6 20 0"/>
-  </symbol>
-  <symbol id="i-soclean" viewBox="0 0 120 100">
-    <path class="fS sI" stroke-width="3" d="M30 30 q-12 4 -10 26 q6 10 14 4 M90 30 q12 4 10 26 q-6 10 -14 4"/>
-    <circle class="fS sI" stroke-width="3" cx="60" cy="52" r="30"/>
-    <path class="fN sI" stroke-width="3" stroke-linecap="round" d="M48 48 v2 M72 48 v2 M52 64 q8 6 16 0"/>
-    <path class="sA" stroke-width="3" stroke-linecap="round" d="M104 10 v14 M97 17 h14"/>
-  </symbol>
-</svg>
-
 <div class="stage" id="stage">
   <!-- 그림은 art/의 배경 한 장(1024x1536) + 누르는 레이어. 좌표는 그림 픽셀의 절반(viewBox 512x768, 그림도 512x768로 놓음).
        엔진의 스티커(66), 반짝 별, 거품 글자, 손 모양 크기가 400~500 폭 좌표에 맞춰져 있어서 EP01과 같은 눈금을 씀 -->
@@ -232,9 +213,9 @@
     ]
   },
   "words": [
-    { "en": "bath time", "ko": "목욕 시간", "line": 3, "icon": "#i-bath" },
-    { "en": "rub-a-dub", "ko": "문질문질", "line": 8, "icon": "#i-rub" },
-    { "en": "so clean", "ko": "아주 깨끗해", "line": 11, "icon": "#i-soclean" }
+    { "en": "bath time", "ko": "목욕 시간", "line": 3, "icon": "art/L-sticker-bath.webp" },
+    { "en": "rub-a-dub", "ko": "문질문질", "line": 8, "icon": "art/L-sticker-rub.webp" },
+    { "en": "so clean", "ko": "아주 깨끗해", "line": 11, "icon": "art/L-sticker-soclean.webp" }
   ],
   "worksheet": null,
   "tips": [

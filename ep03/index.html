@@ -35,24 +35,6 @@
 <script src="/engine/interactions/tap-sparkle.js"></script>
 </head>
 <body>
-<!-- 단어 그림: 부모님 화면 단어 버튼에서 쓴다(손 모양 #hand-shape는 엔진이 넣음) -->
-<svg class="sprite" width="0" height="0" aria-hidden="true">
-  <symbol id="i-wash" viewBox="0 0 120 100">
-    <circle class="fS sI" stroke-width="3" cx="56" cy="54" r="32"/>
-    <path class="fN sI" stroke-width="3" stroke-linecap="round" d="M44 50 q4 -4 8 0 M62 50 q4 -4 8 0 M46 66 q10 8 20 0"/>
-    <path class="fO sA" stroke-width="2.5" d="M98 22 q-7 10 0 14 q7 -4 0 -14 z M104 52 q-6 8 0 12 q6 -4 0 -12 z"/>
-  </symbol>
-  <symbol id="i-splash" viewBox="0 0 120 100">
-    <path class="fO sA" stroke-width="3" stroke-linejoin="round" d="M20 84 q10 -24 22 -12 q2 -30 18 -36 q16 6 18 36 q12 -12 22 12 z"/>
-    <path class="fO sA" stroke-width="2.5" d="M28 34 q-6 9 0 12 q6 -3 0 -12 z M92 30 q-6 9 0 12 q6 -3 0 -12 z M60 8 q-6 9 0 12 q6 -3 0 -12 z"/>
-  </symbol>
-  <symbol id="i-fresh" viewBox="0 0 120 100">
-    <circle class="fS sI" stroke-width="3" cx="56" cy="54" r="32"/>
-    <path class="fN sI" stroke-width="3" stroke-linecap="round" d="M44 50 q4 -4 8 0 M62 50 q4 -4 8 0 M44 64 q12 12 24 0"/>
-    <path class="sA" stroke-width="3" stroke-linecap="round" d="M100 14 v16 M92 22 h16 M18 70 v12 M12 76 h12 M104 66 v10 M99 71 h10"/>
-  </symbol>
-</svg>
-
 <div class="stage" id="stage">
   <!-- 그림은 art/의 배경 한 장(1024x1536) + 누르는 레이어. 좌표는 그림 픽셀의 절반(viewBox 512x768, 그림도 512x768로 놓음).
        엔진의 스티커(66), 반짝 별, 거품 글자, 손 모양 크기가 400~500 폭 좌표에 맞춰져 있어서 EP01과 같은 눈금을 씀 -->
@@ -237,9 +219,9 @@
     ]
   },
   "words": [
-    { "en": "wash my face", "ko": "얼굴을 씻어요", "line": 3, "icon": "#i-wash" },
-    { "en": "splash", "ko": "첨벙", "line": 4, "icon": "#i-splash" },
-    { "en": "so fresh", "ko": "상쾌해", "line": 11, "icon": "#i-fresh" }
+    { "en": "wash my face", "ko": "얼굴을 씻어요", "line": 3, "icon": "art/L-sticker-wash.webp" },
+    { "en": "splash", "ko": "첨벙", "line": 4, "icon": "art/L-sticker-splash.webp" },
+    { "en": "so fresh", "ko": "상쾌해", "line": 11, "icon": "art/L-sticker-fresh.webp" }
   ],
   "worksheet": null,
   "tips": [

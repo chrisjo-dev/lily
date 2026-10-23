@@ -35,24 +35,6 @@
 <script src="/engine/interactions/say-sticker.js"></script>
 </head>
 <body>
-<!-- 단어 그림: 부모님 화면 단어 버튼에서 쓴다(손 모양 #hand-shape는 엔진이 넣음) -->
-<svg class="sprite" width="0" height="0" aria-hidden="true">
-  <symbol id="i-wake-up" viewBox="0 0 120 100">
-    <path class="fO sI" stroke-width="3" d="M30 74 a30 30 0 0 1 60 0 z"/>
-    <path class="sA" stroke-width="4" stroke-linecap="round" d="M60 18 v12 M27 32 l8 8 M93 32 l-8 8 M12 58 h10 M98 58 h10"/>
-    <path class="sI" stroke-width="3" stroke-linecap="round" d="M10 76 h100"/>
-  </symbol>
-  <symbol id="i-stretch" viewBox="0 0 120 100">
-    <circle class="fS sI" stroke-width="3" cx="60" cy="40" r="12"/>
-    <path class="fN sI" stroke-width="4" stroke-linecap="round" d="M60 52 v26 M60 78 l-10 16 M60 78 l10 16 M60 58 l-22 -40 M60 58 l22 -40"/>
-    <path class="sA" stroke-width="3" stroke-linecap="round" d="M30 10 l-6 -6 M90 10 l6 -6 M24 22 h-8 M96 22 h8"/>
-  </symbol>
-  <symbol id="i-good-morning" viewBox="0 0 120 100">
-    <rect class="fS sI" stroke-width="3" x="22" y="12" width="76" height="76" rx="6"/>
-    <path class="sI" stroke-width="3" d="M60 12 v76 M22 50 h76"/>
-    <circle class="fO sA" stroke-width="3" cx="80" cy="31" r="10"/>
-  </symbol>
-</svg>
 <div class="stage" id="stage">
   <!-- 그림은 art/의 배경 한 장(1024x1536) + 누르는 레이어. 좌표는 그림 픽셀의 절반(viewBox 512x768, 그림도 512x768로 놓음).
        엔진의 스티커(66), 반짝 별, 거품 글자, 손 모양 크기가 400~500 폭 좌표에 맞춰져 있어서 EP01과 같은 눈금을 씀 -->
@@ -235,9 +217,9 @@
     ]
   },
   "words": [
-    { "en": "wake up", "ko": "일어나", "line": 3, "icon": "#i-wake-up" },
-    { "en": "stretch", "ko": "쭉 펴요", "line": 6, "icon": "#i-stretch" },
-    { "en": "good morning", "ko": "좋은 아침", "line": 11, "icon": "#i-good-morning" }
+    { "en": "wake up", "ko": "일어나", "line": 3, "icon": "art/L-sticker-wake.webp" },
+    { "en": "stretch", "ko": "쭉 펴요", "line": 6, "icon": "art/L-sticker-stretch.webp" },
+    { "en": "good morning", "ko": "좋은 아침", "line": 11, "icon": "art/L-sticker-morning.webp" }
   ],
   "worksheet": null,
   "tips": [

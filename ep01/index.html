@@ -36,24 +36,6 @@
 <script src="/engine/interactions/lamp-end.js"></script>
 </head>
 <body>
-<!-- 단어 그림: 부모님 화면 단어 버튼에서 쓴다(손 모양 #hand-shape는 엔진이 넣음) -->
-<svg class="sprite" width="0" height="0" aria-hidden="true">
-  <symbol id="i-brush" viewBox="0 0 120 100">
-    <path class="fS sI" stroke-width="3" d="M30 18 q-18 0 -18 24 q0 16 7 34 q4 12 9 0 l4 -16 q2 -6 4 0 l4 16 q5 12 9 0 q7 -18 7 -34 q0 -24 -18 -24 q-4 2 -9 2 q-5 0 -9 -2 z"/>
-    <rect class="fA" x="66" y="54" width="50" height="9" rx="4.5" transform="rotate(-28 91 58)"/>
-    <path class="sA fN" stroke-width="3" stroke-linecap="round" d="M70 46 l-5 -9 M76 43 l-5 -9 M82 40 l-5 -9"/>
-  </symbol>
-  <symbol id="i-bubbles" viewBox="0 0 120 100">
-    <g class="fS sA" stroke-width="3"><circle cx="48" cy="56" r="26"/><circle cx="88" cy="38" r="16"/><circle cx="94" cy="76" r="10"/><circle cx="22" cy="24" r="8"/><circle cx="112" cy="14" r="5"/></g>
-    <path class="fN sO" stroke-width="3" stroke-linecap="round" d="M36 46 q5 -7 12 -7 M81 32 q4 -4 7 -4"/>
-  </symbol>
-  <symbol id="i-clean" viewBox="0 0 120 100">
-    <path class="fS sI" stroke-width="3" d="M44 14 q-20 0 -20 26 q0 18 7 36 q4 12 9 0 l4 -16 q2 -6 4 0 l4 16 q5 12 9 0 q7 -18 7 -36 q0 -26 -20 -26 q-4 2 -9 2 q-5 0 -9 -2 z"/>
-    <path class="fN sI" stroke-width="3" stroke-linecap="round" d="M37 40 q8 9 18 0"/>
-    <path class="sA" stroke-width="4" stroke-linecap="round" d="M92 16 v18 M83 25 h18 M106 50 v12 M100 56 h12 M90 70 v10 M85 75 h10"/>
-  </symbol>
-</svg>
-
 <div class="stage" id="stage">
   <!-- 그림은 art/의 배경 한 장 + 누르는 레이어. 장면마다 viewBox = 그림 픽셀 크기라 레이어가 그림과 함께 늘고 줄어든다 -->
   <!-- 처음: 하품하는 릴리 (누를 것은 아래 수납장 위의 큰 재생 버튼 하나) -->
@@ -253,9 +235,9 @@
     ]
   },
   "words": [
-    { "en": "brush my teeth", "ko": "이를 닦아요", "line": 3, "icon": "#i-brush" },
-    { "en": "bubbles", "ko": "거품", "line": 9, "icon": "#i-bubbles" },
-    { "en": "all clean", "ko": "깨끗해", "line": 13, "icon": "#i-clean" }
+    { "en": "brush my teeth", "ko": "이를 닦아요", "line": 3, "icon": "art/L-sticker-brush.webp" },
+    { "en": "bubbles", "ko": "거품", "line": 9, "icon": "art/L-sticker-bubbles.webp" },
+    { "en": "all clean", "ko": "깨끗해", "line": 13, "icon": "art/L-sticker-clean.webp" }
   ],
   "worksheet": null,
   "worksheet_hidden": {

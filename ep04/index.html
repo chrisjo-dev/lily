@@ -35,24 +35,6 @@
 <script src="/engine/interactions/tap-sparkle.js"></script>
 </head>
 <body>
-<!-- 단어 그림: 부모님 화면 단어 버튼에서 쓴다(손 모양 #hand-shape는 엔진이 넣음) -->
-<svg class="sprite" width="0" height="0" aria-hidden="true">
-  <symbol id="i-yummy" viewBox="0 0 120 100">
-    <path class="fS sI" stroke-width="3" d="M18 50 h84 q-4 36 -42 36 q-38 0 -42 -36 z"/>
-    <path class="fN sI" stroke-width="3" stroke-linecap="round" d="M48 64 q12 10 24 0"/>
-    <path class="fO sA" stroke-width="3" d="M60 38 q-14 -10 -14 -20 q0 -8 8 -8 q5 0 6 6 q1 -6 6 -6 q8 0 8 8 q0 10 -14 20 z"/>
-  </symbol>
-  <symbol id="i-gone" viewBox="0 0 120 100">
-    <path class="fS sI" stroke-width="3" d="M18 50 h84 q-4 36 -42 36 q-38 0 -42 -36 z"/>
-    <path class="sA" stroke-width="3" stroke-linecap="round" d="M60 12 v20 M50 22 h20 M30 24 l6 8 M90 24 l-6 8"/>
-  </symbol>
-  <symbol id="i-more" viewBox="0 0 120 100">
-    <path class="fS sI" stroke-width="3" d="M10 54 h70 q-4 30 -35 30 q-31 0 -35 -30 z"/>
-    <circle class="fO sA" stroke-width="3" cx="94" cy="34" r="16"/>
-    <path class="sA" stroke-width="4" stroke-linecap="round" d="M94 26 v16 M86 34 h16"/>
-  </symbol>
-</svg>
-
 <div class="stage" id="stage">
   <!-- 그림은 art/의 배경 한 장(1024x1536) + 누르는 레이어. 좌표는 그림 픽셀의 절반(viewBox 512x768, 그림도 512x768로 놓음).
        엔진의 스티커(66), 반짝 별, 거품 글자, 손 모양 크기가 400~500 폭 좌표에 맞춰져 있어서 EP01과 같은 눈금을 씀 -->
@@ -223,9 +205,9 @@
     ]
   },
   "words": [
-    { "en": "yummy", "ko": "맛있어", "line": 3, "icon": "#i-yummy" },
-    { "en": "all gone", "ko": "다 먹었어", "line": 6, "icon": "#i-gone" },
-    { "en": "more please", "ko": "더 주세요", "line": 10, "icon": "#i-more" }
+    { "en": "yummy", "ko": "맛있어", "line": 3, "icon": "art/L-sticker-yummy.webp" },
+    { "en": "all gone", "ko": "다 먹었어", "line": 6, "icon": "art/L-sticker-gone.webp" },
+    { "en": "more please", "ko": "더 주세요", "line": 10, "icon": "art/L-sticker-more.webp" }
   ],
   "worksheet": null,
   "tips": [
