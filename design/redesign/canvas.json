@@ -285,7 +285,14 @@
       "title": "R58-HomePhone",
       "group": "개선안 2",
       "status": "approved",
-      "note": "2026-10-23 사용자 승인: 개선안 2 방향으로 엔진과 홈 코드에 반영"
+      "note": "2026-10-23 사용자 승인: 개선안 2 방향으로 엔진과 홈 코드에 반영",
+      "impl": {
+        "route": "/",
+        "files": [
+          "index.html"
+        ],
+        "updated": "2026-10-23T02:42:09Z"
+      }
     },
     "R59-GateCard.html": {
       "x": 18234,
