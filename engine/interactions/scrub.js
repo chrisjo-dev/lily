@@ -1,6 +1,8 @@
 // scrub: 문지르면 세균이 사라지고 글자가 떠오른다. 그 장면에 들어올 때마다 세균이 다시 생긴다.
 // 자유 놀이: { scene: "sc2", type: "scrub", target: "t-scrub", brush: "brush2", home: [x, y], into: "germs", floats: "floats",
 //   img: "art/L-germ.png", word: "Brush!", reach: 40, germs: [[x, y, r], ...], rest: [x, y] }
+// hint(선택): [x, y, 배율] 문지르기 안내 손(engine/ui/hand-rub.webp)의 손끝 자리. 없으면 home 위, 배율은 장면 폭에 맞춤.
+//   그 장면에 들어와 아직 안 문질렀을 때만 보인다
 // rest(선택): 손을 떼면 brush가 가 있을 자리(얼굴을 가리지 않게 턱 아래 같은 곳). 없으면 마지막 자리에 둔다
 // 기다림으로도 쓸 수 있다: { at, type: "scrub", ...위와 같음 } 세균을 다 지우면 이어짐
 // 장면 마크업: 빈 <g id="germs">, <g id="floats">, target 안에 따라 움직일 <g id="brush2">와 넓은 .hit.scrub
@@ -15,7 +17,14 @@ LilyInteractions.scrub = (api, specs) => {
       return { g, x, y, r, gone: false };
     });
     const brush = api.$(s.brush), home = `translate(${s.home[0]} ${s.home[1]})`;
-    function reset() { germs.forEach((g) => { g.gone = false; g.g.classList.remove("gone"); }); brush.setAttribute("transform", home); }
+    // 기본 자리: brush 머리 바로 위(손등이 오른쪽으로 뻗어도 화면 밖으로 안 나가게 손끝을 조금 왼쪽에)
+    const k = svg.viewBox.baseVal.width / 482 * 1.4, h = s.hint || [s.home[0] - 12 * k, s.home[1] - 40 * k, k];
+    const hand = api.el("g", { class: "hand rub", transform: `translate(${h[0]} ${h[1]}) scale(${h[2]})` }, svg);
+    api.el("use", { href: "#hand-rub" }, api.el("g", {}, hand));
+    function reset() {
+      germs.forEach((g) => { g.gone = false; g.g.classList.remove("gone"); });
+      brush.setAttribute("transform", home); hand.classList.remove("off");
+    }
     function floatWord(x, y) {
       const o = api.el("g", { transform: `translate(${x} ${y - 30})` }, api.$(s.floats));
       const t = api.el("text", { class: "floaty fA", "font-size": 34, "text-anchor": "middle" }, o);
@@ -24,6 +33,7 @@ LilyInteractions.scrub = (api, specs) => {
     }
     function clear(g) { g.gone = true; g.g.classList.add("gone"); floatWord(g.x, g.y); }
     function scrubAt(p) {
+      hand.classList.add("off");
       brush.setAttribute("transform", `translate(${p.x.toFixed(1)} ${p.y.toFixed(1)})`);
       for (const g of germs) {
         if (g.gone) continue;

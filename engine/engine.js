@@ -22,6 +22,8 @@ function el(tag, attrs, parent) {
 const PLAY_PATH = "M6.5 4.3v11.4a.8.8 0 0 0 1.2.7l9.2-5.7a.8.8 0 0 0 0-1.4L7.7 3.6a.8.8 0 0 0-1.2.7z";
 // 4~7세가 찾고 누를 시간. 고리 애니메이션(.ring, 4s + 4s)과 같이 바꾼다
 const AUTO_MS = 8000;
+// 화면 그림(손 안내, 반짝 별, 거품 터짐)은 engine/ui/에 있다. 편 주소와 상관없이 engine.js가 있는 곳을 기준으로 찾는다
+const UI = ((document.currentScript && document.currentScript.src) || "/engine/engine.js").replace(/[^/]*$/, "") + "ui/";
 
 // ---- 편 설정에서 채우는 값 ----
 let EP, LINES, WAITS, SCENES, SCENE_AT, END_AT, END_WAIT = -1, audio, stage, rows;
@@ -39,12 +41,15 @@ const each = (hook, ...a) => { for (const m of mods) if (m[hook]) m[hook](...a);
 // ---- 셸: 머리줄, 무대 위 조각, 자막, 조작 줄, 부모님 화면 ----
 function buildShell() {
   const st = $("stage"), end = EP.end || {}, ws = EP.worksheet;
+  // 화면 그림은 sprite에 한 번만 두고 장면에서는 <use>로 가리킨다(장면마다 같은 그림을 다시 받지 않음).
+  // 손 #hand-shape(누르기)와 #hand-rub(문지르기)는 손끝이 (0, -2)에 오는 크기, 별과 터짐은 symbol이라 <use>의 x, y, width, height로 놓는다.
+  // href는 첫 재생이나 첫 기다림에서 넣는다(loadUi). 첫 화면에서 받는 양은 그대로
   document.body.insertAdjacentHTML("afterbegin", `<svg class="sprite" width="0" height="0" aria-hidden="true">
-  <g id="hand-shape">
-    <ellipse class="fK sI" stroke-width="1.5" cx="0" cy="12" rx="10" ry="14"/>
-    <rect class="fK sI" stroke-width="1" x="-6" y="0" width="7" height="12" rx="3"/>
-    <rect class="fK sI" stroke-width="1" x="1" y="-2" width="7" height="14" rx="3"/>
-  </g></svg>`);
+  <g id="hand-shape"><image class="ui" data-ui="hand-tap.webp" x="-11" y="-35" width="44" height="46" transform="scale(1 -1)"/></g>
+  <g id="hand-rub"><image class="ui" data-ui="hand-rub.webp" x="-4" y="-16" width="44" height="29"/></g>
+  <symbol id="ui-sparkle" viewBox="0 0 229 256"><image class="ui" data-ui="sparkle.webp" width="229" height="256"/></symbol>
+  <symbol id="ui-pop" viewBox="0 0 256 234"><image class="ui" data-ui="pop.webp" width="256" height="234"/></symbol>
+  </svg>`);
   const kid = document.createElement("div");
   kid.className = "kid"; kid.id = "kid";
   // 아이가 누르고 문지를 때 선택, 길게 누르기 메뉴, 그림 끌기가 생기지 않게(CSS만으로는 안드로이드와 SVG 그림이 남는다)
@@ -98,7 +103,7 @@ function buildShell() {
   <audio id="audio" src="${esc(EP.audio)}" preload="metadata"></audio>`);
 
   // 학습지는 설정에 worksheet가 있을 때만. 없으면 학습지 칸, 학습지 칩, 학습지 팁을 모두 뺀다
-  const icon = (i) => i.startsWith("#") ? `<svg aria-hidden="true"><use href="${esc(i)}"/></svg>` : `<img src="${esc(i)}" alt="" width="64" height="54">`;
+  const icon = (i) => i.startsWith("#") ? `<svg aria-hidden="true"><use href="${esc(i)}"/></svg>` : `<img data-src="${esc(i)}" alt="" width="64" height="54" loading="lazy" decoding="async">`;
   const tip = (p) => {
     if (p && p.worksheet !== undefined) { if (!ws) return ""; p = p.text; }
     return Array.isArray(p) ? `<p><b>${esc(p[0])}</b> ${esc(p[1])}</p>` : `<p>${esc(p)}</p>`;
@@ -200,8 +205,18 @@ function showEnd(on) {
 }
 function updateBigPlay() { $("bigPlay").hidden = started || endShown; }
 
+// 첫 화면 뒤에 받는 그림: 화면 그림(손, 별, 터짐)과 오늘의 단어 스티커. 첫 재생, 첫 기다림, 첫 누름이나 스크롤 중 먼저 오는 때 한 번
+let lateLoaded = false;
+function loadLater() {
+  if (lateLoaded) return;
+  lateLoaded = true;
+  document.querySelectorAll("image.ui").forEach((n) => n.setAttribute("href", UI + n.dataset.ui));
+  document.querySelectorAll(".word img[data-src]").forEach((n) => { n.src = n.dataset.src; n.removeAttribute("data-src"); });
+}
+
 // ---- 재생 ----
 function play() {
+  loadLater();
   started = true; updateBigPlay();
   if (audio.error) audio.load();
   audio.play().catch(() => { $("capText").textContent = "재생할 수 없어요. 다시 눌러 보세요."; });
@@ -246,6 +261,7 @@ function tick() {
 
 // ---- 기다리기 ----
 function enterWait(i) {
+  loadLater();
   waiting = i;
   audio.pause();
   stage.classList.add("waiting");
@@ -317,6 +333,9 @@ function lilyMount() {
   done = WAITS.map(() => false);
   buildShell();
   audio = $("audio"); stage = $("stage");
+  for (const ev of ["pointerdown", "keydown", "scroll"]) window.addEventListener(ev, loadLater, { once: true, capture: true, passive: true });
+  // 손 안내: 문지르는 장면(.hit.scrub가 있는 장면)의 손은 문지르기 손으로
+  document.querySelectorAll(".scene .hand use").forEach((u) => { if (u.closest(".scene").querySelector(".hit.scrub")) u.setAttribute("href", "#hand-rub"); });
 
   // 대본
   rows = LINES.map(([s, e, text], k) => {

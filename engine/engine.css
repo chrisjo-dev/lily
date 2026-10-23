@@ -76,6 +76,11 @@ button { font-family: inherit; color: inherit; }
 .waiting .hand { opacity: 1; }
 .hand > g { transform-box: fill-box; animation: tapHint 1s ease-in-out infinite; }
 @keyframes tapHint { 50% { transform: translateY(-8px); } }
+/* scrub: 문지르기 안내 손은 기다림과 상관없이 그 장면에서 아직 안 문질렀을 때 보이고, 좌우로 움직인다 */
+.hand.rub { opacity: 1; }
+.hand.rub.off { opacity: 0; }
+.hand.rub > g { animation-name: rubHint; }
+@keyframes rubHint { 50% { transform: translateX(-10px); } }
 
 /* find: 찾은 것은 흐리게, 누르면 통통 */
 .tgt.done .art { filter: grayscale(1) brightness(1.08); }
@@ -191,6 +196,7 @@ h2 { font-size: 20px; font-weight: 400; margin: 0 0 14px; color: var(--t-ink); }
   padding: 12px; border-radius: 16px; background: var(--t-bg); border: 0; text-align: left; cursor: pointer;
 }
 .word > svg, .word > img { width: 64px; height: 54px; }
+.word > img { object-fit: contain; }
 .word b { display: block; font-family: var(--en); font-weight: 700; font-size: 21px; line-height: 1.2; white-space: nowrap; color: var(--t-ink); }
 .word span span { font-size: 14px; color: var(--t-sub); }
 .word .say { width: 40px; height: 40px; border-radius: 50%; background: var(--t-surface); color: var(--t-accent); display: grid; place-items: center; }
