@@ -106,15 +106,15 @@ button { font-family: inherit; color: inherit; }
 /* 아이 차례의 "말했어요"(HTML 단추, 본문 줄 아래) */
 .saybtn {
   position: relative; width: 128px; height: 128px; padding: 0; border-radius: 50%; cursor: pointer;
-  border: 3px solid var(--touch-edge); background: var(--touch); box-shadow: 0 5px 20px var(--shadow);
+  border: 0; background: none; box-shadow: 0 5px 20px var(--shadow);
 }
 .saybtn::before {
-  content: ""; position: absolute; left: 50%; top: 50%; width: 200px; height: 200px; margin: -100px 0 0 -100px; pointer-events: none;
-  background: var(--brown); -webkit-mask: url(ui/rays-said.svg) 0 0 / 100% 100% no-repeat; mask: url(ui/rays-said.svg) 0 0 / 100% 100% no-repeat;
+  content: ""; position: absolute; z-index: 1; left: -19%; top: -31%; width: 138%; height: 131%; pointer-events: none;
+  background: url(ui/btn-said.webp) 0 0 / 100% 100% no-repeat;
 }
 .saybtn .halo { position: absolute; inset: -14px; border-radius: 50%; background: var(--touch); opacity: .3; animation: halo 1.8s ease-in-out infinite; }
-.saybtn .pulse { position: relative; z-index: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 5px; height: 100%; }
-.saybtn .ic { width: 36px; height: 36px; background: var(--brown); -webkit-mask: url(ui/ic-said.svg) 0 0 / 100% 100% no-repeat; mask: url(ui/ic-said.svg) 0 0 / 100% 100% no-repeat; }
+.saybtn .pulse { position: relative; z-index: 2; display: flex; flex-direction: column; align-items: center; justify-content: flex-end; height: 100%; padding-bottom: 26%; }
+.saybtn .ic { display: none; }   /* 말풍선은 단추 그림에 들어 있음 */
 .saybtn b { font-family: var(--font-logo); font-weight: 400; font-size: 20px; line-height: 1; color: var(--touch-edge); }
 .saybtn:active { transform: scale(.96); }
 .rib { font-family: var(--font-logo); font-weight: 400; fill: var(--brown); font-size: 14px; }
@@ -159,13 +159,13 @@ body > .stage { visibility: hidden; }
 /* 처음 재생 단추: 노란 동그라미 + 갈색 손그림 빛살(움직이지 않음) */
 .big-play {
   position: absolute; z-index: 4; right: 71px; bottom: 97px; width: 96px; height: 96px; padding: 0; border-radius: 50%; cursor: pointer;
-  border: 3px solid var(--touch-edge); background: var(--touch); color: var(--touch-edge); display: grid; place-items: center; box-shadow: 0 4px 20px var(--shadow);
+  border: 0; background: none; color: var(--touch-edge); display: grid; place-items: center; box-shadow: 0 4px 20px var(--shadow);
 }
 .big-play::before {
-  content: ""; position: absolute; left: 50%; top: 50%; width: 150px; height: 150px; margin: -75px 0 0 -75px; pointer-events: none;
-  background: var(--brown); -webkit-mask: url(ui/rays.svg) 0 0 / 100% 100% no-repeat; mask: url(ui/rays.svg) 0 0 / 100% 100% no-repeat;
+  content: ""; position: absolute; left: -19%; top: -31%; width: 138%; height: 131%; pointer-events: none;
+  background: url(ui/btn-play.webp) 0 0 / 100% 100% no-repeat;
 }
-.big-play svg { width: 40px; height: 40px; margin-left: 5px; }
+.big-play svg { display: none; }   /* 삼각형은 단추 그림에 들어 있음 */
 .big-play:active { transform: scale(.95); }
 
 /* 본문 줄: 한국어는 책 글씨(Gowun Batang), 영어는 그 아래 */
@@ -260,14 +260,15 @@ body > .stage { visibility: hidden; }
 .spot { display: grid; place-items: center; width: 78px; height: 78px; background: url(ui/sticker-spot.webp) center / contain no-repeat; }
 .spot img { display: block; width: 66px; height: 66px; object-fit: contain; }
 .again {
-  position: relative; flex: none; width: 160px; height: 64px; margin-top: 8px; border-radius: 32px; cursor: pointer;
-  border: 3px solid var(--touch-edge); background: var(--touch); color: var(--touch-edge); font-family: var(--font-logo); font-size: 20px; box-shadow: 0 4px 14px var(--shadow);
+  position: relative; flex: none; width: 160px; height: 67px; margin-top: 36px; padding: 0 0 0 40px; border-radius: 34px; cursor: pointer;
+  border: 0; background: none; color: var(--touch-edge); font-family: var(--font-logo); font-size: 20px; box-shadow: 0 4px 14px var(--shadow);
 }
-/* 빛살은 단추 바깥 16px 띠에만(단추 테두리 3px 포함해 -19px). 알약 모양 위쪽 가운데와 두 모서리 */
+/* 단추 그림(빛살 세 줄과 다시 듣기 화살표 포함). 글자는 HTML */
 .again::before {
-  content: ""; position: absolute; inset: -19px; pointer-events: none;
-  background: var(--brown); -webkit-mask: url(ui/rays-again.svg) 0 0 / 100% 100% no-repeat; mask: url(ui/rays-again.svg) 0 0 / 100% 100% no-repeat;
+  content: ""; position: absolute; z-index: -1; left: 0; top: -65%; width: 100%; height: 168%; pointer-events: none;
+  background: url(ui/btn-again.webp) 0 0 / 100% 100% no-repeat;
 }
+.again { isolation: isolate; }
 .again:active { transform: scale(.96); }
 .toparent { flex: none; min-height: 48px; padding: 0 12px; border: 0; background: none; cursor: pointer; font-size: 15px; color: var(--teal); text-decoration: underline; text-decoration-color: var(--teal-soft); text-underline-offset: 4px; }
 .etip { flex: none; margin: 0; padding: 14px 28px calc(14px + env(safe-area-inset-bottom, 0px)); border-top: 1.5px solid var(--line); background: var(--paper-2); text-align: center; font-size: 13px; line-height: 1.65; color: var(--ink-2); }
@@ -348,7 +349,9 @@ details[open] summary > svg { transform: rotate(180deg); }
 .night .ehead .epn, .night .estk span { color: var(--night-ink-2); }
 .night .toparent { color: var(--lamp); text-decoration-color: var(--night-2); }
 .night .etip { background: var(--night-2); border-color: var(--night-2); color: var(--night-ink-2); }
-.night .again::before, .night .saybtn::before, .night .big-play::before { background: var(--night-ink-2); }
+.night .again::before { background-image: url(ui/btn-again-night.webp); }
+.night .saybtn::before { background-image: url(ui/btn-said-night.webp); }
+.night .big-play::before { background-image: url(ui/btn-play-night.webp); }
 
 /* ===== 태블릿 세로: 휴대폰 배치 그대로, 화면 높이에 맞춰 무대를 크게(그림이 덜 잘리는 비율) ===== */
 @media (min-width: 700px) and (orientation: portrait) {
@@ -451,8 +454,6 @@ details[open] summary > svg { transform: rotate(180deg); }
   .turn .cap { flex-basis: 64px; }
   .turn .said { height: 118px; }
   .saybtn { width: 96px; height: 96px; }
-  .saybtn::before { width: 150px; height: 150px; margin: -75px 0 0 -75px; }
-  .saybtn .ic { width: 30px; height: 30px; }
   .saybtn b { font-size: 18px; }
 }
 
