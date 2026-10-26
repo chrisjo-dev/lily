@@ -1,0 +1,320 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=1024">
+  <title>R70 개선안 2 태블릿 EP01 끝 카드 밤</title>
+  <link rel="stylesheet" href="../shared/tokens.css">
+  <style>
+    html, body { margin: 0; width: 1024px; height: 768px; overflow: hidden; background: #1a2236; }
+
+    .book-wrap { position: relative; width: 1024px; height: 768px; }
+    .paper-layer-a {
+      position: absolute; bottom: 6px; left: 0; right: 0;
+      height: 14px; background: #28344e; border-radius: 0 0 5px 5px; z-index: 1;
+    }
+    .paper-layer-b {
+      position: absolute; bottom: 0; left: 18px; right: 18px;
+      height: 12px; background: #1f2a44; border-radius: 0 0 5px 5px; z-index: 0;
+    }
+
+    .book {
+      position: absolute; top: 0; left: 0;
+      display: flex; width: 1024px; height: 748px; z-index: 2;
+      box-shadow: 0 6px 28px rgba(0,0,0,0.45);
+    }
+
+    /* ── 왼쪽 쪽 ── */
+    .page-left {
+      width: 504px; height: 748px;
+      position: relative; overflow: hidden; flex-shrink: 0;
+      background: var(--night);
+      border-radius: 3px 0 0 3px;
+      display: flex; flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 32px 40px;
+      gap: 0;
+    }
+
+    /* 찢은 종이 액자 그림 */
+    .torn-frame {
+      width: 300px; height: 300px;
+      position: relative;
+      flex-shrink: 0;
+      margin-bottom: 24px;
+      filter: drop-shadow(0 8px 24px rgba(0,0,0,0.55));
+    }
+    .torn-frame svg { display: block; }
+
+    /* EP01 정보 */
+    .end-ep {
+      font-family: var(--font-en); font-size: 13px;
+      color: var(--night-ink-2); margin: 0 0 4px; text-align: center;
+    }
+    .end-title {
+      font-family: var(--font-logo); font-size: 24px;
+      color: var(--night-ink); margin: 0 0 8px; text-align: center;
+    }
+    .end-msg {
+      font-family: var(--font-book); font-size: 17px;
+      color: var(--night-ink); margin: 0; text-align: center; line-height: 1.55;
+    }
+
+    /* 구분선 */
+    .left-divider {
+      width: 80%; height: 1px;
+      background: rgba(243,234,216,0.12);
+      margin: 18px 0;
+      flex-shrink: 0;
+    }
+
+    /* 부모 팁 */
+    .parent-tip-text {
+      font-family: var(--font-kr); font-size: 15px;
+      color: var(--night-ink-2); line-height: 1.7;
+      text-align: center; margin: 0;
+    }
+    .tip-en { font-family: var(--font-en); font-style: normal; color: var(--lamp); }
+
+    /* ── 책 등 ── */
+    .spine {
+      width: 10px; flex-shrink: 0;
+      background: linear-gradient(to right,
+        rgba(0,0,0,0.7) 0%,
+        rgba(30,40,64,0.5) 40%,
+        rgba(30,40,64,0.1) 100%);
+    }
+
+    /* ── 오른쪽 쪽 ── */
+    .page-right {
+      flex: 1; height: 748px;
+      display: flex; flex-direction: column;
+      align-items: center;
+      position: relative; overflow: hidden;
+      border-radius: 0 3px 3px 0;
+      background: var(--night-2);
+    }
+    .page-right > * { position: relative; z-index: 1; }
+
+    /* 콘텐츠 영역 */
+    .right-body {
+      flex: 1;
+      display: flex; flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 28px 32px 20px;
+      gap: 0;
+      width: 100%;
+    }
+
+    /* 리본 */
+    .ribbon-wrap {
+      position: relative;
+      width: 240px; height: 40px;
+      display: flex; align-items: center; justify-content: center;
+      margin-bottom: 20px; flex-shrink: 0;
+    }
+    .ribbon-img {
+      position: absolute; inset: 0; width: 100%; height: 100%;
+      object-fit: fill; opacity: 0.9;
+    }
+    .ribbon-text {
+      position: relative; z-index: 1;
+      font-family: var(--font-logo); font-size: 14px; color: var(--brown);
+    }
+
+    /* 스티커 행 */
+    .sticker-row {
+      display: flex; gap: 20px; justify-content: center; align-items: flex-start;
+      margin-bottom: 28px;
+    }
+    .sticker-col { display: flex; flex-direction: column; align-items: center; gap: 6px; }
+    .sticker-slot {
+      width: 110px; height: 110px;
+      position: relative; display: flex; align-items: center; justify-content: center;
+    }
+    .sticker-spot-img {
+      position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain;
+    }
+    .sticker-img {
+      position: relative; z-index: 2;
+      width: 90px; height: 90px; object-fit: contain;
+      filter: drop-shadow(0 3px 8px rgba(0,0,0,0.3));
+    }
+    .sticker-word { font-family: var(--font-en); font-size: 11px; color: var(--night-ink-2); }
+
+    /* 한 번 더 단추 */
+    .again-wrap {
+      display: flex; justify-content: center;
+      margin-bottom: 8px; flex-shrink: 0;
+    }
+    .again-btn {
+      position: relative;
+      width: 200px; height: 84px;
+      border-radius: 42px; border: 0; background: none;
+      cursor: pointer; isolation: isolate;
+      margin-top: 50px;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .again-btn::before {
+      content: "";
+      position: absolute; z-index: -1;
+      left: 0; top: -65%; width: 100%; height: 168%;
+      pointer-events: none;
+      background: url('../assets/btn-again-night.webp') 0 0 / 100% 100% no-repeat;
+    }
+    /* 왼쪽 40px 비워 아이콘(화살표) 안 가리기 */
+    .again-label {
+      position: relative; z-index: 1;
+      font-family: "Jua", sans-serif; font-size: 24px; font-weight: 400;
+      color: var(--touch-edge);
+      padding-left: 40px;
+    }
+
+    /* 부모님께 */
+    .btn-parent {
+      height: 40px; display: flex; align-items: center; justify-content: center;
+      margin-bottom: 0;
+    }
+    .btn-parent span {
+      font-family: var(--font-kr); font-size: 15px; color: var(--lamp);
+      border-bottom: 1px solid rgba(255,217,138,0.4);
+      padding-bottom: 2px;
+    }
+
+    /* 부모 조작 스트립 (밤) */
+    .parent-strip {
+      flex-shrink: 0; width: 100%;
+      background: var(--night);
+      border-top: 1.5px solid rgba(243,234,216,0.1);
+      padding: 10px 24px 14px;
+      display: flex; align-items: center; gap: 16px; min-height: 68px;
+    }
+    .play-btn {
+      width: 48px; height: 48px; border-radius: 50%;
+      background: var(--teal);
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0; box-shadow: 0 2px 8px rgba(47,125,109,0.3);
+    }
+    .play-btn svg { fill: white; display: block; margin-left: 3px; }
+    .strip-sep { width: 1px; height: 32px; background: rgba(243,234,216,0.12); flex-shrink: 0; }
+    .strip-actions { display: flex; gap: 20px; align-items: center; }
+    .action-item { display: flex; align-items: center; gap: 7px; }
+    .action-item img { width: 32px; height: 32px; object-fit: contain; display: block; opacity: 0.55; filter: brightness(1.6); }
+    .action-label { font-family: var(--font-kr); font-size: 11px; color: var(--night-ink-2); white-space: nowrap; }
+  </style>
+</head>
+<body>
+<div class="book-wrap">
+  <div class="paper-layer-a"></div>
+  <div class="paper-layer-b"></div>
+
+  <div class="book">
+
+    <!-- 왼쪽 쪽: 이야기 정보 + 그림 -->
+    <div class="page-left">
+
+      <!-- 찢은 종이 액자 그림 (torn-round.svg inline clipPath) -->
+      <div class="torn-frame">
+        <svg viewBox="-6 -6 194 200" width="300" height="300" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+          <defs>
+            <clipPath id="torn-clip">
+              <path d="M91,2 C91,2 105,0 113,6 C121,12 125,6 133,10 C141,14 144,8 152,14 C160,20 158,26 165,32 C172,38 178,36 180,46 C182,56 177,60 178,70 C179,80 183,84 181,94 C179,104 174,106 173,116 C172,126 176,130 172,139 C168,148 162,148 157,156 C152,164 154,170 147,175 C140,180 135,176 127,179 C119,182 117,187 109,188 C101,189 97,184 89,184 C81,184 77,189 69,188 C61,187 59,182 51,179 C43,176 38,180 31,175 C24,170 26,164 21,156 C16,148 10,148 6,139 C2,130 6,126 5,116 C4,106 -1,104 -3,94 C-5,84 -1,80 0,70 C1,60 -4,56 -2,46 C0,36 6,38 13,32 C20,26 18,20 26,14 C34,8 37,14 45,10 C53,6 57,12 65,6 C73,0 77,2 91,2 Z"/>
+            </clipPath>
+          </defs>
+          <image href="../assets/ep01-bg-0-intro.webp"
+            x="-6" y="-6" width="194" height="200"
+            preserveAspectRatio="xMidYMid slice"
+            clip-path="url(#torn-clip)"/>
+        </svg>
+      </div>
+
+      <!-- EP01 라벨 + 제목 + 메시지 -->
+      <p class="end-ep">EP01</p>
+      <p class="end-title">Brush, Brush, Brush!</p>
+      <p class="end-msg">오늘 이야기를 다 들었어요.</p>
+
+      <div class="left-divider"></div>
+
+      <!-- 부모 팁 -->
+      <p class="parent-tip-text">실제 양치 시간에 한 번만.<br><span class="tip-en">"Brush my teeth!"</span> 하고 말해 주면<br>소리와 상황이 이어져 더 오래 기억해요.</p>
+    </div>
+
+    <!-- 책 등 -->
+    <div class="spine"></div>
+
+    <!-- 오른쪽 쪽: 스티커 + 단추 -->
+    <div class="page-right">
+      <div class="right-body">
+        <!-- 리본 -->
+        <div class="ribbon-wrap">
+          <img class="ribbon-img" src="../assets/ribbon.png" alt="">
+          <span class="ribbon-text">오늘 모은 스티커</span>
+        </div>
+
+        <!-- 스티커 3개 -->
+        <div class="sticker-row">
+          <div class="sticker-col">
+            <div class="sticker-slot">
+              <img class="sticker-spot-img" src="../assets/sticker-spot.png" alt="">
+              <img class="sticker-img" src="../assets/ep01-L-sticker-brush.webp" alt="">
+            </div>
+            <span class="sticker-word">brush my teeth</span>
+          </div>
+          <div class="sticker-col">
+            <div class="sticker-slot">
+              <img class="sticker-spot-img" src="../assets/sticker-spot.png" alt="">
+              <img class="sticker-img" src="../assets/ep01-L-sticker-bubbles.webp" alt="">
+            </div>
+            <span class="sticker-word">bubbles</span>
+          </div>
+          <div class="sticker-col">
+            <div class="sticker-slot">
+              <img class="sticker-spot-img" src="../assets/sticker-spot.png" alt="">
+              <img class="sticker-img" src="../assets/ep01-L-sticker-clean.webp" alt="">
+            </div>
+            <span class="sticker-word">all clean</span>
+          </div>
+        </div>
+
+        <!-- 한 번 더 단추 -->
+        <div class="again-wrap">
+          <button class="again-btn" type="button">
+            <span class="again-label">한 번 더</span>
+          </button>
+        </div>
+
+        <!-- 부모님께 -->
+        <div class="btn-parent">
+          <span>부모님께</span>
+        </div>
+      </div>
+
+      <!-- 부모 조작 스트립 -->
+      <div class="parent-strip">
+        <div class="play-btn" role="button" aria-label="재생">
+          <svg width="18" height="18" viewBox="0 0 18 18"><path d="M4 2.5L15 9L4 15.5V2.5Z"/></svg>
+        </div>
+        <div class="strip-sep"></div>
+        <div class="strip-actions">
+          <div class="action-item">
+            <img src="../assets/ic-repeat.png" alt="">
+            <span class="action-label">반복</span>
+          </div>
+          <div class="action-item">
+            <img src="../assets/ic-slow.png" alt="">
+            <span class="action-label">천천히</span>
+          </div>
+          <div class="action-item">
+            <img src="../assets/ic-listen.png" alt="">
+            <span class="action-label">그냥 듣기</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+</body>
+</html>

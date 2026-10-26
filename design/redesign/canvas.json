@@ -431,6 +431,70 @@
       },
       "status": "approved",
       "note": "2026-10-26 사용자 승인: 작은 휴대폰(375x667) 아이 차례, 끝 카드, 잠금 카드"
+    },
+    "R63-TabletPortraitFirst.html": {
+      "x": 19909,
+      "y": 0,
+      "w": 834,
+      "h": 1194,
+      "title": "R63-TabletPortraitFirst",
+      "group": "개선안 2 태블릿"
+    },
+    "R64-TabletPortraitWait.html": {
+      "x": 20783,
+      "y": 0,
+      "w": 834,
+      "h": 1194,
+      "title": "R64-TabletPortraitWait",
+      "group": "개선안 2 태블릿"
+    },
+    "R65-TabletPortraitTurn.html": {
+      "x": 21657,
+      "y": 0,
+      "w": 834,
+      "h": 1194,
+      "title": "R65-TabletPortraitTurn",
+      "group": "개선안 2 태블릿"
+    },
+    "R66-TabletPortraitEnd.html": {
+      "x": 22531,
+      "y": 0,
+      "w": 834,
+      "h": 1194,
+      "title": "R66-TabletPortraitEnd",
+      "group": "개선안 2 태블릿"
+    },
+    "R67-TabletLandscapeFirst.html": {
+      "x": 23405,
+      "y": 0,
+      "w": 1024,
+      "h": 768,
+      "title": "R67-TabletLandscapeFirst",
+      "group": "개선안 2 태블릿"
+    },
+    "R68-TabletLandscapeTurn.html": {
+      "x": 24469,
+      "y": 0,
+      "w": 1024,
+      "h": 768,
+      "title": "R68-TabletLandscapeTurn",
+      "group": "개선안 2 태블릿"
+    },
+    "R69-TabletLandscapeNight.html": {
+      "x": 25533,
+      "y": 0,
+      "w": 1024,
+      "h": 768,
+      "title": "R69-TabletLandscapeNight",
+      "group": "개선안 2 태블릿"
+    },
+    "R70-TabletLandscapeEnd.html": {
+      "x": 26597,
+      "y": 0,
+      "w": 1024,
+      "h": 768,
+      "title": "R70-TabletLandscapeEnd",
+      "group": "개선안 2 태블릿"
     }
   },
   "groups": [
@@ -449,6 +513,10 @@
     {
       "id": "개선안 2 작은 휴대폰",
       "label": "개선안 2 작은 휴대폰"
+    },
+    {
+      "id": "개선안 2 태블릿",
+      "label": "개선안 2 태블릿"
     }
   ],
   "links": [

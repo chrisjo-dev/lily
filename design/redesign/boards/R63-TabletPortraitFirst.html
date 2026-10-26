@@ -1,0 +1,156 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=834">
+  <title>R63 TabletPortraitFirst – 834×1194</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Andika:wght@400;700&family=Gowun+Batang&family=Gowun+Dodum&family=Jua&display=swap">
+  <link rel="stylesheet" href="../shared/tokens.css">
+  <style>
+    html, body {
+      margin: 0; width: 834px; height: 1194px; overflow: hidden;
+      background: var(--paper);
+    }
+
+    /* ─── kid container: (1194-224)×0.7 = 679px ─── */
+    .kid {
+      max-width: 679px; margin: 0 auto; height: 1194px;
+      display: flex; flex-direction: column;
+      background: var(--paper);
+    }
+
+    /* ─── stage ─── */
+    .stage {
+      position: relative; overflow: hidden;
+      flex: 100 1 0;
+      background: var(--sky);
+    }
+    .stage > svg {
+      position: absolute; inset: 0; width: 100%; height: 100%; display: block;
+    }
+    /* torn edge via mask */
+    .stage::after {
+      content: ""; position: absolute; left: 0; right: 0; bottom: -1px; height: 40px; pointer-events: none;
+      background: var(--paper);
+      -webkit-mask: url(../assets/torn.svg) 0 0 / 100% 100% no-repeat;
+      mask: url(../assets/torn.svg) 0 0 / 100% 100% no-repeat;
+    }
+
+    /* ─── stage overlays ─── */
+    .logo {
+      position: absolute; z-index: 5; top: 2px; left: 8px;
+      width: 48px; height: 48px; display: grid; place-items: center;
+    }
+    .logo img { width: 32px; height: 32px; border-radius: 50%; object-fit: cover; box-shadow: 0 0 0 1.5px var(--paper); }
+
+    .dots {
+      position: absolute; z-index: 5; top: 14px; right: 16px;
+      display: flex; align-items: center; gap: 5px; height: 20px;
+    }
+    .dots i { width: 6px; height: 6px; border-radius: 3px; background: var(--line); }
+    .dots i.past { background: var(--brown); opacity: .4; }
+    .dots i.now  { width: 14px; background: var(--brown); }
+
+    /* eplabel (fresh screen) */
+    .eplabel {
+      position: absolute; z-index: 5; top: 16px; left: 56px;
+      max-width: calc(100% - 140px); padding: 5px 13px 6px;
+      background: var(--paper); border: 1px solid var(--brown);
+      transform: rotate(-1.5deg); box-shadow: 1px 2px 8px rgba(107,74,54,.22);
+      clip-path: polygon(1% 10%, 0% 0%, 98% 2%, 100% 0%, 99% 90%, 100% 100%, 3% 98%, 0% 100%);
+    }
+    .eplabel h1 { margin: 0; font-family: var(--font-logo); font-size: 14px; line-height: 1.3; color: var(--ink); }
+    .eplabel .epn { display: block; font-family: var(--font-en); font-size: 10px; line-height: 1.3; color: var(--ink-2); }
+
+    /* big play button */
+    .big-play {
+      position: absolute; z-index: 4; right: 71px; bottom: 97px;
+      width: 120px; height: 120px;   /* CHANGED 96→120 */
+      padding: 0; border-radius: 50%; cursor: pointer;
+      border: 0; background: none; box-shadow: 0 4px 20px rgba(107,74,54,.22);
+    }
+    .big-play::before {
+      content: ""; position: absolute; left: -19%; top: -31%; width: 138%; height: 131%; pointer-events: none;
+      background: url(../assets/btn-play.webp) 0 0 / 100% 100% no-repeat;
+    }
+
+    /* ─── cap (body text strip) ─── */
+    .cap {
+      position: relative; flex: 1 0 168px; padding: 20px 40px 12px;
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      background: var(--paper);
+    }
+    .cap p { margin: 0; display: flex; flex-direction: column; align-items: center; gap: 6px; text-align: center; }
+    .cap .kr { font-family: var(--font-book); font-size: 22px; line-height: 1.8; color: var(--ink); }  /* CHANGED 23→22 */
+    .cap .en { font-family: var(--font-en); font-size: 18px; line-height: 1.5; color: var(--ink-2); } /* CHANGED 20→18 */
+
+    /* ─── hintrow (parent handle) ─── */
+    .hintrow {
+      position: relative; flex: none; width: 100%; height: 56px;
+      display: flex; align-items: center; justify-content: center; gap: 10px; padding: 0;
+      border: 0; border-top: 1.5px solid var(--line); background: var(--paper-2);
+      color: var(--teal); font-size: 16px; /* CHANGED 15→16 */ font-family: var(--font-kr); cursor: pointer;
+    }
+    .hintrow::after {
+      content: ""; position: absolute; top: 0; right: 0;
+      border-style: solid; border-width: 0 20px 20px 0;
+      border-color: transparent var(--paper) transparent transparent;
+    }
+    .hintrow .bar { width: 32px; height: 3px; border-radius: 2px; background: var(--line); }
+    .hintrow .chev {
+      width: 8px; height: 8px; margin-top: 4px;
+      border-left: 1.5px solid currentColor; border-top: 1.5px solid currentColor;
+      transform: rotate(45deg);
+    }
+  </style>
+</head>
+<body>
+<div class="kid fresh">
+
+  <!-- stage -->
+  <div class="stage">
+    <!-- scene 0: intro (xMidYMin slice – top-aligned) -->
+    <svg viewBox="0 0 482 732" preserveAspectRatio="xMidYMin slice">
+      <image href="../assets/ep01-bg-0-intro.webp" width="482" height="732"/>
+    </svg>
+
+    <!-- logo -->
+    <div class="logo">
+      <img src="../assets/brand-emblem.png" alt="릴리랑" onerror="this.style.background='var(--teal)';this.removeAttribute('src')">
+    </div>
+
+    <!-- episode label -->
+    <div class="eplabel" aria-hidden="true">
+      <span class="epn">EP. 01</span>
+      <h1>Brush, Brush, Brush!</h1>
+    </div>
+
+    <!-- progress dots (sc0 = first, sc1-sc6 upcoming) -->
+    <div class="dots" aria-hidden="true">
+      <i class="now"></i>
+      <i></i><i></i><i></i><i></i><i></i><i></i>
+    </div>
+
+    <!-- big play button -->
+    <button class="big-play" aria-label="이야기 시작"></button>
+  </div><!-- /stage -->
+
+  <!-- body text -->
+  <div class="cap">
+    <p>
+      <span class="kr">노란 동그라미를 누르면<br>릴리 이야기가 시작돼요.</span>
+    </p>
+  </div>
+
+  <!-- parent handle -->
+  <button class="hintrow" aria-label="부모 화면 열기">
+    <span class="bar"></span>
+    부모 화면 열기
+    <span class="chev"></span>
+  </button>
+
+</div>
+</body>
+</html>

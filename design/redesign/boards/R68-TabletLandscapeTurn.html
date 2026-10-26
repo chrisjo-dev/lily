@@ -1,0 +1,318 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=1024">
+  <title>R68 개선안 2 태블릿 EP01 아이 차례</title>
+  <link rel="stylesheet" href="../shared/tokens.css">
+  <style>
+    html, body { margin: 0; width: 1024px; height: 768px; overflow: hidden; background: #c4b49a; }
+
+    .book-wrap { position: relative; width: 1024px; height: 768px; }
+    .paper-layer-a {
+      position: absolute; bottom: 6px; left: 0; right: 0;
+      height: 14px; background: #f0e8dc; border-radius: 0 0 5px 5px; z-index: 1;
+    }
+    .paper-layer-b {
+      position: absolute; bottom: 0; left: 18px; right: 18px;
+      height: 12px; background: #e4d9c6; border-radius: 0 0 5px 5px; z-index: 0;
+    }
+
+    .book {
+      position: absolute; top: 0; left: 0;
+      display: flex; width: 1024px; height: 748px; z-index: 2;
+      box-shadow: 0 6px 28px rgba(50,28,8,0.26);
+    }
+
+    /* ── 왼쪽 쪽 ── */
+    .page-left {
+      width: 504px; height: 748px;
+      position: relative; overflow: hidden; flex-shrink: 0;
+      background: #f5eede;
+      border-radius: 3px 0 0 3px;
+    }
+    .page-bg {
+      position: absolute; inset: 0;
+      background: url('../assets/ep01-bg-5-turn.webp') center top / cover no-repeat;
+    }
+
+    /* "Your turn!" 말풍선 */
+    .speech-bubble {
+      position: absolute;
+      top: 214px; right: 48px;
+      z-index: 5;
+      background: white;
+      border-radius: 20px;
+      padding: 14px 22px;
+      box-shadow: 0 3px 12px rgba(50,28,8,0.14);
+    }
+    .speech-bubble::after {
+      content: "";
+      position: absolute;
+      bottom: -12px; left: 28px;
+      border: 12px solid transparent;
+      border-top-color: white;
+      border-bottom: 0;
+    }
+    .bubble-text {
+      font-family: var(--font-en); font-size: 26px; font-weight: 700;
+      color: var(--teal); margin: 0; white-space: nowrap;
+    }
+
+    /* 하단 스티커 영역 배경 */
+    .sticker-zone {
+      position: absolute; bottom: 0; left: 0; right: 0;
+      height: 220px;
+      background: var(--mint);
+      z-index: 3;
+    }
+    /* 물결 구분선 */
+    .sticker-wave {
+      position: absolute; top: -22px; left: 0; right: 0;
+      z-index: 4; pointer-events: none; line-height: 0;
+    }
+
+    /* 스티커 리본 */
+    .ribbon-wrap {
+      position: relative;
+      width: 200px; height: 34px;
+      margin: 12px auto 10px;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .ribbon-img {
+      position: absolute; inset: 0; width: 100%; height: 100%;
+      object-fit: fill; opacity: 0.9;
+    }
+    .ribbon-text {
+      position: relative; z-index: 1;
+      font-family: var(--font-logo); font-size: 13px; color: var(--brown);
+    }
+
+    /* 스티커 행 */
+    .sticker-row {
+      display: flex; gap: 16px; justify-content: center; align-items: flex-start;
+      padding: 0 20px;
+    }
+    .sticker-col { display: flex; flex-direction: column; align-items: center; gap: 4px; }
+    .sticker-slot {
+      width: 82px; height: 82px;
+      position: relative; display: flex; align-items: center; justify-content: center;
+    }
+    .sticker-spot-img {
+      position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain;
+    }
+    .sticker-word { font-family: var(--font-en); font-size: 10px; color: var(--ink-2); }
+
+    /* ── 책 등 ── */
+    .spine {
+      width: 10px; flex-shrink: 0;
+      background: linear-gradient(to right,
+        rgba(48,24,6,0.6) 0%,
+        rgba(107,74,54,0.32) 40%,
+        rgba(107,74,54,0.06) 100%);
+    }
+
+    /* ── 오른쪽 쪽 ── */
+    .page-right {
+      flex: 1; height: 748px;
+      display: flex; flex-direction: column;
+      position: relative; overflow: hidden;
+      border-radius: 0 3px 3px 0;
+    }
+    .page-right-bg {
+      position: absolute; inset: 0;
+      background: var(--paper) url('../assets/ep01-paper.webp') center / cover;
+      opacity: 0.5; z-index: 0;
+    }
+    .page-right-color {
+      position: absolute; inset: 0;
+      background: var(--paper); z-index: 0; opacity: 0.6;
+    }
+    .page-right > *:not(.page-right-bg):not(.page-right-color) {
+      position: relative; z-index: 1;
+    }
+    .margin-line {
+      position: absolute; left: 52px; top: 0; bottom: 0;
+      width: 1px; background: rgba(107,74,54,0.07); z-index: 1; pointer-events: none;
+    }
+
+    /* 장면 진행 점 */
+    .page-dots {
+      padding: 22px 56px 14px;
+      display: flex; gap: 8px; align-items: center; flex-shrink: 0;
+    }
+    .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--line); }
+    .dot.active { width: 22px; border-radius: 3px; background: var(--teal); }
+
+    /* 본문 */
+    .book-text {
+      flex: 1; padding: 20px 52px 20px 64px;
+      display: flex; flex-direction: column;
+      justify-content: center; gap: 0;
+    }
+    .story-kr {
+      font-family: var(--font-book); font-size: 26px;
+      line-height: 1.9; color: var(--ink);
+      margin: 0 0 28px;
+      border-bottom: 1.5px solid var(--line);
+      padding-bottom: 22px;
+    }
+
+    /* 말했어요 단추 */
+    .said-wrap {
+      display: flex; justify-content: center;
+      padding-top: 8px;
+    }
+    .said-btn {
+      position: relative;
+      width: 128px; height: 128px;
+      border-radius: 50%; border: 0; background: none;
+      cursor: pointer; isolation: isolate;
+    }
+    .said-btn::before {
+      content: "";
+      position: absolute; z-index: -1;
+      left: -19%; top: -31%; width: 138%; height: 131%;
+      pointer-events: none;
+      background: url('../assets/btn-said.webp') 0 0 / 100% 100% no-repeat;
+    }
+    /* 글자는 단추 하단, padding-bottom 26% */
+    .said-pulse {
+      position: relative; z-index: 1;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: flex-end;
+      width: 100%; height: 100%;
+      padding-bottom: 26%;
+    }
+    .said-label {
+      font-family: var(--font-logo); font-size: 20px; font-weight: 400;
+      color: var(--touch-edge); line-height: 1;
+    }
+
+    /* 부모 조작 스트립 */
+    .parent-strip {
+      flex-shrink: 0; background: var(--paper-2);
+      border-top: 1.5px solid var(--line);
+      padding: 10px 24px 14px;
+      display: flex; align-items: center; gap: 16px; min-height: 68px;
+    }
+    .play-btn {
+      width: 48px; height: 48px; border-radius: 50%;
+      background: var(--teal);
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0; box-shadow: 0 2px 8px rgba(47,125,109,0.28);
+    }
+    .play-btn svg { fill: white; display: block; margin-left: 3px; }
+    .strip-sep { width: 1px; height: 32px; background: var(--line); flex-shrink: 0; }
+    .strip-actions { display: flex; gap: 20px; align-items: center; }
+    .action-item { display: flex; align-items: center; gap: 7px; }
+    .action-item img { width: 32px; height: 32px; object-fit: contain; display: block; opacity: 0.72; }
+    .action-label { font-family: var(--font-kr); font-size: 11px; color: var(--ink-2); white-space: nowrap; }
+  </style>
+</head>
+<body>
+<div class="book-wrap">
+  <div class="paper-layer-a"></div>
+  <div class="paper-layer-b"></div>
+
+  <div class="book">
+    <!-- 왼쪽 쪽 -->
+    <div class="page-left">
+      <div class="page-bg"></div>
+
+      <!-- "Your turn!" 말풍선 -->
+      <div class="speech-bubble">
+        <p class="bubble-text">Your turn!</p>
+      </div>
+
+      <!-- 스티커 영역 -->
+      <div class="sticker-zone">
+        <!-- 물결 구분선 -->
+        <svg class="sticker-wave" xmlns="http://www.w3.org/2000/svg"
+             preserveAspectRatio="none" viewBox="0 0 504 24" width="504" height="24">
+          <path d="M0,12 Q21,0 42,10 Q63,20 84,8 Q105,0 126,11 Q147,22 168,9 Q189,0 210,12 Q231,22 252,10 Q273,0 294,12 Q315,22 336,9 Q357,0 378,12 Q399,22 420,9 Q441,0 462,12 Q483,22 504,12 L504,24 L0,24 Z" fill="var(--mint)"/>
+        </svg>
+        <!-- 리본 -->
+        <div class="ribbon-wrap" style="margin-top:18px">
+          <img class="ribbon-img" src="../assets/ribbon.png" alt="">
+          <span class="ribbon-text">오늘의 스티커</span>
+        </div>
+        <!-- 스티커 자리 -->
+        <div class="sticker-row">
+          <div class="sticker-col">
+            <div class="sticker-slot">
+              <img class="sticker-spot-img" src="../assets/sticker-spot.png" alt="">
+            </div>
+            <span class="sticker-word">brush my teeth</span>
+          </div>
+          <div class="sticker-col">
+            <div class="sticker-slot">
+              <img class="sticker-spot-img" src="../assets/sticker-spot.png" alt="">
+            </div>
+            <span class="sticker-word">bubbles</span>
+          </div>
+          <div class="sticker-col">
+            <div class="sticker-slot">
+              <img class="sticker-spot-img" src="../assets/sticker-spot.png" alt="">
+            </div>
+            <span class="sticker-word">all clean</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 책 등 -->
+    <div class="spine"></div>
+
+    <!-- 오른쪽 쪽 -->
+    <div class="page-right">
+      <div class="page-right-bg"></div>
+      <div class="page-right-color"></div>
+      <div class="margin-line"></div>
+
+      <div class="page-dots">
+        <div class="dot"></div>
+        <div class="dot"></div>
+        <div class="dot"></div>
+        <div class="dot"></div>
+        <div class="dot active"></div>
+        <div class="dot"></div>
+      </div>
+
+      <div class="book-text">
+        <p class="story-kr">이제 친구 차례야!<br>내가 말하면 따라 해 봐.<br>말할 때마다 학습지 3번에 스티커 하나!</p>
+
+        <div class="said-wrap">
+          <button class="said-btn" type="button" aria-label="말했어요">
+            <span class="said-pulse">
+              <span class="said-label">말했어요</span>
+            </span>
+          </button>
+        </div>
+      </div>
+
+      <div class="parent-strip">
+        <div class="play-btn" role="button" aria-label="재생">
+          <svg width="18" height="18" viewBox="0 0 18 18"><path d="M4 2.5L15 9L4 15.5V2.5Z"/></svg>
+        </div>
+        <div class="strip-sep"></div>
+        <div class="strip-actions">
+          <div class="action-item">
+            <img src="../assets/ic-repeat.png" alt="">
+            <span class="action-label">반복</span>
+          </div>
+          <div class="action-item">
+            <img src="../assets/ic-slow.png" alt="">
+            <span class="action-label">천천히</span>
+          </div>
+          <div class="action-item">
+            <img src="../assets/ic-listen.png" alt="">
+            <span class="action-label">그냥 듣기</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

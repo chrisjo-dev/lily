@@ -1,0 +1,246 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=1024">
+  <title>R69 개선안 2 태블릿 EP07 램프 기다림 밤</title>
+  <link rel="stylesheet" href="../shared/tokens.css">
+  <style>
+    html, body { margin: 0; width: 1024px; height: 768px; overflow: hidden; background: #1a2236; }
+
+    .book-wrap { position: relative; width: 1024px; height: 768px; }
+    .paper-layer-a {
+      position: absolute; bottom: 6px; left: 0; right: 0;
+      height: 14px; background: #28344e; border-radius: 0 0 5px 5px; z-index: 1;
+    }
+    .paper-layer-b {
+      position: absolute; bottom: 0; left: 18px; right: 18px;
+      height: 12px; background: #1f2a44; border-radius: 0 0 5px 5px; z-index: 0;
+    }
+
+    .book {
+      position: absolute; top: 0; left: 0;
+      display: flex; width: 1024px; height: 748px; z-index: 2;
+      box-shadow: 0 6px 28px rgba(0,0,0,0.45);
+    }
+
+    /* ── 왼쪽 쪽 (밤 장면) ── */
+    .page-left {
+      width: 504px; height: 748px;
+      position: relative; overflow: hidden; flex-shrink: 0;
+      background: var(--night);
+      border-radius: 3px 0 0 3px;
+    }
+    .page-bg {
+      position: absolute; inset: 0;
+      background: url('../assets/ep07-bg-6-night.webp') center top / cover no-repeat;
+    }
+
+    /* "Good night!" 장면 위 텍스트 (그림 속 글자 스타일) */
+    .scene-text {
+      position: absolute;
+      top: 170px; left: 70px;
+      z-index: 5;
+    }
+    .scene-text-inner {
+      font-family: var(--font-logo); font-size: 28px; font-weight: 400;
+      color: white;
+      text-shadow: 0 2px 8px rgba(0,0,0,0.4);
+      white-space: nowrap;
+    }
+
+    /* 램프 터치 타겟 */
+    .touch-wrap {
+      position: absolute;
+      right: 100px; top: 280px;
+      width: 96px; height: 96px;
+      display: flex; align-items: center; justify-content: center;
+      z-index: 5;
+    }
+    /* 진행 고리 (밤 lamp 색) */
+    .wait-ring {
+      position: absolute; top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      pointer-events: none; z-index: 3;
+    }
+    .touch-circle {
+      position: absolute; top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      width: 82px; height: 82px; border-radius: 50%;
+      background: rgba(255,217,138,0.15);
+      border: 3px solid rgba(255,217,138,0.85);
+      display: flex; align-items: center; justify-content: center;
+      z-index: 5;
+      box-shadow: 0 0 18px rgba(255,217,138,0.35), inset 0 0 10px rgba(255,217,138,0.1);
+    }
+    .touch-circle img { width: 52px; height: auto; display: block; }
+
+    /* 하단 찢은 종이 (밤 색상) */
+    .left-torn {
+      position: absolute; bottom: -1px; left: 0; right: 0;
+      z-index: 4; pointer-events: none;
+    }
+
+    /* ── 책 등 ── */
+    .spine {
+      width: 10px; flex-shrink: 0;
+      background: linear-gradient(to right,
+        rgba(0,0,0,0.7) 0%,
+        rgba(30,40,64,0.5) 40%,
+        rgba(30,40,64,0.1) 100%);
+    }
+
+    /* ── 오른쪽 쪽 (밤) ── */
+    .page-right {
+      flex: 1; height: 748px;
+      display: flex; flex-direction: column;
+      position: relative; overflow: hidden;
+      border-radius: 0 3px 3px 0;
+      background: var(--night);
+    }
+    .page-right > * { position: relative; z-index: 1; }
+
+    /* 장면 진행 점 (밤 버전) */
+    .page-dots {
+      padding: 22px 56px 14px;
+      display: flex; gap: 8px; align-items: center; flex-shrink: 0;
+    }
+    .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--night-2); }
+    .dot.active { width: 22px; border-radius: 3px; background: var(--night-ink); }
+
+    /* 본문 */
+    .book-text {
+      flex: 1; padding: 28px 52px 28px 56px;
+      display: flex; flex-direction: column;
+      justify-content: center; gap: 0;
+    }
+    .story-en {
+      font-family: var(--font-book); font-size: 30px;
+      line-height: 1.85; color: var(--night-ink);
+      margin: 0 0 18px;
+      border-bottom: 1.5px solid rgba(243,234,216,0.12);
+      padding-bottom: 22px;
+    }
+    .expression-block {
+      border-top: 1.5px solid rgba(243,234,216,0.12);
+      padding-top: 24px;
+    }
+    .expression-label {
+      font-family: var(--font-kr); font-size: 11px;
+      color: var(--night-ink-2); letter-spacing: 0.06em; margin: 0 0 9px;
+    }
+    .expression-word {
+      display: inline-block;
+      font-family: var(--font-en); font-size: 42px; font-weight: 700;
+      color: var(--night-ink);
+      text-decoration: underline;
+      text-decoration-color: rgba(243,234,216,0.35);
+      text-underline-offset: 7px;
+      text-decoration-thickness: 2.5px;
+      letter-spacing: -0.01em;
+    }
+
+    /* 부모 조작 스트립 (밤) */
+    .parent-strip {
+      flex-shrink: 0;
+      background: var(--night-2);
+      border-top: 1.5px solid rgba(243,234,216,0.1);
+      padding: 10px 24px 14px;
+      display: flex; align-items: center; gap: 16px; min-height: 68px;
+    }
+    .play-btn {
+      width: 48px; height: 48px; border-radius: 50%;
+      background: var(--teal);
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0; box-shadow: 0 2px 8px rgba(47,125,109,0.3);
+    }
+    .play-btn svg { fill: white; display: block; margin-left: 3px; }
+    .strip-sep { width: 1px; height: 32px; background: rgba(243,234,216,0.12); flex-shrink: 0; }
+    .strip-actions { display: flex; gap: 20px; align-items: center; }
+    .action-item { display: flex; align-items: center; gap: 7px; }
+    .action-item img { width: 32px; height: 32px; object-fit: contain; display: block; opacity: 0.55; filter: brightness(1.6); }
+    .action-label { font-family: var(--font-kr); font-size: 11px; color: var(--night-ink-2); white-space: nowrap; }
+  </style>
+</head>
+<body>
+<div class="book-wrap">
+  <div class="paper-layer-a"></div>
+  <div class="paper-layer-b"></div>
+
+  <div class="book">
+    <!-- 왼쪽 쪽 -->
+    <div class="page-left">
+      <div class="page-bg"></div>
+
+      <!-- "Good night!" 장면 위 텍스트 -->
+      <div class="scene-text">
+        <span class="scene-text-inner">Good night!</span>
+      </div>
+
+      <!-- 램프 터치 타겟 -->
+      <div class="touch-wrap">
+        <svg class="wait-ring" xmlns="http://www.w3.org/2000/svg" width="192" height="192" viewBox="0 0 192 192">
+          <circle cx="96" cy="96" r="84" fill="none" stroke="rgba(255,217,138,0.2)" stroke-width="3.5"/>
+          <circle cx="96" cy="96" r="84" fill="none" stroke="rgba(255,217,138,0.82)" stroke-width="3.5"
+                  stroke-linecap="round" stroke-dasharray="528" stroke-dashoffset="132"
+                  transform="rotate(-90 96 96)"/>
+        </svg>
+        <div class="touch-circle">
+          <img src="../assets/ep01-L-lamp-on.png" alt="램프">
+        </div>
+      </div>
+
+      <!-- 하단 찢은 종이 (밤 종이 색) -->
+      <svg class="left-torn" xmlns="http://www.w3.org/2000/svg"
+           preserveAspectRatio="none" viewBox="0 0 504 26" width="504" height="26">
+        <path d="M0,14 Q14,4 28,13 Q42,22 56,9 Q70,0 84,11 Q98,20 112,8 Q126,1 140,12 Q154,22 168,10 Q182,2 196,13 Q210,22 224,9 Q238,0 252,12 Q266,22 280,10 Q294,2 308,13 Q322,22 336,10 Q350,2 364,14 Q378,24 392,11 Q406,2 420,13 Q434,22 448,10 Q462,2 476,14 Q490,24 504,14 L504,26 L0,26 Z" fill="var(--night)"/>
+      </svg>
+    </div>
+
+    <!-- 책 등 -->
+    <div class="spine"></div>
+
+    <!-- 오른쪽 쪽 -->
+    <div class="page-right">
+      <div class="page-dots">
+        <div class="dot"></div>
+        <div class="dot"></div>
+        <div class="dot"></div>
+        <div class="dot"></div>
+        <div class="dot"></div>
+        <div class="dot active"></div>
+      </div>
+
+      <div class="book-text">
+        <p class="story-en">Good night, friend!<br>Sweet dreams. Bye-bye.</p>
+        <div class="expression-block">
+          <p class="expression-label">오늘의 표현</p>
+          <span class="expression-word">sweet dreams</span>
+        </div>
+      </div>
+
+      <div class="parent-strip">
+        <div class="play-btn" role="button" aria-label="재생">
+          <svg width="18" height="18" viewBox="0 0 18 18"><path d="M4 2.5L15 9L4 15.5V2.5Z"/></svg>
+        </div>
+        <div class="strip-sep"></div>
+        <div class="strip-actions">
+          <div class="action-item">
+            <img src="../assets/ic-repeat.png" alt="">
+            <span class="action-label">반복</span>
+          </div>
+          <div class="action-item">
+            <img src="../assets/ic-slow.png" alt="">
+            <span class="action-label">천천히</span>
+          </div>
+          <div class="action-item">
+            <img src="../assets/ic-listen.png" alt="">
+            <span class="action-label">그냥 듣기</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>
