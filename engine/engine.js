@@ -121,12 +121,12 @@ function buildShell() {
   </section>
   <div class="endcard" id="endcard" hidden>
     <div class="ebody">
-      <div class="eframe"><img data-src="${esc(frame)}" alt="" width="170" height="170"></div>
-      <div class="ehead"><p class="epn">${num}</p><p class="etitle">${esc(EP.title)}</p><p class="emsg">${esc(end.done || "오늘 이야기를 다 들었어요.")}</p></div>
-      ${end.stickers ? `<p class="ribbon">${esc(end.sub || "오늘의 스티커")}</p>
+      <div class="eleft"><div class="eframe"><img data-src="${esc(frame)}" alt="" width="170" height="170"></div>
+      <div class="ehead"><p class="epn">${num}</p><p class="etitle">${esc(EP.title)}</p><p class="emsg">${esc(end.done || "오늘 이야기를 다 들었어요.")}</p></div></div>
+      <div class="eright">${end.stickers ? `<p class="ribbon">${esc(end.sub || "오늘의 스티커")}</p>
       <div class="estk">${end.stickers.map((s) => `<span><i class="spot"><img data-src="${esc(s.img)}" alt="" width="66" height="66"></i>${esc(s.label)}</span>`).join("")}</div>` : ""}
       <button class="again" id="again" type="button">한 번 더</button>
-      <button class="toparent" id="toParent" type="button">부모님께</button>
+      <button class="toparent" id="toParent" type="button">부모님께</button></div>
     </div>
     ${t1 ? `<p class="etip">${tipHTML(t1)}</p>` : ""}
   </div>
