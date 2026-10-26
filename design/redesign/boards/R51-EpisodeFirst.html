@@ -49,33 +49,17 @@
       display: block;
     }
 
-    /* 재생 버튼 + 손그림 빛살 */
-    .play-wrap {
-      position: absolute;
-      right: 44px; bottom: 70px;
-      width: 150px; height: 150px;
-      display: flex; align-items: center; justify-content: center;
-      z-index: 5;
-    }
-    .rays-svg {
-      position: absolute; inset: 0;
-      width: 150px; height: 150px;
-    }
-    .play-btn {
-      width: 96px; height: 96px;
-      background: var(--touch);
-      border-radius: 50%;
-      border: 3px solid var(--touch-edge);
-      display: flex; align-items: center; justify-content: center;
+    /* 재생 버튼 (단추 그림 포함, 빛살과 삼각형은 그림 안에 있음) */
+    .big-play {
+      position: absolute; z-index: 4; right: 71px; bottom: 97px;
+      width: 96px; height: 96px; padding: 0; border-radius: 50%; cursor: pointer;
+      border: 0; background: none;
       box-shadow: 0 4px 20px rgba(107,74,54,0.30);
-      position: relative; z-index: 2;
     }
-    .play-arrow {
-      width: 0; height: 0;
-      border-style: solid;
-      border-width: 14px 0 14px 24px;
-      border-color: transparent transparent transparent var(--touch-edge);
-      margin-left: 6px;
+    .big-play::before {
+      content: ""; position: absolute; left: -19%; top: -31%; width: 138%; height: 131%;
+      pointer-events: none;
+      background: url(../assets/btn-play.webp) 0 0 / 100% 100% no-repeat;
     }
 
     /* 찢은 종이 가장자리 */
@@ -143,18 +127,8 @@
       <span class="ep-title">Brush, Brush, Brush!</span>
     </div>
 
-    <!-- 재생 버튼 + 손그림 빛살 (갈색, 정적) -->
-    <div class="play-wrap">
-      <svg class="rays-svg" viewBox="0 0 150 150" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <line x1="75" y1="8" x2="75" y2="22" stroke="#6b4a36" stroke-width="2.5" stroke-linecap="round"/>
-        <line x1="120" y1="20" x2="112" y2="31" stroke="#6b4a36" stroke-width="2.5" stroke-linecap="round"/>
-        <line x1="135" y1="65" x2="121" y2="67" stroke="#6b4a36" stroke-width="2.5" stroke-linecap="round"/>
-        <line x1="28" y1="20" x2="36" y2="31" stroke="#6b4a36" stroke-width="2.5" stroke-linecap="round"/>
-      </svg>
-      <div class="play-btn" id="play-btn">
-        <div class="play-arrow"></div>
-      </div>
-    </div>
+    <!-- 재생 버튼 (빛살과 삼각형은 btn-play.webp 안에 포함) -->
+    <button class="big-play" id="play-btn" aria-label="재생"></button>
 
     <!-- 찢은 종이 가장자리 (불규칙 베지어) -->
     <div class="torn-edge">

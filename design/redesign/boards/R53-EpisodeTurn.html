@@ -109,31 +109,24 @@
       display: flex; align-items: center; justify-content: center;
     }
 
-    /* 128px 원형 버튼 + 빛살 */
-    .said-wrap {
-      position: relative;
-      width: 200px; height: 200px;
-      display: flex; align-items: center; justify-content: center;
-    }
-    .said-rays {
-      position: absolute; inset: 0;
-      width: 200px; height: 200px;
-    }
+    /* 128px 원형 단추 (빛살과 말풍선은 btn-said.webp 안에 포함) */
     .said-btn {
-      width: 128px; height: 128px;
-      background: var(--touch);
-      border-radius: 50%;
-      border: 3px solid var(--touch-edge);
-      display: flex; flex-direction: column;
-      align-items: center; justify-content: center;
-      gap: 5px;
-      box-shadow: 0 5px 24px rgba(107,74,54,0.28);
-      position: relative; z-index: 2;
+      position: relative; width: 128px; height: 128px; padding: 0;
+      border-radius: 50%; cursor: pointer; border: 0; background: none;
+      box-shadow: 0 5px 20px rgba(107,74,54,0.25);
     }
-    .said-icon { width: 36px; height: 36px; flex-shrink: 0; }
-    .said-kr {
-      font-family: var(--font-logo); font-size: 20px;
-      color: var(--touch-edge); line-height: 1;
+    .said-btn::before {
+      content: ""; position: absolute; z-index: 1; left: -19%; top: -31%; width: 138%; height: 131%;
+      pointer-events: none;
+      background: url(../assets/btn-said.webp) 0 0 / 100% 100% no-repeat;
+    }
+    .pulse {
+      position: relative; z-index: 2; display: flex; flex-direction: column;
+      align-items: center; justify-content: flex-end; height: 100%; padding-bottom: 26%;
+    }
+    .pulse b {
+      font-family: var(--font-logo); font-weight: 400; font-size: 20px;
+      line-height: 1; color: var(--touch-edge);
     }
   </style>
 </head>
@@ -198,28 +191,11 @@
     <p class="body-kr">따라 말해 볼까?</p>
   </div>
 
-  <!-- 말했어요 원형 단추 128px -->
+  <!-- 말했어요 원형 단추 128px (빛살과 말풍선은 btn-said.webp 안에 포함) -->
   <div class="said-zone">
-    <div class="said-wrap">
-      <!-- 손그림 빛살 -->
-      <svg class="said-rays" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <line x1="100" y1="8" x2="100" y2="24" stroke="#6b4a36" stroke-width="2.5" stroke-linecap="round"/>
-        <line x1="155" y1="22" x2="146" y2="35" stroke="#6b4a36" stroke-width="2.5" stroke-linecap="round"/>
-        <line x1="177" y1="78" x2="163" y2="80" stroke="#6b4a36" stroke-width="2.5" stroke-linecap="round"/>
-        <line x1="42" y1="22" x2="51" y2="35" stroke="#6b4a36" stroke-width="2.5" stroke-linecap="round"/>
-        <line x1="22" y1="78" x2="36" y2="80" stroke="#6b4a36" stroke-width="2.5" stroke-linecap="round"/>
-      </svg>
-      <div class="said-btn" id="said-btn">
-        <!-- 말풍선 아이콘 인라인 SVG -->
-        <svg class="said-icon" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <rect x="4" y="4" width="28" height="20" rx="8" stroke="#6b4a36" stroke-width="2.2" fill="none"/>
-          <path d="M12,24 L16,30 L20,24" stroke="#6b4a36" stroke-width="2" stroke-linejoin="round" fill="none"/>
-          <line x1="11" y1="12" x2="25" y2="12" stroke="#6b4a36" stroke-width="1.8" stroke-linecap="round"/>
-          <line x1="11" y1="17" x2="20" y2="17" stroke="#6b4a36" stroke-width="1.8" stroke-linecap="round"/>
-        </svg>
-        <span class="said-kr">말했어요</span>
-      </div>
-    </div>
+    <button class="said-btn" id="said-btn">
+      <span class="pulse"><b>말했어요</b></span>
+    </button>
   </div>
 </body>
 </html>

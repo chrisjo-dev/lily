@@ -377,6 +377,54 @@
         ],
         "updated": "2026-10-23T07:55:19Z"
       }
+    },
+    "R60-SmallTurn.html": {
+      "x": 18664,
+      "y": 0,
+      "w": 375,
+      "h": 667,
+      "title": "R60-SmallTurn",
+      "group": "개선안 2 작은 휴대폰",
+      "impl": {
+        "route": "/ep01/",
+        "files": [
+          "engine/engine.css",
+          "engine/ui/gate.css"
+        ],
+        "updated": "2026-10-26T13:29:58Z"
+      }
+    },
+    "R61-SmallEnd.html": {
+      "x": 19079,
+      "y": 0,
+      "w": 375,
+      "h": 667,
+      "title": "R61-SmallEnd",
+      "group": "개선안 2 작은 휴대폰",
+      "impl": {
+        "route": "/ep01/",
+        "files": [
+          "engine/engine.css",
+          "engine/ui/gate.css"
+        ],
+        "updated": "2026-10-26T13:29:58Z"
+      }
+    },
+    "R62-SmallGate.html": {
+      "x": 19494,
+      "y": 0,
+      "w": 375,
+      "h": 667,
+      "title": "R62-SmallGate",
+      "group": "개선안 2 작은 휴대폰",
+      "impl": {
+        "route": "/ep01/",
+        "files": [
+          "engine/engine.css",
+          "engine/ui/gate.css"
+        ],
+        "updated": "2026-10-26T13:29:58Z"
+      }
     }
   },
   "groups": [
@@ -391,6 +439,10 @@
     {
       "id": "개선안 2",
       "label": "개선안 2"
+    },
+    {
+      "id": "개선안 2 작은 휴대폰",
+      "label": "개선안 2 작은 휴대폰"
     }
   ],
   "links": [
