@@ -242,7 +242,9 @@ function setScene(s) {
   warm(s); warm(s + 1);
   SCENES.forEach((sc, i) => $(sc.id).toggleAttribute("hidden", i !== s));
   // 밤 편(설정 night: true)이나 밤 장면(장면 night: true)은 화면 장치도 어둡게, 아이 차례 장면은 큰 "말했어요" 단추
-  $("kid").classList.toggle("night", EP.night === true || SCENES[s].night === true);
+  const night = EP.night === true || SCENES[s].night === true;
+  $("kid").classList.toggle("night", night);
+  document.body.classList.toggle("nightpage", night);   // 태블릿 세로에서 아이 영역 양옆 바탕도 밤으로
   $("kid").classList.toggle("turn", s === sayScene);
   document.querySelectorAll("#dots i").forEach((d, i) => { d.className = i + 1 < s ? "past" : i + 1 === s ? "now" : ""; });
   $("dots").setAttribute("aria-label", s ? `장면 ${s}/${SCENES.length - 1} ${SCENES[s].name || ""}` : "장면 시작 전");
@@ -284,6 +286,7 @@ function setTime(t) {
 }
 function showEnd(on) {
   endShown = on; $("endcard").hidden = !on;
+  $("kid").classList.toggle("ended", on);
   if (on) drawer(false);
   updateBigPlay();
 }
