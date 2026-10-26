@@ -392,7 +392,9 @@
           "engine/ui/gate.css"
         ],
         "updated": "2026-10-26T13:29:58Z"
-      }
+      },
+      "status": "approved",
+      "note": "2026-10-26 사용자 승인: 작은 휴대폰(375x667) 아이 차례, 끝 카드, 잠금 카드"
     },
     "R61-SmallEnd.html": {
       "x": 19079,
@@ -408,7 +410,9 @@
           "engine/ui/gate.css"
         ],
         "updated": "2026-10-26T13:29:58Z"
-      }
+      },
+      "status": "approved",
+      "note": "2026-10-26 사용자 승인: 작은 휴대폰(375x667) 아이 차례, 끝 카드, 잠금 카드"
     },
     "R62-SmallGate.html": {
       "x": 19494,
@@ -424,7 +428,9 @@
           "engine/ui/gate.css"
         ],
         "updated": "2026-10-26T13:29:58Z"
-      }
+      },
+      "status": "approved",
+      "note": "2026-10-26 사용자 승인: 작은 휴대폰(375x667) 아이 차례, 끝 카드, 잠금 카드"
     }
   },
   "groups": [
