@@ -24,8 +24,9 @@
   .play-label { font-family: var(--font-logo); font-size: var(--t-lg); margin: 0; }
   .play-sub { font-size: var(--t-xs); color: var(--ink-2); margin: 0; }
 
-  .pill { position: relative; display: block; width: 280px; aspect-ratio: 439 / 270; background: url(../assets/btn-sample-pill.webp) center / contain no-repeat; }
-  .pill span { position: absolute; left: 36%; top: 33%; width: 58%; height: 54%; display: grid; place-items: center; font-family: var(--font-logo); font-size: 20px; color: var(--ink); }
+  .cta { display: flex; align-items: center; gap: var(--s4); }
+  .cta-art { position: relative; flex: none; width: 210px; aspect-ratio: 455 / 373; background: url(../assets/btn-sample-lily.webp) center / contain no-repeat; }
+  .cta-art span { position: absolute; left: 62%; top: 72%; width: 34%; height: 25%; display: grid; place-items: center; font-family: var(--font-logo); font-size: var(--t-md); color: var(--brown); }
   /* 부모 단추와 링크 */
   .btn-parent { display: inline-flex; align-items: center; justify-content: center; min-height: var(--parent-target); padding: 0 var(--s6); border: 2px solid var(--teal); border-radius: var(--r-btn); color: var(--teal); font-family: var(--font-logo); font-size: var(--t-md); background: var(--card); }
   .btn-parent.solid { background: var(--teal); color: var(--card); }
@@ -90,10 +91,9 @@
   <div class="grid">
     <div class="cell">
       <h2>맛보기 단추</h2>
-      <p class="use">홈과 랜딩의 첫 행동. 알약 그림 안에 글자(Jua 20). 노랑은 한 화면에 이것 하나. 이야기 안의 둥근 재생 단추와 구분한다.</p>
-      <div class="demo stack">
-        <a class="pill"><span>맛보기 바로 듣기</span></a>
-        <p class="play-sub">EP01 이 닦기, 2분 19초, 무료</p>
+      <p class="use">홈과 랜딩의 첫 행동. 릴리가 노란 단추를 가리키고, 종이 딱지에 "무료". 그림과 글 전체가 한 링크. 노랑은 한 화면에 이것 하나.</p>
+      <div class="demo">
+        <div class="cta"><span class="cta-art"><span>무료</span></span><div><p class="play-label">맛보기<br>바로 듣기</p><p class="play-sub">EP01 이 닦기<br>2분 19초</p></div></div>
       </div>
     </div>
     </div>
