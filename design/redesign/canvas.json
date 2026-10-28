@@ -575,6 +575,30 @@
         ],
         "updated": "2026-10-26T15:09:15Z"
       }
+    },
+    "H01-HomePhone.html": {
+      "x": 27661,
+      "y": 0,
+      "w": 390,
+      "h": 1600,
+      "title": "H01-HomePhone",
+      "group": "홈 개선안 3"
+    },
+    "H02-HomeTabletLandscape.html": {
+      "x": 28091,
+      "y": 0,
+      "w": 1024,
+      "h": 768,
+      "title": "H02-HomeTabletLandscape",
+      "group": "홈 개선안 3"
+    },
+    "H03-HomeTabletPortrait.html": {
+      "x": 29155,
+      "y": 0,
+      "w": 834,
+      "h": 1194,
+      "title": "H03-HomeTabletPortrait",
+      "group": "홈 개선안 3"
     }
   },
   "groups": [
@@ -597,6 +621,10 @@
     {
       "id": "개선안 2 태블릿",
       "label": "개선안 2 태블릿"
+    },
+    {
+      "id": "홈 개선안 3",
+      "label": "홈 개선안 3"
     }
   ],
   "links": [
