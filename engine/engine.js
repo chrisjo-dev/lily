@@ -316,6 +316,51 @@ function loadLater() {
   document.querySelectorAll(".word img[data-src]").forEach((n) => { n.src = n.dataset.src; n.removeAttribute("data-src"); });
 }
 
+// ---- 효과음(engine/sfx/) ----
+// 누르는 장치마다 짧은 소리. Web Audio로 낸다(HTMLAudio는 iOS에서 늦게 울림). 내레이션 <audio>와는 따로라 그 볼륨과 재생에 손대지 않는다.
+// 첫 화면 무게를 늘리지 않게 첫 누름(pointerdown, keydown, click) 때 AudioContext를 만들고 그때 받는다.
+// 못 받거나 Web Audio가 없으면 조용히 넘어간다(소리만 없고 동작은 같다). 소리 원본과 다시 만드는 법: engine/README.md
+const SFX_DIR = UI.replace(/ui\/$/, "sfx/");
+const SFX_NAMES = ["find", "sparkle", "pop", "scrub", "said", "sticker", "lamp", "play", "again", "parent"];
+const SFX_GAP = { scrub: 0.2 };          // 문지르기는 0.2초 넘게 띄우고, 앞 소리가 울리는 동안은 새로 내지 않는다
+let actx = null, sfxBuf = {}, sfxWait = {}, sfxLast = {}, sfxLive = {};
+function sfxUnlock() {
+  try {
+    if (!actx) {
+      const AC = window.AudioContext || window.webkitAudioContext;
+      if (!AC) return;
+      actx = new AC();
+      for (const n of SFX_NAMES) {
+        sfxWait[n] = fetch(SFX_DIR + n + ".mp3")
+          .then((r) => (r.ok ? r.arrayBuffer() : Promise.reject(r.status)))
+          .then((b) => new Promise((ok, no) => actx.decodeAudioData(b, ok, no)))
+          .then((buf) => (sfxBuf[n] = buf), () => null);
+      }
+    }
+    if (actx.state !== "running") actx.resume().catch(() => {});
+  } catch (_) { actx = null; }
+}
+// iOS는 손을 뗄 때(touchend, click) 열리기도 해서 여러 이벤트에서 깨운다. 한 번 돌기 시작하면 할 일이 없다
+for (const ev of ["pointerdown", "touchend", "click", "keydown"]) window.addEventListener(ev, sfxUnlock, { capture: true, passive: true });
+// 간격과 겹침은 오디오 시계가 아니라 performance.now()로 잰다(시계가 멈춘 컨텍스트에서도 소리가 막히지 않게)
+function sfx(name, delay) {
+  if (!actx) return;
+  const now = () => performance.now() / 1000, asked = now(), gap = SFX_GAP[name] || 0.05;
+  if (asked - (sfxLast[name] ?? -9) < gap || (SFX_GAP[name] && (sfxLive[name] || 0) > asked)) return;
+  sfxLast[name] = asked;
+  const go = (buf) => {
+    // 첫 누름처럼 아직 못 받았으면 받는 대로 내되, 늦으면(0.35초 넘게) 버린다
+    if (!buf || now() - asked > 0.35) return;
+    try {
+      const src = actx.createBufferSource();
+      src.buffer = buf; src.connect(actx.destination);
+      src.start(actx.currentTime + (delay || 0));
+      sfxLive[name] = now() + (delay || 0) + buf.duration;
+    } catch (_) {}
+  };
+  if (sfxBuf[name]) go(sfxBuf[name]); else if (sfxWait[name]) sfxWait[name].then(go);
+}
+
 // ---- 재생 ----
 function play() {
   loadLater();
@@ -422,7 +467,7 @@ function autoResolve() { const i = waiting; if (i < 0) return; doAction(i); fini
 let api;
 function makeApi() {
   return {
-    $, el, chip, showEnd, finishWait, armTimer, sceneAt, lines: LINES,
+    $, el, chip, showEnd, finishWait, armTimer, sceneAt, sfx, lines: LINES,
     get audio() { return audio; },
     get waiting() { return waiting; },
     get scene() { return scene; },
@@ -490,17 +535,20 @@ function lilyMount() {
   }
 
   // ---- 부모님 조작 ----
-  $("bigPlay").addEventListener("click", () => { stopAt = null; play(); });
+  $("bigPlay").addEventListener("click", () => { sfx("play"); stopAt = null; play(); });
   $("play").addEventListener("click", () => {
+    if (waiting >= 0 || audio.paused) sfx("play");
     if (waiting >= 0) { doAction(waiting); finishWait(false); return drawer(false); }
     if (!audio.paused) return audio.pause();
     drawer(false);                          // 재생을 누르면 서랍을 닫고 이야기로
     if (endShown || audio.ended) return restart();
     stopAt = null; play();
   });
-  $("again").addEventListener("click", restart);
+  $("again").addEventListener("click", () => { sfx("again"); restart(); });
   const toParent = (node) => node.scrollIntoView({ behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth" });
   $("toParent").addEventListener("click", () => toParent($("parent")));
+  // 부모용 단추는 아이 소리보다 작은 종이 틱 하나로 묶는다
+  for (const id of ["toParent", "drawerOpen", "drawerClose", "toScript", "justListen", "times3", "slow"]) $(id).addEventListener("click", () => sfx("parent"));
   $("drawerOpen").addEventListener("click", () => drawer(true));
   $("drawerClose").addEventListener("click", () => drawer(false));
   $("scrim").addEventListener("click", () => drawer(false));
@@ -526,6 +574,7 @@ function lilyMount() {
     e.currentTarget.setAttribute("aria-pressed", String(on)); audio.playbackRate = on ? 0.85 : 1;
   });
   document.querySelectorAll(".word").forEach((b) => b.addEventListener("click", () => {
+    sfx("parent");
     if (wordBtn) wordBtn.classList.remove("on");
     wordBtn = b; b.classList.add("on");
     const [s, e] = LINES[Number(b.dataset.line)];

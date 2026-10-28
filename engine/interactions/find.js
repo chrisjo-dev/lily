@@ -10,7 +10,7 @@ LilyInteractions.find = (api, specs) => {
     if (it.found) return;
     it.found = true; render(it);
   }
-  items.forEach((it) => api.onTap(api.$(it.s.target), () => { find(it); if (it.s.wait >= 0 && api.waiting === it.s.wait) api.finishWait(false); }));
+  items.forEach((it) => api.onTap(api.$(it.s.target), () => { api.sfx("find"); find(it); if (it.s.wait >= 0 && api.waiting === it.s.wait) api.finishWait(false); }));
   return {
     act(i) { find(items.find((it) => it.s.wait === i)); },
     seek() { items.forEach((it) => { if (it.s.wait >= 0) { it.found = api.isDone(it.s.wait); render(it); } }); },

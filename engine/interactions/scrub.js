@@ -33,6 +33,7 @@ LilyInteractions.scrub = (api, specs) => {
     }
     function clear(g) { g.gone = true; g.g.classList.add("gone"); floatWord(g.x, g.y); }
     function scrubAt(p) {
+      api.sfx("scrub");                    // 0.2초 넘는 간격으로만, 겹쳐 쌓이지 않게(engine.js sfx)
       hand.classList.add("off");
       brush.setAttribute("transform", `translate(${p.x.toFixed(1)} ${p.y.toFixed(1)})`);
       for (const g of germs) {

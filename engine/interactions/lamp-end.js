@@ -7,6 +7,7 @@ LilyInteractions["lamp-end"] = (api, specs) => {
   const render = () => { api.$(s.target).classList.toggle("done", off); scEl.classList.toggle("lamp-off", off); api.setEndReady(off); };
   function turnOff() { off = true; api.setDone(s.wait); render(); }
   api.onTap(api.$(s.target), () => {
+    if (!off) api.sfx("lamp");
     turnOff();
     if (api.waiting === s.wait) api.finishWait(false);
     else if (api.audio.paused && api.audio.currentTime >= api.endAt) api.showEnd(true);

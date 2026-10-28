@@ -74,6 +74,28 @@
 
 손 안내(`hand-tap.webp`, `hand-rub.webp`), 반짝 별(`sparkle.webp`), 거품 터짐(`pop.webp`), 자물쇠(`lock.webp`)는 AI로 그린 투명 webp(긴 변 256px)입니다. 원본 한 장은 `lilyrang/studio/art/ui/sheet-ui.png`(단추 그림은 `sheet-ui3`), 자르기는 `lilyrang/studio/tools/build_ui.py`. 엔진은 `engine.js`가 있는 주소를 기준으로 `ui/`를 찾으므로 어느 편 주소에서도 같은 파일을 씁니다(같은 출처라 CSP `img-src 'self'`로 충분). 첫 화면 무게를 늘리지 않으려고 이 그림과 오늘의 단어 스티커는 첫 재생, 첫 기다림, 첫 누름이나 스크롤 중 먼저 오는 때에 받습니다.
 
+### 효과음 (`engine/sfx/`)
+
+누르는 장치마다 작은 효과음이 납니다. 파일 이름이 곧 장치 이름입니다.
+
+| 파일 | 언제 | 소리 |
+|---|---|---|
+| `find.mp3` | `find` 대상을 누를 때 | 나무 톡톡 |
+| `sparkle.mp3` | `tap-sparkle`을 누를 때 | 방울 두 알 |
+| `pop.mp3` | 거품 하나가 터질 때 | 부드러운 뽁 |
+| `scrub.mp3` | 문지르는 동안(0.2초 넘는 간격, 앞 소리가 끝나야 다음) | 솔 사악 |
+| `said.mp3` | "말했어요"가 받아들여질 때 | 칼림바 두 음 |
+| `sticker.mp3` | 스티커가 판에 닿을 때(말했어요 0.45초 뒤) | 착 + 작은 반짝 |
+| `lamp.mp3` | 램프를 끌 때 | 줄 당겨 딸깍 |
+| `play.mp3` | 큰 시작 단추, 부모 화면 재생(일시정지는 소리 없음) | 부드러운 세 음 |
+| `again.mp3` | 끝 카드 "한 번 더" | 나무 톡 두 번 |
+| `parent.mp3` | 부모 단추(서랍 열고 닫기, 부모님께, 대본, 옵션, 단어 듣기) | 종이 틱 |
+
+- 엔진은 `api.sfx(이름, 늦춤초)`로 냅니다. 8초 자동 진행처럼 아이가 누르지 않은 동작에는 소리를 내지 않습니다.
+- Web Audio로 냅니다. 첫 누름(pointerdown, touchend, click, keydown) 때 AudioContext를 만들고 그때 파일을 받으므로 첫 화면 무게는 그대로입니다. 내레이션 `<audio>`와는 따로라 그 볼륨과 재생에 영향이 없습니다. 못 받거나 Web Audio가 없으면 소리만 빠지고 동작은 같습니다. 같은 출처 fetch라 CSP `connect-src 'self'`로 충분합니다.
+- 크기: 내레이션(ep01 -16.8 LUFS)보다 최대 순간 음량이 약 14~16 dB 낮고, 부모 틱은 약 19 dB 낮습니다. mp3 44.1kHz 모노 96kbps, 파일당 2~6KB.
+- 원본은 외부 소리 없이 합성했습니다. 다시 만들기: `python3 lilyrang/studio/sfx-lab/build_sfx.py`(결과는 `sfx-lab/sfx/`, 측정표 `sfx-lab/measurements.md`, 후보 시청 페이지 `sfx-lab/index.html`). 고른 후보를 위 이름으로 복사합니다(`find-wood-toktok`, `sparkle-bell-twin`, `pop-soft-plop`, `scrub-brush-shh`, `said-kalimba-up`, `sticker-pat-ting`, `lamp-chain-click`, `play-soft-up`, `again-wood-tok-up`, `parent-paper-tick`).
+
 새 종류가 필요하면 파일 하나를 더합니다.
 
 ```js

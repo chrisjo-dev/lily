@@ -29,6 +29,8 @@ LilyInteractions["say-sticker"] = (api, specs) => {
     const w = waits.find((x) => !api.isDone(x.wait));
     const ok = w && (api.waiting === w.wait || api.audio.currentTime >= w.from - 0.3);
     if (!ok) return api.replay(api.$(B.target).querySelector(".pulse"), "nope");
+    // 말했어요(칼림바) 다음, 날아간 스티커가 판에 닿을 즈음(.fly 0.6초의 끝 무렵) 착
+    api.sfx("said"); if (!earned[w.sticker]) api.sfx("sticker", 0.45);
     give(w.sticker);
     if (api.waiting === w.wait) api.finishWait(false);
   });

@@ -26,7 +26,7 @@ LilyInteractions.pop = (api, specs) => {
   }
   function popOne(G, k) {
     if (G.popped[k]) return;
-    G.popped[k] = true; render(G);
+    G.popped[k] = true; render(G); api.sfx("pop");
     const all = G.popped.every(Boolean);
     if (all) api.setDone(G.s.wait);
     if (api.waiting === G.s.wait) all ? api.finishWait(false) : api.armTimer();

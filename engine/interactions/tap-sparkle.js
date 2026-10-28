@@ -14,6 +14,7 @@ LilyInteractions["tap-sparkle"] = (api, specs) => {
     }
     function burst(p) { sparkle(p.x, p.y); sparkle(p.x + 26, p.y - 22); sparkle(p.x - 24, p.y - 14); }
     api.onTap(api.$(s.target), (e) => {
+      api.sfx("sparkle");
       burst(e ? api.toSvg(e, svg) : keyAt());
       if (s.wait >= 0) { api.setDone(s.wait); if (api.waiting === s.wait) api.finishWait(false); }
     });
