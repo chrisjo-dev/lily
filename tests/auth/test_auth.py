@@ -1,7 +1,7 @@
 """레인 D 브라우저 시험 (Playwright, 실제 Chrome).
 
 실행: python3 tests/auth/test_auth.py   (저장소 루트에서. 4443 포트에 rangesrv를 띄우고 끝나면 끈다)
-필요: playwright(python), Chrome, /Users/wonsang/test/podcast/tests/lily/rangesrv.py
+필요: playwright(python), Chrome, 저장소의 tests/lily/rangesrv.py
 실제 Supabase에는 붙지 않는다. Supabase 응답은 page.route 로 흉내 낸다(가짜 주소 testref.supabase.co, 가짜 키).
 """
 import asyncio, base64, json, os, re, subprocess, sys, time
@@ -10,7 +10,7 @@ from playwright.async_api import async_playwright
 ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 PORT = int(os.environ.get("LILY_D_PORT", "4443"))
 B = f"http://localhost:{PORT}"
-SRV = "/Users/wonsang/test/podcast/tests/lily/rangesrv.py"
+SRV = os.path.join(ROOT, "tests", "lily", "rangesrv.py")
 SB = "https://testref.supabase.co"
 INIT = """window.__lt=[];try{new PerformanceObserver(l=>{for(const e of l.getEntries())window.__lt.push(e.duration)}).observe({type:'longtask',buffered:true})}catch(e){}
 window.__csp=[];document.addEventListener('securitypolicyviolation',e=>window.__csp.push(e.violatedDirective+' '+e.blockedURI));"""

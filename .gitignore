@@ -8,3 +8,5 @@ dist/
 .wrangler/
 design/*/render/
 design/*/compare/
+*.env
+.env*

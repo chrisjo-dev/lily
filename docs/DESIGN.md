@@ -59,7 +59,7 @@
 | 누를 곳 | 노랑 #ffc83d + 갈색 외곽선 (아이 구역만) |
 | 글자 | 먹 #24323d, 보조 #5b6b78 |
 | 글꼴 | 로고만 Jua, 한국어 Gowun Dodum, 영어 단어와 제목 Andika |
-| 그림 | 기준 캐릭터 시트(podcast/lily/art/character/lily-character-sheet.webp), 수채와 과슈, 얇은 갈색 선 |
+| 그림 | 기준 캐릭터 시트(lilyrang/studio/art/character/lily-character-sheet.webp), 수채와 과슈, 얇은 갈색 선 |
 | 화면 그림 | 손 힌트, 별, 터짐, 자물쇠 같은 장치도 같은 그림체(engine/ui) |
 | 모서리 | 그림 액자 16, 카드 20, 단추 14 |
 | 간격 | 4의 배수 |

@@ -72,7 +72,7 @@
 
 ### 화면 그림 (`engine/ui/`)
 
-손 안내(`hand-tap.webp`, `hand-rub.webp`), 반짝 별(`sparkle.webp`), 거품 터짐(`pop.webp`), 자물쇠(`lock.webp`)는 AI로 그린 투명 webp(긴 변 256px)입니다. 원본 한 장은 `podcast/lily/art/ui/sheet-ui.png`, 자르기는 `podcast/lily/tools/build_ui.py`. 엔진은 `engine.js`가 있는 주소를 기준으로 `ui/`를 찾으므로 어느 편 주소에서도 같은 파일을 씁니다(같은 출처라 CSP `img-src 'self'`로 충분). 첫 화면 무게를 늘리지 않으려고 이 그림과 오늘의 단어 스티커는 첫 재생, 첫 기다림, 첫 누름이나 스크롤 중 먼저 오는 때에 받습니다.
+손 안내(`hand-tap.webp`, `hand-rub.webp`), 반짝 별(`sparkle.webp`), 거품 터짐(`pop.webp`), 자물쇠(`lock.webp`)는 AI로 그린 투명 webp(긴 변 256px)입니다. 원본 한 장은 `lilyrang/studio/art/ui/sheet-ui.png`(단추 그림은 `sheet-ui3`), 자르기는 `lilyrang/studio/tools/build_ui.py`. 엔진은 `engine.js`가 있는 주소를 기준으로 `ui/`를 찾으므로 어느 편 주소에서도 같은 파일을 씁니다(같은 출처라 CSP `img-src 'self'`로 충분). 첫 화면 무게를 늘리지 않으려고 이 그림과 오늘의 단어 스티커는 첫 재생, 첫 기다림, 첫 누름이나 스크롤 중 먼저 오는 때에 받습니다.
 
 새 종류가 필요하면 파일 하나를 더합니다.
 
