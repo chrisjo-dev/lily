@@ -6,7 +6,9 @@
       "w": 1440,
       "h": 1640,
       "title": "S01-Foundations",
-      "group": "디자인 시스템"
+      "group": "디자인 시스템",
+      "status": "approved",
+      "note": "사용자 승인 2026-10-28: 디자인 시스템 기초/부품"
     },
     "S02-Components.html": {
       "x": 1480,
@@ -14,7 +16,9 @@
       "w": 1440,
       "h": 1700,
       "title": "S02-Components",
-      "group": "디자인 시스템"
+      "group": "디자인 시스템",
+      "status": "approved",
+      "note": "사용자 승인 2026-10-28: 디자인 시스템 기초/부품"
     }
   },
   "groups": [

@@ -80,7 +80,9 @@
       "w": 390,
       "h": 3860,
       "title": "L11-AdLandingPhone",
-      "group": "광고 랜딩"
+      "group": "광고 랜딩",
+      "status": "approved",
+      "note": "사용자 승인 2026-10-28: 광고/공유용 별도 랜딩, EP01 실제 화면과 시스템 부품"
     },
     "L12-AdLandingDesktop.html": {
       "x": 5680,
@@ -88,6 +90,16 @@
       "w": 1280,
       "h": 2560,
       "title": "L12-AdLandingDesktop",
+      "group": "광고 랜딩",
+      "status": "approved",
+      "note": "사용자 승인 2026-10-28: 광고/공유용 별도 랜딩, EP01 실제 화면과 시스템 부품"
+    },
+    "L13-PlayButtonOptions.html": {
+      "x": 7000,
+      "y": 0,
+      "w": 1760,
+      "h": 1700,
+      "title": "L13-PlayButtonOptions",
       "group": "광고 랜딩"
     }
   },

@@ -1,0 +1,149 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>L13 맛보기 단추 시안</title>
+<link rel="stylesheet" href="../shared/system-tokens.css">
+<link rel="stylesheet" href="../shared/paper.css">
+<style>
+  body { padding: var(--s10); background: var(--paper-2); }
+  img { display: block; max-width: 100%; }
+  h1 { font-family: var(--font-logo); font-weight: 400; font-size: var(--t-xl); margin: 0 0 var(--s2); }
+  .lead { font-size: var(--t-md); color: var(--ink-2); margin: 0 0 var(--s8); }
+  .grid { display: grid; grid-template-columns: repeat(4, 390px); gap: var(--s10); }
+  .opt h2 { font-family: var(--font-logo); font-weight: 400; font-size: var(--t-lg); margin: 0; }
+  .opt .why { font-size: var(--t-sm); color: var(--ink-2); margin: var(--s1) 0 var(--s3); min-height: 3.2em; }
+
+  /* 휴대폰 첫 화면(L11 위쪽) */
+  .phone { width: 390px; height: 640px; overflow: hidden; background: var(--paper); border-radius: 28px; border: 1px solid var(--line); }
+  .hero-img { width: 100%; height: 210px; object-fit: cover; object-position: 30% 40%; }
+  .sheet { position: relative; margin-top: -20px; background: var(--paper); padding: var(--s2) var(--s6) 0; }
+  .sheet::before { content: ''; position: absolute; left: 0; right: 0; top: -20px; height: 22px; background: var(--paper); -webkit-mask: var(--m-torn) 0 0 / 100% 100% no-repeat; mask: var(--m-torn) 0 0 / 100% 100% no-repeat; }
+  .logo { font-family: var(--font-logo); font-size: var(--t-md); color: var(--brown); margin: 0 0 var(--s2); }
+  .promise { font-family: var(--font-logo); font-weight: 400; font-size: 26px; line-height: 1.3; margin: 0 0 var(--s2); }
+  .promise-sub { font-size: var(--t-sm); margin: 0 0 var(--s6); }
+
+  .label { font-family: var(--font-logo); font-size: var(--t-lg); margin: 0; color: var(--ink); }
+  .sub { font-size: var(--t-xs); color: var(--ink-2); margin: var(--s1) 0 0; }
+  .row { display: flex; align-items: center; gap: var(--s4); }
+  .sprite { position: relative; flex: none; }
+  .on { position: absolute; display: grid; place-items: center; font-family: var(--font-logo); color: var(--brown); text-align: center; line-height: 1.1; }
+
+  /* 0. 지금 */
+  .big-play { position: relative; width: 88px; height: 88px; background: var(--touch); border-radius: 50%; border: 2.5px solid var(--brown); flex: none; margin: 18px 0 0 14px; }
+  .big-play::before { content: ''; position: absolute; left: -19%; top: -31%; width: 138%; height: 131%; background: url(../assets/v2/btn-play.webp) center / contain no-repeat; }
+
+  /* 1. 알약 */
+  .s1 { width: 330px; margin: 0 auto; }
+  .s1 .on { left: 36%; top: 33%; width: 58%; height: 54%; font-size: 22px; color: var(--ink); }
+  .center-sub { text-align: center; }
+
+  /* 2. 책 표지 */
+  .s2 { width: 150px; }
+  /* 3. 릴리 */
+  .s3 { width: 210px; }
+  .s3 .on { left: 62%; top: 72%; width: 34%; height: 25%; font-size: var(--t-md); }
+  /* 4. 비스킷 */
+  .s4 { width: 170px; }
+  /* 5. 찢은 종이 */
+  .s5 { width: 200px; margin: 0 auto; }
+  .s5 .on { left: 4%; top: 80%; width: 92%; height: 18%; font-size: 18px; color: var(--ink); }
+  /* 6. 책 위 해 */
+  .s6 { width: 250px; margin: 0 auto; }
+  .s6 .on { left: 22%; top: 55%; width: 56%; height: 16%; font-size: 17px; color: var(--ink); }
+  .stack { display: flex; flex-direction: column; align-items: center; gap: var(--s1); }
+</style>
+</head>
+<body>
+  <h1>맛보기 단추 시안</h1>
+  <p class="lead">L11 첫 화면에 그대로 넣어 비교. 단추 그림은 OpenAI 시안 한 장(play-cta)에서 오려 썼고, 글자는 그림 위에 실제 글자로 얹었다. 노란 것은 여전히 화면에 하나.</p>
+
+  <div class="grid">
+    <div class="opt">
+      <h2>0. 지금</h2>
+      <p class="why">노란 원과 글이 따로 논다. 무엇을 듣는지 그림이 없다.</p>
+      <div class="phone">
+        <img class="hero-img" src="../assets/v2/home-hero-800.webp" alt="">
+        <div class="sheet">
+          <p class="logo">릴리랑</p><h1 class="promise">아이가 이야기에 끼어드는<br>2분 영어 그림책</h1><p class="promise-sub">4~7세 아이와 함께 듣고, 누르며 노는 영어.</p>
+          <div class="row"><span class="big-play"></span><div><p class="label">맛보기 바로 듣기</p><p class="sub">EP01 이 닦기, 2분 19초, 무료</p></div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="opt">
+      <h2>1. 알약 단추</h2>
+      <p class="why">글자가 단추 안에. 누를 곳이 넓고 분명하다. 이야기의 "한 번 더" 단추와 한 가족.</p>
+      <div class="phone">
+        <img class="hero-img" src="../assets/v2/home-hero-800.webp" alt="">
+        <div class="sheet">
+          <p class="logo">릴리랑</p><h1 class="promise">아이가 이야기에 끼어드는<br>2분 영어 그림책</h1><p class="promise-sub">4~7세 아이와 함께 듣고, 누르며 노는 영어.</p>
+          <div class="sprite s1"><img src="../assets/cta/cta1-pill.webp" alt=""><span class="on">맛보기 바로 듣기</span></div>
+          <p class="sub center-sub">EP01 이 닦기, 2분 19초, 무료</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="opt">
+      <h2>2. 책 표지 위 단추</h2>
+      <p class="why">"이 책을 들어요"가 그림으로 보인다. 아래 책장과 이어진다.</p>
+      <div class="phone">
+        <img class="hero-img" src="../assets/v2/home-hero-800.webp" alt="">
+        <div class="sheet">
+          <p class="logo">릴리랑</p><h1 class="promise">아이가 이야기에 끼어드는<br>2분 영어 그림책</h1><p class="promise-sub">4~7세 아이와 함께 듣고, 누르며 노는 영어.</p>
+          <div class="row"><div class="sprite s2"><img src="../assets/cta/cta2-book.webp" alt=""></div><div><p class="label">맛보기 바로 듣기</p><p class="sub">EP01 이 닦기<br>2분 19초, 무료</p></div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="opt">
+      <h2>3. 릴리가 가리켜요</h2>
+      <p class="why">아이 눈에 "릴리가 눌러 보래"로 읽힌다. 이야기 속 손 힌트와 같은 말.</p>
+      <div class="phone">
+        <img class="hero-img" src="../assets/v2/home-hero-800.webp" alt="">
+        <div class="sheet">
+          <p class="logo">릴리랑</p><h1 class="promise">아이가 이야기에 끼어드는<br>2분 영어 그림책</h1><p class="promise-sub">4~7세 아이와 함께 듣고, 누르며 노는 영어.</p>
+          <div class="row"><div class="sprite s3"><img src="../assets/cta/cta3-lily.webp" alt=""><span class="on">무료</span></div><div><p class="label">맛보기<br>바로 듣기</p><p class="sub">EP01 이 닦기<br>2분 19초</p></div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="opt">
+      <h2>4. 비스킷이 앞발로</h2>
+      <p class="why">가장 귀엽고 부드럽다. 대신 첫 화면 위 그림에도 비스킷이 있어 겹친다.</p>
+      <div class="phone">
+        <img class="hero-img" src="../assets/v2/home-hero-800.webp" alt="">
+        <div class="sheet">
+          <p class="logo">릴리랑</p><h1 class="promise">아이가 이야기에 끼어드는<br>2분 영어 그림책</h1><p class="promise-sub">4~7세 아이와 함께 듣고, 누르며 노는 영어.</p>
+          <div class="row"><div class="sprite s4"><img src="../assets/cta/cta4-biscuit.webp" alt=""></div><div><p class="label">맛보기<br>바로 듣기</p><p class="sub">EP01 이 닦기<br>2분 19초, 무료</p></div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="opt">
+      <h2>5. 찢은 종이 딱지</h2>
+      <p class="why">칫솔과 거품이 "이 닦기 편"을 말해 준다. 글은 종이 띠 위에. 재료가 시스템과 같다.</p>
+      <div class="phone">
+        <img class="hero-img" src="../assets/v2/home-hero-800.webp" alt="">
+        <div class="sheet">
+          <p class="logo">릴리랑</p><h1 class="promise">아이가 이야기에 끼어드는<br>2분 영어 그림책</h1><p class="promise-sub">4~7세 아이와 함께 듣고, 누르며 노는 영어.</p>
+          <div class="stack"><div class="sprite s5"><img src="../assets/cta/cta5-paper.webp" alt=""><span class="on">맛보기 바로 듣기</span></div><p class="sub">EP01 이 닦기, 2분 19초, 무료</p></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="opt">
+      <h2>6. 책 위로 뜨는 해</h2>
+      <p class="why">"책을 펼치면 이야기가 뜬다". 가장 상징적이고 크다. 첫 화면을 많이 차지한다.</p>
+      <div class="phone">
+        <img class="hero-img" src="../assets/v2/home-hero-800.webp" alt="">
+        <div class="sheet">
+          <p class="logo">릴리랑</p><h1 class="promise">아이가 이야기에 끼어드는<br>2분 영어 그림책</h1><p class="promise-sub">4~7세 아이와 함께 듣고, 누르며 노는 영어.</p>
+          <div class="stack"><div class="sprite s6"><img src="../assets/cta/cta6-sun.webp" alt=""><span class="on">맛보기 바로 듣기</span></div><p class="sub">EP01 이 닦기, 2분 19초, 무료</p></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
