@@ -80,29 +80,56 @@ a   { text-decoration: none; color: inherit; }
 :focus-visible { outline: 3px solid var(--teal); outline-offset: 2px; }
 
 /* ════════════════════════════════════════════════
-   재생 단추 (공통, 노랑 원 + btn-play.webp)
-   노랑은 이 단추 하나만
+   크레용 겹줄 액자 (R71, 랜딩 L17과 같은 재료 brand/crayon)
+   페이지 전체를 책 액자로, 섹션 경계는 크레용 줄
    ════════════════════════════════════════════════ */
-.big-play {
-  position: relative;
-  width: 96px;
-  height: 96px;
-  background: var(--touch);
-  border-radius: 50%;
-  border: 2.5px solid var(--brown);
-  flex-shrink: 0;
-  cursor: pointer;
-  display: block;
+body { padding: 6px; }
+.cr-book {
+  border: 34px solid transparent;
+  border-image: url('brand/crayon/frame9.webp') 50 round;
+  overflow: clip;
 }
-.big-play::before {
+.cr-line { position: relative; }
+.cr-line::before {
   content: '';
   position: absolute;
-  left: -19%;
-  top: -31%;
-  width: 138%;
-  height: 131%;
-  background: url('/engine/ui/btn-play.webp') center / contain no-repeat;
+  top: 0; left: 10%; right: 10%;
+  height: 14px;
+  background: url('brand/crayon/divider.webp') center / 100% 100% no-repeat;
   pointer-events: none;
+}
+
+/* 맛보기 단추: 책 위로 뜨는 해 (노랑은 이 단추 하나만) */
+.cr-cta {
+  display: flex;
+  width: fit-content;
+  margin: 8px auto 4px;
+  flex-direction: column;
+  align-items: center;
+}
+.cr-cta-art {
+  position: relative;
+  display: block;
+  width: 230px;
+  aspect-ratio: 456 / 401;
+  background: url('brand/crayon/btn-sample-book.webp') center / contain no-repeat;
+}
+.cr-cta-art span {
+  position: absolute;
+  left: 22%; top: 55%;
+  width: 56%; height: 16%;
+  display: grid;
+  place-items: center;
+  font-family: var(--font-logo);
+  font-size: 16px;
+  color: var(--ink);
+  white-space: nowrap;
+}
+.cr-cta-sub {
+  display: block;
+  font-size: 12px;
+  color: var(--ink-2);
+  margin-top: 2px;
 }
 
 /* ════════════════════════════════════════════════
@@ -114,7 +141,9 @@ a   { text-decoration: none; color: inherit; }
 .hero-img-ph {
   display: block;
   width: 100%;
-  height: 260px;
+  height: 230px;
+  border: 12px solid transparent;
+  border-image: url('brand/crayon/picframe9.webp') 20 round;
   object-fit: cover;
   object-position: left center;
 }
@@ -122,7 +151,6 @@ a   { text-decoration: none; color: inherit; }
 .hero-info {
   background: var(--paper);
   padding: 20px 24px 24px;
-  border-bottom: 1px solid var(--line);
 }
 .main-title {
   font-family: var(--font-logo);
@@ -138,27 +166,6 @@ a   { text-decoration: none; color: inherit; }
   line-height: 1.6;
   margin: 0 0 18px;
 }
-.play-row {
-  display: flex;
-  align-items: center;
-  gap: 14px;
-  margin-bottom: 14px;
-}
-.play-text { display: flex; flex-direction: column; gap: 3px; }
-.play-label {
-  font-family: var(--font-kr);
-  font-size: 14px;
-  font-weight: 700;
-  color: var(--ink);
-  margin: 0;
-}
-.play-sub {
-  font-family: var(--font-kr);
-  font-size: 11px;
-  color: var(--ink-2);
-  margin: 0;
-  line-height: 1.5;
-}
 .btn-join-quiet {
   font-family: var(--font-kr);
   font-size: 12px;
@@ -171,8 +178,6 @@ a   { text-decoration: none; color: inherit; }
    ════════════════════════════════════════════════ */
 .how-sec {
   padding: 28px 20px 24px;
-  background: var(--paper-2);
-  border-top: 1px solid var(--line);
 }
 .how-sec-title {
   font-family: var(--font-logo);
@@ -235,8 +240,6 @@ a   { text-decoration: none; color: inherit; }
    릴리의 하루 선반 (공통)
    ════════════════════════════════════════════════ */
 .shelf-sec {
-  background: var(--paper);
-  border-top: 1px solid var(--line);
   padding-bottom: 16px;
 }
 .shelf-head {
@@ -360,8 +363,6 @@ a   { text-decoration: none; color: inherit; }
    ════════════════════════════════════════════════ */
 .parent-sec {
   padding: 26px 20px 30px;
-  background: var(--paper-2);
-  border-top: 1px solid var(--line);
 }
 .parent-sec-title {
   font-family: var(--font-logo);
@@ -394,8 +395,6 @@ a   { text-decoration: none; color: inherit; }
 .parent-bar {
   display: none;
   height: 90px;
-  background: var(--paper-2);
-  border-top: 1.5px solid var(--line);
   align-items: center;
   justify-content: space-around;
   padding: 0 40px;
@@ -437,8 +436,6 @@ a   { text-decoration: none; color: inherit; }
    ════════════════════════════════════════════════ */
 .faq-sec {
   padding: 26px 20px 30px;
-  background: var(--paper);
-  border-top: 1px solid var(--line);
 }
 .faq-title {
   font-family: var(--font-logo);
@@ -446,9 +443,9 @@ a   { text-decoration: none; color: inherit; }
   color: var(--ink);
   margin: 0 0 16px;
 }
-.faq-item { border-bottom: 1px solid var(--line); padding: 11px 0; }
+.faq-item { padding: 11px 0; }
 .faq-item:first-of-type { padding-top: 0; }
-.faq-item:last-of-type  { border-bottom: none; padding-bottom: 0; }
+.faq-item:last-of-type  { padding-bottom: 0; }
 .faq-q {
   font-family: var(--font-kr);
   font-size: 13px;
@@ -469,8 +466,6 @@ a   { text-decoration: none; color: inherit; }
    ════════════════════════════════════════════════ */
 .site-footer {
   padding: 18px 20px 26px;
-  background: var(--paper-2);
-  border-top: 1px solid var(--line);
 }
 .footer-links { display: flex; gap: 16px; margin-bottom: 6px; }
 .footer-links a {
@@ -495,8 +490,10 @@ a   { text-decoration: none; color: inherit; }
     display: block;
     position: relative;
     width: 100%;
-    height: 380px;
+    height: 420px;
     overflow: hidden;
+    border: 14px solid transparent;
+    border-image: url('brand/crayon/picframe9.webp') 20 round;
   }
   .hero-img-tb {
     position: absolute;
@@ -530,10 +527,6 @@ a   { text-decoration: none; color: inherit; }
     line-height: 1.7;
     margin: 0;
   }
-  .hero-panel .play-row   { margin-top: 4px; margin-bottom: 0; }
-  .hero-panel .big-play   { width: 80px; height: 80px; }
-  .hero-panel .play-label { font-size: 14px; }
-  .hero-panel .play-sub   { font-size: 12px; }
   .hero-panel .btn-join-quiet { font-size: 12px; }
 
   /* phone-only 숨김 */
@@ -605,8 +598,10 @@ a   { text-decoration: none; color: inherit; }
     display: block;
     position: relative;
     width: 100%;
-    height: 400px;
+    height: 420px;
     overflow: hidden;
+    border: 14px solid transparent;
+    border-image: url('brand/crayon/picframe9.webp') 20 round;
   }
   .hero-img-tb {
     position: absolute;
@@ -640,10 +635,6 @@ a   { text-decoration: none; color: inherit; }
     line-height: 1.7;
     margin: 0;
   }
-  .hero-panel .play-row   { margin-top: 6px; margin-bottom: 0; }
-  .hero-panel .big-play   { width: 88px; height: 88px; }
-  .hero-panel .play-label { font-size: 15px; }
-  .hero-panel .play-sub   { font-size: 12px; }
   .hero-panel .btn-join-quiet { font-size: 12px; }
 
   /* phone-only + how-sec 숨김 */
@@ -701,6 +692,16 @@ a   { text-decoration: none; color: inherit; }
   .footer-by { font-size: 11px; }
 }
 
+/* ── 태블릿, 데스크톱 크레용 액자 (L19와 같은 굵기) ── */
+@media (min-width: 700px) and (orientation: portrait), (min-width: 900px) and (orientation: landscape) {
+  body { padding: 12px; }
+  .cr-book { border-width: 40px; }
+  .hero-panel { gap: 8px; }
+  .hero-panel .cr-cta { margin: 0; }
+  .hero-panel .cr-cta-art { width: 180px; }
+  .hero-panel .cr-cta-art span { font-size: 14px; }
+}
+
 /* ── 드래그/선택 방지 ── */
 .hero-phone, .hero-phone *,
 .hero-tablet, .hero-tablet * {
@@ -714,6 +715,7 @@ a   { text-decoration: none; color: inherit; }
 </style>
 </head>
 <body>
+<div class="cr-book">
 
 <!-- ══════════════════════════════════════════════
      히어로 전화기 (H01, 700px 미만)
@@ -729,13 +731,7 @@ a   { text-decoration: none; color: inherit; }
   <div class="hero-info">
     <h1 class="main-title">릴리랑</h1>
     <p class="main-tagline">하루 2분, 영어 그림책. 4~7세 아이와 함께 들어요.</p>
-    <div class="play-row">
-      <a class="big-play" href="/ep01/" aria-label="맛보기 바로 듣기, EP01 무료"></a>
-      <div class="play-text">
-        <p class="play-label">맛보기 바로 듣기</p>
-        <p class="play-sub">EP01 Brush, Brush, Brush! 무료</p>
-      </div>
-    </div>
+    <a class="cr-cta" href="/ep01/"><span class="cr-cta-art"><span>맛보기 바로 듣기</span></span><span class="cr-cta-sub">EP01 이 닦기, 2분 19초, 무료</span></a>
     <a class="btn-join-quiet" href="/join/">가입하고 7편 모두 보기</a>
   </div>
 </div>
@@ -754,13 +750,7 @@ a   { text-decoration: none; color: inherit; }
   <div class="hero-panel">
     <h1 class="hero-logo">릴리랑</h1>
     <p class="hero-tagline">하루 2분, 영어 그림책.<br>4~7세 아이와 함께 들어요.</p>
-    <div class="play-row">
-      <a class="big-play" href="/ep01/" aria-label="맛보기 바로 듣기, EP01 무료"></a>
-      <div class="play-text">
-        <p class="play-label">맛보기 바로 듣기</p>
-        <p class="play-sub">EP01 Brush, Brush, Brush! 무료</p>
-      </div>
-    </div>
+    <a class="cr-cta" href="/ep01/"><span class="cr-cta-art"><span>맛보기 바로 듣기</span></span><span class="cr-cta-sub">EP01 이 닦기, 2분 19초, 무료</span></a>
     <a class="btn-join-quiet" href="/join/">가입하고 7편 모두 보기</a>
   </div>
 </div>
@@ -768,7 +758,7 @@ a   { text-decoration: none; color: inherit; }
 <!-- ══════════════════════════════════════════════
      이렇게 함께해요 (H01 phone + H03 portrait)
      ══════════════════════════════════════════════ -->
-<section class="how-sec" aria-labelledby="h-how">
+<section class="how-sec cr-line" aria-labelledby="h-how">
   <h2 class="how-sec-title" id="h-how">이렇게 함께해요</h2>
   <div class="how-steps">
     <div class="how-step">
@@ -808,7 +798,7 @@ a   { text-decoration: none; color: inherit; }
 <!-- ══════════════════════════════════════════════
      릴리의 하루 선반 (공통)
      ══════════════════════════════════════════════ -->
-<section class="shelf-sec" aria-labelledby="h-shelf">
+<section class="shelf-sec cr-line" aria-labelledby="h-shelf">
   <div class="shelf-head">
     <h2 class="shelf-title" id="h-shelf">릴리의 하루</h2>
     <span class="shelf-sub">아침부터 밤까지, 하루 7권</span>
@@ -915,7 +905,7 @@ a   { text-decoration: none; color: inherit; }
 <!-- ══════════════════════════════════════════════
      부모님께 (H01 phone, 세로 목록)
      ══════════════════════════════════════════════ -->
-<section class="parent-sec" aria-labelledby="h-parent">
+<section class="parent-sec cr-line" aria-labelledby="h-parent">
   <h2 class="parent-sec-title" id="h-parent">부모님께</h2>
   <div class="parent-items">
     <div class="parent-item">
@@ -948,7 +938,7 @@ a   { text-decoration: none; color: inherit; }
 <!-- ══════════════════════════════════════════════
      부모님께 가로 막대 (H02/H03 tablet)
      ══════════════════════════════════════════════ -->
-<div class="parent-bar" role="complementary" aria-label="부모님께">
+<div class="parent-bar cr-line" role="complementary" aria-label="부모님께">
   <div class="parent-bar-item">
     <img fetchpriority="low" class="parent-bar-icon" src="brand/home/home-ic-time.webp" alt=""
          loading="lazy" decoding="async" width="96" height="96">
@@ -980,7 +970,7 @@ a   { text-decoration: none; color: inherit; }
 <!-- ══════════════════════════════════════════════
      자주 묻는 질문 (phone + landscape 공통)
      ══════════════════════════════════════════════ -->
-<section class="faq-sec" aria-labelledby="h-faq">
+<section class="faq-sec cr-line" aria-labelledby="h-faq">
   <h2 class="faq-title" id="h-faq">자주 묻는 질문</h2>
   <div class="faq-item">
     <p class="faq-q">몇 살부터 할 수 있나요?</p>
@@ -1006,5 +996,6 @@ a   { text-decoration: none; color: inherit; }
   <p class="footer-by">매일 외국어 읽기가 만들어요</p>
 </footer>
 
+</div>
 </body>
 </html>

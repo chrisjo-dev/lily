@@ -633,7 +633,17 @@
       "w": 390,
       "h": 1820,
       "title": "R71-CrayonHome",
-      "group": "크레용 액자 전체"
+      "group": "크레용 액자 전체",
+      "status": "approved",
+      "note": "전체 크레용 겹줄 액자 채택(사용자: 전체도 크레용)",
+      "impl": {
+        "route": "/",
+        "files": [
+          "index.html",
+          "brand/crayon/frame9.webp"
+        ],
+        "updated": "2026-10-28T12:09:43Z"
+      }
     },
     "R72-CrayonEpisodeFirst.html": {
       "x": 30459,
@@ -641,7 +651,16 @@
       "w": 390,
       "h": 844,
       "title": "R72-CrayonEpisodeFirst",
-      "group": "크레용 액자 전체"
+      "group": "크레용 액자 전체",
+      "status": "approved",
+      "note": "전체 크레용 겹줄 액자 채택(사용자: 전체도 크레용)",
+      "impl": {
+        "route": "/ep01/",
+        "files": [
+          "engine/engine.css"
+        ],
+        "updated": "2026-10-28T12:09:43Z"
+      }
     },
     "R73-CrayonEpisodeWait.html": {
       "x": 30889,
@@ -649,7 +668,16 @@
       "w": 390,
       "h": 844,
       "title": "R73-CrayonEpisodeWait",
-      "group": "크레용 액자 전체"
+      "group": "크레용 액자 전체",
+      "status": "approved",
+      "note": "전체 크레용 겹줄 액자 채택(사용자: 전체도 크레용)",
+      "impl": {
+        "route": "/ep01/",
+        "files": [
+          "engine/engine.css"
+        ],
+        "updated": "2026-10-28T12:09:43Z"
+      }
     },
     "R74-CrayonEpisodeEnd.html": {
       "x": 31319,
@@ -657,7 +685,16 @@
       "w": 390,
       "h": 844,
       "title": "R74-CrayonEpisodeEnd",
-      "group": "크레용 액자 전체"
+      "group": "크레용 액자 전체",
+      "status": "approved",
+      "note": "전체 크레용 겹줄 액자 채택(사용자: 전체도 크레용)",
+      "impl": {
+        "route": "/ep01/",
+        "files": [
+          "engine/engine.css"
+        ],
+        "updated": "2026-10-28T12:09:43Z"
+      }
     },
     "R75-CrayonGateCard.html": {
       "x": 31749,
@@ -665,7 +702,17 @@
       "w": 390,
       "h": 844,
       "title": "R75-CrayonGateCard",
-      "group": "크레용 액자 전체"
+      "group": "크레용 액자 전체",
+      "status": "approved",
+      "note": "전체 크레용 겹줄 액자 채택(사용자: 전체도 크레용)",
+      "impl": {
+        "route": "/ep02/",
+        "files": [
+          "engine/ui/gate.css",
+          "engine/engine.css"
+        ],
+        "updated": "2026-10-28T12:09:43Z"
+      }
     },
     "R76-CrayonJoin.html": {
       "x": 32179,
@@ -673,7 +720,16 @@
       "w": 390,
       "h": 844,
       "title": "R76-CrayonJoin",
-      "group": "크레용 액자 전체"
+      "group": "크레용 액자 전체",
+      "status": "approved",
+      "note": "전체 크레용 겹줄 액자 채택(사용자: 전체도 크레용)",
+      "impl": {
+        "route": "/join/",
+        "files": [
+          "join/pages.css"
+        ],
+        "updated": "2026-10-28T12:09:43Z"
+      }
     }
   },
   "groups": [

@@ -30,10 +30,15 @@ button { font-family: inherit; color: inherit; }
 }
 /* 무대는 그림 비율(2:3)보다 길어지지 않게: 더 길면 slice로 양옆이 잘려 가장자리의 누를 것(램프 같은)이 가려진다. 남는 높이는 본문 줄이 받는다 */
 .stage { position: relative; overflow: hidden; flex: 100 1 0; min-height: 240px; max-height: calc(min(100vw, 480px) * 1.5); background: var(--sky); }
-/* 무대 아래 찢은 종이 가장자리(본문 줄 종이가 그림 위로 살짝 올라옴) */
+/* 무대와 본문 줄 경계: 크레용 칸 줄(R72) */
 .stage::after {
-  content: ""; position: absolute; left: 0; right: 0; bottom: -1px; height: 40px; pointer-events: none;
-  background: var(--paper); -webkit-mask: url(ui/torn.svg) 0 0 / 100% 100% no-repeat; mask: url(ui/torn.svg) 0 0 / 100% 100% no-repeat;
+  content: ""; position: absolute; left: 10%; right: 10%; bottom: -1px; height: 14px; pointer-events: none;
+  background: url(../brand/crayon/divider.webp) center / 100% 100% no-repeat;
+}
+/* 화면 둘레 크레용 겹줄 액자(R72~R75, 랜딩과 같은 frame9). 그림 위에 얹기만 하고 누르기는 그대로 통과 */
+body::after {
+  content: ""; position: fixed; inset: 0; z-index: 99; pointer-events: none;
+  border: 26px solid transparent; border-image: url(../brand/crayon/frame9.webp) 50 round;
 }
 .stage > svg { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
 .stage svg { stroke-linecap: round; stroke-linejoin: round; }
@@ -130,12 +135,11 @@ body > .stage { visibility: hidden; }
 .eplabel h1 { margin: 0; font: inherit; }
 .eplabel .epn { display: block; font-family: var(--font-en); font-size: 10px; line-height: 1.3; color: var(--ink-2); }
 .fresh .eplabel {
-  width: auto; height: auto; overflow: visible; top: 16px; left: 56px; max-width: calc(100% - 140px); padding: 5px 13px 6px;
-  background: var(--paper); border: 1px solid var(--brown); transform: rotate(-1.5deg); box-shadow: 1px 2px 8px var(--shadow);
-  clip-path: polygon(1% 10%, 0% 0%, 98% 2%, 100% 0%, 99% 90%, 100% 100%, 3% 98%, 0% 100%);
+  width: auto; height: auto; overflow: visible; top: 12px; left: 52px; max-width: calc(100% - 140px); padding: 0 6px 1px;
+  background: var(--paper) padding-box; border: 9px solid transparent; border-image: url(../brand/crayon/picframe9.webp) 20 round; transform: rotate(-1.5deg); clip-path: none;
 }
 .fresh .eplabel h1, .drawer-open .eplabel h1 { font-family: var(--font-logo); font-size: 14px; line-height: 1.3; color: var(--ink); overflow: hidden; text-overflow: ellipsis; }
-.drawer-open .eplabel { z-index: 22; width: auto; height: auto; top: 10px; left: 56px; overflow: visible; clip-path: none; transform: none; border: 0; background: none; box-shadow: none; padding: 0; }
+.drawer-open .eplabel { z-index: 22; width: auto; height: auto; top: 10px; left: 56px; overflow: visible; clip-path: none; transform: none; border: 0; border-image: none; background: none; box-shadow: none; padding: 0; }
 .drawer-open .eplabel h1 { font-size: 13px; color: var(--night-ink); }
 .drawer-open .eplabel .epn { color: var(--night-ink-2); }
 .drawer-open .logo { z-index: 22; opacity: .7; }
@@ -192,8 +196,9 @@ body > .stage { visibility: hidden; }
 /* 접힌 부모 서랍 손잡이 */
 .hintrow {
   position: relative; flex: none; width: 100%; height: 56px; display: flex; align-items: center; justify-content: center; gap: 10px; padding: 0;
-  border: 0; border-top: 1.5px solid var(--line); background: var(--paper-2); color: var(--teal); font-size: 13px; cursor: pointer;
+  border: 0; background: var(--paper); color: var(--teal); font-size: 13px; cursor: pointer;
 }
+.hintrow::before { content: ""; position: absolute; top: -2px; left: 22%; right: 22%; height: 10px; background: url(../brand/crayon/divider.webp) center / 100% 100% no-repeat; opacity: .7; pointer-events: none; }
 .hintrow::after { content: ""; position: absolute; top: 0; right: 0; border-style: solid; border-width: 0 20px 20px 0; border-color: transparent var(--paper) transparent transparent; }
 .hintrow .bar { width: 32px; height: 3px; border-radius: 2px; background: var(--line); }
 .hintrow .chev { width: 8px; height: 8px; margin-top: 4px; border-left: 1.5px solid currentColor; border-top: 1.5px solid currentColor; transform: rotate(45deg); }
@@ -246,7 +251,7 @@ body > .stage { visibility: hidden; }
 /* .eleft(액자, 제목), .eright(스티커, 단추) 묶음은 태블릿 가로의 펼친 책에서만 상자가 된다. 그 밖에는 없는 것처럼 */
 .eleft, .eright { display: contents; }
 .ebody { flex: 1; min-height: 0; overflow-y: auto; display: flex; flex-direction: column; align-items: center; gap: 14px; padding: 28px 24px 16px; }
-.eframe { flex: none; width: 170px; height: 170px; -webkit-mask: url(ui/torn-round.svg) center / 100% 100% no-repeat; mask: url(ui/torn-round.svg) center / 100% 100% no-repeat; }
+.eframe { flex: none; width: 170px; height: 170px; border: 12px solid transparent; border-image: url(../brand/crayon/picframe9.webp) 20 round; }
 .eframe img { display: block; width: 100%; height: 100%; object-fit: cover; object-position: center 20%; }
 .ehead { text-align: center; }
 .ehead p { margin: 0; }
@@ -324,7 +329,7 @@ details[open] summary > svg { transform: rotate(180deg); }
 /* ===== 밤 편, 밤 장면(R55): 화면 장치도 어둡고 낮게 ===== */
 .night { background: var(--night); }
 .night .stage { background: var(--night); }
-.night .stage::after, .night .cap, .night.turn .said { background: var(--night-2); }
+.night .cap, .night.turn .said { background: var(--night-2); }
 .night .cap .kr { color: var(--night-ink); }
 .night .cap .en { color: var(--night-ink-2); }
 .night .dots i { background: var(--night-ink-2); opacity: .5; }
@@ -334,12 +339,12 @@ details[open] summary > svg { transform: rotate(180deg); }
 .night .ring .cnt { stroke: var(--lamp); }
 .night .ring.corner .cnt { stroke: var(--night-ink-2); }
 .night .tgt .halo { fill: var(--lamp); }
-.night .hintrow { background: var(--night); border-top: 1px solid var(--night-2); color: var(--lamp); }
+.night .hintrow { background: var(--night); color: var(--lamp); }
 .night .hintrow .bar { background: var(--night-2); }
 .night .hintrow::after { border-color: transparent var(--night-2) transparent transparent; }
 .night .logo { opacity: .85; }
 .night .chip { background: var(--night-2); border-color: var(--night-2); color: var(--night-ink); }
-.night.fresh .eplabel { background: var(--night-2); border-color: var(--night-ink-2); }
+.night.fresh .eplabel { background: var(--night-2) padding-box; }
 .night.fresh .eplabel h1 { color: var(--night-ink); }
 .night.fresh .eplabel .epn { color: var(--night-ink-2); }
 .nightpage { background: linear-gradient(var(--night), var(--night)) 0 0 / 100% 100dvh no-repeat, var(--paper); }
@@ -403,6 +408,7 @@ details[open] summary > svg { transform: rotate(180deg); }
   .kid::before { content: ""; grid-row: 1 / 4; grid-column: 3; background: var(--paper); border-radius: 0 3px 3px 0; }
   .kid::after { content: ""; grid-row: 1 / 4; grid-column: 2; background: linear-gradient(to right, color-mix(in srgb, var(--brown) 70%, var(--ink)), color-mix(in srgb, var(--brown) 32%, transparent) 40%, color-mix(in srgb, var(--brown) 6%, transparent)); }
   .stage { grid-area: stage; min-height: 0; max-height: none; border-radius: 3px 0 0 3px; }
+  .stage::after { display: none; }
   .dots { grid-area: dots; position: static; padding: 22px 56px 14px; height: auto; gap: 8px; }
   .dots i { width: 7px; height: 7px; }
   .dots i.now { width: 22px; background: var(--teal); }
