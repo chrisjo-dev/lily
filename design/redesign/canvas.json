@@ -582,7 +582,16 @@
       "w": 390,
       "h": 1600,
       "title": "H01-HomePhone",
-      "group": "홈 개선안 3"
+      "group": "홈 개선안 3",
+      "status": "approved",
+      "note": "2026-10-28 사용자 승인: 홈 개선안 3 코드 반영",
+      "impl": {
+        "route": "/",
+        "files": [
+          "index.html"
+        ],
+        "updated": "2026-10-28T07:05:35Z"
+      }
     },
     "H02-HomeTabletLandscape.html": {
       "x": 28091,
@@ -590,7 +599,16 @@
       "w": 1024,
       "h": 768,
       "title": "H02-HomeTabletLandscape",
-      "group": "홈 개선안 3"
+      "group": "홈 개선안 3",
+      "status": "approved",
+      "note": "2026-10-28 사용자 승인: 홈 개선안 3 코드 반영",
+      "impl": {
+        "route": "/",
+        "files": [
+          "index.html"
+        ],
+        "updated": "2026-10-28T07:05:35Z"
+      }
     },
     "H03-HomeTabletPortrait.html": {
       "x": 29155,
@@ -598,7 +616,16 @@
       "w": 834,
       "h": 1194,
       "title": "H03-HomeTabletPortrait",
-      "group": "홈 개선안 3"
+      "group": "홈 개선안 3",
+      "status": "approved",
+      "note": "2026-10-28 사용자 승인: 홈 개선안 3 코드 반영",
+      "impl": {
+        "route": "/",
+        "files": [
+          "index.html"
+        ],
+        "updated": "2026-10-28T07:05:35Z"
+      }
     }
   },
   "groups": [
