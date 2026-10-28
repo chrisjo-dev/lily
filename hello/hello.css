@@ -42,8 +42,9 @@ h2 { font-family: var(--font-title); font-weight: 700; letter-spacing: -0.06em; 
 
 /* 맛보기 단추(L13 6번 선택): 책 위로 뜨는 해 그림 + 리본 위 실제 글자. 그림과 글 전체가 한 링크 */
 .cta { display: flex; width: fit-content; margin: var(--s5) auto 0; flex-direction: column; align-items: center; text-decoration: none; color: inherit; border-radius: 16px; }
-.cta-art { position: relative; display: block; width: 250px; aspect-ratio: 456 / 401; background: url(img/btn-sample-book.webp) center / contain no-repeat; }
-.cta-art span { position: absolute; left: 22%; top: 55%; width: 56%; height: 16%; display: grid; place-items: center; font-family: var(--font-logo); font-size: 17px; color: var(--ink); white-space: nowrap; }
+/* 리본 글씨는 그림에 함께 그려 넣었다(개구 굵게, 리본 곡선). 글자는 화면 읽기용으로만 남긴다 */
+.cta-art { position: relative; display: block; width: 250px; aspect-ratio: 456 / 401; background: url(img/btn-sample-book-label.webp) center / contain no-repeat; }
+.cta-art span { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); clip-path: inset(50%); white-space: nowrap; }
 .cta-sub { display: block; font-size: var(--t-xs); color: var(--ink-2); margin-top: var(--s1); }
 
 /* 2분 19초: 2x2 그림 칸 */
@@ -100,7 +101,6 @@ h2 { font-family: var(--font-title); font-weight: 700; letter-spacing: -0.06em; 
   .promise { font-size: 33px; margin: var(--s4) 0 var(--s3); }
   .promise-sub { font-size: var(--t-md); }
   .cta-art { width: 280px; }
-  .cta-art span { font-size: 19px; }
   .cta-sub { font-size: var(--t-sm); }
 
   .moments { grid-template-columns: repeat(4, 1fr); gap: var(--s6); }
