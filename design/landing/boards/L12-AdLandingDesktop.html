@@ -18,13 +18,11 @@
   .play-sub { font-size: var(--t-sm); color: var(--ink-2); margin: var(--s1) 0 0; }
   .link-quiet { color: var(--teal); font-size: var(--t-md); border-bottom: 1px solid var(--teal-soft); }
 
-  /* 맛보기 단추(L13 3번 선택): 릴리가 노란 단추를 가리키는 그림 + 실제 글자. 그림과 글 전체가 한 링크 */
-  .cta { display: flex; align-items: center; gap: var(--s4); text-decoration: none; color: inherit; }
-  .cta-art { position: relative; flex: none; width: 210px; aspect-ratio: 455 / 373; background: url(../assets/v2/btn-sample-lily.webp) center / contain no-repeat; }
-  .cta-art span { position: absolute; left: 62%; top: 72%; width: 34%; height: 25%; display: grid; place-items: center; font-family: var(--font-logo); font-size: var(--t-md); color: var(--brown); }
-  .cta-label, .cta-sub { display: block; }
-  .cta-label { font-family: var(--font-logo); font-size: var(--t-lg); line-height: 1.25; margin: 0; color: var(--ink); }
-  .cta-sub { font-size: var(--t-xs); color: var(--ink-2); margin: var(--s1) 0 0; }
+  /* 맛보기 단추(L13 6번 선택): 펼친 책 위로 뜨는 노란 해 + 리본 위 실제 글자. 그림과 글 전체가 한 링크 */
+  .cta { display: flex; width: fit-content; flex-direction: column; align-items: center; text-decoration: none; color: inherit; }
+  .cta-art { position: relative; display: block; width: 250px; aspect-ratio: 456 / 401; background: url(../assets/v2/btn-sample-book.webp) center / contain no-repeat; }
+  .cta-art span { position: absolute; left: 22%; top: 55%; width: 56%; height: 16%; display: grid; place-items: center; font-family: var(--font-logo); font-size: 17px; color: var(--ink); white-space: nowrap; }
+  .cta-sub { display: block; font-size: var(--t-xs); color: var(--ink-2); margin-top: var(--s1); }
   h2 { font-family: var(--font-logo); font-weight: 400; font-size: var(--t-xl); line-height: 1.25; margin: 0 0 var(--s2); }
   .sub { font-size: var(--t-md); color: var(--ink-2); margin: 0; }
   section { padding: var(--s16) 0; }
@@ -92,7 +90,7 @@
       <p class="logo">릴리랑</p>
       <h1 class="promise">아이가 이야기에 끼어드는<br>2분 영어 그림책</h1>
       <p class="promise-sub">4~7세 아이와 함께 듣고, 누르며 노는 영어. 로그인 없이 바로 들어 볼 수 있어요.</p>
-      <a class="cta"><span class="cta-art"><span>무료</span></span><span class="cta-text"><span class="cta-label">맛보기<br>바로 듣기</span><span class="cta-sub">EP01 이 닦기<br>2분 19초</span></span></a>
+      <a class="cta"><span class="cta-art"><span>맛보기 바로 듣기</span></span><span class="cta-sub">EP01 이 닦기, 2분 19초, 무료</span></a>
     </div>
   </header>
 
@@ -159,7 +157,7 @@
     <div class="wrap">
       <h2>양치하기 전에 한 편 들어 보세요</h2>
       <div class="acts">
-        <a class="cta"><span class="cta-art"><span>무료</span></span><span class="cta-text"><span class="cta-label">맛보기<br>바로 듣기</span><span class="cta-sub">로그인 없이 바로 시작해요</span></span></a>
+        <a class="cta"><span class="cta-art"><span>맛보기 바로 듣기</span></span><span class="cta-sub">로그인 없이 바로 시작해요</span></a>
         <a class="link-quiet">가입하고 7권 모두 보기</a>
       </div>
     </div>

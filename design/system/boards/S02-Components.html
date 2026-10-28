@@ -14,7 +14,7 @@
   .cell { border-top: 2px solid var(--brown); padding-top: var(--s4); }
   .cell h2 { font-family: var(--font-logo); font-size: var(--t-lg); font-weight: 400; margin: 0; }
   .cell .use { font-size: var(--t-sm); color: var(--ink-2); margin: var(--s1) 0 var(--s5); }
-  .demo { min-height: 150px; display: flex; align-items: center; gap: var(--s5); flex-wrap: wrap; }
+  .demo { padding-bottom: var(--s4); min-height: 150px; display: flex; align-items: center; gap: var(--s5); flex-wrap: wrap; }
   .wide { grid-column: span 2; }
 
   /* 재생 단추 */
@@ -24,9 +24,9 @@
   .play-label { font-family: var(--font-logo); font-size: var(--t-lg); margin: 0; }
   .play-sub { font-size: var(--t-xs); color: var(--ink-2); margin: 0; }
 
-  .cta { display: flex; align-items: center; gap: var(--s4); }
-  .cta-art { position: relative; flex: none; width: 210px; aspect-ratio: 455 / 373; background: url(../assets/btn-sample-lily.webp) center / contain no-repeat; }
-  .cta-art span { position: absolute; left: 62%; top: 72%; width: 34%; height: 25%; display: grid; place-items: center; font-family: var(--font-logo); font-size: var(--t-md); color: var(--brown); }
+  .cta { display: inline-flex; flex-direction: column; align-items: center; }
+  .cta-art { position: relative; display: block; width: 250px; aspect-ratio: 456 / 401; background: url(../assets/btn-sample-book.webp) center / contain no-repeat; }
+  .cta-art span { position: absolute; left: 22%; top: 55%; width: 56%; height: 16%; display: grid; place-items: center; font-family: var(--font-logo); font-size: 17px; color: var(--ink); white-space: nowrap; }
   /* 부모 단추와 링크 */
   .btn-parent { display: inline-flex; align-items: center; justify-content: center; min-height: var(--parent-target); padding: 0 var(--s6); border: 2px solid var(--teal); border-radius: var(--r-btn); color: var(--teal); font-family: var(--font-logo); font-size: var(--t-md); background: var(--card); }
   .btn-parent.solid { background: var(--teal); color: var(--card); }
@@ -91,10 +91,11 @@
   <div class="grid">
     <div class="cell">
       <h2>맛보기 단추</h2>
-      <p class="use">홈과 랜딩의 첫 행동. 릴리가 노란 단추를 가리키고, 종이 딱지에 "무료". 그림과 글 전체가 한 링크. 노랑은 한 화면에 이것 하나.</p>
+      <p class="use">홈과 랜딩의 첫 행동. 펼친 책 위로 노란 해가 뜨고, 리본에 실제 글자. 그림과 글 전체가 한 링크. 노랑은 한 화면에 이것 하나.</p>
       <div class="demo">
-        <div class="cta"><span class="cta-art"><span>무료</span></span><div><p class="play-label">맛보기<br>바로 듣기</p><p class="play-sub">EP01 이 닦기<br>2분 19초</p></div></div>
+        <div class="cta"><span class="cta-art"><span>맛보기 바로 듣기</span></span><p class="play-sub">EP01 이 닦기, 2분 19초, 무료</p></div>
       </div>
+    </div>
     </div>
     </div>
 
