@@ -18,6 +18,10 @@
   .play-sub { font-size: var(--t-xs); color: var(--ink-2); margin: var(--s1) 0 0; }
   .link-quiet { color: var(--teal); font-size: var(--t-sm); border-bottom: 1px solid var(--teal-soft); }
 
+  /* 맛보기 알약 단추(L13 1번 선택): 그림은 OpenAI, 글자는 실제 글자 */
+  .pill { position: relative; display: block; width: 300px; aspect-ratio: 439 / 270; background: url(../assets/v2/btn-sample-pill.webp) center / contain no-repeat; }
+  .pill span { position: absolute; left: 36%; top: 33%; width: 58%; height: 54%; display: grid; place-items: center; font-family: var(--font-logo); font-size: 21px; color: var(--ink); }
+  .pill-sub { font-size: var(--t-xs); color: var(--ink-2); margin: var(--s1) 0 0; padding-left: 12px; }
   h2 { font-family: var(--font-logo); font-weight: 400; font-size: var(--t-xl); line-height: 1.25; margin: 0 0 var(--s2); }
   .sub { font-size: var(--t-sm); color: var(--ink-2); margin: 0; }
   section { padding: var(--s12) var(--s6); }
@@ -29,7 +33,7 @@
   .logo { font-family: var(--font-logo); font-size: var(--t-lg); color: var(--brown); margin: 0 0 var(--s3); }
   .promise { font-family: var(--font-logo); font-weight: 400; font-size: var(--t-xl); line-height: 1.3; margin: 0 0 var(--s3); }
   .promise-sub { font-size: var(--t-md); color: var(--ink); margin: 0 0 var(--s8); }
-  .hero-sheet .play-row { margin-bottom: var(--s5); }
+  .hero-sheet .cta { margin-left: -12px; }
 
   /* 2. 2분 19초 */
   .minutes { background: var(--paper-2); }
@@ -77,7 +81,7 @@
   .close { position: relative; text-align: left; background: var(--sky); padding-top: var(--s12); }
   .close::before { content: ''; position: absolute; left: 0; right: 0; top: -19px; height: 20px; background: var(--sky); -webkit-mask: var(--m-torn-wave) 0 0 / 100% 100% no-repeat; mask: var(--m-torn-wave) 0 0 / 100% 100% no-repeat; }
   .close h2 { margin-bottom: var(--s6); }
-  .close .play-row { margin-bottom: var(--s6); }
+  .close .cta { margin: 0 0 var(--s6) -12px; }
   .foot { padding: var(--s6); font-size: var(--t-xs); color: var(--ink-2); background: var(--paper-2); }
   .foot a { color: var(--ink-2); text-decoration: underline; }
 </style>
@@ -89,10 +93,7 @@
       <p class="logo">릴리랑</p>
       <h1 class="promise">아이가 이야기에 끼어드는<br>2분 영어 그림책</h1>
       <p class="promise-sub">4~7세 아이와 함께 듣고, 누르며 노는 영어. 로그인 없이 바로 들어 볼 수 있어요.</p>
-      <div class="play-row">
-        <a class="big-play" aria-label="맛보기 바로 듣기"></a>
-        <div><p class="play-label">맛보기 바로 듣기</p><p class="play-sub">EP01 이 닦기, 2분 19초, 무료</p></div>
-      </div>
+      <div class="cta"><a class="pill" aria-label="맛보기 바로 듣기, EP01 이 닦기, 2분 19초, 무료"><span>맛보기 바로 듣기</span></a><p class="pill-sub">EP01 이 닦기, 2분 19초, 무료</p></div>
     </div>
   </header>
 
@@ -157,10 +158,7 @@
 
   <section class="close">
     <h2>양치하기 전에<br>한 편 들어 보세요</h2>
-    <div class="play-row">
-      <a class="big-play" aria-label="맛보기 바로 듣기"></a>
-      <div><p class="play-label">맛보기 바로 듣기</p><p class="play-sub">로그인 없이 바로 시작해요</p></div>
-    </div>
+    <div class="cta"><a class="pill" aria-label="맛보기 바로 듣기, 로그인 없이 바로 시작해요"><span>맛보기 바로 듣기</span></a><p class="pill-sub">로그인 없이 바로 시작해요</p></div>
     <a class="link-quiet">가입하고 7권 모두 보기</a>
   </section>
 

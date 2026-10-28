@@ -78,11 +78,11 @@
       "x": 5250,
       "y": 0,
       "w": 390,
-      "h": 3860,
+      "h": 4000,
       "title": "L11-AdLandingPhone",
       "group": "광고 랜딩",
       "status": "approved",
-      "note": "사용자 승인 2026-10-28: 광고/공유용 별도 랜딩, EP01 실제 화면과 시스템 부품"
+      "note": "사용자 승인 2026-10-28, 맛보기 단추는 L13 1번 알약으로 바꿈(사용자 선택)"
     },
     "L12-AdLandingDesktop.html": {
       "x": 5680,
@@ -92,7 +92,7 @@
       "title": "L12-AdLandingDesktop",
       "group": "광고 랜딩",
       "status": "approved",
-      "note": "사용자 승인 2026-10-28: 광고/공유용 별도 랜딩, EP01 실제 화면과 시스템 부품"
+      "note": "사용자 승인 2026-10-28, 맛보기 단추는 L13 1번 알약으로 바꿈(사용자 선택)"
     },
     "L13-PlayButtonOptions.html": {
       "x": 7000,
@@ -100,7 +100,9 @@
       "w": 1760,
       "h": 1700,
       "title": "L13-PlayButtonOptions",
-      "group": "광고 랜딩"
+      "group": "광고 랜딩",
+      "status": "approved",
+      "note": "사용자 선택 2026-10-28: 1번 알약 단추"
     }
   },
   "groups": [
