@@ -626,6 +626,54 @@
         ],
         "updated": "2026-10-28T07:05:35Z"
       }
+    },
+    "R71-CrayonHome.html": {
+      "x": 30029,
+      "y": 0,
+      "w": 390,
+      "h": 1820,
+      "title": "R71-CrayonHome",
+      "group": "크레용 액자 전체"
+    },
+    "R72-CrayonEpisodeFirst.html": {
+      "x": 30459,
+      "y": 0,
+      "w": 390,
+      "h": 844,
+      "title": "R72-CrayonEpisodeFirst",
+      "group": "크레용 액자 전체"
+    },
+    "R73-CrayonEpisodeWait.html": {
+      "x": 30889,
+      "y": 0,
+      "w": 390,
+      "h": 844,
+      "title": "R73-CrayonEpisodeWait",
+      "group": "크레용 액자 전체"
+    },
+    "R74-CrayonEpisodeEnd.html": {
+      "x": 31319,
+      "y": 0,
+      "w": 390,
+      "h": 844,
+      "title": "R74-CrayonEpisodeEnd",
+      "group": "크레용 액자 전체"
+    },
+    "R75-CrayonGateCard.html": {
+      "x": 31749,
+      "y": 0,
+      "w": 390,
+      "h": 844,
+      "title": "R75-CrayonGateCard",
+      "group": "크레용 액자 전체"
+    },
+    "R76-CrayonJoin.html": {
+      "x": 32179,
+      "y": 0,
+      "w": 390,
+      "h": 844,
+      "title": "R76-CrayonJoin",
+      "group": "크레용 액자 전체"
     }
   },
   "groups": [
@@ -652,6 +700,10 @@
     {
       "id": "홈 개선안 3",
       "label": "홈 개선안 3"
+    },
+    {
+      "id": "크레용 액자 전체",
+      "label": "크레용 액자 전체"
     }
   ],
   "links": [
@@ -709,6 +761,31 @@
       "from": "R58-HomePhone.html",
       "to": "R51-EpisodeFirst.html",
       "label": "맛보기 바로 듣기"
+    },
+    {
+      "from": "R71-CrayonHome.html",
+      "to": "R72-CrayonEpisodeFirst.html",
+      "label": "맛보기 바로 듣기"
+    },
+    {
+      "from": "R72-CrayonEpisodeFirst.html",
+      "to": "R73-CrayonEpisodeWait.html",
+      "label": "재생"
+    },
+    {
+      "from": "R73-CrayonEpisodeWait.html",
+      "to": "R75-CrayonGateCard.html",
+      "label": "맛보기 끝"
+    },
+    {
+      "from": "R75-CrayonGateCard.html",
+      "to": "R76-CrayonJoin.html",
+      "label": "가입하고 이어 듣기"
+    },
+    {
+      "from": "R73-CrayonEpisodeWait.html",
+      "to": "R74-CrayonEpisodeEnd.html",
+      "label": "가입 뒤 끝까지"
     }
   ]
 }
