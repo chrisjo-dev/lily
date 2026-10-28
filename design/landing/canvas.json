@@ -110,7 +110,9 @@
       "w": 2170,
       "h": 1100,
       "title": "L14-LineLayoutOptions",
-      "group": "광고 랜딩"
+      "group": "광고 랜딩",
+      "status": "rejected",
+      "note": "눈에 안 띈다"
     },
     "L15-DividerOptions.html": {
       "x": 11010,
@@ -118,7 +120,9 @@
       "w": 2170,
       "h": 1100,
       "title": "L15-DividerOptions",
-      "group": "광고 랜딩"
+      "group": "광고 랜딩",
+      "status": "rejected",
+      "note": "눈에 안 띈다"
     },
     "L16-BoldLineLayoutOptions.html": {
       "x": 13220,
@@ -126,7 +130,9 @@
       "w": 2170,
       "h": 1100,
       "title": "L16-BoldLineLayoutOptions",
-      "group": "광고 랜딩"
+      "group": "광고 랜딩",
+      "status": "rejected",
+      "note": "OpenAI 시안 2번으로 감"
     },
     "L17-CrayonLandingPhone.html": {
       "x": 15430,
@@ -134,7 +140,9 @@
       "w": 390,
       "h": 2940,
       "title": "L17-CrayonLandingPhone",
-      "group": "광고 랜딩"
+      "group": "광고 랜딩",
+      "status": "approved",
+      "note": "사용자 승인 2026-10-28: 크레용 겹줄 액자(OpenAI 시안 2번 고도화)로 랜딩 진행. L11 휴대폰 배치를 대신함"
     },
     "L18-CrayonVariants.html": {
       "x": 15860,
@@ -142,7 +150,19 @@
       "w": 940,
       "h": 1680,
       "title": "L18-CrayonVariants",
-      "group": "광고 랜딩"
+      "group": "광고 랜딩",
+      "status": "rejected",
+      "note": "사용자: 원래(L17)가 가장 낫다"
+    },
+    "L19-CrayonLandingDesktop.html": {
+      "x": 16840,
+      "y": 0,
+      "w": 1280,
+      "h": 2460,
+      "title": "L19-CrayonLandingDesktop",
+      "group": "광고 랜딩",
+      "status": "approved",
+      "note": "L17 승인(2026-10-28)을 PC로 옮긴 것. 같은 재료와 글"
     }
   },
   "groups": [
