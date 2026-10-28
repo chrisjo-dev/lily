@@ -32,6 +32,7 @@
 
   /* 글꼴 */
   --font-logo: "Jua", "Gowun Dodum", sans-serif;
+  --font-title: "Gaegu", "Jua", "Gowun Dodum", sans-serif; /* 로고와 큰 제목, 큰 단추 글자만(굵게, 자간 -0.06em) */
   --font-kr: "Gowun Dodum", "Apple SD Gothic Neo", "Noto Sans KR", sans-serif;
   --font-en: "Andika", "Gowun Dodum", sans-serif;
   --font-book: "Gowun Batang", "Gowun Dodum", serif;   /* 본문 줄, 책 글씨 */

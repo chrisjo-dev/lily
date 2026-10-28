@@ -7,6 +7,7 @@
   --crayon: #3f86d0;
 
   --font-logo: "Jua", "Gowun Dodum", sans-serif;
+  --font-title: "Gaegu", "Jua", "Gowun Dodum", sans-serif; /* 로고와 큰 제목만(DESIGN.md 글꼴) */
   --font-kr: "Gowun Dodum", "Apple SD Gothic Neo", sans-serif;
   --font-en: "Andika", "Gowun Dodum", sans-serif;
 
@@ -30,13 +31,13 @@ a:focus-visible { outline: 3px solid var(--teal); outline-offset: 2px; }
 
 .star-title { display: flex; align-items: center; justify-content: center; gap: var(--s3); }
 .star-title::before, .star-title::after { content: ''; width: 20px; height: 20px; background: url(img/star.webp) center / contain no-repeat; flex: none; }
-h2 { font-family: var(--font-logo); font-weight: 400; font-size: 24px; line-height: 1.3; margin: 0; text-align: center; }
+h2 { font-family: var(--font-title); font-weight: 700; letter-spacing: -0.06em; font-size: 28px; line-height: 1.3; margin: 0; text-align: center; }
 .sub { font-size: var(--t-sm); color: var(--ink-2); margin: var(--s2) 0 var(--s5); text-align: center; }
 
 /* 첫 화면 */
 .hero .pic img { height: 230px; max-height: max(26vh, 180px); object-fit: cover; object-position: 30% 45%; }
-.logo { font-family: var(--font-logo); font-size: 44px; color: var(--brown); margin: var(--s5) 0 0; line-height: 1; }
-.promise { font-family: var(--font-logo); font-weight: 400; font-size: 22px; line-height: 1.35; margin: var(--s3) 0 var(--s2); text-align: center; }
+.logo { font-family: var(--font-title); font-weight: 700; letter-spacing: -0.06em; font-size: 52px; color: var(--brown); margin: var(--s5) 0 0; line-height: 1; }
+.promise { font-family: var(--font-title); font-weight: 700; letter-spacing: -0.06em; font-size: 26px; line-height: 1.35; margin: var(--s3) 0 var(--s2); text-align: center; }
 .promise-sub { font-size: var(--t-sm); text-align: center; margin: 0; }
 
 /* 맛보기 단추(L13 6번 선택): 책 위로 뜨는 해 그림 + 리본 위 실제 글자. 그림과 글 전체가 한 링크 */
@@ -89,14 +90,14 @@ h2 { font-family: var(--font-logo); font-weight: 400; font-size: 24px; line-heig
   .divider { height: 18px; margin: var(--s12) auto; width: 82%; }
   .pic { border-width: 14px; }
   .star-title::before, .star-title::after { width: 24px; height: 24px; }
-  h2 { font-size: var(--t-xl); }
+  h2 { font-size: 33px; }
   .sub { font-size: var(--t-md); margin: var(--s2) 0 var(--s8); }
 
   .hero { display: grid; grid-template-columns: 1.15fr 1fr; gap: var(--s10); align-items: center; }
   .hero .pic img { height: 470px; max-height: none; object-position: 25% 45%; }
   .hero-text { text-align: center; }
-  .logo { font-size: 56px; margin: 0; }
-  .promise { font-size: var(--t-xl); margin: var(--s4) 0 var(--s3); }
+  .logo { font-size: 66px; margin: 0; }
+  .promise { font-size: 33px; margin: var(--s4) 0 var(--s3); }
   .promise-sub { font-size: var(--t-md); }
   .cta-art { width: 280px; }
   .cta-art span { font-size: 19px; }

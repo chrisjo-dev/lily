@@ -31,11 +31,13 @@
 <meta name="twitter:description" content="아이와 함께 2분, 듣고 누르며 노는 영어 그림책. 4~7세 아이와 부모님을 위한 릴리랑.">
 <meta name="twitter:image" content="https://lily.wspace.ai.kr/og.jpg">
 
-<!-- Fonts: preconnect + async load (Andika, Gowun Dodum, Jua) -->
+<!-- Fonts: preconnect + async load (Andika, Gowun Dodum, Jua, Gaegu 제목 글자만) -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Andika:wght@400;700&family=Gowun+Dodum&family=Jua&display=swap" onload="this.onload=null;this.rel='stylesheet'">
-<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Andika:wght@400;700&family=Gowun+Dodum&family=Jua&display=swap"></noscript>
+<!-- 개구는 홈 제목 글자만, 페이지가 다 뜬 뒤에 켠다(brand/title-font.js). 제목 글자를 바꾸면 text도 함께 -->
+<link id="title-font" rel="stylesheet" media="print" href="https://fonts.googleapis.com/css2?family=Gaegu:wght@700&display=swap&text=%20%EA%B2%8C%EA%BB%98%EB%8A%94%EB%8B%98%EB%9E%91%EB%A0%87%EB%A3%A8%EB%A6%AC%EB%A6%B4%EB%AA%A8%EB%AC%B8%EB%AC%BB%EB%B6%80%EC%9A%94%EC%9D%98%EC%9D%B4%EC%9E%90%EC%A3%BC%EC%A7%88%ED%95%98%ED%95%A8%ED%95%B4">
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Andika:wght@400;700&family=Gowun+Dodum&family=Jua&display=swap"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gaegu:wght@700&display=swap&text=%20%EA%B2%8C%EA%BB%98%EB%8A%94%EB%8B%98%EB%9E%91%EB%A0%87%EB%A3%A8%EB%A6%AC%EB%A6%B4%EB%AA%A8%EB%AC%B8%EB%AC%BB%EB%B6%80%EC%9A%94%EC%9D%98%EC%9D%B4%EC%9E%90%EC%A3%BC%EC%A7%88%ED%95%98%ED%95%A8%ED%95%B4"></noscript>
 
 <!-- Hero image preload (뷰포트별 분리: phone=800w, tablet=1280w) -->
 <link rel="preload" as="image" href="brand/home/home-hero-800.webp"
@@ -58,6 +60,7 @@
   --touch-edge: #6b4a36;
   --card:       #ffffff;
   --font-logo: "Jua", sans-serif;
+  --font-title: "Gaegu", "Jua", sans-serif; /* 로고와 큰 제목만(DESIGN.md 글꼴) */
   --font-kr:   "Gowun Dodum", "Apple SD Gothic Neo", sans-serif;
   --font-en:   "Andika", sans-serif;
   --r-frame: 16px;
@@ -80,56 +83,29 @@ a   { text-decoration: none; color: inherit; }
 :focus-visible { outline: 3px solid var(--teal); outline-offset: 2px; }
 
 /* ════════════════════════════════════════════════
-   크레용 겹줄 액자 (R71, 랜딩 L17과 같은 재료 brand/crayon)
-   페이지 전체를 책 액자로, 섹션 경계는 크레용 줄
+   재생 단추 (공통, 노랑 원 + btn-play.webp)
+   노랑은 이 단추 하나만
    ════════════════════════════════════════════════ */
-body { padding: 6px; }
-.cr-book {
-  border: 34px solid transparent;
-  border-image: url('brand/crayon/frame9.webp') 50 round;
-  overflow: clip;
+.big-play {
+  position: relative;
+  width: 96px;
+  height: 96px;
+  background: var(--touch);
+  border-radius: 50%;
+  border: 2.5px solid var(--brown);
+  flex-shrink: 0;
+  cursor: pointer;
+  display: block;
 }
-.cr-line { position: relative; }
-.cr-line::before {
+.big-play::before {
   content: '';
   position: absolute;
-  top: 0; left: 10%; right: 10%;
-  height: 14px;
-  background: url('brand/crayon/divider.webp') center / 100% 100% no-repeat;
+  left: -19%;
+  top: -31%;
+  width: 138%;
+  height: 131%;
+  background: url('/engine/ui/btn-play.webp') center / contain no-repeat;
   pointer-events: none;
-}
-
-/* 맛보기 단추: 책 위로 뜨는 해 (노랑은 이 단추 하나만) */
-.cr-cta {
-  display: flex;
-  width: fit-content;
-  margin: 8px auto 4px;
-  flex-direction: column;
-  align-items: center;
-}
-.cr-cta-art {
-  position: relative;
-  display: block;
-  width: 230px;
-  aspect-ratio: 456 / 401;
-  background: url('brand/crayon/btn-sample-book.webp') center / contain no-repeat;
-}
-.cr-cta-art span {
-  position: absolute;
-  left: 22%; top: 55%;
-  width: 56%; height: 16%;
-  display: grid;
-  place-items: center;
-  font-family: var(--font-logo);
-  font-size: 16px;
-  color: var(--ink);
-  white-space: nowrap;
-}
-.cr-cta-sub {
-  display: block;
-  font-size: 12px;
-  color: var(--ink-2);
-  margin-top: 2px;
 }
 
 /* ════════════════════════════════════════════════
@@ -141,9 +117,7 @@ body { padding: 6px; }
 .hero-img-ph {
   display: block;
   width: 100%;
-  height: 230px;
-  border: 12px solid transparent;
-  border-image: url('brand/crayon/picframe9.webp') 20 round;
+  height: 260px;
   object-fit: cover;
   object-position: left center;
 }
@@ -151,10 +125,13 @@ body { padding: 6px; }
 .hero-info {
   background: var(--paper);
   padding: 20px 24px 24px;
+  border-bottom: 1px solid var(--line);
 }
 .main-title {
-  font-family: var(--font-logo);
-  font-size: 40px;
+  font-family: var(--font-title);
+  font-weight: 700;
+  letter-spacing: -0.06em;
+  font-size: 46px;
   color: var(--brown);
   line-height: 1;
   margin: 0 0 8px;
@@ -165,6 +142,27 @@ body { padding: 6px; }
   color: var(--ink);
   line-height: 1.6;
   margin: 0 0 18px;
+}
+.play-row {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 14px;
+}
+.play-text { display: flex; flex-direction: column; gap: 3px; }
+.play-label {
+  font-family: var(--font-kr);
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--ink);
+  margin: 0;
+}
+.play-sub {
+  font-family: var(--font-kr);
+  font-size: 11px;
+  color: var(--ink-2);
+  margin: 0;
+  line-height: 1.5;
 }
 .btn-join-quiet {
   font-family: var(--font-kr);
@@ -178,10 +176,14 @@ body { padding: 6px; }
    ════════════════════════════════════════════════ */
 .how-sec {
   padding: 28px 20px 24px;
+  background: var(--paper-2);
+  border-top: 1px solid var(--line);
 }
 .how-sec-title {
-  font-family: var(--font-logo);
-  font-size: 20px;
+  font-family: var(--font-title);
+  font-weight: 700;
+  letter-spacing: -0.06em;
+  font-size: 23px;
   color: var(--ink);
   margin: 0 0 18px;
   text-align: center;
@@ -240,14 +242,18 @@ body { padding: 6px; }
    릴리의 하루 선반 (공통)
    ════════════════════════════════════════════════ */
 .shelf-sec {
+  background: var(--paper);
+  border-top: 1px solid var(--line);
   padding-bottom: 16px;
 }
 .shelf-head {
   padding: 22px 20px 0;
 }
 .shelf-title {
-  font-family: var(--font-logo);
-  font-size: 20px;
+  font-family: var(--font-title);
+  font-weight: 700;
+  letter-spacing: -0.06em;
+  font-size: 23px;
   color: var(--ink);
   margin: 0 0 2px;
 }
@@ -363,10 +369,14 @@ body { padding: 6px; }
    ════════════════════════════════════════════════ */
 .parent-sec {
   padding: 26px 20px 30px;
+  background: var(--paper-2);
+  border-top: 1px solid var(--line);
 }
 .parent-sec-title {
-  font-family: var(--font-logo);
-  font-size: 20px;
+  font-family: var(--font-title);
+  font-weight: 700;
+  letter-spacing: -0.06em;
+  font-size: 23px;
   color: var(--ink);
   margin: 0 0 18px;
   text-align: center;
@@ -395,6 +405,8 @@ body { padding: 6px; }
 .parent-bar {
   display: none;
   height: 90px;
+  background: var(--paper-2);
+  border-top: 1.5px solid var(--line);
   align-items: center;
   justify-content: space-around;
   padding: 0 40px;
@@ -436,16 +448,20 @@ body { padding: 6px; }
    ════════════════════════════════════════════════ */
 .faq-sec {
   padding: 26px 20px 30px;
+  background: var(--paper);
+  border-top: 1px solid var(--line);
 }
 .faq-title {
-  font-family: var(--font-logo);
-  font-size: 20px;
+  font-family: var(--font-title);
+  font-weight: 700;
+  letter-spacing: -0.06em;
+  font-size: 23px;
   color: var(--ink);
   margin: 0 0 16px;
 }
-.faq-item { padding: 11px 0; }
+.faq-item { border-bottom: 1px solid var(--line); padding: 11px 0; }
 .faq-item:first-of-type { padding-top: 0; }
-.faq-item:last-of-type  { padding-bottom: 0; }
+.faq-item:last-of-type  { border-bottom: none; padding-bottom: 0; }
 .faq-q {
   font-family: var(--font-kr);
   font-size: 13px;
@@ -466,6 +482,8 @@ body { padding: 6px; }
    ════════════════════════════════════════════════ */
 .site-footer {
   padding: 18px 20px 26px;
+  background: var(--paper-2);
+  border-top: 1px solid var(--line);
 }
 .footer-links { display: flex; gap: 16px; margin-bottom: 6px; }
 .footer-links a {
@@ -490,10 +508,8 @@ body { padding: 6px; }
     display: block;
     position: relative;
     width: 100%;
-    height: 420px;
+    height: 380px;
     overflow: hidden;
-    border: 14px solid transparent;
-    border-image: url('brand/crayon/picframe9.webp') 20 round;
   }
   .hero-img-tb {
     position: absolute;
@@ -514,8 +530,10 @@ body { padding: 6px; }
     gap: 10px;
   }
   .hero-logo {
-    font-family: var(--font-logo);
-    font-size: 56px;
+    font-family: var(--font-title);
+    font-weight: 700;
+    letter-spacing: -0.06em;
+    font-size: 64px;
     color: var(--brown);
     line-height: 1;
     margin: 0;
@@ -527,6 +545,10 @@ body { padding: 6px; }
     line-height: 1.7;
     margin: 0;
   }
+  .hero-panel .play-row   { margin-top: 4px; margin-bottom: 0; }
+  .hero-panel .big-play   { width: 80px; height: 80px; }
+  .hero-panel .play-label { font-size: 14px; }
+  .hero-panel .play-sub   { font-size: 12px; }
   .hero-panel .btn-join-quiet { font-size: 12px; }
 
   /* phone-only 숨김 */
@@ -534,7 +556,7 @@ body { padding: 6px; }
 
   /* 이렇게 함께해요 — 태블릿 세로 크기 */
   .how-sec { padding: 36px 40px 44px; }
-  .how-sec-title { font-size: 22px; margin-bottom: 18px; }
+  .how-sec-title { font-size: 26px; margin-bottom: 18px; }
   .how-img   { width: 96px; height: 96px; }
   .how-num   { font-size: 13px; }
   .how-label { font-size: 13px; }
@@ -550,7 +572,7 @@ body { padding: 6px; }
     align-items: baseline;
     gap: 10px;
   }
-  .shelf-title  { font-size: 22px; margin: 0; }
+  .shelf-title  { font-size: 26px; margin: 0; }
   .shelf-sub    { font-size: 12px; margin: 0; }
   .books-stand  { gap: 6px; padding: 0 40px; overflow-x: visible; }
   .book-col     { flex: 1; width: auto; max-width: 88px; flex-shrink: 1; }
@@ -598,10 +620,8 @@ body { padding: 6px; }
     display: block;
     position: relative;
     width: 100%;
-    height: 420px;
+    height: 400px;
     overflow: hidden;
-    border: 14px solid transparent;
-    border-image: url('brand/crayon/picframe9.webp') 20 round;
   }
   .hero-img-tb {
     position: absolute;
@@ -622,8 +642,10 @@ body { padding: 6px; }
     gap: 10px;
   }
   .hero-logo {
-    font-family: var(--font-logo);
-    font-size: 52px;
+    font-family: var(--font-title);
+    font-weight: 700;
+    letter-spacing: -0.06em;
+    font-size: 60px;
     color: var(--brown);
     line-height: 1;
     margin: 0;
@@ -635,6 +657,10 @@ body { padding: 6px; }
     line-height: 1.7;
     margin: 0;
   }
+  .hero-panel .play-row   { margin-top: 6px; margin-bottom: 0; }
+  .hero-panel .big-play   { width: 88px; height: 88px; }
+  .hero-panel .play-label { font-size: 15px; }
+  .hero-panel .play-sub   { font-size: 12px; }
   .hero-panel .btn-join-quiet { font-size: 12px; }
 
   /* phone-only + how-sec 숨김 */
@@ -649,7 +675,7 @@ body { padding: 6px; }
     align-items: baseline;
     gap: 10px;
   }
-  .shelf-title  { font-size: 22px; margin: 0; }
+  .shelf-title  { font-size: 26px; margin: 0; }
   .shelf-sub    { font-size: 12px; margin: 0; }
   .books-stand  { gap: 8px; padding: 0 32px; overflow-x: visible; }
   .book-col     { flex: 1; width: auto; max-width: 100px; flex-shrink: 1; }
@@ -677,7 +703,7 @@ body { padding: 6px; }
 
   /* FAQ — 가로 여백 확대 */
   .faq-sec   { padding: 36px 40px 44px; }
-  .faq-title { font-size: 22px; }
+  .faq-title { font-size: 26px; }
 
   /* 푸터 — 가로 배치 */
   .site-footer {
@@ -690,23 +716,6 @@ body { padding: 6px; }
   .footer-links { margin-bottom: 0; gap: 20px; }
   .footer-links a { font-size: 12px; }
   .footer-by { font-size: 11px; }
-}
-
-/* ── 태블릿, 데스크톱 크레용 액자 (L19와 같은 굵기) ── */
-@media (min-width: 700px) and (orientation: portrait), (min-width: 900px) and (orientation: landscape) {
-  body { padding: 12px; }
-  .cr-book { border-width: 40px; }
-  .hero-panel { gap: 8px; }
-  .hero-panel .cr-cta { margin: 0; }
-  .hero-panel .cr-cta-art { width: 180px; }
-  .hero-panel .cr-cta-art span { font-size: 14px; }
-  /* 그림 위 작은 글은 종이 쪽지에 얹어 읽히게 */
-  .hero-panel .cr-cta-sub, .hero-panel .btn-join-quiet {
-    background: color-mix(in srgb, var(--paper) 88%, transparent);
-    border-radius: 8px;
-    padding: 2px 10px;
-  }
-  .hero-panel .cr-cta-sub { margin-top: 4px; }
 }
 
 /* ── 드래그/선택 방지 ── */
@@ -722,7 +731,6 @@ body { padding: 6px; }
 </style>
 </head>
 <body>
-<div class="cr-book">
 
 <!-- ══════════════════════════════════════════════
      히어로 전화기 (H01, 700px 미만)
@@ -738,7 +746,13 @@ body { padding: 6px; }
   <div class="hero-info">
     <h1 class="main-title">릴리랑</h1>
     <p class="main-tagline">하루 2분, 영어 그림책. 4~7세 아이와 함께 들어요.</p>
-    <a class="cr-cta" href="/ep01/"><span class="cr-cta-art"><span>맛보기 바로 듣기</span></span><span class="cr-cta-sub">EP01 이 닦기, 2분 19초, 무료</span></a>
+    <div class="play-row">
+      <a class="big-play" href="/ep01/" aria-label="맛보기 바로 듣기, EP01 무료"></a>
+      <div class="play-text">
+        <p class="play-label">맛보기 바로 듣기</p>
+        <p class="play-sub">EP01 Brush, Brush, Brush! 무료</p>
+      </div>
+    </div>
     <a class="btn-join-quiet" href="/join/">가입하고 7편 모두 보기</a>
   </div>
 </div>
@@ -757,7 +771,13 @@ body { padding: 6px; }
   <div class="hero-panel">
     <h1 class="hero-logo">릴리랑</h1>
     <p class="hero-tagline">하루 2분, 영어 그림책.<br>4~7세 아이와 함께 들어요.</p>
-    <a class="cr-cta" href="/ep01/"><span class="cr-cta-art"><span>맛보기 바로 듣기</span></span><span class="cr-cta-sub">EP01 이 닦기, 2분 19초, 무료</span></a>
+    <div class="play-row">
+      <a class="big-play" href="/ep01/" aria-label="맛보기 바로 듣기, EP01 무료"></a>
+      <div class="play-text">
+        <p class="play-label">맛보기 바로 듣기</p>
+        <p class="play-sub">EP01 Brush, Brush, Brush! 무료</p>
+      </div>
+    </div>
     <a class="btn-join-quiet" href="/join/">가입하고 7편 모두 보기</a>
   </div>
 </div>
@@ -765,7 +785,7 @@ body { padding: 6px; }
 <!-- ══════════════════════════════════════════════
      이렇게 함께해요 (H01 phone + H03 portrait)
      ══════════════════════════════════════════════ -->
-<section class="how-sec cr-line" aria-labelledby="h-how">
+<section class="how-sec" aria-labelledby="h-how">
   <h2 class="how-sec-title" id="h-how">이렇게 함께해요</h2>
   <div class="how-steps">
     <div class="how-step">
@@ -805,7 +825,7 @@ body { padding: 6px; }
 <!-- ══════════════════════════════════════════════
      릴리의 하루 선반 (공통)
      ══════════════════════════════════════════════ -->
-<section class="shelf-sec cr-line" aria-labelledby="h-shelf">
+<section class="shelf-sec" aria-labelledby="h-shelf">
   <div class="shelf-head">
     <h2 class="shelf-title" id="h-shelf">릴리의 하루</h2>
     <span class="shelf-sub">아침부터 밤까지, 하루 7권</span>
@@ -912,7 +932,7 @@ body { padding: 6px; }
 <!-- ══════════════════════════════════════════════
      부모님께 (H01 phone, 세로 목록)
      ══════════════════════════════════════════════ -->
-<section class="parent-sec cr-line" aria-labelledby="h-parent">
+<section class="parent-sec" aria-labelledby="h-parent">
   <h2 class="parent-sec-title" id="h-parent">부모님께</h2>
   <div class="parent-items">
     <div class="parent-item">
@@ -945,7 +965,7 @@ body { padding: 6px; }
 <!-- ══════════════════════════════════════════════
      부모님께 가로 막대 (H02/H03 tablet)
      ══════════════════════════════════════════════ -->
-<div class="parent-bar cr-line" role="complementary" aria-label="부모님께">
+<div class="parent-bar" role="complementary" aria-label="부모님께">
   <div class="parent-bar-item">
     <img fetchpriority="low" class="parent-bar-icon" src="brand/home/home-ic-time.webp" alt=""
          loading="lazy" decoding="async" width="96" height="96">
@@ -977,7 +997,7 @@ body { padding: 6px; }
 <!-- ══════════════════════════════════════════════
      자주 묻는 질문 (phone + landscape 공통)
      ══════════════════════════════════════════════ -->
-<section class="faq-sec cr-line" aria-labelledby="h-faq">
+<section class="faq-sec" aria-labelledby="h-faq">
   <h2 class="faq-title" id="h-faq">자주 묻는 질문</h2>
   <div class="faq-item">
     <p class="faq-q">몇 살부터 할 수 있나요?</p>
@@ -1003,6 +1023,6 @@ body { padding: 6px; }
   <p class="footer-by">매일 외국어 읽기가 만들어요</p>
 </footer>
 
-</div>
+<script src="brand/title-font.js"></script>
 </body>
 </html>

@@ -634,16 +634,8 @@
       "h": 1820,
       "title": "R71-CrayonHome",
       "group": "크레용 액자 전체",
-      "status": "approved",
-      "note": "전체 크레용 겹줄 액자 채택(사용자: 전체도 크레용)",
-      "impl": {
-        "route": "/",
-        "files": [
-          "index.html",
-          "brand/crayon/frame9.webp"
-        ],
-        "updated": "2026-10-28T12:09:43Z"
-      }
+      "status": "rejected",
+      "note": "홈은 v3(H01)로 되돌림, 사용자 결정"
     },
     "R72-CrayonEpisodeFirst.html": {
       "x": 30459,
