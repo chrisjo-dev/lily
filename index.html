@@ -700,6 +700,13 @@ body { padding: 6px; }
   .hero-panel .cr-cta { margin: 0; }
   .hero-panel .cr-cta-art { width: 180px; }
   .hero-panel .cr-cta-art span { font-size: 14px; }
+  /* 그림 위 작은 글은 종이 쪽지에 얹어 읽히게 */
+  .hero-panel .cr-cta-sub, .hero-panel .btn-join-quiet {
+    background: color-mix(in srgb, var(--paper) 88%, transparent);
+    border-radius: 8px;
+    padding: 2px 10px;
+  }
+  .hero-panel .cr-cta-sub { margin-top: 4px; }
 }
 
 /* ── 드래그/선택 방지 ── */
