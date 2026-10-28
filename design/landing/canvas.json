@@ -73,6 +73,22 @@
         ],
         "updated": "2026-10-22T08:00:01Z"
       }
+    },
+    "L11-AdLandingPhone.html": {
+      "x": 5250,
+      "y": 0,
+      "w": 390,
+      "h": 3860,
+      "title": "L11-AdLandingPhone",
+      "group": "광고 랜딩"
+    },
+    "L12-AdLandingDesktop.html": {
+      "x": 5680,
+      "y": 0,
+      "w": 1280,
+      "h": 2560,
+      "title": "L12-AdLandingDesktop",
+      "group": "광고 랜딩"
     }
   },
   "groups": [
@@ -87,7 +103,17 @@
     {
       "id": "L3 첫화면 놀이",
       "label": "L3 첫화면 놀이"
+    },
+    {
+      "id": "광고 랜딩",
+      "label": "광고 랜딩"
     }
   ],
-  "links": []
+  "links": [
+    {
+      "from": "L11-AdLandingPhone.html",
+      "to": "L12-AdLandingDesktop.html",
+      "label": "넓은 화면"
+    }
+  ]
 }

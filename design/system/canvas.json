@@ -1,0 +1,27 @@
+{
+  "boards": {
+    "S01-Foundations.html": {
+      "x": 0,
+      "y": 0,
+      "w": 1440,
+      "h": 1640,
+      "title": "S01-Foundations",
+      "group": "디자인 시스템"
+    },
+    "S02-Components.html": {
+      "x": 1480,
+      "y": 0,
+      "w": 1440,
+      "h": 1700,
+      "title": "S02-Components",
+      "group": "디자인 시스템"
+    }
+  },
+  "groups": [
+    {
+      "id": "디자인 시스템",
+      "label": "디자인 시스템"
+    }
+  ],
+  "links": []
+}
