@@ -1,0 +1,218 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=390">
+  <title>Brush, Brush, Brush! — 잘 자</title>
+  <link rel="stylesheet" href="../shared/tokens.css">
+  <style>
+    body { background: var(--t-bg); color: var(--t-ink); font-family: var(--t-body); width: 390px; margin: 0 auto; overflow-x: hidden; }
+    .top-bar { display: flex; align-items: center; justify-content: space-between; padding: 0 16px; height: 52px; background: var(--t-surface); border-bottom: 1.5px solid var(--t-line); }
+    .top-title { font-family: var(--t-en); font-size: 11px; color: var(--t-sub); letter-spacing: 0.03em; }
+    .prog-dots { display: flex; align-items: center; gap: 5px; }
+    .pdot { width: 8px; height: 8px; border-radius: 50%; background: var(--t-soft); }
+    .pdot.done { background: var(--t-accent); opacity: 0.38; }
+    .pdot.now { width: 22px; border-radius: 4px; background: var(--t-accent); }
+    .listen-sw { display: flex; align-items: center; gap: 5px; font-family: var(--t-kr); font-size: 10px; color: var(--t-sub); }
+    .sw-track { width: 28px; height: 16px; background: var(--t-soft); border-radius: 8px; position: relative; }
+    .sw-thumb { position: absolute; left: 2px; top: 2px; width: 12px; height: 12px; background: var(--t-surface-2); border-radius: 50%; }
+    .stage { width: 390px; height: 580px; position: relative; overflow: hidden; display: block; }
+    .caption-strip { background: var(--t-surface); padding: 12px 24px 10px; border-top: 1.5px solid var(--t-line); border-bottom: 1.5px solid var(--t-line); }
+    .caption-text { font-family: var(--t-kr); font-size: 19px; line-height: 1.55; color: var(--t-ink); margin: 0; text-align: center; word-break: keep-all; }
+    .en { font-family: var(--t-en); font-size: 21px; color: var(--t-accent); font-weight: 700; }
+    .controls { background: var(--t-bg); padding: 11px 18px 10px; }
+    .ctrl-top { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }
+    .play-btn { width: 38px; height: 38px; border-radius: 50%; background: var(--t-soft); border: none; display: flex; align-items: center; justify-content: center; flex-shrink: 0; cursor: pointer; }
+    .prog-wrap { flex: 1; }
+    .prog-track { height: 4px; background: var(--t-soft); border-radius: 2px; margin-bottom: 4px; }
+    .prog-fill { width: 92%; height: 100%; background: var(--t-accent); border-radius: 2px; }
+    .time-row { display: flex; justify-content: space-between; font-family: var(--t-en); font-size: 11px; color: var(--t-sub); }
+    .ctrl-btns { display: flex; gap: 7px; }
+    .ctrl-btn { flex: 1; border: 1.5px solid var(--t-line); background: var(--t-surface); border-radius: 10px; padding: 8px 6px; font-family: var(--t-kr); font-size: 11px; color: var(--t-sub); text-align: center; cursor: pointer; }
+    .parent-hint { display: flex; align-items: center; justify-content: center; gap: 5px; padding: 7px 16px 8px; background: var(--t-bg); font-family: var(--t-kr); font-size: 10px; color: var(--t-sub); opacity: 0.55; }
+    .lamp-ring { animation: hpulse 2s ease-in-out infinite; }
+    @keyframes hpulse { 0%,100%{ opacity: 0.6; } 50%{ opacity: 0.16; } }
+  </style>
+</head>
+<body class="t-night">
+
+  <header class="top-bar">
+    <span class="top-title">Brush, Brush, Brush!</span>
+    <div class="prog-dots" aria-label="진행 6/6">
+      <span class="pdot done"></span><span class="pdot done"></span>
+      <span class="pdot done"></span><span class="pdot done"></span><span class="pdot done"></span>
+      <span class="pdot now"></span>
+    </div>
+    <div class="listen-sw">
+      <span>그냥 듣기</span>
+      <span class="sw-track"><span class="sw-thumb"></span></span>
+    </div>
+  </header>
+
+  <div class="stage" role="img" aria-label="잠자리 장면. 켜진 무드등을 탭하면 꺼져요. 오늘 배운 단어 스티커 3개.">
+    <svg width="390" height="580" viewBox="0 0 390 580" xmlns="http://www.w3.org/2000/svg">
+
+      <!-- 배경: 가장 어두운 밤 -->
+      <rect width="390" height="580" style="fill:var(--t-bg)"/>
+
+      <!-- ===== 램프 무드등 글로우 ===== -->
+      <ellipse cx="316" cy="430" rx="100" ry="38" style="fill:var(--t-accent)" opacity="0.06"/>
+      <ellipse cx="370" cy="300" rx="60" ry="140" style="fill:var(--t-accent)" opacity="0.04"/>
+      <circle cx="316" cy="265" r="130" style="fill:var(--t-accent)" opacity="0.04"/>
+      <circle cx="316" cy="265" r="88" style="fill:var(--t-accent)" opacity="0.07"/>
+      <circle cx="316" cy="265" r="58" style="fill:var(--t-accent)" opacity="0.12"/>
+
+      <!-- ===== 방 배경 ===== -->
+      <!-- 창문 (왼쪽 위) -->
+      <rect x="14" y="22" width="110" height="126" rx="9" style="fill:var(--t-surface); stroke:var(--t-line); stroke-width:1.5"/>
+      <line x1="69" y1="22" x2="69" y2="148" style="stroke:var(--t-line); stroke-width:1.5"/>
+      <line x1="14" y1="85" x2="124" y2="85" style="stroke:var(--t-line); stroke-width:1.5"/>
+      <path d="M 28 50 a 18 18 0 1 0 18 32 a 13 13 0 1 1 -18 -32 z" style="fill:var(--t-moon)"/>
+      <circle cx="106" cy="42" r="1.2" style="fill:var(--t-moon)" opacity="0.9"/>
+      <circle cx="95" cy="62" r="0.9" style="fill:var(--t-moon)" opacity="0.7"/>
+      <circle cx="22" cy="128" r="0.8" style="fill:var(--t-moon)" opacity="0.5"/>
+      <!-- 천장 별 -->
+      <circle cx="200" cy="18" r="0.9" style="fill:var(--t-moon)" opacity="0.35"/>
+      <circle cx="250" cy="35" r="1" style="fill:var(--t-moon)" opacity="0.3"/>
+
+      <!-- 바닥 -->
+      <rect x="0" y="390" width="390" height="5" style="fill:var(--t-line)" opacity="0.6"/>
+      <rect x="0" y="394" width="390" height="80" style="fill:var(--t-surface-2)"/>
+
+      <!-- ===== 침대 (왼쪽) ===== -->
+      <!-- 헤드보드 -->
+      <rect x="10" y="220" width="220" height="58" rx="12" style="fill:var(--t-soft); stroke:var(--t-line); stroke-width:1.5"/>
+      <!-- 매트리스 -->
+      <rect x="8" y="276" width="224" height="116" rx="8" style="fill:var(--t-surface-2); stroke:var(--t-line); stroke-width:1"/>
+      <!-- 이불 -->
+      <rect x="8" y="310" width="224" height="82" rx="8" style="fill:var(--t-soft)"/>
+      <!-- 이불 주름 -->
+      <line x1="50" y1="330" x2="50" y2="392" style="stroke:var(--t-line); stroke-width:1; opacity:0.5"/>
+      <line x1="100" y1="325" x2="100" y2="392" style="stroke:var(--t-line); stroke-width:1; opacity:0.5"/>
+      <line x1="150" y1="323" x2="150" y2="392" style="stroke:var(--t-line); stroke-width:1; opacity:0.5"/>
+      <line x1="200" y1="326" x2="200" y2="392" style="stroke:var(--t-line); stroke-width:1; opacity:0.5"/>
+      <!-- 베개 -->
+      <rect x="18" y="282" width="110" height="30" rx="12" style="fill:var(--t-surface); stroke:var(--t-line); stroke-width:1"/>
+
+      <!-- ===== 릴리 (베개 위에 잠든 모습) ===== -->
+      <!-- 피그테일 기둥 (얼굴 뒤) -->
+      <path d="M 42 237 q -17 4 -14 25 q 9 -4 13 -14" style="fill:var(--hair)"/>
+      <path d="M 98 237 q 17 4 14 25 q -9 -4 -13 -14" style="fill:var(--hair)"/>
+      <!-- 얼굴 -->
+      <circle cx="70" cy="300" r="28" style="fill:var(--skin)"/>
+      <!-- 귀 -->
+      <circle cx="42" cy="303" r="8" style="fill:var(--skin)"/>
+      <circle cx="98" cy="303" r="8" style="fill:var(--skin)"/>
+      <!-- 볼컷 헤어캡 (lily-scene.svg 0.5× 스케일) -->
+      <path d="M 42 294 q 4 -29 28 -29 q 24 0 28 29 q -14 -11 -28 -12 q -14 1 -28 12 z" style="fill:var(--hair)"/>
+      <!-- 노란 머리띠 -->
+      <circle cx="38" cy="310" r="5" style="fill:var(--sun)"/>
+      <circle cx="102" cy="310" r="5" style="fill:var(--sun)"/>
+      <!-- 감은 눈 (잠든 표정) -->
+      <path d="M 58 302 q 6 5 12 0" style="fill:none; stroke:var(--hair); stroke-width:2; stroke-linecap:round"/>
+      <path d="M 72 302 q 6 5 12 0" style="fill:none; stroke:var(--hair); stroke-width:2; stroke-linecap:round"/>
+      <!-- 볼 -->
+      <ellipse cx="52" cy="308" rx="9" ry="5" style="fill:var(--cheek)" opacity="0.55"/>
+      <ellipse cx="88" cy="308" rx="9" ry="5" style="fill:var(--cheek)" opacity="0.55"/>
+      <!-- 코 -->
+      <circle cx="70" cy="312" r="2" style="fill:var(--cheek)" opacity="0.5"/>
+      <!-- 파란 셔츠 깃 (이불 위로 살짝) -->
+      <path d="M 44 318 q 12 -8 26 -6 q 14 -2 26 6" style="fill:none; stroke:var(--blue); stroke-width:6; stroke-linecap:round" opacity="0.85"/>
+
+      <!-- ===== 비스킷 (릴리 옆에서 잠든 강아지) ===== -->
+      <!-- 처진 귀 -->
+      <path d="M 138 285 q -14 6 -10 28 q 10 -2 12 -14" style="fill:var(--hair)"/>
+      <path d="M 164 285 q 14 6 10 28 q -10 -2 -12 -14" style="fill:var(--hair)"/>
+      <!-- 머리 -->
+      <circle cx="151" cy="296" r="20" style="fill:var(--dog)"/>
+      <!-- 주둥이 -->
+      <ellipse cx="154" cy="304" rx="10" ry="7" style="fill:var(--dog)"/>
+      <!-- 코 -->
+      <ellipse cx="154" cy="301" rx="4" ry="3" style="fill:var(--ink)"/>
+      <!-- 감은 눈 -->
+      <path d="M 140 292 q 5 4 10 0" style="fill:none; stroke:var(--ink); stroke-width:1.5; stroke-linecap:round"/>
+      <path d="M 153 292 q 5 4 10 0" style="fill:none; stroke:var(--ink); stroke-width:1.5; stroke-linecap:round"/>
+
+      <!-- ===== 침대 옆 테이블 ===== -->
+      <rect x="250" y="340" width="86" height="52" rx="8" style="fill:var(--t-soft); stroke:var(--t-line); stroke-width:1"/>
+      <rect x="260" y="390" width="8" height="28" style="fill:var(--t-soft)"/>
+      <rect x="318" y="390" width="8" height="28" style="fill:var(--t-soft)"/>
+
+      <!-- ===== 무드등 (THE 서명 요소 — 탭 타겟) ===== -->
+      <line x1="316" y1="175" x2="316" y2="200" style="stroke:var(--t-sub); stroke-width:2; opacity:0.5"/>
+      <path d="M 283 200 l 13 -52 l 40 0 l 13 52 z" style="fill:var(--t-moon); stroke:var(--t-line); stroke-width:1.5"/>
+      <path d="M 289 200 l 10 -40 l 34 0 l 10 40 z" style="fill:var(--t-accent)" opacity="0.28"/>
+      <ellipse cx="316" cy="200" rx="33" ry="7" style="fill:var(--t-moon); stroke:var(--t-line); stroke-width:1"/>
+      <path d="M 284 202 l -28 72 l 120 0 l -28 -72 z" style="fill:var(--t-accent)" opacity="0.09"/>
+      <rect x="310" y="200" width="12" height="58" rx="5" style="fill:var(--t-sub)" opacity="0.7"/>
+      <ellipse cx="316" cy="258" rx="22" ry="7" style="fill:var(--t-sub)" opacity="0.65"/>
+      <circle cx="316" cy="232" r="5" style="fill:var(--t-accent)"/>
+      <!-- 탭 가이드 링 (램프 중심) -->
+      <circle cx="316" cy="225" r="52" class="lamp-ring"
+        style="fill:none; stroke:var(--t-accent); stroke-width:2.5"/>
+      <circle cx="316" cy="225" r="64" style="fill:none; stroke:var(--t-accent); stroke-width:1; opacity:0.25"/>
+
+      <!-- ===== 씬 / 엔드카드 구분선 ===== -->
+      <rect x="0" y="394" width="390" height="1.5" style="fill:var(--t-line)"/>
+
+      <!-- ===== 엔드카드 (씬 아래 독립 영역) ===== -->
+      <rect x="0" y="395" width="390" height="185" style="fill:var(--t-surface)"/>
+
+      <!-- 오늘 배운 단어 제목 -->
+      <text x="195" y="418" style="font-family:var(--t-kr); font-size:11px; fill:var(--t-sub); text-anchor:middle; opacity:0.65">오늘 배운 단어</text>
+
+      <!-- 스티커 3개 -->
+      <!-- brush -->
+      <circle cx="72" cy="449" r="26" style="fill:var(--t-surface-2); stroke:var(--t-accent); stroke-width:1.5"/>
+      <rect x="58" y="444" width="28" height="7" rx="3.5" style="fill:var(--sun)"/>
+      <rect x="78" y="438" width="10" height="12" rx="2.5" style="fill:var(--t-moon)"/>
+      <text x="72" y="466" style="font-family:var(--t-en); font-size:7.5px; fill:var(--t-sub); text-anchor:middle">brush</text>
+
+      <!-- bubbles -->
+      <circle cx="195" cy="449" r="26" style="fill:var(--t-surface-2); stroke:var(--t-accent); stroke-width:1.5"/>
+      <circle cx="188" cy="445" r="7" style="fill:var(--t-soft); stroke:var(--t-accent); stroke-width:1.2"/>
+      <circle cx="200" cy="450" r="5" style="fill:var(--t-soft); stroke:var(--t-accent); stroke-width:1.2"/>
+      <circle cx="190" cy="455" r="4" style="fill:var(--t-soft); stroke:var(--t-accent); stroke-width:1.2"/>
+      <text x="195" y="466" style="font-family:var(--t-en); font-size:7.5px; fill:var(--t-sub); text-anchor:middle">bubbles</text>
+
+      <!-- all clean -->
+      <circle cx="318" cy="449" r="26" style="fill:var(--t-surface-2); stroke:var(--t-accent); stroke-width:1.5"/>
+      <path d="M 306 449 l 8 10 l 18 -20" style="fill:none; stroke:var(--t-accent); stroke-width:3; stroke-linecap:round; stroke-linejoin:round"/>
+      <text x="318" y="466" style="font-family:var(--t-en); font-size:7.5px; fill:var(--t-sub); text-anchor:middle">all clean</text>
+
+      <!-- 버튼 2개 -->
+      <rect x="16" y="472" width="170" height="34" rx="17" style="fill:var(--t-accent)"/>
+      <text x="101" y="494" style="font-family:var(--t-kr); font-size:12px; fill:var(--t-surface); text-anchor:middle; font-weight:700">한 번 더 듣기</text>
+      <rect x="200" y="472" width="174" height="34" rx="17" style="fill:var(--t-soft); stroke:var(--t-line); stroke-width:1"/>
+      <text x="287" y="494" style="font-family:var(--t-kr); font-size:12px; fill:var(--t-sub); text-anchor:middle">부모님 화면</text>
+
+    </svg>
+  </div>
+
+  <div class="caption-strip">
+    <p class="caption-text"><span class="en">Good night, friend!</span> 램프를 꺼 볼까?</p>
+  </div>
+
+  <div class="controls">
+    <div class="ctrl-top">
+      <button class="play-btn" aria-label="재생">
+        <svg width="16" height="16" viewBox="0 0 16 16"><path d="M5 3 L13 8 L5 13 Z" style="fill:var(--t-sub)"/></svg>
+      </button>
+      <div class="prog-wrap">
+        <div class="prog-track"><div class="prog-fill"></div></div>
+        <div class="time-row"><span>2:12</span><span>2:19</span></div>
+      </div>
+    </div>
+    <div class="ctrl-btns">
+      <button class="ctrl-btn">3번 이어 듣기</button>
+      <button class="ctrl-btn">조금 천천히</button>
+    </div>
+  </div>
+
+  <div class="parent-hint">
+    <span>아래로 내리면 부모님 화면</span>
+    <svg width="12" height="12" viewBox="0 0 12 12"><path d="M2 4 l4 4 l4 -4" style="fill:none; stroke:var(--t-sub); stroke-width:1.5; stroke-linecap:round"/></svg>
+  </div>
+
+</body>
+</html>

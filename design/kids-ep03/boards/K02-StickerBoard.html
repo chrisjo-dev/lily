@@ -1,0 +1,568 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>K02 스티커판 — Brush, Brush, Brush!</title>
+<link rel="stylesheet" href="../shared/tokens.css">
+<style>
+/* ── layout ── */
+body { background: var(--bg); max-width: 390px; margin: 0 auto; }
+
+/* ── top bar ── */
+.topbar {
+  background: var(--card);
+  border-bottom: 1px solid var(--line);
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 var(--s4);
+  height: 52px;
+}
+.topbar-brand {
+  font-size: 15px; font-weight: 700; color: var(--ink); letter-spacing: -0.02em;
+}
+.topbar-nav { display: flex; gap: var(--s4); }
+.topbar-nav a {
+  font-size: 13px; color: var(--sub); text-decoration: none; font-weight: 500;
+}
+
+/* ── hero (compact) ── */
+.hero {
+  background: var(--night);
+  position: relative; overflow: hidden;
+  padding: var(--s4) var(--s4) 0;
+}
+.hero-meta {
+  display: flex; align-items: center; gap: var(--s2);
+  margin-bottom: var(--s3);
+}
+.hero-chip {
+  font-size: 11px; font-weight: 700; color: var(--night);
+  background: var(--sun); border-radius: 6px;
+  padding: 2px var(--s2);
+  font-family: var(--round);
+}
+.hero-chip.age { background: var(--sky); color: var(--night-2); }
+.hero-title {
+  color: #fff;
+  font-family: var(--round);
+  font-size: 22px; line-height: 1.2;
+  margin: 0 0 var(--s2);
+}
+.hero-desc {
+  color: var(--star); font-size: 13px; line-height: 1.5;
+  margin: 0 0 var(--s3);
+}
+.hero-illo {
+  display: block;
+  width: 280px; height: auto;
+  margin: 0 auto;
+  /* lily-scene viewBox 0 -14 400 264 — 264/400 ≈ 0.66 ratio */
+}
+
+/* ── sticker board card ── */
+.sticker-board-card {
+  background: var(--card);
+  border-radius: var(--r-card);
+  margin: var(--s4);
+  padding: var(--s5);
+  position: relative;
+}
+.sticker-board-label {
+  font-family: var(--round);
+  font-size: 13px; color: var(--sub);
+  margin: 0 0 var(--s4);
+  display: flex; align-items: center; gap: var(--s2);
+}
+.sticker-board-label::before {
+  content: "";
+  display: inline-block;
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: var(--blue);
+}
+.sticker-row {
+  display: flex; gap: var(--s3);
+  justify-content: space-between;
+}
+.sticker-slot {
+  flex: 1;
+  display: flex; flex-direction: column; align-items: center; gap: 6px;
+}
+.sticker-circle {
+  width: 46px; height: 46px;
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--round);
+  font-size: 18px;
+  border: 2px dashed var(--line);
+  background: transparent;
+  color: var(--muted);
+  transition: all 0.2s;
+}
+.sticker-circle.filled {
+  border: 2px solid transparent;
+  background: var(--sun);
+  color: var(--night);
+  box-shadow: 0 2px 6px rgba(255,200,61,0.4);
+}
+.sticker-circle.now {
+  border: 3px solid var(--blue);
+  background: var(--blue-soft);
+  color: var(--blue);
+  animation: pulse-ring 1.4s ease-in-out infinite;
+}
+@keyframes pulse-ring {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(49,130,246,0.3); }
+  50% { box-shadow: 0 0 0 6px rgba(49,130,246,0); }
+}
+.sticker-name {
+  font-family: var(--round);
+  font-size: 11px; color: var(--sub);
+  text-align: center; line-height: 1.2;
+}
+.sticker-name.now-label { color: var(--blue); font-weight: 700; }
+
+/* ── player card ── */
+.player-card {
+  background: var(--card);
+  border-radius: var(--r-card);
+  margin: 0 var(--s4) var(--s4);
+  padding: var(--s5);
+}
+.player-now-line {
+  background: var(--hl);
+  border-left: 3px solid var(--sun);
+  border-radius: var(--r-chip);
+  padding: var(--s2) var(--s3);
+  font-size: 15px; line-height: 1.5;
+  margin-bottom: var(--s4);
+  color: var(--ink);
+  font-weight: 500;
+}
+.player-now-line .word-hl {
+  color: var(--blue); font-weight: 700;
+}
+.player-controls {
+  display: flex; align-items: center; gap: var(--s4);
+  margin-bottom: var(--s3);
+}
+.play-btn {
+  width: 56px; height: 56px;
+  border-radius: 50%;
+  background: var(--blue);
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+  box-shadow: 0 4px 12px rgba(49,130,246,0.35);
+}
+.play-btn svg { margin-left: 3px; }
+.player-progress-wrap { flex: 1; }
+.player-time-row {
+  display: flex; justify-content: space-between;
+  font-size: 12px; color: var(--muted); margin-bottom: 6px;
+}
+.player-bar-bg {
+  height: 4px; background: var(--line); border-radius: 2px; position: relative;
+}
+.player-bar-fill {
+  height: 4px; background: var(--blue); border-radius: 2px;
+  width: 46%; /* 1:08 / 2:19 ≈ 46% */
+}
+.player-bar-dot {
+  position: absolute; top: -4px; left: 46%;
+  width: 12px; height: 12px;
+  background: var(--blue); border-radius: 50%;
+  border: 2px solid var(--card);
+  transform: translateX(-50%);
+  box-shadow: 0 1px 4px rgba(49,130,246,0.4);
+}
+.player-tools {
+  display: flex; gap: var(--s2); margin-top: var(--s3);
+}
+.player-tool-btn {
+  flex: 1;
+  background: var(--bg);
+  border: 1px solid var(--line);
+  border-radius: var(--r-btn);
+  padding: 8px var(--s3);
+  font-size: 12px; font-weight: 600;
+  color: var(--sub);
+  text-align: center;
+}
+
+/* ── words section ── */
+.section-title {
+  font-family: var(--round);
+  font-size: 16px; color: var(--ink);
+  margin: 0 var(--s4) var(--s3);
+}
+.words-grid {
+  display: flex; gap: var(--s3);
+  padding: 0 var(--s4); margin-bottom: var(--s4);
+}
+.word-sticker {
+  flex: 1;
+  background: var(--card);
+  border-radius: 16px;
+  padding: var(--s3) var(--s2);
+  display: flex; flex-direction: column; align-items: center; gap: var(--s2);
+  border: 2px dashed var(--line);
+  /* slight rotation for cut-out feel */
+  position: relative;
+}
+.word-sticker:nth-child(1) { transform: rotate(-1.5deg); }
+.word-sticker:nth-child(2) { transform: rotate(0.5deg); border-color: var(--blue); background: var(--blue-soft); }
+.word-sticker:nth-child(3) { transform: rotate(1.2deg); }
+.word-sticker.active { border-color: var(--blue); background: var(--blue-soft); }
+.word-icon { width: 52px; height: 44px; }
+.word-en {
+  font-family: var(--round);
+  font-size: 13px; color: var(--night);
+  text-align: center; line-height: 1.3;
+}
+.word-sticker:nth-child(2) .word-en { color: var(--blue); }
+.word-ko {
+  font-size: 11px; color: var(--sub); text-align: center;
+}
+.word-tap-label {
+  font-size: 10px; color: var(--muted);
+  border: 1px solid var(--line);
+  border-radius: 4px; padding: 1px 5px;
+  margin-top: 2px;
+}
+.word-sticker:nth-child(2) .word-tap-label {
+  border-color: var(--blue); color: var(--blue);
+}
+
+/* ── worksheet card ── */
+.worksheet-card {
+  background: var(--card);
+  border-radius: var(--r-card);
+  margin: 0 var(--s4) var(--s4);
+  overflow: hidden;
+}
+.worksheet-top {
+  padding: var(--s5) var(--s5) var(--s4);
+}
+.worksheet-top h3 {
+  font-family: var(--round);
+  font-size: 17px; color: var(--ink);
+  margin: 0 0 var(--s1);
+}
+.worksheet-top p {
+  font-size: 13px; color: var(--sub); margin: 0 0 var(--s4);
+}
+.worksheet-checklist {
+  list-style: none; padding: 0; margin: 0 0 var(--s4);
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: var(--s2);
+}
+.worksheet-checklist li {
+  font-size: 13px; color: var(--sub);
+  display: flex; align-items: flex-start; gap: var(--s2);
+}
+.ws-num {
+  width: 18px; height: 18px;
+  background: var(--sun-soft);
+  color: var(--night);
+  border-radius: 50%;
+  font-size: 11px; font-weight: 700;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0; margin-top: 1px;
+}
+.worksheet-preview {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  object-position: top;
+  display: block;
+}
+.worksheet-dl-btn {
+  display: block;
+  background: var(--blue);
+  color: #fff;
+  text-align: center;
+  font-size: 15px; font-weight: 700;
+  padding: var(--s4);
+  text-decoration: none;
+  letter-spacing: -0.01em;
+}
+
+/* ── tips card ── */
+.tips-card {
+  background: var(--night);
+  border-radius: var(--r-card);
+  margin: 0 var(--s4) var(--s4);
+  padding: var(--s5);
+}
+.tips-label {
+  font-family: var(--round);
+  font-size: 13px; color: var(--star);
+  margin: 0 0 var(--s3);
+  letter-spacing: 0.02em;
+}
+.tips-list {
+  list-style: none; padding: 0; margin: 0;
+  display: flex; flex-direction: column; gap: var(--s3);
+}
+.tips-list li {
+  font-size: 14px; color: rgba(255,255,255,0.85); line-height: 1.5;
+  display: flex; gap: var(--s3); align-items: flex-start;
+}
+.tip-dot {
+  width: 6px; height: 6px;
+  border-radius: 50%; background: var(--sun);
+  flex-shrink: 0; margin-top: 8px;
+}
+
+/* ── script accordion ── */
+.script-acc {
+  background: var(--card);
+  border-radius: var(--r-card);
+  margin: 0 var(--s4) var(--s4);
+  overflow: hidden;
+}
+.script-acc-head {
+  padding: var(--s4) var(--s5);
+  display: flex; justify-content: space-between; align-items: center;
+}
+.script-acc-head span {
+  font-size: 14px; font-weight: 600; color: var(--sub);
+}
+.script-chevron {
+  width: 20px; height: 20px; color: var(--muted);
+}
+
+/* ── footer ── */
+.footer {
+  border-top: 1px solid var(--line);
+  padding: var(--s5) var(--s4);
+  margin-bottom: var(--s4);
+}
+.footer-links {
+  display: flex; gap: var(--s5);
+  margin-bottom: var(--s3);
+}
+.footer-links a {
+  font-size: 12px; color: var(--muted); text-decoration: none;
+}
+.footer-copy {
+  font-size: 11px; color: var(--muted);
+}
+</style>
+</head>
+<body>
+
+<!-- top bar -->
+<header class="topbar">
+  <span class="topbar-brand">매일 외국어 읽기</span>
+  <nav class="topbar-nav">
+    <a href="#">오늘의 읽기</a>
+    <a href="#">메일로 받기</a>
+  </nav>
+</header>
+
+<!-- hero -->
+<section class="hero">
+  <div class="hero-meta">
+    <span class="hero-chip">EP03</span>
+    <span class="hero-chip age">5~8세</span>
+    <span class="hero-chip age">2분</span>
+  </div>
+  <h1 class="hero-title">Brush, Brush,<br>Brush!</h1>
+  <p class="hero-desc">자기 전 이 닦기 시간이에요.<br>릴리랑 같이 듣고, 같이 말해 봐요.</p>
+  <img class="hero-illo" src="../assets/lily-scene.svg"
+       alt="릴리와 비스킷이 욕실에서 이를 닦는 장면"
+       viewBox="0 -14 400 264">
+</section>
+
+<!-- sticker board -->
+<div class="sticker-board-card">
+  <p class="sticker-board-label">오늘 들은 장면 스티커</p>
+  <div class="sticker-row">
+
+    <!-- 1 인사 — filled -->
+    <div class="sticker-slot">
+      <div class="sticker-circle filled">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+          <path d="M7 13l3 3 7-7" stroke="var(--night)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+      <span class="sticker-name">인사</span>
+    </div>
+
+    <!-- 2 이 닦기 — filled -->
+    <div class="sticker-slot">
+      <div class="sticker-circle filled">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+          <path d="M7 13l3 3 7-7" stroke="var(--night)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+      <span class="sticker-name">이 닦기</span>
+    </div>
+
+    <!-- 3 거품 — now playing -->
+    <div class="sticker-slot">
+      <div class="sticker-circle now">
+        <!-- small bubble icon -->
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+          <circle cx="9" cy="14" r="4" stroke="var(--blue)" stroke-width="2"/>
+          <circle cx="15" cy="9" r="3" stroke="var(--blue)" stroke-width="2"/>
+          <circle cx="18" cy="16" r="2" stroke="var(--blue)" stroke-width="2"/>
+        </svg>
+      </div>
+      <span class="sticker-name now-label">거품</span>
+    </div>
+
+    <!-- 4 깨끗해 — empty -->
+    <div class="sticker-slot">
+      <div class="sticker-circle">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+          <path d="M12 5v14M5 12h14" stroke="var(--line)" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+      </div>
+      <span class="sticker-name">깨끗해</span>
+    </div>
+
+    <!-- 5 따라하기 — empty -->
+    <div class="sticker-slot">
+      <div class="sticker-circle">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+          <path d="M12 5v14M5 12h14" stroke="var(--line)" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+      </div>
+      <span class="sticker-name">따라<br>말하기</span>
+    </div>
+
+    <!-- 6 잘 자 — empty -->
+    <div class="sticker-slot">
+      <div class="sticker-circle">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+          <path d="M12 5v14M5 12h14" stroke="var(--line)" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+      </div>
+      <span class="sticker-name">잘 자</span>
+    </div>
+
+  </div>
+</div>
+
+<!-- player -->
+<div class="player-card">
+  <!-- now-playing line at 1:08 -->
+  <div class="player-now-line">
+    와! <span class="word-hl">Bubbles!</span> 거품이야! <span class="word-hl">Bubbles!</span>
+  </div>
+
+  <div class="player-controls">
+    <!-- big play button (playing state) -->
+    <div class="play-btn" role="img" aria-label="재생 중">
+      <!-- pause icon -->
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+        <rect x="6" y="5" width="4" height="14" rx="1.5" fill="#fff"/>
+        <rect x="14" y="5" width="4" height="14" rx="1.5" fill="#fff"/>
+      </svg>
+    </div>
+
+    <div class="player-progress-wrap">
+      <div class="player-time-row">
+        <span>1:08</span>
+        <span>2:19</span>
+      </div>
+      <div class="player-bar-bg">
+        <div class="player-bar-fill"></div>
+        <div class="player-bar-dot"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="player-tools">
+    <div class="player-tool-btn">3번 이어 듣기</div>
+    <div class="player-tool-btn">조금 천천히</div>
+  </div>
+</div>
+
+<!-- 오늘의 단어 -->
+<h2 class="section-title">오늘의 단어</h2>
+<div class="words-grid">
+
+  <div class="word-sticker">
+    <img class="word-icon" src="../assets/word-brush.svg" alt="칫솔 아이콘">
+    <span class="word-en">brush<br>my teeth</span>
+    <span class="word-ko">이를 닦아요</span>
+    <span class="word-tap-label">탭하면 들려요</span>
+  </div>
+
+  <!-- bubbles — now-playing / active -->
+  <div class="word-sticker active">
+    <img class="word-icon" src="../assets/word-bubbles.svg" alt="거품 아이콘">
+    <span class="word-en">bubbles</span>
+    <span class="word-ko">거품</span>
+    <span class="word-tap-label">지금 나왔어요</span>
+  </div>
+
+  <div class="word-sticker">
+    <img class="word-icon" src="../assets/word-clean.svg" alt="반짝이는 이 아이콘">
+    <span class="word-en">all clean</span>
+    <span class="word-ko">깨끗해</span>
+    <span class="word-tap-label">탭하면 들려요</span>
+  </div>
+
+</div>
+
+<!-- 학습지 -->
+<div class="worksheet-card">
+  <div class="worksheet-top">
+    <h3>학습지</h3>
+    <p>인쇄해서 같이 해봐요</p>
+    <ul class="worksheet-checklist">
+      <li><span class="ws-num">1</span><span>그림에서 칫솔 찾기</span></li>
+      <li><span class="ws-num">2</span><span>오려서 노는 단어 카드</span></li>
+      <li><span class="ws-num">3</span><span>말할 때마다 스티커</span></li>
+      <li><span class="ws-num">4</span><span>릴리 색칠하기</span></li>
+    </ul>
+  </div>
+  <img class="worksheet-preview" src="../assets/worksheet.png" alt="학습지 미리보기">
+  <a href="#" class="worksheet-dl-btn">학습지 받기 (A4)</a>
+</div>
+
+<!-- 부모님께 -->
+<div class="tips-card">
+  <p class="tips-label">부모님께</p>
+  <ul class="tips-list">
+    <li>
+      <span class="tip-dot"></span>
+      <span>한 번만 들어도 괜찮아요. 여러 번 들을수록 자연스럽게 익혀요.</span>
+    </li>
+    <li>
+      <span class="tip-dot"></span>
+      <span>실제 양치 시간에 "Brush my teeth!" 한 번 말해 주시면 훨씬 오래 기억해요.</span>
+    </li>
+    <li>
+      <span class="tip-dot"></span>
+      <span>따라 하지 않아도 괜찮아요. 먼저 듣는 것만으로도 충분해요.</span>
+    </li>
+  </ul>
+</div>
+
+<!-- 대본 보기 (collapsed) -->
+<div class="script-acc">
+  <div class="script-acc-head">
+    <span>대본 보기 (부모님용)</span>
+    <svg class="script-chevron" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8">
+      <path d="M5 8l5 5 5-5" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+  </div>
+</div>
+
+<!-- footer -->
+<footer class="footer">
+  <div class="footer-links">
+    <a href="#">이전 에피소드</a>
+    <a href="#">다음 에피소드</a>
+    <a href="#">메일로 받기</a>
+  </div>
+  <p class="footer-copy">매일 외국어 읽기, read.wspace.ai.kr</p>
+</footer>
+
+</body>
+</html>

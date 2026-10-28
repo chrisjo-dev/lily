@@ -1,0 +1,194 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=390">
+  <title>Brush, Brush, Brush! — 이 닦기</title>
+  <link rel="stylesheet" href="../shared/tokens.css">
+  <style>
+    body {
+      background: var(--t-bg);
+      color: var(--t-ink);
+      font-family: var(--t-body);
+      width: 390px;
+      margin: 0 auto;
+      overflow-x: hidden;
+    }
+    .top-bar {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 16px; height: 52px;
+      background: var(--t-surface); border-bottom: 1.5px solid var(--t-soft);
+    }
+    .top-title { font-family: var(--t-en); font-size: 11px; color: var(--t-sub); letter-spacing: 0.03em; }
+    .prog-dots { display: flex; align-items: center; gap: 5px; }
+    .pdot { width: 8px; height: 8px; border-radius: 50%; background: var(--t-soft); }
+    .pdot.done { background: var(--t-accent); opacity: 0.38; }
+    .pdot.now  { width: 22px; border-radius: 4px; background: var(--t-accent); }
+    .listen-sw { display: flex; align-items: center; gap: 5px; font-family: var(--t-kr); font-size: 10px; color: var(--t-sub); }
+    .sw-track { width: 28px; height: 16px; background: var(--t-soft); border-radius: 8px; position: relative; }
+    .sw-thumb { position: absolute; left: 2px; top: 2px; width: 12px; height: 12px; background: var(--t-surface); border-radius: 50%; }
+
+    .stage { width: 390px; height: 538px; position: relative; overflow: hidden; display: block; }
+
+    .caption-strip {
+      background: var(--t-surface);
+      padding: 14px 24px 12px;
+      border-top: 1.5px solid var(--t-soft); border-bottom: 1.5px solid var(--t-soft);
+    }
+    .caption-text { font-family: var(--t-kr); font-size: 19px; line-height: 1.55; color: var(--t-ink); margin: 0; text-align: center; word-break: keep-all; }
+    .en { font-family: var(--t-en); font-size: 21px; color: var(--t-accent); font-weight: 700; }
+
+    .controls { background: var(--t-bg); padding: 11px 18px 10px; }
+    .ctrl-top { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }
+    .play-btn { width: 38px; height: 38px; border-radius: 50%; background: var(--t-accent); border: none; display: flex; align-items: center; justify-content: center; flex-shrink: 0; cursor: pointer; }
+    .prog-wrap { flex: 1; }
+    .prog-track { height: 4px; background: var(--t-soft); border-radius: 2px; margin-bottom: 4px; }
+    .prog-fill { width: 37%; height: 100%; background: var(--t-accent); border-radius: 2px; }
+    .time-row { display: flex; justify-content: space-between; font-family: var(--t-en); font-size: 11px; color: var(--t-sub); }
+    .ctrl-btns { display: flex; gap: 7px; }
+    .ctrl-btn { flex: 1; border: 1.5px solid var(--t-soft); background: var(--t-surface); border-radius: 10px; padding: 8px 6px; font-family: var(--t-kr); font-size: 11px; color: var(--t-sub); text-align: center; cursor: pointer; }
+
+    /* 스와이프 흔적 애니메이션 */
+    .swipe-trail {
+      stroke-dasharray: 200;
+      stroke-dashoffset: 0;
+      animation: trailOn 1s ease-out;
+    }
+    @keyframes trailOn {
+      from { stroke-dashoffset: 200; }
+      to   { stroke-dashoffset: 0; }
+    }
+    /* 텍스트 페이드인 */
+    .brush-text {
+      animation: fadeUp 0.6s ease-out both;
+    }
+    .brush-text:nth-child(2) { animation-delay: 0.18s; }
+    .brush-text:nth-child(3) { animation-delay: 0.36s; }
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(6px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body class="t-book">
+
+  <header class="top-bar">
+    <span class="top-title">Brush, Brush, Brush!</span>
+    <div class="prog-dots" aria-label="진행 2/6">
+      <span class="pdot done"></span>
+      <span class="pdot now"></span>
+      <span class="pdot"></span><span class="pdot"></span><span class="pdot"></span><span class="pdot"></span>
+    </div>
+    <div class="listen-sw">
+      <span>그냥 듣기</span>
+      <span class="sw-track"><span class="sw-thumb"></span></span>
+    </div>
+  </header>
+
+  <div class="stage" role="img" aria-label="이 닦기 장면. 치아 절반이 깨끗해졌어요.">
+    <svg width="390" height="538" viewBox="0 0 390 538" xmlns="http://www.w3.org/2000/svg">
+
+      <!-- 배경: 따뜻한 복숭아 (입 안 배경) -->
+      <rect x="0" y="0" width="390" height="538" style="fill:var(--t-wash-2)"/>
+
+      <!-- 배경 장식 원형 (wash-3) -->
+      <circle cx="60" cy="80" r="55" style="fill:var(--t-wash-3); opacity:0.4"/>
+      <circle cx="340" cy="460" r="70" style="fill:var(--t-wash-3); opacity:0.3"/>
+
+      <!-- 큰 입 모양 (입술 + 치아 클로즈업) -->
+      <!-- 윗 입술 -->
+      <path d="M60 210 q50 -60 130 -68 q80 -8 140 68 z" style="fill:var(--cheek)"/>
+      <!-- 아랫 입술 -->
+      <path d="M60 210 q50 80 130 90 q80 -10 140 -90 z" style="fill:var(--cheek)"/>
+      <!-- 잇몸 (위) -->
+      <path d="M68 210 q52 -44 122 -50 q74 -6 132 50 z" style="fill:var(--skin)"/>
+      <!-- 잇몸 (아래) -->
+      <path d="M68 210 q52 60 122 66 q74 -6 132 -66 z" style="fill:var(--skin)"/>
+
+      <!-- 치아 윗줄: 6개 -->
+      <!-- 왼쪽 3개: 깨끗한 치아 (surface 흰색) -->
+      <rect x="74"  y="176" width="50" height="52" rx="8" style="fill:var(--t-surface); stroke:var(--t-soft); stroke-width:1.5"/>
+      <rect x="128" y="172" width="50" height="56" rx="8" style="fill:var(--t-surface); stroke:var(--t-soft); stroke-width:1.5"/>
+      <rect x="182" y="170" width="50" height="58" rx="8" style="fill:var(--t-surface); stroke:var(--t-soft); stroke-width:1.5"/>
+      <!-- 오른쪽 3개: 세균 남아있는 치아 (살짝 wash-3 덮음) -->
+      <rect x="236" y="170" width="50" height="58" rx="8" style="fill:var(--t-surface); stroke:var(--t-soft); stroke-width:1.5"/>
+      <rect x="290" y="172" width="50" height="56" rx="8" style="fill:var(--t-surface); stroke:var(--t-soft); stroke-width:1.5"/>
+      <!-- 마지막 오른쪽 치아 (잘림) -->
+      <rect x="344" y="175" width="40" height="52" rx="8" style="fill:var(--t-surface); stroke:var(--t-soft); stroke-width:1.5"/>
+
+      <!-- 오른쪽 치아 위의 세균 점들 -->
+      <!-- 세균 1 (웃긴 얼굴) -->
+      <circle cx="261" cy="192" r="11" style="fill:var(--t-wash-3)"/>
+      <circle cx="257" cy="189" r="2" style="fill:var(--ink)"/>
+      <circle cx="265" cy="189" r="2" style="fill:var(--ink)"/>
+      <path d="M256 196 q5 5 10 0" style="fill:none; stroke:var(--ink); stroke-width:1.5"/>
+      <!-- 세균 2 -->
+      <circle cx="310" cy="186" r="9" style="fill:var(--t-wash-3); opacity:0.9"/>
+      <circle cx="306" cy="183" r="1.8" style="fill:var(--ink)"/>
+      <circle cx="314" cy="183" r="1.8" style="fill:var(--ink)"/>
+      <path d="M306 190 q4 4 8 0" style="fill:none; stroke:var(--ink); stroke-width:1.5"/>
+      <!-- 세균 3 (작은) -->
+      <circle cx="355" cy="194" r="7" style="fill:var(--t-wash-3); opacity:0.8"/>
+      <circle cx="352" cy="191" r="1.5" style="fill:var(--ink)"/>
+      <circle cx="358" cy="191" r="1.5" style="fill:var(--ink)"/>
+
+      <!-- 치아 아랫줄 (wash-1 배경, 부드럽게) -->
+      <rect x="80"  y="218" width="48" height="44" rx="7" style="fill:var(--t-surface); stroke:var(--t-soft); stroke-width:1.5"/>
+      <rect x="132" y="220" width="48" height="40" rx="7" style="fill:var(--t-surface); stroke:var(--t-soft); stroke-width:1.5"/>
+      <rect x="184" y="221" width="48" height="38" rx="7" style="fill:var(--t-surface); stroke:var(--t-soft); stroke-width:1.5"/>
+      <rect x="236" y="221" width="48" height="38" rx="7" style="fill:var(--t-surface); stroke:var(--t-soft); stroke-width:1.5"/>
+      <rect x="288" y="219" width="48" height="42" rx="7" style="fill:var(--t-surface); stroke:var(--t-soft); stroke-width:1.5"/>
+
+      <!-- 스와이프 흔적 (왼쪽에서 중간까지) -->
+      <path d="M74 198 q60 -24 116 -6 q10 4 14 0" class="swipe-trail"
+        style="fill:none; stroke:var(--t-accent); stroke-width:8; stroke-linecap:round; opacity:0.35"/>
+
+      <!-- 거품 (닦인 쪽) -->
+      <circle cx="98"  cy="180" r="8"  style="fill:var(--t-surface); stroke:var(--t-soft); stroke-width:1.5; opacity:0.8"/>
+      <circle cx="118" cy="165" r="5"  style="fill:var(--t-surface); stroke:var(--t-soft); stroke-width:1.5; opacity:0.7"/>
+      <circle cx="142" cy="175" r="6"  style="fill:var(--t-surface); stroke:var(--t-soft); stroke-width:1.5; opacity:0.8"/>
+      <circle cx="170" cy="160" r="4"  style="fill:var(--t-surface); stroke:var(--t-soft); stroke-width:1.5; opacity:0.6"/>
+      <circle cx="198" cy="168" r="7"  style="fill:var(--t-surface); stroke:var(--t-soft); stroke-width:1.5; opacity:0.7"/>
+
+      <!-- "Brush, brush, brush" 텍스트 -->
+      <text x="195" y="330" class="brush-text" style="font-family:var(--t-en); font-size:34px; font-weight:700; fill:var(--t-accent); text-anchor:middle">Brush,</text>
+      <text x="195" y="374" class="brush-text" style="font-family:var(--t-en); font-size:34px; font-weight:700; fill:var(--t-accent); text-anchor:middle">brush,</text>
+      <text x="195" y="418" class="brush-text" style="font-family:var(--t-en); font-size:34px; font-weight:700; fill:var(--t-accent); text-anchor:middle">brush.</text>
+
+      <!-- 손 (아이 손가락으로 쓸기) -->
+      <rect x="174" y="450" width="80" height="56" rx="28" style="fill:var(--skin); opacity:0.85"/>
+      <rect x="186" y="440" width="14" height="22" rx="7" style="fill:var(--skin); opacity:0.85"/>
+      <rect x="204" y="436" width="14" height="26" rx="7" style="fill:var(--skin); opacity:0.85"/>
+      <rect x="222" y="438" width="14" height="24" rx="7" style="fill:var(--skin); opacity:0.85"/>
+
+      <!-- 페이지 모서리 글로우 -->
+      <rect x="0" y="480" width="60" height="58" rx="30" style="fill:var(--t-wash-3); opacity:0.3"/>
+
+    </svg>
+  </div>
+
+  <div class="caption-strip">
+    <p class="caption-text"><span class="en">Brush, brush, brush.</span> 친구도 같이!</p>
+  </div>
+
+  <div class="controls">
+    <div class="ctrl-top">
+      <button class="play-btn" aria-label="일시정지">
+        <svg width="16" height="16" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+          <rect x="3" y="2" width="3.5" height="12" rx="1.2" style="fill:var(--t-surface)"/>
+          <rect x="9.5" y="2" width="3.5" height="12" rx="1.2" style="fill:var(--t-surface)"/>
+        </svg>
+      </button>
+      <div class="prog-wrap">
+        <div class="prog-track"><div class="prog-fill"></div></div>
+        <div class="time-row"><span>0:52</span><span>2:19</span></div>
+      </div>
+    </div>
+    <div class="ctrl-btns">
+      <button class="ctrl-btn">3번 이어 듣기</button>
+      <button class="ctrl-btn">조금 천천히</button>
+    </div>
+  </div>
+
+</body>
+</html>

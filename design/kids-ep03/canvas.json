@@ -1,0 +1,567 @@
+{
+  "boards": {
+    "K00-Current.html": {
+      "x": 0,
+      "y": 0,
+      "w": 390,
+      "h": 2200,
+      "title": "K00-Current",
+      "group": "current"
+    },
+    "K03-BubblePlayer.html": {
+      "x": 1290,
+      "y": 0,
+      "w": 390,
+      "h": 1720,
+      "title": "K03-BubblePlayer",
+      "group": "proposals"
+    },
+    "K04-Bedtime.html": {
+      "x": 1720,
+      "y": 0,
+      "w": 390,
+      "h": 2160,
+      "title": "K04-Bedtime",
+      "group": "proposals"
+    },
+    "K01-Storybook.html": {
+      "x": 430,
+      "y": 0,
+      "w": 390,
+      "h": 1960,
+      "title": "K01-Storybook",
+      "group": "proposals"
+    },
+    "K02-StickerBoard.html": {
+      "x": 860,
+      "y": 0,
+      "w": 390,
+      "h": 1960,
+      "title": "K02-StickerBoard",
+      "group": "proposals"
+    },
+    "N06-KidParent.html": {
+      "x": 2150,
+      "y": 2400,
+      "w": 390,
+      "h": 2120,
+      "title": "N06-KidParent",
+      "group": "round2"
+    },
+    "N02-OpenBook.html": {
+      "x": 430,
+      "y": 2400,
+      "w": 390,
+      "h": 1980,
+      "title": "N02-OpenBook",
+      "group": "round2"
+    },
+    "N05-WordCards.html": {
+      "x": 1720,
+      "y": 2400,
+      "w": 390,
+      "h": 1280,
+      "title": "N05-WordCards",
+      "group": "round2"
+    },
+    "N01-ToyPlayer.html": {
+      "x": 0,
+      "y": 2400,
+      "w": 390,
+      "h": 1700,
+      "title": "N01-ToyPlayer",
+      "group": "round2"
+    },
+    "N07-Comic.html": {
+      "x": 2580,
+      "y": 2400,
+      "w": 390,
+      "h": 1910,
+      "title": "N07-Comic",
+      "group": "round2"
+    },
+    "N03-NightLight.html": {
+      "x": 860,
+      "y": 2400,
+      "w": 390,
+      "h": 1660,
+      "title": "N03-NightLight",
+      "group": "round2"
+    },
+    "N04-GamePath.html": {
+      "x": 1290,
+      "y": 2400,
+      "w": 390,
+      "h": 1840,
+      "title": "N04-GamePath",
+      "group": "round2"
+    },
+    "B01-FindBrush.html": {
+      "x": 0,
+      "y": 5764,
+      "w": 390,
+      "h": 844,
+      "title": "B01-FindBrush",
+      "group": "interactive-B-book",
+      "status": "approved",
+      "note": "사용자 선택(2026-10-22): B의 차분한 그림책 그림체와 색. 누르는 곳 표시는 D 규칙(노란색)을 따른다",
+      "impl": {
+        "route": "/ep01/",
+        "files": [
+          "ep01/index.html",
+          "engine/engine.js",
+          "engine/engine.css"
+        ],
+        "updated": "2026-10-28T05:55:23Z"
+      }
+    },
+    "B02-Scrub.html": {
+      "x": 430,
+      "y": 5764,
+      "w": 390,
+      "h": 844,
+      "title": "B02-Scrub",
+      "group": "interactive-B-book",
+      "status": "approved",
+      "note": "사용자 선택(2026-10-22): B의 차분한 그림책 그림체와 색. 누르는 곳 표시는 D 규칙(노란색)을 따른다",
+      "impl": {
+        "route": "/ep01/",
+        "files": [
+          "ep01/index.html",
+          "engine/engine.js",
+          "engine/engine.css"
+        ],
+        "updated": "2026-10-28T05:55:23Z"
+      }
+    },
+    "B03-PopBubbles.html": {
+      "x": 860,
+      "y": 5764,
+      "w": 390,
+      "h": 844,
+      "title": "B03-PopBubbles",
+      "group": "interactive-B-book",
+      "status": "approved",
+      "note": "사용자 선택(2026-10-22): B의 차분한 그림책 그림체와 색. 누르는 곳 표시는 D 규칙(노란색)을 따른다",
+      "impl": {
+        "route": "/ep01/",
+        "files": [
+          "ep01/index.html",
+          "engine/engine.js",
+          "engine/engine.css"
+        ],
+        "updated": "2026-10-28T05:55:24Z"
+      }
+    },
+    "B04-Sparkle.html": {
+      "x": 1290,
+      "y": 5764,
+      "w": 390,
+      "h": 844,
+      "title": "B04-Sparkle",
+      "group": "interactive-B-book",
+      "status": "approved",
+      "note": "사용자 선택(2026-10-22): B의 차분한 그림책 그림체와 색. 누르는 곳 표시는 D 규칙(노란색)을 따른다",
+      "impl": {
+        "route": "/ep01/",
+        "files": [
+          "ep01/index.html",
+          "engine/engine.js",
+          "engine/engine.css"
+        ],
+        "updated": "2026-10-28T05:55:24Z"
+      }
+    },
+    "B05-YourTurn.html": {
+      "x": 1720,
+      "y": 5764,
+      "w": 390,
+      "h": 844,
+      "title": "B05-YourTurn",
+      "group": "interactive-B-book",
+      "status": "approved",
+      "note": "사용자 선택(2026-10-22): B의 차분한 그림책 그림체와 색. 누르는 곳 표시는 D 규칙(노란색)을 따른다",
+      "impl": {
+        "route": "/ep01/",
+        "files": [
+          "ep01/index.html",
+          "engine/engine.js",
+          "engine/engine.css"
+        ],
+        "updated": "2026-10-28T05:55:24Z"
+      }
+    },
+    "B06-GoodNight.html": {
+      "x": 2150,
+      "y": 5764,
+      "w": 390,
+      "h": 844,
+      "title": "B06-GoodNight",
+      "group": "interactive-B-book",
+      "status": "approved",
+      "note": "사용자 선택(2026-10-22): B의 차분한 그림책 그림체와 색. 누르는 곳 표시는 D 규칙(노란색)을 따른다",
+      "impl": {
+        "route": "/ep01/",
+        "files": [
+          "ep01/index.html",
+          "engine/engine.js",
+          "engine/engine.css"
+        ],
+        "updated": "2026-10-28T05:55:25Z"
+      }
+    },
+    "D01-FindBrush.html": {
+      "x": 0,
+      "y": 7852,
+      "w": 390,
+      "h": 844,
+      "title": "D01-FindBrush",
+      "group": "interactive-D-bright",
+      "status": "approved",
+      "note": "사용자 선택(2026-10-22): D의 노란색=누르는 곳 규칙과 장면 흐름. 그림체는 B를 따른다",
+      "impl": {
+        "route": "/ep01/",
+        "files": [
+          "ep01/index.html",
+          "engine/engine.js",
+          "engine/engine.css"
+        ],
+        "updated": "2026-10-28T05:55:25Z"
+      },
+      "comments": [
+        {
+          "text": "2026-10-28 english-reading/design에서 옮김. 옛 /listen/kids/ep03/ 시안, 지금 사이트 /ep01/(이후 개선안 2로 바뀜)",
+          "by": "user",
+          "created": "2026-10-28T05:55:27Z"
+        }
+      ]
+    },
+    "D02-Scrub.html": {
+      "x": 430,
+      "y": 7852,
+      "w": 390,
+      "h": 844,
+      "title": "D02-Scrub",
+      "group": "interactive-D-bright",
+      "status": "approved",
+      "note": "사용자 선택(2026-10-22): D의 노란색=누르는 곳 규칙과 장면 흐름. 그림체는 B를 따른다",
+      "impl": {
+        "route": "/ep01/",
+        "files": [
+          "ep01/index.html",
+          "engine/engine.js",
+          "engine/engine.css"
+        ],
+        "updated": "2026-10-28T05:55:25Z"
+      }
+    },
+    "D03-PopBubbles.html": {
+      "x": 860,
+      "y": 7852,
+      "w": 390,
+      "h": 844,
+      "title": "D03-PopBubbles",
+      "group": "interactive-D-bright",
+      "status": "approved",
+      "note": "사용자 선택(2026-10-22): D의 노란색=누르는 곳 규칙과 장면 흐름. 그림체는 B를 따른다",
+      "impl": {
+        "route": "/ep01/",
+        "files": [
+          "ep01/index.html",
+          "engine/engine.js",
+          "engine/engine.css"
+        ],
+        "updated": "2026-10-28T05:55:26Z"
+      }
+    },
+    "D04-Sparkle.html": {
+      "x": 1290,
+      "y": 7852,
+      "w": 390,
+      "h": 844,
+      "title": "D04-Sparkle",
+      "group": "interactive-D-bright",
+      "status": "approved",
+      "note": "사용자 선택(2026-10-22): D의 노란색=누르는 곳 규칙과 장면 흐름. 그림체는 B를 따른다",
+      "impl": {
+        "route": "/ep01/",
+        "files": [
+          "ep01/index.html",
+          "engine/engine.js",
+          "engine/engine.css"
+        ],
+        "updated": "2026-10-28T05:55:26Z"
+      }
+    },
+    "D05-YourTurn.html": {
+      "x": 1720,
+      "y": 7852,
+      "w": 390,
+      "h": 844,
+      "title": "D05-YourTurn",
+      "group": "interactive-D-bright",
+      "status": "approved",
+      "note": "사용자 선택(2026-10-22): D의 노란색=누르는 곳 규칙과 장면 흐름. 그림체는 B를 따른다",
+      "impl": {
+        "route": "/ep01/",
+        "files": [
+          "ep01/index.html",
+          "engine/engine.js",
+          "engine/engine.css"
+        ],
+        "updated": "2026-10-28T05:55:26Z"
+      }
+    },
+    "D06-GoodNight.html": {
+      "x": 2150,
+      "y": 7852,
+      "w": 390,
+      "h": 844,
+      "title": "D06-GoodNight",
+      "group": "interactive-D-bright",
+      "status": "approved",
+      "note": "사용자 선택(2026-10-22): D의 노란색=누르는 곳 규칙과 장면 흐름. 그림체는 B를 따른다",
+      "impl": {
+        "route": "/ep01/",
+        "files": [
+          "ep01/index.html",
+          "engine/engine.js",
+          "engine/engine.css"
+        ],
+        "updated": "2026-10-28T05:55:27Z"
+      }
+    },
+    "C01-FindBrush.html": {
+      "x": 0,
+      "y": 6808,
+      "w": 390,
+      "h": 844,
+      "title": "C01-FindBrush",
+      "group": "interactive-C-night"
+    },
+    "C02-Scrub.html": {
+      "x": 430,
+      "y": 6808,
+      "w": 390,
+      "h": 844,
+      "title": "C02-Scrub",
+      "group": "interactive-C-night"
+    },
+    "C03-PopBubbles.html": {
+      "x": 860,
+      "y": 6808,
+      "w": 390,
+      "h": 844,
+      "title": "C03-PopBubbles",
+      "group": "interactive-C-night"
+    },
+    "C04-Sparkle.html": {
+      "x": 1290,
+      "y": 6808,
+      "w": 390,
+      "h": 844,
+      "title": "C04-Sparkle",
+      "group": "interactive-C-night"
+    },
+    "C05-YourTurn.html": {
+      "x": 1720,
+      "y": 6808,
+      "w": 390,
+      "h": 844,
+      "title": "C05-YourTurn",
+      "group": "interactive-C-night"
+    },
+    "C06-GoodNight.html": {
+      "x": 2150,
+      "y": 6808,
+      "w": 390,
+      "h": 844,
+      "title": "C06-GoodNight",
+      "group": "interactive-C-night"
+    },
+    "A01-FindBrush.html": {
+      "x": 0,
+      "y": 4720,
+      "w": 390,
+      "h": 844,
+      "title": "A01-FindBrush",
+      "group": "interactive-A-toy"
+    },
+    "A02-Scrub.html": {
+      "x": 430,
+      "y": 4720,
+      "w": 390,
+      "h": 844,
+      "title": "A02-Scrub",
+      "group": "interactive-A-toy"
+    },
+    "A03-PopBubbles.html": {
+      "x": 860,
+      "y": 4720,
+      "w": 390,
+      "h": 844,
+      "title": "A03-PopBubbles",
+      "group": "interactive-A-toy"
+    },
+    "A04-Sparkle.html": {
+      "x": 1290,
+      "y": 4720,
+      "w": 390,
+      "h": 844,
+      "title": "A04-Sparkle",
+      "group": "interactive-A-toy"
+    },
+    "A05-YourTurn.html": {
+      "x": 1720,
+      "y": 4720,
+      "w": 390,
+      "h": 844,
+      "title": "A05-YourTurn",
+      "group": "interactive-A-toy"
+    },
+    "A06-GoodNight.html": {
+      "x": 2150,
+      "y": 4720,
+      "w": 390,
+      "h": 844,
+      "title": "A06-GoodNight",
+      "group": "interactive-A-toy"
+    }
+  },
+  "groups": [
+    {
+      "id": "current",
+      "label": "current"
+    },
+    {
+      "id": "variant",
+      "label": "variant"
+    },
+    {
+      "id": "proposals",
+      "label": "proposals"
+    },
+    {
+      "id": "round2",
+      "label": "round2"
+    },
+    {
+      "id": "interactive-B-book",
+      "label": "interactive-B-book"
+    },
+    {
+      "id": "interactive-D-bright",
+      "label": "interactive-D-bright"
+    },
+    {
+      "id": "interactive-C-night",
+      "label": "interactive-C-night"
+    },
+    {
+      "id": "interactive-A-toy",
+      "label": "interactive-A-toy"
+    }
+  ],
+  "links": [
+    {
+      "from": "A01-FindBrush.html",
+      "to": "A02-Scrub.html",
+      "label": "칫솔 누름"
+    },
+    {
+      "from": "A02-Scrub.html",
+      "to": "A03-PopBubbles.html",
+      "label": "다 닦음"
+    },
+    {
+      "from": "A03-PopBubbles.html",
+      "to": "A04-Sparkle.html",
+      "label": "거품 다 터뜨림"
+    },
+    {
+      "from": "A04-Sparkle.html",
+      "to": "A05-YourTurn.html",
+      "label": "이 반짝"
+    },
+    {
+      "from": "A05-YourTurn.html",
+      "to": "A06-GoodNight.html",
+      "label": "스티커 3개"
+    },
+    {
+      "from": "B01-FindBrush.html",
+      "to": "B02-Scrub.html",
+      "label": "칫솔 누름"
+    },
+    {
+      "from": "B02-Scrub.html",
+      "to": "B03-PopBubbles.html",
+      "label": "다 닦음"
+    },
+    {
+      "from": "B03-PopBubbles.html",
+      "to": "B04-Sparkle.html",
+      "label": "거품 다 터뜨림"
+    },
+    {
+      "from": "B04-Sparkle.html",
+      "to": "B05-YourTurn.html",
+      "label": "이 반짝"
+    },
+    {
+      "from": "B05-YourTurn.html",
+      "to": "B06-GoodNight.html",
+      "label": "스티커 3개"
+    },
+    {
+      "from": "D01-FindBrush.html",
+      "to": "D02-Scrub.html",
+      "label": "칫솔 누름"
+    },
+    {
+      "from": "D02-Scrub.html",
+      "to": "D03-PopBubbles.html",
+      "label": "다 닦음"
+    },
+    {
+      "from": "D03-PopBubbles.html",
+      "to": "D04-Sparkle.html",
+      "label": "거품 다 터뜨림"
+    },
+    {
+      "from": "D04-Sparkle.html",
+      "to": "D05-YourTurn.html",
+      "label": "이 반짝"
+    },
+    {
+      "from": "D05-YourTurn.html",
+      "to": "D06-GoodNight.html",
+      "label": "스티커 3개"
+    },
+    {
+      "from": "C01-FindBrush.html",
+      "to": "C02-Scrub.html",
+      "label": "칫솔 누름"
+    },
+    {
+      "from": "C02-Scrub.html",
+      "to": "C03-PopBubbles.html",
+      "label": "다 닦음"
+    },
+    {
+      "from": "C03-PopBubbles.html",
+      "to": "C04-Sparkle.html",
+      "label": "거품 다 터뜨림"
+    },
+    {
+      "from": "C04-Sparkle.html",
+      "to": "C05-YourTurn.html",
+      "label": "이 반짝"
+    },
+    {
+      "from": "C05-YourTurn.html",
+      "to": "C06-GoodNight.html",
+      "label": "스티커 3개"
+    }
+  ]
+}
