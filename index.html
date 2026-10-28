@@ -39,9 +39,9 @@
 
 <!-- Hero image preload (뷰포트별 분리: phone=800w, tablet=1280w) -->
 <link rel="preload" as="image" href="brand/home/home-hero-800.webp"
-  media="(max-width: 699px)" fetchpriority="high">
+  media="(max-width: 699px), (max-width: 899px) and (orientation: landscape)" fetchpriority="high">
 <link rel="preload" as="image" href="brand/home/home-hero-1280.webp"
-  media="(min-width: 700px)" fetchpriority="high">
+  media="(min-width: 700px) and (orientation: portrait), (min-width: 900px) and (orientation: landscape)" fetchpriority="high">
 
 <style>
 /* ── 디자인 토큰 ── */
@@ -725,7 +725,7 @@ a   { text-decoration: none; color: inherit; }
        sizes="100vw"
        alt="릴리와 비스킷이 반기는 방"
        width="800" height="533"
-       decoding="async" fetchpriority="high">
+       decoding="async" loading="lazy">
   <div class="hero-info">
     <h1 class="main-title">릴리랑</h1>
     <p class="main-tagline">하루 2분, 영어 그림책. 4~7세 아이와 함께 들어요.</p>
@@ -750,7 +750,7 @@ a   { text-decoration: none; color: inherit; }
        sizes="(min-width: 700px) 1280px, 800px"
        alt="릴리와 비스킷이 반기는 방"
        width="1280" height="853"
-       decoding="async" fetchpriority="high">
+       decoding="async" loading="lazy">
   <div class="hero-panel">
     <h1 class="hero-logo">릴리랑</h1>
     <p class="hero-tagline">하루 2분, 영어 그림책.<br>4~7세 아이와 함께 들어요.</p>
@@ -773,7 +773,7 @@ a   { text-decoration: none; color: inherit; }
   <div class="how-steps">
     <div class="how-step">
       <p class="how-num">1</p>
-      <img class="how-img" src="brand/home/home-how-listen.webp" alt="들어요"
+      <img fetchpriority="low" class="how-img" src="brand/home/home-how-listen.webp" alt="들어요"
            loading="lazy" decoding="async" width="192" height="192">
       <p class="how-label">들어요</p>
       <p class="how-desc">재미있는 이야기를<br>함께 들어요.</p>
@@ -785,7 +785,7 @@ a   { text-decoration: none; color: inherit; }
     </div>
     <div class="how-step">
       <p class="how-num">2</p>
-      <img class="how-img" src="brand/home/home-how-tap.webp" alt="눌러요"
+      <img fetchpriority="low" class="how-img" src="brand/home/home-how-tap.webp" alt="눌러요"
            loading="lazy" decoding="async" width="192" height="192">
       <p class="how-label">눌러요</p>
       <p class="how-desc">릴리가 기다리면<br>그림을 톡!</p>
@@ -797,7 +797,7 @@ a   { text-decoration: none; color: inherit; }
     </div>
     <div class="how-step">
       <p class="how-num">3</p>
-      <img class="how-img" src="brand/home/home-how-say.webp" alt="생활에서 말해요"
+      <img fetchpriority="low" class="how-img" src="brand/home/home-how-say.webp" alt="생활에서 말해요"
            loading="lazy" decoding="async" width="192" height="192">
       <p class="how-label">생활에서 말해요</p>
       <p class="how-desc">양치할 때<br>Brush my teeth!</p>
@@ -817,53 +817,53 @@ a   { text-decoration: none; color: inherit; }
     <!-- EP02 -->
     <a class="book-col" href="/ep02/" aria-label="EP02 Wake Up! 일어나기, 가입 후 이용">
       <div class="book-wrap">
-        <img class="book-base" src="brand/home/home-book.webp" alt=""
+        <img fetchpriority="low" class="book-base" src="brand/home/home-book.webp" alt=""
              loading="lazy" decoding="async" width="200" height="193">
-        <img class="book-ep" src="/ep02/thumb.webp" alt="Wake Up!"
+        <img fetchpriority="low" class="book-ep" src="/ep02/thumb.webp" alt="Wake Up!"
              loading="lazy" decoding="async" width="400" height="400">
-        <img class="book-lock" src="brand/home/brand-lock.webp" alt="잠김"
+        <img fetchpriority="low" class="book-lock" src="brand/home/brand-lock.webp" alt="잠김"
              loading="lazy" decoding="async" width="38" height="48">
       </div>
     </a>
     <!-- EP03 -->
     <a class="book-col" href="/ep03/" aria-label="EP03 Splash, Splash! 세수하기, 가입 후 이용">
       <div class="book-wrap">
-        <img class="book-base" src="brand/home/home-book.webp" alt=""
+        <img fetchpriority="low" class="book-base" src="brand/home/home-book.webp" alt=""
              loading="lazy" decoding="async" width="200" height="193">
-        <img class="book-ep" src="/ep03/thumb.webp" alt="Splash, Splash!"
+        <img fetchpriority="low" class="book-ep" src="/ep03/thumb.webp" alt="Splash, Splash!"
              loading="lazy" decoding="async" width="400" height="400">
-        <img class="book-lock" src="brand/home/brand-lock.webp" alt="잠김"
+        <img fetchpriority="low" class="book-lock" src="brand/home/brand-lock.webp" alt="잠김"
              loading="lazy" decoding="async" width="38" height="48">
       </div>
     </a>
     <!-- EP04 -->
     <a class="book-col" href="/ep04/" aria-label="EP04 Yummy, Yummy! 아침 먹기, 가입 후 이용">
       <div class="book-wrap">
-        <img class="book-base" src="brand/home/home-book.webp" alt=""
+        <img fetchpriority="low" class="book-base" src="brand/home/home-book.webp" alt=""
              loading="lazy" decoding="async" width="200" height="193">
-        <img class="book-ep" src="/ep04/thumb.webp" alt="Yummy, Yummy!"
+        <img fetchpriority="low" class="book-ep" src="/ep04/thumb.webp" alt="Yummy, Yummy!"
              loading="lazy" decoding="async" width="400" height="400">
-        <img class="book-lock" src="brand/home/brand-lock.webp" alt="잠김"
+        <img fetchpriority="low" class="book-lock" src="brand/home/brand-lock.webp" alt="잠김"
              loading="lazy" decoding="async" width="38" height="48">
       </div>
     </a>
     <!-- EP05 -->
     <a class="book-col" href="/ep05/" aria-label="EP05 Put On, Ready! 옷 입기, 가입 후 이용">
       <div class="book-wrap">
-        <img class="book-base" src="brand/home/home-book.webp" alt=""
+        <img fetchpriority="low" class="book-base" src="brand/home/home-book.webp" alt=""
              loading="lazy" decoding="async" width="200" height="193">
-        <img class="book-ep" src="/ep05/thumb.webp" alt="Put On, Ready!"
+        <img fetchpriority="low" class="book-ep" src="/ep05/thumb.webp" alt="Put On, Ready!"
              loading="lazy" decoding="async" width="400" height="400">
-        <img class="book-lock" src="brand/home/brand-lock.webp" alt="잠김"
+        <img fetchpriority="low" class="book-lock" src="brand/home/brand-lock.webp" alt="잠김"
              loading="lazy" decoding="async" width="38" height="48">
       </div>
     </a>
     <!-- EP01 무료 -->
     <a class="book-col" href="/ep01/" aria-label="EP01 Brush, Brush, Brush! 이 닦기 무료">
       <div class="book-wrap">
-        <img class="book-base" src="brand/home/home-book.webp" alt=""
+        <img fetchpriority="low" class="book-base" src="brand/home/home-book.webp" alt=""
              loading="lazy" decoding="async" width="200" height="193">
-        <img class="book-ep" src="/ep01/art/bg-0-intro.webp" alt="Brush, Brush, Brush!"
+        <img fetchpriority="low" class="book-ep" src="/ep01/art/bg-0-intro.webp" alt="Brush, Brush, Brush!"
              loading="lazy" decoding="async" width="482" height="732">
         <span class="book-free-label">무료</span>
       </div>
@@ -871,32 +871,32 @@ a   { text-decoration: none; color: inherit; }
     <!-- EP06 -->
     <a class="book-col" href="/ep06/" aria-label="EP06 Rub-a-Dub, Bath Time! 목욕하기, 가입 후 이용">
       <div class="book-wrap">
-        <img class="book-base" src="brand/home/home-book.webp" alt=""
+        <img fetchpriority="low" class="book-base" src="brand/home/home-book.webp" alt=""
              loading="lazy" decoding="async" width="200" height="193">
-        <img class="book-ep" src="/ep06/thumb.webp" alt="Rub-a-Dub, Bath Time!"
+        <img fetchpriority="low" class="book-ep" src="/ep06/thumb.webp" alt="Rub-a-Dub, Bath Time!"
              loading="lazy" decoding="async" width="400" height="400">
-        <img class="book-lock" src="brand/home/brand-lock.webp" alt="잠김"
+        <img fetchpriority="low" class="book-lock" src="brand/home/brand-lock.webp" alt="잠김"
              loading="lazy" decoding="async" width="38" height="48">
       </div>
     </a>
     <!-- EP07 -->
     <a class="book-col" href="/ep07/" aria-label="EP07 Sweet Dreams 잠자리 책, 가입 후 이용">
       <div class="book-wrap">
-        <img class="book-base" src="brand/home/home-book.webp" alt=""
+        <img fetchpriority="low" class="book-base" src="brand/home/home-book.webp" alt=""
              loading="lazy" decoding="async" width="200" height="193">
-        <img class="book-ep" src="/ep07/thumb.webp" alt="Sweet Dreams"
+        <img fetchpriority="low" class="book-ep" src="/ep07/thumb.webp" alt="Sweet Dreams"
              loading="lazy" decoding="async" width="800" height="400">
-        <img class="book-lock" src="brand/home/brand-lock.webp" alt="잠김"
+        <img fetchpriority="low" class="book-lock" src="brand/home/brand-lock.webp" alt="잠김"
              loading="lazy" decoding="async" width="38" height="48">
       </div>
     </a>
     <!-- 비스킷 장식 -->
     <div class="biscuit-col" aria-hidden="true">
-      <img class="biscuit-img" src="brand/home/home-biscuit.webp" alt=""
+      <img fetchpriority="low" class="biscuit-img" src="brand/home/home-biscuit.webp" alt=""
            loading="lazy" decoding="async" width="128" height="124">
     </div>
   </div>
-  <img class="shelf-board" src="brand/home/home-shelf.webp" alt=""
+  <img fetchpriority="low" class="shelf-board" src="brand/home/home-shelf.webp" alt=""
        loading="lazy" decoding="async" width="800" height="186">
   <div class="shelf-labels" aria-hidden="true">
     <span class="shelf-label">일어나기</span>
@@ -919,7 +919,7 @@ a   { text-decoration: none; color: inherit; }
   <h2 class="parent-sec-title" id="h-parent">부모님께</h2>
   <div class="parent-items">
     <div class="parent-item">
-      <img class="parent-icon" src="brand/home/home-ic-time.webp" alt=""
+      <img fetchpriority="low" class="parent-icon" src="brand/home/home-ic-time.webp" alt=""
            loading="lazy" decoding="async" width="96" height="96">
       <div>
         <p class="parent-label">하루 2분이면 충분해요</p>
@@ -927,7 +927,7 @@ a   { text-decoration: none; color: inherit; }
       </div>
     </div>
     <div class="parent-item">
-      <img class="parent-icon" src="brand/home/home-ic-safe.webp" alt=""
+      <img fetchpriority="low" class="parent-icon" src="brand/home/home-ic-safe.webp" alt=""
            loading="lazy" decoding="async" width="96" height="106">
       <div>
         <p class="parent-label">아이 정보는 받지 않아요</p>
@@ -935,7 +935,7 @@ a   { text-decoration: none; color: inherit; }
       </div>
     </div>
     <div class="parent-item">
-      <img class="parent-icon" src="brand/home/home-ic-grow.webp" alt=""
+      <img fetchpriority="low" class="parent-icon" src="brand/home/home-ic-grow.webp" alt=""
            loading="lazy" decoding="async" width="96" height="67">
       <div>
         <p class="parent-label">생활 장면에서 한 번 더 말해 주면 오래 기억해요</p>
@@ -950,7 +950,7 @@ a   { text-decoration: none; color: inherit; }
      ══════════════════════════════════════════════ -->
 <div class="parent-bar" role="complementary" aria-label="부모님께">
   <div class="parent-bar-item">
-    <img class="parent-bar-icon" src="brand/home/home-ic-time.webp" alt=""
+    <img fetchpriority="low" class="parent-bar-icon" src="brand/home/home-ic-time.webp" alt=""
          loading="lazy" decoding="async" width="96" height="96">
     <div class="parent-bar-text">
       <p class="parent-bar-label">하루 2분이면 충분해요</p>
@@ -959,7 +959,7 @@ a   { text-decoration: none; color: inherit; }
   </div>
   <div class="parent-divider" aria-hidden="true"></div>
   <div class="parent-bar-item">
-    <img class="parent-bar-icon" src="brand/home/home-ic-safe.webp" alt=""
+    <img fetchpriority="low" class="parent-bar-icon" src="brand/home/home-ic-safe.webp" alt=""
          loading="lazy" decoding="async" width="96" height="106">
     <div class="parent-bar-text">
       <p class="parent-bar-label">아이 정보는 받지 않아요</p>
@@ -968,7 +968,7 @@ a   { text-decoration: none; color: inherit; }
   </div>
   <div class="parent-divider" aria-hidden="true"></div>
   <div class="parent-bar-item">
-    <img class="parent-bar-icon" src="brand/home/home-ic-grow.webp" alt=""
+    <img fetchpriority="low" class="parent-bar-icon" src="brand/home/home-ic-grow.webp" alt=""
          loading="lazy" decoding="async" width="96" height="67">
     <div class="parent-bar-text">
       <p class="parent-bar-label">생활 장면에서 한 번 더</p>
