@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>L18 크레용 액자 변형 두 개</title>
+<link rel="stylesheet" href="../shared/system-tokens.css">
+<style>
+  /* L17(크레용 겹줄 액자)과 같은 결의 변형 두 개. 재료는 모두 OpenAI 시안 2번에서 오린 크레용 조각(assets/crayon), 갈색은 같은 조각의 색만 바꾼 것 */
+  body { padding: var(--s10); background: var(--paper-2); }
+  img { display: block; max-width: 100%; }
+  .top h1 { font-family: var(--font-logo); font-weight: 400; font-size: var(--t-xl); margin: 0 0 var(--s2); }
+  .top p { font-size: var(--t-md); color: var(--ink-2); margin: 0 0 var(--s8); }
+  .grid { display: grid; grid-template-columns: repeat(2, 390px); gap: var(--s12); }
+  .opt > h2 { font-family: var(--font-logo); font-weight: 400; font-size: var(--t-lg); margin: 0; }
+  .opt > .why { font-size: var(--t-sm); color: var(--ink-2); margin: var(--s1) 0 var(--s3); min-height: 4.8em; }
+  .phone { width: 390px; border-radius: 28px; overflow: hidden; }
+
+  /* 공통 내용 */
+  .logo { font-family: var(--font-logo); font-size: 44px; color: var(--brown); margin: 0; line-height: 1; text-align: center; }
+  .promise { font-family: var(--font-logo); font-weight: 400; font-size: 22px; line-height: 1.35; margin: var(--s3) 0 var(--s2); text-align: center; }
+  .promise-sub { font-size: var(--t-sm); text-align: center; margin: 0; }
+  .cta { display: flex; width: fit-content; margin: var(--s4) auto 0; flex-direction: column; align-items: center; }
+  .cta-art { position: relative; display: block; width: 240px; aspect-ratio: 456 / 401; background: url(../assets/v2/btn-sample-book.webp) center / contain no-repeat; }
+  .cta-art span { position: absolute; left: 22%; top: 55%; width: 56%; height: 16%; display: grid; place-items: center; font-family: var(--font-logo); font-size: 16px; white-space: nowrap; }
+  .cta-sub { font-size: var(--t-xs); color: var(--ink-2); margin-top: var(--s1); }
+  h3 { font-family: var(--font-logo); font-weight: 400; font-size: 24px; margin: 0; text-align: center; }
+  .sub { font-size: var(--t-sm); color: var(--ink-2); margin: var(--s2) 0 var(--s4); text-align: center; }
+  .moments { display: grid; grid-template-columns: 1fr 1fr; gap: var(--s4) var(--s3); }
+  .moment img { width: 100%; height: 140px; object-fit: cover; object-position: center top; }
+  .moment .t { display: block; font-family: var(--font-en); font-weight: 700; font-size: var(--t-sm); margin-top: var(--s2); }
+  .moment b { display: block; font-family: var(--font-logo); font-weight: 400; font-size: var(--t-md); }
+  .assure { display: flex; gap: var(--s3); align-items: flex-start; margin-top: var(--s4); }
+  .assure img { width: 44px; flex: none; }
+  .assure b { display: block; font-family: var(--font-logo); font-weight: 400; font-size: var(--t-md); }
+  .assure span { font-size: var(--t-sm); color: var(--ink-2); }
+
+  /* A. 갈색 크레용 겹줄 책 */
+  .a .phone { background: var(--paper); padding: 6px; }
+  .a .outer { border: 34px solid transparent; border-image: url(../assets/crayon/frame9-brown.webp) 50 round; }
+  .a .inner { margin: -16px -10px; border: 12px solid transparent; border-image: url(../assets/crayon/picframe9-brown.webp) 20 round; }
+  .a .band { padding: var(--s6) var(--s4); }
+  .a .band:nth-child(even) { background: var(--sky); }
+  .a .band:nth-child(3) { background: var(--peach); }
+  .a .band + .band { position: relative; }
+  .a .band + .band::before { content: ''; position: absolute; left: 12px; right: 12px; top: -7px; height: 14px; background: url(../assets/crayon/divider-brown.webp) center / 100% 100% no-repeat; }
+  .a .hero-pic { border: 12px solid transparent; border-image: url(../assets/crayon/picframe9-brown.webp) 20 round; margin-bottom: var(--s4); }
+  .a .hero-pic img { height: 210px; width: 100%; object-fit: cover; object-position: 30% 45%; }
+  .a .moment .pic { border: 10px solid transparent; border-image: url(../assets/crayon/picframe9-brown.webp) 20 round; background: var(--card); }
+  .a .moment .t { color: var(--brown); }
+  .a .star-row { display: flex; justify-content: center; gap: var(--s2); margin-bottom: var(--s2); }
+  .a .star-row i { width: 16px; height: 16px; background: url(../assets/crayon/star-brown.webp) center / contain no-repeat; }
+
+  /* B. 크레용 칸 액자: 덩어리마다 파란 크레용 칸, 하늘색 종이 위 */
+  .b .phone { background: var(--sky); padding: var(--s4) var(--s3); }
+  .b .panel { position: relative; background: var(--paper); border: 14px solid transparent; border-image: url(../assets/crayon/picframe9.webp) 20 round; padding: var(--s4) var(--s3); margin-bottom: var(--s4); background-clip: padding-box; }
+  .b .panel::before, .b .panel::after { content: ''; position: absolute; top: -22px; width: 22px; height: 22px; background: url(../assets/crayon/star.webp) center / contain no-repeat; }
+  .b .panel::before { left: -20px; }
+  .b .panel::after { right: -20px; }
+  .b .panel.hero { padding: 0 0 var(--s5); }
+  .b .panel.hero img.hero-img { width: 100%; height: 220px; object-fit: cover; object-position: 30% 45%; margin-bottom: var(--s4); }
+  .b .title-tag { display: inline-block; position: relative; left: 50%; transform: translateX(-50%) rotate(-1.5deg); margin: -34px 0 var(--s3); background: var(--paper); border: 10px solid transparent; border-image: url(../assets/crayon/picframe9.webp) 20 round; padding: 2px var(--s4); background-clip: padding-box; }
+  .b .moment img { border-radius: 8px; }
+  .b .moment .t { color: #3f86d0; }
+</style>
+</head>
+<body>
+  <div class="top">
+    <h1>크레용 액자 변형 두 개</h1>
+    <p>L17(파란 크레용 겹줄 액자)과 같은 결로 두 갈래. 모두 OpenAI 시안 2번에서 오린 크레용 조각만 써서 추가 비용 없음.</p>
+  </div>
+  <div class="grid">
+    <div class="opt a">
+      <h2>A. 갈색 크레용 겹줄 책</h2>
+      <p class="why">바깥 굵은 줄과 안쪽 가는 줄 두 겹을 갈색 크레용으로. 칸마다 하늘, 살구 바탕을 번갈아 그림책 장을 넘기는 느낌. 파랑보다 따뜻하고 차분하다.</p>
+      <div class="phone"><div class="outer"><div class="inner">
+        <div class="band">
+          <div class="hero-pic"><img src="../assets/v2/home-hero-800.webp" alt=""></div>
+          <div class="star-row"><i></i><i></i><i></i></div>
+          <p class="logo">릴리랑</p>
+          <p class="promise">아이가 이야기에 끼어드는<br>2분 영어 그림책</p>
+          <p class="promise-sub">4~7세 아이와 함께 듣고, 누르며 노는 영어.</p>
+          <div class="cta"><span class="cta-art"><span>맛보기 바로 듣기</span></span><span class="cta-sub">EP01 이 닦기, 2분 19초, 무료</span></div>
+        </div>
+        <div class="band">
+          <h3>2분 19초 동안</h3><p class="sub">EP01 실제 화면이에요.</p>
+          <div class="moments">
+            <div class="moment"><div class="pic"><img src="../assets/v2/cap-wait0-find.webp" alt=""></div><span class="t">0:40</span><b>릴리가 기다려요</b></div>
+            <div class="moment"><div class="pic"><img src="../assets/v2/cap-wait1-pop.webp" alt=""></div><span class="t">1:19</span><b>거품을 터뜨려요</b></div>
+          </div>
+        </div>
+        <div class="band">
+          <h3>부모님이 궁금해하는 것</h3>
+          <div class="assure"><img src="../assets/v2/home-ic-time.webp" alt=""><div><b>한 편이 2분이면 끝나요</b><span>화면 앞에 오래 두지 않아요.</span></div></div>
+          <div class="assure"><img src="../assets/v2/home-ic-safe.webp" alt=""><div><b>아이 정보는 받지 않아요</b><span>부모님 계정만 만들면 돼요.</span></div></div>
+        </div>
+      </div></div></div>
+    </div>
+
+    <div class="opt b">
+      <h2>B. 크레용 칸 액자</h2>
+      <p class="why">덩어리마다 파란 크레용 칸을 따로 둘러 하늘색 종이 위에 붙인 듯. 칸 모서리에 별, 제목은 칸 윗변에 걸린 크레용 이름표. 2번의 생기를 칸마다 나눠 담았다.</p>
+      <div class="phone">
+        <div class="panel hero">
+          <img class="hero-img" src="../assets/v2/home-hero-800.webp" alt="">
+          <p class="logo">릴리랑</p>
+          <p class="promise">아이가 이야기에 끼어드는<br>2분 영어 그림책</p>
+          <p class="promise-sub">4~7세 아이와 함께 듣고, 누르며 노는 영어.</p>
+          <div class="cta"><span class="cta-art"><span>맛보기 바로 듣기</span></span><span class="cta-sub">EP01 이 닦기, 2분 19초, 무료</span></div>
+        </div>
+        <div class="panel">
+          <h3 class="title-tag">2분 19초 동안</h3><p class="sub">EP01 실제 화면이에요.</p>
+          <div class="moments">
+            <div class="moment"><img src="../assets/v2/cap-wait0-find.webp" alt=""><span class="t">0:40</span><b>릴리가 기다려요</b></div>
+            <div class="moment"><img src="../assets/v2/cap-wait1-pop.webp" alt=""><span class="t">1:19</span><b>거품을 터뜨려요</b></div>
+          </div>
+        </div>
+        <div class="panel">
+          <h3 class="title-tag">부모님이 궁금해하는 것</h3>
+          <div class="assure"><img src="../assets/v2/home-ic-time.webp" alt=""><div><b>한 편이 2분이면 끝나요</b><span>화면 앞에 오래 두지 않아요.</span></div></div>
+          <div class="assure"><img src="../assets/v2/home-ic-safe.webp" alt=""><div><b>아이 정보는 받지 않아요</b><span>부모님 계정만 만들면 돼요.</span></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
