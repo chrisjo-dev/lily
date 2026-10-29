@@ -316,7 +316,9 @@
       "w": 390,
       "h": 1100,
       "title": "P52-JoinPhoneT5",
-      "group": "페이지 T5"
+      "group": "지난 시안",
+      "status": "rejected",
+      "note": "병렬 분담 전 초안, 정식은 같은 번호의 다른 이름"
     },
     "P53-JoinDesktopT5.html": {
       "x": 43824,
@@ -324,7 +326,9 @@
       "w": 1440,
       "h": 1100,
       "title": "P53-JoinDesktopT5",
-      "group": "페이지 T5"
+      "group": "지난 시안",
+      "status": "rejected",
+      "note": "병렬 분담 전 초안, 정식은 같은 번호의 다른 이름"
     },
     "P54-CallbackT5.html": {
       "x": 45304,
@@ -332,7 +336,9 @@
       "w": 390,
       "h": 844,
       "title": "P54-CallbackT5",
-      "group": "페이지 T5"
+      "group": "지난 시안",
+      "status": "rejected",
+      "note": "병렬 분담 전 초안, 정식은 같은 번호의 다른 이름"
     },
     "P55-MeT5.html": {
       "x": 45734,
@@ -340,7 +346,9 @@
       "w": 390,
       "h": 1300,
       "title": "P55-MeT5",
-      "group": "페이지 T5"
+      "group": "지난 시안",
+      "status": "rejected",
+      "note": "병렬 분담 전 초안, 정식은 같은 번호의 다른 이름"
     },
     "P56-PrivacyT5.html": {
       "x": 46164,
@@ -348,7 +356,9 @@
       "w": 390,
       "h": 1600,
       "title": "P56-PrivacyT5",
-      "group": "페이지 T5"
+      "group": "지난 시안",
+      "status": "rejected",
+      "note": "병렬 분담 전 초안, 정식은 같은 번호의 다른 이름"
     },
     "P57-NotFoundT5.html": {
       "x": 46594,
@@ -356,7 +366,9 @@
       "w": 390,
       "h": 844,
       "title": "P57-NotFoundT5",
-      "group": "페이지 T5"
+      "group": "지난 시안",
+      "status": "rejected",
+      "note": "병렬 분담 전 초안, 정식은 같은 번호의 다른 이름"
     },
     "P58-GateT5.html": {
       "x": 47024,
@@ -364,7 +376,9 @@
       "w": 390,
       "h": 844,
       "title": "P58-GateT5",
-      "group": "페이지 T5"
+      "group": "지난 시안",
+      "status": "rejected",
+      "note": "병렬 분담 전 초안, 정식은 같은 번호의 다른 이름"
     },
     "P52-JoinPhone.html": {
       "x": 47454,
@@ -481,5 +495,41 @@
       "label": "페이지 T5"
     }
   ],
-  "links": []
+  "links": [
+    {
+      "from": "P45-LandingT5Desktop.html",
+      "to": "P51-HomeDesktopT5.html",
+      "label": "로고"
+    },
+    {
+      "from": "P50-HomePhoneT5.html",
+      "to": "P58-GateCardPhone.html",
+      "label": "잠긴 편"
+    },
+    {
+      "from": "P58-GateCardPhone.html",
+      "to": "P52-JoinPhone.html",
+      "label": "가입하기"
+    },
+    {
+      "from": "P52-JoinPhone.html",
+      "to": "P54-CallbackPhone.html",
+      "label": "로그인 링크"
+    },
+    {
+      "from": "P54-CallbackPhone.html",
+      "to": "P50-HomePhoneT5.html",
+      "label": "로그인 완료"
+    },
+    {
+      "from": "P50-HomePhoneT5.html",
+      "to": "P55-MePhone.html",
+      "label": "내 정보"
+    },
+    {
+      "from": "P44-LandingT5Phone.html",
+      "to": "P50-HomePhoneT5.html",
+      "label": "다시 올 때"
+    }
+  ]
 }
