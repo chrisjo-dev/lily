@@ -7,12 +7,13 @@
 .lamp .bar { display: flex; align-items: center; justify-content: space-between; padding: 16px 22px 0; position: relative; z-index: 2; }
 .lamp .bar .brand { display: flex; align-items: center; gap: 10px; color: var(--white); text-decoration: none; }
 .lamp .bar img { height: 38px; width: auto; }
-.lamp .bar span { font-family: var(--font-hand); font-weight: 700; font-size: 28px; letter-spacing: -0.03em; }
-.lamp .bar .me { color: var(--navy-soft); font-size: 14px; text-decoration: none; }
+.lamp .bar span { font-family: var(--font-hand); font-weight: 700; font-size: 28px; letter-spacing: -0.03em; color: var(--white); text-shadow: 0 1px 6px rgba(10,18,34,.5); }
+.lamp .bar .me { color: var(--navy-ink); font-size: 16px; font-weight: 600; text-decoration: none; padding: 8px 14px; border: 1.5px solid rgba(233,238,248,.45); border-radius: 999px; }
 .lamp .head { position: relative; z-index: 2; padding: 18px 22px 0; }
 .lamp h1 { font-size: 34px; line-height: 1.16; color: var(--white); }
 .lamp h1 b { font-weight: 400; color: var(--sun); }
-.lamp .sub { font-size: 16px; line-height: 1.5; margin-top: 10px; color: var(--navy-soft); }
+.lamp .sub { font-size: 16px; line-height: 1.5; margin-top: 10px; color: var(--navy-ink); }
+.lamp h1, .lamp .sub, .lamp .note { text-shadow: 0 1px 8px rgba(10,18,34,.6); }
 .lamp .go { margin-top: 18px; }
 .lamp .note { font-size: 13px; color: var(--navy-soft); margin-top: 10px; }
 /* 그림: 가장자리 번짐, 아래는 물결 밑으로 들어가 잘림 */
@@ -25,6 +26,7 @@
 @media (min-width: 900px) {
   .lamp .bar { max-width: 1280px; margin: 0 auto; padding: 26px 48px 0; }
   .lamp .bar img { height: 50px; } .lamp .bar span { font-size: 36px; }
+  .lamp .bar .me { font-size: 17px; }
   .lamp .inner { max-width: 1280px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1.2fr; align-items: end; }
   .lamp .head { align-self: center; padding: 20px 0 40px 48px; }
   .lamp h1 { font-size: clamp(44px, 4.6vw, 64px); line-height: 1.1; }
