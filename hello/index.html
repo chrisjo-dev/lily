@@ -31,90 +31,83 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-<!-- 첫 화면 그림: hello.css의 표시 조건(900px)과 같은 media로 한 장만 받는다 -->
-<link rel="preload" as="image" href="/brand/home/home-hero-800.webp" media="(max-width: 899px)" fetchpriority="high">
-<link rel="preload" as="image" href="/brand/home/home-hero-1280.webp" media="(min-width: 900px)" fetchpriority="high">
-
+<link rel="preload" as="image" href="img/hero.webp" fetchpriority="high">
 <link rel="stylesheet" href="hello.css">
 </head>
 <body>
-  <div class="book"><div class="page">
-    <header class="hero">
-      <div class="pic"><picture>
-        <source media="(min-width: 900px)" srcset="/brand/home/home-hero-1280.webp" width="1280" height="853">
-        <img class="hero-img" src="/brand/home/home-hero-800.webp" width="800" height="533" fetchpriority="high" alt="릴리와 강아지 비스킷이 방에서 반기는 그림">
-      </picture></div>
-      <div class="hero-text">
-        <div class="star-title"><p class="logo">릴리랑</p></div>
-        <h1 class="promise">아이가 이야기에 끼어드는<br>2분 영어 그림책</h1>
-        <p class="promise-sub">4~7세 아이와 함께 듣고, 누르며 노는 영어.<br>로그인 없이 바로 들어 볼 수 있어요.</p>
-        <a class="cta" href="/ep01/"><span class="cta-art"><span>맛보기 바로 듣기</span></span><span class="cta-sub">EP01 이 닦기, 2분 19초, 무료</span></a>
+  <header class="hero">
+    <div class="bar"><img src="img/emblem.webp" alt=""><span>릴리랑</span></div>
+    <div class="inner">
+      <div class="copy">
+        <h1>아이가 <b>톡!</b> 눌러야<br>이야기가 이어져요</h1>
+        <p class="sub">하루 습관마다 2분, 4~7세 아이와 부모가 함께 듣는 영어 그림책</p>
+        <div class="go"><a class="btn" href="/ep01/">무료로 2분 들어보기</a></div>
+        <p class="note">로그인 없이 바로 시작해요</p>
       </div>
-    </header>
+      <img class="art" src="img/hero.webp" width="538" height="410" fetchpriority="high" alt="릴리와 비스킷이 빛나는 휴대폰 속 칫솔을 톡 누르는 그림">
+    </div>
+    <svg class="edge" viewBox="0 0 1440 56" preserveAspectRatio="none" aria-hidden="true"><path d="M0 56V30c160-22 320-26 480-12s320 30 480 18 320-30 480-22v42z" fill="#fefefd"/></svg>
+  </header>
 
-    <div class="divider"></div>
-
-    <section>
-      <div class="star-title"><h2>2분 19초 동안<span class="only-d"> 이런 일이 생겨요</span></h2></div>
-      <p class="sub">EP01 실제 화면이에요.<span class="only-d"> 태블릿에서는 펼친 책처럼 보여요.</span></p>
-      <div class="moments">
-        <div class="moment"><div class="pic"><picture><source media="(min-width: 900px)" srcset="img/cap-tb-first.webp" width="1024" height="768"><img src="img/cap-first.webp" width="585" height="847" loading="lazy" decoding="async" fetchpriority="low" alt="EP01 첫 장면"></picture></div><span class="t">0:00</span><b>그림책처럼 시작</b><span class="d">노란 동그라미를 누르면 릴리가 이를 닦으러 가요.</span></div>
-        <div class="moment"><div class="pic"><picture><source media="(min-width: 900px)" srcset="img/cap-tb-wait0-find.webp" width="1024" height="768"><img src="img/cap-wait0-find.webp" width="585" height="847" loading="lazy" decoding="async" fetchpriority="low" alt="손 그림이 칫솔을 가리키는 장면"></picture></div><span class="t">0:40</span><b>릴리가 기다려요</b><span class="d">아이가 칫솔을 톡 누르면 이어져요.</span></div>
-        <div class="moment"><div class="pic"><picture><source media="(min-width: 900px)" srcset="img/cap-tb-wait1-pop.webp" width="1024" height="768"><img src="img/cap-wait1-pop.webp" width="585" height="847" loading="lazy" decoding="async" fetchpriority="low" alt="거품을 터뜨리는 장면"></picture></div><span class="t">1:19</span><b>거품을 터뜨려요</b><span class="d">Bubbles, pop, pop! 틀리는 일은 없어요.</span></div>
-        <div class="moment"><div class="pic"><picture><source media="(min-width: 900px)" srcset="img/cap-tb-end.webp" width="1024" height="768"><img src="img/cap-end.webp" width="585" height="1035" loading="lazy" decoding="async" fetchpriority="low" alt="오늘 모은 스티커 끝 카드"></picture></div><span class="t">2:19</span><b>스티커 세 장으로 끝</b><span class="d">한 번 더 들을지는 아이가 골라요.</span></div>
+  <section class="stories">
+    <div class="wrap">
+      <h2 class="sec-title">하루 습관마다 한 편씩</h2>
+      <p class="sec-lead">아침부터 밤까지, 2분짜리 그림책 7편</p>
+      <div class="circles">
+        <a class="circle" href="/join/"><div class="dot"><img loading="lazy" decoding="async" src="img/ep-wake.webp" alt=""></div><b>일어나기</b><small>Wake Up!</small></a>
+        <a class="circle" href="/join/"><div class="dot"><img loading="lazy" decoding="async" src="img/ep-wash.webp" alt=""></div><b>세수하기</b><small>Splash, Splash!</small></a>
+        <a class="circle" href="/join/"><div class="dot"><img loading="lazy" decoding="async" src="img/ep-eat.webp" alt=""></div><b>아침 먹기</b><small>Yummy, Yummy!</small></a>
+        <a class="circle" href="/join/"><div class="dot"><img loading="lazy" decoding="async" src="img/ep-dress.webp" alt=""></div><b>옷 입기</b><small>Put On, Ready!</small></a>
+        <a class="circle" href="/ep01/"><div class="dot"><img loading="lazy" decoding="async" src="img/ep-brush.webp" alt=""></div><b>이 닦기</b><small>Brush, Brush!</small><span class="free">무료</span></a>
+        <a class="circle" href="/join/"><div class="dot"><img loading="lazy" decoding="async" src="img/ep-bath.webp" alt=""></div><b>목욕하기</b><small>Bath Time!</small></a>
+        <a class="circle" href="/join/"><div class="dot"><img loading="lazy" decoding="async" src="img/ep-sleep.webp" alt=""></div><b>잠자기</b><small>Good night!</small></a>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <div class="divider"></div>
+  <svg class="wave" viewBox="0 0 1440 60" preserveAspectRatio="none" aria-hidden="true"><path d="M0 60V34c140-30 300-36 470-18s330 34 500 20 330-38 470-26v50z" fill="#dcefff"/></svg>
+  <section class="demo">
+    <div class="wrap"><h2 class="sec-title">보기만 하는 영상이 아니에요</h2><p class="sec-lead">릴리가 묻고 기다리면, 아이가 그림을 눌러 이야기를 이어 가요.</p></div>
+    <div class="frames">
+      <figure class="frame"><div class="scr"><img loading="lazy" decoding="async" src="img/cap-wait0-find.webp" alt="실제 화면: 칫솔이 빛나며 기다리는 장면"></div><b class="hand">릴리가 멈추면</b><span>찾을 그림이 노랗게 숨 쉬어요</span></figure>
+      <figure class="frame"><div class="scr"><img loading="lazy" decoding="async" src="img/cap-wait1-pop.webp" alt="실제 화면: 거품을 누르는 장면"></div><b class="hand">아이가 톡!</b><span>누르는 대로 거품이 퐁퐁</span></figure>
+      <figure class="frame"><div class="scr"><img loading="lazy" decoding="async" src="img/cap-end.webp" alt="실제 화면: 스티커 세 장을 모은 끝"></div><b class="hand">이야기가 이어져요</b><span>끝까지 들으면 스티커 세 장</span></figure>
+    </div>
+    <p class="after">8초가 지나면 릴리가 대신 넘어가요. 틀리는 일은 없어요.</p>
+  </section>
+  <svg class="wave" viewBox="0 0 1440 60" preserveAspectRatio="none" aria-hidden="true"><path d="M0 0v26c160 28 320 32 480 16s320-34 480-20 320 34 480 22V0z" fill="#dcefff"/></svg>
 
-    <section class="life">
-      <div class="left">
-        <div class="star-title"><h2>진짜 양치할 때<br>한 번 더 말해 주세요</h2></div>
-        <p class="phrase">Brush my teeth!</p>
-        <p class="note">들은 말을 그 순간에 부모님이 한 번 말해 주면<br class="only-d"> 더 오래 기억해요.</p>
+  <section class="ways">
+    <div class="wrap">
+      <h2 class="sec-title">시험 대신, 매일 2분 귀에 익혀요</h2>
+      <div class="grid">
+        <div class="way"><img loading="lazy" decoding="async" src="img/home-how-listen.webp" alt=""><div><b>같은 편을 여러 번</b><p>3번 이어 듣기를 켜 두면 연달아 들려줘요.</p></div></div>
+        <div class="way"><img loading="lazy" decoding="async" src="img/home-how-tap.webp" alt=""><div><b>아이 손으로 이어 가요</b><p>릴리가 기다리면 아이가 직접 눌러야 다음 장면이 나와요.</p></div></div>
+        <div class="way"><img loading="lazy" decoding="async" src="img/home-how-say.webp" alt=""><div><b>진짜 그 순간에 한 번 더</b><p>양치할 때 부모님이 <q>Brush my teeth!</q> 한마디면 들은 말이 생활로 이어져요.</p></div></div>
+        <div class="way"><img loading="lazy" decoding="async" src="img/L-sticker-clean.webp" alt=""><div><b>우리말은 처음 한 번만</b><p>그다음부터는 영어만 들려 뜻을 스스로 붙잡게 해요.</p></div></div>
       </div>
-      <div class="shelf">
-        <div class="books">
-          <div class="bk"><img src="/brand/home/home-book.webp" width="200" height="193" loading="lazy" decoding="async" fetchpriority="low" alt=""><img class="ep" src="/ep02/thumb.webp" width="400" height="400" loading="lazy" decoding="async" fetchpriority="low" alt=""><img class="lock" src="/brand/home/brand-lock.webp" width="38" height="48" loading="lazy" decoding="async" fetchpriority="low" alt="잠김"></div>
-          <div class="bk"><img src="/brand/home/home-book.webp" width="200" height="193" loading="lazy" decoding="async" fetchpriority="low" alt=""><img class="ep" src="/ep03/thumb.webp" width="400" height="400" loading="lazy" decoding="async" fetchpriority="low" alt=""><img class="lock" src="/brand/home/brand-lock.webp" width="38" height="48" loading="lazy" decoding="async" fetchpriority="low" alt="잠김"></div>
-          <div class="bk"><img src="/brand/home/home-book.webp" width="200" height="193" loading="lazy" decoding="async" fetchpriority="low" alt=""><img class="ep" src="/ep04/thumb.webp" width="400" height="400" loading="lazy" decoding="async" fetchpriority="low" alt=""><img class="lock" src="/brand/home/brand-lock.webp" width="38" height="48" loading="lazy" decoding="async" fetchpriority="low" alt="잠김"></div>
-          <div class="bk"><img src="/brand/home/home-book.webp" width="200" height="193" loading="lazy" decoding="async" fetchpriority="low" alt=""><img class="ep" src="/ep05/thumb.webp" width="400" height="400" loading="lazy" decoding="async" fetchpriority="low" alt=""><img class="lock" src="/brand/home/brand-lock.webp" width="38" height="48" loading="lazy" decoding="async" fetchpriority="low" alt="잠김"></div>
-          <div class="bk"><img src="/brand/home/home-book.webp" width="200" height="193" loading="lazy" decoding="async" fetchpriority="low" alt=""><img class="ep" src="/ep01/art/bg-0-intro.webp" width="482" height="732" loading="lazy" decoding="async" fetchpriority="low" alt=""><span class="free">무료</span></div>
-          <div class="bk"><img src="/brand/home/home-book.webp" width="200" height="193" loading="lazy" decoding="async" fetchpriority="low" alt=""><img class="ep" src="/ep06/thumb.webp" width="400" height="400" loading="lazy" decoding="async" fetchpriority="low" alt=""><img class="lock" src="/brand/home/brand-lock.webp" width="38" height="48" loading="lazy" decoding="async" fetchpriority="low" alt="잠김"></div>
-          <div class="bk"><img src="/brand/home/home-book.webp" width="200" height="193" loading="lazy" decoding="async" fetchpriority="low" alt=""><img class="ep" src="/ep07/thumb.webp" width="800" height="400" loading="lazy" decoding="async" fetchpriority="low" alt=""><img class="lock" src="/brand/home/brand-lock.webp" width="38" height="48" loading="lazy" decoding="async" fetchpriority="low" alt="잠김"></div>
-        </div>
-        <img class="board" src="/brand/home/home-shelf.webp" width="800" height="186" loading="lazy" decoding="async" fetchpriority="low" alt="">
-        <p class="shelf-note">아침부터 밤까지 7권. EP01은 무료, 나머지는 가입하면 열려요.</p>
-      </div>
-    </section>
+    </div>
+  </section>
 
-    <div class="divider"></div>
+  <section class="qa">
+    <div class="wrap">
+      <h2 class="sec-title">부모님이 먼저 묻는 것</h2>
+      <dl>
+        <div><dt>화면을 오래 보진 않나요?</dt><dd>한 편이 2분이면 끝나요. 다 들으면 멈춰요.</dd></div>
+        <div><dt>아이 정보를 받나요?</dt><dd>아이 이름, 사진, 학교는 묻지 않아요. 부모님 계정만 만들어요.</dd></div>
+        <div><dt>앱을 깔아야 하나요?</dt><dd>아니요. 휴대폰, 태블릿, PC 브라우저에서 바로 열려요.</dd></div>
+        <div><dt>얼마예요?</dt><dd>이 닦기 편은 로그인 없이 무료, 가입도 무료예요.</dd></div>
+      </dl>
+    </div>
+  </section>
 
-    <section>
-      <div class="star-title"><h2>부모님이 궁금해하는 것</h2></div>
-      <p class="sub only-d">걱정 하나에 사실 한 줄씩.</p>
-      <div class="cols3">
-        <div class="assure"><img src="/brand/home/home-ic-time.webp" width="96" height="96" loading="lazy" decoding="async" fetchpriority="low" alt=""><div><b>한 편이 2분이면 끝나요</b><span>화면 앞에 오래 두지 않아요.</span></div></div>
-        <div class="assure"><img src="/brand/home/home-ic-safe.webp" width="96" height="106" loading="lazy" decoding="async" fetchpriority="low" alt=""><div><b>아이 정보는 받지 않아요</b><span>아이 이름과 사진, 학교는 묻지 않아요.</span></div></div>
-        <div class="assure"><img src="/brand/home/home-ic-grow.webp" width="96" height="67" loading="lazy" decoding="async" fetchpriority="low" alt=""><div><b>시험도 점수도 없어요</b><span>따라 말하기는 권하지만 시키지 않아요.</span></div></div>
-      </div>
-      <div class="faq">
-        <div><b>몇 살부터 할 수 있나요?</b><span>4~7세에 맞춰 만들었어요.</span></div>
-        <div><b>돈이 드나요?</b><span>EP01은 가입 없이 무료, 가입도 무료예요.</span></div>
-      </div>
-    </section>
-
-    <div class="divider"></div>
-
-    <section class="close-sec">
-      <div class="star-title"><h2>양치하기 전에<br class="only-m"> 한 편 들어 보세요</h2></div>
-      <a class="cta" href="/ep01/"><span class="cta-art"><span>맛보기 바로 듣기</span></span><span class="cta-sub">로그인 없이 바로 시작해요</span></a>
-      <a class="link-quiet" href="/join/">가입하고 7권 모두 보기</a>
-    </section>
-
-    <footer class="foot"><a href="/privacy/">개인정보처리방침</a><br>매일 외국어 읽기가 만들어요</footer>
-  </div></div>
-  <!-- 글꼴은 맨 끝에서 받는다(첫 그리기를 막지 않게, display=swap) -->
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Andika:wght@400;700&family=Gowun+Dodum&family=Jua&family=Gaegu:wght@700&display=swap">
+  <section class="last">
+    <img loading="lazy" decoding="async" src="img/end.webp" alt="">
+    <h2>오늘 습관 하나에<br>2분만 써 보세요</h2>
+    <p>로그인 없이 바로 시작해요</p>
+    <a class="btn" href="/ep01/">무료로 2분 들어보기</a>
+  </section>
+  <footer class="foot"><a href="/join/">가입하고 7편 모두 보기</a><br><a href="/privacy/">개인정보처리방침</a></footer>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gaegu:wght@700&family=Jua&family=Noto+Sans+KR:wght@400;700&display=swap">
 </body>
 </html>

@@ -141,16 +141,8 @@
       "h": 2940,
       "title": "L17-CrayonLandingPhone",
       "group": "지금 랜딩 /hello/",
-      "status": "approved",
-      "note": "사용자 승인 2026-10-28: 크레용 겹줄 액자(OpenAI 시안 2번 고도화)로 랜딩 진행. L11 휴대폰 배치를 대신함",
-      "impl": {
-        "route": "/hello/",
-        "files": [
-          "hello/index.html",
-          "hello/hello.css"
-        ],
-        "updated": "2026-10-28T09:08:55Z"
-      }
+      "status": "rejected",
+      "note": "/hello/는 promo T5(P44, P45)로 교체됨 2026-10-29"
     },
     "L18-CrayonVariants.html": {
       "x": 15860,
@@ -169,16 +161,8 @@
       "h": 2460,
       "title": "L19-CrayonLandingDesktop",
       "group": "지금 랜딩 /hello/",
-      "status": "approved",
-      "note": "L17 승인(2026-10-28)을 PC로 옮긴 것. 같은 재료와 글",
-      "impl": {
-        "route": "/hello/",
-        "files": [
-          "hello/index.html",
-          "hello/hello.css"
-        ],
-        "updated": "2026-10-28T09:08:55Z"
-      }
+      "status": "rejected",
+      "note": "/hello/는 promo T5(P44, P45)로 교체됨 2026-10-29"
     },
     "L20-FontOptions.html": {
       "x": 18160,
