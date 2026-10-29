@@ -6,7 +6,7 @@
       "w": 390,
       "h": 2600,
       "title": "L01-L1-book-mobile",
-      "group": "L1 그림책",
+      "group": "지난 시안",
       "status": "rejected",
       "note": "L3 선택으로 보류"
     },
@@ -16,7 +16,7 @@
       "w": 1280,
       "h": 2800,
       "title": "L02-L1-book-desktop",
-      "group": "L1 그림책",
+      "group": "지난 시안",
       "status": "rejected",
       "note": "L3 선택으로 보류"
     },
@@ -26,7 +26,7 @@
       "w": 390,
       "h": 2700,
       "title": "L03-L2-timeline-mobile",
-      "group": "L2 하루 시간표",
+      "group": "지난 시안",
       "status": "rejected",
       "note": "L3 선택으로 보류"
     },
@@ -36,7 +36,7 @@
       "w": 1280,
       "h": 2600,
       "title": "L04-L2-timeline-desktop",
-      "group": "L2 하루 시간표",
+      "group": "지난 시안",
       "status": "rejected",
       "note": "L3 선택으로 보류"
     },
@@ -46,9 +46,9 @@
       "w": 390,
       "h": 2800,
       "title": "L05-L3-preview-mobile",
-      "group": "L3 첫화면 놀이",
-      "status": "approved",
-      "note": "사용자 선택(2026-10-22): L3 첫 화면 놀이. 휴대폰과 태블릿 친화적으로 구현",
+      "group": "지난 시안",
+      "status": "rejected",
+      "note": "대체됨: 뒤 시안(L17, L19, 홈 H01)으로 바뀜",
       "impl": {
         "route": "/",
         "files": [
@@ -63,9 +63,9 @@
       "w": 1280,
       "h": 2600,
       "title": "L06-L3-preview-desktop",
-      "group": "L3 첫화면 놀이",
-      "status": "approved",
-      "note": "사용자 선택(2026-10-22): L3 첫 화면 놀이. 휴대폰과 태블릿 친화적으로 구현",
+      "group": "지난 시안",
+      "status": "rejected",
+      "note": "대체됨: 뒤 시안(L17, L19, 홈 H01)으로 바뀜",
       "impl": {
         "route": "/",
         "files": [
@@ -80,9 +80,9 @@
       "w": 390,
       "h": 4100,
       "title": "L11-AdLandingPhone",
-      "group": "광고 랜딩",
-      "status": "approved",
-      "note": "사용자 승인 2026-10-28, 맛보기 단추는 L13 6번 책 위로 뜨는 해(사용자 최종 선택, 1번, 3번에서 바꿈)"
+      "group": "지난 시안",
+      "status": "rejected",
+      "note": "대체됨: 뒤 시안(L17, L19, 홈 H01)으로 바뀜"
     },
     "L12-AdLandingDesktop.html": {
       "x": 5680,
@@ -90,9 +90,9 @@
       "w": 1280,
       "h": 2560,
       "title": "L12-AdLandingDesktop",
-      "group": "광고 랜딩",
-      "status": "approved",
-      "note": "사용자 승인 2026-10-28, 맛보기 단추는 L13 6번 책 위로 뜨는 해(사용자 최종 선택, 1번, 3번에서 바꿈)"
+      "group": "지난 시안",
+      "status": "rejected",
+      "note": "대체됨: 뒤 시안(L17, L19, 홈 H01)으로 바뀜"
     },
     "L13-PlayButtonOptions.html": {
       "x": 7000,
@@ -100,7 +100,7 @@
       "w": 1760,
       "h": 1700,
       "title": "L13-PlayButtonOptions",
-      "group": "광고 랜딩",
+      "group": "지금 랜딩 /hello/",
       "status": "approved",
       "note": "사용자 최종 선택 2026-10-28: 6번 책 위로 뜨는 해"
     },
@@ -110,7 +110,7 @@
       "w": 2170,
       "h": 1100,
       "title": "L14-LineLayoutOptions",
-      "group": "광고 랜딩",
+      "group": "지난 시안",
       "status": "rejected",
       "note": "눈에 안 띈다"
     },
@@ -120,7 +120,7 @@
       "w": 2170,
       "h": 1100,
       "title": "L15-DividerOptions",
-      "group": "광고 랜딩",
+      "group": "지난 시안",
       "status": "rejected",
       "note": "눈에 안 띈다"
     },
@@ -130,7 +130,7 @@
       "w": 2170,
       "h": 1100,
       "title": "L16-BoldLineLayoutOptions",
-      "group": "광고 랜딩",
+      "group": "지난 시안",
       "status": "rejected",
       "note": "OpenAI 시안 2번으로 감"
     },
@@ -140,7 +140,7 @@
       "w": 390,
       "h": 2940,
       "title": "L17-CrayonLandingPhone",
-      "group": "광고 랜딩",
+      "group": "지금 랜딩 /hello/",
       "status": "approved",
       "note": "사용자 승인 2026-10-28: 크레용 겹줄 액자(OpenAI 시안 2번 고도화)로 랜딩 진행. L11 휴대폰 배치를 대신함",
       "impl": {
@@ -158,7 +158,7 @@
       "w": 940,
       "h": 1680,
       "title": "L18-CrayonVariants",
-      "group": "광고 랜딩",
+      "group": "지난 시안",
       "status": "rejected",
       "note": "사용자: 원래(L17)가 가장 낫다"
     },
@@ -168,7 +168,7 @@
       "w": 1280,
       "h": 2460,
       "title": "L19-CrayonLandingDesktop",
-      "group": "광고 랜딩",
+      "group": "지금 랜딩 /hello/",
       "status": "approved",
       "note": "L17 승인(2026-10-28)을 PC로 옮긴 것. 같은 재료와 글",
       "impl": {
@@ -186,7 +186,7 @@
       "w": 1600,
       "h": 1150,
       "title": "L20-FontOptions",
-      "group": "글꼴"
+      "group": "글꼴 결정"
     },
     "L21-FontSpecimen.html": {
       "x": 19800,
@@ -194,7 +194,9 @@
       "w": 1520,
       "h": 1150,
       "title": "L21-FontSpecimen",
-      "group": "글꼴"
+      "group": "글꼴 결정",
+      "status": "approved",
+      "note": "사용자 결정 2026-10-28: 제목과 큰 글씨만 개구 굵게, 나머지는 그대로"
     }
   },
   "groups": [
@@ -217,6 +219,18 @@
     {
       "id": "글꼴",
       "label": "글꼴"
+    },
+    {
+      "id": "지난 시안",
+      "label": "지난 시안"
+    },
+    {
+      "id": "지금 랜딩 /hello/",
+      "label": "지금 랜딩 /hello/"
+    },
+    {
+      "id": "글꼴 결정",
+      "label": "글꼴 결정"
     }
   ],
   "links": [

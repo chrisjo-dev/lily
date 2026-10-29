@@ -1,0 +1,19 @@
+{
+  "boards": {
+    "O01-DesignMap.html": {
+      "x": 0,
+      "y": 0,
+      "w": 1600,
+      "h": 2840,
+      "title": "O01-DesignMap",
+      "group": "한눈에"
+    }
+  },
+  "groups": [
+    {
+      "id": "한눈에",
+      "label": "한눈에"
+    }
+  ],
+  "links": []
+}

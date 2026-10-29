@@ -1,0 +1,8 @@
+/* 디자인 지도 보드용. 릴리랑 종이색과 글꼴 */
+@import url("https://fonts.googleapis.com/css2?family=Gowun+Dodum&family=Gaegu:wght@700&display=swap");
+:root {
+  --paper: #fbf6ec; --paper-2: #f2ebdf; --ink: #2f2a26; --ink-2: #6b625a; --brown: #6b4a33;
+  --touch: #f2b630; --teal: #3d7f7a; --warn: #b4532a; --done: #3d7f7a; --card: #fffdf8;
+  --font-title: "Gaegu", "Gowun Dodum", sans-serif; --font-kr: "Gowun Dodum", sans-serif;
+  --s1: 4px; --s2: 8px; --s3: 12px; --s4: 16px; --s6: 24px; --s8: 32px; --s10: 40px; --s12: 48px;
+}

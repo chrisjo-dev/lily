@@ -6,7 +6,9 @@
       "w": 390,
       "h": 6989,
       "title": "T01-LandingPhone",
-      "group": "taste 시안"
+      "group": "지난 시안",
+      "status": "rejected",
+      "note": "사용자: 너무 별로야"
     },
     "T02-LandingDesktop.html": {
       "x": 430,
@@ -14,7 +16,9 @@
       "w": 1440,
       "h": 6023,
       "title": "T02-LandingDesktop",
-      "group": "taste 시안"
+      "group": "지난 시안",
+      "status": "rejected",
+      "note": "사용자: 너무 별로야"
     },
     "T03-HomePhone.html": {
       "x": 1910,
@@ -22,13 +26,19 @@
       "w": 390,
       "h": 3889,
       "title": "T03-HomePhone",
-      "group": "taste 시안"
+      "group": "지난 시안",
+      "status": "rejected",
+      "note": "사용자: 너무 별로야"
     }
   },
   "groups": [
     {
       "id": "taste 시안",
       "label": "taste 시안"
+    },
+    {
+      "id": "지난 시안",
+      "label": "지난 시안"
     }
   ],
   "links": []

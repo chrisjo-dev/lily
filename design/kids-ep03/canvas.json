@@ -6,7 +6,7 @@
       "w": 390,
       "h": 2200,
       "title": "K00-Current",
-      "group": "current"
+      "group": "지난 시안"
     },
     "K03-BubblePlayer.html": {
       "x": 1290,
@@ -14,7 +14,7 @@
       "w": 390,
       "h": 1720,
       "title": "K03-BubblePlayer",
-      "group": "proposals"
+      "group": "지난 시안"
     },
     "K04-Bedtime.html": {
       "x": 1720,
@@ -22,7 +22,7 @@
       "w": 390,
       "h": 2160,
       "title": "K04-Bedtime",
-      "group": "proposals"
+      "group": "지난 시안"
     },
     "K01-Storybook.html": {
       "x": 430,
@@ -30,7 +30,7 @@
       "w": 390,
       "h": 1960,
       "title": "K01-Storybook",
-      "group": "proposals"
+      "group": "지난 시안"
     },
     "K02-StickerBoard.html": {
       "x": 860,
@@ -38,7 +38,7 @@
       "w": 390,
       "h": 1960,
       "title": "K02-StickerBoard",
-      "group": "proposals"
+      "group": "지난 시안"
     },
     "N06-KidParent.html": {
       "x": 2150,
@@ -46,7 +46,7 @@
       "w": 390,
       "h": 2120,
       "title": "N06-KidParent",
-      "group": "round2"
+      "group": "지난 시안"
     },
     "N02-OpenBook.html": {
       "x": 430,
@@ -54,7 +54,7 @@
       "w": 390,
       "h": 1980,
       "title": "N02-OpenBook",
-      "group": "round2"
+      "group": "지난 시안"
     },
     "N05-WordCards.html": {
       "x": 1720,
@@ -62,7 +62,7 @@
       "w": 390,
       "h": 1280,
       "title": "N05-WordCards",
-      "group": "round2"
+      "group": "지난 시안"
     },
     "N01-ToyPlayer.html": {
       "x": 0,
@@ -70,7 +70,7 @@
       "w": 390,
       "h": 1700,
       "title": "N01-ToyPlayer",
-      "group": "round2"
+      "group": "지난 시안"
     },
     "N07-Comic.html": {
       "x": 2580,
@@ -78,7 +78,7 @@
       "w": 390,
       "h": 1910,
       "title": "N07-Comic",
-      "group": "round2"
+      "group": "지난 시안"
     },
     "N03-NightLight.html": {
       "x": 860,
@@ -86,7 +86,7 @@
       "w": 390,
       "h": 1660,
       "title": "N03-NightLight",
-      "group": "round2"
+      "group": "지난 시안"
     },
     "N04-GamePath.html": {
       "x": 1290,
@@ -94,7 +94,7 @@
       "w": 390,
       "h": 1840,
       "title": "N04-GamePath",
-      "group": "round2"
+      "group": "지난 시안"
     },
     "B01-FindBrush.html": {
       "x": 0,
@@ -337,7 +337,7 @@
       "w": 390,
       "h": 844,
       "title": "C01-FindBrush",
-      "group": "interactive-C-night"
+      "group": "지난 시안"
     },
     "C02-Scrub.html": {
       "x": 430,
@@ -345,7 +345,7 @@
       "w": 390,
       "h": 844,
       "title": "C02-Scrub",
-      "group": "interactive-C-night"
+      "group": "지난 시안"
     },
     "C03-PopBubbles.html": {
       "x": 860,
@@ -353,7 +353,7 @@
       "w": 390,
       "h": 844,
       "title": "C03-PopBubbles",
-      "group": "interactive-C-night"
+      "group": "지난 시안"
     },
     "C04-Sparkle.html": {
       "x": 1290,
@@ -361,7 +361,7 @@
       "w": 390,
       "h": 844,
       "title": "C04-Sparkle",
-      "group": "interactive-C-night"
+      "group": "지난 시안"
     },
     "C05-YourTurn.html": {
       "x": 1720,
@@ -369,7 +369,7 @@
       "w": 390,
       "h": 844,
       "title": "C05-YourTurn",
-      "group": "interactive-C-night"
+      "group": "지난 시안"
     },
     "C06-GoodNight.html": {
       "x": 2150,
@@ -377,7 +377,7 @@
       "w": 390,
       "h": 844,
       "title": "C06-GoodNight",
-      "group": "interactive-C-night"
+      "group": "지난 시안"
     },
     "A01-FindBrush.html": {
       "x": 0,
@@ -385,7 +385,7 @@
       "w": 390,
       "h": 844,
       "title": "A01-FindBrush",
-      "group": "interactive-A-toy"
+      "group": "지난 시안"
     },
     "A02-Scrub.html": {
       "x": 430,
@@ -393,7 +393,7 @@
       "w": 390,
       "h": 844,
       "title": "A02-Scrub",
-      "group": "interactive-A-toy"
+      "group": "지난 시안"
     },
     "A03-PopBubbles.html": {
       "x": 860,
@@ -401,7 +401,7 @@
       "w": 390,
       "h": 844,
       "title": "A03-PopBubbles",
-      "group": "interactive-A-toy"
+      "group": "지난 시안"
     },
     "A04-Sparkle.html": {
       "x": 1290,
@@ -409,7 +409,7 @@
       "w": 390,
       "h": 844,
       "title": "A04-Sparkle",
-      "group": "interactive-A-toy"
+      "group": "지난 시안"
     },
     "A05-YourTurn.html": {
       "x": 1720,
@@ -417,7 +417,7 @@
       "w": 390,
       "h": 844,
       "title": "A05-YourTurn",
-      "group": "interactive-A-toy"
+      "group": "지난 시안"
     },
     "A06-GoodNight.html": {
       "x": 2150,
@@ -425,7 +425,7 @@
       "w": 390,
       "h": 844,
       "title": "A06-GoodNight",
-      "group": "interactive-A-toy"
+      "group": "지난 시안"
     }
   },
   "groups": [
@@ -460,6 +460,10 @@
     {
       "id": "interactive-A-toy",
       "label": "interactive-A-toy"
+    },
+    {
+      "id": "지난 시안",
+      "label": "지난 시안"
     }
   ],
   "links": [

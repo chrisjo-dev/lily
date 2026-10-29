@@ -6,7 +6,7 @@
       "w": 390,
       "h": 3383,
       "title": "R01-HomePhone",
-      "group": "지금"
+      "group": "지난 시안"
     },
     "R02-HomeTablet.html": {
       "x": 430,
@@ -14,7 +14,7 @@
       "w": 1024,
       "h": 768,
       "title": "R02-HomeTablet",
-      "group": "지금"
+      "group": "지난 시안"
     },
     "R03-EpisodeFirst.html": {
       "x": 1494,
@@ -22,7 +22,7 @@
       "w": 390,
       "h": 844,
       "title": "R03-EpisodeFirst",
-      "group": "지금"
+      "group": "지난 시안"
     },
     "R04-EpisodeWait.html": {
       "x": 1924,
@@ -30,7 +30,7 @@
       "w": 390,
       "h": 844,
       "title": "R04-EpisodeWait",
-      "group": "지금"
+      "group": "지난 시안"
     },
     "R05-EpisodeTurn.html": {
       "x": 2354,
@@ -38,7 +38,7 @@
       "w": 390,
       "h": 844,
       "title": "R05-EpisodeTurn",
-      "group": "지금"
+      "group": "지난 시안"
     },
     "R06-EpisodeNight.html": {
       "x": 2784,
@@ -46,7 +46,7 @@
       "w": 390,
       "h": 844,
       "title": "R06-EpisodeNight",
-      "group": "지금"
+      "group": "지난 시안"
     },
     "R07-EpisodeTablet.html": {
       "x": 3214,
@@ -54,7 +54,7 @@
       "w": 1024,
       "h": 768,
       "title": "R07-EpisodeTablet",
-      "group": "지금"
+      "group": "지난 시안"
     },
     "R08-Ep07Night.html": {
       "x": 4278,
@@ -62,7 +62,7 @@
       "w": 390,
       "h": 844,
       "title": "R08-Ep07Night",
-      "group": "지금"
+      "group": "지난 시안"
     },
     "R09-EpisodeParent.html": {
       "x": 4708,
@@ -70,7 +70,7 @@
       "w": 390,
       "h": 1803,
       "title": "R09-EpisodeParent",
-      "group": "지금"
+      "group": "지난 시안"
     },
     "R10-GateCard.html": {
       "x": 5138,
@@ -78,7 +78,7 @@
       "w": 390,
       "h": 844,
       "title": "R10-GateCard",
-      "group": "지금"
+      "group": "지난 시안"
     },
     "R11-Join.html": {
       "x": 5568,
@@ -86,7 +86,7 @@
       "w": 390,
       "h": 877,
       "title": "R11-Join",
-      "group": "지금"
+      "group": "지난 시안"
     },
     "R12-Me.html": {
       "x": 5998,
@@ -94,7 +94,7 @@
       "w": 390,
       "h": 970,
       "title": "R12-Me",
-      "group": "지금"
+      "group": "지난 시안"
     },
     "R13-Privacy.html": {
       "x": 6428,
@@ -102,7 +102,7 @@
       "w": 390,
       "h": 2185,
       "title": "R13-Privacy",
-      "group": "지금"
+      "group": "지난 시안"
     },
     "R21-EpisodeFirst.html": {
       "x": 6858,
@@ -110,7 +110,7 @@
       "w": 390,
       "h": 844,
       "title": "R21-EpisodeFirst",
-      "group": "개선안"
+      "group": "지난 시안"
     },
     "R22-EpisodeWait.html": {
       "x": 7288,
@@ -118,7 +118,7 @@
       "w": 390,
       "h": 844,
       "title": "R22-EpisodeWait",
-      "group": "개선안"
+      "group": "지난 시안"
     },
     "R23-EpisodeTurn.html": {
       "x": 7718,
@@ -126,7 +126,7 @@
       "w": 390,
       "h": 844,
       "title": "R23-EpisodeTurn",
-      "group": "개선안"
+      "group": "지난 시안"
     },
     "R24-EpisodeEnd.html": {
       "x": 8148,
@@ -134,7 +134,7 @@
       "w": 390,
       "h": 844,
       "title": "R24-EpisodeEnd",
-      "group": "개선안"
+      "group": "지난 시안"
     },
     "R25-EpisodeNight.html": {
       "x": 8578,
@@ -142,7 +142,7 @@
       "w": 390,
       "h": 844,
       "title": "R25-EpisodeNight",
-      "group": "개선안"
+      "group": "지난 시안"
     },
     "R26-ParentDrawer.html": {
       "x": 9008,
@@ -150,7 +150,7 @@
       "w": 390,
       "h": 844,
       "title": "R26-ParentDrawer",
-      "group": "개선안"
+      "group": "지난 시안"
     },
     "R41-HomePhone.html": {
       "x": 9438,
@@ -158,7 +158,7 @@
       "w": 390,
       "h": 2573,
       "title": "R41-HomePhone",
-      "group": "개선안"
+      "group": "지난 시안"
     },
     "R42-HomeTablet.html": {
       "x": 9868,
@@ -166,7 +166,7 @@
       "w": 1024,
       "h": 768,
       "title": "R42-HomeTablet",
-      "group": "개선안"
+      "group": "지난 시안"
     },
     "R43-Join.html": {
       "x": 10932,
@@ -174,7 +174,7 @@
       "w": 390,
       "h": 844,
       "title": "R43-Join",
-      "group": "개선안"
+      "group": "지난 시안"
     },
     "R44-Me.html": {
       "x": 11362,
@@ -182,14 +182,15 @@
       "w": 390,
       "h": 844,
       "title": "R44-Me",
-      "group": "개선안"
+      "group": "지난 시안"
     },
     "R31-EpisodeTabletLandscape.html": {
       "x": 11792,
       "y": 0,
       "w": 1024,
       "h": 768,
-      "title": "R31-EpisodeTabletLandscape"
+      "title": "R31-EpisodeTabletLandscape",
+      "group": "지난 시안"
     },
     "R32-EpisodeTabletPortrait.html": {
       "x": 12856,
@@ -197,7 +198,7 @@
       "w": 834,
       "h": 1194,
       "title": "R32-EpisodeTabletPortrait",
-      "group": "개선안"
+      "group": "지난 시안"
     },
     "R33-GateCard.html": {
       "x": 13730,
@@ -205,7 +206,7 @@
       "w": 390,
       "h": 844,
       "title": "R33-GateCard",
-      "group": "개선안"
+      "group": "지난 시안"
     },
     "R51-EpisodeFirst.html": {
       "x": 14160,
@@ -213,7 +214,7 @@
       "w": 390,
       "h": 844,
       "title": "R51-EpisodeFirst",
-      "group": "개선안 2",
+      "group": "이야기 화면 바탕(개선안 2)",
       "status": "approved",
       "note": "2026-10-23 사용자 승인: 개선안 2 방향으로 엔진과 홈 코드에 반영",
       "impl": {
@@ -233,7 +234,7 @@
       "w": 390,
       "h": 844,
       "title": "R52-EpisodeWait",
-      "group": "개선안 2",
+      "group": "이야기 화면 바탕(개선안 2)",
       "status": "approved",
       "note": "2026-10-23 사용자 승인: 개선안 2 방향으로 엔진과 홈 코드에 반영",
       "impl": {
@@ -252,7 +253,7 @@
       "w": 390,
       "h": 844,
       "title": "R53-EpisodeTurn",
-      "group": "개선안 2",
+      "group": "이야기 화면 바탕(개선안 2)",
       "status": "approved",
       "note": "2026-10-23 사용자 승인: 개선안 2 방향으로 엔진과 홈 코드에 반영",
       "impl": {
@@ -271,7 +272,7 @@
       "w": 390,
       "h": 844,
       "title": "R54-EpisodeEnd",
-      "group": "개선안 2",
+      "group": "이야기 화면 바탕(개선안 2)",
       "status": "approved",
       "note": "2026-10-23 사용자 승인: 개선안 2 방향으로 엔진과 홈 코드에 반영",
       "impl": {
@@ -290,7 +291,7 @@
       "w": 390,
       "h": 844,
       "title": "R55-EpisodeNight",
-      "group": "개선안 2",
+      "group": "이야기 화면 바탕(개선안 2)",
       "status": "approved",
       "note": "2026-10-23 사용자 승인: 개선안 2 방향으로 엔진과 홈 코드에 반영",
       "impl": {
@@ -310,7 +311,7 @@
       "w": 390,
       "h": 844,
       "title": "R56-ParentDrawer",
-      "group": "개선안 2",
+      "group": "이야기 화면 바탕(개선안 2)",
       "status": "approved",
       "note": "2026-10-23 사용자 승인: 개선안 2 방향으로 엔진과 홈 코드에 반영",
       "impl": {
@@ -329,7 +330,7 @@
       "w": 1024,
       "h": 768,
       "title": "R57-EpisodeTablet",
-      "group": "개선안 2",
+      "group": "이야기 화면 바탕(개선안 2)",
       "status": "approved",
       "note": "2026-10-23 사용자 승인: 개선안 2 방향으로 엔진과 홈 코드에 반영",
       "impl": {
@@ -348,7 +349,7 @@
       "w": 390,
       "h": 844,
       "title": "R58-HomePhone",
-      "group": "개선안 2",
+      "group": "이야기 화면 바탕(개선안 2)",
       "status": "approved",
       "note": "2026-10-23 사용자 승인: 개선안 2 방향으로 엔진과 홈 코드에 반영",
       "impl": {
@@ -365,7 +366,7 @@
       "w": 390,
       "h": 844,
       "title": "R59-GateCard",
-      "group": "개선안 2",
+      "group": "이야기 화면 바탕(개선안 2)",
       "status": "approved",
       "note": "2026-10-23 사용자 승인: 개선안 2 방향으로 엔진과 홈 코드에 반영",
       "impl": {
@@ -384,7 +385,7 @@
       "w": 375,
       "h": 667,
       "title": "R60-SmallTurn",
-      "group": "개선안 2 작은 휴대폰",
+      "group": "이야기 화면 바탕(개선안 2)",
       "impl": {
         "route": "/ep01/",
         "files": [
@@ -402,7 +403,7 @@
       "w": 375,
       "h": 667,
       "title": "R61-SmallEnd",
-      "group": "개선안 2 작은 휴대폰",
+      "group": "이야기 화면 바탕(개선안 2)",
       "impl": {
         "route": "/ep01/",
         "files": [
@@ -420,7 +421,7 @@
       "w": 375,
       "h": 667,
       "title": "R62-SmallGate",
-      "group": "개선안 2 작은 휴대폰",
+      "group": "이야기 화면 바탕(개선안 2)",
       "impl": {
         "route": "/ep01/",
         "files": [
@@ -438,7 +439,7 @@
       "w": 834,
       "h": 1194,
       "title": "R63-TabletPortraitFirst",
-      "group": "개선안 2 태블릿",
+      "group": "이야기 화면 바탕(개선안 2)",
       "status": "approved",
       "note": "2026-10-26 사용자 승인: 태블릿 보드대로 코드 반영",
       "impl": {
@@ -456,7 +457,7 @@
       "w": 834,
       "h": 1194,
       "title": "R64-TabletPortraitWait",
-      "group": "개선안 2 태블릿",
+      "group": "이야기 화면 바탕(개선안 2)",
       "status": "approved",
       "note": "2026-10-26 사용자 승인: 태블릿 보드대로 코드 반영",
       "impl": {
@@ -474,7 +475,7 @@
       "w": 834,
       "h": 1194,
       "title": "R65-TabletPortraitTurn",
-      "group": "개선안 2 태블릿",
+      "group": "이야기 화면 바탕(개선안 2)",
       "status": "approved",
       "note": "2026-10-26 사용자 승인: 태블릿 보드대로 코드 반영",
       "impl": {
@@ -492,7 +493,7 @@
       "w": 834,
       "h": 1194,
       "title": "R66-TabletPortraitEnd",
-      "group": "개선안 2 태블릿",
+      "group": "이야기 화면 바탕(개선안 2)",
       "status": "approved",
       "note": "2026-10-26 사용자 승인: 태블릿 보드대로 코드 반영",
       "impl": {
@@ -510,7 +511,7 @@
       "w": 1024,
       "h": 768,
       "title": "R67-TabletLandscapeFirst",
-      "group": "개선안 2 태블릿",
+      "group": "이야기 화면 바탕(개선안 2)",
       "status": "approved",
       "note": "2026-10-26 사용자 승인: 태블릿 보드대로 코드 반영",
       "impl": {
@@ -528,7 +529,7 @@
       "w": 1024,
       "h": 768,
       "title": "R68-TabletLandscapeTurn",
-      "group": "개선안 2 태블릿",
+      "group": "이야기 화면 바탕(개선안 2)",
       "status": "approved",
       "note": "2026-10-26 사용자 승인: 태블릿 보드대로 코드 반영",
       "impl": {
@@ -546,7 +547,7 @@
       "w": 1024,
       "h": 768,
       "title": "R69-TabletLandscapeNight",
-      "group": "개선안 2 태블릿",
+      "group": "이야기 화면 바탕(개선안 2)",
       "status": "approved",
       "note": "2026-10-26 사용자 승인: 태블릿 보드대로 코드 반영",
       "impl": {
@@ -564,7 +565,7 @@
       "w": 1024,
       "h": 768,
       "title": "R70-TabletLandscapeEnd",
-      "group": "개선안 2 태블릿",
+      "group": "이야기 화면 바탕(개선안 2)",
       "status": "approved",
       "note": "2026-10-26 사용자 승인: 태블릿 보드대로 코드 반영",
       "impl": {
@@ -582,7 +583,7 @@
       "w": 390,
       "h": 1600,
       "title": "H01-HomePhone",
-      "group": "홈 개선안 3",
+      "group": "지금 홈 /",
       "status": "approved",
       "note": "2026-10-28 사용자 승인: 홈 개선안 3 코드 반영",
       "impl": {
@@ -599,7 +600,7 @@
       "w": 1024,
       "h": 768,
       "title": "H02-HomeTabletLandscape",
-      "group": "홈 개선안 3",
+      "group": "지금 홈 /",
       "status": "approved",
       "note": "2026-10-28 사용자 승인: 홈 개선안 3 코드 반영",
       "impl": {
@@ -616,7 +617,7 @@
       "w": 834,
       "h": 1194,
       "title": "H03-HomeTabletPortrait",
-      "group": "홈 개선안 3",
+      "group": "지금 홈 /",
       "status": "approved",
       "note": "2026-10-28 사용자 승인: 홈 개선안 3 코드 반영",
       "impl": {
@@ -633,7 +634,7 @@
       "w": 390,
       "h": 1820,
       "title": "R71-CrayonHome",
-      "group": "크레용 액자 전체",
+      "group": "지난 시안",
       "status": "rejected",
       "note": "홈은 v3(H01)로 되돌림, 사용자 결정"
     },
@@ -643,7 +644,7 @@
       "w": 390,
       "h": 844,
       "title": "R72-CrayonEpisodeFirst",
-      "group": "크레용 액자 전체",
+      "group": "지금 크레용 액자(이야기, 잠금, 가입)",
       "status": "approved",
       "note": "전체 크레용 겹줄 액자 채택(사용자: 전체도 크레용)",
       "impl": {
@@ -660,7 +661,7 @@
       "w": 390,
       "h": 844,
       "title": "R73-CrayonEpisodeWait",
-      "group": "크레용 액자 전체",
+      "group": "지금 크레용 액자(이야기, 잠금, 가입)",
       "status": "approved",
       "note": "전체 크레용 겹줄 액자 채택(사용자: 전체도 크레용)",
       "impl": {
@@ -677,7 +678,7 @@
       "w": 390,
       "h": 844,
       "title": "R74-CrayonEpisodeEnd",
-      "group": "크레용 액자 전체",
+      "group": "지금 크레용 액자(이야기, 잠금, 가입)",
       "status": "approved",
       "note": "전체 크레용 겹줄 액자 채택(사용자: 전체도 크레용)",
       "impl": {
@@ -694,7 +695,7 @@
       "w": 390,
       "h": 844,
       "title": "R75-CrayonGateCard",
-      "group": "크레용 액자 전체",
+      "group": "지금 크레용 액자(이야기, 잠금, 가입)",
       "status": "approved",
       "note": "전체 크레용 겹줄 액자 채택(사용자: 전체도 크레용)",
       "impl": {
@@ -712,7 +713,7 @@
       "w": 390,
       "h": 844,
       "title": "R76-CrayonJoin",
-      "group": "크레용 액자 전체",
+      "group": "지금 크레용 액자(이야기, 잠금, 가입)",
       "status": "approved",
       "note": "전체 크레용 겹줄 액자 채택(사용자: 전체도 크레용)",
       "impl": {
@@ -752,6 +753,22 @@
     {
       "id": "크레용 액자 전체",
       "label": "크레용 액자 전체"
+    },
+    {
+      "id": "지난 시안",
+      "label": "지난 시안"
+    },
+    {
+      "id": "지금 홈 /",
+      "label": "지금 홈 /"
+    },
+    {
+      "id": "지금 크레용 액자(이야기, 잠금, 가입)",
+      "label": "지금 크레용 액자(이야기, 잠금, 가입)"
+    },
+    {
+      "id": "이야기 화면 바탕(개선안 2)",
+      "label": "이야기 화면 바탕(개선안 2)"
     }
   ],
   "links": [
