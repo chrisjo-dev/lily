@@ -11,45 +11,44 @@
 <link rel="icon" href="/brand/favicon.ico" sizes="any"><link rel="icon" href="/brand/favicon-32.png" type="image/png" sizes="32x32"><link rel="apple-touch-icon" href="/brand/apple-touch-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" id="fonts" media="print" href="https://fonts.googleapis.com/css2?family=Andika:wght@400;700&family=Gowun+Dodum&family=Jua&family=Gaegu:wght@700&display=swap">
-<link rel="stylesheet" href="/join/pages.css">
+<link rel="stylesheet" id="fonts" media="print" href="https://fonts.googleapis.com/css2?family=Gaegu:wght@700&family=Jua&family=Noto+Sans+KR:wght@400;500;700&display=swap">
+<link rel="stylesheet" href="/common/shell.css">
+<link rel="stylesheet" href="/common/forms.css">
 </head>
 <body>
-<div class="wrap">
-  <header class="top"><a class="logo" href="/"><img src="/brand/emblem.png" width="52" height="40" alt="">릴리랑</a></header>
-  <main>
+<header class="lamp short">
+  <div class="bar"><a class="brand" href="/"><img src="/hello/img/emblem.webp" width="288" height="221" alt=""><span>릴리랑</span></a></div>
+  <div class="inner"><img class="art" src="/hello/img/hero.webp" width="538" height="474" alt=""></div>
+  <svg class="edge" viewBox="0 0 1440 56" preserveAspectRatio="none" aria-hidden="true"><path d="M0 56V30c160-22 320-26 480-12s320 30 480 18 320-30 480-22v42z" fill="#fefefd"/></svg>
+</header>
+<main class="page split">
+  <div class="intro">
     <h1>릴리랑 가입하기</h1>
-    <p class="lead">가입하면 모든 편을 끝까지 들을 수 있어요. 가입은 무료예요.</p>
+    <p class="lead">가입하면 모든 이야기를 끝까지 들을 수 있어요. 가입은 무료예요.</p>
+    <img class="vig" src="/hello/img/end.webp" width="624" height="507" decoding="async" alt="">
+  </div>
+  <div class="part form">
+    <p class="msg info" id="notReady" hidden>가입은 아직 준비 중이에요. 그동안 <a href="/ep01/">맛보기 편</a>을 끝까지 들어 보세요.</p>
+    <div class="msg info" id="already" hidden>이미 로그인돼 있어요. <a id="alreadyNext" href="/">이어서 듣기</a> 또는 <a href="/me/">내 정보</a></div>
 
-    <p class="msg" id="notReady" hidden>가입은 아직 준비 중이에요. 그동안 <a href="/ep01/">맛보기 편</a>을 끝까지 들어 보세요.</p>
-    <div class="msg" id="already" hidden>이미 로그인돼 있어요. <a id="alreadyNext" href="/">이어서 듣기</a> 또는 <a href="/me/">내 정보</a></div>
-
-    <section class="card" id="joinBox" aria-labelledby="agreeTitle">
-      <h2 id="agreeTitle" class="sr-title">동의</h2>
-      <label class="check"><input type="checkbox" id="agree"><span><b>[필수]</b> 개인정보 수집과 이용에 동의해요</span></label>
-      <p class="agree-detail">보호자 계정(이메일 또는 카카오 계정 정보, 닉네임)만 받아요. 로그인과 이어 듣기에 쓰고, 탈퇴하면 바로 지워요. <a href="/privacy/">자세히 보기</a></p>
-      <label class="check"><input type="checkbox" id="marketing"><span><b>[선택]</b> 새 편 소식과 안내를 받을게요</span></label>
-      <p class="agree-detail">동의하지 않아도 가입할 수 있어요. 내 정보에서 언제든 바꿀 수 있어요.</p>
-      <p class="note">만 14세 이상 보호자만 가입할 수 있어요. 아이 이름이나 사진은 받지 않아요.</p>
-
-      <div class="or">로그인 방법</div>
-      <button class="btn kakao" type="button" id="kakao" disabled>
-        <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 3C6.48 3 2 6.48 2 10.8c0 2.78 1.86 5.22 4.66 6.6l-.95 3.5c-.08.3.26.54.52.37l4.13-2.74c.54.06 1.08.1 1.64.1 5.52 0 10-3.48 10-7.83S17.52 3 12 3z"/></svg>
-        카카오로 시작하기
-      </button>
-
-      <div class="or">또는</div>
+    <section id="joinBox" aria-label="가입">
+      <label class="check"><input type="checkbox" id="agree"><i class="box" aria-hidden="true"></i><span><b>[필수]</b> 개인정보 수집과 이용에 동의해요</span></label>
+      <p class="detail">보호자 계정(이메일 또는 카카오 계정 정보, 닉네임)만 받아요. 로그인과 이어 듣기에 쓰고, 탈퇴하면 바로 지워요. <a href="/privacy/">자세히 보기</a></p>
+      <label class="check"><input type="checkbox" id="marketing"><i class="box" aria-hidden="true"></i><span><b>[선택]</b> 새 이야기 소식과 안내를 받을게요</span></label>
+      <p class="detail">동의하지 않아도 가입할 수 있어요. 내 정보에서 언제든 바꿀 수 있어요.</p>
+      <p class="assure">만 14세 이상 보호자만 가입할 수 있어요. 아이 이름이나 사진은 받지 않아요.</p>
+      <p class="or">로그인 방법</p>
+      <button class="act kakao" type="button" id="kakao" disabled><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 3C6.48 3 2 6.48 2 10.8c0 2.78 1.86 5.22 4.66 6.6l-.95 3.5c-.08.3.26.54.52.37l4.13-2.74c.54.06 1.08.1 1.64.1 5.52 0 10-3.48 10-7.83S17.52 3 12 3z"/></svg>카카오로 시작하기</button>
+      <p class="or">또는</p>
       <form id="emailForm" novalidate>
-        <label class="field">이메일
-          <input type="email" id="email" name="email" autocomplete="email" inputmode="email" maxlength="254" required>
-        </label>
-        <button class="btn line" type="submit" id="emailBtn" disabled>이메일로 로그인 링크 받기</button>
+        <label class="field">이메일<input class="input" type="email" id="email" name="email" autocomplete="email" inputmode="email" maxlength="254" placeholder="you@example.com" required></label>
+        <button class="act line" type="submit" id="emailBtn" disabled>이메일로 로그인 링크 받기</button>
       </form>
-      <p class="msg" id="msg" role="status" aria-live="polite" hidden></p>
+      <p class="msg ok" id="msg" role="status" aria-live="polite" hidden></p>
     </section>
-  </main>
-  <footer class="foot"><a href="/privacy/">개인정보처리방침</a></footer>
-</div>
+  </div>
+</main>
+<footer class="foot2"><a href="/privacy/">개인정보처리방침</a></footer>
 <script src="/join/fonts.js"></script>
 <script src="/engine/lily-config.js"></script>
 <script src="/engine/auth.js"></script>

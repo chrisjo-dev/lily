@@ -39,16 +39,34 @@
 
   A.onChange(function (m) { if (!m && uid) { uid = null; signedOut(); } });
 
+  // 끝까지 들은 이야기: 동그라미 그림, 우리말 이름, 영어 제목, 날짜(시안 P65). 모르는 편은 그림 없이 편 번호만
+  var EPS = {
+    ep01: ["이 닦기", "Brush, Brush!", "brush"], ep02: ["일어나기", "Wake Up!", "wake"], ep03: ["세수하기", "Splash, Splash!", "wash"],
+    ep04: ["아침 먹기", "Yummy, Yummy!", "eat"], ep05: ["옷 입기", "Put On, Ready!", "dress"], ep06: ["목욕하기", "Bath Time!", "bath"],
+    ep07: ["잠자리 책", "Good night!", "sleep"]
+  };
   function showEpisodes(rows) {
     var ul = $("eps");
     ul.textContent = "";
     rows.forEach(function (row) {
       if (!/^ep[0-9]{2}$/.test(row.episode)) return;
+      var info = EPS[row.episode];
       var li = document.createElement("li");
       var a = document.createElement("a");
-      a.className = "en";
       a.href = "/" + row.episode + "/";
-      a.textContent = row.episode.toUpperCase();
+      if (info) {
+        var im = document.createElement("img");
+        im.src = "/hello/img/ep-" + info[2] + ".webp"; im.alt = ""; im.width = 56; im.height = 56; im.decoding = "async";
+        a.appendChild(im);
+      } else {
+        a.appendChild(document.createElement("i"));
+      }
+      var name = document.createElement("span");
+      var b = document.createElement("b");
+      b.textContent = info ? info[0] : row.episode.toUpperCase();
+      name.appendChild(b);
+      if (info) { var sm = document.createElement("small"); sm.textContent = info[1]; name.appendChild(sm); }
+      a.appendChild(name);
       var t = document.createElement("time");
       t.dateTime = row.completed_at;
       var d = new Date(row.completed_at);

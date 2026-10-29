@@ -9,17 +9,22 @@
 <meta name="robots" content="noindex, nofollow">
 <title>로그인 중 | 릴리랑</title>
 <link rel="icon" href="/brand/favicon.ico" sizes="any">
-<link rel="stylesheet" href="/join/pages.css">
+<link rel="stylesheet" href="/common/shell.css">
+<link rel="stylesheet" href="/common/forms.css">
 </head>
 <body>
-<div class="wrap">
-  <header class="top"><a class="logo" href="/"><img src="/brand/emblem.png" width="52" height="40" alt="">릴리랑</a></header>
-  <main>
-    <h1 id="title">로그인하고 있어요</h1>
-    <p class="lead" id="status" role="status" aria-live="polite">잠깐만 기다려 주세요.</p>
-    <p id="retry" hidden><a class="btn main" id="retryLink" href="/join/">다시 로그인하기</a></p>
-  </main>
-</div>
+<header class="lamp short noart">
+  <div class="bar"><a class="brand" href="/"><img src="/hello/img/emblem.webp" width="288" height="221" alt=""><span>릴리랑</span></a></div>
+  <div class="inner"></div>
+  <svg class="edge" viewBox="0 0 1440 56" preserveAspectRatio="none" aria-hidden="true"><path d="M0 56V30c160-22 320-26 480-12s320 30 480 18 320-30 480-22v42z" fill="#fefefd"/></svg>
+</header>
+<main class="wait">
+  <h1 id="title">로그인하고 있어요</h1>
+  <p class="lead" id="status" role="status" aria-live="polite">잠깐만 기다려 주세요.</p>
+  <p class="dots" aria-hidden="true"><i></i><i></i><i></i></p>
+  <img class="vig" src="/hello/img/end.webp" width="624" height="507" alt="">
+  <p class="part" id="retry" hidden><a class="act main" id="retryLink" href="/join/">다시 로그인하기</a></p>
+</main>
 <script src="/engine/lily-config.js"></script>
 <script src="/engine/auth.js"></script>
 <script src="/join/callback/callback.js"></script>

@@ -225,7 +225,7 @@ async def run(br):
     fcp, lt = await perf(pg)
     ok("me: profile and listened episodes shown, unsafe episode id dropped",
        await pg.input_value("#nickname") == "하늘맘" and await pg.is_checked('input[name="age"][value="4-5"]')
-       and await pg.evaluate("document.querySelectorAll('#eps li').length") == 1 and await pg.evaluate("!document.querySelector('#eps img')"), f"FCP={fcp:.0f}ms lt={lt}")
+       and await pg.evaluate("document.querySelectorAll('#eps li').length") == 1 and await pg.evaluate("[...document.querySelectorAll('#eps img')].every(i => i.getAttribute('src') === '/hello/img/ep-wake.webp')"), f"FCP={fcp:.0f}ms lt={lt}")
     await pg.click('input[name="age"][value="6-7"] >> xpath=..')
     await pg.fill("#nickname", "새 이름")
     await pg.click("#save"); await pg.wait_for_selector("#saveMsg:not([hidden])")
@@ -332,7 +332,8 @@ async def sizes(br):
             if wait: await pg.wait_for_selector(wait, timeout=8000)
             await pg.wait_for_timeout(400)
             L = await pg.evaluate(LAYOUT)
-            col = 760 if name == "privacy" else 560
+            # 가입은 PC(900px 이상)에서 시안 P63처럼 소개와 폼 두 칸(1080px + 양옆 48px)
+            col = 760 if name == "privacy" else 1176 if name.startswith("join") and w >= 900 else 560
             good = not L["hscroll"] and not L["small"] and L["clipped"] == [] and L["centered"] and (name == "gate" or L["mainW"] <= col)
             ok(f"layout {name} {w}x{h}: no h-scroll, targets >= 48px, centered column", good, str(L))
             if SHOTS:
