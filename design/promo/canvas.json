@@ -54,7 +54,9 @@
       "w": 390,
       "h": 3150,
       "title": "P11-LandingPhone",
-      "group": "랜딩"
+      "group": "지난 시안",
+      "status": "rejected",
+      "note": "사용자: 디자인 너무 별로"
     },
     "P12-LandingDesktop.html": {
       "x": 7150,
@@ -62,7 +64,33 @@
       "w": 1440,
       "h": 3370,
       "title": "P12-LandingDesktop",
-      "group": "랜딩"
+      "group": "지난 시안",
+      "status": "rejected",
+      "note": "사용자: 디자인 너무 별로"
+    },
+    "P21-LandingA.html": {
+      "x": 8630,
+      "y": 0,
+      "w": 1616,
+      "h": 1300,
+      "title": "P21-LandingA",
+      "group": "랜딩 시안 A B C"
+    },
+    "P22-LandingB.html": {
+      "x": 10286,
+      "y": 0,
+      "w": 1616,
+      "h": 1300,
+      "title": "P22-LandingB",
+      "group": "랜딩 시안 A B C"
+    },
+    "P23-LandingC.html": {
+      "x": 11942,
+      "y": 0,
+      "w": 1616,
+      "h": 1300,
+      "title": "P23-LandingC",
+      "group": "랜딩 시안 A B C"
     }
   },
   "groups": [
@@ -73,6 +101,14 @@
     {
       "id": "랜딩",
       "label": "랜딩"
+    },
+    {
+      "id": "랜딩 시안 A B C",
+      "label": "랜딩 시안 A B C"
+    },
+    {
+      "id": "지난 시안",
+      "label": "지난 시안"
     }
   ],
   "links": []
