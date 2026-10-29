@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>C14 그림책 출판사 랜딩 휴대폰</title>
+<link rel="stylesheet" href="../shared/tokens.css">
+<link rel="stylesheet" href="../shared/hl.css">
+<style>
+  /* 2. 그림책 출판사: 그림은 그림대로 꽉 채우고, 글은 그림 밖 종이 위에. 활자 위계와 여백으로 고급스러움 */
+  body { width: 390px; margin: 0 auto; }
+  .mast { position: absolute; top: 20px; left: 0; right: 0; text-align: center; z-index: 1; }
+  .mast p { margin: 0; font-family: var(--font-title); font-weight: 700; font-size: 26px; color: #fff; letter-spacing: -0.02em; text-shadow: 0 1px 8px rgba(47,42,38,.35); }
+  .cover { position: relative; height: 640px; }
+  .cover img { width: 100%; height: 100%; object-fit: cover; object-position: 28% 40%; }
+  .title { padding: 40px 28px 0; }
+  .kicker { font-size: 13px; color: var(--ink-2); margin: 0 0 var(--s3); }
+  .title h1 { font-size: 40px; margin: 0; color: var(--ink); }
+  .title .lead { font-size: 16px; line-height: 1.75; margin: var(--s4) 0 var(--s6); color: var(--ink); }
+
+  .spread { margin-top: 88px; }
+  .spread img { width: 100%; height: 420px; object-fit: cover; }
+  .spread .page { padding: 28px 28px 0; }
+  .spread .no { font-family: var(--font-title); font-weight: 700; font-size: 18px; color: var(--brown); }
+  .spread h2 { font-size: 32px; margin: 4px 0 var(--s3); }
+  .spread p { font-size: 15px; line-height: 1.8; margin: 0; color: var(--ink); }
+  .spread.right img { width: 82%; margin-left: auto; height: 360px; }
+  .spread.left img { width: 82%; height: 360px; }
+
+  .list { margin: 96px 28px 0; }
+  .list h2 { font-size: 32px; margin: 0 0 var(--s2); }
+  .list > p { font-size: 15px; color: var(--ink-2); margin: 0 0 var(--s6); }
+  .list ol { list-style: none; margin: 0; padding: 0; }
+  .list li { display: grid; grid-template-columns: 64px 1fr; gap: 16px; align-items: center; padding: 14px 0; border-top: 1px solid var(--line); }
+  .list li:last-child { border-bottom: 1px solid var(--line); }
+  .list img { width: 64px; height: 80px; object-fit: cover; border-radius: 6px; }
+  .list b { display: block; font-family: var(--font-title); font-weight: 700; font-size: 20px; letter-spacing: -0.03em; }
+  .list span { font-size: 13px; color: var(--ink-2); }
+  .list .free span { color: var(--brown); }
+
+  .colophon { margin: 96px 28px 0; }
+  .colophon h2 { font-size: 26px; margin: 0 0 var(--s4); }
+  .colophon p { font-size: 14px; line-height: 1.8; margin: 0 0 var(--s3); color: var(--ink); }
+  .end { margin: 72px 28px 0; text-align: center; }
+  .end h2 { font-size: 30px; margin: 0 0 var(--s6); }
+  .end .quiet { display: inline-block; margin-top: 20px; }
+</style>
+</head>
+<body>
+  <header class="cover">
+    <div class="mast"><p>릴리랑</p></div>
+    <img src="../assets/hl/home-hero-1280.webp" alt="릴리와 강아지 비스킷이 방에서 반기는 그림">
+  </header>
+  <section class="title">
+    <p class="kicker">4~7세, 부모와 함께 듣는 영어 그림책</p>
+    <h1 class="t">아이가 이야기에<br>끼어드는 2분</h1>
+    <p class="lead">릴리가 이를 닦다 멈추면, 아이가 칫솔을 눌러 줘야 이야기가 이어져요. 하루 습관마다 한 편, 아침부터 밤까지 일곱 권.</p>
+    <a class="play"><img src="../assets/hl/btn-play.webp" alt=""><b>맛보기 바로 듣기<small>EP01 이 닦기, 2분 19초, 로그인 없이</small></b></a>
+  </section>
+
+  <section class="spread right">
+    <img src="../assets/hl/ep01-bg-1-find.webp" alt="칫솔을 찾는 릴리와 비스킷">
+    <div class="page"><span class="no">0:40</span><h2 class="t">릴리가 기다려요</h2><p>아이가 칫솔을 톡 눌러야 다음 장으로 넘어가요. 듣기만 하는 영상과 다른 점이에요.</p></div>
+  </section>
+  <section class="spread left">
+    <img src="../assets/hl/ep01-bg-4-clean.webp" alt="이를 다 닦고 웃는 릴리">
+    <div class="page"><span class="no">2:19</span><h2 class="t">스티커 세 장으로 끝</h2><p>2분 남짓이면 한 편이 끝나요. 한 번 더 들을지는 아이가 골라요.</p></div>
+  </section>
+
+  <section class="list">
+    <h2 class="t">릴리의 하루, 일곱 권</h2>
+    <p>EP01은 가입 없이, 나머지는 무료 가입 뒤에 열려요.</p>
+    <ol>
+      <li><img src="../assets/hl/cover-ep02.webp" alt=""><div><b>Wake Up!</b><span>일어나기</span></div></li>
+      <li><img src="../assets/hl/cover-ep03.webp" alt=""><div><b>Splash, Splash!</b><span>세수하기</span></div></li>
+      <li><img src="../assets/hl/cover-ep04.webp" alt=""><div><b>Yummy, Yummy!</b><span>아침 먹기</span></div></li>
+      <li><img src="../assets/hl/cover-ep05.webp" alt=""><div><b>Put On, Ready!</b><span>옷 입기</span></div></li>
+      <li class="free"><img src="../assets/hl/cover-ep01.webp" alt=""><div><b>Brush, Brush, Brush!</b><span>이 닦기, 지금 무료</span></div></li>
+      <li><img src="../assets/hl/cover-ep06.webp" alt=""><div><b>Rub-a-Dub, Bath Time!</b><span>목욕하기</span></div></li>
+      <li><img src="../assets/hl/cover-ep07.webp" alt=""><div><b>Sweet Dreams</b><span>잠자기</span></div></li>
+    </ol>
+  </section>
+
+  <section class="colophon">
+    <h2 class="t">부모님께</h2>
+    <p>한 편이 2분이면 끝나요. 화면 앞에 오래 두지 않아요.</p>
+    <p>아이 이름과 사진, 학교는 묻지 않아요. 부모님 계정만 만들면 돼요.</p>
+    <p>시험도 점수도 없어요. 따라 말하기는 권하지만 시키지 않아요.</p>
+  </section>
+
+  <section class="end">
+    <h2 class="t">오늘 양치 전에<br>한 편 들어 보세요</h2>
+    <a class="play"><img src="../assets/hl/btn-play.webp" alt=""><b>맛보기 바로 듣기<small>로그인 없이 바로 시작해요</small></b></a><br>
+    <a class="quiet">가입하고 일곱 권 모두 보기</a>
+  </section>
+  <footer class="foot"><a>개인정보처리방침</a></footer>
+</body>
+</html>

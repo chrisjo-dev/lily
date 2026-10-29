@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>C15 그림책 출판사 홈 휴대폰</title>
+<link rel="stylesheet" href="../shared/tokens.css">
+<link rel="stylesheet" href="../shared/hl.css">
+<style>
+  /* 2. 그림책 출판사 홈: 오늘 읽을 책 한 권을 크게, 아래는 서가 목록 */
+  body { width: 390px; margin: 0 auto; }
+  .bar { display: flex; justify-content: space-between; align-items: baseline; padding: 18px 28px 14px; }
+  .bar p { margin: 0; font-family: var(--font-title); font-weight: 700; font-size: 28px; color: var(--brown); }
+  .bar a { font-size: 13px; color: var(--ink-2); }
+  .feature img { width: 100%; height: 520px; object-fit: cover; object-position: center 35%; }
+  .feature .page { padding: 28px 28px 0; }
+  .kicker { font-size: 13px; color: var(--ink-2); margin: 0 0 var(--s2); }
+  .feature h1 { font-size: 38px; margin: 0 0 var(--s2); }
+  .feature p.d { font-size: 15px; line-height: 1.75; margin: 0 0 var(--s6); }
+
+  .list { margin: 72px 28px 0; }
+  .list h2 { font-size: 28px; margin: 0 0 var(--s4); }
+  .list ol { list-style: none; margin: 0; padding: 0; }
+  .list li { display: grid; grid-template-columns: 56px 1fr auto; gap: 14px; align-items: center; padding: 12px 0; border-top: 1px solid var(--line); }
+  .list li:last-child { border-bottom: 1px solid var(--line); }
+  .list img { width: 56px; height: 70px; object-fit: cover; border-radius: 6px; }
+  .list b { display: block; font-family: var(--font-title); font-weight: 700; font-size: 19px; letter-spacing: -0.03em; }
+  .list span { font-size: 13px; color: var(--ink-2); }
+  .list .st { font-size: 12px; color: var(--teal); }
+  .list .lock { width: 16px; height: 16px; }
+  .note { margin: 40px 28px 0; font-size: 14px; color: var(--ink-2); }
+</style>
+</head>
+<body>
+  <div class="bar"><p>릴리랑</p><a>내 정보</a></div>
+  <section class="feature">
+    <img src="../assets/hl/cover-ep01.webp" alt="EP01 이 닦기 첫 장면">
+    <div class="page">
+      <p class="kicker">이어서 듣기, 1분 19초부터</p>
+      <h1 class="t">Brush, Brush, Brush!</h1>
+      <p class="d">이 닦기. 거품을 터뜨릴 차례에서 멈췄어요.</p>
+      <a class="play"><img src="../assets/hl/btn-play.webp" alt=""><b>이어서 듣기<small>남은 시간 1분</small></b></a>
+    </div>
+  </section>
+  <section class="list">
+    <h2 class="t">릴리의 하루</h2>
+    <ol>
+      <li><img src="../assets/hl/cover-ep02.webp" alt=""><div><b>Wake Up!</b><span>일어나기</span></div><i class="lock"></i></li>
+      <li><img src="../assets/hl/cover-ep03.webp" alt=""><div><b>Splash, Splash!</b><span>세수하기</span></div><i class="lock"></i></li>
+      <li><img src="../assets/hl/cover-ep04.webp" alt=""><div><b>Yummy, Yummy!</b><span>아침 먹기</span></div><i class="lock"></i></li>
+      <li><img src="../assets/hl/cover-ep05.webp" alt=""><div><b>Put On, Ready!</b><span>옷 입기</span></div><i class="lock"></i></li>
+      <li><img src="../assets/hl/cover-ep01.webp" alt=""><div><b>Brush, Brush, Brush!</b><span>이 닦기</span></div><span class="st">듣는 중</span></li>
+      <li><img src="../assets/hl/cover-ep06.webp" alt=""><div><b>Rub-a-Dub, Bath Time!</b><span>목욕하기</span></div><i class="lock"></i></li>
+      <li><img src="../assets/hl/cover-ep07.webp" alt=""><div><b>Sweet Dreams</b><span>잠자기</span></div><i class="lock"></i></li>
+    </ol>
+  </section>
+  <p class="note">가입은 무료예요. 가입하면 일곱 권이 모두 열려요. <a class="quiet">가입하기</a></p>
+  <footer class="foot"><a>개인정보처리방침</a></footer>
+</body>
+</html>

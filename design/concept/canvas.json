@@ -23,12 +23,88 @@
       "h": 920,
       "title": "C03-CrayonSketchbook",
       "group": "새 컨셉"
+    },
+    "C11-CoverLandingPhone.html": {
+      "x": 4920,
+      "y": 0,
+      "w": 390,
+      "h": 3226,
+      "title": "C11-CoverLandingPhone",
+      "group": "홈과 랜딩"
+    },
+    "C12-CoverHomePhone.html": {
+      "x": 5350,
+      "y": 0,
+      "w": 390,
+      "h": 1375,
+      "title": "C12-CoverHomePhone",
+      "group": "홈과 랜딩"
+    },
+    "C14-PressLandingPhone.html": {
+      "x": 5780,
+      "y": 0,
+      "w": 390,
+      "h": 3866,
+      "title": "C14-PressLandingPhone",
+      "group": "홈과 랜딩"
+    },
+    "C15-PressHomePhone.html": {
+      "x": 6210,
+      "y": 0,
+      "w": 390,
+      "h": 2264,
+      "title": "C15-PressHomePhone",
+      "group": "홈과 랜딩"
+    },
+    "C17-DayLandingPhone.html": {
+      "x": 6640,
+      "y": 0,
+      "w": 390,
+      "h": 3843,
+      "title": "C17-DayLandingPhone",
+      "group": "홈과 랜딩"
+    },
+    "C18-DayHomePhone.html": {
+      "x": 7070,
+      "y": 0,
+      "w": 390,
+      "h": 1572,
+      "title": "C18-DayHomePhone",
+      "group": "홈과 랜딩"
+    },
+    "C13-CoverLandingDesktop.html": {
+      "x": 7500,
+      "y": 0,
+      "w": 1280,
+      "h": 800,
+      "title": "C13-CoverLandingDesktop",
+      "group": "홈과 랜딩"
+    },
+    "C16-PressLandingDesktop.html": {
+      "x": 8820,
+      "y": 0,
+      "w": 1280,
+      "h": 800,
+      "title": "C16-PressLandingDesktop",
+      "group": "홈과 랜딩"
+    },
+    "C19-DayLandingDesktop.html": {
+      "x": 10140,
+      "y": 0,
+      "w": 1280,
+      "h": 800,
+      "title": "C19-DayLandingDesktop",
+      "group": "홈과 랜딩"
     }
   },
   "groups": [
     {
       "id": "새 컨셉",
       "label": "새 컨셉"
+    },
+    {
+      "id": "홈과 랜딩",
+      "label": "홈과 랜딩"
     }
   ],
   "links": []
