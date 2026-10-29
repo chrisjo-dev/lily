@@ -1,9 +1,9 @@
 /* 홍보(광고) 토큰. docs/PROMO.md 기준: 색은 크게, 단추는 하나, 카피가 주인공 */
-@import url("https://fonts.googleapis.com/css2?family=Jua&family=Noto+Sans+KR:wght@500;700;900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Jua&family=Gaegu:wght@700&family=Noto+Sans+KR:wght@500;700;900&display=swap");
 :root {
   --sky: #8ec3ea; --sky-deep: #3f86d0; --night: #1f2a4d; --cream: #fff8ea; --sun: #ffc531; --sun-edge: #6b4a33;
-  --ink: #1d2433; --ink-soft: #46506a; --white: #ffffff;
-  --font-head: "Jua", "Noto Sans KR", sans-serif; --font-body: "Noto Sans KR", sans-serif;
+  --wall: #86a3a6; --wall-soft: #dfe9e8; --ink: #1d2433; --ink-soft: #46506a; --white: #ffffff;
+  --font-head: "Jua", "Noto Sans KR", sans-serif; --font-hand: "Gaegu", "Jua", sans-serif; --font-body: "Noto Sans KR", sans-serif;
 }
 body { margin: 0; font-family: var(--font-body); color: var(--ink); word-break: keep-all; }
 .ad { position: relative; width: 1080px; overflow: hidden; }

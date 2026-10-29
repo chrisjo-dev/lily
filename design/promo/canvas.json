@@ -162,7 +162,25 @@
       "w": 1616,
       "h": 1300,
       "title": "P32-LandingT2",
-      "group": "랜딩 시간 없는 실내"
+      "group": "랜딩 시간 없는 실내",
+      "status": "approved",
+      "note": "사용자 선택 2026-10-29: T2 책 읽는 구석. 벽은 밤처럼 안 보이게, 아래 섹션은 세 컷 시연, 동화 7편, 원리, 매일 습관, 걱정, 마지막 단추 순서"
+    },
+    "P33-LandingT2Phone.html": {
+      "x": 28502,
+      "y": 0,
+      "w": 390,
+      "h": 3640,
+      "title": "P33-LandingT2Phone",
+      "group": "랜딩 T2"
+    },
+    "P34-LandingT2Desktop.html": {
+      "x": 28932,
+      "y": 0,
+      "w": 1440,
+      "h": 4430,
+      "title": "P34-LandingT2Desktop",
+      "group": "랜딩 T2"
     }
   },
   "groups": [
@@ -197,6 +215,10 @@
     {
       "id": "랜딩 시간 없는 실내",
       "label": "랜딩 시간 없는 실내"
+    },
+    {
+      "id": "랜딩 T2",
+      "label": "랜딩 T2"
     }
   ],
   "links": []

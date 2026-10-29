@@ -1,0 +1,179 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>P34 랜딩 T2 PC</title>
+<link rel="stylesheet" href="../shared/tokens.css">
+<style>
+  /* 승인 시안 P32(T2)를 PC 1440으로. P33(휴대폰)과 같은 내용과 순서, 그림은 hero-wide */
+  body { width: 1440px; margin: 0 auto; background: var(--cream); }
+  img { display: block; max-width: 100%; }
+  h1, h2, h3 { font-family: var(--font-head); font-weight: 400; margin: 0; }
+  .wrap { width: 1200px; margin: 0 auto; }
+  .btn { display: inline-flex; align-items: center; justify-content: center; gap: 14px; background: var(--sun); color: var(--ink); border: 5px solid var(--sun-edge); border-radius: 999px; padding: 20px 50px; font-family: var(--font-head); font-size: 30px; line-height: 1; text-decoration: none; }
+  .btn::before { content: ''; border-left: 20px solid var(--sun-edge); border-top: 13px solid transparent; border-bottom: 13px solid transparent; }
+  .sec-title { font-size: 50px; line-height: 1.18; }
+  .sec-lead { font-size: 20px; line-height: 1.6; margin: 14px 0 0; }
+
+  .hero { position: relative; height: 900px; background: var(--wall) url(../assets/hero-wide.webp) center / cover no-repeat; overflow: hidden; }
+  .hero .top { position: absolute; left: 120px; top: 60px; width: 600px; }
+  .hero .logo { height: 54px; background: var(--white); border-radius: 14px; padding: 6px 12px; }
+  .hero h1 { font-size: 72px; line-height: 1.14; color: var(--ink); margin-top: 90px; }
+  .hero h1 em { font-style: normal; color: var(--white); background: var(--sky-deep); border-radius: 14px; padding: 0 12px; }
+  .hero .sub { font-size: 26px; font-weight: 700; color: var(--ink); margin: 20px 0 34px; }
+  .hero .note { font-size: 18px; font-weight: 700; color: var(--ink); margin: 14px 0 0 30px; }
+  .hero .phone { position: absolute; right: 70px; top: 150px; width: 300px; height: 540px; border: 14px solid var(--ink); border-radius: 48px; overflow: hidden; background: var(--white); transform: rotate(4deg); }
+  .hero .phone img { width: 100%; height: 100%; object-fit: cover; object-position: center 45%; }
+  .call { position: absolute; letter-spacing: -0.06em; font-family: var(--font-hand); font-weight: 700; font-size: 36px; line-height: 1.05; color: var(--sun); text-shadow: 0 0 8px var(--ink), 0 0 2px var(--ink); }
+  .call.c1 { right: 400px; top: 200px; }
+  .call.c2 { right: 395px; top: 650px; }
+  .call.c3 { right: 90px; top: 730px; }
+
+  .demo { background: var(--ink); color: var(--white); padding: 100px 0; }
+  .demo .wrap { display: grid; grid-template-columns: 380px 1fr; gap: 60px; align-items: center; }
+  .demo .sec-title { color: var(--white); }
+  .steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; }
+  .step .scr { border: 8px solid var(--white); border-radius: 30px; overflow: hidden; height: 420px; background: var(--white); }
+  .step .scr img { width: 100%; height: 100%; object-fit: cover; object-position: center 40%; }
+  .step span { display: block; letter-spacing: -0.06em; font-family: var(--font-hand); font-weight: 700; font-size: 32px; color: var(--sun); text-align: center; margin-top: 14px; line-height: 1.1; }
+  .demo .sec-lead { color: var(--wall-soft); }
+
+  .books { padding: 110px 0 90px; }
+  .books .head { display: grid; grid-template-columns: 1fr 640px; gap: 60px; align-items: center; }
+  .open { display: grid; grid-template-columns: 1fr 1fr; border-radius: 26px; overflow: hidden; background: var(--white); }
+  .open img { width: 100%; height: 340px; object-fit: cover; object-position: center 85%; }
+  .open .page { padding: 30px; display: flex; flex-direction: column; justify-content: center; }
+  .open .en { letter-spacing: -0.05em; font-family: var(--font-hand); font-weight: 700; font-size: 40px; line-height: 1.12; color: var(--ink); }
+  .open .ko { font-size: 17px; color: var(--ink-soft); margin-top: 12px; line-height: 1.5; }
+  .open .listen { margin-top: 18px; align-self: flex-start; font-size: 16px; font-weight: 700; color: var(--white); background: var(--sky-deep); border-radius: 999px; padding: 8px 16px; }
+  .row { display: grid; grid-template-columns: repeat(7, 1fr); gap: 16px; margin-top: 50px; }
+  .ep img { width: 100%; height: 210px; object-fit: cover; border-radius: 16px; }
+  .ep b { display: block; font-size: 19px; margin-top: 10px; }
+  .ep small { font-size: 15px; color: var(--ink-soft); }
+  .ep.free img { outline: 5px solid var(--sun); outline-offset: -5px; }
+
+  .why { background: var(--wall-soft); padding: 100px 0; }
+  .why .wrap { display: grid; grid-template-columns: 380px 1fr; gap: 60px; }
+  .why ul { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: 1fr 1fr; gap: 36px 40px; }
+  .why li { display: grid; grid-template-columns: 84px 1fr; gap: 18px; align-items: center; }
+  .why li img { width: 84px; height: 84px; object-fit: contain; }
+  .why li b { display: block; font-size: 22px; }
+  .why li span { font-size: 17px; color: var(--ink-soft); line-height: 1.55; }
+  .why .note { font-size: 16px; color: var(--ink-soft); margin: 20px 0 0; }
+
+  .daily { padding: 100px 0; }
+  .daily .wrap { display: grid; grid-template-columns: 380px 1fr; gap: 60px; align-items: center; }
+  .slot { display: grid; grid-template-columns: 90px 1fr; gap: 16px; margin-bottom: 22px; }
+  .slot .when { font-family: var(--font-head); font-size: 30px; color: var(--sky-deep); }
+  .slot .what { font-size: 22px; font-weight: 700; line-height: 1.5; }
+  .stickers { display: flex; gap: 16px; align-items: center; margin-top: 30px; background: var(--white); border-radius: 22px; padding: 20px 24px; }
+  .stickers img { width: 84px; height: 84px; }
+  .stickers p { margin: 0 0 0 8px; font-size: 19px; line-height: 1.5; }
+
+  .qa { background: var(--wall-soft); padding: 100px 0; }
+  .qa .wrap { display: grid; grid-template-columns: 380px 1fr; gap: 60px; }
+  .qa dl { margin: 0; display: grid; grid-template-columns: 1fr 1fr; gap: 0 50px; }
+  .qa dt { font-size: 22px; font-weight: 900; margin-top: 26px; }
+  .qa dd { margin: 6px 0 0; font-size: 18px; line-height: 1.55; color: var(--ink-soft); }
+
+  .last { background: var(--wall); padding: 90px 0; text-align: center; }
+  .last h2 { font-size: 56px; line-height: 1.18; color: var(--ink); }
+  .last p { font-size: 20px; font-weight: 700; margin: 14px 0 30px; }
+  .foot { padding: 30px 0 40px; text-align: center; font-size: 16px; color: var(--ink-soft); }
+  .foot a { color: var(--ink-soft); }
+</style>
+</head>
+<body>
+  <header class="hero">
+    <div class="top">
+      <img class="logo" src="../assets/logo-h.svg" alt="릴리랑">
+      <h1>아이가 <em>톡!</em> 눌러야<br>이야기가 이어져요</h1>
+      <p class="sub">하루 습관마다 2분, 4~7세 영어 그림책</p>
+      <a class="btn" href="#play">무료로 2분 들어보기</a>
+      <p class="note">로그인 없이 바로 시작해요</p>
+    </div>
+    <div class="phone"><img src="../assets/cap-wait0-find.webp" alt="EP01 실제 화면: 칫솔이 노랗게 빛나고 손가락이 톡"></div>
+    <span class="call c1">릴리가<br>멈추면</span>
+    <span class="call c2">아이가<br>톡!</span>
+    <span class="call c3">이야기가 이어져요</span>
+  </header>
+
+  <section class="demo">
+    <div class="wrap">
+      <div><h2 class="sec-title">보기만 하는<br>영상이 아니에요</h2><p class="sec-lead">8초 동안 누르지 않으면 릴리가 대신 넘어가요. 틀리는 일은 없어요.</p></div>
+      <div class="steps">
+        <div class="step"><div class="scr"><img src="../assets/cap-wait0-find.webp" alt="칫솔을 찾으며 기다리는 장면"></div><span>릴리가<br>멈추면</span></div>
+        <div class="step"><div class="scr"><img src="../assets/cap-wait1-pop.webp" alt="거품을 누르는 장면"></div><span>아이가<br>톡!</span></div>
+        <div class="step"><div class="scr"><img src="../assets/cap-end.webp" alt="스티커를 모은 끝 화면"></div><span>이야기가<br>이어져요</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="books">
+    <div class="wrap head">
+      <div><h2 class="sec-title">한 편 한 편이<br>진짜 그림책이에요</h2>
+      <p class="sec-lead">그림과 목소리, 노래가 담긴 2분짜리 이야기 7편.</p></div>
+      <div class="open">
+        <img src="../assets/bg-3-bubbles.webp" alt="EP01 그림책 한 쪽: 거품 속 릴리">
+        <div class="page"><span class="en">Bubbles,<br>pop, pop!</span><span class="ko">거품이 퐁퐁 터져요.<br>EP01 이 닦기 중에서</span><span class="listen">▶ 10초 들어보기</span></div>
+      </div>
+    </div>
+    <div class="row wrap">
+      <div class="ep"><img src="../assets/thumb-ep02.webp" alt=""><b>일어나기</b><small>Wake Up!</small></div>
+      <div class="ep"><img src="../assets/thumb-ep03.webp" alt=""><b>세수하기</b><small>Splash, Splash!</small></div>
+      <div class="ep"><img src="../assets/thumb-ep04.webp" alt=""><b>아침 먹기</b><small>Yummy, Yummy!</small></div>
+      <div class="ep"><img src="../assets/thumb-ep05.webp" alt=""><b>옷 입기</b><small>Put On, Ready!</small></div>
+      <div class="ep free"><img src="../assets/thumb-ep01.webp" alt=""><b>이 닦기 (무료)</b><small>Brush, Brush!</small></div>
+      <div class="ep"><img src="../assets/thumb-ep06.webp" alt=""><b>목욕하기</b><small>Bath Time!</small></div>
+      <div class="ep"><img src="../assets/thumb-ep07.webp" alt=""><b>잠자기</b><small>Good night!</small></div>
+    </div>
+  </section>
+
+  <section class="why">
+    <div class="wrap">
+      <div><h2 class="sec-title">이렇게 들어서<br>귀에 붙어요</h2><p class="note">점수나 실력 향상을 약속하지 않아요. 매일 2분, 귀에 익히는 방법이에요.</p></div>
+      <ul>
+        <li><img src="../assets/home-how-listen.webp" alt=""><div><b>같은 편을 여러 번</b><span>시험 대신 반복. 3번 이어 듣기를 켜 두면 연달아 들려줘요.</span></div></li>
+        <li><img src="../assets/home-how-tap.webp" alt=""><div><b>아이가 직접 눌러 이어 가요</b><span>릴리가 묻고 기다리는 순간, 아이 손이 이야기에 들어와요.</span></div></li>
+        <li><img src="../assets/home-how-say.webp" alt=""><div><b>진짜 그 순간에 한 번 더</b><span>양치할 때 부모님이 "Brush my teeth!" 한마디. 들은 말이 생활로 이어져요.</span></div></li>
+        <li><img src="../assets/home-how-listen.webp" alt=""><div><b>우리말 풀이는 처음 한 번만</b><span>그다음부터는 영어만 들려 뜻을 스스로 붙잡게 해요.</span></div></li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="daily">
+    <div class="wrap">
+      <h2 class="sec-title">매일, 그 시간에<br>한 편씩</h2>
+      <div><div class="slot"><span class="when">아침</span><span class="what">일어나기, 세수하기, 아침 먹기, 옷 입기</span></div>
+      <div class="slot"><span class="when">저녁</span><span class="what">이 닦기, 목욕하기</span></div>
+      <div class="slot"><span class="when">밤</span><span class="what">잠자기</span></div>
+      <div class="stickers">
+        <img src="../assets/L-sticker-brush.webp" alt=""><img src="../assets/L-sticker-bubbles.webp" alt=""><img src="../assets/L-sticker-clean.webp" alt="">
+        <p>한 편을 끝까지 들으면<br>스티커 세 장을 모아요</p>
+      </div></div>
+    </div>
+  </section>
+
+  <section class="qa">
+    <div class="wrap">
+      <h2 class="sec-title">부모님이<br>먼저 묻는 것</h2>
+      <dl>
+        <div><dt>화면을 오래 보진 않나요?</dt><dd>한 편이 2분이면 끝나요. 다 들으면 멈춰요.</dd></div>
+        <div><dt>아이 정보를 받나요?</dt><dd>아이 이름, 사진, 학교는 묻지 않아요. 부모님 계정만 만들어요.</dd></div>
+        <div><dt>앱을 깔아야 하나요?</dt><dd>아니요. 휴대폰과 태블릿 브라우저에서 바로 열려요.</dd></div>
+        <div><dt>얼마예요?</dt><dd>이 닦기 편은 로그인 없이 무료, 가입도 무료예요.</dd></div>
+      </dl>
+    </div>
+  </section>
+
+  <section class="last">
+    <div class="wrap">
+      <h2>오늘, 습관 하나에<br>2분만 써 보세요</h2>
+      <p>로그인 없이 바로 시작해요</p>
+      <a class="btn" href="#play">무료로 2분 들어보기</a>
+    </div>
+  </section>
+  <footer class="foot"><a href="#privacy">개인정보처리방침</a></footer>
+</body>
+</html>
