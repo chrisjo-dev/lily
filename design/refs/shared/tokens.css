@@ -1,0 +1,19 @@
+/* 참고 사이트 판 토큰 (종이색 바탕, 릴리랑 팔레트에서 가져옴) */
+:root {
+  --paper:   #f7f2e8;
+  --card:    #fffdf8;
+  --ink:     #24323d;
+  --sub:     #5b6b78;
+  --muted:   #8ca0ad;
+  --line:    #e4dccb;
+  --accent:  #2f7d6d;
+  --soft:    #d7ebe4;
+  --wash:    #bfe0f2;
+
+  --font-head: 'Gowun Batang', 'Nanum Myeongjo', serif;
+  --font-body: 'Pretendard', 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;
+
+  --r-md: 14px;
+  --r-lg: 22px;
+  --shadow: 0 6px 24px rgba(36,50,61,0.10);
+}
