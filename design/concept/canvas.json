@@ -1,0 +1,35 @@
+{
+  "boards": {
+    "C01-OneBook.html": {
+      "x": 0,
+      "y": 0,
+      "w": 1600,
+      "h": 920,
+      "title": "C01-OneBook",
+      "group": "새 컨셉"
+    },
+    "C02-LilysRoom.html": {
+      "x": 1640,
+      "y": 0,
+      "w": 1600,
+      "h": 920,
+      "title": "C02-LilysRoom",
+      "group": "새 컨셉"
+    },
+    "C03-CrayonSketchbook.html": {
+      "x": 3280,
+      "y": 0,
+      "w": 1600,
+      "h": 920,
+      "title": "C03-CrayonSketchbook",
+      "group": "새 컨셉"
+    }
+  },
+  "groups": [
+    {
+      "id": "새 컨셉",
+      "label": "새 컨셉"
+    }
+  ],
+  "links": []
+}

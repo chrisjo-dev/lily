@@ -1,0 +1,19 @@
+/* 컨셉 비교 보드용(릴리랑 종이색과 글꼴). 보드는 var(--...)만 쓴다 */
+@import url("https://fonts.googleapis.com/css2?family=Gowun+Dodum&family=Gaegu:wght@700&display=swap");
+:root {
+  --paper: #fbf6ec; --paper-2: #f2ebdf; --ink: #2f2a26; --ink-2: #6b625a; --brown: #6b4a33;
+  --line: #e2d8c8; --touch: #f2b630; --teal: #3d7f7a;
+  --font-title: "Gaegu", "Gowun Dodum", sans-serif; --font-kr: "Gowun Dodum", sans-serif;
+  --s2: 8px; --s3: 12px; --s4: 16px; --s6: 24px; --s8: 32px; --s10: 40px;
+}
+body { margin: 0; background: var(--paper-2); color: var(--ink); font-family: var(--font-kr); word-break: keep-all; line-height: 1.6; }
+.wrap { padding: var(--s10); display: grid; grid-template-columns: 1040px 1fr; gap: var(--s8); align-items: start; }
+.sheet { width: 100%; border-radius: 18px; display: block; }
+h1 { font-family: var(--font-title); font-weight: 700; font-size: 44px; line-height: 1.1; margin: 0; color: var(--brown); letter-spacing: -0.04em; }
+.one { font-size: 19px; margin: var(--s3) 0 var(--s6); }
+h2 { font-size: 15px; margin: var(--s6) 0 var(--s2); color: var(--brown); }
+ul { margin: 0; padding-left: 1.1em; font-size: 15px; }
+li { margin-bottom: 6px; }
+.meter { display: grid; grid-template-columns: 96px 1fr; gap: 6px var(--s3); font-size: 14px; margin-top: var(--s2); }
+.meter b { font-weight: 400; color: var(--ink-2); }
+.verdict { margin-top: var(--s6); padding: var(--s4); background: var(--paper); border-radius: 14px; font-size: 15px; }
