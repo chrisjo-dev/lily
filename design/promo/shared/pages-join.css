@@ -1,0 +1,79 @@
+/* 가입, 로그인 처리, 내 정보(P52~P55). landing-t4.css, landing-t5.css 위에 더한다.
+   위쪽 짧은 남색 별무늬 띠, 아래는 흰 종이. 부모 조작은 하늘 파랑, 노랑은 쓰지 않는다(카카오 단추만 카카오 규정 색). */
+.top { position: relative; color: var(--white); background:
+  radial-gradient(60% 120% at 90% 0, rgba(247,215,154,.38), rgba(247,215,154,0) 70%),
+  url(../assets/stars.svg) 0 0 / 120px 120px, var(--navy); }
+.top .bar span { color: var(--white); }
+.top .edge { display: block; width: 100%; height: 22px; margin-top: -1px; }
+.page { padding: 18px 22px 30px; }
+.page h1 { font-size: 32px; line-height: 1.2; }
+.page .lead { font-size: 16px; line-height: 1.6; color: var(--ink-2); margin-top: 10px; }
+.vig { width: 210px; margin: 6px auto 0; }
+.part { margin-top: 26px; }
+.part + .part { padding-top: 24px; border-top: 0; }
+.part h2 { font-family: var(--font-head); font-weight: 400; font-size: 21px; margin-bottom: 12px; }
+.label { font-size: 14px; color: var(--ink-2); margin: 22px 0 10px; }
+
+/* 동의 */
+.check { display: flex; gap: 12px; align-items: flex-start; font-size: 16px; line-height: 1.5; font-weight: 500; }
+.box { flex: none; width: 24px; height: 24px; border-radius: 7px; border: 2px solid #b8c3d1; background: var(--white); margin-top: 1px; }
+.box.on { background: var(--sky-deep); border-color: var(--sky-deep); box-shadow: inset 0 0 0 4px var(--sky-deep), inset 0 0 0 7px var(--white); }
+.check b { color: var(--sky-deep); font-weight: 700; }
+.detail { font-size: 14px; line-height: 1.6; color: var(--ink-2); margin: 6px 0 16px 36px; }
+.detail a, .quiet-link { color: var(--sky-deep); text-underline-offset: 3px; }
+.assure { background: #f3f8fd; border-radius: 14px; padding: 12px 14px; font-size: 14px; line-height: 1.55; color: var(--ink); margin-top: 6px; }
+
+/* 단추 */
+.act { display: flex; align-items: center; justify-content: center; gap: 10px; width: 100%; box-sizing: border-box; border-radius: 14px; padding: 15px 0; font-family: var(--font-body); font-weight: 700; font-size: 17px; text-decoration: none; border: 0; }
+.act.kakao { background: #fee500; color: rgba(0,0,0,.85); }
+.act.kakao svg { width: 22px; height: 22px; }
+.act.main { background: var(--sky-deep); color: var(--white); }
+.act.line { background: var(--white); color: var(--sky-deep); box-shadow: inset 0 0 0 2px var(--sky-deep); }
+.act.quiet { background: none; color: var(--ink-2); font-weight: 500; text-decoration: underline; text-underline-offset: 3px; padding: 10px 0; }
+.act.danger { background: #b4432c; color: var(--white); }
+.act[aria-disabled="true"] { opacity: .45; }
+.field { display: block; font-size: 15px; font-weight: 700; margin-bottom: 10px; }
+.input { display: block; margin-top: 8px; height: 50px; border-radius: 12px; box-shadow: inset 0 0 0 2px #cfd8e3; background: var(--white); padding: 0 14px; font-size: 16px; line-height: 50px; color: #8a96a6; font-weight: 400; }
+.or { display: flex; align-items: center; gap: 12px; font-size: 13px; color: var(--ink-2); margin: 20px 0 12px; }
+.or::before, .or::after { content: ''; flex: 1; height: 2px; background: #edf1f5; border-radius: 2px; }
+
+/* 상태 글 */
+.msg { font-size: 15px; line-height: 1.55; border-radius: 12px; padding: 12px 14px; margin-top: 12px; }
+.msg.ok { background: #eaf6ee; color: #23613a; }
+.msg.err { background: #fdeeea; color: #8a2f1c; }
+.msg.info { background: #f3f8fd; color: var(--ink); }
+.state-label { display: block; font-family: var(--font-hand); font-weight: 700; font-size: 20px; color: var(--honey); margin-bottom: 8px; }
+
+/* 로그인 처리 중 */
+.wait { text-align: center; padding: 44px 22px 30px; }
+.wait .vig { width: 230px; }
+.dots { display: flex; justify-content: center; gap: 8px; margin-top: 18px; }
+.dots i { width: 10px; height: 10px; border-radius: 50%; background: var(--sky-deep); opacity: .3; }
+.dots i:nth-child(2) { opacity: .6; } .dots i:nth-child(3) { opacity: 1; }
+.pair { display: grid; grid-template-columns: 390px 390px; gap: 40px; padding: 30px; background: #eef1f5; }
+.pair > div { background: var(--paper); min-height: 760px; }
+.pair .cap { font-size: 14px; color: var(--ink-2); padding: 10px 0 0 22px; }
+
+/* 내 정보 */
+.who { font-size: 15px; color: var(--ink-2); }
+.seg { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-top: 8px; }
+.seg span { display: block; text-align: center; border-radius: 12px; padding: 12px 0; font-size: 15px; box-shadow: inset 0 0 0 2px #cfd8e3; }
+.seg span.on { background: var(--sky-deep); color: var(--white); box-shadow: none; font-weight: 700; }
+.done { list-style: none; margin: 0; padding: 0; display: grid; gap: 12px; }
+.done li { display: grid; grid-template-columns: 56px 1fr auto; gap: 12px; align-items: center; }
+.done img { width: 56px; height: 56px; border-radius: 50%; object-fit: cover; background: var(--c5); }
+.done b { font-size: 16px; display: block; }
+.done small { font-size: 13px; color: var(--ink-2); }
+.done time { font-size: 13px; color: var(--ink-2); }
+.foot2 { text-align: center; font-size: 14px; padding: 10px 0 30px; }
+.foot2 a { color: var(--ink-2); text-underline-offset: 3px; }
+
+@media (min-width: 900px) {
+  .top .bar { max-width: 1180px; margin: 0 auto; padding: 22px 48px; }
+  .top .edge { height: 40px; }
+  .split { max-width: 1080px; margin: 0 auto; padding: 50px 48px 70px; display: grid; grid-template-columns: 1fr 460px; gap: 80px; align-items: start; }
+  .split .intro h1 { font-size: 52px; line-height: 1.12; }
+  .split .intro .lead { font-size: 19px; margin-top: 16px; }
+  .split .intro .vig { width: 420px; margin: 30px 0 0; }
+  .split .form { padding: 0; }
+}
