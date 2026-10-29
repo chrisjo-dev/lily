@@ -1,0 +1,59 @@
+/* T5 얼굴의 짧은 띠, 개인정보 문서, 404, 잠금 카드. landing-t4.css 위에 얹는다 */
+:root { --navy: #1b2a44; --navy-soft: #b9c6de; --teal: #2f7d6d; --line-soft: #eef1f5; }
+body { width: 390px; margin: 0 auto; }
+
+/* 짧은 남색 띠 */
+.band { background: radial-gradient(70% 90% at 92% 0, rgba(247,215,154,.38), rgba(247,215,154,0) 70%), url(../assets/stars.svg) 0 0 / 120px 120px, var(--navy); color: var(--white); padding: 16px 22px 34px; position: relative; }
+.band .brand { display: flex; align-items: center; gap: 8px; text-decoration: none; }
+.band .brand img { height: 34px; }
+.band .brand span { font-family: var(--font-hand); font-weight: 700; font-size: 27px; color: var(--white); letter-spacing: -0.03em; }
+.band h1 { font-size: 30px; line-height: 1.22; margin-top: 22px; color: var(--white); }
+.band .lead { font-size: 15px; line-height: 1.6; color: var(--navy-soft); margin-top: 10px; }
+.band-edge { display: block; width: 100%; height: 22px; margin-top: -21px; position: relative; }
+
+/* 개인정보: 읽는 문서 */
+.doc { padding: 26px 22px 40px; }
+.doc .toc { margin: 0 0 28px; padding: 0; list-style: none; display: flex; flex-wrap: wrap; gap: 6px 14px; font-size: 14px; }
+.doc .toc a { color: var(--teal); text-underline-offset: 3px; }
+.doc h2 { font-size: 21px; line-height: 1.3; margin: 34px 0 10px; }
+.doc h2:first-of-type { margin-top: 0; }
+.doc p, .doc li { font-size: 16px; line-height: 1.75; color: var(--ink); }
+.doc ul { margin: 8px 0 0; padding-left: 1.1em; }
+.doc li { margin-bottom: 6px; }
+.doc .row { padding: 12px 0; border-bottom: 1px solid var(--line-soft); }
+.doc .row:last-child { border-bottom: 0; }
+.doc .row b { display: block; font-size: 15px; }
+.doc .row span { display: block; font-size: 15px; line-height: 1.6; color: var(--ink-2); margin-top: 2px; }
+.doc .row em { font-style: normal; font-size: 13px; color: var(--ink-2); }
+.doc .todo { color: #9a5a1a; }
+.doc .back { display: inline-block; margin-top: 34px; font-size: 15px; color: var(--teal); }
+
+/* 404 */
+.lost { text-align: center; padding: 34px 22px 50px; }
+.lost img { width: 86%; margin: 0 auto 8px; }
+.lost h1 { font-size: 30px; line-height: 1.22; }
+.lost p { font-size: 16px; line-height: 1.6; color: var(--ink-2); margin: 10px 0 26px; }
+.lost .home { display: inline-block; font-family: var(--font-head); font-size: 20px; color: var(--white); background: var(--teal); border-radius: 999px; padding: 14px 30px; text-decoration: none; }
+.lost .bar { justify-content: center; }
+
+/* 잠금 카드: 이야기 화면 위에 덮인다 */
+.scene { position: relative; height: 844px; overflow: hidden; background: #000; }
+.scene > img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; filter: saturate(.8); }
+.scene .shade { position: absolute; inset: 0; background: rgba(15,22,38,.55); }
+.scene .badge { position: absolute; left: 50%; top: 210px; transform: translateX(-50%); white-space: nowrap; font-size: 13px; color: var(--white); background: rgba(15,22,38,.7); border-radius: 999px; padding: 7px 16px; }
+.sheet { position: absolute; left: 0; right: 0; bottom: 0; background: var(--paper); border-radius: 26px 26px 0 0; overflow: hidden; }
+.sheet .top { background: radial-gradient(70% 120% at 90% 0, rgba(247,215,154,.38), rgba(247,215,154,0) 70%), url(../assets/stars.svg) 0 0 / 120px 120px, var(--navy); padding: 18px 24px 30px; color: var(--white); }
+.sheet .top p.brand { display: flex; align-items: center; gap: 6px; margin: 0; font-family: var(--font-hand); font-weight: 700; font-size: 20px; color: var(--navy-soft); }
+.sheet .top p.brand img { width: 20px; height: 20px; }
+.sheet .top h2 { font-size: 26px; line-height: 1.28; margin-top: 10px; color: var(--white); }
+.sheet .body { padding: 6px 24px 28px; margin-top: -14px; position: relative; background: var(--paper); border-radius: 22px 22px 0 0; }
+.sheet .more { font-size: 15px; font-weight: 700; margin: 16px 0 10px; }
+.sheet .eps { display: flex; gap: 6px; }
+.sheet .eps img { width: 48px; height: 48px; border-radius: 50%; object-fit: cover; }
+.sheet .eps img:nth-child(1) { background: var(--c2); } .sheet .eps img:nth-child(2) { background: var(--c3); } .sheet .eps img:nth-child(3) { background: var(--c4); }
+.sheet .eps img:nth-child(4) { background: var(--c1); } .sheet .eps img:nth-child(5) { background: var(--c6); } .sheet .eps img:nth-child(6) { background: var(--c7); }
+.sheet .nodata { font-size: 13px; color: var(--ink-2); margin-top: 12px; }
+.sheet .act { display: flex; flex-direction: column; gap: 10px; margin-top: 22px; }
+.sheet .act .join { display: block; text-align: center; font-family: var(--font-head); font-size: 21px; color: var(--white); background: var(--teal); border-radius: 999px; padding: 15px 0; text-decoration: none; }
+.sheet .act .free { display: block; text-align: center; font-family: var(--font-head); font-size: 19px; color: var(--ink); background: var(--sun); border: 3px solid var(--sun-edge); border-radius: 999px; padding: 11px 0; text-decoration: none; }
+.sheet .act .later { font: inherit; font-size: 15px; color: var(--ink-2); background: none; border: 0; padding: 8px; }
