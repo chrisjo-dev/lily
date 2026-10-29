@@ -201,6 +201,30 @@
       "h": 3890,
       "title": "P36-LandingT2Desktop",
       "group": "랜딩 T2"
+    },
+    "P37-FullA.html": {
+      "x": 32322,
+      "y": 0,
+      "w": 1104,
+      "h": 1780,
+      "title": "P37-FullA",
+      "group": "랜딩 전체 시안"
+    },
+    "P38-FullB.html": {
+      "x": 33466,
+      "y": 0,
+      "w": 1104,
+      "h": 1780,
+      "title": "P38-FullB",
+      "group": "랜딩 전체 시안"
+    },
+    "P39-FullM.html": {
+      "x": 34610,
+      "y": 0,
+      "w": 1104,
+      "h": 1780,
+      "title": "P39-FullM",
+      "group": "랜딩 전체 시안"
     }
   },
   "groups": [
@@ -239,6 +263,10 @@
     {
       "id": "랜딩 T2",
       "label": "랜딩 T2"
+    },
+    {
+      "id": "랜딩 전체 시안",
+      "label": "랜딩 전체 시안"
     }
   ],
   "links": []
