@@ -1,0 +1,59 @@
+{
+  "boards": {
+    "P01-TapMomentFeed.html": {
+      "x": 0,
+      "y": 0,
+      "w": 1080,
+      "h": 1350,
+      "title": "P01-TapMomentFeed",
+      "group": "인스타 1차"
+    },
+    "P02-TapMomentStory.html": {
+      "x": 1120,
+      "y": 0,
+      "w": 1080,
+      "h": 1920,
+      "title": "P02-TapMomentStory",
+      "group": "인스타 1차"
+    },
+    "P03-BrushTimeFeed.html": {
+      "x": 2240,
+      "y": 0,
+      "w": 1080,
+      "h": 1350,
+      "title": "P03-BrushTimeFeed",
+      "group": "인스타 1차"
+    },
+    "P04-BrushTimeStory.html": {
+      "x": 3360,
+      "y": 0,
+      "w": 1080,
+      "h": 1920,
+      "title": "P04-BrushTimeStory",
+      "group": "인스타 1차"
+    },
+    "P05-OfferFeed.html": {
+      "x": 4480,
+      "y": 0,
+      "w": 1080,
+      "h": 1350,
+      "title": "P05-OfferFeed",
+      "group": "인스타 1차"
+    },
+    "P06-OfferStory.html": {
+      "x": 5600,
+      "y": 0,
+      "w": 1080,
+      "h": 1920,
+      "title": "P06-OfferStory",
+      "group": "인스타 1차"
+    }
+  },
+  "groups": [
+    {
+      "id": "인스타 1차",
+      "label": "인스타 1차"
+    }
+  ],
+  "links": []
+}
