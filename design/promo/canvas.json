@@ -123,6 +123,30 @@
       "h": 1300,
       "title": "P27-LandingC3",
       "group": "랜딩 C 변형"
+    },
+    "P28-LandingN1.html": {
+      "x": 20222,
+      "y": 0,
+      "w": 1616,
+      "h": 1300,
+      "title": "P28-LandingN1",
+      "group": "랜딩 밤 시연 변형"
+    },
+    "P29-LandingN2.html": {
+      "x": 21878,
+      "y": 0,
+      "w": 1616,
+      "h": 1300,
+      "title": "P29-LandingN2",
+      "group": "랜딩 밤 시연 변형"
+    },
+    "P30-LandingN3.html": {
+      "x": 23534,
+      "y": 0,
+      "w": 1616,
+      "h": 1300,
+      "title": "P30-LandingN3",
+      "group": "랜딩 밤 시연 변형"
     }
   },
   "groups": [
@@ -149,6 +173,10 @@
     {
       "id": "랜딩 C 변형",
       "label": "랜딩 C 변형"
+    },
+    {
+      "id": "랜딩 밤 시연 변형",
+      "label": "랜딩 밤 시연 변형"
     }
   ],
   "links": []
