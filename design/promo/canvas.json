@@ -300,7 +300,9 @@
       "w": 390,
       "h": 2400,
       "title": "P50-HomePhoneT5",
-      "group": "페이지 T5"
+      "group": "지난 시안",
+      "status": "rejected",
+      "note": "T6로 대체: 하루 5분, 이야기가 계속된다는 원칙과 /hello/ 첫 화면 띠"
     },
     "P51-HomeDesktopT5.html": {
       "x": 41914,
@@ -308,7 +310,9 @@
       "w": 1440,
       "h": 2400,
       "title": "P51-HomeDesktopT5",
-      "group": "페이지 T5"
+      "group": "지난 시안",
+      "status": "rejected",
+      "note": "T6로 대체: 하루 5분, 이야기가 계속된다는 원칙과 /hello/ 첫 화면 띠"
     },
     "P52-JoinPhoneT5.html": {
       "x": 43394,
@@ -386,7 +390,9 @@
       "w": 390,
       "h": 1180,
       "title": "P52-JoinPhone",
-      "group": "페이지 T5"
+      "group": "지난 시안",
+      "status": "rejected",
+      "note": "T6로 대체: 하루 5분, 이야기가 계속된다는 원칙과 /hello/ 첫 화면 띠"
     },
     "P53-JoinDesktop.html": {
       "x": 47884,
@@ -394,7 +400,9 @@
       "w": 1440,
       "h": 950,
       "title": "P53-JoinDesktop",
-      "group": "페이지 T5"
+      "group": "지난 시안",
+      "status": "rejected",
+      "note": "T6로 대체: 하루 5분, 이야기가 계속된다는 원칙과 /hello/ 첫 화면 띠"
     },
     "P54-CallbackPhone.html": {
       "x": 49364,
@@ -402,7 +410,9 @@
       "w": 880,
       "h": 820,
       "title": "P54-CallbackPhone",
-      "group": "페이지 T5"
+      "group": "지난 시안",
+      "status": "rejected",
+      "note": "T6로 대체: 하루 5분, 이야기가 계속된다는 원칙과 /hello/ 첫 화면 띠"
     },
     "P55-MePhone.html": {
       "x": 50284,
@@ -410,7 +420,9 @@
       "w": 390,
       "h": 1040,
       "title": "P55-MePhone",
-      "group": "페이지 T5"
+      "group": "지난 시안",
+      "status": "rejected",
+      "note": "T6로 대체: 하루 5분, 이야기가 계속된다는 원칙과 /hello/ 첫 화면 띠"
     },
     "P56-PrivacyPhone.html": {
       "x": 50714,
@@ -418,7 +430,9 @@
       "w": 390,
       "h": 2480,
       "title": "P56-PrivacyPhone",
-      "group": "페이지 T5"
+      "group": "지난 시안",
+      "status": "rejected",
+      "note": "T6로 대체: 하루 5분, 이야기가 계속된다는 원칙과 /hello/ 첫 화면 띠"
     },
     "P57-NotFoundPhone.html": {
       "x": 51144,
@@ -426,7 +440,9 @@
       "w": 390,
       "h": 844,
       "title": "P57-NotFoundPhone",
-      "group": "페이지 T5"
+      "group": "지난 시안",
+      "status": "rejected",
+      "note": "T6로 대체: 하루 5분, 이야기가 계속된다는 원칙과 /hello/ 첫 화면 띠"
     },
     "P58-GateCardPhone.html": {
       "x": 51574,
@@ -434,7 +450,9 @@
       "w": 390,
       "h": 844,
       "title": "P58-GateCardPhone",
-      "group": "페이지 T5"
+      "group": "지난 시안",
+      "status": "rejected",
+      "note": "T6로 대체: 하루 5분, 이야기가 계속된다는 원칙과 /hello/ 첫 화면 띠"
     },
     "P46-SkyHero1.html": {
       "x": 52004,
@@ -465,6 +483,99 @@
       "group": "첫 화면 하늘 시안",
       "status": "rejected",
       "note": "사용자: 바꾸지 말자, 기존(T5 남색 첫 화면)이 더 낫다"
+    },
+    "P60-HomePhoneT6.html": {
+      "x": 56444,
+      "y": 0,
+      "w": 390,
+      "h": 2776,
+      "title": "P60-HomePhoneT6",
+      "group": "페이지 T6",
+      "comments": [
+        {
+          "text": "움직임: 첫 화면 그림은 /hello/처럼 세 장(칫솔, 거품, 잠자리)을 6초마다 1초 겹쳐 교대, 제목 차례 등장. 동그라미는 화면에 들어올 때 차례 등장",
+          "by": "pages-fix",
+          "created": "2026-10-29T13:03:17Z"
+        }
+      ]
+    },
+    "P61-HomeDesktopT6.html": {
+      "x": 56874,
+      "y": 0,
+      "w": 1440,
+      "h": 2600,
+      "title": "P61-HomeDesktopT6",
+      "group": "페이지 T6",
+      "comments": [
+        {
+          "text": "움직임: P60과 같음(그림 세 장 교대, 차례 등장)",
+          "by": "pages-fix",
+          "created": "2026-10-29T13:03:17Z"
+        }
+      ]
+    },
+    "P62-JoinPhoneT6.html": {
+      "x": 58354,
+      "y": 0,
+      "w": 390,
+      "h": 1303,
+      "title": "P62-JoinPhoneT6",
+      "group": "페이지 T6"
+    },
+    "P63-JoinDesktopT6.html": {
+      "x": 58784,
+      "y": 0,
+      "w": 1440,
+      "h": 1182,
+      "title": "P63-JoinDesktopT6",
+      "group": "페이지 T6"
+    },
+    "P64-CallbackT6.html": {
+      "x": 60264,
+      "y": 0,
+      "w": 880,
+      "h": 820,
+      "title": "P64-CallbackT6",
+      "group": "페이지 T6"
+    },
+    "P65-MeT6.html": {
+      "x": 61184,
+      "y": 0,
+      "w": 390,
+      "h": 1035,
+      "title": "P65-MeT6",
+      "group": "페이지 T6"
+    },
+    "P66-PrivacyT6.html": {
+      "x": 61614,
+      "y": 0,
+      "w": 390,
+      "h": 2483,
+      "title": "P66-PrivacyT6",
+      "group": "페이지 T6"
+    },
+    "P67-NotFoundT6.html": {
+      "x": 62044,
+      "y": 0,
+      "w": 390,
+      "h": 844,
+      "title": "P67-NotFoundT6",
+      "group": "페이지 T6"
+    },
+    "P68-GateCardT6.html": {
+      "x": 62474,
+      "y": 0,
+      "w": 390,
+      "h": 844,
+      "title": "P68-GateCardT6",
+      "group": "페이지 T6",
+      "comments": [
+        {
+          "text": "움직임: 카드가 아래에서 올라옴(현재 gate.css와 같음)",
+          "by": "pages-fix",
+          "created": "2026-10-29T13:03:17Z"
+        }
+      ]
     }
   },
   "groups": [
@@ -527,6 +638,10 @@
     {
       "id": "첫 화면 하늘 시안",
       "label": "첫 화면 하늘 시안"
+    },
+    {
+      "id": "페이지 T6",
+      "label": "페이지 T6"
     }
   ],
   "links": [
@@ -564,6 +679,36 @@
       "from": "P44-LandingT5Phone.html",
       "to": "P50-HomePhoneT5.html",
       "label": "다시 올 때"
+    },
+    {
+      "from": "P44-LandingT5Phone.html",
+      "to": "P60-HomePhoneT6.html",
+      "label": "다시 올 때"
+    },
+    {
+      "from": "P60-HomePhoneT6.html",
+      "to": "P68-GateCardT6.html",
+      "label": "잠긴 편 누름"
+    },
+    {
+      "from": "P68-GateCardT6.html",
+      "to": "P62-JoinPhoneT6.html",
+      "label": "가입하고 이어 듣기"
+    },
+    {
+      "from": "P62-JoinPhoneT6.html",
+      "to": "P64-CallbackT6.html",
+      "label": "카카오로 시작하기"
+    },
+    {
+      "from": "P64-CallbackT6.html",
+      "to": "P60-HomePhoneT6.html",
+      "label": "로그인 끝"
+    },
+    {
+      "from": "P60-HomePhoneT6.html",
+      "to": "P65-MeT6.html",
+      "label": "내 정보"
     }
   ]
 }

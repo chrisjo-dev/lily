@@ -1,0 +1,47 @@
+/* 페이지 T6: /hello/(a0406c6)와 같은 얼굴을 모든 페이지에.
+   맨 위 띠는 남색 별무늬 책 읽는 구석과 등불빛, 그림은 가장자리가 번지고 아래는 흰 물결이 곡선대로 자른다. 그 아래는 흰 종이. */
+:root { --navy: #1b2a44; --navy-ink: #e9eef8; --navy-soft: #b9c6de; }
+.lamp { position: relative; overflow: hidden; color: var(--navy-ink); background:
+  radial-gradient(60% 50% at 92% 4%, rgba(247,215,154,.40), rgba(247,215,154,0) 70%),
+  url(../assets/stars.svg) 0 0 / 120px 120px, var(--navy); }
+.lamp .bar { display: flex; align-items: center; justify-content: space-between; padding: 16px 22px 0; position: relative; z-index: 2; }
+.lamp .bar .brand { display: flex; align-items: center; gap: 10px; color: var(--white); text-decoration: none; }
+.lamp .bar img { height: 38px; width: auto; }
+.lamp .bar span { font-family: var(--font-hand); font-weight: 700; font-size: 28px; letter-spacing: -0.03em; }
+.lamp .bar .me { color: var(--navy-soft); font-size: 14px; text-decoration: none; }
+.lamp .head { position: relative; z-index: 2; padding: 18px 22px 0; }
+.lamp h1 { font-size: 34px; line-height: 1.16; color: var(--white); }
+.lamp h1 b { font-weight: 400; color: var(--sun); }
+.lamp .sub { font-size: 16px; line-height: 1.5; margin-top: 10px; color: var(--navy-soft); }
+.lamp .go { margin-top: 18px; }
+.lamp .note { font-size: 13px; color: var(--navy-soft); margin-top: 10px; }
+/* 그림: 가장자리 번짐, 아래는 물결 밑으로 들어가 잘림 */
+.lamp .art { display: block; width: 100%; height: auto; margin: 14px 0 -26px; -webkit-mask-image: linear-gradient(to right, transparent, #000 12%, #000 88%, transparent), linear-gradient(to bottom, transparent, #000 22%); -webkit-mask-composite: source-in; mask-image: linear-gradient(to right, transparent, #000 12%, #000 88%, transparent), linear-gradient(to bottom, transparent, #000 22%); mask-composite: intersect; }
+.lamp.short .art { width: 62%; margin: -40px 0 -18px auto; }
+.lamp .edge { position: relative; z-index: 3; display: block; width: 100%; height: 28px; margin-top: -27px; }
+.lamp.short .head { padding-bottom: 8px; }
+
+
+@media (min-width: 900px) {
+  .lamp .bar { max-width: 1280px; margin: 0 auto; padding: 26px 48px 0; }
+  .lamp .bar img { height: 50px; } .lamp .bar span { font-size: 36px; }
+  .lamp .inner { max-width: 1280px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1.2fr; align-items: end; }
+  .lamp .head { align-self: center; padding: 20px 0 40px 48px; }
+  .lamp h1 { font-size: clamp(44px, 4.6vw, 64px); line-height: 1.1; }
+  .lamp .sub { font-size: 21px; margin-top: 18px; }
+  .lamp .go { margin-top: 30px; }
+  .lamp .note { font-size: 15px; margin-left: 30px; }
+  .lamp .art { margin: 0 0 -40px; }
+  .lamp .edge { height: 56px; margin-top: -55px; }
+  .lamp.short .inner { grid-template-columns: 1fr 380px; }
+  .lamp.short .art { width: 100%; margin: 0 0 -30px; }
+}
+/* 그림 없는 짧은 띠(로그인 처리, 내 정보, 개인정보, 404): 로고 아래 여백을 두고 물결이 로고를 덮지 않게 */
+.lamp.noart .inner { min-height: 40px; }
+@media (min-width: 900px) {
+  .lamp.short .inner:not(:has(.head)) { display: flex; justify-content: flex-end; }
+  .lamp.short .inner:not(:has(.head)) .art { width: 380px; margin-right: 6%; }
+  .lamp.noart .inner { min-height: 56px; }
+}
+.lamp.noart .head { padding-bottom: 36px; }
+@media (min-width: 900px) { .lamp.noart .head { padding-bottom: 60px; } }
