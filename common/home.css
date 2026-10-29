@@ -1,0 +1,60 @@
+/* 홈(승인 시안 T6, 캔버스 promo P60 휴대폰, P61 PC). shell.css 위에 얹는다.
+   원본은 design/promo/shared/landing-t4.css(이야기 동그라미), pages-t5.css(오늘 들어 볼 이야기, 부모님께, 질문) */
+.page { padding: 30px 22px 40px; }
+.page h2 { font-size: 24px; line-height: 1.25; }
+.block + .block { margin-top: 36px; }
+.quiet { color: var(--teal); text-decoration: underline; text-underline-offset: 3px; font-size: 16px; }
+
+/* 오늘 들어 볼 이야기 */
+.today { display: grid; gap: 16px; }
+.today .pic { position: relative; border-radius: 24px; overflow: hidden; }
+.today .pic img { width: 100%; height: auto; aspect-ratio: 4 / 3; object-fit: cover; }
+.today .label { font-family: var(--font-hand); font-weight: 700; font-size: 22px; color: var(--honey); }
+.today h2 { font-size: 30px; margin-top: 4px; }
+.today h2 small { display: block; font-family: var(--font-body); font-size: 15px; color: var(--ink-2); margin-top: 6px; }
+.today .go { margin-top: 18px; }
+.joinline { margin-top: 26px; font-size: 16px; line-height: 1.6; }
+
+/* 이야기 동그라미 */
+.stories { padding: 40px 0 46px; text-align: center; }
+.sec-title { font-size: 30px; line-height: 1.22; }
+.sec-lead { font-size: 16px; line-height: 1.6; color: var(--ink-2); margin-top: 10px; }
+.circles { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px 10px; margin-top: 28px; }
+.circle { text-decoration: none; color: inherit; }
+.circle .dot { position: relative; aspect-ratio: 1; border-radius: 50%; overflow: hidden; }
+.circle .dot > img { width: 100%; height: 100%; object-fit: cover; mix-blend-mode: multiply; }
+.circle:nth-child(1) .dot { background: var(--c1); } .circle:nth-child(2) .dot { background: var(--c2); } .circle:nth-child(3) .dot { background: var(--c3); }
+.circle:nth-child(4) .dot { background: var(--c4); } .circle:nth-child(5) .dot { background: var(--c5); box-shadow: 0 0 0 4px var(--sun); } .circle:nth-child(6) .dot { background: var(--c6); } .circle:nth-child(7) .dot { background: var(--c7); }
+.circle b { display: block; font-family: var(--font-head); font-weight: 400; font-size: 18px; margin-top: 10px; }
+.circle small { display: block; font-size: 13px; color: var(--ink-2); }
+.circle .free { display: inline-block; margin-top: 4px; font-size: 13px; font-weight: 700; color: var(--sun-edge); background: var(--c5); border-radius: 999px; padding: 2px 10px; }
+.circle .lockmark { position: absolute; right: 6%; bottom: 6%; width: 30%; aspect-ratio: 1; border-radius: 50%; background: rgba(255,255,255,.92); display: grid; place-items: center; }
+.circle .lockmark img { width: 58%; height: auto; mix-blend-mode: normal; }
+.circle.locked .dot > img { filter: saturate(.75); }
+.page .stories { text-align: center; }
+
+/* 부모님께 */
+.notes { list-style: none; padding: 0; margin: 18px 0 0; display: grid; gap: 18px; }
+.notes li { display: grid; grid-template-columns: 58px 1fr; gap: 14px; align-items: center; }
+.notes img { width: 58px; height: auto; }
+.notes b { display: block; font-family: var(--font-head); font-weight: 400; font-size: 20px; }
+.notes span { font-size: 15px; line-height: 1.55; color: var(--ink-2); }
+
+/* 자주 묻는 질문 */
+.faq { margin: 16px 0 0; display: grid; gap: 4px; }
+.faq dt { font-size: 18px; font-weight: 700; margin-top: 14px; }
+.faq dd { margin: 4px 0 0; font-size: 16px; line-height: 1.6; color: var(--ink-2); }
+
+@media (min-width: 900px) {
+  .page { max-width: 1180px; margin: 0 auto; padding: 60px 48px 80px; }
+  .page h2 { font-size: 36px; }
+  .block + .block { margin-top: 90px; }
+  .today { grid-template-columns: 1.1fr 1fr; gap: 56px; align-items: center; }
+  .today .label { font-size: 30px; } .today h2 { font-size: 48px; } .today h2 small { font-size: 19px; }
+  .stories { padding: 70px 0 90px; }
+  .sec-title { font-size: 50px; } .sec-lead { font-size: 20px; }
+  .circles { grid-template-columns: repeat(7, 1fr); gap: 22px; margin-top: 50px; }
+  .circle b { font-size: 21px; } .circle small { font-size: 15px; }
+  .notes { grid-template-columns: repeat(3, 1fr); gap: 36px; }
+  .notes li { grid-template-columns: 80px 1fr; } .notes img { width: 80px; }
+}

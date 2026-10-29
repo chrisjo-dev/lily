@@ -1,0 +1,71 @@
+/* 릴리랑 페이지 공통 셸(승인 시안 T6, 캔버스 promo P60~P67): 맨 위 남색 별무늬 띠(.lamp), 흰 물결, 아래 흰 종이.
+   홈, 가입, 로그인 처리, 내 정보, 개인정보, 404가 함께 쓴다. 원본은 design/promo/shared/tokens.css, landing-t4.css, pages-t6.css.
+   페이지마다 다른 부분은 home.css, forms.css, doc.css. /hello/는 따로(hello.css) 둔다. */
+:root {
+  --sky: #8ec3ea; --night: #1f2a4d; --cream: #fff8ea; --wall: #86a3a6; --wall-soft: #dfe9e8; --ink-soft: #46506a; --white: #ffffff;
+  --font-head: "Jua", "Noto Sans KR", "Apple SD Gothic Neo", sans-serif; --font-hand: "Gaegu", "Jua", sans-serif; --font-body: "Noto Sans KR", "Apple SD Gothic Neo", sans-serif;
+  --paper: #fefefd; --ink: #1f2a3a; --ink-2: #4f5b6b; --sky-band: #dcefff; --sky-deep: #2f6fb5; --honey: #b9781f;
+  --sun: #ffc531; --sun-edge: #6b4a33;
+  --c1: #ffe6a8; --c2: #d4ecff; --c3: #ffd9c4; --c4: #dff1d6; --c5: #fff1b3; --c6: #d9e4ff; --c7: #e6dcf5;
+  --navy: #1b2a44; --navy-ink: #e9eef8; --navy-soft: #b9c6de; --teal: #2f7d6d; --line-soft: #eef1f5;
+}
+[hidden] { display: none !important; }
+html { -webkit-text-size-adjust: 100%; }
+::selection { background: var(--c1); color: var(--ink); }
+body { margin: 0; background: var(--paper); color: var(--ink); font-family: var(--font-body); word-break: keep-all; overflow-wrap: anywhere; -webkit-font-smoothing: antialiased; }
+img { display: block; max-width: 100%; }
+h1, h2, h3 { font-family: var(--font-head); font-weight: 400; margin: 0; letter-spacing: -0.02em; text-wrap: balance; }
+p { margin: 0; }
+a:focus-visible { outline: 3px solid var(--sky-deep); outline-offset: 4px; border-radius: 999px; }
+.btn { display: inline-flex; align-items: center; gap: 12px; background: var(--sun); color: var(--ink); border: 3px solid var(--sun-edge); border-radius: 999px; padding: 15px 30px; font-family: var(--font-head); font-size: 23px; line-height: 1; text-decoration: none; box-shadow: 0 6px 14px -6px rgba(107,74,51,.45); transition: transform .2s cubic-bezier(.2,.8,.2,1); }
+.btn::before { content: ''; border-left: 15px solid var(--sun-edge); border-top: 10px solid transparent; border-bottom: 10px solid transparent; }
+.btn:hover { transform: translateY(-2px); }
+@media (prefers-reduced-motion: reduce) { .btn { transition: none; } }
+@media (min-width: 900px) { .btn { font-size: 29px; padding: 20px 42px; } }
+
+/* 맨 위 띠 */
+.bar { display: flex; align-items: center; gap: 10px; }
+.lamp { position: relative; overflow: hidden; color: var(--navy-ink); background:
+  radial-gradient(60% 50% at 92% 4%, rgba(247,215,154,.40), rgba(247,215,154,0) 70%),
+  url(../hello/img/stars.svg) 0 0 / 120px 120px, var(--navy); }
+.lamp .bar { display: flex; align-items: center; justify-content: space-between; padding: 16px 22px 0; position: relative; z-index: 2; }
+.lamp .bar .brand { display: flex; align-items: center; gap: 10px; color: var(--white); text-decoration: none; }
+.lamp .bar img { height: 38px; width: auto; }
+.lamp .bar span { font-family: var(--font-hand); font-weight: 700; font-size: 28px; letter-spacing: -0.03em; color: var(--white); text-shadow: 0 1px 6px rgba(10,18,34,.5); }
+.lamp .bar .me { color: var(--navy-ink); font-size: 16px; font-weight: 600; text-decoration: none; padding: 8px 14px; border: 1.5px solid rgba(233,238,248,.45); border-radius: 999px; }
+.lamp .head { position: relative; z-index: 2; padding: 18px 22px 0; }
+.lamp h1 { font-size: 34px; line-height: 1.16; color: var(--white); }
+.lamp h1 b { font-weight: 400; color: var(--sun); }
+.lamp .sub { font-size: 16px; line-height: 1.5; margin-top: 10px; color: var(--navy-ink); }
+.lamp h1, .lamp .sub { text-shadow: 0 1px 8px rgba(10,18,34,.6); }
+/* 그림: 가장자리 번짐, 아래는 물결 밑으로 들어가 잘림 */
+.lamp .art { display: block; width: 100%; height: auto; margin: 14px 0 -26px; -webkit-mask-image: linear-gradient(to right, transparent, #000 12%, #000 88%, transparent), linear-gradient(to bottom, transparent, #000 22%); -webkit-mask-composite: source-in; mask-image: linear-gradient(to right, transparent, #000 12%, #000 88%, transparent), linear-gradient(to bottom, transparent, #000 22%); mask-composite: intersect; }
+.lamp.short .art { width: 62%; margin: -40px 0 -18px auto; }
+.lamp .edge { position: relative; z-index: 3; display: block; width: 100%; height: 28px; margin-top: -27px; }
+.lamp.short .head { padding-bottom: 8px; }
+/* 그림 없는 짧은 띠(로그인 처리, 내 정보, 개인정보, 404): 로고 아래 여백을 두고 물결이 로고를 덮지 않게 */
+.lamp.noart .inner { min-height: 40px; }
+.lamp.noart .head { padding-bottom: 36px; }
+
+@media (min-width: 900px) {
+  .lamp .bar { max-width: 1280px; margin: 0 auto; padding: 26px 48px 0; }
+  .lamp .bar img { height: 50px; } .lamp .bar span { font-size: 36px; }
+  .lamp .bar .me { font-size: 17px; }
+  .lamp .inner { max-width: 1280px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1.2fr; align-items: end; }
+  .lamp .head { align-self: center; padding: 20px 0 40px 48px; }
+  .lamp h1 { font-size: clamp(44px, 4.6vw, 64px); line-height: 1.1; }
+  .lamp .sub { font-size: 21px; margin-top: 18px; }
+  .lamp .art { margin: 0 0 -40px; }
+  .lamp .edge { height: 56px; margin-top: -55px; }
+  .lamp.short .inner { grid-template-columns: 1fr 380px; }
+  .lamp.short .art { width: 100%; margin: 0 0 -30px; }
+  .lamp.short .inner:not(:has(.head)) { display: flex; justify-content: flex-end; }
+  .lamp.short .inner:not(:has(.head)) .art { width: 380px; margin-right: 6%; }
+  .lamp.noart .inner { min-height: 56px; }
+  .lamp.noart .head { padding-bottom: 60px; }
+}
+
+/* 맨 아래 */
+.foot2 { text-align: center; font-size: 14px; padding: 18px 0 30px; color: var(--ink-2); }
+.foot2 a { display: inline-block; padding: 14px 8px; margin: -14px 0; color: var(--ink-2); text-underline-offset: 3px; }
+.foot2 small { display: block; margin-top: 6px; }
