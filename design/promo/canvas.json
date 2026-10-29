@@ -497,7 +497,9 @@
           "by": "pages-fix",
           "created": "2026-10-29T13:03:17Z"
         }
-      ]
+      ],
+      "status": "approved",
+      "note": "2026-10-30 사용자 '다 진행해'로 승인. T6, 로고 대비 수정(450e646) 포함"
     },
     "P61-HomeDesktopT6.html": {
       "x": 56874,
@@ -512,7 +514,9 @@
           "by": "pages-fix",
           "created": "2026-10-29T13:03:17Z"
         }
-      ]
+      ],
+      "status": "approved",
+      "note": "2026-10-30 사용자 '다 진행해'로 승인. T6, 로고 대비 수정(450e646) 포함"
     },
     "P62-JoinPhoneT6.html": {
       "x": 58354,
@@ -520,7 +524,9 @@
       "w": 390,
       "h": 1303,
       "title": "P62-JoinPhoneT6",
-      "group": "페이지 T6"
+      "group": "페이지 T6",
+      "status": "approved",
+      "note": "2026-10-30 사용자 '다 진행해'로 승인. T6, 로고 대비 수정(450e646) 포함"
     },
     "P63-JoinDesktopT6.html": {
       "x": 58784,
@@ -528,7 +534,9 @@
       "w": 1440,
       "h": 1182,
       "title": "P63-JoinDesktopT6",
-      "group": "페이지 T6"
+      "group": "페이지 T6",
+      "status": "approved",
+      "note": "2026-10-30 사용자 '다 진행해'로 승인. T6, 로고 대비 수정(450e646) 포함"
     },
     "P64-CallbackT6.html": {
       "x": 60264,
@@ -536,7 +544,9 @@
       "w": 880,
       "h": 820,
       "title": "P64-CallbackT6",
-      "group": "페이지 T6"
+      "group": "페이지 T6",
+      "status": "approved",
+      "note": "2026-10-30 사용자 '다 진행해'로 승인. T6, 로고 대비 수정(450e646) 포함"
     },
     "P65-MeT6.html": {
       "x": 61184,
@@ -544,7 +554,9 @@
       "w": 390,
       "h": 1035,
       "title": "P65-MeT6",
-      "group": "페이지 T6"
+      "group": "페이지 T6",
+      "status": "approved",
+      "note": "2026-10-30 사용자 '다 진행해'로 승인. T6, 로고 대비 수정(450e646) 포함"
     },
     "P66-PrivacyT6.html": {
       "x": 61614,
@@ -552,7 +564,9 @@
       "w": 390,
       "h": 2483,
       "title": "P66-PrivacyT6",
-      "group": "페이지 T6"
+      "group": "페이지 T6",
+      "status": "approved",
+      "note": "2026-10-30 사용자 '다 진행해'로 승인. T6, 로고 대비 수정(450e646) 포함"
     },
     "P67-NotFoundT6.html": {
       "x": 62044,
@@ -560,7 +574,9 @@
       "w": 390,
       "h": 844,
       "title": "P67-NotFoundT6",
-      "group": "페이지 T6"
+      "group": "페이지 T6",
+      "status": "approved",
+      "note": "2026-10-30 사용자 '다 진행해'로 승인. T6, 로고 대비 수정(450e646) 포함"
     },
     "P68-GateCardT6.html": {
       "x": 62474,
@@ -575,7 +591,9 @@
           "by": "pages-fix",
           "created": "2026-10-29T13:03:17Z"
         }
-      ]
+      ],
+      "status": "approved",
+      "note": "2026-10-30 사용자 '다 진행해'로 승인. T6, 로고 대비 수정(450e646) 포함"
     }
   },
   "groups": [
