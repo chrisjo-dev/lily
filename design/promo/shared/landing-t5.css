@@ -1,0 +1,29 @@
+/* 랜딩 T5: T4(흰 종이) + 맨 위 첫 화면만 T3의 남색 별무늬 책 읽는 구석. 사용자: "메인 최상단 섹션은 아까처럼" */
+:root { --navy: #1b2a44; --navy-ink: #e9eef8; --navy-soft: #b9c6de; }
+.hero { position: relative; color: var(--navy-ink); background:
+  radial-gradient(60% 50% at 92% 4%, rgba(247,215,154,.40), rgba(247,215,154,0) 70%),
+  url(../assets/stars.svg) 0 0 / 120px 120px, var(--navy); overflow: hidden; }
+.hero .bar { display: flex; align-items: center; gap: 10px; padding: 18px 22px 0; }
+.hero .bar img { height: 40px; }
+.hero .bar span { font-family: var(--font-hand); font-weight: 700; font-size: 30px; color: var(--white); letter-spacing: -0.03em; }
+.hero .copy { padding: 22px 22px 0; }
+.hero h1 { font-size: 40px; line-height: 1.16; color: var(--white); }
+.hero h1 b { font-weight: 400; color: var(--sun); }
+.hero .sub { font-size: 17px; line-height: 1.5; margin: 14px 0 22px; color: var(--navy-soft); }
+.hero .note { font-size: 14px; color: var(--navy-soft); margin-top: 12px; }
+.hero .art { display: block; width: 100%; margin-top: 20px; -webkit-mask-image: linear-gradient(to bottom, transparent, #000 14%); mask-image: linear-gradient(to bottom, transparent, #000 14%); }
+.hero .edge { display: block; width: 100%; height: 28px; margin-top: -27px; position: relative; }
+.hero { padding: 0; } .hero .go, .hero .note { text-align: left; }
+@media (min-width: 900px) {
+  .hero .bar { max-width: 1280px; margin: 0 auto; padding: 28px 48px 0; }
+  .hero .bar img { height: 52px; } .hero .bar span { font-size: 38px; }
+  .hero .inner { max-width: 1280px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1.2fr; align-items: center; padding-bottom: 40px; }
+  .hero .copy { padding: 30px 0 30px 48px; }
+  .hero h1 { font-size: 72px; line-height: 1.1; }
+  .hero .sub { font-size: 23px; margin: 22px 0 36px; }
+  .hero .note { font-size: 16px; margin-left: 32px; }
+  .hero .art { margin-top: 10px; -webkit-mask-image: linear-gradient(to right, transparent, #000 15%), linear-gradient(to bottom, transparent, #000 12%); -webkit-mask-composite: source-in; mask-image: linear-gradient(to right, transparent, #000 15%), linear-gradient(to bottom, transparent, #000 12%); mask-composite: intersect; }
+  .hero .edge { height: 56px; margin-top: -55px; }
+  .hero { display: block; max-width: none; margin: 0; padding: 0; }
+  .hero .go { margin-top: 0; }
+}
