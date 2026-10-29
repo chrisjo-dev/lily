@@ -1,0 +1,132 @@
+/* 랜딩 T3: P36(T2)을 impeccable 기준으로 다듬은 판.
+   세계: 등불 켠 책 읽는 구석. 남색 벽(첫 화면, 마지막), 그 사이는 등불빛이 닿은 종이색과 아침 크림.
+   바뀐 것: 같은 카드 반복 제거, 이야기 목록과 하루 시간표를 하나로, 글자 크기 단계를 크게, 노랑은 맛보기 단추와 무료 편에만. */
+:root {
+  --navy: #1b2a44; --navy-ink: #e9eef8; --navy-soft: #b9c6de;
+  --paper: #fbf7ee; --paper-2: #f4ecdc; --lamp: #f7d79a; --amber: #c9862f;
+  --ink: #1f2a3a; --ink-2: #4a5568; --sun: #ffc531; --sun-edge: #6b4a33; --sky-deep: #2f6fb5;
+}
+::selection { background: var(--lamp); color: var(--ink); }
+body { margin: 0; background: var(--paper); color: var(--ink); font-family: var(--font-body); word-break: keep-all; -webkit-font-smoothing: antialiased; }
+img { display: block; max-width: 100%; }
+h1, h2, h3 { font-family: var(--font-head); font-weight: 400; margin: 0; letter-spacing: -0.02em; text-wrap: balance; }
+p { margin: 0; }
+a:focus-visible { outline: 3px solid var(--sky-deep); outline-offset: 4px; border-radius: 999px; }
+.wrap { padding: 0 22px; }
+.hand { font-family: var(--font-hand); font-weight: 700; letter-spacing: -0.03em; line-height: 1.05; }
+
+.btn { display: inline-flex; align-items: center; gap: 12px; background: var(--sun); color: var(--ink); border: 3px solid var(--sun-edge); border-radius: 999px; padding: 15px 30px; font-family: var(--font-head); font-size: 23px; line-height: 1; text-decoration: none; box-shadow: 0 6px 14px -4px rgba(0,0,0,.35); transition: transform .2s cubic-bezier(.2,.8,.2,1), box-shadow .2s; }
+.btn::before { content: ''; border-left: 15px solid var(--sun-edge); border-top: 10px solid transparent; border-bottom: 10px solid transparent; }
+.btn:hover { transform: translateY(-2px); box-shadow: 0 10px 20px -6px rgba(0,0,0,.4); }
+
+/* 1. 첫 화면 */
+.hero { position: relative; color: var(--navy-ink); background:
+  radial-gradient(60% 50% at 92% 4%, rgba(247,215,154,.40), rgba(247,215,154,0) 70%),
+  url(../assets/stars.svg) 0 0 / 120px 120px, var(--navy); overflow: hidden; }
+.hero .bar { display: flex; align-items: center; gap: 10px; padding: 18px 22px 0; }
+.hero .bar img { height: 40px; }
+.hero .bar span { font-family: var(--font-hand); font-weight: 700; font-size: 30px; color: var(--white); letter-spacing: -0.03em; }
+.hero .copy { padding: 22px 22px 0; }
+.hero h1 { font-size: 40px; line-height: 1.16; color: var(--white); }
+.hero h1 b { font-weight: 400; color: var(--sun); }
+.hero .sub { font-size: 17px; line-height: 1.5; margin: 14px 0 22px; color: var(--navy-soft); }
+.hero .note { font-size: 14px; color: var(--navy-soft); margin-top: 12px; }
+.hero .art { display: block; width: 100%; margin-top: 20px; -webkit-mask-image: linear-gradient(to bottom, transparent, #000 14%); mask-image: linear-gradient(to bottom, transparent, #000 14%); }
+.hero .edge { display: block; width: 100%; height: 28px; margin-top: -27px; position: relative; }
+
+/* 2. 보기만 하는 영상이 아니에요: 실제 세 화면 */
+.demo { background: var(--paper); padding: 56px 0 52px; }
+.demo h2, .day h2, .ways h2, .qa h2 { font-size: 30px; line-height: 1.2; }
+.demo .lead, .day .lead { font-size: 16px; line-height: 1.6; color: var(--ink-2); margin-top: 10px; max-width: 36em; }
+.frames { display: flex; gap: 12px; margin-top: 28px; overflow-x: auto; padding-bottom: 10px; scroll-snap-type: x mandatory; }
+.frame { flex: none; width: 62%; margin: 0; scroll-snap-align: start; }
+.frame .scr { border-radius: 26px; overflow: hidden; border: 7px solid #262b36; aspect-ratio: 9 / 15; background: var(--white); box-shadow: 0 18px 30px -18px rgba(27,42,68,.55); }
+.frame .scr img { width: 100%; height: 100%; object-fit: cover; object-position: center 40%; }
+.frame figcaption { margin-top: 12px; }
+.frame figcaption b { display: block; font-size: 25px; color: var(--amber); }
+.frame figcaption span { font-size: 15px; color: var(--ink-2); line-height: 1.5; }
+
+/* 3. 하루 시간표: 이야기 7편을 시간 순서로 */
+.day { background: var(--paper-2); padding: 56px 0 50px; }
+.slots { margin-top: 28px; display: grid; gap: 28px; }
+.slot h3 { font-size: 20px; color: var(--ink-2); display: flex; align-items: center; gap: 8px; }
+.slot h3 i { width: 22px; height: 22px; border-radius: 50%; flex: none; }
+.slot.am h3 i { background: #f6c75a; } .slot.pm h3 i { background: #ef9e6a; } .slot.nt h3 i { background: var(--navy); box-shadow: inset -6px -2px 0 0 #f2e2b5; }
+.eps { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; margin-top: 12px; }
+.ep img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; border-radius: 16px; background: #fffdf6; }
+.ep b { display: block; font-size: 17px; margin-top: 8px; }
+.ep small { font-size: 13px; color: var(--ink-2); }
+.ep.free { position: relative; }
+.ep.free img { box-shadow: 0 0 0 4px var(--sun); }
+.ep.free .tag { position: absolute; top: 10px; left: 10px; background: var(--sun); color: var(--ink); font-family: var(--font-head); font-size: 15px; padding: 4px 10px; border-radius: 999px; }
+.stickers { display: flex; align-items: center; gap: 14px; margin-top: 30px; font-size: 16px; line-height: 1.5; }
+.stickers .row { display: flex; flex: none; }
+.stickers img { width: 52px; margin-left: -10px; filter: drop-shadow(0 4px 6px rgba(0,0,0,.15)); }
+.stickers img:first-child { margin-left: 0; }
+
+/* 4. 귀에 붙는 방법: 카드 대신 큰 말과 짧은 풀이 */
+.ways { background: var(--paper); padding: 60px 0 56px; }
+.ways .grid { display: grid; gap: 30px; margin-top: 30px; }
+.way b { display: block; font-family: var(--font-head); font-weight: 400; font-size: 24px; line-height: 1.25; }
+.way p { font-size: 16px; line-height: 1.65; color: var(--ink-2); margin-top: 6px; max-width: 30em; }
+.way q { font-family: var(--font-hand); font-weight: 700; font-size: 1.2em; color: var(--sky-deep); quotes: none; }
+.ways .honest { margin-top: 34px; font-size: 14px; color: var(--ink-2); }
+
+/* 5. 부모님이 먼저 묻는 것 */
+.qa { background: var(--paper-2); padding: 56px 0 50px; }
+.qa dl { margin: 24px 0 0; display: grid; gap: 22px; }
+.qa dt { font-size: 18px; font-weight: 700; }
+.qa dd { margin: 6px 0 0; font-size: 16px; line-height: 1.6; color: var(--ink-2); }
+
+/* 6. 마지막: 다시 등불 켠 남색 구석 */
+.last { position: relative; overflow: hidden; color: var(--white); background:
+  radial-gradient(70% 60% at 50% 0, rgba(247,215,154,.35), rgba(247,215,154,0) 70%), var(--navy); padding: 60px 22px 0; text-align: center; }
+.last h2 { font-size: 32px; line-height: 1.2; }
+.last p { font-size: 16px; color: var(--navy-soft); margin: 12px 0 24px; }
+.last .pals { display: flex; justify-content: center; align-items: flex-end; gap: 0; margin-top: 30px; height: 220px; }
+.last .pals .lily { height: 260px; margin-bottom: -70px; }
+.last .pals .bis { height: 120px; margin-left: -20px; }
+.foot { text-align: center; font-size: 14px; padding: 22px 0 30px; color: var(--ink-2); }
+.foot a { color: var(--ink-2); text-underline-offset: 3px; }
+
+@media (prefers-reduced-motion: reduce) { .btn { transition: none; } }
+
+/* PC */
+@media (min-width: 900px) {
+  .wrap { max-width: 1180px; margin: 0 auto; padding: 0 48px; }
+  .btn { font-size: 29px; padding: 20px 42px; }
+  .hero .bar { max-width: 1280px; margin: 0 auto; padding: 28px 48px 0; }
+  .hero .bar img { height: 52px; } .hero .bar span { font-size: 38px; }
+  .hero .inner { max-width: 1280px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1.2fr; align-items: center; padding-bottom: 40px; }
+  .hero .copy { padding: 30px 0 30px 48px; }
+  .hero h1 { font-size: 72px; line-height: 1.1; }
+  .hero .sub { font-size: 23px; margin: 22px 0 36px; }
+  .hero .note { font-size: 16px; margin-left: 32px; }
+  .hero .art { margin-top: 10px; -webkit-mask-image: linear-gradient(to right, transparent, #000 15%), linear-gradient(to bottom, transparent, #000 12%); -webkit-mask-composite: source-in; mask-image: linear-gradient(to right, transparent, #000 15%), linear-gradient(to bottom, transparent, #000 12%); mask-composite: intersect; }
+  .hero .edge { height: 56px; margin-top: -55px; }
+  .demo, .day, .ways, .qa { padding: 120px 0 110px; }
+  .demo h2, .day h2, .ways h2, .qa h2 { font-size: 52px; }
+  .demo .lead, .day .lead { font-size: 20px; }
+  .demo .wrap { display: grid; grid-template-columns: 340px 1fr; gap: 56px; align-items: center; }
+  .frames { margin-top: 0; overflow: visible; gap: 26px; }
+  .frame { width: auto; flex: 1 1 0; min-width: 0; }
+  .frame:nth-child(2) { transform: translateY(40px); }
+  .frame figcaption b { font-size: 30px; } .frame figcaption span { font-size: 17px; }
+  .day .head { display: flex; justify-content: space-between; align-items: end; gap: 40px; }
+  .slots { grid-template-columns: 4fr 2fr 1fr; gap: 26px; margin-top: 48px; }
+  .slot.am .eps { grid-template-columns: repeat(4, 1fr); }
+  .slot.pm .eps { grid-template-columns: repeat(2, 1fr); }
+  .slot.nt .eps { grid-template-columns: 1fr; }
+  .slot h3 { font-size: 24px; }
+  .ep b { font-size: 19px; } .ep small { font-size: 15px; }
+  .stickers { margin-top: 0; font-size: 18px; }
+  .ways .wrap { display: grid; grid-template-columns: 400px 1fr; gap: 80px; }
+  .ways .grid { grid-template-columns: 1fr 1fr; gap: 50px 60px; margin-top: 0; }
+  .way b { font-size: 30px; } .way p { font-size: 18px; }
+  .qa .wrap { display: grid; grid-template-columns: 400px 1fr; gap: 80px; }
+  .qa dl { grid-template-columns: 1fr 1fr; gap: 40px 60px; margin-top: 0; }
+  .qa dt { font-size: 22px; } .qa dd { font-size: 18px; }
+  .last { padding-top: 110px; }
+  .last h2 { font-size: 60px; } .last p { font-size: 20px; }
+  .last .pals { height: 260px; } .last .pals .lily { height: 340px; margin-bottom: -90px; } .last .pals .bis { height: 160px; }
+}

@@ -225,6 +225,22 @@
       "h": 1780,
       "title": "P39-FullM",
       "group": "랜딩 전체 시안"
+    },
+    "P40-LandingT3Phone.html": {
+      "x": 35754,
+      "y": 0,
+      "w": 390,
+      "h": 4430,
+      "title": "P40-LandingT3Phone",
+      "group": "랜딩 T3 다듬기"
+    },
+    "P41-LandingT3Desktop.html": {
+      "x": 36184,
+      "y": 0,
+      "w": 1440,
+      "h": 3750,
+      "title": "P41-LandingT3Desktop",
+      "group": "랜딩 T3 다듬기"
     }
   },
   "groups": [
@@ -267,6 +283,10 @@
     {
       "id": "랜딩 전체 시안",
       "label": "랜딩 전체 시안"
+    },
+    {
+      "id": "랜딩 T3 다듬기",
+      "label": "랜딩 T3 다듬기"
     }
   ],
   "links": []
