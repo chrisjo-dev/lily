@@ -172,7 +172,9 @@
       "w": 390,
       "h": 3640,
       "title": "P33-LandingT2Phone",
-      "group": "랜딩 T2"
+      "group": "지난 시안",
+      "status": "rejected",
+      "note": "T2와 다르게 벽색, 구도를 바꿈. 사용자: 시안 그대로 써야지"
     },
     "P34-LandingT2Desktop.html": {
       "x": 28932,
@@ -180,6 +182,24 @@
       "w": 1440,
       "h": 4430,
       "title": "P34-LandingT2Desktop",
+      "group": "지난 시안",
+      "status": "rejected",
+      "note": "T2와 다르게 벽색, 구도를 바꿈. 사용자: 시안 그대로 써야지"
+    },
+    "P35-LandingT2Phone.html": {
+      "x": 30412,
+      "y": 0,
+      "w": 390,
+      "h": 3390,
+      "title": "P35-LandingT2Phone",
+      "group": "랜딩 T2"
+    },
+    "P36-LandingT2Desktop.html": {
+      "x": 30842,
+      "y": 0,
+      "w": 1440,
+      "h": 3890,
+      "title": "P36-LandingT2Desktop",
       "group": "랜딩 T2"
     }
   },
