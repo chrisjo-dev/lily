@@ -83,8 +83,9 @@
     } catch (e) { return null; }
   }
 
-  // 카드 모양은 ui/gate.css(토큰만 씀). 인라인 style 없이 클래스만 붙인다
-  var MORE = ["ep02", "ep03", "ep04", "ep05", "ep06", "ep07"]; // 가입하면 이어지는 편(홈 목록과 같은 순서)
+  // 카드 모양은 ui/gate.css(시안 T6, promo P68). 인라인 style 없이 클래스만 붙인다
+  // 가입하면 이어지는 이야기 동그라미 그림(홈 목록과 같은 순서, 그림은 /hello/img의 것을 함께 씀)
+  var MORE = ["wake", "wash", "eat", "dress", "bath", "sleep"];
   (function css() {
     if (document.querySelector('link[href="/engine/ui/gate.css"]')) return;
     var l = document.createElement("link");
@@ -103,11 +104,13 @@
     if (card) return;
     card = el("div");
     card.id = "lilyGateCard";
+    var shade = el("div", "gate-shade");
     var badge = el("p", "gate-badge", "맛보기 편이 여기서 끝나요");
-    var box = el("div", "gate-paper");
-    box.setAttribute("role", "dialog");
-    box.setAttribute("aria-modal", "true");
-    box.setAttribute("aria-labelledby", "lilyGateTitle");
+    var sheet = el("div", "gate-sheet");
+    sheet.setAttribute("role", "dialog");
+    sheet.setAttribute("aria-modal", "true");
+    sheet.setAttribute("aria-labelledby", "lilyGateTitle");
+    var top = el("div", "gate-top");
     var brand = el("p", "gate-brand");
     var lock = el("img");
     lock.src = "/engine/ui/lock.webp"; lock.alt = ""; lock.width = 20; lock.height = 20;
@@ -115,12 +118,14 @@
     var title = el("h2", "", "이야기가 계속돼요.");
     title.id = "lilyGateTitle";
     title.appendChild(el("br")); title.appendChild(document.createTextNode("가입하면 바로 이어 들을 수 있어요."));
-    var more = el("p", "gate-more", MORE.length + "편 더 있어요");
+    top.appendChild(brand); top.appendChild(title);
+    var body = el("div", "gate-body");
+    var more = el("p", "gate-more", "새 이야기가 계속 더해져요");
     var eps = el("div", "gate-eps");
     eps.setAttribute("aria-hidden", "true");
-    MORE.forEach(function (id) {
+    MORE.forEach(function (name) {
       var im = el("img");
-      im.src = "/" + id + "/thumb.webp"; im.alt = ""; im.width = 52; im.height = 38; im.decoding = "async";
+      im.src = "/hello/img/ep-" + name + ".webp"; im.alt = ""; im.width = 48; im.height = 48; im.decoding = "async";
       eps.appendChild(im);
     });
     var safe = el("p", "gate-safe", "아이 정보는 받지 않아요");
@@ -137,8 +142,9 @@
     later.id = "lilyGateLater";
     later.addEventListener("click", function () { pending = null; hide(); });
     act.appendChild(join); act.appendChild(free); act.appendChild(later);
-    [brand, title, more, eps, safe, act].forEach(function (n) { box.appendChild(n); });
-    card.appendChild(badge); card.appendChild(box);
+    [more, eps, safe, act].forEach(function (n) { body.appendChild(n); });
+    sheet.appendChild(top); sheet.appendChild(body);
+    card.appendChild(shade); card.appendChild(badge); card.appendChild(sheet);
     document.body.appendChild(card);
     join.focus();
     log("gate_shown");
