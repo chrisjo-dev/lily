@@ -91,6 +91,38 @@
       "h": 1300,
       "title": "P23-LandingC",
       "group": "랜딩 시안 A B C"
+    },
+    "P24-LandingA2.html": {
+      "x": 13598,
+      "y": 0,
+      "w": 1616,
+      "h": 1300,
+      "title": "P24-LandingA2",
+      "group": "랜딩 A 변형"
+    },
+    "P25-LandingA3.html": {
+      "x": 15254,
+      "y": 0,
+      "w": 1616,
+      "h": 1300,
+      "title": "P25-LandingA3",
+      "group": "랜딩 A 변형"
+    },
+    "P26-LandingC2.html": {
+      "x": 16910,
+      "y": 0,
+      "w": 1616,
+      "h": 1300,
+      "title": "P26-LandingC2",
+      "group": "랜딩 C 변형"
+    },
+    "P27-LandingC3.html": {
+      "x": 18566,
+      "y": 0,
+      "w": 1616,
+      "h": 1300,
+      "title": "P27-LandingC3",
+      "group": "랜딩 C 변형"
     }
   },
   "groups": [
@@ -109,6 +141,14 @@
     {
       "id": "지난 시안",
       "label": "지난 시안"
+    },
+    {
+      "id": "랜딩 A 변형",
+      "label": "랜딩 A 변형"
+    },
+    {
+      "id": "랜딩 C 변형",
+      "label": "랜딩 C 변형"
     }
   ],
   "links": []
