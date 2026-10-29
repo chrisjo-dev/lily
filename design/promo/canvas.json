@@ -241,6 +241,22 @@
       "h": 3750,
       "title": "P41-LandingT3Desktop",
       "group": "랜딩 T3 다듬기"
+    },
+    "P42-LandingT4Phone.html": {
+      "x": 37664,
+      "y": 0,
+      "w": 390,
+      "h": 3800,
+      "title": "P42-LandingT4Phone",
+      "group": "랜딩 T4 흰 종이"
+    },
+    "P43-LandingT4Desktop.html": {
+      "x": 38094,
+      "y": 0,
+      "w": 1440,
+      "h": 4180,
+      "title": "P43-LandingT4Desktop",
+      "group": "랜딩 T4 흰 종이"
     }
   },
   "groups": [
@@ -287,6 +303,10 @@
     {
       "id": "랜딩 T3 다듬기",
       "label": "랜딩 T3 다듬기"
+    },
+    {
+      "id": "랜딩 T4 흰 종이",
+      "label": "랜딩 T4 흰 종이"
     }
   ],
   "links": []
