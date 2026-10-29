@@ -499,7 +499,16 @@
         }
       ],
       "status": "approved",
-      "note": "2026-10-30 사용자 '다 진행해'로 승인. T6, 로고 대비 수정(450e646) 포함"
+      "note": "2026-10-30 사용자 '다 진행해'로 승인. T6, 로고 대비 수정(450e646) 포함",
+      "impl": {
+        "route": "/",
+        "files": [
+          "index.html",
+          "common/shell.css",
+          "common/home.css"
+        ],
+        "updated": "2026-10-29T15:30:11Z"
+      }
     },
     "P61-HomeDesktopT6.html": {
       "x": 56874,
@@ -516,7 +525,16 @@
         }
       ],
       "status": "approved",
-      "note": "2026-10-30 사용자 '다 진행해'로 승인. T6, 로고 대비 수정(450e646) 포함"
+      "note": "2026-10-30 사용자 '다 진행해'로 승인. T6, 로고 대비 수정(450e646) 포함",
+      "impl": {
+        "route": "/",
+        "files": [
+          "index.html",
+          "common/shell.css",
+          "common/home.css"
+        ],
+        "updated": "2026-10-29T15:30:11Z"
+      }
     },
     "P62-JoinPhoneT6.html": {
       "x": 58354,
@@ -526,7 +544,16 @@
       "title": "P62-JoinPhoneT6",
       "group": "페이지 T6",
       "status": "approved",
-      "note": "2026-10-30 사용자 '다 진행해'로 승인. T6, 로고 대비 수정(450e646) 포함"
+      "note": "2026-10-30 사용자 '다 진행해'로 승인. T6, 로고 대비 수정(450e646) 포함",
+      "impl": {
+        "route": "/join/",
+        "files": [
+          "join/index.html",
+          "common/shell.css",
+          "common/forms.css"
+        ],
+        "updated": "2026-10-29T15:30:12Z"
+      }
     },
     "P63-JoinDesktopT6.html": {
       "x": 58784,
@@ -536,7 +563,16 @@
       "title": "P63-JoinDesktopT6",
       "group": "페이지 T6",
       "status": "approved",
-      "note": "2026-10-30 사용자 '다 진행해'로 승인. T6, 로고 대비 수정(450e646) 포함"
+      "note": "2026-10-30 사용자 '다 진행해'로 승인. T6, 로고 대비 수정(450e646) 포함",
+      "impl": {
+        "route": "/join/",
+        "files": [
+          "join/index.html",
+          "common/shell.css",
+          "common/forms.css"
+        ],
+        "updated": "2026-10-29T15:30:12Z"
+      }
     },
     "P64-CallbackT6.html": {
       "x": 60264,
@@ -546,7 +582,16 @@
       "title": "P64-CallbackT6",
       "group": "페이지 T6",
       "status": "approved",
-      "note": "2026-10-30 사용자 '다 진행해'로 승인. T6, 로고 대비 수정(450e646) 포함"
+      "note": "2026-10-30 사용자 '다 진행해'로 승인. T6, 로고 대비 수정(450e646) 포함",
+      "impl": {
+        "route": "/join/callback/",
+        "files": [
+          "join/callback/index.html",
+          "common/shell.css",
+          "common/forms.css"
+        ],
+        "updated": "2026-10-29T15:30:12Z"
+      }
     },
     "P65-MeT6.html": {
       "x": 61184,
@@ -556,7 +601,17 @@
       "title": "P65-MeT6",
       "group": "페이지 T6",
       "status": "approved",
-      "note": "2026-10-30 사용자 '다 진행해'로 승인. T6, 로고 대비 수정(450e646) 포함"
+      "note": "2026-10-30 사용자 '다 진행해'로 승인. T6, 로고 대비 수정(450e646) 포함",
+      "impl": {
+        "route": "/me/",
+        "files": [
+          "me/index.html",
+          "me/me.js",
+          "common/shell.css",
+          "common/forms.css"
+        ],
+        "updated": "2026-10-29T15:30:12Z"
+      }
     },
     "P66-PrivacyT6.html": {
       "x": 61614,
@@ -566,7 +621,16 @@
       "title": "P66-PrivacyT6",
       "group": "페이지 T6",
       "status": "approved",
-      "note": "2026-10-30 사용자 '다 진행해'로 승인. T6, 로고 대비 수정(450e646) 포함"
+      "note": "2026-10-30 사용자 '다 진행해'로 승인. T6, 로고 대비 수정(450e646) 포함",
+      "impl": {
+        "route": "/privacy/",
+        "files": [
+          "privacy/index.html",
+          "common/shell.css",
+          "common/doc.css"
+        ],
+        "updated": "2026-10-29T15:30:12Z"
+      }
     },
     "P67-NotFoundT6.html": {
       "x": 62044,
@@ -576,7 +640,16 @@
       "title": "P67-NotFoundT6",
       "group": "페이지 T6",
       "status": "approved",
-      "note": "2026-10-30 사용자 '다 진행해'로 승인. T6, 로고 대비 수정(450e646) 포함"
+      "note": "2026-10-30 사용자 '다 진행해'로 승인. T6, 로고 대비 수정(450e646) 포함",
+      "impl": {
+        "route": "/404.html",
+        "files": [
+          "404.html",
+          "common/shell.css",
+          "common/doc.css"
+        ],
+        "updated": "2026-10-29T15:30:12Z"
+      }
     },
     "P68-GateCardT6.html": {
       "x": 62474,
@@ -593,7 +666,15 @@
         }
       ],
       "status": "approved",
-      "note": "2026-10-30 사용자 '다 진행해'로 승인. T6, 로고 대비 수정(450e646) 포함"
+      "note": "2026-10-30 사용자 '다 진행해'로 승인. T6, 로고 대비 수정(450e646) 포함",
+      "impl": {
+        "route": "/ep02/",
+        "files": [
+          "engine/gate.js",
+          "engine/ui/gate.css"
+        ],
+        "updated": "2026-10-29T15:30:13Z"
+      }
     }
   },
   "groups": [
