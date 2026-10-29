@@ -40,7 +40,7 @@ h1, h2, h3 { font-family: var(--font-head); font-weight: 400; margin: 0; }
 .pnote img { width: 46px; flex: none; }
 
 /* 3. 릴리랑이 특별한 이유: 세 컷과 원리 */
-.why { background: var(--navy); color: var(--white); padding: 40px 0 40px; background-image: url(../assets/stars.svg); background-size: 120px 120px; }
+.why { background: var(--navy); color: var(--white); padding: 40px 0 40px; } /* 별무늬는 첫 화면에만 */
 .why .sec-title { color: var(--white); text-align: center; }
 .steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-top: 22px; }
 .step .scr { border: 5px solid #2b2f3a; border-radius: 18px; overflow: hidden; height: 170px; background: var(--white); box-shadow: 0 0 24px 4px rgba(255,205,110,.35); }
@@ -73,7 +73,7 @@ h1, h2, h3 { font-family: var(--font-head); font-weight: 400; margin: 0; }
 
 /* 6. 마지막 */
 .last { text-align: center; color: var(--white); padding: 44px 22px 40px; background:
-  radial-gradient(circle at 50% 0, rgba(255,214,140,.45), rgba(255,214,140,0) 45%), url(../assets/stars.svg) 0 0 / 120px 120px, var(--navy); }
+  radial-gradient(circle at 50% 0, rgba(255,214,140,.35), rgba(255,214,140,0) 45%), var(--navy); }
 .last h2 { font-size: 30px; line-height: 1.22; }
 .last p { font-size: 14px; color: #cdd6f3; margin: 10px 0 20px; }
 .last .peek { height: 110px; margin: 0 auto 14px; }
