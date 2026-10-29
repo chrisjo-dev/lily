@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>P11 홍보 랜딩 휴대폰</title>
+<link rel="stylesheet" href="../shared/tokens.css">
+<style>
+  /* docs/PROMO.md 기준 랜딩. 인스타 광고로 들어온 부모가 3초 안에 알고, 무료 맛보기를 누르게 */
+  body { width: 390px; margin: 0 auto; background: var(--cream); }
+  img { display: block; max-width: 100%; }
+  h1, h2 { font-family: var(--font-head); font-weight: 400; margin: 0; }
+  .btn { display: flex; align-items: center; justify-content: center; gap: 12px; width: 100%; box-sizing: border-box; background: var(--sun); color: var(--ink); border: 4px solid var(--sun-edge); border-radius: 999px; padding: 16px 0; font-family: var(--font-head); font-size: 26px; line-height: 1; text-decoration: none; }
+  .btn::before { content: ''; border-left: 18px solid var(--sun-edge); border-top: 12px solid transparent; border-bottom: 12px solid transparent; }
+  .wrap { padding: 0 22px; }
+
+  /* 1. 첫 화면: 실제 장면(칫솔을 톡)이 화면 위쪽을 채우고, 큰 한 줄과 단추 */
+  .hero { background: var(--sky); padding-bottom: 28px; }
+  .hero .pic { position: relative; height: 420px; overflow: hidden; }
+  .hero .pic img { width: 100%; height: 100%; object-fit: cover; object-position: center 55%; }
+  .hero .brand { position: absolute; left: 14px; top: 14px; background: var(--white); border-radius: 14px; padding: 6px 10px; }
+  .hero .brand img { height: 34px; }
+  .hero h1 { font-size: 38px; line-height: 1.18; margin-top: 22px; }
+  .hero h1 em { font-style: normal; background: var(--sky-deep); color: var(--white); border-radius: 10px; padding: 0 8px; }
+  .hero .sub { font-size: 17px; font-weight: 700; margin: 10px 0 18px; color: var(--ink); }
+  .hero .note { text-align: center; font-size: 14px; font-weight: 500; margin: 10px 0 0; color: var(--ink-soft); }
+
+  /* 2. 큰 사실 세 개 */
+  .facts { background: var(--night); color: var(--white); display: grid; grid-template-columns: repeat(3, 1fr); padding: 26px 14px; text-align: center; }
+  .facts b { display: block; font-family: var(--font-head); font-weight: 400; font-size: 40px; color: var(--sun); line-height: 1.1; }
+  .facts span { font-size: 13px; font-weight: 500; line-height: 1.4; display: block; margin-top: 6px; }
+
+  /* 3. 이렇게 놀아요: 큰 실제 장면과 짧은 말 */
+  .play { padding: 46px 22px 20px; }
+  .play h2 { font-size: 32px; line-height: 1.2; }
+  .play .lead { font-size: 16px; line-height: 1.6; margin: 12px 0 26px; }
+  .shot { margin-bottom: 28px; }
+  .shot img { width: 100%; height: 300px; object-fit: cover; object-position: center 30%; border-radius: 22px; }
+  .shot.pop img { object-position: center 75%; }
+  .shot h3 { font-family: var(--font-head); font-weight: 400; font-size: 24px; margin: 14px 0 4px; }
+  .shot p { font-size: 15px; line-height: 1.55; margin: 0; color: var(--ink-soft); }
+
+  /* 4. 하루 7편 */
+  .day { background: var(--sky); padding: 42px 0 34px; }
+  .day h2 { font-size: 32px; line-height: 1.2; }
+  .day .lead { font-size: 16px; margin: 10px 0 20px; }
+  .row { display: flex; gap: 10px; overflow-x: auto; padding: 0 22px 6px; }
+  .ep { flex: none; width: 112px; }
+  .ep img { width: 112px; height: 150px; object-fit: cover; border-radius: 14px; border: 3px solid var(--white); }
+  .ep.free img { border-color: var(--sun); }
+  .ep span { display: block; font-size: 14px; font-weight: 700; margin-top: 6px; }
+  .ep small { font-size: 12px; color: var(--ink-soft); }
+  .day .after { font-size: 15px; font-weight: 700; margin: 16px 22px 0; }
+
+  /* 5. 부모님이 먼저 묻는 것 */
+  .qa { padding: 46px 22px 30px; }
+  .qa h2 { font-size: 30px; margin-bottom: 18px; }
+  .qa dl { margin: 0; }
+  .qa dt { font-size: 18px; font-weight: 900; margin-top: 18px; }
+  .qa dd { margin: 4px 0 0; font-size: 15px; line-height: 1.55; color: var(--ink-soft); }
+
+  /* 6. 마지막 한 번 더 */
+  .last { background: var(--night); color: var(--white); padding: 40px 0 34px; text-align: center; }
+  .last h2 { font-size: 32px; line-height: 1.2; }
+  .last p { font-size: 15px; margin: 10px 0 20px; }
+  .foot { padding: 22px 0 30px; font-size: 13px; color: var(--ink-soft); text-align: center; }
+  .foot a { color: var(--ink-soft); }
+</style>
+</head>
+<body>
+  <header class="hero">
+    <div class="pic">
+      <img src="../assets/cap-wait0-find.webp" alt="EP01 실제 장면: 칫솔이 노랗게 빛나고 손가락이 톡 누르려는 순간">
+      <span class="brand"><img src="../assets/logo-h.svg" alt="릴리랑"></span>
+    </div>
+    <div class="wrap">
+      <h1>아이가 <em>톡!</em> 눌러야<br>이야기가 이어져요</h1>
+      <p class="sub">4~7세 아이와 듣는 하루 2분 영어 그림책</p>
+      <a class="btn" href="#play">무료로 2분 들어보기</a>
+      <p class="note">로그인 없이 바로 시작해요</p>
+    </div>
+  </header>
+
+  <section class="facts" aria-label="한눈에">
+    <div><b>2분</b><span>한 편이면<br>끝나요</span></div>
+    <div><b>무료</b><span>첫 편은 가입<br>없이 바로</span></div>
+    <div><b>0개</b><span>받는 아이<br>정보</span></div>
+  </section>
+
+  <section class="play wrap">
+    <h2>보기만 하는<br>영상이 아니에요</h2>
+    <p class="lead">릴리가 멈추고 기다리면, 아이가 그림을 눌러 이야기를 이어 가요. 8초가 지나면 릴리가 대신 넘어가서 틀리는 일은 없어요.</p>
+    <div class="shot pop"><img src="../assets/cap-wait1-pop.webp" alt="거품을 터뜨리는 실제 장면"><h3>거품을 퐁퐁 터뜨리고</h3><p>Bubbles, pop, pop! 누르는 대로 거품이 터져요.</p></div>
+    <div class="shot"><img src="../assets/cap-end.webp" alt="스티커 세 장을 모은 끝 화면"><h3>스티커 세 장이면 끝</h3><p>2분 남짓. 한 번 더 들을지는 아이가 골라요.</p></div>
+  </section>
+
+  <section class="day">
+    <div class="wrap"><h2>아침부터 밤까지<br>하루 습관 7편</h2><p class="lead">그 시간에 맞는 한 편을 들려주세요.</p></div>
+    <div class="row">
+      <div class="ep"><img src="../assets/thumb-ep02.webp" alt=""><span>일어나기</span><small>Wake Up!</small></div>
+      <div class="ep"><img src="../assets/thumb-ep03.webp" alt=""><span>세수하기</span><small>Splash, Splash!</small></div>
+      <div class="ep"><img src="../assets/thumb-ep04.webp" alt=""><span>아침 먹기</span><small>Yummy, Yummy!</small></div>
+      <div class="ep"><img src="../assets/thumb-ep05.webp" alt=""><span>옷 입기</span><small>Put On, Ready!</small></div>
+      <div class="ep free"><img src="../assets/thumb-ep01.webp" alt=""><span>이 닦기 (무료)</span><small>Brush, Brush!</small></div>
+      <div class="ep"><img src="../assets/thumb-ep06.webp" alt=""><span>목욕하기</span><small>Bath Time!</small></div>
+      <div class="ep"><img src="../assets/thumb-ep07.webp" alt=""><span>잠자기</span><small>Good night!</small></div>
+    </div>
+    <p class="after">이 닦기는 지금 무료, 나머지는 무료 가입하면 열려요.</p>
+  </section>
+
+  <section class="qa wrap">
+    <h2>부모님이 먼저 묻는 것</h2>
+    <dl>
+      <dt>화면을 오래 보진 않나요?</dt><dd>한 편이 2분이면 끝나요. 다 들으면 스티커를 붙이고 멈춰요.</dd>
+      <dt>아이 정보를 받나요?</dt><dd>아이 이름, 사진, 학교는 묻지 않아요. 부모님 계정만 만들어요.</dd>
+      <dt>앱을 깔아야 하나요?</dt><dd>아니요. 휴대폰과 태블릿 브라우저에서 바로 열려요.</dd>
+      <dt>시험이나 점수가 있나요?</dt><dd>없어요. 따라 말하기는 권하지만 시키지 않아요.</dd>
+    </dl>
+  </section>
+
+  <section class="last">
+    <div class="wrap">
+      <h2>오늘 양치하기 전에<br>한 편 들어 보세요</h2>
+      <p>로그인 없이, 2분이면 끝나요</p>
+      <a class="btn" href="#play">무료로 2분 들어보기</a>
+    </div>
+  </section>
+  <footer class="foot"><a href="#privacy">개인정보처리방침</a></footer>
+</body>
+</html>

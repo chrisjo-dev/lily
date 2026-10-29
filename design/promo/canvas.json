@@ -47,12 +47,32 @@
       "h": 1920,
       "title": "P06-OfferStory",
       "group": "인스타 1차"
+    },
+    "P11-LandingPhone.html": {
+      "x": 6720,
+      "y": 0,
+      "w": 390,
+      "h": 3150,
+      "title": "P11-LandingPhone",
+      "group": "랜딩"
+    },
+    "P12-LandingDesktop.html": {
+      "x": 7150,
+      "y": 0,
+      "w": 1440,
+      "h": 3370,
+      "title": "P12-LandingDesktop",
+      "group": "랜딩"
     }
   },
   "groups": [
     {
       "id": "인스타 1차",
       "label": "인스타 1차"
+    },
+    {
+      "id": "랜딩",
+      "label": "랜딩"
     }
   ],
   "links": []
