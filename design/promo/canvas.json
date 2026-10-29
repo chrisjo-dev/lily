@@ -293,6 +293,78 @@
         ],
         "updated": "2026-10-29T10:08:39Z"
       }
+    },
+    "P50-HomePhoneT5.html": {
+      "x": 41484,
+      "y": 0,
+      "w": 390,
+      "h": 2400,
+      "title": "P50-HomePhoneT5",
+      "group": "페이지 T5"
+    },
+    "P51-HomeDesktopT5.html": {
+      "x": 41914,
+      "y": 0,
+      "w": 1440,
+      "h": 2400,
+      "title": "P51-HomeDesktopT5",
+      "group": "페이지 T5"
+    },
+    "P52-JoinPhoneT5.html": {
+      "x": 43394,
+      "y": 0,
+      "w": 390,
+      "h": 1100,
+      "title": "P52-JoinPhoneT5",
+      "group": "페이지 T5"
+    },
+    "P53-JoinDesktopT5.html": {
+      "x": 43824,
+      "y": 0,
+      "w": 1440,
+      "h": 1100,
+      "title": "P53-JoinDesktopT5",
+      "group": "페이지 T5"
+    },
+    "P54-CallbackT5.html": {
+      "x": 45304,
+      "y": 0,
+      "w": 390,
+      "h": 844,
+      "title": "P54-CallbackT5",
+      "group": "페이지 T5"
+    },
+    "P55-MeT5.html": {
+      "x": 45734,
+      "y": 0,
+      "w": 390,
+      "h": 1300,
+      "title": "P55-MeT5",
+      "group": "페이지 T5"
+    },
+    "P56-PrivacyT5.html": {
+      "x": 46164,
+      "y": 0,
+      "w": 390,
+      "h": 1600,
+      "title": "P56-PrivacyT5",
+      "group": "페이지 T5"
+    },
+    "P57-NotFoundT5.html": {
+      "x": 46594,
+      "y": 0,
+      "w": 390,
+      "h": 844,
+      "title": "P57-NotFoundT5",
+      "group": "페이지 T5"
+    },
+    "P58-GateT5.html": {
+      "x": 47024,
+      "y": 0,
+      "w": 390,
+      "h": 844,
+      "title": "P58-GateT5",
+      "group": "페이지 T5"
     }
   },
   "groups": [
@@ -347,6 +419,10 @@
     {
       "id": "랜딩 T5",
       "label": "랜딩 T5"
+    },
+    {
+      "id": "페이지 T5",
+      "label": "페이지 T5"
     }
   ],
   "links": []
