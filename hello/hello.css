@@ -155,7 +155,8 @@ a:focus-visible { outline: 3px solid var(--sky-deep); outline-offset: 4px; borde
   .hero h1 { font-size: clamp(48px, 5vw, 72px); line-height: 1.1; }
   .hero .sub { font-size: 23px; margin: 22px 0 36px; }
   .hero .note { font-size: 16px; margin-left: 32px; }
-  .hero .art { margin-top: 10px; -webkit-mask-image: linear-gradient(to right, transparent, #000 15%), linear-gradient(to bottom, transparent, #000 12%); -webkit-mask-composite: source-in; mask-image: linear-gradient(to right, transparent, #000 15%), linear-gradient(to bottom, transparent, #000 12%); mask-composite: intersect; }
+  /* 그림 네 변을 남색 벽으로 부드럽게 번지게(위, 왼쪽, 오른쪽은 길게, 아래는 물결이 덮음) */
+  .hero .art { margin-top: 10px; -webkit-mask-image: linear-gradient(to right, transparent, #000 18%, #000 80%, transparent), linear-gradient(to bottom, transparent, #000 24%); -webkit-mask-composite: source-in; mask-image: linear-gradient(to right, transparent, #000 18%, #000 80%, transparent), linear-gradient(to bottom, transparent, #000 24%); mask-composite: intersect; }
   .hero .edge { height: 56px; margin-top: -55px; }
   .hero { display: block; max-width: none; margin: 0; padding: 0; }
   .hero .go { margin-top: 0; }
