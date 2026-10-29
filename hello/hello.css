@@ -39,7 +39,7 @@ a:focus-visible { outline: 3px solid var(--sky-deep); outline-offset: 4px; borde
 .hero .call { position: absolute; font-size: 21px; color: var(--honey); }
 .hero .call.a { left: 0; top: -2%; font-size: 18px; } .hero .call.b { right: 0; top: 0; } .hero .call.c { right: 4%; bottom: 2%; }
 
-/* 2. 이야기 7편: 색 동그라미 */
+/* 2. 이야기: 색 동그라미 */
 .stories { padding: 40px 0 46px; text-align: center; }
 .sec-title { font-size: 30px; line-height: 1.22; }
 .sec-lead { font-size: 16px; line-height: 1.6; color: var(--ink-2); margin-top: 10px; }
@@ -114,7 +114,7 @@ a:focus-visible { outline: 3px solid var(--sky-deep); outline-offset: 4px; borde
   .demo { padding: 50px 0 90px; }
   .frames { justify-content: center; gap: 36px; overflow: visible; margin-top: 50px; }
   .frame { width: 280px; }
-  .frame:nth-child(2) { transform: translateY(34px); }
+  .frame:nth-child(2) { margin-top: 34px; }
   .frame b { font-size: 32px; } .frame span { font-size: 17px; }
   .demo .after { font-size: 18px; margin-top: 56px; }
   .ways { padding: 110px 0 60px; }
@@ -145,21 +145,60 @@ a:focus-visible { outline: 3px solid var(--sky-deep); outline-offset: 4px; borde
 .hero .sub { font-size: 17px; line-height: 1.5; margin: 14px 0 22px; color: var(--navy-soft); }
 .hero .note { font-size: 14px; color: var(--navy-soft); margin-top: 12px; }
 .hero .art { display: block; width: 100%; margin-top: 20px; -webkit-mask-image: linear-gradient(to bottom, transparent, #000 14%); mask-image: linear-gradient(to bottom, transparent, #000 14%); }
-.hero .edge { display: block; width: 100%; height: 28px; margin-top: -27px; position: relative; }
+/* 첫 화면 그림 세 장(칫솔, 거품, 잠자리)은 같은 크기로 겹쳐 두고 차례로 바뀐다(motion.js).
+   세 장 모두 아래에 맨 아래 줄을 세로로 늘린 60px(538 기준)가 있고, 그 부분은 물결 밑에 숨긴다 */
+.hero .stage { position: relative; margin-bottom: calc(-100% * 60 / 538 - 10px); }
+.hero .stage .alt { position: absolute; left: 0; top: 0; opacity: 0; transition: opacity 1s ease-in-out; }
+.hero .stage .art.on { opacity: 1; }
+.hero .stage .art.off { opacity: 0; }
+.hero .stage .art { margin: 0; }
+.hero .stage { margin-top: 20px; }
+.hero .edge { display: block; width: 100%; height: 28px; margin-top: -27px; position: relative; z-index: 1; transform: scaleX(-1); }
 .hero { padding: 0; } .hero .go, .hero .note { text-align: left; }
 @media (min-width: 900px) {
   .hero .bar { max-width: 1280px; margin: 0 auto; padding: 28px 48px 0; }
   .hero .bar img { height: 52px; } .hero .bar span { font-size: 38px; }
-  .hero .inner { max-width: 1280px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1.2fr; align-items: center; padding-bottom: 40px; }
+  /* 그림을 첫 화면 바닥에 붙이고 물결 밑까지 내려, 물결이 그림을 곡선대로 자르게 */
+  .hero .inner { max-width: 1280px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1.2fr; align-items: end; padding-bottom: 0; }
+  .hero .copy { align-self: center; }
   .hero .copy { padding: 30px 0 30px 48px; }
   .hero h1 { font-size: clamp(48px, 5vw, 72px); line-height: 1.1; }
   .hero .sub { font-size: 23px; margin: 22px 0 36px; }
   .hero .note { font-size: 16px; margin-left: 32px; }
   /* 그림 네 변을 남색 벽으로 부드럽게 번지게(위, 왼쪽, 오른쪽은 길게, 아래는 물결이 덮음) */
   .hero .art { margin-top: 10px; -webkit-mask-image: linear-gradient(to right, transparent, #000 18%, #000 80%, transparent), linear-gradient(to bottom, transparent, #000 24%); -webkit-mask-composite: source-in; mask-image: linear-gradient(to right, transparent, #000 18%, #000 80%, transparent), linear-gradient(to bottom, transparent, #000 24%); mask-composite: intersect; }
-  .hero .edge { height: 56px; margin-top: -55px; }
+  .hero .edge { height: 56px; margin-top: -55px; transform: scaleX(-1); }
+  .hero .stage { margin-top: 10px; margin-bottom: calc(-100% * 60 / 538 + 30px); }
   .hero { display: block; max-width: none; margin: 0; padding: 0; }
   .hero .go { margin-top: 0; }
 }
 .hero .bar img { width: auto; }
 .hero .art { height: auto; }
+.hero .stage .art:first-child { transition: opacity 1s ease-in-out; }
+
+/* ===== 움직임 =====
+   첫 화면: 글이 차례로 떠오르고 "톡!"이 한 번 튄다, 그림은 천천히 숨 쉬듯 떠 있다(그림 자체는 처음부터 보임, LCP 보호).
+   아래: 화면에 들어올 때 차례로 떠오름(motion.js). 동그라미와 화면은 누르면 살짝 눌림. 움직임 줄이기 설정이면 모두 끔. */
+@keyframes rise { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: none; } }
+@keyframes riseT { from { transform: translateY(14px); } to { transform: none; } }
+@keyframes pop { 0%, 100% { transform: none; } 40% { transform: scale(1.18) rotate(-6deg); } 70% { transform: scale(.96) rotate(2deg); } }
+@keyframes drift { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
+@keyframes shine { 0%, 82% { background-position: -140% 0; } 100% { background-position: 240% 0; } }
+.hero .copy > * { animation: rise .7s cubic-bezier(.2,.8,.2,1) both; }
+.hero .copy > h1 { animation-name: riseT; } /* 제목은 처음부터 보이게(LCP), 위치만 올라온다 */
+.hero .copy > :nth-child(2) { animation-delay: .12s; } .hero .copy > :nth-child(3) { animation-delay: .24s; } .hero .copy > :nth-child(4) { animation-delay: .34s; }
+.hero h1 b { display: inline-block; animation: pop .7s cubic-bezier(.3,1.6,.5,1) .9s both; }
+.hero .stage { animation: drift 7s ease-in-out 1.2s infinite; }
+.hero .btn { background-image: linear-gradient(100deg, transparent 30%, rgba(255,255,255,.55) 50%, transparent 70%); background-size: 60% 100%; background-repeat: no-repeat; animation: shine 6s ease-in-out 2s infinite; }
+.motion .rv { opacity: 0; transform: translateY(22px); transition: opacity .6s ease-out, transform .7s cubic-bezier(.2,.8,.2,1); transition-delay: calc(var(--i, 0) * 70ms); }
+.motion .rv.in { opacity: 1; transform: none; }
+.circle .dot { transition: transform .25s cubic-bezier(.3,1.6,.5,1); }
+.circle:hover .dot, .circle:focus-visible .dot { transform: translateY(-6px) rotate(-3deg); }
+.circle:active .dot { transform: scale(.94); }
+.frame .scr { transition: transform .3s cubic-bezier(.2,.8,.2,1); }
+.frame:hover .scr { transform: translateY(-6px); }
+@media (prefers-reduced-motion: reduce) {
+  .hero .copy > *, .hero h1 b, .hero .stage, .hero .btn { animation: none; }
+  .hero .stage .alt { display: none; }
+  .circle .dot, .frame .scr { transition: none; }
+}
