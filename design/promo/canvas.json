@@ -442,7 +442,9 @@
       "w": 1440,
       "h": 1000,
       "title": "P46-SkyHero1",
-      "group": "첫 화면 하늘 시안"
+      "group": "첫 화면 하늘 시안",
+      "status": "rejected",
+      "note": "사용자: 바꾸지 말자, 기존(T5 남색 첫 화면)이 더 낫다"
     },
     "P47-SkyHero2.html": {
       "x": 53484,
@@ -450,7 +452,9 @@
       "w": 1440,
       "h": 1000,
       "title": "P47-SkyHero2",
-      "group": "첫 화면 하늘 시안"
+      "group": "첫 화면 하늘 시안",
+      "status": "rejected",
+      "note": "사용자: 바꾸지 말자, 기존(T5 남색 첫 화면)이 더 낫다"
     },
     "P48-SkyHero3.html": {
       "x": 54964,
@@ -458,7 +462,9 @@
       "w": 1440,
       "h": 1000,
       "title": "P48-SkyHero3",
-      "group": "첫 화면 하늘 시안"
+      "group": "첫 화면 하늘 시안",
+      "status": "rejected",
+      "note": "사용자: 바꾸지 말자, 기존(T5 남색 첫 화면)이 더 낫다"
     }
   },
   "groups": [
