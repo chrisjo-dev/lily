@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>릴리랑, 오늘의 한 편</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&family=Gaegu:wght@700&display=swap">
+<link rel="stylesheet" href="../shared/tokens.css">
+<link rel="stylesheet" href="../shared/landing.css">
+<link rel="stylesheet" href="../shared/home.css">
+<script src="../shared/js-on.js"></script>
+</head>
+<body>
+
+<!-- 다시 온 부모: 방 위의 판에는 이어 들을 한 편만 -->
+<header class="hero home-hero">
+  <img class="hero-room" src="../assets/home-hero-1280.webp" srcset="../assets/home-hero-800.webp 800w, ../assets/home-hero-1280.webp 1280w" sizes="100vw" width="1280" height="853" alt="별무늬 잠옷을 입은 릴리와 강아지 비스킷이 방 안 러그에 앉아 반기는 수채화" fetchpriority="high">
+  <div class="card">
+    <h1 class="card-title"><span class="w-name">릴리랑</span><span class="w-end">오늘의 한 편</span></h1>
+    <div class="resume">
+      <img src="../assets/thumb-ep01.webp" width="482" height="732" alt="EP01 이 닦기 첫 장면">
+      <p class="resume-text"><b>이 닦기</b> Brush, Brush, Brush!<br>지난번에 1분 10초까지 들었어요</p>
+    </div>
+    <div class="card-foot">
+      <a class="btn-play" href="/ep01/">이어 듣기</a>
+      <a class="link-quiet" href="/ep01/">처음부터 듣기</a>
+    </div>
+  </div>
+</header>
+
+<main>
+  <section class="day home-day" aria-labelledby="day-h">
+    <div class="day-pin">
+      <h2 id="day-h" class="giant" data-reveal>하루</h2>
+      <p class="day-note" data-reveal="2">지금 시간에 맞는 편을 골라 보세요. 다 들은 칸에는 스티커가 붙어 있어요.</p>
+      <div class="day-pics" data-reveal="3"><img src="../assets/thumb-ep02.webp" width="482" height="732" alt="아침, EP02 일어나기 장면"><img src="../assets/night.webp" width="1024" height="1536" alt="밤, EP07 잠자기 장면"></div>
+    </div>
+    <div class="bars">
+      <details class="bar" data-reveal><summary><span class="when">아침</span><span class="what">일어나기</span><span class="en">Wake Up!</span></summary>
+        <div class="bar-in"><img src="../assets/thumb-ep02.webp" width="482" height="732" alt="EP02 일어나기 첫 장면" loading="lazy"><p>배우는 말: wake up, stretch<br>2분 25초</p><a class="btn-lock" href="/join/">가입하고 열기</a></div></details>
+      <details class="bar" data-reveal><summary><span class="when">아침</span><span class="what">세수하기</span><span class="en">Splash, Splash!</span></summary>
+        <div class="bar-in"><img src="../assets/thumb-ep03.webp" width="482" height="732" alt="EP03 세수하기 첫 장면" loading="lazy"><p>배우는 말: wash my face, splash<br>2분 37초</p><a class="btn-lock" href="/join/">가입하고 열기</a></div></details>
+      <details class="bar" data-reveal><summary><span class="when">아침</span><span class="what">아침 먹기</span><span class="en">Yummy, Yummy!</span></summary>
+        <div class="bar-in"><img src="../assets/thumb-ep04.webp" width="482" height="732" alt="EP04 아침 먹기 첫 장면" loading="lazy"><p>배우는 말: yummy, all gone<br>2분 26초</p><a class="btn-lock" href="/join/">가입하고 열기</a></div></details>
+      <details class="bar" data-reveal><summary><span class="when">아침</span><span class="what">옷 입기</span><span class="en">Put On, Ready!</span></summary>
+        <div class="bar-in"><img src="../assets/thumb-ep05.webp" width="482" height="732" alt="EP05 옷 입기 첫 장면" loading="lazy"><p>배우는 말: put on, my socks<br>2분 18초</p><a class="btn-lock" href="/join/">가입하고 열기</a></div></details>
+      <details class="bar bar-free has-sticker" data-reveal open><summary><span class="when">저녁</span><span class="what">이 닦기</span><span class="en">Brush, Brush, Brush!</span><img class="stuck" src="../assets/L-sticker-brush.webp" width="96" height="96" alt="받은 칫솔 스티커"></summary>
+        <div class="bar-in"><img src="../assets/thumb-ep01.webp" width="482" height="732" alt="EP01 이 닦기 첫 장면" loading="lazy"><p>배우는 말: brush my teeth, bubbles<br>2분 19초, 무료</p><a class="btn-play" href="/ep01/">듣기</a></div></details>
+      <details class="bar" data-reveal><summary><span class="when">저녁</span><span class="what">목욕하기</span><span class="en">Rub-a-Dub, Bath Time!</span></summary>
+        <div class="bar-in"><img src="../assets/thumb-ep06.webp" width="482" height="732" alt="EP06 목욕하기 첫 장면" loading="lazy"><p>배우는 말: bath time, rub-a-dub<br>2분 26초</p><a class="btn-lock" href="/join/">가입하고 열기</a></div></details>
+      <details class="bar" data-reveal><summary><span class="when">밤</span><span class="what">잠자기</span><span class="en">Sweet Dreams</span></summary>
+        <div class="bar-in"><img src="../assets/thumb-ep07.webp" width="482" height="732" alt="EP07 잠자기 첫 장면" loading="lazy"><p>배우는 말: read a book, turn the page<br>2분 13초</p><a class="btn-lock" href="/join/">가입하고 열기</a></div></details>
+    </div>
+  </section>
+
+  <section class="letter-field home-word" aria-labelledby="word-h">
+    <figure class="letter-pic" data-reveal><img src="../assets/bg-4-clean.webp" width="415" height="623" alt="이를 다 닦고 활짝 웃는 릴리" loading="lazy"></figure>
+    <article class="letter" data-reveal>
+      <h2 id="word-h">오늘의 말</h2>
+      <p>이 닦기에서 들은 말이에요. 진짜 양치하는 그 순간에 한 번만 말해 주세요.</p>
+      <p class="word">Brush my teeth!</p>
+      <p>이를 닦아요. 아이가 따라 하지 않아도 괜찮습니다.</p>
+    </article>
+  </section>
+</main>
+
+<footer class="back">
+  <div class="back-card">
+    <div class="back-msg" data-reveal>
+      <h2>내일 아침에 또 만나요</h2>
+      <p>가입하면 일곱 편이 모두 열립니다. 가입은 무료이고 아이 정보는 받지 않습니다.</p>
+    </div>
+    <div class="back-addr" data-reveal="2">
+      <img class="stamp" src="../assets/home-biscuit.webp" width="128" height="124" alt="우표 자리에 앉은 강아지 비스킷" loading="lazy">
+      <a href="/join/">가입하고 7편 모두 보기</a>
+      <a href="/me/">내 정보</a>
+      <a href="/privacy/">개인정보처리방침</a>
+    </div>
+    <p class="imprint">릴리랑, 매일 외국어 읽기가 만들어요</p>
+  </div>
+</footer>
+<script src="../shared/home.js" defer></script>
+</body>
+</html>
