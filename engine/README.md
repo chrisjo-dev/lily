@@ -5,7 +5,7 @@
 ## 새 편 만들기
 
 1. `/ep01/index.html`을 복사해 `/epNN/index.html`로 둡니다.
-2. `<head>`: 제목, 설명, OG(`https://lily.wspace.ai.kr/epNN/...`), canonical, 첫 장면 그림 preload만 바꿉니다. 화면 토큰(`/engine/ui/tokens.css`), 엔진 CSS, 글꼴(Andika, Gowun Batang, Gowun Dodum, Jua), 스크립트 줄(아래 "잠금 훅"의 순서)은 그대로 둡니다.
+2. `<head>`: 제목, 설명, OG(`https://lilyrang.co.kr/epNN/...`), canonical, 첫 장면 그림 preload만 바꿉니다. 화면 토큰(`/engine/ui/tokens.css`), 엔진 CSS, 글꼴(Andika, Gowun Batang, Gowun Dodum, Jua), 스크립트 줄(아래 "잠금 훅"의 순서)은 그대로 둡니다.
 3. `<body>`:
    - `<div class="stage" id="stage">` 안에 장면마다 `<svg class="scene" id="scN" viewBox="그림 픽셀">`. 첫 장면 그림만 `href`, 나머지는 `data-src`(엔진이 장면 직전에 받아 둠). 첫 장면 말고는 `hidden`.
    - 설정 JSON 블록 `<script type="application/json" id="lily-episode">{...}</script>`. 실행되는 코드가 아니라 데이터라 CSP에 걸리지 않습니다. JSON이라 주석과 끝 쉼표는 못 씁니다. 엔진이 문서를 다 읽은 뒤 스스로 시작하고, 읽은 설정을 `window.LILY_EPISODE`에도 둡니다.

@@ -12,7 +12,7 @@
 4. RLS 미적용 테이블 0건: 대시보드 Table Editor의 RLS 경고가 없어야 한다. SQL로 확인하려면 아래를 실행해 0줄이어야 한다.
    `select relname from pg_class c join pg_namespace n on n.oid = c.relnamespace where n.nspname = 'public' and c.relkind = 'r' and not c.relrowsecurity;`
 5. 리디렉트 주소는 정확히 이것만 등록한다(와일드카드와 localhost는 운영 설정에 넣지 않음).
-   - Supabase, Authentication > URL Configuration: Site URL `https://lily.wspace.ai.kr`, Redirect URLs `https://lily.wspace.ai.kr/join/callback/`
+   - Supabase, Authentication > URL Configuration: Site URL `https://lilyrang.co.kr`, Redirect URLs `https://lilyrang.co.kr/join/callback/`
    - 카카오 개발자 콘솔, 카카오 로그인 > Redirect URI: `https://<ref>.supabase.co/auth/v1/callback`
 6. 카카오 동의항목: 프로필 사진(profile_image)을 "사용 안 함"으로 둔다. `privacy/index.html`의 "프로필 사진은 요청하지 않고 저장하지도 않아요." 문장은 이 설정을 전제로 한다. 프로필 사진을 받기로 바꾸면 그 문장을 지우고 수집 항목 표의 카카오 줄에 "프로필 사진 주소"를 다시 넣는다.
 7. 개인정보처리방침 빈칸 채우기: `privacy/index.html`의 담당자 이름, 연락처 이메일, 시행일. Supabase 리전이 서울이 아니면 HTML 주석에 남긴 국외 이전 절도 채워 넣는다.
