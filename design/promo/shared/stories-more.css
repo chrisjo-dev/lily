@@ -29,9 +29,6 @@
 .sm-strip .circle small { min-height: 2.6em; }
 .sm-strip .sm-fade { opacity: .5; }
 .sm-strip.at-end { justify-content: flex-end; overflow: hidden; }
-.sm-track { height: 4px; border-radius: 4px; background: var(--line-soft); margin-top: 12px; position: relative; }
-.sm-track i { position: absolute; left: 0; top: 0; bottom: 0; width: 28%; border-radius: 4px; background: var(--sky-deep); }
-.sm-track.end i { left: auto; right: 0; }
 .sm-note { display: flex; align-items: center; gap: 10px; margin: 30px 0 0; font-size: 13px; color: #9aa4b2; }
 .sm-note::before, .sm-note::after { content: ''; flex: 1; border-top: 1px dashed var(--sm-line); }
 
@@ -92,7 +89,6 @@
   .sm-board > * { width: 100%; box-sizing: border-box; }
   .sm-a .sm-strip { margin: 40px calc(50% - 50vw) 0 0; padding: 8px 48px 8px 0; scroll-padding-inline: 0; gap: 22px; -webkit-mask-image: linear-gradient(to right, #000 88%, transparent); mask-image: linear-gradient(to right, #000 88%, transparent); }
   .sm-a .sm-strip .circle { width: 124px; }
-  .sm-a .sm-track { margin-top: 18px; max-width: 360px; } .sm-a .sm-track i { width: 70%; }
   .sm-join { margin-top: 34px; }
 
   /* B */
