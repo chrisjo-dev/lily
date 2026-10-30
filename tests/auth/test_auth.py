@@ -29,7 +29,7 @@ def cfg_js(url, key): return f'window.LILY_CONFIG = {{ supabaseUrl: "{url}", sup
 
 async def use_config(pg, url, key):
     """lily-config.js 를 가짜 값으로 바꾸고, 페이지 CSP의 자리 표시를 그 주소로 바꾼다(메인이 실제로 할 일과 같다)."""
-    await pg.route("**/engine/lily-config.js", lambda r: r.fulfill(status=200, content_type="text/javascript", body=cfg_js(url, key)))
+    await pg.route("**/src/shared/config/lily-config.js", lambda r: r.fulfill(status=200, content_type="text/javascript", body=cfg_js(url, key)))
     async def html(route):
         resp = await route.fetch()
         body = (await resp.text()).replace("https://supabase-project-ref.invalid", url)
@@ -112,7 +112,7 @@ async def run(br):
     need = ["받는 정보", "보관 기간", "지우는 방법", "처리 위탁", "Supabase", "카카오", "권리", "14세 미만", "담당", "탈퇴하면"]
     ok("privacy has every required section", all(w in txt for w in need), f"missing={[w for w in need if w not in txt]} FCP={fcp:.0f}ms")
     bad = []
-    for d in ("engine", "join", "me", "privacy", "supabase", "tests/auth"):
+    for d in ("engine", "src", "join", "me", "privacy", "supabase", "tests/auth"):
         for dp, _, fs in os.walk(os.path.join(ROOT, d)):
             for f in fs:
                 if f.endswith((".html", ".js", ".css", ".sql", ".sh", ".py")):

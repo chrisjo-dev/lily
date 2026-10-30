@@ -5,7 +5,7 @@
 --   3. 아이 정보는 나이대('4-5', '6-7')만. IP와 기기 정보는 저장하지 않는다.
 --   4. 권한(GRANT)은 필요한 것만 주고, 정책은 그 위에 한 겹 더 막는다.
 
--- 이벤트 이름 목록(이 밖은 거부). 바꿀 때는 engine/auth.js 의 EVENTS 도 같이 바꾼다.
+-- 이벤트 이름 목록(이 밖은 거부). 바꿀 때는 src/entities/session/session.js 의 EVENTS 도 같이 바꾼다.
 create or replace function public.lily_event_name_ok(n text)
 returns boolean
 language sql
