@@ -2,269 +2,269 @@
   "boards": {
     "P01-TapMomentFeed.html": {
       "x": 0,
-      "y": 0,
+      "y": 12976,
       "w": 1080,
       "h": 1350,
       "title": "P01-TapMomentFeed",
-      "group": "인스타 1차"
+      "group": "인스타 홍보"
     },
     "P02-TapMomentStory.html": {
-      "x": 1120,
-      "y": 0,
+      "x": 1140,
+      "y": 12976,
       "w": 1080,
       "h": 1920,
       "title": "P02-TapMomentStory",
-      "group": "인스타 1차"
+      "group": "인스타 홍보"
     },
     "P03-BrushTimeFeed.html": {
-      "x": 2240,
-      "y": 0,
+      "x": 2280,
+      "y": 12976,
       "w": 1080,
       "h": 1350,
       "title": "P03-BrushTimeFeed",
-      "group": "인스타 1차"
+      "group": "인스타 홍보"
     },
     "P04-BrushTimeStory.html": {
-      "x": 3360,
-      "y": 0,
+      "x": 3420,
+      "y": 12976,
       "w": 1080,
       "h": 1920,
       "title": "P04-BrushTimeStory",
-      "group": "인스타 1차"
+      "group": "인스타 홍보"
     },
     "P05-OfferFeed.html": {
-      "x": 4480,
-      "y": 0,
+      "x": 4560,
+      "y": 12976,
       "w": 1080,
       "h": 1350,
       "title": "P05-OfferFeed",
-      "group": "인스타 1차"
+      "group": "인스타 홍보"
     },
     "P06-OfferStory.html": {
-      "x": 5600,
-      "y": 0,
+      "x": 5700,
+      "y": 12976,
       "w": 1080,
       "h": 1920,
       "title": "P06-OfferStory",
-      "group": "인스타 1차"
+      "group": "인스타 홍보"
     },
     "P11-LandingPhone.html": {
-      "x": 6720,
-      "y": 0,
+      "x": 0,
+      "y": 15396,
       "w": 390,
       "h": 3150,
       "title": "P11-LandingPhone",
-      "group": "지난 시안",
+      "group": "지난 랜딩 시안",
       "status": "rejected",
       "note": "사용자: 디자인 너무 별로"
     },
     "P12-LandingDesktop.html": {
-      "x": 7150,
-      "y": 0,
+      "x": 450,
+      "y": 15396,
       "w": 1440,
       "h": 3370,
       "title": "P12-LandingDesktop",
-      "group": "지난 시안",
+      "group": "지난 랜딩 시안",
       "status": "rejected",
       "note": "사용자: 디자인 너무 별로"
     },
     "P21-LandingA.html": {
-      "x": 8630,
-      "y": 0,
+      "x": 1950,
+      "y": 15396,
       "w": 1616,
       "h": 1300,
       "title": "P21-LandingA",
-      "group": "랜딩 시안 A B C"
+      "group": "지난 랜딩 시안"
     },
     "P22-LandingB.html": {
-      "x": 10286,
-      "y": 0,
+      "x": 3626,
+      "y": 15396,
       "w": 1616,
       "h": 1300,
       "title": "P22-LandingB",
-      "group": "랜딩 시안 A B C"
+      "group": "지난 랜딩 시안"
     },
     "P23-LandingC.html": {
-      "x": 11942,
-      "y": 0,
+      "x": 5302,
+      "y": 15396,
       "w": 1616,
       "h": 1300,
       "title": "P23-LandingC",
-      "group": "랜딩 시안 A B C"
+      "group": "지난 랜딩 시안"
     },
     "P24-LandingA2.html": {
-      "x": 13598,
-      "y": 0,
+      "x": 6978,
+      "y": 15396,
       "w": 1616,
       "h": 1300,
       "title": "P24-LandingA2",
-      "group": "랜딩 A 변형"
+      "group": "지난 랜딩 시안"
     },
     "P25-LandingA3.html": {
-      "x": 15254,
-      "y": 0,
+      "x": 0,
+      "y": 18966,
       "w": 1616,
       "h": 1300,
       "title": "P25-LandingA3",
-      "group": "랜딩 A 변형"
+      "group": "지난 랜딩 시안"
     },
     "P26-LandingC2.html": {
-      "x": 16910,
-      "y": 0,
+      "x": 1676,
+      "y": 18966,
       "w": 1616,
       "h": 1300,
       "title": "P26-LandingC2",
-      "group": "랜딩 C 변형"
+      "group": "지난 랜딩 시안"
     },
     "P27-LandingC3.html": {
-      "x": 18566,
-      "y": 0,
+      "x": 3352,
+      "y": 18966,
       "w": 1616,
       "h": 1300,
       "title": "P27-LandingC3",
-      "group": "랜딩 C 변형"
+      "group": "지난 랜딩 시안"
     },
     "P28-LandingN1.html": {
-      "x": 20222,
-      "y": 0,
+      "x": 5028,
+      "y": 18966,
       "w": 1616,
       "h": 1300,
       "title": "P28-LandingN1",
-      "group": "랜딩 밤 시연 변형"
+      "group": "지난 랜딩 시안"
     },
     "P29-LandingN2.html": {
-      "x": 21878,
-      "y": 0,
+      "x": 6704,
+      "y": 18966,
       "w": 1616,
       "h": 1300,
       "title": "P29-LandingN2",
-      "group": "랜딩 밤 시연 변형"
+      "group": "지난 랜딩 시안"
     },
     "P30-LandingN3.html": {
-      "x": 23534,
-      "y": 0,
+      "x": 0,
+      "y": 20466,
       "w": 1616,
       "h": 1300,
       "title": "P30-LandingN3",
-      "group": "랜딩 밤 시연 변형"
+      "group": "지난 랜딩 시안"
     },
     "P31-LandingT1.html": {
-      "x": 25190,
-      "y": 0,
+      "x": 1676,
+      "y": 20466,
       "w": 1616,
       "h": 1300,
       "title": "P31-LandingT1",
-      "group": "랜딩 시간 없는 실내"
+      "group": "지난 랜딩 시안"
     },
     "P32-LandingT2.html": {
-      "x": 26846,
-      "y": 0,
+      "x": 3352,
+      "y": 20466,
       "w": 1616,
       "h": 1300,
       "title": "P32-LandingT2",
-      "group": "랜딩 시간 없는 실내",
+      "group": "지난 랜딩 시안",
       "status": "approved",
       "note": "사용자 선택 2026-10-29: T2 책 읽는 구석. 벽은 밤처럼 안 보이게, 아래 섹션은 세 컷 시연, 동화 7편, 원리, 매일 습관, 걱정, 마지막 단추 순서"
     },
     "P33-LandingT2Phone.html": {
-      "x": 28502,
-      "y": 0,
+      "x": 5028,
+      "y": 20466,
       "w": 390,
       "h": 3640,
       "title": "P33-LandingT2Phone",
-      "group": "지난 시안",
+      "group": "지난 랜딩 시안",
       "status": "rejected",
       "note": "T2와 다르게 벽색, 구도를 바꿈. 사용자: 시안 그대로 써야지"
     },
     "P34-LandingT2Desktop.html": {
-      "x": 28932,
-      "y": 0,
+      "x": 5478,
+      "y": 20466,
       "w": 1440,
       "h": 4430,
       "title": "P34-LandingT2Desktop",
-      "group": "지난 시안",
+      "group": "지난 랜딩 시안",
       "status": "rejected",
       "note": "T2와 다르게 벽색, 구도를 바꿈. 사용자: 시안 그대로 써야지"
     },
     "P35-LandingT2Phone.html": {
-      "x": 30412,
-      "y": 0,
+      "x": 6978,
+      "y": 20466,
       "w": 390,
       "h": 3390,
       "title": "P35-LandingT2Phone",
-      "group": "랜딩 T2"
+      "group": "지난 랜딩 시안"
     },
     "P36-LandingT2Desktop.html": {
-      "x": 30842,
-      "y": 0,
+      "x": 7428,
+      "y": 20466,
       "w": 1440,
       "h": 3890,
       "title": "P36-LandingT2Desktop",
-      "group": "랜딩 T2"
+      "group": "지난 랜딩 시안"
     },
     "P37-FullA.html": {
-      "x": 32322,
-      "y": 0,
+      "x": 0,
+      "y": 25096,
       "w": 1104,
       "h": 1780,
       "title": "P37-FullA",
-      "group": "랜딩 전체 시안"
+      "group": "지난 랜딩 시안"
     },
     "P38-FullB.html": {
-      "x": 33466,
-      "y": 0,
+      "x": 1164,
+      "y": 25096,
       "w": 1104,
       "h": 1780,
       "title": "P38-FullB",
-      "group": "랜딩 전체 시안"
+      "group": "지난 랜딩 시안"
     },
     "P39-FullM.html": {
-      "x": 34610,
-      "y": 0,
+      "x": 2328,
+      "y": 25096,
       "w": 1104,
       "h": 1780,
       "title": "P39-FullM",
-      "group": "랜딩 전체 시안"
+      "group": "지난 랜딩 시안"
     },
     "P40-LandingT3Phone.html": {
-      "x": 35754,
-      "y": 0,
+      "x": 3492,
+      "y": 25096,
       "w": 390,
       "h": 4430,
       "title": "P40-LandingT3Phone",
-      "group": "랜딩 T3 다듬기"
+      "group": "지난 랜딩 시안"
     },
     "P41-LandingT3Desktop.html": {
-      "x": 36184,
-      "y": 0,
+      "x": 3942,
+      "y": 25096,
       "w": 1440,
       "h": 3750,
       "title": "P41-LandingT3Desktop",
-      "group": "랜딩 T3 다듬기"
+      "group": "지난 랜딩 시안"
     },
     "P42-LandingT4Phone.html": {
-      "x": 37664,
-      "y": 0,
+      "x": 5442,
+      "y": 25096,
       "w": 390,
       "h": 3800,
       "title": "P42-LandingT4Phone",
-      "group": "랜딩 T4 흰 종이"
+      "group": "지난 랜딩 시안"
     },
     "P43-LandingT4Desktop.html": {
-      "x": 38094,
-      "y": 0,
+      "x": 5892,
+      "y": 25096,
       "w": 1440,
       "h": 4180,
       "title": "P43-LandingT4Desktop",
-      "group": "랜딩 T4 흰 종이"
+      "group": "지난 랜딩 시안"
     },
     "P44-LandingT5Phone.html": {
-      "x": 39574,
+      "x": 0,
       "y": 0,
       "w": 390,
       "h": 3750,
       "title": "P44-LandingT5Phone",
-      "group": "랜딩 T5",
+      "group": "랜딩 (승인)",
       "status": "approved",
       "note": "사용자 승인 2026-10-29: 이대로 /hello/ 만들기",
       "impl": {
@@ -277,12 +277,12 @@
       }
     },
     "P45-LandingT5Desktop.html": {
-      "x": 40004,
+      "x": 450,
       "y": 0,
       "w": 1440,
       "h": 4160,
       "title": "P45-LandingT5Desktop",
-      "group": "랜딩 T5",
+      "group": "랜딩 (승인)",
       "status": "approved",
       "note": "사용자 승인 2026-10-29: 이대로 /hello/ 만들기",
       "impl": {
@@ -295,202 +295,202 @@
       }
     },
     "P50-HomePhoneT5.html": {
-      "x": 41484,
-      "y": 0,
+      "x": 0,
+      "y": 31226,
       "w": 390,
       "h": 2400,
       "title": "P50-HomePhoneT5",
-      "group": "지난 시안",
+      "group": "지난 페이지 시안",
       "status": "rejected",
       "note": "T6로 대체: 하루 5분, 이야기가 계속된다는 원칙과 /hello/ 첫 화면 띠"
     },
     "P51-HomeDesktopT5.html": {
-      "x": 41914,
-      "y": 0,
+      "x": 450,
+      "y": 31226,
       "w": 1440,
       "h": 2400,
       "title": "P51-HomeDesktopT5",
-      "group": "지난 시안",
+      "group": "지난 페이지 시안",
       "status": "rejected",
       "note": "T6로 대체: 하루 5분, 이야기가 계속된다는 원칙과 /hello/ 첫 화면 띠"
     },
     "P52-JoinPhoneT5.html": {
-      "x": 43394,
-      "y": 0,
+      "x": 1950,
+      "y": 31226,
       "w": 390,
       "h": 1100,
       "title": "P52-JoinPhoneT5",
-      "group": "지난 시안",
+      "group": "지난 페이지 시안",
       "status": "rejected",
       "note": "병렬 분담 전 초안, 정식은 같은 번호의 다른 이름"
     },
     "P53-JoinDesktopT5.html": {
-      "x": 43824,
-      "y": 0,
+      "x": 2850,
+      "y": 31226,
       "w": 1440,
       "h": 1100,
       "title": "P53-JoinDesktopT5",
-      "group": "지난 시안",
+      "group": "지난 페이지 시안",
       "status": "rejected",
       "note": "병렬 분담 전 초안, 정식은 같은 번호의 다른 이름"
     },
     "P54-CallbackT5.html": {
-      "x": 45304,
-      "y": 0,
+      "x": 5850,
+      "y": 31226,
       "w": 390,
       "h": 844,
       "title": "P54-CallbackT5",
-      "group": "지난 시안",
+      "group": "지난 페이지 시안",
       "status": "rejected",
       "note": "병렬 분담 전 초안, 정식은 같은 번호의 다른 이름"
     },
     "P55-MeT5.html": {
-      "x": 45734,
-      "y": 0,
+      "x": 7240,
+      "y": 31226,
       "w": 390,
       "h": 1300,
       "title": "P55-MeT5",
-      "group": "지난 시안",
+      "group": "지난 페이지 시안",
       "status": "rejected",
       "note": "병렬 분담 전 초안, 정식은 같은 번호의 다른 이름"
     },
     "P56-PrivacyT5.html": {
-      "x": 46164,
-      "y": 0,
+      "x": 8140,
+      "y": 31226,
       "w": 390,
       "h": 1600,
       "title": "P56-PrivacyT5",
-      "group": "지난 시안",
+      "group": "지난 페이지 시안",
       "status": "rejected",
       "note": "병렬 분담 전 초안, 정식은 같은 번호의 다른 이름"
     },
     "P57-NotFoundT5.html": {
-      "x": 46594,
-      "y": 0,
+      "x": 0,
+      "y": 33906,
       "w": 390,
       "h": 844,
       "title": "P57-NotFoundT5",
-      "group": "지난 시안",
+      "group": "지난 페이지 시안",
       "status": "rejected",
       "note": "병렬 분담 전 초안, 정식은 같은 번호의 다른 이름"
     },
     "P58-GateT5.html": {
-      "x": 47024,
-      "y": 0,
+      "x": 900,
+      "y": 33906,
       "w": 390,
       "h": 844,
       "title": "P58-GateT5",
-      "group": "지난 시안",
+      "group": "지난 페이지 시안",
       "status": "rejected",
       "note": "병렬 분담 전 초안, 정식은 같은 번호의 다른 이름"
     },
     "P52-JoinPhone.html": {
-      "x": 47454,
-      "y": 0,
+      "x": 2400,
+      "y": 31226,
       "w": 390,
       "h": 1180,
       "title": "P52-JoinPhone",
-      "group": "지난 시안",
+      "group": "지난 페이지 시안",
       "status": "rejected",
       "note": "T6로 대체: 하루 5분, 이야기가 계속된다는 원칙과 /hello/ 첫 화면 띠"
     },
     "P53-JoinDesktop.html": {
-      "x": 47884,
-      "y": 0,
+      "x": 4350,
+      "y": 31226,
       "w": 1440,
       "h": 950,
       "title": "P53-JoinDesktop",
-      "group": "지난 시안",
+      "group": "지난 페이지 시안",
       "status": "rejected",
       "note": "T6로 대체: 하루 5분, 이야기가 계속된다는 원칙과 /hello/ 첫 화면 띠"
     },
     "P54-CallbackPhone.html": {
-      "x": 49364,
-      "y": 0,
+      "x": 6300,
+      "y": 31226,
       "w": 880,
       "h": 820,
       "title": "P54-CallbackPhone",
-      "group": "지난 시안",
+      "group": "지난 페이지 시안",
       "status": "rejected",
       "note": "T6로 대체: 하루 5분, 이야기가 계속된다는 원칙과 /hello/ 첫 화면 띠"
     },
     "P55-MePhone.html": {
-      "x": 50284,
-      "y": 0,
+      "x": 7690,
+      "y": 31226,
       "w": 390,
       "h": 1040,
       "title": "P55-MePhone",
-      "group": "지난 시안",
+      "group": "지난 페이지 시안",
       "status": "rejected",
       "note": "T6로 대체: 하루 5분, 이야기가 계속된다는 원칙과 /hello/ 첫 화면 띠"
     },
     "P56-PrivacyPhone.html": {
-      "x": 50714,
-      "y": 0,
+      "x": 8590,
+      "y": 31226,
       "w": 390,
       "h": 2480,
       "title": "P56-PrivacyPhone",
-      "group": "지난 시안",
+      "group": "지난 페이지 시안",
       "status": "rejected",
       "note": "T6로 대체: 하루 5분, 이야기가 계속된다는 원칙과 /hello/ 첫 화면 띠"
     },
     "P57-NotFoundPhone.html": {
-      "x": 51144,
-      "y": 0,
+      "x": 450,
+      "y": 33906,
       "w": 390,
       "h": 844,
       "title": "P57-NotFoundPhone",
-      "group": "지난 시안",
+      "group": "지난 페이지 시안",
       "status": "rejected",
       "note": "T6로 대체: 하루 5분, 이야기가 계속된다는 원칙과 /hello/ 첫 화면 띠"
     },
     "P58-GateCardPhone.html": {
-      "x": 51574,
-      "y": 0,
+      "x": 1350,
+      "y": 33906,
       "w": 390,
       "h": 844,
       "title": "P58-GateCardPhone",
-      "group": "지난 시안",
+      "group": "지난 페이지 시안",
       "status": "rejected",
       "note": "T6로 대체: 하루 5분, 이야기가 계속된다는 원칙과 /hello/ 첫 화면 띠"
     },
     "P46-SkyHero1.html": {
-      "x": 52004,
-      "y": 0,
+      "x": 7392,
+      "y": 25096,
       "w": 1440,
       "h": 1000,
       "title": "P46-SkyHero1",
-      "group": "첫 화면 하늘 시안",
+      "group": "지난 랜딩 시안",
       "status": "rejected",
       "note": "사용자: 바꾸지 말자, 기존(T5 남색 첫 화면)이 더 낫다"
     },
     "P47-SkyHero2.html": {
-      "x": 53484,
-      "y": 0,
+      "x": 0,
+      "y": 29726,
       "w": 1440,
       "h": 1000,
       "title": "P47-SkyHero2",
-      "group": "첫 화면 하늘 시안",
+      "group": "지난 랜딩 시안",
       "status": "rejected",
       "note": "사용자: 바꾸지 말자, 기존(T5 남색 첫 화면)이 더 낫다"
     },
     "P48-SkyHero3.html": {
-      "x": 54964,
-      "y": 0,
+      "x": 1500,
+      "y": 29726,
       "w": 1440,
       "h": 1000,
       "title": "P48-SkyHero3",
-      "group": "첫 화면 하늘 시안",
+      "group": "지난 랜딩 시안",
       "status": "rejected",
       "note": "사용자: 바꾸지 말자, 기존(T5 남색 첫 화면)이 더 낫다"
     },
     "P60-HomePhoneT6.html": {
-      "x": 56444,
-      "y": 0,
+      "x": 0,
+      "y": 4660,
       "w": 390,
       "h": 3030,
       "title": "P60-HomePhoneT6",
-      "group": "페이지 T6",
+      "group": "홈 (승인)",
       "comments": [
         {
           "text": "움직임: 첫 화면 그림은 /hello/처럼 세 장(칫솔, 거품, 잠자리)을 6초마다 1초 겹쳐 교대, 제목 차례 등장. 동그라미는 화면에 들어올 때 차례 등장",
@@ -511,12 +511,12 @@
       }
     },
     "P61-HomeDesktopT6.html": {
-      "x": 56874,
-      "y": 0,
+      "x": 450,
+      "y": 4660,
       "w": 1440,
       "h": 2900,
       "title": "P61-HomeDesktopT6",
-      "group": "페이지 T6",
+      "group": "홈 (승인)",
       "comments": [
         {
           "text": "움직임: P60과 같음(그림 세 장 교대, 차례 등장)",
@@ -537,12 +537,12 @@
       }
     },
     "P62-JoinPhoneT6.html": {
-      "x": 58354,
-      "y": 0,
+      "x": 0,
+      "y": 8190,
       "w": 390,
       "h": 1303,
       "title": "P62-JoinPhoneT6",
-      "group": "페이지 T6",
+      "group": "가입, 로그인, 잠금 (승인)",
       "status": "approved",
       "note": "2026-10-30 사용자 '다 진행해'로 승인. T6, 로고 대비 수정(450e646) 포함",
       "impl": {
@@ -556,12 +556,12 @@
       }
     },
     "P63-JoinDesktopT6.html": {
-      "x": 58784,
-      "y": 0,
+      "x": 450,
+      "y": 8190,
       "w": 1440,
       "h": 1182,
       "title": "P63-JoinDesktopT6",
-      "group": "페이지 T6",
+      "group": "가입, 로그인, 잠금 (승인)",
       "status": "approved",
       "note": "2026-10-30 사용자 '다 진행해'로 승인. T6, 로고 대비 수정(450e646) 포함",
       "impl": {
@@ -575,12 +575,12 @@
       }
     },
     "P64-CallbackT6.html": {
-      "x": 60264,
-      "y": 0,
+      "x": 1950,
+      "y": 8190,
       "w": 880,
       "h": 820,
       "title": "P64-CallbackT6",
-      "group": "페이지 T6",
+      "group": "가입, 로그인, 잠금 (승인)",
       "status": "approved",
       "note": "2026-10-30 사용자 '다 진행해'로 승인. T6, 로고 대비 수정(450e646) 포함",
       "impl": {
@@ -594,12 +594,12 @@
       }
     },
     "P65-MeT6.html": {
-      "x": 61184,
-      "y": 0,
+      "x": 0,
+      "y": 9993,
       "w": 390,
       "h": 1035,
       "title": "P65-MeT6",
-      "group": "페이지 T6",
+      "group": "내 정보, 개인정보, 404 (승인)",
       "status": "approved",
       "note": "2026-10-30 사용자 '다 진행해'로 승인. T6, 로고 대비 수정(450e646) 포함",
       "impl": {
@@ -614,12 +614,12 @@
       }
     },
     "P66-PrivacyT6.html": {
-      "x": 61614,
-      "y": 0,
+      "x": 450,
+      "y": 9993,
       "w": 390,
       "h": 2483,
       "title": "P66-PrivacyT6",
-      "group": "페이지 T6",
+      "group": "내 정보, 개인정보, 404 (승인)",
       "status": "approved",
       "note": "2026-10-30 사용자 '다 진행해'로 승인. T6, 로고 대비 수정(450e646) 포함",
       "impl": {
@@ -633,12 +633,12 @@
       }
     },
     "P67-NotFoundT6.html": {
-      "x": 62044,
-      "y": 0,
+      "x": 900,
+      "y": 9993,
       "w": 390,
       "h": 844,
       "title": "P67-NotFoundT6",
-      "group": "페이지 T6",
+      "group": "내 정보, 개인정보, 404 (승인)",
       "status": "approved",
       "note": "2026-10-30 사용자 '다 진행해'로 승인. T6, 로고 대비 수정(450e646) 포함",
       "impl": {
@@ -652,12 +652,12 @@
       }
     },
     "P68-GateCardT6.html": {
-      "x": 62474,
-      "y": 0,
+      "x": 2890,
+      "y": 8190,
       "w": 390,
       "h": 844,
       "title": "P68-GateCardT6",
-      "group": "페이지 T6",
+      "group": "가입, 로그인, 잠금 (승인)",
       "comments": [
         {
           "text": "움직임: 카드가 아래에서 올라옴(현재 gate.css와 같음)",
@@ -677,12 +677,12 @@
       }
     },
     "P69-StoriesMoreA-Phone.html": {
-      "x": 62904,
-      "y": 0,
+      "x": 1950,
+      "y": 4660,
       "w": 375,
       "h": 1000,
       "title": "P69-StoriesMoreA-Phone",
-      "group": "T7 이야기 줄 더 많아 보이게",
+      "group": "홈 (승인)",
       "status": "approved",
       "note": "2026-10-30 사용자 'A로 구현'으로 승인: 이야기 줄 가로 넘김, 곧 나와요 칸, 진행 막대, PC 화살표. 편수 칩 제거(사용자 지시)",
       "impl": {
@@ -696,12 +696,12 @@
       }
     },
     "P70-StoriesMoreA-Desktop.html": {
-      "x": 63319,
-      "y": 0,
+      "x": 2385,
+      "y": 4660,
       "w": 1440,
       "h": 900,
       "title": "P70-StoriesMoreA-Desktop",
-      "group": "T7 이야기 줄 더 많아 보이게",
+      "group": "홈 (승인)",
       "status": "approved",
       "note": "2026-10-30 사용자 'A로 구현'으로 승인: 이야기 줄 가로 넘김, 곧 나와요 칸, 진행 막대, PC 화살표. 편수 칩 제거(사용자 지시)",
       "impl": {
@@ -715,114 +715,74 @@
       }
     },
     "P71-StoriesMoreB-Phone.html": {
-      "x": 64799,
-      "y": 0,
+      "x": 1800,
+      "y": 33906,
       "w": 375,
       "h": 1000,
       "title": "P71-StoriesMoreB-Phone",
-      "group": "T7 이야기 줄 더 많아 보이게",
+      "group": "지난 페이지 시안",
       "status": "rejected",
       "note": "A 선택으로 보류"
     },
     "P72-StoriesMoreB-Desktop.html": {
-      "x": 65214,
-      "y": 0,
+      "x": 2235,
+      "y": 33906,
       "w": 1440,
       "h": 900,
       "title": "P72-StoriesMoreB-Desktop",
-      "group": "T7 이야기 줄 더 많아 보이게",
+      "group": "지난 페이지 시안",
       "status": "rejected",
       "note": "A 선택으로 보류"
     },
     "P73-StoriesMoreC-Phone.html": {
-      "x": 66694,
-      "y": 0,
+      "x": 3735,
+      "y": 33906,
       "w": 375,
       "h": 1600,
       "title": "P73-StoriesMoreC-Phone",
-      "group": "T7 이야기 줄 더 많아 보이게",
+      "group": "지난 페이지 시안",
       "status": "rejected",
       "note": "A 선택으로 보류"
     },
     "P74-StoriesMoreC-Desktop.html": {
-      "x": 67109,
-      "y": 0,
+      "x": 4170,
+      "y": 33906,
       "w": 1440,
       "h": 900,
       "title": "P74-StoriesMoreC-Desktop",
-      "group": "T7 이야기 줄 더 많아 보이게",
+      "group": "지난 페이지 시안",
       "status": "rejected",
       "note": "A 선택으로 보류"
     }
   },
   "groups": [
     {
-      "id": "인스타 1차",
-      "label": "인스타 1차"
+      "id": "랜딩 (승인)",
+      "label": "랜딩 (승인)"
     },
     {
-      "id": "랜딩",
-      "label": "랜딩"
+      "id": "홈 (승인)",
+      "label": "홈 (승인)"
     },
     {
-      "id": "랜딩 시안 A B C",
-      "label": "랜딩 시안 A B C"
+      "id": "가입, 로그인, 잠금 (승인)",
+      "label": "가입, 로그인, 잠금 (승인)"
     },
     {
-      "id": "지난 시안",
-      "label": "지난 시안"
+      "id": "내 정보, 개인정보, 404 (승인)",
+      "label": "내 정보, 개인정보, 404 (승인)"
     },
     {
-      "id": "랜딩 A 변형",
-      "label": "랜딩 A 변형"
+      "id": "인스타 홍보",
+      "label": "인스타 홍보"
     },
     {
-      "id": "랜딩 C 변형",
-      "label": "랜딩 C 변형"
+      "id": "지난 랜딩 시안",
+      "label": "지난 랜딩 시안"
     },
     {
-      "id": "랜딩 밤 시연 변형",
-      "label": "랜딩 밤 시연 변형"
-    },
-    {
-      "id": "랜딩 시간 없는 실내",
-      "label": "랜딩 시간 없는 실내"
-    },
-    {
-      "id": "랜딩 T2",
-      "label": "랜딩 T2"
-    },
-    {
-      "id": "랜딩 전체 시안",
-      "label": "랜딩 전체 시안"
-    },
-    {
-      "id": "랜딩 T3 다듬기",
-      "label": "랜딩 T3 다듬기"
-    },
-    {
-      "id": "랜딩 T4 흰 종이",
-      "label": "랜딩 T4 흰 종이"
-    },
-    {
-      "id": "랜딩 T5",
-      "label": "랜딩 T5"
-    },
-    {
-      "id": "페이지 T5",
-      "label": "페이지 T5"
-    },
-    {
-      "id": "첫 화면 하늘 시안",
-      "label": "첫 화면 하늘 시안"
-    },
-    {
-      "id": "페이지 T6",
-      "label": "페이지 T6"
-    },
-    {
-      "id": "T7 이야기 줄 더 많아 보이게",
-      "label": "T7 이야기 줄 더 많아 보이게"
+      "id": "지난 페이지 시안",
+      "label": "지난 페이지 시안"
     }
   ],
   "links": [
