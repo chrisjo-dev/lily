@@ -1080,7 +1080,17 @@
       "w": 390,
       "h": 844,
       "title": "P140-GateCardT8",
-      "group": "페이지 T8 손글씨 제목"
+      "group": "페이지 T8 손글씨 제목",
+      "status": "approved",
+      "note": "2026-10-30 사용자 '전부 구현'으로 승인: 손글씨 제목 T8",
+      "impl": {
+        "route": "편 페이지 잠금 카드",
+        "files": [
+          "engine/gate.js",
+          "engine/ui/gate.css"
+        ],
+        "updated": "2026-10-30T04:03:32Z"
+      }
     },
     "P141-LandingPhoneT8.html": {
       "x": 450,
@@ -1088,7 +1098,17 @@
       "w": 390,
       "h": 700,
       "title": "P141-LandingPhoneT8",
-      "group": "페이지 T8 손글씨 제목"
+      "group": "페이지 T8 손글씨 제목",
+      "status": "approved",
+      "note": "2026-10-30 사용자 '전부 구현'으로 승인: 손글씨 제목 T8",
+      "impl": {
+        "route": "/hello/",
+        "files": [
+          "hello/index.html",
+          "hello/hello.css"
+        ],
+        "updated": "2026-10-30T04:03:32Z"
+      }
     },
     "P142-LandingDesktopT8.html": {
       "x": 900,
@@ -1096,7 +1116,17 @@
       "w": 1440,
       "h": 560,
       "title": "P142-LandingDesktopT8",
-      "group": "페이지 T8 손글씨 제목"
+      "group": "페이지 T8 손글씨 제목",
+      "status": "approved",
+      "note": "2026-10-30 사용자 '전부 구현'으로 승인: 손글씨 제목 T8",
+      "impl": {
+        "route": "/hello/",
+        "files": [
+          "hello/index.html",
+          "hello/hello.css"
+        ],
+        "updated": "2026-10-30T04:03:33Z"
+      }
     },
     "P120-JoinPhoneT8.html": {
       "x": 0,
@@ -1104,7 +1134,17 @@
       "w": 390,
       "h": 1040,
       "title": "P120-JoinPhoneT8",
-      "group": "페이지 T8 손글씨 제목"
+      "group": "페이지 T8 손글씨 제목",
+      "status": "approved",
+      "note": "2026-10-30 사용자 '전부 구현'으로 승인: 손글씨 제목 T8",
+      "impl": {
+        "route": "/join/",
+        "files": [
+          "join/index.html",
+          "common/forms.css"
+        ],
+        "updated": "2026-10-30T04:03:31Z"
+      }
     },
     "P121-JoinDesktopT8.html": {
       "x": 450,
@@ -1112,7 +1152,17 @@
       "w": 1440,
       "h": 900,
       "title": "P121-JoinDesktopT8",
-      "group": "페이지 T8 손글씨 제목"
+      "group": "페이지 T8 손글씨 제목",
+      "status": "approved",
+      "note": "2026-10-30 사용자 '전부 구현'으로 승인: 손글씨 제목 T8",
+      "impl": {
+        "route": "/join/",
+        "files": [
+          "join/index.html",
+          "common/forms.css"
+        ],
+        "updated": "2026-10-30T04:03:31Z"
+      }
     },
     "P122-CallbackT8.html": {
       "x": 1950,
@@ -1120,7 +1170,17 @@
       "w": 880,
       "h": 660,
       "title": "P122-CallbackT8",
-      "group": "페이지 T8 손글씨 제목"
+      "group": "페이지 T8 손글씨 제목",
+      "status": "approved",
+      "note": "2026-10-30 사용자 '전부 구현'으로 승인: 손글씨 제목 T8",
+      "impl": {
+        "route": "/join/callback/",
+        "files": [
+          "join/callback/index.html",
+          "common/forms.css"
+        ],
+        "updated": "2026-10-30T04:03:31Z"
+      }
     },
     "P130-MePhoneT8.html": {
       "x": 2890,
@@ -1128,7 +1188,17 @@
       "w": 390,
       "h": 1074,
       "title": "P130-MePhoneT8",
-      "group": "페이지 T8 손글씨 제목"
+      "group": "페이지 T8 손글씨 제목",
+      "status": "approved",
+      "note": "제목은 글자로(사용자: 개인정보, 내 정보는 손글씨 하지마)",
+      "impl": {
+        "route": "/me/",
+        "files": [
+          "me/index.html",
+          "common/forms.css"
+        ],
+        "updated": "2026-10-30T04:03:31Z"
+      }
     },
     "P131-MeDesktopT8.html": {
       "x": 3340,
@@ -1136,7 +1206,17 @@
       "w": 1440,
       "h": 900,
       "title": "P131-MeDesktopT8",
-      "group": "페이지 T8 손글씨 제목"
+      "group": "페이지 T8 손글씨 제목",
+      "status": "approved",
+      "note": "제목은 글자로(사용자: 개인정보, 내 정보는 손글씨 하지마)",
+      "impl": {
+        "route": "/me/",
+        "files": [
+          "me/index.html",
+          "common/forms.css"
+        ],
+        "updated": "2026-10-30T04:03:32Z"
+      }
     },
     "P132-PrivacyPhoneT8.html": {
       "x": 4840,
@@ -1144,7 +1224,17 @@
       "w": 390,
       "h": 2832,
       "title": "P132-PrivacyPhoneT8",
-      "group": "페이지 T8 손글씨 제목"
+      "group": "페이지 T8 손글씨 제목",
+      "status": "approved",
+      "note": "제목은 글자로(사용자: 개인정보, 내 정보는 손글씨 하지마)",
+      "impl": {
+        "route": "/privacy/",
+        "files": [
+          "privacy/index.html",
+          "common/doc.css"
+        ],
+        "updated": "2026-10-30T04:03:32Z"
+      }
     },
     "P133-PrivacyDesktopT8.html": {
       "x": 5290,
@@ -1152,7 +1242,17 @@
       "w": 1440,
       "h": 2413,
       "title": "P133-PrivacyDesktopT8",
-      "group": "페이지 T8 손글씨 제목"
+      "group": "페이지 T8 손글씨 제목",
+      "status": "approved",
+      "note": "제목은 글자로(사용자: 개인정보, 내 정보는 손글씨 하지마)",
+      "impl": {
+        "route": "/privacy/",
+        "files": [
+          "privacy/index.html",
+          "common/doc.css"
+        ],
+        "updated": "2026-10-30T04:03:32Z"
+      }
     },
     "P134-NotFoundPhoneT8.html": {
       "x": 6790,
@@ -1160,7 +1260,17 @@
       "w": 390,
       "h": 844,
       "title": "P134-NotFoundPhoneT8",
-      "group": "페이지 T8 손글씨 제목"
+      "group": "페이지 T8 손글씨 제목",
+      "status": "approved",
+      "note": "2026-10-30 사용자 '전부 구현'으로 승인: 손글씨 제목 T8",
+      "impl": {
+        "route": "/404.html",
+        "files": [
+          "404.html",
+          "common/doc.css"
+        ],
+        "updated": "2026-10-30T04:03:32Z"
+      }
     },
     "P135-NotFoundDesktopT8.html": {
       "x": 7240,
@@ -1168,7 +1278,17 @@
       "w": 1440,
       "h": 900,
       "title": "P135-NotFoundDesktopT8",
-      "group": "페이지 T8 손글씨 제목"
+      "group": "페이지 T8 손글씨 제목",
+      "status": "approved",
+      "note": "2026-10-30 사용자 '전부 구현'으로 승인: 손글씨 제목 T8",
+      "impl": {
+        "route": "/404.html",
+        "files": [
+          "404.html",
+          "common/doc.css"
+        ],
+        "updated": "2026-10-30T04:03:32Z"
+      }
     }
   },
   "groups": [
