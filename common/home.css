@@ -37,9 +37,7 @@
    넘김은 CSS 가로 스크롤과 scroll-snap, 진행 막대와 화살표만 stories-scroll.js가 붙인다(JS가 없으면 둘 다 숨김). */
 .sm-a .sec-title, .sm-a .sec-lead { text-align: left; }
 .sm-a .sm-join { margin-top: 26px; }
-.sm-ctrl { display: flex; align-items: center; justify-content: space-between; margin-top: 18px; }
-.sm-count { display: inline-flex; align-items: baseline; font-size: 14px; color: var(--ink-2); background: var(--line-soft); border-radius: 999px; padding: 6px 12px; }
-.sm-count b { margin: 0 1px 0 5px; font-family: var(--font-head); font-weight: 400; font-size: 16px; color: var(--ink); }
+.sm-ctrl { display: flex; align-items: center; justify-content: flex-end; margin-top: 18px; }
 .sm-swipe { display: inline-flex; align-items: center; gap: 6px; font-family: var(--font-hand); font-weight: 700; font-size: 18px; color: var(--honey); }
 .sm-swipe::after { content: ''; width: 9px; height: 9px; border-right: 2.5px solid currentColor; border-top: 2.5px solid currentColor; transform: rotate(45deg); }
 .sm-arrow { display: none; }
@@ -84,7 +82,6 @@ body { overflow-x: clip; }
   .stories { padding: 70px 0 90px; }
   .sec-title { font-size: 50px; } .sec-lead { font-size: 20px; }
   .circle b { font-size: 21px; } .circle small { font-size: 15px; }
-  .sm-count { font-size: 15px; padding: 8px 16px; } .sm-count b { font-size: 18px; }
   .sm-ahead { display: flex; align-items: flex-end; justify-content: space-between; gap: 24px; }
   .sm-ctrl { gap: 12px; margin-top: 0; }
   .sm-swipe { display: none; }
@@ -94,7 +91,8 @@ body { overflow-x: clip; }
   .sm-js .sm-arrow.next { background: var(--ink); border-color: var(--ink); } .sm-arrow.next::after { border-color: var(--white); }
   .sm-arrow:disabled { opacity: .4; cursor: default; }
   .sm-arrow:focus-visible { outline: 3px solid var(--sky-deep); outline-offset: 4px; }
-  .sm-a .sm-strip { margin: 40px calc(50% - 50vw) 0 0; padding: 8px 48px 8px 0; scroll-padding-inline: 0; gap: 22px; -webkit-mask-image: linear-gradient(to right, #000 88%, transparent); mask-image: linear-gradient(to right, #000 88%, transparent); }
+  /* 줄은 화면 오른쪽으로 붙되 보드 P70 폭(1262px)을 넘지 않게 해서, 넓은 화면에서도 마지막 칸이 잘려 보이게 한다 */
+  .sm-a .sm-strip { margin: 40px max(calc(50% - 50vw), calc(100% - 1262px)) 0 0; padding: 8px 48px 8px 0; scroll-padding-inline: 0; gap: 22px; -webkit-mask-image: linear-gradient(to right, #000 88%, transparent); mask-image: linear-gradient(to right, #000 88%, transparent); }
   .sm-a .sm-strip .circle { width: 124px; }
   .sm-a .sm-track { margin-top: 18px; max-width: 360px; }
   .sm-a .sm-join { margin-top: 34px; }

@@ -1,4 +1,4 @@
-/* T7 이야기 줄 시안: "7편이 전부"처럼 닫혀 보이지 않게, 이야기가 계속 늘어나는 줄로.
+/* T7 이야기 줄 시안: "이게 전부"처럼 닫혀 보이지 않게, 이야기가 계속 늘어나는 줄로.
    A 가로로 넘기는 줄, B "새 이야기 준비 중" 칸과 편수, C 아침에서 밤으로 이어지는 하루 길.
    landing-t4.css, pages-t5.css, pages-t6.css 위에 얹는다. 기존 공유 CSS는 건드리지 않는다. */
 :root {
@@ -16,13 +16,11 @@
 .sm-soon .dot .sil-cut-biscuit { top: 26%; height: 96%; }
 .sm-soon b { color: var(--sm-soon-ink); }
 .sm-soon small { color: #9aa4b2; }
-.sm-count { display: inline-flex; align-items: baseline; gap: 0; font-size: 14px; color: var(--ink-2); background: var(--line-soft); border-radius: 999px; padding: 6px 12px; }
-.sm-count b { margin: 0 1px 0 5px; font-family: var(--font-head); font-weight: 400; font-size: 16px; color: var(--ink); }
 
 /* ---------- A: 가로로 넘기는 줄 ---------- */
 .sm-a { text-align: left; }
 .sm-a .sec-title, .sm-a .sec-lead { text-align: left; }
-.sm-meta { display: flex; align-items: center; justify-content: space-between; margin-top: 18px; }
+.sm-meta { display: flex; align-items: center; justify-content: flex-end; margin-top: 18px; }
 .sm-swipe { display: inline-flex; align-items: center; gap: 6px; font-family: var(--font-hand); font-weight: 700; font-size: 18px; color: var(--honey); }
 .sm-swipe::after { content: ''; width: 9px; height: 9px; border-right: 2.5px solid currentColor; border-top: 2.5px solid currentColor; transform: rotate(45deg); }
 .sm-strip { display: flex; gap: 14px; overflow-x: auto; scrollbar-width: none; margin: 16px -22px 0; padding: 6px 22px 6px; scroll-snap-type: x mandatory; scroll-padding-inline: 22px; text-align: center; }
@@ -82,7 +80,6 @@
 
 @media (min-width: 900px) {
   .sm-board .page { padding-top: 56px; padding-bottom: 40px; }
-  .sm-count { font-size: 15px; padding: 8px 16px; } .sm-count b { font-size: 18px; }
 
   /* A */
   .sm-ahead { display: flex; align-items: flex-end; justify-content: space-between; gap: 24px; }
