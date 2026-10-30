@@ -155,7 +155,7 @@ async def main():
             hit = await until(pg, "!!document.getElementById('lilyGateCard')", 5000)
             t = await pg.evaluate("audio.currentTime")
             ok(f"gate: non-member stops at previewUntil {pu} with join card", hit and pu <= t <= pu + 0.2 and await pg.evaluate("audio.paused && waiting===-1"), f"t={t:.3f}")
-            await pg.route("**/engine/gate.js", lambda r: r.fulfill(status=200, content_type="text/javascript", body="// 시험: 회원처럼"))
+            await pg.route("**/src/features/gate/gate.js", lambda r: r.fulfill(status=200, content_type="text/javascript", body="// 시험: 회원처럼"))
 
         # 2 기다림 지점마다: 정확히 멈추고, 그 종류대로 누르면 이어짐
         board = next((f for f in free if f["type"] == "say-sticker"), None)

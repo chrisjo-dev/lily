@@ -3,13 +3,16 @@
 // - free 편은 언제나 허용. 아니면 previewUntil(초) 전까지 허용, 그 뒤는 회원만.
 // - 비회원이면 가입 카드. 다른 탭에서 로그인하면 카드를 닫고 바로 이어 재생.
 // - 같은 탭에서 가입하고 돌아오면 lilyGate.resumeAt(id) 가 멈췄던 초를 한 번 돌려준다(엔진이 시작할 때 물어보면 됨).
-// 화면 잠금일 뿐 파일은 공개돼 있다(계획 D6). 불러오는 순서: lily-config.js, auth.js, gate.js, gate-default.js, engine.js
+// 화면 잠금일 뿐 파일은 공개돼 있다(계획 D6). 불러오는 순서: lily-config.js, supabase.js, session.js, gate.js, gate-default.js, engine.js
 (function () {
   "use strict";
 
   var FREE_URL = "/ep01/"; // 맛보기 편(계획 D5, D10)
   var RESUME_KEY = "lilyrang-resume";
   var RESUME_TTL = 2 * 60 * 60 * 1000;
+  // 카드 CSS와 그림은 이 파일 옆에 있다. 편 주소와 상관없이 gate.js가 있는 곳을 기준으로 찾는다(engine.js의 UI와 같은 방식)
+  var BASE = ((document.currentScript && document.currentScript.src) || "/src/features/gate/gate.js").replace(/[^/]*$/, "");
+  var CSS = BASE + "gate.css";
 
   var member = null; // null: 아직 모름
   var pending = null; // { t, ep, resume }
@@ -83,13 +86,13 @@
     } catch (e) { return null; }
   }
 
-  // 카드 모양은 ui/gate.css(시안 T6, promo P68). 인라인 style 없이 클래스만 붙인다
+  // 카드 모양은 gate.css(시안 T6, promo P68). 인라인 style 없이 클래스만 붙인다
   // 가입하면 이어지는 이야기 동그라미 그림(홈 목록과 같은 순서, 그림은 /hello/img의 것을 함께 씀)
   var MORE = ["wake", "wash", "eat", "dress", "bath", "sleep"];
   (function css() {
-    if (document.querySelector('link[href="/engine/ui/gate.css"]')) return;
+    if (document.querySelector('link[href="' + CSS + '"]')) return;
     var l = document.createElement("link");
-    l.rel = "stylesheet"; l.href = "/engine/ui/gate.css";
+    l.rel = "stylesheet"; l.href = CSS;
     document.head.appendChild(l);
   })();
 
@@ -113,12 +116,12 @@
     var top = el("div", "gate-top");
     var brand = el("p", "gate-brand");
     var lock = el("img");
-    lock.src = "/engine/ui/lock.webp"; lock.alt = ""; lock.width = 20; lock.height = 20;
+    lock.src = BASE + "lock.webp"; lock.alt = ""; lock.width = 20; lock.height = 20;
     brand.appendChild(lock); brand.appendChild(document.createTextNode("릴리랑"));
     var title = el("h2", "gate-title-art");
     title.id = "lilyGateTitle";
     var tImg = el("img");
-    tImg.src = "/hello/img/t8-gate-title-680.webp"; tImg.alt = "이야기가 계속돼요."; tImg.width = 680; tImg.height = 116;
+    tImg.src = BASE + "t8-gate-title-680.webp"; tImg.alt = "이야기가 계속돼요."; tImg.width = 680; tImg.height = 116;
     title.appendChild(tImg);
     var sub = el("p", "gate-sub", "가입하면 바로 이어 들을 수 있어요.");
     top.appendChild(brand); top.appendChild(title); top.appendChild(sub);

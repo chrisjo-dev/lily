@@ -13,7 +13,7 @@
 .gate-shade { position: absolute; inset: 0; background: rgba(15,22,38,.55); }
 .gate-badge { position: absolute; left: 50%; top: 210px; transform: translateX(-50%); white-space: nowrap; font-size: 13px; color: #fff; background: rgba(15,22,38,.7); border-radius: 999px; padding: 7px 16px; }
 .gate-sheet { position: absolute; left: 0; right: 0; bottom: 0; margin: 0 auto; max-width: 480px; background: var(--g-paper); border-radius: 26px 26px 0 0; overflow: hidden; }
-.gate-top { background: radial-gradient(70% 120% at 90% 0, rgba(247,215,154,.38), rgba(247,215,154,0) 70%), url(../../hello/img/stars.svg) 0 0 / 120px 120px, var(--g-navy); padding: 18px 24px 30px; color: #fff; }
+.gate-top { background: radial-gradient(70% 120% at 90% 0, rgba(247,215,154,.38), rgba(247,215,154,0) 70%), url(../../../hello/img/stars.svg) 0 0 / 120px 120px, var(--g-navy); padding: 18px 24px 30px; color: #fff; }
 .gate-brand { display: flex; align-items: center; gap: 6px; font-family: var(--g-hand); font-weight: 700; font-size: 20px; color: var(--g-navy-soft); }
 .gate-brand img { width: 20px; height: 20px; object-fit: contain; }
 #lilyGateTitle { line-height: 0; margin-top: 12px; }
