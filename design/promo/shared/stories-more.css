@@ -29,6 +29,9 @@
 .sm-strip .circle small { min-height: 2.6em; }
 .sm-strip .sm-fade { opacity: .5; }
 .sm-strip.at-end { justify-content: flex-end; overflow: hidden; }
+.sm-track { height: 4px; border-radius: 4px; background: var(--line-soft); margin-top: 12px; position: relative; }
+.sm-track i { position: absolute; left: 0; top: 0; bottom: 0; width: 28%; border-radius: 4px; background: var(--sky-deep); }
+.sm-track.end i { left: auto; right: 0; }
 .sm-note { display: flex; align-items: center; gap: 10px; margin: 30px 0 0; font-size: 13px; color: #9aa4b2; }
 .sm-note::before, .sm-note::after { content: ''; flex: 1; border-top: 1px dashed var(--sm-line); }
 

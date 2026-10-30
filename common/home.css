@@ -54,6 +54,11 @@
 .circle.sm-soon .dot .sil-biscuit { top: 26%; height: 96%; }
 .sm-soon b { color: #7a8697; }
 .sm-soon small { color: #9aa4b2; }
+/* 진행 막대: 폰에서만 보인다(PC는 화살표가 대신한다) */
+.sm-track { display: none; height: 4px; border-radius: 4px; background: var(--line-soft); margin-top: 12px; position: relative; overflow: hidden; }
+.sm-track i { position: absolute; left: 0; top: 0; bottom: 0; width: 28%; border-radius: 4px; background: var(--sky-deep); }
+.sm-js .sm-track { display: block; }
+.sm-js .sm-track i { width: calc(var(--sm-view, .28) * 100%); transform: translateX(calc(var(--sm-pos, 0) * (1 / var(--sm-view, .28) - 1) * 100%)); }
 /* 화면 끝까지 붙는 PC 줄이 스크롤 막대 폭만큼 넘쳐도 페이지가 옆으로 밀리지 않게 */
 body { overflow-x: clip; }
 
@@ -90,6 +95,7 @@ body { overflow-x: clip; }
   /* 줄은 화면 오른쪽으로 붙되 보드 P70 폭(1262px)을 넘지 않게 해서, 넓은 화면에서도 마지막 칸이 잘려 보이게 한다 */
   .sm-a .sm-strip { margin: 40px max(calc(50% - 50vw), calc(100% - 1262px)) 0 0; padding: 8px 48px 8px 0; scroll-padding-inline: 0; gap: 22px; -webkit-mask-image: linear-gradient(to right, #000 88%, transparent); mask-image: linear-gradient(to right, #000 88%, transparent); }
   .sm-a .sm-strip .circle { width: 124px; }
+  .sm-js .sm-track { display: none; }
   .sm-a .sm-join { margin-top: 34px; }
   .notes { grid-template-columns: repeat(3, 1fr); gap: 36px; }
   .notes li { grid-template-columns: 80px 1fr; } .notes img { width: 80px; }
