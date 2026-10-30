@@ -753,6 +753,262 @@
       "group": "지난 페이지 시안",
       "status": "rejected",
       "note": "A 선택으로 보류"
+    },
+    "P75-TitleA-Phone.html": {
+      "x": 9020,
+      "y": 0,
+      "w": 390,
+      "h": 620,
+      "title": "P75-TitleA-Phone",
+      "group": "첫 화면 제목 손글씨 시안",
+      "status": "rejected",
+      "note": "사용자: 다 별로, 디자인 감각 부족"
+    },
+    "P76-TitleA-Desktop.html": {
+      "x": 9450,
+      "y": 0,
+      "w": 1440,
+      "h": 620,
+      "title": "P76-TitleA-Desktop",
+      "group": "첫 화면 제목 손글씨 시안",
+      "status": "rejected",
+      "note": "사용자: 다 별로, 디자인 감각 부족"
+    },
+    "P77-TitleB-Phone.html": {
+      "x": 10930,
+      "y": 0,
+      "w": 390,
+      "h": 620,
+      "title": "P77-TitleB-Phone",
+      "group": "첫 화면 제목 손글씨 시안",
+      "status": "rejected",
+      "note": "사용자: 다 별로, 디자인 감각 부족"
+    },
+    "P78-TitleB-Desktop.html": {
+      "x": 11360,
+      "y": 0,
+      "w": 1440,
+      "h": 620,
+      "title": "P78-TitleB-Desktop",
+      "group": "첫 화면 제목 손글씨 시안",
+      "status": "rejected",
+      "note": "사용자: 다 별로, 디자인 감각 부족"
+    },
+    "P79-TitleC-Phone.html": {
+      "x": 12840,
+      "y": 0,
+      "w": 390,
+      "h": 620,
+      "title": "P79-TitleC-Phone",
+      "group": "첫 화면 제목 손글씨 시안",
+      "status": "rejected",
+      "note": "사용자: 다 별로, 디자인 감각 부족"
+    },
+    "P80-TitleC-Desktop.html": {
+      "x": 13270,
+      "y": 0,
+      "w": 1440,
+      "h": 620,
+      "title": "P80-TitleC-Desktop",
+      "group": "첫 화면 제목 손글씨 시안",
+      "status": "rejected",
+      "note": "사용자: 다 별로, 디자인 감각 부족"
+    },
+    "P81-TitleD-Phone.html": {
+      "x": 14750,
+      "y": 0,
+      "w": 390,
+      "h": 620,
+      "title": "P81-TitleD-Phone",
+      "group": "첫 화면 제목 손글씨 시안",
+      "status": "rejected",
+      "note": "사용자: 다 별로, 디자인 감각 부족"
+    },
+    "P82-TitleD-Desktop.html": {
+      "x": 15180,
+      "y": 0,
+      "w": 1440,
+      "h": 620,
+      "title": "P82-TitleD-Desktop",
+      "group": "첫 화면 제목 손글씨 시안",
+      "status": "rejected",
+      "note": "사용자: 다 별로, 디자인 감각 부족"
+    },
+    "P83-Title2A-Phone.html": {
+      "x": 16660,
+      "y": 0,
+      "w": 390,
+      "h": 620,
+      "title": "P83-Title2A-Phone",
+      "group": "첫 화면 제목 손글씨 시안 2",
+      "status": "rejected",
+      "note": "사용자: 너무 정신없다"
+    },
+    "P84-Title2A-Desktop.html": {
+      "x": 17090,
+      "y": 0,
+      "w": 1440,
+      "h": 620,
+      "title": "P84-Title2A-Desktop",
+      "group": "첫 화면 제목 손글씨 시안 2",
+      "status": "rejected",
+      "note": "사용자: 너무 정신없다"
+    },
+    "P85-Title2B-Phone.html": {
+      "x": 18570,
+      "y": 0,
+      "w": 390,
+      "h": 620,
+      "title": "P85-Title2B-Phone",
+      "group": "첫 화면 제목 손글씨 시안 2",
+      "status": "rejected",
+      "note": "사용자: 너무 정신없다"
+    },
+    "P86-Title2B-Desktop.html": {
+      "x": 19000,
+      "y": 0,
+      "w": 1440,
+      "h": 620,
+      "title": "P86-Title2B-Desktop",
+      "group": "첫 화면 제목 손글씨 시안 2",
+      "status": "rejected",
+      "note": "사용자: 너무 정신없다"
+    },
+    "P87-Title2C-Phone.html": {
+      "x": 20480,
+      "y": 0,
+      "w": 390,
+      "h": 620,
+      "title": "P87-Title2C-Phone",
+      "group": "첫 화면 제목 손글씨 시안 2",
+      "status": "rejected",
+      "note": "사용자: 너무 정신없다"
+    },
+    "P88-Title2C-Desktop.html": {
+      "x": 20910,
+      "y": 0,
+      "w": 1440,
+      "h": 620,
+      "title": "P88-Title2C-Desktop",
+      "group": "첫 화면 제목 손글씨 시안 2",
+      "status": "rejected",
+      "note": "사용자: 너무 정신없다"
+    },
+    "P89-Title2D-Phone.html": {
+      "x": 22390,
+      "y": 0,
+      "w": 390,
+      "h": 620,
+      "title": "P89-Title2D-Phone",
+      "group": "첫 화면 제목 손글씨 시안 2",
+      "status": "rejected",
+      "note": "사용자: 너무 정신없다"
+    },
+    "P90-Title2D-Desktop.html": {
+      "x": 22820,
+      "y": 0,
+      "w": 1440,
+      "h": 620,
+      "title": "P90-Title2D-Desktop",
+      "group": "첫 화면 제목 손글씨 시안 2",
+      "status": "rejected",
+      "note": "사용자: 너무 정신없다"
+    },
+    "P91-Title3A-Phone.html": {
+      "x": 24300,
+      "y": 0,
+      "w": 390,
+      "h": 620,
+      "title": "P91-Title3A-Phone",
+      "group": "첫 화면 제목 손글씨 시안 3"
+    },
+    "P93-Title3B-Phone.html": {
+      "x": 26210,
+      "y": 0,
+      "w": 390,
+      "h": 620,
+      "title": "P93-Title3B-Phone",
+      "group": "첫 화면 제목 손글씨 시안 3"
+    },
+    "P95-Title3C-Phone.html": {
+      "x": 28120,
+      "y": 0,
+      "w": 390,
+      "h": 620,
+      "title": "P95-Title3C-Phone",
+      "group": "첫 화면 제목 손글씨 시안 3"
+    },
+    "P92-Title3A-Desktop.html": {
+      "x": 24730,
+      "y": 0,
+      "w": 1440,
+      "h": 620,
+      "title": "P92-Title3A-Desktop",
+      "group": "첫 화면 제목 손글씨 시안 3"
+    },
+    "P94-Title3B-Desktop.html": {
+      "x": 26640,
+      "y": 0,
+      "w": 1440,
+      "h": 620,
+      "title": "P94-Title3B-Desktop",
+      "group": "첫 화면 제목 손글씨 시안 3"
+    },
+    "P96-Title3C-Desktop.html": {
+      "x": 28550,
+      "y": 0,
+      "w": 1440,
+      "h": 620,
+      "title": "P96-Title3C-Desktop",
+      "group": "첫 화면 제목 손글씨 시안 3"
+    },
+    "P97-Title4A-Phone.html": {
+      "x": 30030,
+      "y": 0,
+      "w": 390,
+      "h": 620,
+      "title": "P97-Title4A-Phone",
+      "group": "첫 화면 제목 손글씨 시안 4"
+    },
+    "P99-Title4B-Phone.html": {
+      "x": 31940,
+      "y": 0,
+      "w": 390,
+      "h": 620,
+      "title": "P99-Title4B-Phone",
+      "group": "첫 화면 제목 손글씨 시안 4"
+    },
+    "P101-Title4C-Phone.html": {
+      "x": 33850,
+      "y": 0,
+      "w": 390,
+      "h": 620,
+      "title": "P101-Title4C-Phone",
+      "group": "첫 화면 제목 손글씨 시안 4"
+    },
+    "P98-Title4A-Desktop.html": {
+      "x": 30460,
+      "y": 0,
+      "w": 1440,
+      "h": 620,
+      "title": "P98-Title4A-Desktop",
+      "group": "첫 화면 제목 손글씨 시안 4"
+    },
+    "P100-Title4B-Desktop.html": {
+      "x": 32370,
+      "y": 0,
+      "w": 1440,
+      "h": 620,
+      "title": "P100-Title4B-Desktop",
+      "group": "첫 화면 제목 손글씨 시안 4"
+    },
+    "P102-Title4C-Desktop.html": {
+      "x": 34280,
+      "y": 0,
+      "w": 1440,
+      "h": 620,
+      "title": "P102-Title4C-Desktop",
+      "group": "첫 화면 제목 손글씨 시안 4"
     }
   },
   "groups": [
@@ -783,6 +1039,22 @@
     {
       "id": "지난 페이지 시안",
       "label": "지난 페이지 시안"
+    },
+    {
+      "id": "첫 화면 제목 손글씨 시안",
+      "label": "첫 화면 제목 손글씨 시안"
+    },
+    {
+      "id": "첫 화면 제목 손글씨 시안 2",
+      "label": "첫 화면 제목 손글씨 시안 2"
+    },
+    {
+      "id": "첫 화면 제목 손글씨 시안 3",
+      "label": "첫 화면 제목 손글씨 시안 3"
+    },
+    {
+      "id": "첫 화면 제목 손글씨 시안 4",
+      "label": "첫 화면 제목 손글씨 시안 4"
     }
   ],
   "links": [
