@@ -2,11 +2,15 @@
   // 릴리랑: Cloudflare Workers 정적 자산. scripts/build-site.sh가 만든 dist/만 배포(허용 목록)
   "name": "lily",
   "compatibility_date": "2026-10-01",
-  "workers_dev": true,
+  // mp3만 Worker를 먼저 거쳐 Range(206)를 처리한다. 나머지는 정적 자산이 바로 응답
+  "main": "worker/range.js",
+  "workers_dev": false, // workers.dev 주소는 쓰지 않음(계정에 서브도메인 미등록)
   // 커스텀 도메인: 첫 배포 때 Cloudflare가 DNS 레코드와 인증서를 만든다(도메인이 이 계정 존에 있어야 함)
   "routes": [{ "pattern": "lilyrang.co.kr", "custom_domain": true }],
   "assets": {
     "directory": "./dist",
+    "binding": "ASSETS",
+    "run_worker_first": ["/**/*.mp3"],
     "not_found_handling": "404-page",
     "html_handling": "auto-trailing-slash"
   }
