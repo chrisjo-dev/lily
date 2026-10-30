@@ -15,14 +15,13 @@
 <link rel="stylesheet" href="/common/shell.css">
 <link rel="stylesheet" href="/common/forms.css">
 </head>
-<body>
-<header class="lamp short noart">
+<body class="t8 t8-me">
+<header class="lamp short noart t8">
   <div class="bar"><a class="brand" href="/"><img src="/hello/img/emblem.webp" width="288" height="221" alt=""><span>릴리랑</span></a></div>
-  <div class="inner"></div>
+  <div class="inner"><div class="head"><h1>내 정보</h1></div></div>
   <svg class="edge" viewBox="0 0 1440 56" preserveAspectRatio="none" aria-hidden="true"><path d="M0 56V30c160-22 320-26 480-12s320 30 480 18 320-30 480-22v42z" fill="#fefefd"/></svg>
 </header>
-<main class="page">
-  <h1>내 정보</h1>
+<main class="page wide">
   <p class="msg info" id="notReady" hidden>가입은 아직 준비 중이에요. 그동안 <a href="/ep01/">맛보기 편</a>을 끝까지 들어 보세요.</p>
   <div id="signedOut" hidden>
     <p class="lead">로그인하면 들은 이야기와 내 정보를 볼 수 있어요.</p>
@@ -31,6 +30,7 @@
   <p class="lead" id="loading">불러오고 있어요.</p>
 
   <div id="signedIn" hidden>
+    <div>
     <p class="who" id="who"></p>
     <div class="part">
       <form id="profile" novalidate>
@@ -48,7 +48,9 @@
       </form>
       <p class="msg ok" id="saveMsg" role="status" aria-live="polite" hidden></p>
     </div>
+    </div>
 
+    <div>
     <section class="part" aria-labelledby="epsTitle">
       <h2 id="epsTitle">끝까지 들은 이야기</h2>
       <ul class="done" id="eps"></ul>
@@ -65,6 +67,7 @@
       </div>
       <p class="msg ok" id="acctMsg" role="status" aria-live="polite" hidden></p>
     </section>
+    </div>
   </div>
 </main>
 <footer class="foot2"><a href="/privacy/">개인정보처리방침</a></footer>

@@ -16,27 +16,24 @@
 <link rel="stylesheet" href="/common/forms.css">
 </head>
 <body>
-<header class="lamp short">
+<header class="lamp short t8j">
   <div class="bar"><a class="brand" href="/"><img src="/hello/img/emblem.webp" width="288" height="221" alt=""><span>릴리랑</span></a></div>
-  <div class="inner"><img class="art" src="/hello/img/hero.webp" width="538" height="474" alt=""></div>
+  <div class="inner"><div class="head"><h1 class="title-art"><picture><source media="(max-width: 899px)" srcset="/hello/img/t8-join-680.webp"><img src="/hello/img/t8-join.webp" width="600" height="352" alt="릴리랑 가입하기"></picture></h1><p class="sub">가입하면 모든 이야기를 끝까지 들을 수 있어요. 가입은 무료예요.</p></div><img class="art" src="/hello/img/hero.webp" width="538" height="474" alt=""></div>
   <svg class="edge" viewBox="0 0 1440 56" preserveAspectRatio="none" aria-hidden="true"><path d="M0 56V30c160-22 320-26 480-12s320 30 480 18 320-30 480-22v42z" fill="#fefefd"/></svg>
 </header>
-<main class="page split">
-  <div class="intro">
-    <h1>릴리랑 가입하기</h1>
-    <p class="lead">가입하면 모든 이야기를 끝까지 들을 수 있어요. 가입은 무료예요.</p>
-    <img class="vig" src="/hello/img/end.webp" width="624" height="507" decoding="async" alt="">
-  </div>
-  <div class="part form">
+<main class="t8j-body">
     <p class="msg info" id="notReady" hidden>가입은 아직 준비 중이에요. 그동안 <a href="/ep01/">맛보기 편</a>을 끝까지 들어 보세요.</p>
     <div class="msg info" id="already" hidden>이미 로그인돼 있어요. <a id="alreadyNext" href="/">이어서 듣기</a> 또는 <a href="/me/">내 정보</a></div>
 
-    <section id="joinBox" aria-label="가입">
+    <section id="joinBox" class="t8j-cols" aria-label="가입">
+      <div>
       <label class="check"><input type="checkbox" id="agree"><i class="box" aria-hidden="true"></i><span><b>[필수]</b> 개인정보 수집과 이용에 동의해요</span></label>
       <p class="detail">보호자 계정(이메일 또는 카카오 계정 정보, 닉네임)만 받아요. 로그인과 이어 듣기에 쓰고, 탈퇴하면 바로 지워요. <a href="/privacy/">자세히 보기</a></p>
       <label class="check"><input type="checkbox" id="marketing"><i class="box" aria-hidden="true"></i><span><b>[선택]</b> 새 이야기 소식과 안내를 받을게요</span></label>
       <p class="detail">동의하지 않아도 가입할 수 있어요. 내 정보에서 언제든 바꿀 수 있어요.</p>
       <p class="assure">만 14세 이상 보호자만 가입할 수 있어요. 아이 이름이나 사진은 받지 않아요.</p>
+      </div>
+      <div>
       <p class="or">로그인 방법</p>
       <button class="act kakao" type="button" id="kakao" disabled><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 3C6.48 3 2 6.48 2 10.8c0 2.78 1.86 5.22 4.66 6.6l-.95 3.5c-.08.3.26.54.52.37l4.13-2.74c.54.06 1.08.1 1.64.1 5.52 0 10-3.48 10-7.83S17.52 3 12 3z"/></svg>카카오로 시작하기</button>
       <p class="or">또는</p>
@@ -45,8 +42,8 @@
         <button class="act line" type="submit" id="emailBtn" disabled>이메일로 로그인 링크 받기</button>
       </form>
       <p class="msg ok" id="msg" role="status" aria-live="polite" hidden></p>
+      </div>
     </section>
-  </div>
 </main>
 <footer class="foot2"><a href="/privacy/">개인정보처리방침</a></footer>
 <script src="/join/fonts.js"></script>
