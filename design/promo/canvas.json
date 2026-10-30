@@ -684,7 +684,16 @@
       "title": "P69-StoriesMoreA-Phone",
       "group": "T7 이야기 줄 더 많아 보이게",
       "status": "approved",
-      "note": "2026-10-30 사용자 'A로 구현'으로 승인: 이야기 줄 가로 넘김, 곧 나와요 칸, 편수 칩, 진행 막대, PC 화살표"
+      "note": "2026-10-30 사용자 'A로 구현'으로 승인: 이야기 줄 가로 넘김, 곧 나와요 칸, 편수 칩, 진행 막대, PC 화살표",
+      "impl": {
+        "route": "/",
+        "files": [
+          "index.html",
+          "common/home.css",
+          "common/stories-scroll.js"
+        ],
+        "updated": "2026-10-30T00:19:18Z"
+      }
     },
     "P70-StoriesMoreA-Desktop.html": {
       "x": 63319,
@@ -694,7 +703,16 @@
       "title": "P70-StoriesMoreA-Desktop",
       "group": "T7 이야기 줄 더 많아 보이게",
       "status": "approved",
-      "note": "2026-10-30 사용자 'A로 구현'으로 승인: 이야기 줄 가로 넘김, 곧 나와요 칸, 편수 칩, 진행 막대, PC 화살표"
+      "note": "2026-10-30 사용자 'A로 구현'으로 승인: 이야기 줄 가로 넘김, 곧 나와요 칸, 편수 칩, 진행 막대, PC 화살표",
+      "impl": {
+        "route": "/",
+        "files": [
+          "index.html",
+          "common/home.css",
+          "common/stories-scroll.js"
+        ],
+        "updated": "2026-10-30T00:19:18Z"
+      }
     },
     "P71-StoriesMoreB-Phone.html": {
       "x": 64799,

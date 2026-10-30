@@ -20,7 +20,6 @@
 .stories { padding: 40px 0 46px; text-align: center; }
 .sec-title { font-size: 30px; line-height: 1.22; }
 .sec-lead { font-size: 16px; line-height: 1.6; color: var(--ink-2); margin-top: 10px; }
-.circles { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px 10px; margin-top: 28px; }
 .circle { text-decoration: none; color: inherit; }
 .circle .dot { position: relative; aspect-ratio: 1; border-radius: 50%; overflow: hidden; }
 .circle .dot > img { width: 100%; height: 100%; object-fit: cover; mix-blend-mode: multiply; }
@@ -33,6 +32,36 @@
 .circle .lockmark img { width: 58%; height: auto; mix-blend-mode: normal; }
 .circle.locked .dot > img { filter: saturate(.75); }
 .page .stories { text-align: center; }
+
+/* 이야기 줄(승인 시안 T7 A, 캔버스 promo P69 휴대폰, P70 PC). 원본은 design/promo/shared/stories-more.css.
+   넘김은 CSS 가로 스크롤과 scroll-snap, 진행 막대와 화살표만 stories-scroll.js가 붙인다(JS가 없으면 둘 다 숨김). */
+.sm-a .sec-title, .sm-a .sec-lead { text-align: left; }
+.sm-a .sm-join { margin-top: 26px; }
+.sm-ctrl { display: flex; align-items: center; justify-content: space-between; margin-top: 18px; }
+.sm-count { display: inline-flex; align-items: baseline; font-size: 14px; color: var(--ink-2); background: var(--line-soft); border-radius: 999px; padding: 6px 12px; }
+.sm-count b { margin: 0 1px 0 5px; font-family: var(--font-head); font-weight: 400; font-size: 16px; color: var(--ink); }
+.sm-swipe { display: inline-flex; align-items: center; gap: 6px; font-family: var(--font-hand); font-weight: 700; font-size: 18px; color: var(--honey); }
+.sm-swipe::after { content: ''; width: 9px; height: 9px; border-right: 2.5px solid currentColor; border-top: 2.5px solid currentColor; transform: rotate(45deg); }
+.sm-arrow { display: none; }
+.sm-strip { display: flex; gap: 14px; overflow-x: auto; scrollbar-width: none; margin: 16px -22px 0; padding: 6px 22px; scroll-snap-type: x mandatory; scroll-padding-inline: 22px; text-align: center; }
+.sm-strip::-webkit-scrollbar { display: none; }
+.sm-strip .circle { flex: none; width: 130px; scroll-snap-align: start; }
+.sm-strip .circle:focus-visible { outline-offset: -3px; }
+.sm-strip .circle small { min-height: 2.6em; }
+.sm-strip .sm-fade { opacity: .5; }
+/* 아직 없는 이야기: 점선 동그라미에 흐린 실루엣. 누를 수 없는 칸이라 노란색을 쓰지 않는다 */
+.sm-soon { color: #7a8697; }
+.sm-soon .dot { background: #f4f6f9; border: 2.5px dashed #c7d0db; box-sizing: border-box; }
+.circle.sm-soon .dot .sil { position: absolute; left: 50%; top: 16%; width: auto; height: 150%; object-fit: contain; transform: translateX(-50%); filter: brightness(0); opacity: .08; mix-blend-mode: normal; }
+.circle.sm-soon .dot .sil-biscuit { top: 26%; height: 96%; }
+.sm-soon b { color: #7a8697; }
+.sm-soon small { color: #9aa4b2; }
+.sm-track { display: none; height: 4px; border-radius: 4px; background: var(--line-soft); margin-top: 12px; position: relative; overflow: hidden; }
+.sm-track i { position: absolute; left: 0; top: 0; bottom: 0; width: 28%; border-radius: 4px; background: var(--sky-deep); }
+.sm-js .sm-track { display: block; }
+.sm-js .sm-track i { width: calc(var(--sm-view, .28) * 100%); transform: translateX(calc(var(--sm-pos, 0) * (1 / var(--sm-view, .28) - 1) * 100%)); }
+/* 화면 끝까지 붙는 PC 줄이 스크롤 막대 폭만큼 넘쳐도 페이지가 옆으로 밀리지 않게 */
+body { overflow-x: clip; }
 
 /* 부모님께 */
 .notes { list-style: none; padding: 0; margin: 18px 0 0; display: grid; gap: 18px; }
@@ -54,8 +83,21 @@
   .today .label { font-size: 30px; } .today h2 { font-size: 48px; } .today h2 small { font-size: 19px; }
   .stories { padding: 70px 0 90px; }
   .sec-title { font-size: 50px; } .sec-lead { font-size: 20px; }
-  .circles { grid-template-columns: repeat(7, 1fr); gap: 22px; margin-top: 50px; }
   .circle b { font-size: 21px; } .circle small { font-size: 15px; }
+  .sm-count { font-size: 15px; padding: 8px 16px; } .sm-count b { font-size: 18px; }
+  .sm-ahead { display: flex; align-items: flex-end; justify-content: space-between; gap: 24px; }
+  .sm-ctrl { gap: 12px; margin-top: 0; }
+  .sm-swipe { display: none; }
+  .sm-js .sm-arrow { display: block; position: relative; width: 52px; height: 52px; padding: 0; border-radius: 50%; border: 1.5px solid #cfd6de; background: var(--white); cursor: pointer; }
+  .sm-arrow::after { content: ''; position: absolute; left: 50%; top: 50%; width: 11px; height: 11px; border-right: 2.5px solid var(--ink); border-top: 2.5px solid var(--ink); transform: translate(-65%, -50%) rotate(45deg); }
+  .sm-arrow.prev::after { transform: translate(-35%, -50%) rotate(-135deg); }
+  .sm-js .sm-arrow.next { background: var(--ink); border-color: var(--ink); } .sm-arrow.next::after { border-color: var(--white); }
+  .sm-arrow:disabled { opacity: .4; cursor: default; }
+  .sm-arrow:focus-visible { outline: 3px solid var(--sky-deep); outline-offset: 4px; }
+  .sm-a .sm-strip { margin: 40px calc(50% - 50vw) 0 0; padding: 8px 48px 8px 0; scroll-padding-inline: 0; gap: 22px; -webkit-mask-image: linear-gradient(to right, #000 88%, transparent); mask-image: linear-gradient(to right, #000 88%, transparent); }
+  .sm-a .sm-strip .circle { width: 124px; }
+  .sm-a .sm-track { margin-top: 18px; max-width: 360px; }
+  .sm-a .sm-join { margin-top: 34px; }
   .notes { grid-template-columns: repeat(3, 1fr); gap: 36px; }
   .notes li { grid-template-columns: 80px 1fr; } .notes img { width: 80px; }
 }

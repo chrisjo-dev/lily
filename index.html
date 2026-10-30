@@ -35,6 +35,7 @@
 <link rel="stylesheet" href="/common/shell.css">
 <link rel="stylesheet" href="/common/home.css">
 <script src="/common/hero-rotate.js" defer></script>
+<script src="/common/stories-scroll.js" defer></script>
 </head>
 <body>
 <header class="lamp">
@@ -52,10 +53,15 @@
       <p class="joinline"><a class="quiet" href="/join/">가입하고 모든 이야기 보기</a></p>
     </div>
   </section>
-  <section class="block stories">
-    <h2 class="sec-title">릴리의 하루는 계속돼요</h2>
-    <p class="sec-lead">하루 습관마다 한 편씩, 새 이야기가 계속 더해져요</p>
-    <div class="circles">
+  <section class="block stories sm-a">
+    <div class="sm-ahead">
+      <div>
+        <h2 class="sec-title">릴리의 하루는 계속돼요</h2>
+        <p class="sec-lead">하루 습관마다 한 편씩, 새 이야기가 계속 더해져요</p>
+      </div>
+      <div class="sm-ctrl"><span class="sm-count">지금 <b>7편</b>, 계속 늘어나요</span><span class="sm-swipe" aria-hidden="true">옆으로 넘겨요</span><button type="button" class="sm-arrow prev" aria-label="이전 이야기 보기" aria-controls="sm-strip" disabled></button><button type="button" class="sm-arrow next" aria-label="다음 이야기 보기" aria-controls="sm-strip"></button></div>
+    </div>
+    <div class="sm-strip" id="sm-strip">
       <a class="circle locked" href="/ep02/"><div class="dot"><img loading="lazy" decoding="async" src="/hello/img/ep-wake.webp" width="284" height="214" alt=""><span class="lockmark"><img src="/brand/lock.webp" width="38" height="48" alt="가입 후 이용"></span></div><b>일어나기</b><small>Wake Up!</small></a>
       <a class="circle locked" href="/ep03/"><div class="dot"><img loading="lazy" decoding="async" src="/hello/img/ep-wash.webp" width="280" height="214" alt=""><span class="lockmark"><img src="/brand/lock.webp" width="38" height="48" alt="가입 후 이용"></span></div><b>세수하기</b><small>Splash, Splash!</small></a>
       <a class="circle locked" href="/ep04/"><div class="dot"><img loading="lazy" decoding="async" src="/hello/img/ep-eat.webp" width="274" height="214" alt=""><span class="lockmark"><img src="/brand/lock.webp" width="38" height="48" alt="가입 후 이용"></span></div><b>아침 먹기</b><small>Yummy, Yummy!</small></a>
@@ -63,8 +69,11 @@
       <a class="circle" href="/ep01/"><div class="dot"><img loading="lazy" decoding="async" src="/hello/img/ep-brush.webp" width="270" height="210" alt=""></div><b>이 닦기</b><small>Brush, Brush, Brush!</small><span class="free">무료</span></a>
       <a class="circle locked" href="/ep06/"><div class="dot"><img loading="lazy" decoding="async" src="/hello/img/ep-bath.webp" width="280" height="210" alt=""><span class="lockmark"><img src="/brand/lock.webp" width="38" height="48" alt="가입 후 이용"></span></div><b>목욕하기</b><small>Bath Time!</small></a>
       <a class="circle locked" href="/ep07/"><div class="dot"><img loading="lazy" decoding="async" src="/hello/img/ep-sleep.webp" width="306" height="210" alt=""><span class="lockmark"><img src="/brand/lock.webp" width="38" height="48" alt="가입 후 이용"></span></div><b>잠자리 책</b><small>Good night!</small></a>
+      <div class="circle sm-soon" role="img" aria-label="새 이야기 준비 중"><div class="dot"><img class="sil" loading="lazy" decoding="async" src="/brand/home/soon-lily.webp" width="153" height="420" alt=""></div><b>곧 나와요</b><small>새 이야기 준비 중</small></div>
+      <div class="circle sm-soon sm-fade" role="img" aria-label="새 이야기 준비 중"><div class="dot"><img class="sil sil-biscuit" loading="lazy" decoding="async" src="/brand/home/soon-biscuit.webp" width="208" height="260" alt=""></div><b>곧 나와요</b><small>새 이야기 준비 중</small></div>
     </div>
-    <p class="sec-lead">가입하면 모든 이야기를 들을 수 있어요. <a class="quiet" href="/join/">지금 시작하기</a></p>
+    <div class="sm-track" aria-hidden="true"><i></i></div>
+    <p class="sec-lead sm-join">가입하면 모든 이야기를 들을 수 있어요. <a class="quiet" href="/join/">지금 시작하기</a></p>
   </section>
   <section class="block">
     <h2>부모님께</h2>
