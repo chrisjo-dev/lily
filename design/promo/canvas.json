@@ -2,7 +2,7 @@
   "boards": {
     "P01-TapMomentFeed.html": {
       "x": 0,
-      "y": 12976,
+      "y": 14685,
       "w": 1080,
       "h": 1350,
       "title": "P01-TapMomentFeed",
@@ -10,7 +10,7 @@
     },
     "P02-TapMomentStory.html": {
       "x": 1140,
-      "y": 12976,
+      "y": 14685,
       "w": 1080,
       "h": 1920,
       "title": "P02-TapMomentStory",
@@ -18,7 +18,7 @@
     },
     "P03-BrushTimeFeed.html": {
       "x": 2280,
-      "y": 12976,
+      "y": 14685,
       "w": 1080,
       "h": 1350,
       "title": "P03-BrushTimeFeed",
@@ -26,7 +26,7 @@
     },
     "P04-BrushTimeStory.html": {
       "x": 3420,
-      "y": 12976,
+      "y": 14685,
       "w": 1080,
       "h": 1920,
       "title": "P04-BrushTimeStory",
@@ -34,7 +34,7 @@
     },
     "P05-OfferFeed.html": {
       "x": 4560,
-      "y": 12976,
+      "y": 14685,
       "w": 1080,
       "h": 1350,
       "title": "P05-OfferFeed",
@@ -42,7 +42,7 @@
     },
     "P06-OfferStory.html": {
       "x": 5700,
-      "y": 12976,
+      "y": 14685,
       "w": 1080,
       "h": 1920,
       "title": "P06-OfferStory",
@@ -50,7 +50,7 @@
     },
     "P11-LandingPhone.html": {
       "x": 0,
-      "y": 15396,
+      "y": 17105,
       "w": 390,
       "h": 3150,
       "title": "P11-LandingPhone",
@@ -60,7 +60,7 @@
     },
     "P12-LandingDesktop.html": {
       "x": 450,
-      "y": 15396,
+      "y": 17105,
       "w": 1440,
       "h": 3370,
       "title": "P12-LandingDesktop",
@@ -70,7 +70,7 @@
     },
     "P21-LandingA.html": {
       "x": 1950,
-      "y": 15396,
+      "y": 17105,
       "w": 1616,
       "h": 1300,
       "title": "P21-LandingA",
@@ -78,7 +78,7 @@
     },
     "P22-LandingB.html": {
       "x": 3626,
-      "y": 15396,
+      "y": 17105,
       "w": 1616,
       "h": 1300,
       "title": "P22-LandingB",
@@ -86,7 +86,7 @@
     },
     "P23-LandingC.html": {
       "x": 5302,
-      "y": 15396,
+      "y": 17105,
       "w": 1616,
       "h": 1300,
       "title": "P23-LandingC",
@@ -94,7 +94,7 @@
     },
     "P24-LandingA2.html": {
       "x": 6978,
-      "y": 15396,
+      "y": 17105,
       "w": 1616,
       "h": 1300,
       "title": "P24-LandingA2",
@@ -102,7 +102,7 @@
     },
     "P25-LandingA3.html": {
       "x": 0,
-      "y": 18966,
+      "y": 20675,
       "w": 1616,
       "h": 1300,
       "title": "P25-LandingA3",
@@ -110,7 +110,7 @@
     },
     "P26-LandingC2.html": {
       "x": 1676,
-      "y": 18966,
+      "y": 20675,
       "w": 1616,
       "h": 1300,
       "title": "P26-LandingC2",
@@ -118,7 +118,7 @@
     },
     "P27-LandingC3.html": {
       "x": 3352,
-      "y": 18966,
+      "y": 20675,
       "w": 1616,
       "h": 1300,
       "title": "P27-LandingC3",
@@ -126,7 +126,7 @@
     },
     "P28-LandingN1.html": {
       "x": 5028,
-      "y": 18966,
+      "y": 20675,
       "w": 1616,
       "h": 1300,
       "title": "P28-LandingN1",
@@ -134,7 +134,7 @@
     },
     "P29-LandingN2.html": {
       "x": 6704,
-      "y": 18966,
+      "y": 20675,
       "w": 1616,
       "h": 1300,
       "title": "P29-LandingN2",
@@ -142,7 +142,7 @@
     },
     "P30-LandingN3.html": {
       "x": 0,
-      "y": 20466,
+      "y": 22175,
       "w": 1616,
       "h": 1300,
       "title": "P30-LandingN3",
@@ -150,7 +150,7 @@
     },
     "P31-LandingT1.html": {
       "x": 1676,
-      "y": 20466,
+      "y": 22175,
       "w": 1616,
       "h": 1300,
       "title": "P31-LandingT1",
@@ -158,7 +158,7 @@
     },
     "P32-LandingT2.html": {
       "x": 3352,
-      "y": 20466,
+      "y": 22175,
       "w": 1616,
       "h": 1300,
       "title": "P32-LandingT2",
@@ -168,7 +168,7 @@
     },
     "P33-LandingT2Phone.html": {
       "x": 5028,
-      "y": 20466,
+      "y": 22175,
       "w": 390,
       "h": 3640,
       "title": "P33-LandingT2Phone",
@@ -178,7 +178,7 @@
     },
     "P34-LandingT2Desktop.html": {
       "x": 5478,
-      "y": 20466,
+      "y": 22175,
       "w": 1440,
       "h": 4430,
       "title": "P34-LandingT2Desktop",
@@ -188,7 +188,7 @@
     },
     "P35-LandingT2Phone.html": {
       "x": 6978,
-      "y": 20466,
+      "y": 22175,
       "w": 390,
       "h": 3390,
       "title": "P35-LandingT2Phone",
@@ -196,7 +196,7 @@
     },
     "P36-LandingT2Desktop.html": {
       "x": 7428,
-      "y": 20466,
+      "y": 22175,
       "w": 1440,
       "h": 3890,
       "title": "P36-LandingT2Desktop",
@@ -204,7 +204,7 @@
     },
     "P37-FullA.html": {
       "x": 0,
-      "y": 25096,
+      "y": 26805,
       "w": 1104,
       "h": 1780,
       "title": "P37-FullA",
@@ -212,7 +212,7 @@
     },
     "P38-FullB.html": {
       "x": 1164,
-      "y": 25096,
+      "y": 26805,
       "w": 1104,
       "h": 1780,
       "title": "P38-FullB",
@@ -220,7 +220,7 @@
     },
     "P39-FullM.html": {
       "x": 2328,
-      "y": 25096,
+      "y": 26805,
       "w": 1104,
       "h": 1780,
       "title": "P39-FullM",
@@ -228,7 +228,7 @@
     },
     "P40-LandingT3Phone.html": {
       "x": 3492,
-      "y": 25096,
+      "y": 26805,
       "w": 390,
       "h": 4430,
       "title": "P40-LandingT3Phone",
@@ -236,7 +236,7 @@
     },
     "P41-LandingT3Desktop.html": {
       "x": 3942,
-      "y": 25096,
+      "y": 26805,
       "w": 1440,
       "h": 3750,
       "title": "P41-LandingT3Desktop",
@@ -244,7 +244,7 @@
     },
     "P42-LandingT4Phone.html": {
       "x": 5442,
-      "y": 25096,
+      "y": 26805,
       "w": 390,
       "h": 3800,
       "title": "P42-LandingT4Phone",
@@ -252,7 +252,7 @@
     },
     "P43-LandingT4Desktop.html": {
       "x": 5892,
-      "y": 25096,
+      "y": 26805,
       "w": 1440,
       "h": 4180,
       "title": "P43-LandingT4Desktop",
@@ -296,7 +296,7 @@
     },
     "P50-HomePhoneT5.html": {
       "x": 0,
-      "y": 31226,
+      "y": 32935,
       "w": 390,
       "h": 2400,
       "title": "P50-HomePhoneT5",
@@ -306,7 +306,7 @@
     },
     "P51-HomeDesktopT5.html": {
       "x": 450,
-      "y": 31226,
+      "y": 32935,
       "w": 1440,
       "h": 2400,
       "title": "P51-HomeDesktopT5",
@@ -316,7 +316,7 @@
     },
     "P52-JoinPhoneT5.html": {
       "x": 1950,
-      "y": 31226,
+      "y": 32935,
       "w": 390,
       "h": 1100,
       "title": "P52-JoinPhoneT5",
@@ -326,7 +326,7 @@
     },
     "P53-JoinDesktopT5.html": {
       "x": 2850,
-      "y": 31226,
+      "y": 32935,
       "w": 1440,
       "h": 1100,
       "title": "P53-JoinDesktopT5",
@@ -336,7 +336,7 @@
     },
     "P54-CallbackT5.html": {
       "x": 5850,
-      "y": 31226,
+      "y": 32935,
       "w": 390,
       "h": 844,
       "title": "P54-CallbackT5",
@@ -346,7 +346,7 @@
     },
     "P55-MeT5.html": {
       "x": 7240,
-      "y": 31226,
+      "y": 32935,
       "w": 390,
       "h": 1300,
       "title": "P55-MeT5",
@@ -356,7 +356,7 @@
     },
     "P56-PrivacyT5.html": {
       "x": 8140,
-      "y": 31226,
+      "y": 32935,
       "w": 390,
       "h": 1600,
       "title": "P56-PrivacyT5",
@@ -366,7 +366,7 @@
     },
     "P57-NotFoundT5.html": {
       "x": 0,
-      "y": 33906,
+      "y": 35615,
       "w": 390,
       "h": 844,
       "title": "P57-NotFoundT5",
@@ -376,7 +376,7 @@
     },
     "P58-GateT5.html": {
       "x": 900,
-      "y": 33906,
+      "y": 35615,
       "w": 390,
       "h": 844,
       "title": "P58-GateT5",
@@ -386,7 +386,7 @@
     },
     "P52-JoinPhone.html": {
       "x": 2400,
-      "y": 31226,
+      "y": 32935,
       "w": 390,
       "h": 1180,
       "title": "P52-JoinPhone",
@@ -396,7 +396,7 @@
     },
     "P53-JoinDesktop.html": {
       "x": 4350,
-      "y": 31226,
+      "y": 32935,
       "w": 1440,
       "h": 950,
       "title": "P53-JoinDesktop",
@@ -406,7 +406,7 @@
     },
     "P54-CallbackPhone.html": {
       "x": 6300,
-      "y": 31226,
+      "y": 32935,
       "w": 880,
       "h": 820,
       "title": "P54-CallbackPhone",
@@ -416,7 +416,7 @@
     },
     "P55-MePhone.html": {
       "x": 7690,
-      "y": 31226,
+      "y": 32935,
       "w": 390,
       "h": 1040,
       "title": "P55-MePhone",
@@ -426,7 +426,7 @@
     },
     "P56-PrivacyPhone.html": {
       "x": 8590,
-      "y": 31226,
+      "y": 32935,
       "w": 390,
       "h": 2480,
       "title": "P56-PrivacyPhone",
@@ -436,7 +436,7 @@
     },
     "P57-NotFoundPhone.html": {
       "x": 450,
-      "y": 33906,
+      "y": 35615,
       "w": 390,
       "h": 844,
       "title": "P57-NotFoundPhone",
@@ -446,7 +446,7 @@
     },
     "P58-GateCardPhone.html": {
       "x": 1350,
-      "y": 33906,
+      "y": 35615,
       "w": 390,
       "h": 844,
       "title": "P58-GateCardPhone",
@@ -456,7 +456,7 @@
     },
     "P46-SkyHero1.html": {
       "x": 7392,
-      "y": 25096,
+      "y": 26805,
       "w": 1440,
       "h": 1000,
       "title": "P46-SkyHero1",
@@ -466,7 +466,7 @@
     },
     "P47-SkyHero2.html": {
       "x": 0,
-      "y": 29726,
+      "y": 31435,
       "w": 1440,
       "h": 1000,
       "title": "P47-SkyHero2",
@@ -476,7 +476,7 @@
     },
     "P48-SkyHero3.html": {
       "x": 1500,
-      "y": 29726,
+      "y": 31435,
       "w": 1440,
       "h": 1000,
       "title": "P48-SkyHero3",
@@ -488,7 +488,7 @@
       "x": 0,
       "y": 4660,
       "w": 390,
-      "h": 3030,
+      "h": 4296,
       "title": "P60-HomePhoneT6",
       "group": "홈 (승인)",
       "comments": [
@@ -499,7 +499,7 @@
         }
       ],
       "status": "approved",
-      "note": "2026-10-30 사용자 '다 진행해'로 승인. T6, 로고 대비 수정(450e646) 포함. 2026-10-30 이렇게 함께해요 복원, 작은 그림 경계 번짐(사용자 지시)",
+      "note": "2026-10-30 사용자 '다 진행해'로 승인. T6, 로고 대비 수정(450e646) 포함. 2026-10-30 이렇게 함께해요 복원, 작은 그림 경계 번짐(사용자 지시). 2026-10-30 아래쪽을 랜딩 T4/T5의 시연, 듣는 방법, 부모님 질문, 마지막 권유로 교체(사용자 지시)",
       "impl": {
         "route": "/",
         "files": [
@@ -514,7 +514,7 @@
       "x": 450,
       "y": 4660,
       "w": 1440,
-      "h": 2900,
+      "h": 4739,
       "title": "P61-HomeDesktopT6",
       "group": "홈 (승인)",
       "comments": [
@@ -525,7 +525,7 @@
         }
       ],
       "status": "approved",
-      "note": "2026-10-30 사용자 '다 진행해'로 승인. T6, 로고 대비 수정(450e646) 포함. 2026-10-30 이렇게 함께해요 복원, 작은 그림 경계 번짐(사용자 지시)",
+      "note": "2026-10-30 사용자 '다 진행해'로 승인. T6, 로고 대비 수정(450e646) 포함. 2026-10-30 이렇게 함께해요 복원, 작은 그림 경계 번짐(사용자 지시). 2026-10-30 아래쪽을 랜딩 T4/T5의 시연, 듣는 방법, 부모님 질문, 마지막 권유로 교체(사용자 지시)",
       "impl": {
         "route": "/",
         "files": [
@@ -538,7 +538,7 @@
     },
     "P62-JoinPhoneT6.html": {
       "x": 0,
-      "y": 8190,
+      "y": 9899,
       "w": 390,
       "h": 1303,
       "title": "P62-JoinPhoneT6",
@@ -557,7 +557,7 @@
     },
     "P63-JoinDesktopT6.html": {
       "x": 450,
-      "y": 8190,
+      "y": 9899,
       "w": 1440,
       "h": 1182,
       "title": "P63-JoinDesktopT6",
@@ -576,7 +576,7 @@
     },
     "P64-CallbackT6.html": {
       "x": 1950,
-      "y": 8190,
+      "y": 9899,
       "w": 880,
       "h": 820,
       "title": "P64-CallbackT6",
@@ -595,7 +595,7 @@
     },
     "P65-MeT6.html": {
       "x": 0,
-      "y": 9993,
+      "y": 11702,
       "w": 390,
       "h": 1035,
       "title": "P65-MeT6",
@@ -615,7 +615,7 @@
     },
     "P66-PrivacyT6.html": {
       "x": 450,
-      "y": 9993,
+      "y": 11702,
       "w": 390,
       "h": 2483,
       "title": "P66-PrivacyT6",
@@ -634,7 +634,7 @@
     },
     "P67-NotFoundT6.html": {
       "x": 900,
-      "y": 9993,
+      "y": 11702,
       "w": 390,
       "h": 844,
       "title": "P67-NotFoundT6",
@@ -653,7 +653,7 @@
     },
     "P68-GateCardT6.html": {
       "x": 2890,
-      "y": 8190,
+      "y": 9899,
       "w": 390,
       "h": 844,
       "title": "P68-GateCardT6",
@@ -716,7 +716,7 @@
     },
     "P71-StoriesMoreB-Phone.html": {
       "x": 1800,
-      "y": 33906,
+      "y": 35615,
       "w": 375,
       "h": 1000,
       "title": "P71-StoriesMoreB-Phone",
@@ -726,7 +726,7 @@
     },
     "P72-StoriesMoreB-Desktop.html": {
       "x": 2235,
-      "y": 33906,
+      "y": 35615,
       "w": 1440,
       "h": 900,
       "title": "P72-StoriesMoreB-Desktop",
@@ -736,7 +736,7 @@
     },
     "P73-StoriesMoreC-Phone.html": {
       "x": 3735,
-      "y": 33906,
+      "y": 35615,
       "w": 375,
       "h": 1600,
       "title": "P73-StoriesMoreC-Phone",
@@ -746,7 +746,7 @@
     },
     "P74-StoriesMoreC-Desktop.html": {
       "x": 4170,
-      "y": 33906,
+      "y": 35615,
       "w": 1440,
       "h": 900,
       "title": "P74-StoriesMoreC-Desktop",
