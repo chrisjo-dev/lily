@@ -16,7 +16,9 @@
 .gate-top { background: radial-gradient(70% 120% at 90% 0, rgba(247,215,154,.38), rgba(247,215,154,0) 70%), url(../../hello/img/stars.svg) 0 0 / 120px 120px, var(--g-navy); padding: 18px 24px 30px; color: #fff; }
 .gate-brand { display: flex; align-items: center; gap: 6px; font-family: var(--g-hand); font-weight: 700; font-size: 20px; color: var(--g-navy-soft); }
 .gate-brand img { width: 20px; height: 20px; object-fit: contain; }
-#lilyGateTitle { font-family: var(--g-head); font-weight: 400; letter-spacing: -0.02em; font-size: 26px; line-height: 1.28; margin-top: 10px; color: #fff; text-wrap: balance; }
+#lilyGateTitle { line-height: 0; margin-top: 12px; }
+#lilyGateTitle img { display: block; width: 100%; max-width: 292px; height: auto; margin-left: -2px; }
+.gate-sub { font-size: 16px; line-height: 1.5; color: #e9eef8; margin-top: 10px !important; }
 .gate-body { position: relative; margin-top: -14px; padding: 6px 24px calc(28px + env(safe-area-inset-bottom, 0px)); background: var(--g-paper); border-radius: 22px 22px 0 0; }
 .gate-more { font-size: 15px; font-weight: 700; margin: 16px 0 10px !important; }
 .gate-eps { display: flex; gap: 6px; }

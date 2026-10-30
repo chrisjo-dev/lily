@@ -206,3 +206,14 @@ a:focus-visible { outline: 3px solid var(--sky-deep); outline-offset: 4px; borde
   .hero .stage .alt { display: none; }
   .circle .dot, .frame .scr { transition: none; }
 }
+
+/* T8 첫 화면: 손글씨 제목 그림(견본 6). 부제는 제목 그림 위에서 읽히게 그림자를 둔다 */
+.hero h1.title-art { line-height: 0; }
+.hero h1.title-art img { display: block; width: 300px; height: auto; margin-left: -2px; }
+.hero .copy > .sub { font-size: 15px; line-height: 1.5; margin: 12px 0 22px; color: var(--navy-ink); text-shadow: 0 1px 8px rgba(10,18,34,.6); text-wrap: balance; }
+@media (min-width: 600px) { .hero h1.title-art img { width: 340px; } }
+@media (min-width: 900px) {
+  .hero h1.title-art img { width: clamp(430px, 36vw, 540px); margin-left: -4px; }
+  .hero .inner { grid-template-columns: 1fr 1fr; }
+  .hero .copy > .sub { font-size: 21px; margin: 20px 0 36px; }
+}

@@ -115,10 +115,13 @@
     var lock = el("img");
     lock.src = "/engine/ui/lock.webp"; lock.alt = ""; lock.width = 20; lock.height = 20;
     brand.appendChild(lock); brand.appendChild(document.createTextNode("릴리랑"));
-    var title = el("h2", "", "이야기가 계속돼요.");
+    var title = el("h2", "gate-title-art");
     title.id = "lilyGateTitle";
-    title.appendChild(el("br")); title.appendChild(document.createTextNode("가입하면 바로 이어 들을 수 있어요."));
-    top.appendChild(brand); top.appendChild(title);
+    var tImg = el("img");
+    tImg.src = "/hello/img/t8-gate-title-680.webp"; tImg.alt = "이야기가 계속돼요."; tImg.width = 680; tImg.height = 116;
+    title.appendChild(tImg);
+    var sub = el("p", "gate-sub", "가입하면 바로 이어 들을 수 있어요.");
+    top.appendChild(brand); top.appendChild(title); top.appendChild(sub);
     var body = el("div", "gate-body");
     var more = el("p", "gate-more", "새 이야기가 계속 더해져요");
     var eps = el("div", "gate-eps");
