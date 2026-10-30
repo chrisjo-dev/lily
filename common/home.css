@@ -1,5 +1,5 @@
 /* 홈(승인 시안 T6, 캔버스 promo P60 휴대폰, P61 PC). shell.css 위에 얹는다.
-   원본은 design/promo/shared/landing-t4.css(이야기 동그라미), pages-t5.css(오늘 들어 볼 이야기, 부모님께, 질문) */
+   원본은 design/promo/shared/landing-t4.css(이야기 동그라미, 아래쪽 시연부터 마지막 권유까지), pages-t5.css(오늘 들어 볼 이야기) */
 .page { padding: 30px 22px 40px; }
 .page h2 { font-size: 24px; line-height: 1.25; }
 .block + .block { margin-top: 36px; }
@@ -62,26 +62,40 @@
 /* 화면 끝까지 붙는 PC 줄이 스크롤 막대 폭만큼 넘쳐도 페이지가 옆으로 밀리지 않게 */
 body { overflow-x: clip; }
 
-/* 부모님께 */
-.notes { list-style: none; padding: 0; margin: 18px 0 0; display: grid; gap: 18px; }
-.notes li { display: grid; grid-template-columns: 58px 1fr; gap: 14px; align-items: center; }
-.notes img { width: 58px; height: auto; }
-.notes b { display: block; font-family: var(--font-head); font-weight: 400; font-size: 20px; }
-.notes span { font-size: 15px; line-height: 1.55; color: var(--ink-2); }
-
-/* 이렇게 함께해요: 세 단계 그림. 숫자는 실제 순서라 남색 동그라미로(누를 수 없으니 노란색은 쓰지 않는다) */
-.how-steps { list-style: none; padding: 0; margin: 20px 0 0; display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; text-align: center; }
-.how-steps img { display: block; width: 92px; height: auto; margin: 0 auto; }
-.how-steps i { position: relative; display: grid; place-items: center; width: 28px; height: 28px; margin: -12px auto 0; border-radius: 50%; background: var(--paper); border: 1.5px solid var(--ink); font-family: var(--font-head); font-style: normal; font-size: 16px; line-height: 1; color: var(--ink); }
-.how-steps b { display: block; margin-top: 8px; font-family: var(--font-head); font-weight: 400; font-size: 18px; line-height: 1.25; }
-.how-steps span { display: block; margin-top: 6px; font-size: 14px; line-height: 1.5; color: var(--ink-2); }
-/* 작은 그림은 좌우가 칼같이 잘리지 않게 가장자리를 바탕색으로 번지게 한다(오려 낸 캐릭터는 쓰지 않는다) */
-.notes img, .how-steps img { -webkit-mask-image: radial-gradient(closest-side, #000 62%, transparent); mask-image: radial-gradient(closest-side, #000 62%, transparent); }
-
-/* 자주 묻는 질문 */
-.faq { margin: 16px 0 0; display: grid; gap: 4px; }
-.faq dt { font-size: 18px; font-weight: 700; margin-top: 14px; }
-.faq dd { margin: 4px 0 0; font-size: 16px; line-height: 1.6; color: var(--ink-2); }
+/* 아래쪽: 시연, 듣는 방법, 부모님 질문, 마지막 권유(랜딩 T4/T5와 같은 모양, 캔버스 promo P60 휴대폰, P61 PC).
+   원본은 design/promo/shared/landing-t4.css, hello/hello.css의 같은 절. 홈은 정적이라 화면에 들어올 때 떠오르는 움직임은 없다 */
+.wrap { padding: 0 22px; }
+.hand { font-family: var(--font-hand); font-weight: 700; letter-spacing: -0.03em; line-height: 1.05; }
+.wave { display: block; width: 100%; height: 30px; }
+.demo { background: var(--sky-band); padding: 26px 0 40px; }
+.demo .sec-title, .demo .sec-lead { text-align: center; }
+/* 폰은 화면 세 컷을 가로로 넘긴다(CSS 스크롤과 scroll-snap) */
+.frames { display: flex; gap: 14px; margin-top: 26px; overflow-x: auto; padding: 0 22px 10px; scroll-snap-type: x mandatory; }
+.frame { flex: none; width: 60%; margin: 0; scroll-snap-align: center; text-align: center; }
+.frame .scr { border-radius: 26px; overflow: hidden; border: 7px solid var(--white); aspect-ratio: 9 / 15; box-shadow: 0 16px 26px -16px rgba(31,42,58,.45); transition: transform .3s cubic-bezier(.2,.8,.2,1); }
+.frame:hover .scr { transform: translateY(-6px); }
+.frame .scr img { width: 100%; height: 100%; object-fit: cover; object-position: center 40%; }
+.frame b { display: block; font-size: 26px; color: var(--sky-deep); margin-top: 12px; }
+.frame span { font-size: 15px; color: var(--ink-2); }
+.demo .after { text-align: center; font-size: 15px; color: var(--ink-2); margin-top: 18px; }
+.ways { padding: 54px 0 40px; }
+.ways .sec-title { text-align: center; }
+.ways .grid { display: grid; gap: 28px; margin-top: 30px; }
+.way { display: grid; grid-template-columns: 76px 1fr; gap: 16px; align-items: center; }
+.way img { width: 76px; height: 76px; object-fit: contain; }
+.way b { display: block; font-family: var(--font-head); font-weight: 400; font-size: 22px; }
+.way p { font-size: 15px; line-height: 1.6; color: var(--ink-2); margin-top: 4px; }
+.way q { font-family: var(--font-hand); font-weight: 700; font-size: 1.2em; color: var(--sky-deep); quotes: none; }
+.qa { padding: 40px 0 40px; }
+.qa .sec-title { text-align: center; }
+.qa dl { margin: 22px 0 0; display: grid; gap: 20px; }
+.qa dt { font-size: 18px; font-weight: 700; }
+.qa dd { margin: 6px 0 0; font-size: 16px; line-height: 1.6; color: var(--ink-2); }
+.last { text-align: center; padding: 30px 22px 50px; }
+.last img { width: 70%; height: auto; margin: 0 auto 10px; }
+.last h2 { font-size: 32px; line-height: 1.2; }
+.last p { font-size: 16px; color: var(--ink-2); margin: 12px 0 22px; }
+@media (prefers-reduced-motion: reduce) { .frame .scr { transition: none; } }
 
 @media (min-width: 900px) {
   .page { max-width: 1180px; margin: 0 auto; padding: 60px 48px 80px; }
@@ -106,11 +120,24 @@ body { overflow-x: clip; }
   .sm-a .sm-strip .circle { width: 124px; }
   .sm-js .sm-track { display: none; }
   .sm-a .sm-join { margin-top: 34px; }
-  .notes { grid-template-columns: repeat(3, 1fr); gap: 36px; }
-  .notes li { grid-template-columns: 80px 1fr; } .notes img { width: 80px; }
-  .how-steps { margin-top: 30px; gap: 36px; }
-  .how-steps img { width: 150px; }
-  .how-steps i { width: 36px; height: 36px; margin-top: -18px; font-size: 19px; }
-  .how-steps b { font-size: 24px; margin-top: 12px; }
-  .how-steps span { font-size: 17px; margin-top: 8px; }
+  .wrap { max-width: 1180px; margin: 0 auto; padding: 0 48px; }
+  .wave { height: 60px; }
+  .demo { padding: 50px 0 90px; }
+  .frames { justify-content: center; gap: 36px; overflow: visible; margin-top: 50px; }
+  .frame { width: 280px; }
+  .frame:nth-child(2) { margin-top: 34px; }
+  .frame b { font-size: 32px; } .frame span { font-size: 17px; }
+  .demo .after { font-size: 18px; margin-top: 56px; }
+  .ways { padding: 110px 0 60px; }
+  .ways .grid { grid-template-columns: 1fr 1fr; gap: 50px 70px; margin-top: 56px; }
+  .way { grid-template-columns: 110px 1fr; gap: 24px; }
+  .way img { width: 110px; height: 110px; }
+  .way b { font-size: 28px; } .way p { font-size: 18px; }
+  .qa { padding: 70px 0; }
+  .qa .wrap { max-width: 900px; }
+  .qa dl { grid-template-columns: 1fr 1fr; gap: 36px 60px; margin-top: 44px; }
+  .qa dt { font-size: 22px; } .qa dd { font-size: 18px; }
+  .last { padding: 40px 0 90px; }
+  .last img { width: 520px; }
+  .last h2 { font-size: 58px; } .last p { font-size: 20px; }
 }
