@@ -76,7 +76,7 @@ body { overflow-x: clip; }
 .how-steps b { display: block; margin-top: 8px; font-family: var(--font-head); font-weight: 400; font-size: 18px; line-height: 1.25; }
 .how-steps span { display: block; margin-top: 6px; font-size: 14px; line-height: 1.5; color: var(--ink-2); }
 /* 작은 그림은 좌우가 칼같이 잘리지 않게 가장자리를 바탕색으로 번지게 한다(오려 낸 캐릭터는 쓰지 않는다) */
-.how-steps img { -webkit-mask-image: radial-gradient(closest-side, #000 62%, transparent); mask-image: radial-gradient(closest-side, #000 62%, transparent); }
+.notes img, .how-steps img { -webkit-mask-image: radial-gradient(closest-side, #000 62%, transparent); mask-image: radial-gradient(closest-side, #000 62%, transparent); }
 
 /* 자주 묻는 질문 */
 .faq { margin: 16px 0 0; display: grid; gap: 4px; }
