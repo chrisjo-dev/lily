@@ -146,14 +146,17 @@ a:focus-visible { outline: 3px solid var(--sky-deep); outline-offset: 4px; borde
 .hero .note { font-size: 14px; color: var(--navy-soft); margin-top: 12px; }
 .hero .art { display: block; width: 100%; margin-top: 20px; -webkit-mask-image: linear-gradient(to bottom, transparent, #000 14%); mask-image: linear-gradient(to bottom, transparent, #000 14%); }
 /* 첫 화면 그림 세 장(칫솔, 거품, 잠자리)은 같은 크기로 겹쳐 두고 차례로 바뀐다(motion.js).
-   세 장 모두 아래에 맨 아래 줄을 세로로 늘린 60px(538 기준)가 있고, 그 부분은 물결 밑에 숨긴다 */
-.hero .stage { position: relative; margin-bottom: calc(-100% * 60 / 538 - 10px); }
+   세 장 모두 538x410 실제 그림(늘린 띠 없음). 물결 곡선의 가장 낮은 곳(높이의 37/56)과 위로 뜨는 움직임(8px)을 더해
+   그림 아래 끝이 그보다 조금 아래(폰 35px, PC 48px 위에서 물결 시작)에 오게 해서 물결이 그림을 곡선대로 덮는다.
+   음수 여백끼리는 겹쳐서 더 큰 쪽만 남으므로 폰은 물결(.edge) 쪽 여백으로 맞춘다 */
+.hero .stage { position: relative; margin-bottom: 0; }
+.hero .stage .art { aspect-ratio: 538 / 410; }
 .hero .stage .alt { position: absolute; left: 0; top: 0; opacity: 0; transition: opacity 1s ease-in-out; }
 .hero .stage .art.on { opacity: 1; }
 .hero .stage .art.off { opacity: 0; }
 .hero .stage .art { margin: 0; }
 .hero .stage { margin-top: 20px; }
-.hero .edge { display: block; width: 100%; height: 28px; margin-top: -27px; position: relative; z-index: 1; transform: scaleX(-1); }
+.hero .edge { display: block; width: 100%; height: 28px; margin-top: -35px; position: relative; z-index: 1; transform: scaleX(-1); }
 .hero { padding: 0; } .hero .go, .hero .note { text-align: left; }
 @media (min-width: 900px) {
   .hero .bar { max-width: 1280px; margin: 0 auto; padding: 28px 48px 0; }
@@ -168,7 +171,7 @@ a:focus-visible { outline: 3px solid var(--sky-deep); outline-offset: 4px; borde
   /* 그림 네 변을 남색 벽으로 부드럽게 번지게(위, 왼쪽, 오른쪽은 길게, 아래는 물결이 덮음) */
   .hero .art { margin-top: 10px; -webkit-mask-image: linear-gradient(to right, transparent, #000 18%, #000 80%, transparent), linear-gradient(to bottom, transparent, #000 24%); -webkit-mask-composite: source-in; mask-image: linear-gradient(to right, transparent, #000 18%, #000 80%, transparent), linear-gradient(to bottom, transparent, #000 24%); mask-composite: intersect; }
   .hero .edge { height: 56px; margin-top: -55px; transform: scaleX(-1); }
-  .hero .stage { margin-top: 10px; margin-bottom: calc(-100% * 60 / 538 + 30px); }
+  .hero .stage { margin-top: 10px; margin-bottom: 7px; }
   .hero { display: block; max-width: none; margin: 0; padding: 0; }
   .hero .go { margin-top: 0; }
 }

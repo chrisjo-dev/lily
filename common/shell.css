@@ -42,8 +42,10 @@ a:focus-visible { outline: 3px solid var(--sky-deep); outline-offset: 4px; borde
 .lamp .art { display: block; width: 100%; height: auto; margin: 14px 0 -26px; -webkit-mask-image: linear-gradient(to right, transparent, #000 12%, #000 88%, transparent), linear-gradient(to bottom, transparent, #000 22%); -webkit-mask-composite: source-in; mask-image: linear-gradient(to right, transparent, #000 12%, #000 88%, transparent), linear-gradient(to bottom, transparent, #000 22%); mask-composite: intersect; }
 .lamp.short .art { width: 62%; margin: -40px 0 -18px auto; }
 /* 홈 첫 화면 그림 세 장(칫솔, 거품, 잠자리)은 같은 크기로 겹쳐 두고 차례로 바뀐다(hero-rotate.js) */
-.lamp .stage { position: relative; margin: 14px 0 -26px; }
-.lamp .stage .art { margin: 0; transition: opacity 1s ease-in-out; }
+/* 세 장 모두 538x410 실제 그림(늘린 띠 없음). 물결(.edge) 곡선의 가장 낮은 곳이 높이의 37/56이라,
+   그림 아래 끝이 그보다 조금 아래(폰 24px, PC 42px 위에서 물결 시작)에 오게 해서 물결이 그림을 곡선대로 덮는다 */
+.lamp .stage { position: relative; margin: 14px 0 3px; }
+.lamp .stage .art { margin: 0; aspect-ratio: 538 / 410; transition: opacity 1s ease-in-out; }
 .lamp .stage .alt { position: absolute; left: 0; top: 0; opacity: 0; }
 .lamp .stage .art.on { opacity: 1; }
 .lamp .stage .art.off { opacity: 0; }
@@ -63,7 +65,7 @@ a:focus-visible { outline: 3px solid var(--sky-deep); outline-offset: 4px; borde
   .lamp h1 { font-size: clamp(44px, 4.6vw, 64px); line-height: 1.1; }
   .lamp .sub { font-size: 21px; margin-top: 18px; }
   .lamp .art { margin: 0 0 -40px; }
-  .lamp .stage { margin: 0 0 -40px; }
+  .lamp .stage { margin: 0 0 13px; }
   .lamp .stage .art { margin: 0; }
   .lamp .edge { height: 56px; margin-top: -55px; }
   .lamp.short .inner { grid-template-columns: 1fr 380px; }
