@@ -302,7 +302,10 @@ LAYOUT = """(() => {
   const m = document.querySelector('main');
   const r = m ? m.getBoundingClientRect() : {left: 0, right: innerWidth, width: innerWidth};
   const clipped = [...document.querySelectorAll('h1, h2, p, li, td, th, label, a, button')].filter(n => !n.classList.contains('sr-title')).filter(vis).filter(n => n.scrollWidth > n.clientWidth + 1 && getComputedStyle(n).overflow !== 'visible').map(n => (n.id || n.className || n.tagName) + ':' + n.scrollWidth + '/' + n.clientWidth);
-  return {hscroll: document.documentElement.scrollWidth > innerWidth, small, mainW: Math.round(r.width), centered: Math.abs(r.left - (innerWidth - r.right)) <= 2, clipped};
+  return {hscroll: document.documentElement.scrollWidth > innerWidth, small, mainW: Math.round(r.width), centered: Math.abs(r.left - (innerWidth - r.right)) <= 2, clipped,
+    // 글자 줄 길이(문단과 목록 칸 폭의 최대값)와, 본문을 감싼 칸(.wide)이 가운데인지
+    lineW: Math.round(Math.max(0, ...[...document.querySelectorAll('main p, main li')].filter(vis).map(n => n.getBoundingClientRect().width))),
+    wide: (() => { const w = document.querySelector('.wide'); if (!w) return null; const q = w.getBoundingClientRect(); return {w: Math.round(q.width), centered: Math.abs(q.left - (innerWidth - q.right)) <= 2}; })()};
 })()"""
 
 async def sizes(br):
@@ -333,8 +336,15 @@ async def sizes(br):
             await pg.wait_for_timeout(400)
             L = await pg.evaluate(LAYOUT)
             # 가입은 PC(900px 이상)에서 시안 P63처럼 소개와 폼 두 칸(1080px + 양옆 48px)
-            col = 760 if name == "privacy" else 1176 if name.startswith("join") and w >= 900 else 560
-            good = not L["hscroll"] and not L["small"] and L["clipped"] == [] and L["centered"] and (name == "gate" or L["mainW"] <= col)
+            # 개인정보는 PC(900px 이상)에서 시안 P133처럼 목차 + 본문 두 칸(최대 1180px): 가운데는 감싼 칸(.wide)이 맞고 본문 줄은 760px 이하
+            # 내 정보는 PC에서 시안 P131처럼 두 칸(최대 1180px)
+            two = w >= 900 and name in ("privacy", "me")
+            col = 1180 if two else 760 if name == "privacy" else 1176 if name.startswith("join") and w >= 900 else 560
+            line = 760 if name == "privacy" else 720
+            centered = L["wide"]["centered"] if two else L["centered"]
+            width_ok = name == "gate" or (L["wide"]["w"] if two else L["mainW"]) <= col
+            good = (not L["hscroll"] and not L["small"] and L["clipped"] == [] and centered and width_ok
+                    and (name in ("gate", "join", "join-empty") or L["lineW"] <= line))
             ok(f"layout {name} {w}x{h}: no h-scroll, targets >= 48px, centered column", good, str(L))
             if SHOTS:
                 os.makedirs(SHOTS, exist_ok=True)
