@@ -30,7 +30,6 @@ a:focus-visible { outline: 3px solid var(--sky-deep); outline-offset: 4px; borde
 /* 1. 첫 화면 */
 .hero { padding: 8px 22px 30px; }
 .hero h1 { font-size: 40px; line-height: 1.16; }
-.hero h1 b { font-weight: 400; color: var(--sky-deep); }
 .hero .sub { font-size: 17px; line-height: 1.55; margin: 14px 0 0; color: var(--ink-2); }
 .hero .art { width: 100%; margin: 10px 0 6px; }
 .hero .go { text-align: center; }
@@ -141,7 +140,6 @@ a:focus-visible { outline: 3px solid var(--sky-deep); outline-offset: 4px; borde
 .hero .bar span { font-family: var(--font-hand); font-weight: 700; font-size: 30px; color: var(--white); letter-spacing: -0.03em; }
 .hero .copy { padding: 22px 22px 0; }
 .hero h1 { font-size: 40px; line-height: 1.16; color: var(--white); }
-.hero h1 b { font-weight: 400; color: var(--sun); }
 .hero .sub { font-size: 17px; line-height: 1.5; margin: 14px 0 22px; color: var(--navy-soft); }
 .hero .note { font-size: 14px; color: var(--navy-soft); margin-top: 12px; }
 .hero .art { display: block; width: 100%; margin-top: 20px; -webkit-mask-image: linear-gradient(to bottom, transparent, #000 14%); mask-image: linear-gradient(to bottom, transparent, #000 14%); }
@@ -191,7 +189,6 @@ a:focus-visible { outline: 3px solid var(--sky-deep); outline-offset: 4px; borde
 .hero .copy > * { animation: rise .7s cubic-bezier(.2,.8,.2,1) both; }
 .hero .copy > h1 { animation-name: riseT; } /* 제목은 처음부터 보이게(LCP), 위치만 올라온다 */
 .hero .copy > :nth-child(2) { animation-delay: .12s; } .hero .copy > :nth-child(3) { animation-delay: .24s; } .hero .copy > :nth-child(4) { animation-delay: .34s; }
-.hero h1 b { display: inline-block; animation: pop .7s cubic-bezier(.3,1.6,.5,1) .9s both; }
 .hero .stage { animation: drift 7s ease-in-out 1.2s infinite; }
 .hero .btn { background-image: linear-gradient(100deg, transparent 30%, rgba(255,255,255,.55) 50%, transparent 70%); background-size: 60% 100%; background-repeat: no-repeat; animation: shine 6s ease-in-out 2s infinite; }
 .motion .rv { opacity: 0; transform: translateY(22px); transition: opacity .6s ease-out, transform .7s cubic-bezier(.2,.8,.2,1); transition-delay: calc(var(--i, 0) * 70ms); }
@@ -202,7 +199,7 @@ a:focus-visible { outline: 3px solid var(--sky-deep); outline-offset: 4px; borde
 .frame .scr { transition: transform .3s cubic-bezier(.2,.8,.2,1); }
 .frame:hover .scr { transform: translateY(-6px); }
 @media (prefers-reduced-motion: reduce) {
-  .hero .copy > *, .hero h1 b, .hero .stage, .hero .btn { animation: none; }
+  .hero .copy > *, .hero .stage, .hero .btn { animation: none; }
   .hero .stage .alt { display: none; }
   .circle .dot, .frame .scr { transition: none; }
 }
