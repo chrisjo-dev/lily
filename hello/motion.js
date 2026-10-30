@@ -1,4 +1,4 @@
-// 첫 화면 그림 교대: 첫 장은 바로 보이고(LCP), 나머지 두 장은 load 뒤에 받아 5초마다 1초 동안 겹쳐 바뀐다.
+// 첫 화면 그림 교대: 첫 장은 바로 보이고(LCP), 나머지 두 장은 load 뒤에 받아 3초마다 1초 동안 겹쳐 바뀐다.
 // 움직임 줄이기 설정이면 첫 장만 둔다. 탭이 숨거나 첫 화면이 안 보이면 멈춘다.
 (function () {
   if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
@@ -13,7 +13,7 @@
   function tick() { show((cur + 1) % imgs.length); }
   function run() {
     var go = ready && inView && !document.hidden;
-    if (go && !timer) timer = setInterval(tick, 6000);
+    if (go && !timer) timer = setInterval(tick, 3000);
     if (!go && timer) { clearInterval(timer); timer = null; }
   }
   addEventListener('load', function () {
