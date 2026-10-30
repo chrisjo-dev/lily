@@ -146,9 +146,8 @@ a:focus-visible { outline: 3px solid var(--sky-deep); outline-offset: 4px; borde
 .hero .note { font-size: 14px; color: var(--navy-soft); margin-top: 12px; }
 .hero .art { display: block; width: 100%; margin-top: 20px; -webkit-mask-image: linear-gradient(to bottom, transparent, #000 14%); mask-image: linear-gradient(to bottom, transparent, #000 14%); }
 /* 첫 화면 그림 세 장(칫솔, 거품, 잠자리)은 같은 크기로 겹쳐 두고 차례로 바뀐다(motion.js).
-   세 장 모두 538x410 실제 그림(늘린 띠 없음). 물결 곡선의 가장 낮은 곳(높이의 37/56)과 위로 뜨는 움직임(8px)을 더해
-   그림 아래 끝이 그보다 조금 아래(폰 35px, PC 48px 위에서 물결 시작)에 오게 해서 물결이 그림을 곡선대로 덮는다.
-   음수 여백끼리는 겹쳐서 더 큰 쪽만 남으므로 폰은 물결(.edge) 쪽 여백으로 맞춘다 */
+   세 장 모두 538x410 실제 그림(늘린 띠 없음). 물결 곡선의 가장 낮은 곳(높이의 40/56)보다 그림 아래 끝이 조금 아래에 오게 해서
+   물결이 그림을 곡선대로 덮는다. 음수 여백끼리는 겹쳐서 더 큰 쪽만 남으므로 폰은 물결(.edge) 쪽 여백으로 맞춘다 */
 .hero .stage { position: relative; margin-bottom: 0; }
 .hero .stage .art { aspect-ratio: 538 / 410; }
 .hero .stage .alt { position: absolute; left: 0; top: 0; opacity: 0; transition: opacity 1s ease-in-out; }
@@ -156,7 +155,9 @@ a:focus-visible { outline: 3px solid var(--sky-deep); outline-offset: 4px; borde
 .hero .stage .art.off { opacity: 0; }
 .hero .stage .art { margin: 0; }
 .hero .stage { margin-top: 20px; }
-.hero .edge { display: block; width: 100%; height: 28px; margin-top: -35px; position: relative; z-index: 1; transform: scaleX(-1); }
+/* 폰: 홈과 같이 물결을 뒤집지 않고 130%로 넓혀, 그림 오른쪽 아래 글씨(이어져요)가 물결 골 위에 남게 한다.
+   그림 아래 끝은 물결 시작보다 25px(PC 46px) 아래, 위로 뜨는 움직임은 3px로 줄여 떠도 곡선 아래에 있게 한다 */
+.hero .edge { display: block; width: 130%; max-width: none; height: 28px; margin-top: -25px; position: relative; z-index: 1; }
 .hero { padding: 0; } .hero .go, .hero .note { text-align: left; }
 @media (min-width: 900px) {
   .hero .bar { max-width: 1280px; margin: 0 auto; padding: 28px 48px 0; }
@@ -170,8 +171,8 @@ a:focus-visible { outline: 3px solid var(--sky-deep); outline-offset: 4px; borde
   .hero .note { font-size: 16px; margin-left: 32px; }
   /* 그림 네 변을 남색 벽으로 부드럽게 번지게(위, 왼쪽, 오른쪽은 길게, 아래는 물결이 덮음) */
   .hero .art { margin-top: 10px; -webkit-mask-image: linear-gradient(to right, transparent, #000 18%, #000 80%, transparent), linear-gradient(to bottom, transparent, #000 24%); -webkit-mask-composite: source-in; mask-image: linear-gradient(to right, transparent, #000 18%, #000 80%, transparent), linear-gradient(to bottom, transparent, #000 24%); mask-composite: intersect; }
-  .hero .edge { height: 56px; margin-top: -55px; transform: scaleX(-1); }
-  .hero .stage { margin-top: 10px; margin-bottom: 7px; }
+  .hero .edge { width: 140%; height: 56px; margin-top: -55px; } /* PC도 글씨가 물결 골 위에 오게 */
+  .hero .stage { margin-top: 10px; margin-bottom: 9px; }
   .hero { display: block; max-width: none; margin: 0; padding: 0; }
   .hero .go { margin-top: 0; }
 }
@@ -185,7 +186,7 @@ a:focus-visible { outline: 3px solid var(--sky-deep); outline-offset: 4px; borde
 @keyframes rise { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: none; } }
 @keyframes riseT { from { transform: translateY(14px); } to { transform: none; } }
 @keyframes pop { 0%, 100% { transform: none; } 40% { transform: scale(1.18) rotate(-6deg); } 70% { transform: scale(.96) rotate(2deg); } }
-@keyframes drift { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
+@keyframes drift { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-3px); } } /* 3px 넘게 뜨면 그림 아래 끝이나 글씨가 물결에 걸린다 */
 @keyframes shine { 0%, 82% { background-position: -140% 0; } 100% { background-position: 240% 0; } }
 .hero .copy > * { animation: rise .7s cubic-bezier(.2,.8,.2,1) both; }
 .hero .copy > h1 { animation-name: riseT; } /* 제목은 처음부터 보이게(LCP), 위치만 올라온다 */

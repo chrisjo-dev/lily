@@ -42,7 +42,7 @@ a:focus-visible { outline: 3px solid var(--sky-deep); outline-offset: 4px; borde
 .lamp .art { display: block; width: 100%; height: auto; margin: 14px 0 -26px; -webkit-mask-image: linear-gradient(to right, transparent, #000 12%, #000 88%, transparent), linear-gradient(to bottom, transparent, #000 22%); -webkit-mask-composite: source-in; mask-image: linear-gradient(to right, transparent, #000 12%, #000 88%, transparent), linear-gradient(to bottom, transparent, #000 22%); mask-composite: intersect; }
 .lamp.short .art { width: 62%; margin: -40px 0 -18px auto; }
 /* 홈 첫 화면 그림 세 장(칫솔, 거품, 잠자리)은 같은 크기로 겹쳐 두고 차례로 바뀐다(hero-rotate.js) */
-/* 세 장 모두 538x410 실제 그림(늘린 띠 없음). 물결(.edge) 곡선의 가장 낮은 곳이 높이의 37/56이라,
+/* 세 장 모두 538x410 실제 그림(늘린 띠 없음). 물결(.edge) 곡선의 가장 낮은 곳이 높이의 40/56이라,
    그림 아래 끝이 그보다 조금 아래(폰 24px, PC 42px 위에서 물결 시작)에 오게 해서 물결이 그림을 곡선대로 덮는다 */
 .lamp .stage { position: relative; margin: 14px 0 3px; }
 .lamp .stage .art { margin: 0; aspect-ratio: 538 / 410; transition: opacity 1s ease-in-out; }
@@ -51,6 +51,9 @@ a:focus-visible { outline: 3px solid var(--sky-deep); outline-offset: 4px; borde
 .lamp .stage .art.off { opacity: 0; }
 @media (prefers-reduced-motion: reduce) { .lamp .stage .alt { display: none; } }
 .lamp .edge { position: relative; z-index: 3; display: block; width: 100%; height: 28px; margin-top: -27px; }
+/* 폰: 그림 오른쪽 아래 글씨(이어져요)가 물결 골(가장 낮은 곳)에 오도록 물결을 130%로 넓혀 오른쪽 끝을 잘라 보인다.
+   그림 아래 끝은 물결 시작보다 24px 아래라 곡선 전체가 그림을 덮고, 글씨 아래 끝은 골 위로 남는다 */
+.lamp:has(.stage) .edge { width: 130%; max-width: none; }
 .lamp.short .head { padding-bottom: 8px; }
 /* 그림 없는 짧은 띠(로그인 처리, 내 정보, 개인정보, 404): 로고 아래 여백을 두고 물결이 로고를 덮지 않게 */
 .lamp.noart .inner { min-height: 40px; }
@@ -68,6 +71,7 @@ a:focus-visible { outline: 3px solid var(--sky-deep); outline-offset: 4px; borde
   .lamp .stage { margin: 0 0 13px; }
   .lamp .stage .art { margin: 0; }
   .lamp .edge { height: 56px; margin-top: -55px; }
+  .lamp:has(.stage) .edge { width: 140%; } /* PC도 글씨가 물결 골 위에 오게(900~1920px에서 확인) */
   .lamp.short .inner { grid-template-columns: 1fr 380px; }
   .lamp.short .art { width: 100%; margin: 0 0 -30px; }
   .lamp.short .inner:not(:has(.head)) { display: flex; justify-content: flex-end; }
