@@ -2,7 +2,7 @@
   "boards": {
     "P01-TapMomentFeed.html": {
       "x": 0,
-      "y": 14685,
+      "y": 24941,
       "w": 1080,
       "h": 1350,
       "title": "P01-TapMomentFeed",
@@ -10,7 +10,7 @@
     },
     "P02-TapMomentStory.html": {
       "x": 1140,
-      "y": 14685,
+      "y": 24941,
       "w": 1080,
       "h": 1920,
       "title": "P02-TapMomentStory",
@@ -18,7 +18,7 @@
     },
     "P03-BrushTimeFeed.html": {
       "x": 2280,
-      "y": 14685,
+      "y": 24941,
       "w": 1080,
       "h": 1350,
       "title": "P03-BrushTimeFeed",
@@ -26,7 +26,7 @@
     },
     "P04-BrushTimeStory.html": {
       "x": 3420,
-      "y": 14685,
+      "y": 24941,
       "w": 1080,
       "h": 1920,
       "title": "P04-BrushTimeStory",
@@ -34,7 +34,7 @@
     },
     "P05-OfferFeed.html": {
       "x": 4560,
-      "y": 14685,
+      "y": 24941,
       "w": 1080,
       "h": 1350,
       "title": "P05-OfferFeed",
@@ -42,7 +42,7 @@
     },
     "P06-OfferStory.html": {
       "x": 5700,
-      "y": 14685,
+      "y": 24941,
       "w": 1080,
       "h": 1920,
       "title": "P06-OfferStory",
@@ -50,7 +50,7 @@
     },
     "P11-LandingPhone.html": {
       "x": 0,
-      "y": 17105,
+      "y": 27361,
       "w": 390,
       "h": 3150,
       "title": "P11-LandingPhone",
@@ -60,7 +60,7 @@
     },
     "P12-LandingDesktop.html": {
       "x": 450,
-      "y": 17105,
+      "y": 27361,
       "w": 1440,
       "h": 3370,
       "title": "P12-LandingDesktop",
@@ -70,7 +70,7 @@
     },
     "P21-LandingA.html": {
       "x": 1950,
-      "y": 17105,
+      "y": 27361,
       "w": 1616,
       "h": 1300,
       "title": "P21-LandingA",
@@ -78,7 +78,7 @@
     },
     "P22-LandingB.html": {
       "x": 3626,
-      "y": 17105,
+      "y": 27361,
       "w": 1616,
       "h": 1300,
       "title": "P22-LandingB",
@@ -86,7 +86,7 @@
     },
     "P23-LandingC.html": {
       "x": 5302,
-      "y": 17105,
+      "y": 27361,
       "w": 1616,
       "h": 1300,
       "title": "P23-LandingC",
@@ -94,7 +94,7 @@
     },
     "P24-LandingA2.html": {
       "x": 6978,
-      "y": 17105,
+      "y": 27361,
       "w": 1616,
       "h": 1300,
       "title": "P24-LandingA2",
@@ -102,7 +102,7 @@
     },
     "P25-LandingA3.html": {
       "x": 0,
-      "y": 20675,
+      "y": 30931,
       "w": 1616,
       "h": 1300,
       "title": "P25-LandingA3",
@@ -110,7 +110,7 @@
     },
     "P26-LandingC2.html": {
       "x": 1676,
-      "y": 20675,
+      "y": 30931,
       "w": 1616,
       "h": 1300,
       "title": "P26-LandingC2",
@@ -118,7 +118,7 @@
     },
     "P27-LandingC3.html": {
       "x": 3352,
-      "y": 20675,
+      "y": 30931,
       "w": 1616,
       "h": 1300,
       "title": "P27-LandingC3",
@@ -126,7 +126,7 @@
     },
     "P28-LandingN1.html": {
       "x": 5028,
-      "y": 20675,
+      "y": 30931,
       "w": 1616,
       "h": 1300,
       "title": "P28-LandingN1",
@@ -134,7 +134,7 @@
     },
     "P29-LandingN2.html": {
       "x": 6704,
-      "y": 20675,
+      "y": 30931,
       "w": 1616,
       "h": 1300,
       "title": "P29-LandingN2",
@@ -142,7 +142,7 @@
     },
     "P30-LandingN3.html": {
       "x": 0,
-      "y": 22175,
+      "y": 32431,
       "w": 1616,
       "h": 1300,
       "title": "P30-LandingN3",
@@ -150,7 +150,7 @@
     },
     "P31-LandingT1.html": {
       "x": 1676,
-      "y": 22175,
+      "y": 32431,
       "w": 1616,
       "h": 1300,
       "title": "P31-LandingT1",
@@ -158,7 +158,7 @@
     },
     "P32-LandingT2.html": {
       "x": 3352,
-      "y": 22175,
+      "y": 32431,
       "w": 1616,
       "h": 1300,
       "title": "P32-LandingT2",
@@ -168,7 +168,7 @@
     },
     "P33-LandingT2Phone.html": {
       "x": 5028,
-      "y": 22175,
+      "y": 32431,
       "w": 390,
       "h": 3640,
       "title": "P33-LandingT2Phone",
@@ -178,7 +178,7 @@
     },
     "P34-LandingT2Desktop.html": {
       "x": 5478,
-      "y": 22175,
+      "y": 32431,
       "w": 1440,
       "h": 4430,
       "title": "P34-LandingT2Desktop",
@@ -188,7 +188,7 @@
     },
     "P35-LandingT2Phone.html": {
       "x": 6978,
-      "y": 22175,
+      "y": 32431,
       "w": 390,
       "h": 3390,
       "title": "P35-LandingT2Phone",
@@ -196,7 +196,7 @@
     },
     "P36-LandingT2Desktop.html": {
       "x": 7428,
-      "y": 22175,
+      "y": 32431,
       "w": 1440,
       "h": 3890,
       "title": "P36-LandingT2Desktop",
@@ -204,7 +204,7 @@
     },
     "P37-FullA.html": {
       "x": 0,
-      "y": 26805,
+      "y": 37061,
       "w": 1104,
       "h": 1780,
       "title": "P37-FullA",
@@ -212,7 +212,7 @@
     },
     "P38-FullB.html": {
       "x": 1164,
-      "y": 26805,
+      "y": 37061,
       "w": 1104,
       "h": 1780,
       "title": "P38-FullB",
@@ -220,7 +220,7 @@
     },
     "P39-FullM.html": {
       "x": 2328,
-      "y": 26805,
+      "y": 37061,
       "w": 1104,
       "h": 1780,
       "title": "P39-FullM",
@@ -228,7 +228,7 @@
     },
     "P40-LandingT3Phone.html": {
       "x": 3492,
-      "y": 26805,
+      "y": 37061,
       "w": 390,
       "h": 4430,
       "title": "P40-LandingT3Phone",
@@ -236,7 +236,7 @@
     },
     "P41-LandingT3Desktop.html": {
       "x": 3942,
-      "y": 26805,
+      "y": 37061,
       "w": 1440,
       "h": 3750,
       "title": "P41-LandingT3Desktop",
@@ -244,7 +244,7 @@
     },
     "P42-LandingT4Phone.html": {
       "x": 5442,
-      "y": 26805,
+      "y": 37061,
       "w": 390,
       "h": 3800,
       "title": "P42-LandingT4Phone",
@@ -252,7 +252,7 @@
     },
     "P43-LandingT4Desktop.html": {
       "x": 5892,
-      "y": 26805,
+      "y": 37061,
       "w": 1440,
       "h": 4180,
       "title": "P43-LandingT4Desktop",
@@ -296,7 +296,7 @@
     },
     "P50-HomePhoneT5.html": {
       "x": 0,
-      "y": 32935,
+      "y": 43191,
       "w": 390,
       "h": 2400,
       "title": "P50-HomePhoneT5",
@@ -306,7 +306,7 @@
     },
     "P51-HomeDesktopT5.html": {
       "x": 450,
-      "y": 32935,
+      "y": 43191,
       "w": 1440,
       "h": 2400,
       "title": "P51-HomeDesktopT5",
@@ -316,7 +316,7 @@
     },
     "P52-JoinPhoneT5.html": {
       "x": 1950,
-      "y": 32935,
+      "y": 43191,
       "w": 390,
       "h": 1100,
       "title": "P52-JoinPhoneT5",
@@ -326,7 +326,7 @@
     },
     "P53-JoinDesktopT5.html": {
       "x": 2850,
-      "y": 32935,
+      "y": 43191,
       "w": 1440,
       "h": 1100,
       "title": "P53-JoinDesktopT5",
@@ -336,7 +336,7 @@
     },
     "P54-CallbackT5.html": {
       "x": 5850,
-      "y": 32935,
+      "y": 43191,
       "w": 390,
       "h": 844,
       "title": "P54-CallbackT5",
@@ -346,7 +346,7 @@
     },
     "P55-MeT5.html": {
       "x": 7240,
-      "y": 32935,
+      "y": 43191,
       "w": 390,
       "h": 1300,
       "title": "P55-MeT5",
@@ -356,7 +356,7 @@
     },
     "P56-PrivacyT5.html": {
       "x": 8140,
-      "y": 32935,
+      "y": 43191,
       "w": 390,
       "h": 1600,
       "title": "P56-PrivacyT5",
@@ -366,7 +366,7 @@
     },
     "P57-NotFoundT5.html": {
       "x": 0,
-      "y": 35615,
+      "y": 45871,
       "w": 390,
       "h": 844,
       "title": "P57-NotFoundT5",
@@ -376,7 +376,7 @@
     },
     "P58-GateT5.html": {
       "x": 900,
-      "y": 35615,
+      "y": 45871,
       "w": 390,
       "h": 844,
       "title": "P58-GateT5",
@@ -386,7 +386,7 @@
     },
     "P52-JoinPhone.html": {
       "x": 2400,
-      "y": 32935,
+      "y": 43191,
       "w": 390,
       "h": 1180,
       "title": "P52-JoinPhone",
@@ -396,7 +396,7 @@
     },
     "P53-JoinDesktop.html": {
       "x": 4350,
-      "y": 32935,
+      "y": 43191,
       "w": 1440,
       "h": 950,
       "title": "P53-JoinDesktop",
@@ -406,7 +406,7 @@
     },
     "P54-CallbackPhone.html": {
       "x": 6300,
-      "y": 32935,
+      "y": 43191,
       "w": 880,
       "h": 820,
       "title": "P54-CallbackPhone",
@@ -416,7 +416,7 @@
     },
     "P55-MePhone.html": {
       "x": 7690,
-      "y": 32935,
+      "y": 43191,
       "w": 390,
       "h": 1040,
       "title": "P55-MePhone",
@@ -426,7 +426,7 @@
     },
     "P56-PrivacyPhone.html": {
       "x": 8590,
-      "y": 32935,
+      "y": 43191,
       "w": 390,
       "h": 2480,
       "title": "P56-PrivacyPhone",
@@ -436,7 +436,7 @@
     },
     "P57-NotFoundPhone.html": {
       "x": 450,
-      "y": 35615,
+      "y": 45871,
       "w": 390,
       "h": 844,
       "title": "P57-NotFoundPhone",
@@ -446,7 +446,7 @@
     },
     "P58-GateCardPhone.html": {
       "x": 1350,
-      "y": 35615,
+      "y": 45871,
       "w": 390,
       "h": 844,
       "title": "P58-GateCardPhone",
@@ -456,7 +456,7 @@
     },
     "P46-SkyHero1.html": {
       "x": 7392,
-      "y": 26805,
+      "y": 37061,
       "w": 1440,
       "h": 1000,
       "title": "P46-SkyHero1",
@@ -466,7 +466,7 @@
     },
     "P47-SkyHero2.html": {
       "x": 0,
-      "y": 31435,
+      "y": 41691,
       "w": 1440,
       "h": 1000,
       "title": "P47-SkyHero2",
@@ -476,7 +476,7 @@
     },
     "P48-SkyHero3.html": {
       "x": 1500,
-      "y": 31435,
+      "y": 41691,
       "w": 1440,
       "h": 1000,
       "title": "P48-SkyHero3",
@@ -716,7 +716,7 @@
     },
     "P71-StoriesMoreB-Phone.html": {
       "x": 1800,
-      "y": 35615,
+      "y": 45871,
       "w": 375,
       "h": 1000,
       "title": "P71-StoriesMoreB-Phone",
@@ -726,7 +726,7 @@
     },
     "P72-StoriesMoreB-Desktop.html": {
       "x": 2235,
-      "y": 35615,
+      "y": 45871,
       "w": 1440,
       "h": 900,
       "title": "P72-StoriesMoreB-Desktop",
@@ -736,7 +736,7 @@
     },
     "P73-StoriesMoreC-Phone.html": {
       "x": 3735,
-      "y": 35615,
+      "y": 45871,
       "w": 375,
       "h": 1600,
       "title": "P73-StoriesMoreC-Phone",
@@ -746,7 +746,7 @@
     },
     "P74-StoriesMoreC-Desktop.html": {
       "x": 4170,
-      "y": 35615,
+      "y": 45871,
       "w": 1440,
       "h": 900,
       "title": "P74-StoriesMoreC-Desktop",
@@ -755,8 +755,8 @@
       "note": "A 선택으로 보류"
     },
     "P75-TitleA-Phone.html": {
-      "x": 9020,
-      "y": 0,
+      "x": 0,
+      "y": 20461,
       "w": 390,
       "h": 620,
       "title": "P75-TitleA-Phone",
@@ -765,8 +765,8 @@
       "note": "사용자: 다 별로, 디자인 감각 부족"
     },
     "P76-TitleA-Desktop.html": {
-      "x": 9450,
-      "y": 0,
+      "x": 450,
+      "y": 20461,
       "w": 1440,
       "h": 620,
       "title": "P76-TitleA-Desktop",
@@ -775,8 +775,8 @@
       "note": "사용자: 다 별로, 디자인 감각 부족"
     },
     "P77-TitleB-Phone.html": {
-      "x": 10930,
-      "y": 0,
+      "x": 1950,
+      "y": 20461,
       "w": 390,
       "h": 620,
       "title": "P77-TitleB-Phone",
@@ -785,8 +785,8 @@
       "note": "사용자: 다 별로, 디자인 감각 부족"
     },
     "P78-TitleB-Desktop.html": {
-      "x": 11360,
-      "y": 0,
+      "x": 2400,
+      "y": 20461,
       "w": 1440,
       "h": 620,
       "title": "P78-TitleB-Desktop",
@@ -795,8 +795,8 @@
       "note": "사용자: 다 별로, 디자인 감각 부족"
     },
     "P79-TitleC-Phone.html": {
-      "x": 12840,
-      "y": 0,
+      "x": 3900,
+      "y": 20461,
       "w": 390,
       "h": 620,
       "title": "P79-TitleC-Phone",
@@ -805,8 +805,8 @@
       "note": "사용자: 다 별로, 디자인 감각 부족"
     },
     "P80-TitleC-Desktop.html": {
-      "x": 13270,
-      "y": 0,
+      "x": 4350,
+      "y": 20461,
       "w": 1440,
       "h": 620,
       "title": "P80-TitleC-Desktop",
@@ -815,8 +815,8 @@
       "note": "사용자: 다 별로, 디자인 감각 부족"
     },
     "P81-TitleD-Phone.html": {
-      "x": 14750,
-      "y": 0,
+      "x": 5850,
+      "y": 20461,
       "w": 390,
       "h": 620,
       "title": "P81-TitleD-Phone",
@@ -825,8 +825,8 @@
       "note": "사용자: 다 별로, 디자인 감각 부족"
     },
     "P82-TitleD-Desktop.html": {
-      "x": 15180,
-      "y": 0,
+      "x": 6300,
+      "y": 20461,
       "w": 1440,
       "h": 620,
       "title": "P82-TitleD-Desktop",
@@ -835,8 +835,8 @@
       "note": "사용자: 다 별로, 디자인 감각 부족"
     },
     "P83-Title2A-Phone.html": {
-      "x": 16660,
-      "y": 0,
+      "x": 0,
+      "y": 21581,
       "w": 390,
       "h": 620,
       "title": "P83-Title2A-Phone",
@@ -845,8 +845,8 @@
       "note": "사용자: 너무 정신없다"
     },
     "P84-Title2A-Desktop.html": {
-      "x": 17090,
-      "y": 0,
+      "x": 450,
+      "y": 21581,
       "w": 1440,
       "h": 620,
       "title": "P84-Title2A-Desktop",
@@ -855,8 +855,8 @@
       "note": "사용자: 너무 정신없다"
     },
     "P85-Title2B-Phone.html": {
-      "x": 18570,
-      "y": 0,
+      "x": 1950,
+      "y": 21581,
       "w": 390,
       "h": 620,
       "title": "P85-Title2B-Phone",
@@ -865,8 +865,8 @@
       "note": "사용자: 너무 정신없다"
     },
     "P86-Title2B-Desktop.html": {
-      "x": 19000,
-      "y": 0,
+      "x": 2400,
+      "y": 21581,
       "w": 1440,
       "h": 620,
       "title": "P86-Title2B-Desktop",
@@ -875,8 +875,8 @@
       "note": "사용자: 너무 정신없다"
     },
     "P87-Title2C-Phone.html": {
-      "x": 20480,
-      "y": 0,
+      "x": 3900,
+      "y": 21581,
       "w": 390,
       "h": 620,
       "title": "P87-Title2C-Phone",
@@ -885,8 +885,8 @@
       "note": "사용자: 너무 정신없다"
     },
     "P88-Title2C-Desktop.html": {
-      "x": 20910,
-      "y": 0,
+      "x": 4350,
+      "y": 21581,
       "w": 1440,
       "h": 620,
       "title": "P88-Title2C-Desktop",
@@ -895,8 +895,8 @@
       "note": "사용자: 너무 정신없다"
     },
     "P89-Title2D-Phone.html": {
-      "x": 22390,
-      "y": 0,
+      "x": 5850,
+      "y": 21581,
       "w": 390,
       "h": 620,
       "title": "P89-Title2D-Phone",
@@ -905,8 +905,8 @@
       "note": "사용자: 너무 정신없다"
     },
     "P90-Title2D-Desktop.html": {
-      "x": 22820,
-      "y": 0,
+      "x": 6300,
+      "y": 21581,
       "w": 1440,
       "h": 620,
       "title": "P90-Title2D-Desktop",
@@ -915,100 +915,260 @@
       "note": "사용자: 너무 정신없다"
     },
     "P91-Title3A-Phone.html": {
-      "x": 24300,
-      "y": 0,
+      "x": 0,
+      "y": 22701,
       "w": 390,
       "h": 620,
       "title": "P91-Title3A-Phone",
       "group": "첫 화면 제목 손글씨 시안 3"
     },
     "P93-Title3B-Phone.html": {
-      "x": 26210,
-      "y": 0,
+      "x": 1950,
+      "y": 22701,
       "w": 390,
       "h": 620,
       "title": "P93-Title3B-Phone",
       "group": "첫 화면 제목 손글씨 시안 3"
     },
     "P95-Title3C-Phone.html": {
-      "x": 28120,
-      "y": 0,
+      "x": 3900,
+      "y": 22701,
       "w": 390,
       "h": 620,
       "title": "P95-Title3C-Phone",
       "group": "첫 화면 제목 손글씨 시안 3"
     },
     "P92-Title3A-Desktop.html": {
-      "x": 24730,
-      "y": 0,
+      "x": 450,
+      "y": 22701,
       "w": 1440,
       "h": 620,
       "title": "P92-Title3A-Desktop",
       "group": "첫 화면 제목 손글씨 시안 3"
     },
     "P94-Title3B-Desktop.html": {
-      "x": 26640,
-      "y": 0,
+      "x": 2400,
+      "y": 22701,
       "w": 1440,
       "h": 620,
       "title": "P94-Title3B-Desktop",
       "group": "첫 화면 제목 손글씨 시안 3"
     },
     "P96-Title3C-Desktop.html": {
-      "x": 28550,
-      "y": 0,
+      "x": 4350,
+      "y": 22701,
       "w": 1440,
       "h": 620,
       "title": "P96-Title3C-Desktop",
       "group": "첫 화면 제목 손글씨 시안 3"
     },
     "P97-Title4A-Phone.html": {
-      "x": 30030,
-      "y": 0,
+      "x": 0,
+      "y": 23821,
       "w": 390,
       "h": 620,
       "title": "P97-Title4A-Phone",
       "group": "첫 화면 제목 손글씨 시안 4"
     },
     "P99-Title4B-Phone.html": {
-      "x": 31940,
-      "y": 0,
+      "x": 1950,
+      "y": 23821,
       "w": 390,
       "h": 620,
       "title": "P99-Title4B-Phone",
       "group": "첫 화면 제목 손글씨 시안 4"
     },
     "P101-Title4C-Phone.html": {
-      "x": 33850,
-      "y": 0,
+      "x": 3900,
+      "y": 23821,
       "w": 390,
       "h": 620,
       "title": "P101-Title4C-Phone",
       "group": "첫 화면 제목 손글씨 시안 4"
     },
     "P98-Title4A-Desktop.html": {
-      "x": 30460,
-      "y": 0,
+      "x": 450,
+      "y": 23821,
       "w": 1440,
       "h": 620,
       "title": "P98-Title4A-Desktop",
       "group": "첫 화면 제목 손글씨 시안 4"
     },
     "P100-Title4B-Desktop.html": {
-      "x": 32370,
-      "y": 0,
+      "x": 2400,
+      "y": 23821,
       "w": 1440,
       "h": 620,
       "title": "P100-Title4B-Desktop",
       "group": "첫 화면 제목 손글씨 시안 4"
     },
     "P102-Title4C-Desktop.html": {
-      "x": 34280,
-      "y": 0,
+      "x": 4350,
+      "y": 23821,
       "w": 1440,
       "h": 620,
       "title": "P102-Title4C-Desktop",
       "group": "첫 화면 제목 손글씨 시안 4"
+    },
+    "P103-PresignEnd-Phone.html": {
+      "x": 0,
+      "y": 19061,
+      "w": 390,
+      "h": 844,
+      "title": "P103-PresignEnd-Phone",
+      "group": "완주 화면 사전 신청"
+    },
+    "P105-PresignGate-Phone.html": {
+      "x": 450,
+      "y": 19061,
+      "w": 390,
+      "h": 844,
+      "title": "P105-PresignGate-Phone",
+      "group": "완주 화면 사전 신청"
+    },
+    "P107-PresignChoose-Phone.html": {
+      "x": 900,
+      "y": 19061,
+      "w": 390,
+      "h": 844,
+      "title": "P107-PresignChoose-Phone",
+      "group": "완주 화면 사전 신청"
+    },
+    "P109-PresignDone-Phone.html": {
+      "x": 1350,
+      "y": 19061,
+      "w": 390,
+      "h": 844,
+      "title": "P109-PresignDone-Phone",
+      "group": "완주 화면 사전 신청"
+    },
+    "P104-PresignEnd-Desktop.html": {
+      "x": 1800,
+      "y": 19061,
+      "w": 1440,
+      "h": 900,
+      "title": "P104-PresignEnd-Desktop",
+      "group": "완주 화면 사전 신청"
+    },
+    "P106-PresignGate-Desktop.html": {
+      "x": 3300,
+      "y": 19061,
+      "w": 1440,
+      "h": 900,
+      "title": "P106-PresignGate-Desktop",
+      "group": "완주 화면 사전 신청"
+    },
+    "P108-PresignChoose-Desktop.html": {
+      "x": 4800,
+      "y": 19061,
+      "w": 1440,
+      "h": 900,
+      "title": "P108-PresignChoose-Desktop",
+      "group": "완주 화면 사전 신청"
+    },
+    "P110-PresignDone-Desktop.html": {
+      "x": 6300,
+      "y": 19061,
+      "w": 1440,
+      "h": 900,
+      "title": "P110-PresignDone-Desktop",
+      "group": "완주 화면 사전 신청"
+    },
+    "P140-GateCardT8.html": {
+      "x": 0,
+      "y": 17717,
+      "w": 390,
+      "h": 844,
+      "title": "P140-GateCardT8",
+      "group": "페이지 T8 손글씨 제목"
+    },
+    "P141-LandingPhoneT8.html": {
+      "x": 450,
+      "y": 17717,
+      "w": 390,
+      "h": 700,
+      "title": "P141-LandingPhoneT8",
+      "group": "페이지 T8 손글씨 제목"
+    },
+    "P142-LandingDesktopT8.html": {
+      "x": 900,
+      "y": 17717,
+      "w": 1440,
+      "h": 560,
+      "title": "P142-LandingDesktopT8",
+      "group": "페이지 T8 손글씨 제목"
+    },
+    "P120-JoinPhoneT8.html": {
+      "x": 0,
+      "y": 14685,
+      "w": 390,
+      "h": 1040,
+      "title": "P120-JoinPhoneT8",
+      "group": "페이지 T8 손글씨 제목"
+    },
+    "P121-JoinDesktopT8.html": {
+      "x": 450,
+      "y": 14685,
+      "w": 1440,
+      "h": 900,
+      "title": "P121-JoinDesktopT8",
+      "group": "페이지 T8 손글씨 제목"
+    },
+    "P122-CallbackT8.html": {
+      "x": 1950,
+      "y": 14685,
+      "w": 880,
+      "h": 660,
+      "title": "P122-CallbackT8",
+      "group": "페이지 T8 손글씨 제목"
+    },
+    "P130-MePhoneT8.html": {
+      "x": 2890,
+      "y": 14685,
+      "w": 390,
+      "h": 1074,
+      "title": "P130-MePhoneT8",
+      "group": "페이지 T8 손글씨 제목"
+    },
+    "P131-MeDesktopT8.html": {
+      "x": 3340,
+      "y": 14685,
+      "w": 1440,
+      "h": 900,
+      "title": "P131-MeDesktopT8",
+      "group": "페이지 T8 손글씨 제목"
+    },
+    "P132-PrivacyPhoneT8.html": {
+      "x": 4840,
+      "y": 14685,
+      "w": 390,
+      "h": 2832,
+      "title": "P132-PrivacyPhoneT8",
+      "group": "페이지 T8 손글씨 제목"
+    },
+    "P133-PrivacyDesktopT8.html": {
+      "x": 5290,
+      "y": 14685,
+      "w": 1440,
+      "h": 2413,
+      "title": "P133-PrivacyDesktopT8",
+      "group": "페이지 T8 손글씨 제목"
+    },
+    "P134-NotFoundPhoneT8.html": {
+      "x": 6790,
+      "y": 14685,
+      "w": 390,
+      "h": 844,
+      "title": "P134-NotFoundPhoneT8",
+      "group": "페이지 T8 손글씨 제목"
+    },
+    "P135-NotFoundDesktopT8.html": {
+      "x": 7240,
+      "y": 14685,
+      "w": 1440,
+      "h": 900,
+      "title": "P135-NotFoundDesktopT8",
+      "group": "페이지 T8 손글씨 제목"
     }
   },
   "groups": [
@@ -1029,16 +1189,12 @@
       "label": "내 정보, 개인정보, 404 (승인)"
     },
     {
-      "id": "인스타 홍보",
-      "label": "인스타 홍보"
+      "id": "페이지 T8 손글씨 제목",
+      "label": "페이지 T8 손글씨 제목"
     },
     {
-      "id": "지난 랜딩 시안",
-      "label": "지난 랜딩 시안"
-    },
-    {
-      "id": "지난 페이지 시안",
-      "label": "지난 페이지 시안"
+      "id": "완주 화면 사전 신청",
+      "label": "완주 화면 사전 신청"
     },
     {
       "id": "첫 화면 제목 손글씨 시안",
@@ -1055,6 +1211,18 @@
     {
       "id": "첫 화면 제목 손글씨 시안 4",
       "label": "첫 화면 제목 손글씨 시안 4"
+    },
+    {
+      "id": "인스타 홍보",
+      "label": "인스타 홍보"
+    },
+    {
+      "id": "지난 랜딩 시안",
+      "label": "지난 랜딩 시안"
+    },
+    {
+      "id": "지난 페이지 시안",
+      "label": "지난 페이지 시안"
     }
   ],
   "links": [
@@ -1122,6 +1290,36 @@
       "from": "P60-HomePhoneT6.html",
       "to": "P65-MeT6.html",
       "label": "내 정보"
+    },
+    {
+      "from": "P103-PresignEnd-Phone.html",
+      "to": "P105-PresignGate-Phone.html",
+      "label": "창립 회원 사전 신청"
+    },
+    {
+      "from": "P105-PresignGate-Phone.html",
+      "to": "P107-PresignChoose-Phone.html",
+      "label": "부모님 확인"
+    },
+    {
+      "from": "P107-PresignChoose-Phone.html",
+      "to": "P109-PresignDone-Phone.html",
+      "label": "이 안으로 사전 신청"
+    },
+    {
+      "from": "P104-PresignEnd-Desktop.html",
+      "to": "P106-PresignGate-Desktop.html",
+      "label": "창립 회원 사전 신청"
+    },
+    {
+      "from": "P106-PresignGate-Desktop.html",
+      "to": "P108-PresignChoose-Desktop.html",
+      "label": "부모님 확인"
+    },
+    {
+      "from": "P108-PresignChoose-Desktop.html",
+      "to": "P110-PresignDone-Desktop.html",
+      "label": "이 안으로 사전 신청"
     }
   ]
 }

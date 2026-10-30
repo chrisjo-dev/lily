@@ -1,0 +1,31 @@
+/* T8 가입, 로그인 처리: 홈(T6)과 같은 남색 띠에 손글씨 제목을 얹는다. 제목 그림은 크림 한 줄, 연하늘 한 줄.
+   pages-t6.css 위에 더한다. 본문 아래는 흰 종이, 부모 조작은 하늘 파랑(노랑은 카카오 단추만 규정 색). */
+.lamp.t8j .inner { display: grid; grid-template-columns: 1fr 46%; align-items: end; }
+.lamp.t8j .head { display: contents; }
+.lamp.t8j h1.title-art { grid-column: 1; grid-row: 1; align-self: center; padding: 10px 0 16px 22px; }
+.lamp.t8j h1.title-art img { width: 172px; margin: 0; }
+.lamp.t8j .sub { grid-column: 1 / -1; grid-row: 2; margin: 0; padding: 2px 22px 36px; font-size: 15px; word-break: keep-all; text-wrap: balance; line-height: 1.55; }
+.lamp.t8j .art { grid-column: 2; grid-row: 1; width: 100%; margin: 0 0 -6px; -webkit-mask-image: linear-gradient(to right, transparent, #000 22%, #000 90%, transparent), linear-gradient(to bottom, transparent, #000 24%, #000 80%, transparent); -webkit-mask-composite: source-in; mask-image: linear-gradient(to right, transparent, #000 22%, #000 90%, transparent), linear-gradient(to bottom, transparent, #000 24%, #000 80%, transparent); mask-composite: intersect; }
+.lamp.t8j.noart .inner { grid-template-columns: 1fr; }
+.lamp.t8j.noart h1.title-art { padding-bottom: 40px; }
+.lamp.t8j.noart h1.title-art img { width: 196px; }
+.t8j-body { padding: 8px 22px 30px; }
+.t8j-body .part { margin-top: 0; }
+.t8j-body .or:first-child { margin-top: 22px; }
+.t8j-wait { padding: 26px 22px 30px; }
+.t8j-wait .lead { font-size: 17px; line-height: 1.6; color: var(--ink); margin: 0; }
+.t8j-wait .dots { justify-content: flex-start; margin-top: 16px; }
+.t8j-wait .vig { display: block; width: 210px; margin: 22px 0 0; }
+.t8j-wait .part { margin-top: 18px; }
+.pair.t8j-pair > div { min-height: 600px; }
+
+@media (min-width: 900px) {
+  .lamp.t8j .inner { display: grid; grid-template-columns: 1fr 380px; }
+  .lamp.t8j .head { display: block; align-self: center; padding: 10px 0 52px 48px; }
+  .lamp.t8j h1.title-art { padding: 0; }
+  .lamp.t8j h1.title-art img { width: clamp(250px, 20vw, 300px); }
+  .lamp.t8j .sub { padding: 0; margin-top: 20px; font-size: 20px; max-width: 520px; word-break: keep-all; text-wrap: balance; }
+  .lamp.t8j .art { grid-column: auto; grid-row: auto; margin: 0 0 -30px; }
+  .t8j-cols { max-width: 1080px; margin: 0 auto; padding: 36px 48px 70px; display: grid; grid-template-columns: 1fr 1fr; gap: 72px; align-items: start; }
+  .t8j-cols .or:first-child { margin-top: 0; }
+}

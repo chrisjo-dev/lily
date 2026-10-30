@@ -1,0 +1,64 @@
+/* T8 정보 페이지(내 정보, 개인정보처리방침, 404): 홈 새 컨셉. 남색 띠 위에 손글씨 제목 그림, 아래는 흰 종이.
+   pages-t6.css 위에 얹는다. 제목 그림은 assets/t8-info-title-*.webp */
+body.pc { width: auto; }
+.lamp.t8 .inner { display: block; min-height: 0; }
+.lamp.t8 .head { padding: 20px 22px 44px; }
+.lamp.t8 h1.title-art img { width: var(--tw, 220px); margin-left: -2px; }
+.lamp.t8 .sub { max-width: 330px; margin-top: 14px; }
+.lamp.t8 .edge { margin-top: -27px; }
+.t8-me .head { --tw: 230px; } .t8-privacy .head { --tw: 214px; } .t8-lost .head { --tw: 296px; }
+
+/* 내 정보 */
+.t8 .page .who { margin-top: 0; }
+.t8 .page { padding-top: 6px; }
+.t8 .page .done img { border: 2px solid #fff; box-shadow: 0 0 0 1.5px #dcefff; }
+
+/* 404 */
+.t8 .lost { padding-top: 10px; }
+.t8 .lost img { width: 92%; -webkit-mask-image: radial-gradient(closest-side, #000 64%, transparent); mask-image: radial-gradient(closest-side, #000 64%, transparent); }
+.t8 .lost h2 { font-size: 23px; line-height: 1.3; }
+.t8 .lost .home { background: var(--sky-deep); }
+
+/* 개인정보처리방침: 목차는 칩, 항목은 번호 줄, 표는 얇은 카드 */
+.t8 .toc { list-style: none; margin: 0; padding: 22px 22px 0; display: flex; flex-wrap: wrap; gap: 8px; }
+.t8 .doc { padding-top: 26px; }
+.t8 .toc a { display: inline-block; padding: 6px 12px; border-radius: 999px; background: #eef5fc; color: var(--sky-deep); text-decoration: none; font-size: 14px; }
+.t8 .doc h2 { padding-top: 26px; border-top: 1.5px solid #e6edf5; }
+.t8 .doc h2:first-of-type { border-top: 0; padding-top: 0; }
+.t8 .doc .row { background: #f6f9fc; border-radius: 14px; border: 0; padding: 12px 14px; margin-top: 8px; }
+.t8 .doc .row em { display: block; margin-top: 4px; }
+.t8 .doc .back { color: var(--sky-deep); }
+.t8 .doc .todo { background: #fff3d6; border-radius: 6px; padding: 0 4px; }
+
+@media (min-width: 900px) {
+  .lamp.t8 .head { padding: 28px 0 70px 0; }
+  .lamp.t8 h1.title-art img { width: var(--tw, 300px); }
+  .t8-me .head { --tw: 330px; } .t8-privacy .head { --tw: 330px; } .t8-lost .head { --tw: 440px; }
+  .lamp.t8 .sub { max-width: 560px; font-size: 20px; }
+  .lamp.t8 .edge { height: 56px; margin-top: -55px; }
+  .t8 .wide { max-width: 1180px; margin: 0 auto; padding: 24px 48px 80px; }
+  /* 내 정보: 왼쪽 고치는 칸, 오른쪽 들은 이야기 */
+  .t8-me .wide { display: grid; grid-template-columns: 480px 1fr; gap: 90px; align-items: start; }
+  .t8-me .wide > div:last-child > .part:first-child { margin-top: 0; padding-top: 0; }
+  .t8-me .wide > div:last-child > .part + .part { margin-top: 44px; }
+  .t8 .wide .who { font-size: 17px; margin-bottom: 26px; }
+  .t8-me .done { gap: 18px; } .t8-me .done img { width: 72px; height: 72px; } .t8-me .done li { grid-template-columns: 72px 1fr auto; gap: 18px; } .t8-me .done b { font-size: 19px; }
+  .t8-me .part h2 { font-size: 28px; margin-bottom: 18px; }
+  /* 개인정보: 왼쪽 목차(붙박이), 오른쪽 본문 */
+  .t8-privacy .wide { display: grid; grid-template-columns: 230px 1fr; gap: 80px; align-items: start; }
+  .t8-privacy .doc { padding: 0; max-width: 760px; }
+  .t8-privacy .toc { position: sticky; top: 30px; flex-direction: column; flex-wrap: nowrap; gap: 6px; margin: 0; padding: 0; align-items: flex-start; }
+  .t8-privacy .doc { padding-top: 0; }
+  .t8-privacy .toc a { font-size: 16px; padding: 8px 16px; }
+  .t8-privacy .doc h2 { font-size: 26px; }
+  .t8-privacy .doc p, .t8-privacy .doc li { font-size: 17px; }
+  .t8-privacy .doc .row { display: grid; grid-template-columns: 220px 1fr; column-gap: 20px; align-items: baseline; }
+  .t8-privacy .doc .row em { grid-column: 2; }
+  /* 404: 그림 왼쪽, 글 오른쪽 */
+  .t8-lost .wide { display: grid; grid-template-columns: 1fr 1fr; gap: 70px; align-items: center; text-align: left; padding-top: 10px; }
+  .t8-lost .wide img { width: 100%; margin: 0; }
+  .t8-lost .wide h2 { font-size: 34px; }
+  .t8-lost .wide p { font-size: 26px; line-height: 1.55; margin: 0 0 36px; }
+  .t8-lost .wide .home { font-size: 26px; padding: 18px 40px; }
+}
+.t8 .doc .row + ul { margin-top: 16px; }
