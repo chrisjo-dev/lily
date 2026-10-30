@@ -1,0 +1,40 @@
+# 릴리랑 robots.txt
+# 공개 페이지(홈, 이야기, 개인정보처리방침)는 검색과 AI 검색에 열어 둔다.
+# 가입, 로그인 처리, 내 정보 화면은 개인 화면이라 막는다(그 페이지에도 noindex가 있다).
+# Content-Signal: 검색과 AI 답변 근거(search, ai-input)는 허용. 학습(ai-train)은 정하지 않음(운영자 결정 후 추가).
+User-agent: *
+Content-Signal: search=yes, ai-input=yes
+Allow: /
+Disallow: /join/
+Disallow: /me/
+
+# AI 검색과 답변(허용)
+User-agent: GPTBot
+User-agent: OAI-SearchBot
+User-agent: ChatGPT-User
+User-agent: ClaudeBot
+User-agent: Claude-User
+User-agent: Claude-SearchBot
+User-agent: anthropic-ai
+User-agent: PerplexityBot
+User-agent: Perplexity-User
+User-agent: Google-Extended
+User-agent: GoogleOther
+User-agent: Applebot
+User-agent: Applebot-Extended
+User-agent: Amazonbot
+User-agent: FacebookBot
+User-agent: meta-externalagent
+User-agent: Bingbot
+User-agent: Yeti
+User-agent: Daum
+Allow: /
+Disallow: /join/
+Disallow: /me/
+
+# 학습 데이터 수집만 하거나 과하게 긁는 봇(차단)
+User-agent: CCBot
+User-agent: Bytespider
+Disallow: /
+
+Sitemap: https://lilyrang.co.kr/sitemap.xml

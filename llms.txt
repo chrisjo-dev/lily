@@ -1,0 +1,30 @@
+# 릴리랑 (Lilyrang)
+
+> 아침, 양치, 잠자리처럼 하루 습관 순간에 4~7세 아이와 부모가 함께 듣는 2분 영어 그림책. 릴리가 기다리면 아이가 그림을 눌러 이야기를 이어 간다. 앱 설치 없이 브라우저에서 연다.
+
+## 이야기
+
+- [Brush, Brush, Brush! 이 닦기](https://lilyrang.co.kr/ep01/): 자기 전 이 닦기 이야기. 오늘의 단어 Brush my teeth, Bubbles, All clean. 로그인 없이 무료로 끝까지 듣는다. 약 2분 20초.
+- [Wake Up! 일어나기](https://lilyrang.co.kr/ep02/): 아침에 일어나는 이야기. 오늘의 단어 Wake up, Stretch, Good morning. 무료 가입 후 끝까지 듣는다.
+- [Splash, Splash! 세수하기](https://lilyrang.co.kr/ep03/): 아침 세수 이야기. 오늘의 단어 Wash my face, Splash, So fresh. 무료 가입 후 끝까지 듣는다.
+- [Yummy, Yummy! 아침 먹기](https://lilyrang.co.kr/ep04/): 아침밥 이야기. 오늘의 단어 Yummy, All gone, More please. 무료 가입 후 끝까지 듣는다.
+- [Put On, Ready! 옷 입기](https://lilyrang.co.kr/ep05/): 아침에 옷 입는 이야기. 오늘의 단어 Put on, My socks, Ready. 무료 가입 후 끝까지 듣는다.
+- [Rub-a-Dub, Bath Time! 목욕하기](https://lilyrang.co.kr/ep06/): 저녁 목욕 이야기. 오늘의 단어 Bath time, Rub-a-dub, So clean. 무료 가입 후 끝까지 듣는다.
+- [Sweet Dreams 잠자리 책](https://lilyrang.co.kr/ep07/): 잠자리에 책 읽는 이야기. 오늘의 단어 Read a book, Turn the page, Sweet dreams. 무료 가입 후 끝까지 듣는다.
+
+## 소개
+
+- [릴리랑 홈](https://lilyrang.co.kr/): 서비스 소개, 아이가 그림을 눌러 이야기를 잇는 방식, 부모님이 먼저 묻는 질문(화면 시간, 아이 정보, 앱 설치, 비용).
+- [개인정보처리방침](https://lilyrang.co.kr/privacy/): 받는 정보와 목적, 보관 기간, 지우는 방법. 아이 이름, 사진, 학교는 받지 않는다.
+
+## 핵심 사실
+
+- 대상: 4~7세 아이와 부모.
+- 길이: 한 편이 2분 남짓(약 2분 13초에서 2분 38초). 다 들으면 멈춘다.
+- 방식: 릴리가 묻고 기다리면 아이가 그림을 눌러야 다음 장면이 나온다. 8초가 지나면 릴리가 대신 넘어간다.
+- 언어: 영어 표현을 우리말 설명과 함께 들려준다. 우리말은 처음 한 번만, 그다음은 영어만.
+- 끝까지 들으면 오늘의 단어 스티커 세 장을 모은다.
+- 비용: 이 닦기 편은 로그인 없이 무료, 가입도 무료.
+- 아이 정보: 아이 이름, 사진, 학교는 묻지 않고 부모님 계정만 만든다.
+- 기기: 휴대폰, 태블릿, PC 브라우저에서 바로 열린다. 앱 설치가 필요 없다.
+- 만든 곳: 매일 외국어 읽기(https://read.wspace.ai.kr/).

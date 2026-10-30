@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+  <url>
+    <loc>https://lilyrang.co.kr/</loc>
+    <lastmod>2026-10-30</lastmod>
+    <image:image><image:loc>https://lilyrang.co.kr/og.jpg</image:loc></image:image>
+  </url>
+  <url>
+    <loc>https://lilyrang.co.kr/ep01/</loc>
+    <lastmod>2026-10-30</lastmod>
+    <image:image><image:loc>https://lilyrang.co.kr/ep01/og.jpg</image:loc></image:image>
+  </url>
+  <url>
+    <loc>https://lilyrang.co.kr/ep02/</loc>
+    <lastmod>2026-10-30</lastmod>
+    <image:image><image:loc>https://lilyrang.co.kr/ep02/og.jpg</image:loc></image:image>
+  </url>
+  <url>
+    <loc>https://lilyrang.co.kr/ep03/</loc>
+    <lastmod>2026-10-30</lastmod>
+    <image:image><image:loc>https://lilyrang.co.kr/ep03/og.jpg</image:loc></image:image>
+  </url>
+  <url>
+    <loc>https://lilyrang.co.kr/ep04/</loc>
+    <lastmod>2026-10-30</lastmod>
+    <image:image><image:loc>https://lilyrang.co.kr/ep04/og.jpg</image:loc></image:image>
+  </url>
+  <url>
+    <loc>https://lilyrang.co.kr/ep05/</loc>
+    <lastmod>2026-10-30</lastmod>
+    <image:image><image:loc>https://lilyrang.co.kr/ep05/og.jpg</image:loc></image:image>
+  </url>
+  <url>
+    <loc>https://lilyrang.co.kr/ep06/</loc>
+    <lastmod>2026-10-30</lastmod>
+    <image:image><image:loc>https://lilyrang.co.kr/ep06/og.jpg</image:loc></image:image>
+  </url>
+  <url>
+    <loc>https://lilyrang.co.kr/ep07/</loc>
+    <lastmod>2026-10-30</lastmod>
+    <image:image><image:loc>https://lilyrang.co.kr/ep07/og.jpg</image:loc></image:image>
+  </url>
+  <url>
+    <loc>https://lilyrang.co.kr/privacy/</loc>
+    <lastmod>2026-10-30</lastmod>
+  </url>
+</urlset>
