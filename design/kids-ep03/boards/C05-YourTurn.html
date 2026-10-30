@@ -1,0 +1,187 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=390">
+  <title>Brush, Brush, Brush! — 친구 차례</title>
+  <link rel="stylesheet" href="../shared/tokens.css">
+  <style>
+    body { background: var(--t-bg); color: var(--t-ink); font-family: var(--t-body); width: 390px; margin: 0 auto; overflow-x: hidden; }
+    .top-bar { display: flex; align-items: center; justify-content: space-between; padding: 0 16px; height: 52px; background: var(--t-surface); border-bottom: 1.5px solid var(--t-line); }
+    .top-title { font-family: var(--t-en); font-size: 11px; color: var(--t-sub); letter-spacing: 0.03em; }
+    .prog-dots { display: flex; align-items: center; gap: 5px; }
+    .pdot { width: 8px; height: 8px; border-radius: 50%; background: var(--t-soft); }
+    .pdot.done { background: var(--t-accent); opacity: 0.38; }
+    .pdot.now { width: 22px; border-radius: 4px; background: var(--t-accent); }
+    .listen-sw { display: flex; align-items: center; gap: 5px; font-family: var(--t-kr); font-size: 10px; color: var(--t-sub); }
+    .sw-track { width: 28px; height: 16px; background: var(--t-soft); border-radius: 8px; position: relative; }
+    .sw-thumb { position: absolute; left: 2px; top: 2px; width: 12px; height: 12px; background: var(--t-surface-2); border-radius: 50%; }
+    .stage { width: 390px; height: 610px; position: relative; overflow: hidden; display: block; }
+    .caption-strip { background: var(--t-surface); padding: 12px 24px 10px; border-top: 1.5px solid var(--t-line); border-bottom: 1.5px solid var(--t-line); }
+    .wait-tag { display: inline-flex; align-items: center; gap: 6px; background: var(--t-soft); border-radius: 99px; padding: 3px 11px; font-family: var(--t-kr); font-size: 11px; color: var(--t-accent); margin-bottom: 7px; }
+    .wait-dot { width: 6px; height: 6px; background: var(--t-accent); border-radius: 50%; animation: blink 1.6s ease-in-out infinite; }
+    @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.25} }
+    .caption-text { font-family: var(--t-kr); font-size: 19px; line-height: 1.55; color: var(--t-ink); margin: 0; text-align: center; word-break: keep-all; }
+    .en { font-family: var(--t-en); font-size: 21px; color: var(--t-accent); font-weight: 700; }
+    .controls { background: var(--t-bg); padding: 11px 18px 10px; }
+    .ctrl-top { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }
+    .play-btn { width: 38px; height: 38px; border-radius: 50%; background: var(--t-soft); border: none; display: flex; align-items: center; justify-content: center; flex-shrink: 0; cursor: pointer; }
+    .prog-wrap { flex: 1; }
+    .prog-track { height: 4px; background: var(--t-soft); border-radius: 2px; margin-bottom: 4px; }
+    .prog-fill { width: 77%; height: 100%; background: var(--t-accent); border-radius: 2px; }
+    .time-row { display: flex; justify-content: space-between; font-family: var(--t-en); font-size: 11px; color: var(--t-sub); }
+    .ctrl-btns { display: flex; gap: 7px; }
+    .ctrl-btn { flex: 1; border: 1.5px solid var(--t-line); background: var(--t-surface); border-radius: 10px; padding: 8px 6px; font-family: var(--t-kr); font-size: 11px; color: var(--t-sub); text-align: center; cursor: pointer; }
+    .ring-drain { animation: drain5 5s linear; transform-origin: 195px 340px; }
+    @keyframes drain5 { from { stroke-dashoffset: 0; } to { stroke-dashoffset: 452; } }
+    .hint-ring { animation: hpulse 2.2s ease-in-out infinite; }
+    @keyframes hpulse { 0%,100%{ opacity: 0.55; } 50%{ opacity: 0.15; } }
+  </style>
+</head>
+<body class="t-night">
+
+  <header class="top-bar">
+    <span class="top-title">Brush, Brush, Brush!</span>
+    <div class="prog-dots" aria-label="진행 5/6">
+      <span class="pdot done"></span><span class="pdot done"></span>
+      <span class="pdot done"></span><span class="pdot done"></span>
+      <span class="pdot now"></span>
+      <span class="pdot"></span>
+    </div>
+    <div class="listen-sw">
+      <span>그냥 듣기</span>
+      <span class="sw-track"><span class="sw-thumb"></span></span>
+    </div>
+  </header>
+
+  <div class="stage" role="img" aria-label="친구 차례. 릴리가 Bubbles 라고 하면 아이가 따라 말해요.">
+    <svg width="390" height="610" viewBox="0 0 390 610" xmlns="http://www.w3.org/2000/svg">
+
+      <!-- 배경 -->
+      <rect width="390" height="610" style="fill:var(--t-surface)"/>
+
+      <!-- 별 -->
+      <circle cx="340" cy="28" r="1.1" style="fill:var(--t-moon)" opacity="0.4"/>
+      <circle cx="36" cy="42" r="0.9" style="fill:var(--t-moon)" opacity="0.32"/>
+
+      <!-- "이제 친구 차례야!" 안내 텍스트 -->
+      <text x="195" y="40" style="font-family:var(--t-kr); font-size:14px; fill:var(--t-sub); text-anchor:middle">이제 친구 차례야! 내가 말하면 따라 해 봐.</text>
+
+      <!-- ===== 릴리 (상단 왼쪽, 소형) ===== -->
+      <!-- 1단계: 피그테일 기둥 (얼굴 뒤에서 삐져나오는 부분, 먼저 그림) -->
+      <ellipse cx="18" cy="110" rx="18" ry="26" style="fill:var(--hair)"/>
+      <ellipse cx="190" cy="110" rx="18" ry="26" style="fill:var(--hair)"/>
+      <!-- 2단계: 얼굴 (피그테일 중앙 가림) -->
+      <circle cx="104" cy="114" r="66" style="fill:var(--skin)"/>
+      <!-- 귀 -->
+      <circle cx="38" cy="118" r="10" style="fill:var(--skin)"/>
+      <circle cx="170" cy="118" r="10" style="fill:var(--skin)"/>
+      <!-- 3단계: 머리카락 볼컷 캡 (lily-scene.svg 기준, scale 1.179) -->
+      <path d="M26 102 q9 -68 66 -68 q57 0 66 68 q-33 -26 -66 -28 q-33 2 -66 28 z" style="fill:var(--hair)"/>
+      <!-- 4단계: 머리띠 (노란 원) -->
+      <circle cx="34" cy="106" r="9" style="fill:var(--sun)"/>
+      <circle cx="174" cy="106" r="9" style="fill:var(--sun)"/>
+      <!-- 5단계: 눈, 볼, 입 (머리카락 캡 위에) -->
+      <circle cx="84" cy="108" r="9" style="fill:var(--ink)"/>
+      <circle cx="87" cy="105" r="3.2" style="fill:var(--t-moon)"/>
+      <circle cx="124" cy="108" r="9" style="fill:var(--ink)"/>
+      <circle cx="127" cy="105" r="3.2" style="fill:var(--t-moon)"/>
+      <!-- 볼 -->
+      <ellipse cx="68" cy="126" rx="14" ry="9" style="fill:var(--cheek)" opacity="0.5"/>
+      <ellipse cx="140" cy="126" rx="14" ry="9" style="fill:var(--cheek)" opacity="0.5"/>
+      <!-- 입 (말하는 중 - 작은 O형) -->
+      <ellipse cx="104" cy="136" rx="10" ry="9" style="fill:var(--ink)"/>
+      <ellipse cx="104" cy="134" rx="8" ry="6" style="fill:var(--skin)"/>
+      <!-- 셔츠 -->
+      <path d="M 46 178 q -10 10 -10 40 l 136 0 q 0 -30 -10 -40 q -28 -14 -58 -14 q -30 0 -58 14 z" style="fill:var(--blue)"/>
+
+      <!-- 말풍선 -->
+      <rect x="178" y="76" width="194" height="70" rx="16" style="fill:var(--t-surface-2); stroke:var(--t-line); stroke-width:1.5"/>
+      <!-- 꼬리 -->
+      <path d="M 192 130 l -20 24 l 14 -4 z" style="fill:var(--t-surface-2); stroke:var(--t-line); stroke-width:1.5"/>
+      <path d="M 192 130 l -20 24 l 14 -4 z" style="fill:var(--t-surface-2)"/>
+      <!-- 말풍선 텍스트 -->
+      <text x="275" y="107" style="font-family:var(--t-en); font-size:22px; fill:var(--t-accent); text-anchor:middle; font-weight:700">Bubbles.</text>
+      <text x="275" y="132" style="font-family:var(--t-kr); font-size:13px; fill:var(--t-sub); text-anchor:middle">릴리가 기다려요...</text>
+
+      <!-- ===== 큰 "말했어요!" 버튼 ===== -->
+      <!-- 5s 링 (바깥) -->
+      <circle cx="195" cy="340" r="90" class="ring-drain"
+        style="fill:none; stroke:var(--t-line); stroke-width:2"/>
+      <circle cx="195" cy="340" r="90" class="ring-drain"
+        style="fill:none; stroke:var(--t-accent); stroke-width:2.5;
+               stroke-dasharray:452; stroke-linecap:round;
+               transform:rotate(-90deg); transform-origin:195px 340px; opacity:0.5"/>
+      <!-- 글로우 링 (중간) -->
+      <circle cx="195" cy="340" r="78" class="hint-ring"
+        style="fill:none; stroke:var(--t-accent); stroke-width:2"/>
+      <!-- 버튼 배경 -->
+      <circle cx="195" cy="340" r="66" style="fill:var(--t-accent)"/>
+      <!-- 버튼 내부 밝기 링 -->
+      <circle cx="195" cy="340" r="66" style="fill:none; stroke:var(--t-moon); stroke-width:1.5; opacity:0.2"/>
+      <!-- 버튼 텍스트 -->
+      <text x="195" y="332" style="font-family:var(--t-kr); font-size:20px; fill:var(--t-surface); text-anchor:middle; font-weight:700">말했어요!</text>
+      <text x="195" y="356" style="font-family:var(--t-en); font-size:13px; fill:var(--t-surface); text-anchor:middle; opacity:0.7">I said it!</text>
+
+      <!-- ===== 스티커판 (하단) ===== -->
+      <rect x="20" y="452" width="350" height="82" rx="16" style="fill:var(--t-soft); stroke:var(--t-line); stroke-width:1.5"/>
+      <text x="30" y="472" style="font-family:var(--t-kr); font-size:11px; fill:var(--t-sub); opacity:0.7">스티커판</text>
+
+      <!-- 슬롯 1: 채워짐 (brush my teeth) -->
+      <circle cx="88" cy="502" r="28" style="fill:var(--t-surface-2); stroke:var(--t-accent); stroke-width:2"/>
+      <!-- 칫솔 아이콘 간략화 -->
+      <rect x="72" y="498" width="32" height="8" rx="4" style="fill:var(--sun)"/>
+      <rect x="94" y="493" width="12" height="13" rx="3" style="fill:var(--t-moon)"/>
+      <text x="88" y="517" style="font-family:var(--t-kr); font-size:9px; fill:var(--t-sub); text-anchor:middle; opacity:0.7">brush</text>
+
+      <!-- 슬롯 2: 스티커 날아오는 중 (bubbles - 45도 각도) -->
+      <circle cx="195" cy="502" r="28" style="fill:var(--t-surface-2); stroke:var(--t-line); stroke-width:1.5; stroke-dasharray:5 4"/>
+      <!-- 날아오는 스티커 (비스듬히 이동 중, 슬롯 위 약간 오른쪽) -->
+      <g transform="translate(228, 475) rotate(-22)">
+        <circle r="22" style="fill:var(--t-surface); stroke:var(--t-accent); stroke-width:2"/>
+        <!-- 거품 아이콘 간략화 -->
+        <circle cx="-4" cy="-2" r="7" style="fill:var(--t-surface-2); stroke:var(--t-accent); stroke-width:1.5"/>
+        <circle cx="6" cy="4" r="5" style="fill:var(--t-surface-2); stroke:var(--t-accent); stroke-width:1.5"/>
+        <circle cx="-2" cy="6" r="4" style="fill:var(--t-surface-2); stroke:var(--t-accent); stroke-width:1.5"/>
+      </g>
+      <!-- 이동 궤적 점선 -->
+      <path d="M 228 475 q -16 18 -33 27" style="fill:none; stroke:var(--t-accent); stroke-width:1.5; stroke-dasharray:4 3; opacity:0.5"/>
+      <text x="195" y="517" style="font-family:var(--t-kr); font-size:9px; fill:var(--t-sub); text-anchor:middle; opacity:0.6">bubbles</text>
+
+      <!-- 슬롯 3: 빈 칸 -->
+      <circle cx="302" cy="502" r="28" style="fill:none; stroke:var(--t-line); stroke-width:1.5; stroke-dasharray:5 4"/>
+      <text x="302" y="517" style="font-family:var(--t-kr); font-size:9px; fill:var(--t-soft); text-anchor:middle">all clean</text>
+
+      <!-- 학습지 3번 링크 -->
+      <rect x="116" y="544" width="158" height="22" rx="11" style="fill:var(--t-soft)"/>
+      <text x="195" y="559" style="font-family:var(--t-kr); font-size:11px; fill:var(--t-accent); text-anchor:middle">학습지 3번에도 붙여요</text>
+
+    </svg>
+  </div>
+
+  <div class="caption-strip">
+    <div class="wait-tag">
+      <span class="wait-dot"></span>
+      릴리가 기다려요
+    </div>
+    <p class="caption-text">이제 친구 차례야! <span class="en">Bubbles!</span></p>
+  </div>
+
+  <div class="controls">
+    <div class="ctrl-top">
+      <button class="play-btn" aria-label="일시정지">
+        <svg width="16" height="16" viewBox="0 0 16 16"><rect x="3" y="2" width="3.5" height="12" rx="1.2" style="fill:var(--t-sub)"/><rect x="9.5" y="2" width="3.5" height="12" rx="1.2" style="fill:var(--t-sub)"/></svg>
+      </button>
+      <div class="prog-wrap">
+        <div class="prog-track"><div class="prog-fill"></div></div>
+        <div class="time-row"><span>1:48</span><span>2:19</span></div>
+      </div>
+    </div>
+    <div class="ctrl-btns">
+      <button class="ctrl-btn">3번 이어 듣기</button>
+      <button class="ctrl-btn">조금 천천히</button>
+    </div>
+  </div>
+
+</body>
+</html>

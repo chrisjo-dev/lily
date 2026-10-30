@@ -1,0 +1,634 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=390">
+  <title>Brush, Brush, Brush! — 매일 외국어 읽기</title>
+  <link rel="stylesheet" href="../shared/tokens.css">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: var(--t-bg);
+      font-family: var(--t-body);
+      color: var(--t-ink);
+      font-size: 16px;
+      line-height: 1.6;
+      letter-spacing: -0.01em;
+      word-break: keep-all;
+      max-width: 390px;
+      margin: 0 auto;
+    }
+
+    /* --- SITE MARK --- */
+    .site-mark {
+      padding: 12px 20px 0;
+      text-align: right;
+      font-size: 10px;
+      font-family: var(--t-kr);
+      color: var(--t-sub);
+      letter-spacing: 0.09em;
+      opacity: 0.6;
+    }
+
+    /* --- EPISODE HEADER --- */
+    .ep-header {
+      padding: 12px 20px 20px;
+    }
+    .ep-chips {
+      display: flex;
+      gap: 6px;
+      margin-bottom: 12px;
+    }
+    .ep-chip {
+      font-size: 11px;
+      font-family: var(--t-kr);
+      color: var(--t-sub);
+      background: var(--t-surface);
+      border: 1px solid var(--t-line);
+      border-radius: 6px;
+      padding: 3px 8px;
+      line-height: 1.4;
+    }
+    .ep-title {
+      font-family: var(--t-en);
+      font-size: 31px;
+      font-weight: 700;
+      color: var(--t-moon);
+      line-height: 1.1;
+      margin-bottom: 8px;
+      letter-spacing: -0.02em;
+    }
+    .ep-desc {
+      font-size: 13px;
+      font-family: var(--t-kr);
+      color: var(--t-sub);
+      line-height: 1.6;
+    }
+
+    /* --- MOON STAGE --- */
+    .moon-stage {
+      position: relative;
+      width: 100%;
+      padding: 8px 20px 0;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      min-height: 230px;
+    }
+    .moon-stars {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+    }
+    /* Lily round window — a framed picture on the dark wall */
+    .lily-window {
+      position: absolute;
+      top: 12px;
+      right: 16px;
+      width: 66px;
+      height: 66px;
+      border-radius: 50%;
+      overflow: hidden;
+      border: 2px solid var(--t-surface-2);
+      background: var(--t-surface);
+      flex-shrink: 0;
+    }
+    .lily-window img {
+      width: 185%;
+      height: 185%;
+      margin-left: -42%;
+      margin-top: -14%;
+      object-fit: cover;
+    }
+    /* Moon play button */
+    .moon-btn {
+      position: relative;
+      width: 210px;
+      height: 210px;
+      background: none;
+      border: none;
+      padding: 0;
+      cursor: pointer;
+      flex-shrink: 0;
+    }
+    .moon-btn:focus-visible {
+      outline: 2px solid var(--t-accent);
+      outline-offset: 4px;
+      border-radius: 50%;
+    }
+
+    /* --- PLAYER LOWER --- */
+    .player-lower {
+      padding: 10px 20px 0;
+    }
+    /* Current line */
+    .now-line {
+      font-family: var(--t-kr);
+      font-size: 20px;
+      color: var(--t-ink);
+      text-align: center;
+      line-height: 1.6;
+      padding-bottom: 14px;
+    }
+    .now-line .en-word {
+      font-family: var(--t-en);
+      color: var(--t-accent);
+      font-size: 21px;
+    }
+    /* Linear progress */
+    .progress-track {
+      position: relative;
+      width: 100%;
+      height: 3px;
+      background: var(--t-surface-2);
+      border-radius: 2px;
+      margin-bottom: 8px;
+    }
+    .progress-fill {
+      width: 49%;
+      height: 100%;
+      background: var(--t-accent);
+      border-radius: 2px;
+    }
+    .progress-knob {
+      position: absolute;
+      top: 50%;
+      left: 49%;
+      transform: translate(-50%, -50%);
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--t-accent);
+      border: 2px solid var(--t-bg);
+    }
+    .time-row {
+      display: flex;
+      justify-content: space-between;
+      font-size: 12px;
+      font-family: var(--t-kr);
+      color: var(--t-sub);
+      opacity: 0.8;
+      margin-bottom: 14px;
+    }
+    /* Tool buttons */
+    .tool-row {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 4px;
+    }
+    .tool-btn {
+      flex: 1;
+      font-family: var(--t-kr);
+      font-size: 12px;
+      color: var(--t-sub);
+      background: var(--t-surface);
+      border: 1px solid var(--t-line);
+      border-radius: 20px;
+      padding: 8px 4px;
+      cursor: pointer;
+      text-align: center;
+    }
+
+    /* --- SECTION RULE --- */
+    .section-rule {
+      width: calc(100% - 40px);
+      margin: 24px 20px 0;
+      height: 1px;
+      background: var(--t-line);
+    }
+
+    /* --- LANTERNS ON STRINGS --- */
+    .words-section {
+      padding: 0 12px 0;
+    }
+    .words-label {
+      font-family: var(--t-kr);
+      font-size: 11px;
+      color: var(--t-sub);
+      letter-spacing: 0.1em;
+      text-align: center;
+      padding: 14px 0 0;
+      opacity: 0.65;
+      display: block;
+    }
+    .lanterns-rail-svg {
+      display: block;
+      width: 100%;
+      margin-top: 4px;
+      overflow: visible;
+    }
+    .lanterns-row {
+      display: flex;
+      justify-content: space-around;
+      align-items: flex-start;
+      padding: 0 8px;
+    }
+    .lantern-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 90px;
+      background: none;
+      border: none;
+      padding: 0;
+      cursor: pointer;
+      color: inherit;
+      font: inherit;
+    }
+    .lantern-item:focus-visible .lantern-globe {
+      outline: 2px solid var(--t-accent);
+      outline-offset: 3px;
+    }
+    .lantern-globe {
+      width: 72px;
+      height: 72px;
+      border-radius: 50%;
+      background: var(--t-surface);
+      border: 1.5px solid var(--t-line);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 10px;
+    }
+    .lantern-globe.glow {
+      border-color: var(--t-accent);
+      box-shadow: 0 0 0 4px rgba(255,181,71,0.13), 0 0 0 9px rgba(255,181,71,0.05);
+    }
+    .lantern-globe img {
+      width: 44px;
+      height: 44px;
+      object-fit: contain;
+    }
+    .lantern-en {
+      font-family: var(--t-en);
+      font-size: 11px;
+      color: var(--t-sub);
+      text-align: center;
+      line-height: 1.3;
+      margin-bottom: 4px;
+      white-space: nowrap;
+    }
+    .lantern-en.glow { color: var(--t-accent); }
+    .lantern-ko {
+      font-family: var(--t-kr);
+      font-size: 12px;
+      color: var(--t-sub);
+      text-align: center;
+      opacity: 0.6;
+      line-height: 1.3;
+    }
+
+    /* --- PARENT SECTION --- */
+    .parent-section {
+      margin-top: 28px;
+      padding: 0 16px;
+    }
+    .parent-label {
+      font-family: var(--t-kr);
+      font-size: 10px;
+      color: var(--t-sub);
+      letter-spacing: 0.1em;
+      margin-bottom: 12px;
+      opacity: 0.55;
+      display: block;
+    }
+    .pcard {
+      background: var(--t-surface);
+      border: 1px solid var(--t-line);
+      border-radius: 14px;
+      padding: 16px;
+      margin-bottom: 10px;
+    }
+    .pcard-title {
+      font-family: var(--t-kr);
+      font-size: 14px;
+      color: var(--t-ink);
+      font-weight: 600;
+      margin-bottom: 12px;
+      opacity: 0.9;
+    }
+    /* Worksheet */
+    .ws-preview {
+      border-radius: 8px;
+      overflow: hidden;
+      border: 1px solid var(--t-line);
+      margin-bottom: 12px;
+      height: 200px;
+    }
+    .ws-preview img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: top;
+      display: block;
+      filter: brightness(0.8);
+    }
+    .ws-items {
+      display: flex;
+      flex-direction: column;
+      gap: 7px;
+      margin-bottom: 14px;
+    }
+    .ws-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-family: var(--t-kr);
+      font-size: 13px;
+      color: var(--t-sub);
+      line-height: 1.5;
+    }
+    .ws-num {
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: var(--t-soft);
+      font-size: 11px;
+      color: var(--t-accent);
+      font-family: var(--t-kr);
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .dl-btn {
+      display: block;
+      width: 100%;
+      padding: 11px 16px;
+      background: var(--t-surface-2);
+      color: var(--t-accent);
+      border: 1px solid var(--t-line);
+      border-radius: 10px;
+      font-family: var(--t-kr);
+      font-size: 13px;
+      text-align: center;
+      cursor: pointer;
+      text-decoration: none;
+    }
+    /* Tips */
+    .tips-list {
+      display: flex;
+      flex-direction: column;
+      gap: 9px;
+    }
+    .tip-item {
+      font-family: var(--t-kr);
+      font-size: 13px;
+      color: var(--t-sub);
+      line-height: 1.65;
+      padding-left: 14px;
+      position: relative;
+    }
+    .tip-item::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 10px;
+      width: 4px;
+      height: 4px;
+      border-radius: 50%;
+      background: var(--t-accent);
+      opacity: 0.45;
+    }
+    /* Script toggle */
+    .script-btn {
+      width: 100%;
+      background: var(--t-surface);
+      border: 1px solid var(--t-line);
+      border-radius: 12px;
+      padding: 12px 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-family: var(--t-kr);
+      font-size: 13px;
+      color: var(--t-sub);
+      cursor: pointer;
+    }
+
+    /* --- FOOTER --- */
+    .footer {
+      padding: 16px 16px 40px;
+      margin-top: 20px;
+      border-top: 1px solid var(--t-line);
+    }
+    .footer-copy {
+      font-family: var(--t-kr);
+      font-size: 10px;
+      color: var(--t-sub);
+      opacity: 0.38;
+    }
+  </style>
+</head>
+<body class="t-night">
+
+  <!-- SITE MARK -->
+  <p class="site-mark" aria-label="서비스 이름">매일 외국어 읽기</p>
+
+  <!-- EPISODE HEADER -->
+  <header class="ep-header">
+    <div class="ep-chips" aria-label="에피소드 정보">
+      <span class="ep-chip">EP03</span>
+      <span class="ep-chip">5~8세</span>
+      <span class="ep-chip">2분</span>
+    </div>
+    <h1 class="ep-title">Brush, Brush, Brush!</h1>
+    <p class="ep-desc">자기 전 이 닦기 시간이에요. 릴리랑 같이 들어요.</p>
+  </header>
+
+  <!-- MOON PLAYER STAGE -->
+  <section aria-label="오디오 플레이어">
+
+    <div class="moon-stage">
+
+      <!-- Scattered background stars -->
+      <svg class="moon-stars" viewBox="0 0 390 230" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+        <circle cx="22"  cy="32" r="1.2" style="fill:var(--t-moon)" opacity="0.32"/>
+        <circle cx="64"  cy="15" r="1"   style="fill:var(--t-moon)" opacity="0.24"/>
+        <circle cx="108" cy="38" r="0.8" style="fill:var(--t-moon)" opacity="0.18"/>
+        <circle cx="152" cy="22" r="1.4" style="fill:var(--t-moon)" opacity="0.28"/>
+        <circle cx="245" cy="30" r="1"   style="fill:var(--t-moon)" opacity="0.26"/>
+        <circle cx="285" cy="11" r="1.2" style="fill:var(--t-moon)" opacity="0.21"/>
+        <circle cx="350" cy="46" r="0.9" style="fill:var(--t-moon)" opacity="0.17"/>
+        <circle cx="36"  cy="64" r="0.7" style="fill:var(--t-moon)" opacity="0.19"/>
+        <circle cx="172" cy="52" r="1"   style="fill:var(--t-moon)" opacity="0.21"/>
+        <circle cx="316" cy="37" r="1.1" style="fill:var(--t-moon)" opacity="0.19"/>
+        <circle cx="74"  cy="80" r="0.8" style="fill:var(--t-moon)" opacity="0.14"/>
+        <circle cx="330" cy="70" r="0.7" style="fill:var(--t-moon)" opacity="0.16"/>
+      </svg>
+
+      <!-- Lily round window (framed picture on the wall) -->
+      <div class="lily-window" aria-label="릴리와 비스킷이 이를 닦는 그림">
+        <img src="../assets/lily-scene.svg" alt="릴리 이 닦기 장면">
+      </div>
+
+      <!-- Moon play button — the signature element -->
+      <!-- SVG: 210x210, center (105,105), moon radius 62 -->
+      <!-- Progress arc at r=101; halo rings 90, 81, 73, 66 -->
+      <!-- Moon phase: right side lit (~49%), left side dark -->
+      <!--   Circumference at r=101: 2*PI*101 ≈ 634.6 -->
+      <!--   49% dash: 634.6*0.49 ≈ 310.9 → 311; gap: 323 -->
+      <button class="moon-btn" aria-label="일시정지 (1분 8초 / 2분 19초 재생 중)">
+        <svg width="210" height="210" viewBox="0 0 210 210" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+
+          <!-- Progress track ring -->
+          <circle cx="105" cy="105" r="101" fill="none" stroke="var(--t-line)" stroke-width="2.5"/>
+          <!-- Progress fill arc (49%, starts at 12 o'clock = rotate -90) -->
+          <circle cx="105" cy="105" r="101" fill="none" stroke="var(--t-accent)" stroke-width="2.5"
+            stroke-dasharray="311 324" stroke-linecap="round"
+            transform="rotate(-90 105 105)"/>
+
+          <!-- Halo: concentric flat amber rings (no gradients) -->
+          <circle cx="105" cy="105" r="93"  fill="none" stroke="var(--t-accent)" stroke-width="1"   opacity="0.07"/>
+          <circle cx="105" cy="105" r="84"  fill="none" stroke="var(--t-accent)" stroke-width="1.5" opacity="0.11"/>
+          <circle cx="105" cy="105" r="75"  fill="none" stroke="var(--t-accent)" stroke-width="2"   opacity="0.17"/>
+          <circle cx="105" cy="105" r="67"  fill="none" stroke="var(--t-accent)" stroke-width="2.5" opacity="0.22"/>
+
+          <!-- Moon body: dark (unlit) side -->
+          <circle cx="105" cy="105" r="60" style="fill:var(--t-surface-2)"/>
+
+          <!-- Moon lit side: right semicircle (~49% = roughly half) -->
+          <!-- Arc from top (105, 45) clockwise to bottom (105, 165), then L back to top -->
+          <path d="M 105,45 A 60,60 0 0,1 105,165 L 105,45 Z" style="fill:var(--t-moon)"/>
+
+          <!-- Pause icon: small moon-coloured disc behind two solid bars — readable on both halves -->
+          <circle cx="105" cy="105" r="32" style="fill:var(--t-moon)" opacity="0.18"/>
+          <rect x="89"  y="83" width="14" height="44" rx="4" style="fill:var(--t-bg)"/>
+          <rect x="107" y="83" width="14" height="44" rx="4" style="fill:var(--t-bg)"/>
+        </svg>
+      </button>
+
+    </div>
+
+    <!-- Current line and controls below the moon -->
+    <div class="player-lower">
+
+      <p class="now-line" aria-live="polite">
+        와! <span class="en-word">Bubbles!</span> 거품이야! <span class="en-word">Bubbles!</span>
+      </p>
+
+      <div role="progressbar" aria-valuenow="68" aria-valuemin="0" aria-valuemax="139" aria-label="재생 위치">
+        <div class="progress-track">
+          <div class="progress-fill"></div>
+          <div class="progress-knob"></div>
+        </div>
+        <div class="time-row">
+          <span>1:08</span>
+          <span>2:19</span>
+        </div>
+      </div>
+
+      <div class="tool-row">
+        <button class="tool-btn">3번 이어 듣기</button>
+        <button class="tool-btn">조금 천천히</button>
+      </div>
+
+    </div>
+
+  </section>
+
+  <!-- DIVIDER -->
+  <div class="section-rule" role="separator"></div>
+
+  <!-- WORDS: LANTERNS ON STRINGS -->
+  <section class="words-section" aria-label="오늘의 단어">
+
+    <span class="words-label">오늘의 단어</span>
+
+    <!-- Horizontal string rail with three attachment knots -->
+    <svg class="lanterns-rail-svg" height="28" viewBox="0 0 358 28" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" preserveAspectRatio="none">
+      <line x1="0" y1="5" x2="358" y2="5" stroke="var(--t-line)" stroke-width="1"/>
+      <!-- knot for brush my teeth -->
+      <circle cx="58"  cy="5" r="3" style="fill:var(--t-soft)"/>
+      <line x1="58"  y1="5" x2="58"  y2="28" stroke="var(--t-line)" stroke-width="1"/>
+      <!-- knot for bubbles (now playing, amber) -->
+      <circle cx="179" cy="5" r="3.5" style="fill:var(--t-accent)" opacity="0.55"/>
+      <line x1="179" y1="5" x2="179" y2="28" stroke="var(--t-line)" stroke-width="1" opacity="0.85"/>
+      <!-- knot for all clean -->
+      <circle cx="300" cy="5" r="3" style="fill:var(--t-soft)"/>
+      <line x1="300" y1="5" x2="300" y2="28" stroke="var(--t-line)" stroke-width="1"/>
+    </svg>
+
+    <div class="lanterns-row">
+
+      <!-- Word 1: brush my teeth -->
+      <button class="lantern-item" aria-label="brush my teeth 발음 듣기">
+        <div class="lantern-globe">
+          <img src="../assets/word-brush.svg" alt="칫솔 아이콘">
+        </div>
+        <span class="lantern-en">brush my teeth</span>
+        <span class="lantern-ko">이를 닦아요</span>
+      </button>
+
+      <!-- Word 2: bubbles — NOW PLAYING -->
+      <button class="lantern-item" aria-label="bubbles 발음 듣기 (현재 재생 중)" aria-pressed="true">
+        <div class="lantern-globe glow">
+          <img src="../assets/word-bubbles.svg" alt="거품 아이콘">
+        </div>
+        <span class="lantern-en glow">bubbles</span>
+        <span class="lantern-ko">거품</span>
+      </button>
+
+      <!-- Word 3: all clean -->
+      <button class="lantern-item" aria-label="all clean 발음 듣기">
+        <div class="lantern-globe">
+          <img src="../assets/word-clean.svg" alt="깨끗 아이콘">
+        </div>
+        <span class="lantern-en">all clean</span>
+        <span class="lantern-ko">깨끗해</span>
+      </button>
+
+    </div>
+  </section>
+
+  <!-- PARENT SECTION -->
+  <section class="parent-section" aria-label="부모님 구역">
+
+    <span class="parent-label">부모님 구역</span>
+
+    <!-- Worksheet -->
+    <div class="pcard">
+      <p class="pcard-title">학습지</p>
+      <div class="ws-preview">
+        <img src="../assets/worksheet.png" alt="A4 학습지 미리보기: 칫솔 찾기, 단어 카드, 스티커 활동, 색칠하기">
+      </div>
+      <div class="ws-items">
+        <div class="ws-item"><span class="ws-num">1</span>그림에서 칫솔 찾기</div>
+        <div class="ws-item"><span class="ws-num">2</span>오려서 노는 단어 카드</div>
+        <div class="ws-item"><span class="ws-num">3</span>말할 때마다 스티커</div>
+        <div class="ws-item"><span class="ws-num">4</span>릴리 색칠하기</div>
+      </div>
+      <a href="#" class="dl-btn">학습지 받기 (A4)</a>
+    </div>
+
+    <!-- Tips -->
+    <div class="pcard" role="complementary">
+      <p class="pcard-title">부모님께</p>
+      <div class="tips-list">
+        <p class="tip-item">여러 번 들려주세요. 한 번에 다 알아듣지 않아도 괜찮아요.</p>
+        <p class="tip-item">실제 양치 시간에 "Brush my teeth!" 한 번 말해 주세요.</p>
+        <p class="tip-item">따라 하지 않아도 괜찮아요. 귀로 듣는 것만으로도 충분해요.</p>
+      </div>
+    </div>
+
+    <!-- Script toggle -->
+    <button class="script-btn" aria-expanded="false" aria-controls="script-content">
+      <span>대본 보기 (부모님용)</span>
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <path d="M4 6 L8 10 L12 6" stroke="var(--t-sub)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </button>
+
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <p class="footer-copy">매일 외국어 읽기 read.wspace.ai.kr</p>
+  </footer>
+
+</body>
+</html>

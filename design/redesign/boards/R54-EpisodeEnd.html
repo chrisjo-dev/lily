@@ -1,0 +1,233 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=390">
+  <title>R54 개선안 2 EpisodeEnd</title>
+  <link rel="stylesheet" href="../shared/tokens.css">
+  <style>
+    html, body { margin: 0; width: 390px; height: 844px; overflow: hidden; background: var(--paper); }
+
+    /* 종이 질감 배경 */
+    .page {
+      width: 390px; height: 844px;
+      position: relative;
+      display: flex; flex-direction: column;
+    }
+    .paper-bg {
+      position: absolute; inset: 0;
+      width: 100%; height: 100%;
+      object-fit: cover; display: block; z-index: 0;
+      opacity: 0.55;
+    }
+
+    /* 메인 콘텐츠 */
+    .page-body {
+      position: relative; z-index: 1;
+      flex: 1;
+      display: flex; flex-direction: column;
+      align-items: center;
+      padding: 28px 24px 0;
+      gap: 14px;
+    }
+
+    /* 찢은 종이 액자 (Lily 그림) */
+    .torn-frame {
+      width: 170px; height: 170px;
+      position: relative; flex-shrink: 0;
+    }
+    .torn-frame-bg {
+      position: absolute; inset: 0;
+      width: 100%; height: 100%;
+      border-radius: 50%;
+      overflow: hidden;
+      box-shadow: 2px 3px 14px rgba(107,74,54,0.18);
+    }
+    .torn-frame-bg img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+    }
+    /* 찢긴 종이 테두리 (SVG 마스크 효과) */
+    .torn-frame-edge {
+      position: absolute; inset: -6px; z-index: 2;
+      pointer-events: none;
+    }
+
+    /* 제목 묶음 */
+    .end-title-block { text-align: center; }
+    .end-ep {
+      font-family: var(--font-en); font-size: 11px;
+      color: var(--ink-2); margin: 0 0 3px;
+    }
+    .end-title {
+      font-family: var(--font-logo); font-size: 20px;
+      color: var(--ink); margin: 0 0 8px;
+    }
+    .end-msg {
+      font-family: var(--font-book); font-size: 15px;
+      color: var(--ink); margin: 0; line-height: 1.65;
+    }
+
+    /* 스티커 리본 + 자리 */
+    .sticker-section { text-align: center; width: 100%; }
+
+    .ribbon-wrap {
+      position: relative;
+      width: 220px; height: 38px; margin: 0 auto 10px;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .ribbon-img {
+      position: absolute; inset: 0; width: 100%; height: 100%;
+      object-fit: fill;
+    }
+    .ribbon-text {
+      position: relative; z-index: 1;
+      font-family: var(--font-logo); font-size: 14px; color: var(--brown);
+    }
+
+    .sticker-row {
+      display: flex; gap: 14px; justify-content: center; align-items: flex-start;
+    }
+    .sticker-col {
+      display: flex; flex-direction: column; align-items: center; gap: 5px;
+    }
+    .sticker-slot {
+      width: 78px; height: 78px;
+      position: relative;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .sticker-spot-img {
+      position: absolute; inset: 0; width: 100%; height: 100%;
+      object-fit: contain;
+    }
+    .sticker-img {
+      position: relative; z-index: 2;
+      width: 66px; height: 66px; object-fit: contain;
+      filter: drop-shadow(0 2px 5px rgba(107,74,54,0.14));
+    }
+    .sticker-word {
+      font-family: var(--font-en); font-size: 10px; color: var(--ink-2);
+    }
+
+    /* 버튼 묶음 */
+    .btn-block {
+      width: 100%; display: flex; flex-direction: column;
+      align-items: center; gap: 8px;
+    }
+
+    /* 한 번 더: 알약 단추 (빛살과 화살표는 btn-again.webp 안에 포함) */
+    .btn-again {
+      position: relative; flex: none; width: 160px; height: 67px; margin-top: 36px;
+      padding: 0 0 0 40px; border-radius: 34px; cursor: pointer;
+      border: 0; background: none; color: var(--touch-edge);
+      font-family: var(--font-logo); font-size: 20px;
+      box-shadow: 0 4px 14px rgba(107,74,54,0.25);
+      isolation: isolate;
+    }
+    .btn-again::before {
+      content: ""; position: absolute; z-index: -1; left: 0; top: -65%; width: 100%; height: 168%;
+      pointer-events: none;
+      background: url(../assets/btn-again.webp) 0 0 / 100% 100% no-repeat;
+    }
+
+    /* 부모님께 텍스트 링크 */
+    .btn-parent {
+      height: 40px;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .btn-parent span {
+      font-family: var(--font-kr); font-size: 15px; color: var(--teal);
+      border-bottom: 1px solid var(--teal-soft);
+      padding-bottom: 1px;
+    }
+
+    /* 부모 생활 장면 연결 띠 */
+    .parent-tip {
+      position: relative; z-index: 1;
+      background: var(--paper-2);
+      border-top: 1.5px solid var(--line);
+      padding: 14px 28px;
+      text-align: center;
+    }
+    .tip-text {
+      font-family: var(--font-kr); font-size: 13px;
+      color: var(--ink-2); line-height: 1.65; margin: 0;
+    }
+    .tip-en {
+      font-family: var(--font-en);
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <!-- 종이 질감 배경 -->
+    <img class="paper-bg" src="../assets/ep01-paper.webp" alt="">
+
+    <div class="page-body">
+      <!-- 찢긴 종이 액자 속 Lily 그림 -->
+      <div class="torn-frame">
+        <div class="torn-frame-bg">
+          <img src="../assets/ep01-bg-5-turn.webp" alt="이 닦기 이야기">
+        </div>
+        <!-- 찢긴 외곽 SVG -->
+        <svg class="torn-frame-edge" viewBox="0 0 182 182" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M91,2 C91,2 105,0 113,6 C121,12 125,6 133,10 C141,14 144,8 152,14 C160,20 158,26 165,32 C172,38 178,36 180,46 C182,56 177,60 178,70 C179,80 183,84 181,94 C179,104 174,106 173,116 C172,126 176,130 172,139 C168,148 162,148 157,156 C152,164 154,170 147,175 C140,180 135,176 127,179 C119,182 117,187 109,188 C101,189 97,184 89,184 C81,184 77,189 69,188 C61,187 59,182 51,179 C43,176 38,180 31,175 C24,170 26,164 21,156 C16,148 10,148 6,139 C2,130 6,126 5,116 C4,106 -1,104 -3,94 C-5,84 -1,80 0,70 C1,60 -4,56 -2,46 C0,36 6,38 13,32 C20,26 18,20 26,14 C34,8 37,14 45,10 C53,6 57,12 65,6 C73,0 77,2 91,2 Z" stroke="var(--brown)" stroke-width="1.5" fill="none" opacity="0.4"/>
+        </svg>
+      </div>
+
+      <!-- 제목 -->
+      <div class="end-title-block">
+        <p class="end-ep">EP01</p>
+        <p class="end-title">Brush, Brush, Brush!</p>
+        <p class="end-msg">이 닦기 이야기를 다 들었어요.</p>
+      </div>
+
+      <!-- 스티커 리본 + 세 장 -->
+      <div class="sticker-section">
+        <div class="ribbon-wrap">
+          <img class="ribbon-img" src="../assets/ribbon.png" alt="">
+          <span class="ribbon-text">오늘의 스티커</span>
+        </div>
+        <div class="sticker-row">
+          <div class="sticker-col">
+            <div class="sticker-slot">
+              <img class="sticker-spot-img" src="../assets/sticker-spot.png" alt="">
+              <img class="sticker-img" src="../assets/ep01-L-sticker-brush.webp" alt="">
+            </div>
+            <span class="sticker-word">brush my teeth</span>
+          </div>
+          <div class="sticker-col">
+            <div class="sticker-slot">
+              <img class="sticker-spot-img" src="../assets/sticker-spot.png" alt="">
+              <img class="sticker-img" src="../assets/ep01-L-sticker-bubbles.webp" alt="">
+            </div>
+            <span class="sticker-word">bubbles</span>
+          </div>
+          <div class="sticker-col">
+            <div class="sticker-slot">
+              <img class="sticker-spot-img" src="../assets/sticker-spot.png" alt="">
+              <img class="sticker-img" src="../assets/ep01-L-sticker-clean.webp" alt="">
+            </div>
+            <span class="sticker-word">all clean</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- 버튼 묶음 -->
+      <div class="btn-block">
+        <!-- 한 번 더: 알약 단추 (빛살과 화살표는 btn-again.webp 안에 포함) -->
+        <button class="btn-again" id="again-btn">한 번 더</button>
+        <!-- 부모님께 링크 -->
+        <div class="btn-parent">
+          <span>부모님께</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 부모 생활 연결 띠 -->
+    <div class="parent-tip">
+      <p class="tip-text">오늘 양치할 때 <span class="tip-en">Brush my teeth!</span> 한 번 더 말해 주세요.</p>
+    </div>
+  </div>
+</body>
+</html>

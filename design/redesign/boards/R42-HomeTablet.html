@@ -1,0 +1,247 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=1024">
+  <title>R42 개선안 HomeTablet</title>
+  <link rel="stylesheet" href="../shared/tokens.css">
+  <style>
+    html, body { margin: 0; width: 1024px; height: 768px; overflow: hidden; }
+
+    .book {
+      display: flex;
+      width: 1024px;
+      height: 768px;
+    }
+
+    /* Left page: art */
+    .book-left {
+      width: 430px;
+      height: 768px;
+      flex-shrink: 0;
+      position: relative;
+      overflow: hidden;
+    }
+    .book-art {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center top;
+    }
+    /* Page-edge shadow on right side of art */
+    .book-art-edge {
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 32px;
+      height: 100%;
+      background: linear-gradient(to right, transparent, rgba(36,50,61,0.09));
+    }
+    /* Logo badge over the art */
+    .book-art-logo {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      z-index: 2;
+      background: rgba(251,246,236,0.82);
+      border-radius: 10px;
+      padding: 7px 14px;
+    }
+    .book-art-logo img { height: 28px; width: auto; display: block; }
+
+    /* Spine */
+    .book-spine {
+      width: 4px;
+      flex-shrink: 0;
+      height: 768px;
+      background: linear-gradient(to right, var(--paper-2), var(--line), var(--paper));
+    }
+
+    /* Right page: paper content */
+    .book-right {
+      flex: 1;
+      height: 768px;
+      background: var(--paper);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 0 72px 0 64px;
+      position: relative;
+    }
+
+    .book-ep-label {
+      font-family: var(--font-kr);
+      font-size: 13px;
+      color: var(--ink-2);
+      margin: 0 0 10px;
+    }
+    .book-title {
+      font-family: var(--font-en);
+      font-weight: 700;
+      font-size: 54px;
+      color: var(--ink);
+      line-height: 1.1;
+      margin: 0 0 8px;
+    }
+    .book-kr {
+      font-family: var(--font-kr);
+      font-size: 18px;
+      color: var(--ink-2);
+      margin: 0 0 40px;
+    }
+
+    /* CTA buttons */
+    .book-cta {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      max-width: 360px;
+    }
+    .play-btn {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      background: var(--touch);
+      border: 2px solid var(--touch-edge);
+      border-radius: var(--r-btn);
+      padding: 13px 20px 13px 13px;
+      text-decoration: none;
+      cursor: pointer;
+    }
+    .play-btn-circle {
+      width: 52px;
+      height: 52px;
+      min-width: 52px;
+      background: var(--touch-edge);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .play-btn-label strong {
+      display: block;
+      font-family: var(--font-kr);
+      font-size: 17px;
+      font-weight: 700;
+      color: var(--ink);
+    }
+    .play-btn-label span {
+      font-family: var(--font-kr);
+      font-size: 13px;
+      color: var(--brown);
+    }
+    .signup-btn {
+      display: block;
+      border: 2px solid var(--teal);
+      border-radius: var(--r-btn);
+      padding: 16px 24px;
+      font-family: var(--font-kr);
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--teal);
+      text-align: center;
+      text-decoration: none;
+    }
+
+    /* Today's words: sticker + Andika text, no pill tags */
+    .words-section {
+      margin-top: 40px;
+    }
+    .words-label {
+      font-family: var(--font-kr);
+      font-size: 11px;
+      color: var(--ink-2);
+      margin: 0 0 10px;
+      letter-spacing: 0.04em;
+    }
+    .word-row {
+      display: flex;
+      gap: 18px;
+      align-items: center;
+    }
+    .word-item {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+    }
+    .word-sticker {
+      width: 28px;
+      height: 28px;
+      object-fit: contain;
+      display: block;
+    }
+    .word-text {
+      font-family: var(--font-en);
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--brown);
+    }
+    /* Parent note below */
+    .parent-note {
+      margin-top: 28px;
+      font-family: var(--font-kr);
+      font-size: 13px;
+      color: var(--ink-2);
+      line-height: 1.6;
+    }
+  </style>
+</head>
+<body>
+  <div class="book">
+    <!-- Left page: watercolor art -->
+    <div class="book-left">
+      <img class="book-art" src="../assets/ep01-bg-0-intro.webp" alt="Brush, Brush, Brush! 장면">
+      <div class="book-art-edge" aria-hidden="true"></div>
+      <div class="book-art-logo">
+        <img src="../assets/brand-logo-h.svg" alt="릴리랑">
+      </div>
+    </div>
+
+    <!-- Spine -->
+    <div class="book-spine" aria-hidden="true"></div>
+
+    <!-- Right page: paper -->
+    <div class="book-right">
+      <p class="book-ep-label">이번 주 이야기, EP01</p>
+      <h1 class="book-title">Brush, Brush,<br>Brush!</h1>
+      <p class="book-kr">이 닦기 이야기</p>
+
+      <div class="book-cta">
+        <a class="play-btn" href="#" role="button" aria-label="맛보기 바로 듣기, 2분 무료">
+          <div class="play-btn-circle" aria-hidden="true">
+            <svg width="16" height="18" viewBox="0 0 16 18" fill="none">
+              <path d="M2 1.5L14 9L2 16.5V1.5Z" fill="#fbf6ec" stroke="#fbf6ec" stroke-width="0.5"/>
+            </svg>
+          </div>
+          <div class="play-btn-label">
+            <strong>맛보기 바로 듣기</strong>
+            <span>2분, 무료</span>
+          </div>
+        </a>
+        <a class="signup-btn" href="R43-Join.html">가입하고 7편 모두 보기</a>
+      </div>
+
+      <div class="words-section" aria-label="오늘 만나는 단어">
+        <p class="words-label">오늘 만나는 단어</p>
+        <div class="word-row">
+          <div class="word-item">
+            <img class="word-sticker" src="../assets/ep01-L-sticker-brush.webp" alt="">
+            <span class="word-text">brush my teeth</span>
+          </div>
+          <div class="word-item">
+            <img class="word-sticker" src="../assets/ep01-L-sticker-bubbles.webp" alt="">
+            <span class="word-text">bubbles</span>
+          </div>
+          <div class="word-item">
+            <img class="word-sticker" src="../assets/ep01-L-sticker-clean.webp" alt="">
+            <span class="word-text">all clean</span>
+          </div>
+        </div>
+        <p class="parent-note">하루 2분, 생활 장면에서 한 번 더</p>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

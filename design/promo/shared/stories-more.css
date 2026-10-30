@@ -1,0 +1,141 @@
+/* T7 이야기 줄 시안: "이게 전부"처럼 닫혀 보이지 않게, 이야기가 계속 늘어나는 줄로.
+   A 가로로 넘기는 줄, B "새 이야기 준비 중" 칸과 편수, C 아침에서 밤으로 이어지는 하루 길.
+   landing-t4.css, pages-t5.css, pages-t6.css 위에 얹는다. 기존 공유 CSS는 건드리지 않는다. */
+:root {
+  --sm-line: #c7d0db; --sm-soon-bg: #f4f6f9; --sm-soon-ink: #7a8697;
+  --sm-dawn: #fff1cf; --sm-noon: #e1f0ff; --sm-dusk: #cbc4ec; --sm-night: #1f2d4d;
+}
+.sm-board { overflow-x: hidden; }
+.sm-board .page { padding-top: 10px; }
+.sm-join { margin-top: 26px; }
+
+/* 공통: 아직 없는 이야기 동그라미(점선, 흐린 실루엣) */
+.sm-soon { color: var(--sm-soon-ink); }
+.sm-soon .dot { background: var(--sm-soon-bg); border: 2.5px dashed var(--sm-line); box-sizing: border-box; }
+.sm-soon .dot .sil { position: absolute; left: 50%; top: 16%; width: auto; height: 150%; object-fit: contain; transform: translateX(-50%); filter: brightness(0); opacity: .08; mix-blend-mode: normal; }
+.sm-soon .dot .sil-cut-biscuit { top: 26%; height: 96%; }
+.sm-soon b { color: var(--sm-soon-ink); }
+.sm-soon small { color: #9aa4b2; }
+
+/* ---------- A: 가로로 넘기는 줄 ---------- */
+.sm-a { text-align: left; }
+.sm-a .sec-title, .sm-a .sec-lead { text-align: left; }
+.sm-meta { display: flex; align-items: center; justify-content: flex-end; margin-top: 18px; }
+.sm-swipe { display: inline-flex; align-items: center; gap: 6px; font-family: var(--font-hand); font-weight: 700; font-size: 18px; color: var(--honey); }
+.sm-swipe::after { content: ''; width: 9px; height: 9px; border-right: 2.5px solid currentColor; border-top: 2.5px solid currentColor; transform: rotate(45deg); }
+.sm-strip { display: flex; gap: 14px; overflow-x: auto; scrollbar-width: none; margin: 16px -22px 0; padding: 6px 22px 6px; scroll-snap-type: x mandatory; scroll-padding-inline: 22px; text-align: center; }
+.sm-strip::-webkit-scrollbar { display: none; }
+.sm-strip .circle { flex: none; width: 130px; scroll-snap-align: start; }
+.sm-strip .circle small { min-height: 2.6em; }
+.sm-strip .sm-fade { opacity: .5; }
+.sm-strip.at-end { justify-content: flex-end; overflow: hidden; }
+.sm-track { height: 4px; border-radius: 4px; background: var(--line-soft); margin-top: 12px; position: relative; }
+.sm-track i { position: absolute; left: 0; top: 0; bottom: 0; width: 28%; border-radius: 4px; background: var(--sky-deep); }
+.sm-track.end i { left: auto; right: 0; }
+.sm-note { display: flex; align-items: center; gap: 10px; margin: 30px 0 0; font-size: 13px; color: #9aa4b2; }
+.sm-note::before, .sm-note::after { content: ''; flex: 1; border-top: 1px dashed var(--sm-line); }
+
+/* ---------- B: 준비 중 칸과 편수 ---------- */
+.sm-tally { display: inline-flex; align-items: center; gap: 12px; margin-top: 14px; padding: 8px 18px 8px 8px; border-radius: 999px; background: var(--line-soft); text-align: left; }
+.sm-num { display: grid; place-items: center; width: 46px; height: 46px; border-radius: 50%; background: var(--white); font-family: var(--font-head); font-size: 28px; color: var(--sky-deep); box-shadow: 0 0 0 2px #fff, 0 0 0 4px var(--c2); }
+.sm-tally-t b { display: block; font-family: var(--font-head); font-weight: 400; font-size: 18px; }
+.sm-tally-t small { display: block; font-size: 14px; color: var(--ink-2); }
+.sm-next { grid-column: span 2; position: relative; overflow: hidden; display: flex; align-items: center; gap: 12px; align-self: start; aspect-ratio: 2.05 / 1; padding: 0 14px; border: 2.5px dashed var(--sm-line); border-radius: 999px; background: var(--sm-soon-bg); text-align: left; box-sizing: border-box; }
+.sm-plus { flex: none; position: relative; width: 44px; height: 44px; border-radius: 50%; background: var(--white); box-shadow: 0 2px 8px -3px rgba(31,42,58,.25); }
+.sm-plus::before, .sm-plus::after { content: ''; position: absolute; left: 50%; top: 50%; width: 18px; height: 3px; border-radius: 2px; background: var(--sky-deep); transform: translate(-50%, -50%); }
+.sm-plus::after { transform: translate(-50%, -50%) rotate(90deg); }
+.sm-next-t { position: relative; z-index: 1; }
+.sm-next-t b { display: block; font-family: var(--font-head); font-weight: 400; font-size: 17px; color: var(--ink); }
+.sm-next-t small { display: block; font-size: 12.5px; line-height: 1.4; color: var(--ink-2); margin-top: 2px; }
+.sm-plusdot .dot .sm-plus { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); width: 54px; height: 54px; }
+.sm-plusdot b { color: var(--ink); }
+
+/* ---------- C: 아침에서 밤, 다음 날로 이어지는 하루 길 ---------- */
+.sm-day { position: relative; margin: 26px -22px 0; height: 1220px; overflow: hidden;
+  background: linear-gradient(180deg, var(--sm-dawn) 0%, #ffeccb 20%, var(--sm-noon) 40%, #d8e9fb 55%, var(--sm-dusk) 63%, #56628f 69%, var(--sm-night) 75%, #22315a 86%, #6d6a8f 95%, #e9b98a 100%); }
+.sm-day::after { content: ''; position: absolute; left: 0; right: 0; top: 70%; height: 22%; background: url(../assets/stars.svg) 0 0 / 120px 120px; opacity: .9; pointer-events: none; }
+.sm-sun { position: absolute; right: 28px; top: 34px; width: 64px; height: 64px; border-radius: 50%; background: radial-gradient(circle, #ffd56a 0 46%, rgba(255,213,106,.35) 47% 62%, rgba(255,213,106,0) 63%); }
+.sm-time { position: absolute; z-index: 2; font-family: var(--font-hand); font-weight: 700; font-size: 20px; color: var(--honey); }
+.t-am { left: 22px; top: 70px; }
+.t-pm { right: 22px; top: 700px; color: #5a4f8f; }
+.t-night { right: 22px; top: 900px; color: #f3d892; }
+.t-next { right: 22px; bottom: 26px; color: #ffe2b0; }
+.sm-road { position: absolute; left: 0; top: 0; width: 375px; height: 1220px; z-index: 0; }
+.sm-road path { fill: none; stroke-linecap: round; }
+.sm-road .road-base { stroke: rgba(255,255,255,.75); stroke-width: 22; }
+.sm-road .road { stroke: #e6c58a; stroke-width: 4; stroke-dasharray: 2 12; }
+.sm-road .road.dash { stroke: rgba(255,226,176,.85); stroke-dasharray: 10 10; stroke-width: 3; }
+.sm-dayitems { position: absolute; inset: 0; z-index: 1; }
+.sm-c { position: absolute; display: flex; align-items: center; gap: 14px; margin-top: -52px; text-align: left; }
+.sm-c .dot { flex: none; width: 104px; box-shadow: 0 0 0 5px rgba(255,255,255,.9), 0 10px 20px -10px rgba(31,42,58,.45); }
+.sm-c.side-l { left: calc(var(--cx) - 52px); }
+.sm-c.side-r { right: calc(375px - var(--cx) - 52px); flex-direction: row-reverse; text-align: right; }
+.sm-c .t { display: block; }
+.sm-c b { margin-top: 0; font-size: 19px; }
+.sm-c:nth-child(5) .dot { box-shadow: 0 0 0 5px var(--sun), 0 10px 20px -10px rgba(31,42,58,.45); }
+.sm-p6 b { color: #2c2752; }
+.sm-p7 b, .sm-p8 b { color: #fff; } .sm-p7 small, .sm-p8 small { color: #c9d3ea; }
+.sm-c.sm-soon .dot { background: #2a3a63; border-color: rgba(255,226,176,.7); box-shadow: none; }
+.sm-c.sm-soon .dot .sil { filter: brightness(0) invert(1); opacity: .16; }
+
+@media (min-width: 900px) {
+  .sm-board .page { padding-top: 56px; padding-bottom: 40px; }
+
+  /* A */
+  .sm-ahead { display: flex; align-items: flex-end; justify-content: space-between; gap: 24px; }
+  .sm-ctrl { display: flex; align-items: center; gap: 12px; }
+  .sm-arrow { position: relative; width: 52px; height: 52px; border-radius: 50%; border: 1.5px solid #cfd6de; background: var(--white); }
+  .sm-arrow::after { content: ''; position: absolute; left: 50%; top: 50%; width: 11px; height: 11px; border-right: 2.5px solid var(--ink); border-top: 2.5px solid var(--ink); transform: translate(-65%, -50%) rotate(45deg); }
+  .sm-arrow.prev { opacity: .4; } .sm-arrow.prev::after { transform: translate(-35%, -50%) rotate(-135deg); }
+  .sm-arrow.next { background: var(--ink); border-color: var(--ink); } .sm-arrow.next::after { border-color: var(--white); }
+  .sm-board { min-height: 100vh; display: flex; flex-direction: column; justify-content: center; }
+  .sm-board > * { width: 100%; box-sizing: border-box; }
+  .sm-a .sm-strip { margin: 40px calc(50% - 50vw) 0 0; padding: 8px 48px 8px 0; scroll-padding-inline: 0; gap: 22px; -webkit-mask-image: linear-gradient(to right, #000 88%, transparent); mask-image: linear-gradient(to right, #000 88%, transparent); }
+  .sm-a .sm-strip .circle { width: 124px; }
+  .sm-join { margin-top: 34px; }
+
+  /* B */
+  .sm-tally { margin-top: 20px; padding: 10px 24px 10px 10px; }
+  .sm-num { width: 54px; height: 54px; font-size: 32px; }
+  .sm-tally-t b { font-size: 21px; } .sm-tally-t small { font-size: 15px; }
+  .sm-plusdot b { font-size: 19px; white-space: nowrap; }
+  .sm-b .circles { grid-template-columns: repeat(8, 1fr); gap: 20px; margin-top: 44px; }
+
+  /* C */
+  .sm-cpage .stories { padding-bottom: 30px; }
+  .sm-cpage.tail { padding-top: 0; text-align: center; }
+  .sm-day.wide { margin: 0; height: 430px; background: linear-gradient(90deg, var(--sm-dawn) 0%, #ffeccb 16%, var(--sm-noon) 34%, #d8e9fb 52%, var(--sm-dusk) 64%, #56628f 70%, var(--sm-night) 76%, #22315a 86%, #4f557f 91%, #c99a86 97%, #f3c993 100%); }
+  .sm-day.wide::after { left: 70%; right: 10%; top: 0; height: 100%; }
+  .sm-day.wide .sm-sun { left: 40px; right: auto; top: 26px; width: 76px; height: 76px; }
+  .sm-moon { position: absolute; left: 80.5%; top: 34px; width: 40px; height: 40px; border-radius: 50%; box-shadow: 11px -7px 0 0 #f3d892; z-index: 1; }
+  .sm-day.wide .sm-road { width: 1440px; height: 400px; }
+  .sm-day.wide .sm-dayitems { inset: 0 0 30px; }
+  .sm-day.wide .t-am { left: 130px; top: 42px; }
+  .sm-day.wide .t-pm { left: 61%; top: 42px; bottom: auto; right: auto; }
+  .sm-day.wide .t-night { left: auto; right: 21%; top: 46px; }
+  .sm-day.wide .t-next { right: 24px; top: auto; bottom: 22px; color: #fff3da; text-shadow: 0 1px 6px rgba(31,45,77,.6); }
+  .sm-day.wide .sm-c { flex-direction: column; gap: 0; width: 170px; margin: -60px 0 0 -85px; text-align: center; }
+  .sm-day.wide .sm-c .dot { width: 120px; margin-bottom: 10px; }
+  .sm-day.wide .sm-c b { font-size: 20px; }
+  .sm-d6 b { color: #2c2752; } .sm-d6 small { color: #3b3f63; }
+  .sm-d7 b, .sm-d8 b { color: #fff; } .sm-d7 small, .sm-d8 small { color: #c9d3ea; }
+  .sm-day.wide .sm-road .road-base { stroke-width: 26; }
+}
+
+/* 위치(생성 좌표) */
+.sm-p1 { top: 178px; --cx: 92px; }
+.sm-p2 { top: 300px; --cx: 283px; }
+.sm-p3 { top: 422px; --cx: 92px; }
+.sm-p4 { top: 544px; --cx: 283px; }
+.sm-p5 { top: 666px; --cx: 92px; }
+.sm-p6 { top: 788px; --cx: 283px; }
+.sm-p7 { top: 910px; --cx: 92px; }
+.sm-p8 { top: 1050px; --cx: 283px; }
+.sm-d1 { left: 8.333%; top: 150px; }
+.sm-d2 { left: 19.306%; top: 250px; }
+.sm-d3 { left: 30.278%; top: 150px; }
+.sm-d4 { left: 41.250%; top: 250px; }
+.sm-d5 { left: 52.222%; top: 150px; }
+.sm-d6 { left: 63.194%; top: 250px; }
+.sm-d7 { left: 74.167%; top: 150px; }
+.sm-d8 { left: 85.833%; top: 150px; }

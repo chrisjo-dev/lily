@@ -1,0 +1,230 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=390">
+  <title>R56 개선안 2 ParentDrawer</title>
+  <link rel="stylesheet" href="../shared/tokens.css">
+  <style>
+    html, body { margin: 0; width: 390px; height: 844px; overflow: hidden; background: var(--paper); }
+
+    /* 아이 구역 배경 (흐림) */
+    .scene-peek {
+      position: absolute; top: 0; left: 0; right: 0;
+      height: 844px; z-index: 0; overflow: hidden;
+    }
+    .scene-art { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .scene-dim {
+      position: absolute; inset: 0;
+      background: var(--ink); opacity: 0.52;
+    }
+
+    /* 헤더 (반투명) */
+    .hdr {
+      position: absolute; top: 0; left: 0; right: 0;
+      display: flex; align-items: center; gap: 10px;
+      padding: 8px 16px; height: 52px; z-index: 2;
+    }
+    .hdr .emblem {
+      width: 32px; height: 32px; border-radius: 50%;
+      object-fit: cover; border: 1.5px solid rgba(243,234,216,0.4);
+      flex-shrink: 0; opacity: 0.7;
+    }
+    .ep-info { flex: 1; }
+    .ep-num { font-size: 10px; color: rgba(243,234,216,0.6); font-family: var(--font-en); }
+    .ep-title { font-size: 13px; font-weight: 700; color: rgba(243,234,216,0.8); font-family: var(--font-logo); }
+
+    /* 부모 서랍 (종이 시트) */
+    .drawer-sheet {
+      position: absolute; bottom: 0; left: 0; right: 0;
+      background: var(--paper);
+      border-radius: 22px 22px 0 0;
+      box-shadow: 0 -6px 28px rgba(36,50,61,0.18);
+      z-index: 3;
+      display: flex; flex-direction: column;
+    }
+
+    /* 손잡이 선 */
+    .sheet-handle {
+      height: 28px;
+      display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+    }
+    .handle-bar { width: 40px; height: 4px; background: var(--line); border-radius: 2px; }
+
+    /* 종이 시트 본문 */
+    .sheet-body { padding: 0 20px 24px; display: flex; flex-direction: column; }
+
+    /* 재생 줄: 청록 원형 64px + 진행 바 */
+    .play-row {
+      display: flex; align-items: center; gap: 14px;
+      padding: 2px 0 16px; border-bottom: 1px solid var(--line);
+    }
+    .play-circle {
+      width: 64px; height: 64px; border-radius: 50%;
+      background: var(--teal);
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+      box-shadow: 0 3px 12px rgba(47,125,109,0.28);
+    }
+    .play-icon {
+      width: 0; height: 0;
+      border-style: solid; border-width: 11px 0 11px 20px;
+      border-color: transparent transparent transparent var(--paper);
+      margin-left: 5px;
+    }
+    .progress-area { flex: 1; display: flex; flex-direction: column; gap: 7px; }
+    .time-row {
+      display: flex; justify-content: space-between;
+      font-family: var(--font-en); font-size: 12px; color: var(--ink-2);
+    }
+    .progress-bar-bg {
+      height: 4px; background: var(--line); border-radius: 2px; position: relative;
+    }
+    .progress-bar-fill {
+      position: absolute; left: 0; top: 0; bottom: 0;
+      width: 28%; background: var(--teal); border-radius: 2px;
+    }
+    .progress-dot {
+      position: absolute; top: 50%; left: 28%;
+      transform: translate(-50%, -50%);
+      width: 12px; height: 12px;
+      border-radius: 50%; background: var(--teal);
+      border: 2px solid var(--paper);
+    }
+
+    /* 아이콘 토글 행 묶음 */
+    .icon-section { border-bottom: 1px solid var(--line); }
+
+    .icon-row {
+      display: flex; align-items: center; gap: 12px;
+      height: 56px;
+    }
+    .row-icon {
+      width: 32px; height: 32px;
+      object-fit: contain; flex-shrink: 0;
+    }
+    .row-text { flex: 1; }
+    .row-label {
+      font-family: var(--font-kr); font-size: 15px; color: var(--ink);
+      display: block;
+    }
+    .row-sub {
+      font-family: var(--font-kr); font-size: 12px; color: var(--ink-2);
+      display: block; margin-top: 1px;
+    }
+
+    /* 청록 스위치 */
+    .toggle {
+      width: 44px; height: 26px; border-radius: 13px;
+      position: relative; flex-shrink: 0; margin-left: 10px;
+    }
+    .toggle.off { background: var(--line); }
+    .toggle.on { background: var(--teal); }
+    .toggle::after {
+      content: ''; position: absolute;
+      top: 3px;
+      width: 20px; height: 20px;
+      border-radius: 50%; background: var(--paper);
+      box-shadow: 0 1px 3px rgba(36,50,61,0.18);
+      transition: left 0.2s;
+    }
+    .toggle.off::after { left: 3px; }
+    .toggle.on::after { left: 21px; }
+
+    /* 대본 보기 링크 행 */
+    .link-section { padding-top: 4px; }
+    .link-row {
+      display: flex; align-items: center; height: 48px; gap: 12px;
+    }
+    .link-icon {
+      width: 32px; height: 32px; object-fit: contain; flex-shrink: 0; opacity: 0.7;
+    }
+    .link-label {
+      font-family: var(--font-kr); font-size: 15px;
+      color: var(--teal); flex: 1;
+    }
+    .link-arrow {
+      width: 8px; height: 8px;
+      border-right: 1.5px solid var(--teal-soft);
+      border-top: 1.5px solid var(--teal-soft);
+      transform: rotate(45deg);
+      flex-shrink: 0;
+    }
+  </style>
+</head>
+<body>
+  <!-- 아이 구역 배경 흐림 -->
+  <div class="scene-peek">
+    <img class="scene-art" src="../assets/ep01-bg-0-intro.webp" alt="">
+    <div class="scene-dim"></div>
+  </div>
+
+  <!-- 헤더 -->
+  <header class="hdr">
+    <img class="emblem" src="../assets/brand-emblem.png" alt="릴리랑">
+    <div class="ep-info">
+      <div class="ep-num">EP01</div>
+      <div class="ep-title">Brush, Brush, Brush!</div>
+    </div>
+  </header>
+
+  <!-- 부모 서랍 (종이 시트) -->
+  <div class="drawer-sheet">
+    <div class="sheet-handle"><div class="handle-bar"></div></div>
+
+    <div class="sheet-body">
+      <!-- 재생 줄: 청록 64px 원 + 진행 바 -->
+      <div class="play-row">
+        <div class="play-circle"><div class="play-icon"></div></div>
+        <div class="progress-area">
+          <div class="time-row"><span>0:38</span><span>2:19</span></div>
+          <div class="progress-bar-bg">
+            <div class="progress-bar-fill"></div>
+            <div class="progress-dot"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 아이콘 토글 행 4줄 -->
+      <div class="icon-section">
+        <!-- 반복 -->
+        <div class="icon-row">
+          <img class="row-icon" src="../assets/ic-repeat.png" alt="">
+          <div class="row-text">
+            <span class="row-label">3번 이어 듣기</span>
+            <span class="row-sub">끝나면 처음부터 다시 들어요</span>
+          </div>
+          <div class="toggle off"></div>
+        </div>
+        <!-- 천천히 -->
+        <div class="icon-row">
+          <img class="row-icon" src="../assets/ic-slow.png" alt="">
+          <div class="row-text">
+            <span class="row-label">조금 천천히</span>
+            <span class="row-sub">재생 속도 0.85x</span>
+          </div>
+          <div class="toggle on"></div>
+        </div>
+        <!-- 그냥 듣기 -->
+        <div class="icon-row">
+          <img class="row-icon" src="../assets/ic-listen.png" alt="">
+          <div class="row-text">
+            <span class="row-label">그냥 듣기</span>
+            <span class="row-sub">아이 차례에도 멈추지 않아요</span>
+          </div>
+          <div class="toggle off"></div>
+        </div>
+      </div>
+
+      <!-- 대본 링크 -->
+      <div class="link-section">
+        <div class="link-row">
+          <img class="link-icon" src="../assets/ic-script.png" alt="">
+          <span class="link-label">대본 보기</span>
+          <div class="link-arrow"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

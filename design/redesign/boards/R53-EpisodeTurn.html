@@ -1,0 +1,201 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=390">
+  <title>R53 개선안 2 EpisodeTurn</title>
+  <link rel="stylesheet" href="../shared/tokens.css">
+  <style>
+    html, body { margin: 0; width: 390px; height: 844px; overflow: hidden; background: var(--paper); }
+
+    /* 무대 */
+    .stage {
+      position: relative; width: 390px; height: 560px;
+      overflow: hidden; background: var(--mint);
+    }
+    .stage-art {
+      width: 100%; height: 100%;
+      object-fit: cover; object-position: top center; display: block;
+    }
+
+    /* 진행 점 */
+    .progress-dots {
+      position: absolute; top: 14px; right: 16px; z-index: 5;
+      display: flex; gap: 5px; align-items: center;
+    }
+    .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--line); }
+    .dot.on { background: var(--brown); width: 14px; border-radius: 3px; }
+
+    /* 브랜드 엠블럼 */
+    .brand {
+      position: absolute; top: 10px; left: 16px; z-index: 5;
+      width: 32px; height: 32px; border-radius: 50%;
+      object-fit: cover; border: 1.5px solid rgba(255,255,255,0.6);
+    }
+
+    /* 스티커 영역 (리본 + 자리) */
+    .sticker-overlay {
+      position: absolute; bottom: 32px; left: 0; right: 0;
+      padding: 0 20px;
+      display: flex; flex-direction: column; align-items: center; gap: 8px;
+      z-index: 5;
+    }
+
+    /* 리본 띠 */
+    .ribbon-wrap {
+      position: relative;
+      width: 220px; height: 38px;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .ribbon-img {
+      position: absolute; inset: 0; width: 100%; height: 100%;
+      object-fit: fill;
+    }
+    .ribbon-text {
+      position: relative; z-index: 1;
+      font-family: var(--font-logo); font-size: 14px; color: var(--brown);
+      text-shadow: 0 1px 0 rgba(255,255,255,0.6);
+    }
+
+    /* 스티커 자리 행 */
+    .sticker-row { display: flex; gap: 12px; justify-content: center; }
+    .sticker-col { display: flex; flex-direction: column; align-items: center; gap: 5px; }
+    .sticker-slot {
+      width: 76px; height: 76px;
+      position: relative;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .sticker-spot-img {
+      position: absolute; inset: 0;
+      width: 100%; height: 100%;
+      object-fit: contain;
+    }
+    .sticker-filled {
+      position: relative; z-index: 2;
+      width: 64px; height: 64px;
+      object-fit: contain;
+      filter: drop-shadow(0 2px 5px rgba(107,74,54,0.2));
+    }
+    .sticker-word {
+      font-family: var(--font-en); font-size: 11px; color: var(--ink-2);
+    }
+
+    /* 찢은 가장자리 */
+    .torn-edge {
+      position: absolute; bottom: 0; left: 0; right: 0; z-index: 4; line-height: 0;
+    }
+
+    /* 본문 줄: 대사 */
+    .text-strip {
+      height: 80px; background: var(--paper);
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      padding: 0 32px; gap: 4px;
+    }
+    .body-en {
+      font-family: var(--font-en); font-size: 20px;
+      font-weight: 700; color: var(--ink); margin: 0; text-align: center;
+    }
+    .body-kr {
+      font-family: var(--font-book); font-size: 14px;
+      color: var(--ink-2); margin: 0; text-align: center;
+    }
+
+    /* 말했어요 단추 영역 */
+    .said-zone {
+      height: 204px;
+      background: var(--paper);
+      border-top: 1px solid var(--line);
+      display: flex; align-items: center; justify-content: center;
+    }
+
+    /* 128px 원형 단추 (빛살과 말풍선은 btn-said.webp 안에 포함) */
+    .said-btn {
+      position: relative; width: 128px; height: 128px; padding: 0;
+      border-radius: 50%; cursor: pointer; border: 0; background: none;
+      box-shadow: 0 5px 20px rgba(107,74,54,0.25);
+    }
+    .said-btn::before {
+      content: ""; position: absolute; z-index: 1; left: -19%; top: -31%; width: 138%; height: 131%;
+      pointer-events: none;
+      background: url(../assets/btn-said.webp) 0 0 / 100% 100% no-repeat;
+    }
+    .pulse {
+      position: relative; z-index: 2; display: flex; flex-direction: column;
+      align-items: center; justify-content: flex-end; height: 100%; padding-bottom: 26%;
+    }
+    .pulse b {
+      font-family: var(--font-logo); font-weight: 400; font-size: 20px;
+      line-height: 1; color: var(--touch-edge);
+    }
+  </style>
+</head>
+<body>
+  <div class="stage">
+    <img class="stage-art" src="../assets/ep01-bg-5-turn.webp" alt="친구 차례 장면">
+
+    <img class="brand" src="../assets/brand-emblem.png" alt="릴리랑">
+    <div class="progress-dots">
+      <span class="dot"></span>
+      <span class="dot"></span>
+      <span class="dot"></span>
+      <span class="dot on"></span>
+      <span class="dot"></span>
+      <span class="dot"></span>
+    </div>
+
+    <!-- 스티커 영역 -->
+    <div class="sticker-overlay">
+      <!-- 리본 띠 -->
+      <div class="ribbon-wrap">
+        <img class="ribbon-img" src="../assets/ribbon.png" alt="">
+        <span class="ribbon-text">오늘의 스티커</span>
+      </div>
+      <!-- 스티커 자리 -->
+      <div class="sticker-row">
+        <div class="sticker-col">
+          <div class="sticker-slot">
+            <img class="sticker-spot-img" src="../assets/sticker-spot.png" alt="">
+            <img class="sticker-filled" src="../assets/ep01-L-sticker-brush.webp" alt="">
+          </div>
+          <span class="sticker-word">brush my teeth</span>
+        </div>
+        <div class="sticker-col">
+          <div class="sticker-slot">
+            <img class="sticker-spot-img" src="../assets/sticker-spot.png" alt="">
+          </div>
+          <span class="sticker-word">bubbles</span>
+        </div>
+        <div class="sticker-col">
+          <div class="sticker-slot">
+            <img class="sticker-spot-img" src="../assets/sticker-spot.png" alt="">
+          </div>
+          <span class="sticker-word">all clean</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 찢은 가장자리 (불규칙 베지어) -->
+    <div class="torn-edge">
+      <svg width="390" height="40" viewBox="0 0 390 40" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg" style="display:block">
+        <rect x="0" y="0" width="390" height="6" fill="rgba(36,50,61,0.05)"/>
+        <path d="M0,40 L0,30 C4,33 9,25 17,28 C25,31 29,22 38,19 C45,16 52,25 61,29 C69,33 75,23 84,20 C91,17 98,22 107,26 C115,30 121,34 130,29 C137,24 143,17 152,21 C161,25 167,32 175,29 C182,26 188,19 197,15 C205,11 212,22 221,27 C229,32 236,35 244,30 C252,25 258,17 267,21 C275,25 281,31 289,28 C297,25 303,19 311,23 C319,27 325,33 333,27 C340,21 347,16 356,20 C363,24 370,31 378,27 C383,24 387,21 390,23 L390,40 Z" style="fill:var(--paper)"/>
+        <path d="M0,31 C4,34 9,26 17,29 C25,32 29,23 38,20 C45,17 52,26 61,30 C69,34 75,24 84,21 C91,18 98,23 107,27 C115,31 121,35 130,30 C137,25 143,18 152,22 C161,26 167,33 175,30 C182,27 188,20 197,16 C205,12 212,23 221,28 C229,33 236,36 244,31 C252,26 258,18 267,22 C275,26 281,32 289,29 C297,26 303,20 311,24 C319,28 325,34 333,28 C340,22 347,17 356,21 C363,25 370,32 378,28 C383,25 387,22 390,24" stroke="var(--card)" stroke-width="1.2" fill="none" stroke-opacity="0.6"/>
+      </svg>
+    </div>
+  </div>
+
+  <!-- 본문: 대사 -->
+  <div class="text-strip">
+    <p class="body-en">Brush my teeth!</p>
+    <p class="body-kr">따라 말해 볼까?</p>
+  </div>
+
+  <!-- 말했어요 원형 단추 128px (빛살과 말풍선은 btn-said.webp 안에 포함) -->
+  <div class="said-zone">
+    <button class="said-btn" id="said-btn">
+      <span class="pulse"><b>말했어요</b></span>
+    </button>
+  </div>
+</body>
+</html>

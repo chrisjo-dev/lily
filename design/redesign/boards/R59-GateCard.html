@@ -1,0 +1,299 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=390">
+  <title>R59 개선안 2 GateCard</title>
+  <link rel="stylesheet" href="../shared/tokens.css">
+  <style>
+    html, body { margin: 0; width: 390px; height: 844px; overflow: hidden; background: var(--sky); }
+
+    .screen {
+      width: 390px;
+      height: 844px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* 무대 배경 (이야기 그림) */
+    .stage-img {
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 420px;
+      background: url('../assets/ep01-bg-1-find.webp') center top / cover no-repeat;
+    }
+
+    /* 맛보기 배지 */
+    .preview-badge {
+      position: absolute;
+      top: 170px;
+      left: 0; right: 0;
+      display: flex;
+      justify-content: center;
+      z-index: 3;
+    }
+    .badge-pill {
+      background: rgba(36,50,61,0.72);
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+      border-radius: 20px;
+      padding: 6px 16px;
+      font-family: var(--font-kr);
+      font-size: 12px;
+      color: rgba(255,255,255,0.92);
+      white-space: nowrap;
+    }
+
+    /* 종이 카드: 찢은 가장자리 포함 */
+    .gate-paper {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      /* 찢은 SVG 높이(30px) + 카드 본체 */
+      height: 504px;
+    }
+
+    /* 찢은 종이 윗 가장자리 SVG */
+    .torn-top {
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 30px;
+      z-index: 1;
+    }
+
+    /* 카드 본체 */
+    .card-body {
+      position: absolute;
+      top: 28px; bottom: 0; left: 0; right: 0;
+      background: var(--paper);
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+
+    /* 브랜드 잠금 */
+    .card-brand {
+      padding: 14px 24px 0;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-shrink: 0;
+    }
+    .brand-lock-img {
+      width: 20px; height: auto;
+      opacity: 0.55;
+    }
+    .brand-name {
+      font-family: var(--font-logo);
+      font-size: 14px;
+      color: var(--ink-2);
+    }
+
+    /* 헤드라인 */
+    .card-headline {
+      font-family: var(--font-kr);
+      font-size: 21px;
+      line-height: 1.6;
+      color: var(--ink);
+      padding: 12px 24px 16px;
+      flex-shrink: 0;
+    }
+
+    /* 리본 스트립 */
+    .ribbon-wrap {
+      position: relative;
+      padding: 0 24px 0;
+      flex-shrink: 0;
+      height: 42px;
+    }
+    .ribbon-img {
+      position: absolute;
+      top: 0; left: 24px;
+      width: calc(100% - 48px);
+      height: 42px;
+      object-fit: fill;
+      opacity: 0.88;
+      pointer-events: none;
+    }
+    .ribbon-content {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 42px;
+    }
+    .ribbon-text {
+      font-family: var(--font-kr);
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--ink);
+      white-space: nowrap;
+    }
+
+    /* 리본 아래 썸네일 줄 */
+    .thumb-row {
+      display: flex;
+      gap: 8px;
+      padding: 8px 24px 0;
+      flex-shrink: 0;
+    }
+    .thumb-row img {
+      flex: 1;
+      min-width: 0;
+      height: 38px;
+      object-fit: cover;
+      border-radius: 5px;
+      border: 1px solid var(--line);
+      display: block;
+    }
+
+    /* 안심 문구 */
+    .card-reassure {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 10px 24px 0;
+      flex-shrink: 0;
+    }
+    .reassure-dot {
+      width: 5px; height: 5px;
+      border-radius: 50%;
+      background: var(--teal);
+      flex-shrink: 0;
+      opacity: 0.7;
+    }
+    .reassure-text {
+      font-family: var(--font-kr);
+      font-size: 12px;
+      color: var(--ink-2);
+    }
+
+    /* 단추 구역 */
+    .card-actions {
+      flex: 1;
+      padding: 14px 24px 32px;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      gap: 10px;
+    }
+
+    /* 주 단추: 청록 가입 */
+    .btn-primary {
+      height: 56px;
+      border-radius: var(--r-btn);
+      background: var(--teal);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-kr);
+      font-size: 17px;
+      font-weight: 700;
+      color: white;
+      letter-spacing: -0.01em;
+      cursor: pointer;
+      box-shadow: 0 3px 12px rgba(47,125,109,0.3);
+    }
+
+    /* 보조 단추: 선 */
+    .btn-secondary {
+      height: 50px;
+      border-radius: var(--r-btn);
+      border: 1.5px solid var(--line);
+      background: var(--paper);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-kr);
+      font-size: 15px;
+      color: var(--ink-2);
+      cursor: pointer;
+    }
+
+    /* 셋째: 텍스트만 */
+    .btn-text {
+      height: 36px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-kr);
+      font-size: 13px;
+      color: var(--ink-2);
+      opacity: 0.6;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+<div class="screen">
+
+  <!-- 무대 배경 -->
+  <div class="stage-img" role="img" aria-label="이야기 장면"></div>
+
+  <!-- 맛보기 종료 배지 -->
+  <div class="preview-badge">
+    <div class="badge-pill">맛보기 편이 여기서 끝나요</div>
+  </div>
+
+  <!-- 종이 카드 (찢은 가장자리 포함) -->
+  <div class="gate-paper">
+
+    <!-- 찢은 종이 윗 가장자리 (불규칙 곡선) -->
+    <svg class="torn-top" xmlns="http://www.w3.org/2000/svg"
+         preserveAspectRatio="none" viewBox="0 0 390 30" width="390" height="30"
+         aria-hidden="true">
+      <path d="M0,30 L0,17 Q14,5 28,15 Q42,25 56,11 Q70,1 84,13 Q98,23 112,9 Q126,1 140,13 Q154,23 168,11 Q182,3 196,15 Q210,25 224,11 Q238,1 252,13 Q266,24 280,11 Q294,3 308,15 Q322,25 336,11 Q350,1 364,13 Q378,24 390,17 L390,30 Z" fill="var(--paper)"/>
+    </svg>
+
+    <!-- 카드 본체 -->
+    <div class="card-body">
+
+      <!-- 브랜드 잠금 -->
+      <div class="card-brand">
+        <img class="brand-lock-img" src="../assets/brand-lock.webp" alt="">
+        <span class="brand-name">릴리랑</span>
+      </div>
+
+      <!-- 헤드라인 -->
+      <p class="card-headline">
+        이야기가 계속돼요.<br>
+        가입하면 바로 이어 들을 수 있어요.
+      </p>
+
+      <!-- 리본 스트립 -->
+      <div class="ribbon-wrap">
+        <img class="ribbon-img" src="../assets/ribbon.png" alt="" role="presentation">
+        <div class="ribbon-content">
+          <span class="ribbon-text">6편 더 있어요</span>
+        </div>
+      </div>
+
+      <!-- 썸네일 줄 -->
+      <div class="thumb-row" aria-label="이어지는 편">
+        <img src="../assets/ep02-thumb.webp" alt="EP02">
+        <img src="../assets/ep03-thumb.webp" alt="EP03">
+        <img src="../assets/ep04-thumb.webp" alt="EP04">
+        <img src="../assets/ep05-thumb.webp" alt="EP05">
+        <img src="../assets/ep06-thumb.webp" alt="EP06">
+        <img src="../assets/ep07-thumb.webp" alt="EP07">
+      </div>
+
+      <!-- 안심 문구 -->
+      <div class="card-reassure">
+        <div class="reassure-dot"></div>
+        <span class="reassure-text">아이 정보는 받지 않아요</span>
+      </div>
+
+      <!-- 단추 구역 -->
+      <div class="card-actions">
+        <div class="btn-primary" role="button" aria-label="가입하고 이어 듣기">가입하고 이어 듣기</div>
+        <div class="btn-secondary" role="button" aria-label="맛보기 다시 듣기">맛보기 다시 듣기</div>
+        <div class="btn-text" role="button" aria-label="나중에">나중에</div>
+      </div>
+
+    </div>
+  </div>
+
+</div>
+</body>
+</html>

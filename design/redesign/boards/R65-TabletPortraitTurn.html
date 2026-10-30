@@ -1,0 +1,237 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=834">
+  <title>R65 TabletPortraitTurn – 834×1194</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Andika:wght@400;700&family=Gowun+Batang&family=Gowun+Dodum&family=Jua&display=swap">
+  <link rel="stylesheet" href="../shared/tokens.css">
+  <style>
+    html, body {
+      margin: 0; width: 834px; height: 1194px; overflow: hidden;
+      background: var(--paper);
+    }
+
+    /* ─── kid container: (1194-224)×0.7 = 679px ─── */
+    .kid {
+      max-width: 679px; margin: 0 auto; height: 1194px;
+      display: flex; flex-direction: column;
+      background: var(--paper);
+    }
+
+    /* ─── stage ─── */
+    .stage {
+      position: relative; overflow: hidden;
+      flex: 100 1 0;
+      background: var(--sky);
+    }
+    .stage > svg {
+      position: absolute; inset: 0; width: 100%; height: 100%; display: block;
+    }
+    .stage::after {
+      content: ""; position: absolute; left: 0; right: 0; bottom: -1px; height: 40px; pointer-events: none;
+      background: var(--paper);
+      -webkit-mask: url(../assets/torn.svg) 0 0 / 100% 100% no-repeat;
+      mask: url(../assets/torn.svg) 0 0 / 100% 100% no-repeat;
+    }
+
+    /* SVG scene element classes */
+    .stage svg { stroke-linecap: round; stroke-linejoin: round; }
+    .stage text { font-family: 'Andika', sans-serif; font-weight: 700; }
+    .stage text.kr { font-family: 'Gowun Dodum', sans-serif; font-weight: 400; }
+    .fS { fill: var(--paper); } .fA { fill: var(--teal); } .fU { fill: var(--ink-2); }
+    .fN { fill: none; } .fT { fill: var(--touch); } .fI { fill: #191f28; }
+    .sO { stroke: var(--teal-soft); } .sU { stroke: var(--ink-2); }
+    .sE { stroke: var(--touch-edge); }
+
+    /* ─── sticker panel HTML overlay ─── */
+    /*
+      Ribbon + spots positioned from app.png measurements (834×1194):
+      Ribbon center ≈ y=597, height 38px → top=578 in stage
+      Spots (78px) row centers ≈ y=672 in stage
+    */
+    .stk-panel {
+      position: absolute; z-index: 3; pointer-events: none;
+      left: 0; right: 0; top: 599px;
+      display: flex; flex-direction: column; align-items: center;
+    }
+    .stk-ribbon {
+      flex: none; display: grid; place-items: center;
+      width: 220px; height: 38px; margin: 0; padding-bottom: 4px;
+      background: url(../assets/ribbon.webp) 0 0 / 100% 100% no-repeat;
+      font-family: var(--font-logo); font-size: 14px; color: var(--brown);
+    }
+    .stk-row {
+      display: flex; justify-content: center; align-items: flex-start; gap: 24px; margin-top: -4px;
+    }
+    .stk-slot {
+      display: flex; flex-direction: column; align-items: center; gap: 5px; width: 100px;
+      font-family: var(--font-en); font-size: 10px; line-height: 1.2; color: var(--ink-2); text-align: center;
+    }
+    .stk-spot {
+      display: grid; place-items: center; width: 100px; height: 100px;
+      background: url(../assets/sticker-spot.webp) center / contain no-repeat;
+    }
+    .stk-spot img { display: block; width: 82px; height: 82px; object-fit: contain; }
+
+    /* ─── stage overlays ─── */
+    .logo {
+      position: absolute; z-index: 5; top: 2px; left: 8px;
+      width: 48px; height: 48px; display: grid; place-items: center;
+    }
+    .logo img { width: 32px; height: 32px; border-radius: 50%; object-fit: cover; box-shadow: 0 0 0 1.5px var(--paper); }
+
+    .dots {
+      position: absolute; z-index: 5; top: 14px; right: 16px;
+      display: flex; align-items: center; gap: 5px; height: 20px;
+    }
+    .dots i { width: 6px; height: 6px; border-radius: 3px; background: var(--line); }
+    .dots i.past { background: var(--brown); opacity: .4; }
+    .dots i.now  { width: 14px; background: var(--brown); }
+
+    /* ─── turn cap (EN primary, KR secondary) ─── */
+    .cap {
+      position: relative; flex: 1 0 96px; padding: 0 40px;
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      background: var(--paper);
+    }
+    .cap p {
+      margin: 0; display: flex; flex-direction: column-reverse; align-items: center; gap: 4px; text-align: center;
+    }
+    /* EN comes first visually (column-reverse puts it on top) */
+    .cap .en { font-family: var(--font-en); font-weight: 700; font-size: 18px; color: var(--ink); }       /* CHANGED 24→18 */
+    .cap .kr { font-family: var(--font-book); font-size: 22px; line-height: 1.5; color: var(--ink-2); } /* CHANGED 16→22 */
+
+    /* ─── said zone ─── */
+    .said {
+      flex: none; height: 180px;
+      display: flex; align-items: center; justify-content: center;
+      border-top: 1px solid var(--line); background: var(--paper);
+    }
+
+    /* saybtn */
+    .saybtn {
+      position: relative; width: 150px; height: 150px;   /* CHANGED 128→150 */
+      padding: 0; border-radius: 50%; cursor: pointer;
+      border: 0; background: none; box-shadow: 0 5px 20px rgba(107,74,54,.22);
+    }
+    .saybtn::before {
+      content: ""; position: absolute; z-index: 1;
+      left: -19%; top: -31%; width: 138%; height: 131%;   /* same ratio preserved */
+      pointer-events: none;
+      background: url(../assets/btn-said.webp) 0 0 / 100% 100% no-repeat;
+    }
+    .saybtn .halo {
+      position: absolute; inset: -14px; border-radius: 50%;
+      background: var(--touch); opacity: .3;
+      animation: halo 1.8s ease-in-out infinite;
+    }
+    @keyframes halo { 50% { opacity: .08; transform: scale(1.18); } }
+    .saybtn .pulse {
+      position: relative; z-index: 2;
+      display: flex; flex-direction: column; align-items: center; justify-content: flex-end;
+      height: 100%; padding-bottom: 26%;
+    }
+    .saybtn b { font-family: var(--font-logo); font-weight: 400; font-size: 20px; line-height: 1; color: var(--touch-edge); }
+
+    /* ─── hintrow ─── */
+    .hintrow {
+      position: relative; flex: none; width: 100%; height: 56px;
+      display: flex; align-items: center; justify-content: center; gap: 10px; padding: 0;
+      border: 0; border-top: 1.5px solid var(--line); background: var(--paper-2);
+      color: var(--teal); font-size: 16px; font-family: var(--font-kr); cursor: pointer; /* CHANGED 15→16 */
+    }
+    .hintrow::after {
+      content: ""; position: absolute; top: 0; right: 0;
+      border-style: solid; border-width: 0 20px 20px 0;
+      border-color: transparent var(--paper) transparent transparent;
+    }
+    .hintrow .bar { width: 32px; height: 3px; border-radius: 2px; background: var(--line); }
+    .hintrow .chev {
+      width: 8px; height: 8px; margin-top: 4px;
+      border-left: 1.5px solid currentColor; border-top: 1.5px solid currentColor;
+      transform: rotate(45deg);
+    }
+  </style>
+</head>
+<body>
+<div class="kid turn">
+
+  <!-- stage -->
+  <div class="stage">
+    <!--
+      scene 5: 친구 차례 (xMidYMid slice)
+      Stage ≈ 679×854px  SVG 415×623  scale=1.636  YMid offset=-82.5px
+      Sticker panel (SVG y=430-518) → screen y=620-764 (above torn edge at y=814)
+    -->
+    <svg viewBox="0 0 415 623" preserveAspectRatio="xMidYMid slice">
+      <image href="../assets/ep01-bg-5-turn.webp" width="415" height="623"/>
+
+      <!-- speech bubble (showing current word "Bubbles.") -->
+      <rect class="fS sO" stroke-width="2" x="262" y="136" width="148" height="66" rx="18"/>
+      <path class="fS" d="M276 196 l-34 22 l50 -12 z"/>
+      <text class="fA" x="336" y="176" font-size="19" text-anchor="middle">Bubbles.</text>
+
+      <!-- sticker panel: rendered as HTML overlay (.stk-panel) below, not SVG -->
+    </svg>
+
+    <!-- sticker panel HTML overlay -->
+    <div class="stk-panel" aria-hidden="true">
+      <div class="stk-ribbon">오늘의 스티커</div>
+      <div class="stk-row">
+        <span class="stk-slot">
+          <span class="stk-spot"><img src="../assets/ep01-L-sticker-brush.webp" alt="brush"></span>
+          <span>brush my teeth</span>
+        </span>
+        <span class="stk-slot">
+          <span class="stk-spot"></span>
+          <span>bubbles</span>
+        </span>
+        <span class="stk-slot">
+          <span class="stk-spot"></span>
+          <span>all clean</span>
+        </span>
+      </div>
+    </div>
+
+    <!-- logo -->
+    <div class="logo">
+      <img src="../assets/brand-emblem.png" alt="릴리랑" onerror="this.style.background='var(--teal)';this.removeAttribute('src')">
+    </div>
+
+    <!-- progress dots (sc5 = now) -->
+    <div class="dots" aria-hidden="true">
+      <i class="past"></i><i class="past"></i><i class="past"></i><i class="past"></i><i class="past"></i>
+      <i class="now"></i>
+      <i></i>
+    </div>
+  </div><!-- /stage -->
+
+  <!-- turn cap: EN primary, KR secondary -->
+  <div class="cap">
+    <p>
+      <span class="en">Bubbles.</span>
+      <span class="kr">따라 말해 볼까?</span>
+    </p>
+  </div>
+
+  <!-- said zone -->
+  <div class="said">
+    <button class="saybtn" aria-label="말했어요">
+      <span class="halo"></span>
+      <span class="pulse"><b>말했어요</b></span>
+    </button>
+  </div>
+
+  <!-- parent handle -->
+  <button class="hintrow" aria-label="부모 화면 열기">
+    <span class="bar"></span>
+    부모 화면 열기
+    <span class="chev"></span>
+  </button>
+
+</div>
+</body>
+</html>

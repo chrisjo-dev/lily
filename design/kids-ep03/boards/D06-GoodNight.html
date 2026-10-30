@@ -1,0 +1,235 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=390">
+  <title>D06 — 잘 자</title>
+  <link rel="stylesheet" href="../shared/tokens.css">
+  <style>
+    body { width: 390px; max-width: 390px; min-height: 844px; max-height: 844px; overflow: hidden; margin: 0 auto; background: var(--t-bg); font-family: var(--t-kr); }
+
+    .top-bar { height: 52px; display: flex; align-items: center; justify-content: space-between; padding: 0 16px; background: var(--t-bg); }
+    .ep-title { font-family: var(--t-en); font-size: 13px; font-weight: 700; color: rgba(255,255,255,0.72); letter-spacing: 0.01em; }
+    .progress-dots { display: flex; gap: 5px; align-items: center; }
+    .dot { width: 10px; height: 10px; border-radius: 50%; background: rgba(255,255,255,0.28); }
+    .dot.active { width: 14px; height: 14px; background: var(--t-accent); }
+    .dot.done { background: rgba(255,255,255,0.55); }
+    .skip-wrap { display: flex; align-items: center; gap: 5px; font-size: 11px; font-family: var(--t-kr); color: rgba(255,255,255,0.6); }
+    .track { width: 34px; height: 18px; background: rgba(255,255,255,0.18); border-radius: 9px; position: relative; }
+    .thumb { width: 14px; height: 14px; border-radius: 50%; background: rgba(255,255,255,0.45); position: absolute; top: 2px; left: 2px; }
+
+    .stage { width: 390px; height: 612px; overflow: hidden; background: var(--t-bg); position: relative; }
+
+    .caption-strip { background: var(--t-surface); padding: 12px 20px 14px; height: 88px; display: flex; flex-direction: column; justify-content: center; gap: 5px; }
+    .wait-tag { display: inline-flex; align-items: center; gap: 6px; background: var(--t-soft); border-radius: 20px; padding: 3px 10px 3px 7px; font-size: 12px; color: var(--t-bg); width: fit-content; }
+    .caption-line { font-family: var(--t-kr); font-size: 20px; color: var(--t-ink); line-height: 1.4; }
+    .caption-line .en { font-family: var(--t-en); color: var(--t-bg); font-weight: 700; }
+
+    .parent-ctrl { height: 68px; background: var(--t-surface); border-top: 1.5px solid var(--t-line); display: flex; align-items: center; padding: 0 14px; gap: 8px; }
+    .pp-btn { width: 40px; height: 40px; border-radius: 50%; background: var(--t-bg); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+    .track-wrap { flex: 1; display: flex; flex-direction: column; gap: 3px; }
+    .audio-bar { height: 4px; background: var(--t-line); border-radius: 2px; overflow: hidden; }
+    .audio-fill { height: 100%; background: var(--t-bg); border-radius: 2px; }
+    .audio-time { font-family: var(--t-en); font-size: 11px; color: var(--t-sub); display: flex; justify-content: space-between; }
+    .ctrl-btns { display: flex; gap: 5px; }
+    .ctrl-btn { font-family: var(--t-kr); font-size: 10px; color: var(--t-sub); background: var(--t-soft); border-radius: 8px; padding: 5px 9px; white-space: nowrap; }
+
+    .parent-hint { height: 24px; background: var(--t-surface); display: flex; align-items: center; justify-content: center; gap: 4px; font-family: var(--t-kr); font-size: 11px; color: var(--t-sub); border-top: 1px solid var(--t-line); }
+
+    @keyframes countdown5s { from { stroke-dashoffset: 0; } to { stroke-dashoffset: 44; } }
+    .timer-arc { animation: countdown5s 5s linear forwards; transform-origin: 9px 9px; transform: rotate(-90deg); }
+    @keyframes lamp-glow { 0%, 100% { opacity: 0.55; } 50% { opacity: 0.85; } }
+    .lamp-glow { animation: lamp-glow 2.4s ease-in-out infinite; }
+    @keyframes twinkle { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
+    .star-a { animation: twinkle 1.8s ease-in-out infinite; }
+    .star-b { animation: twinkle 2.2s ease-in-out 0.5s infinite; }
+    .star-c { animation: twinkle 1.6s ease-in-out 1.0s infinite; }
+
+    /* End card */
+    .end-card {
+      position: absolute;
+      bottom: 0; left: 0; width: 390px;
+      background: var(--t-surface);
+      border-radius: 24px 24px 0 0;
+      padding: 20px 20px 16px;
+    }
+    .end-title { font-family: var(--t-kr); font-size: 15px; color: var(--t-sub); margin-bottom: 10px; }
+    .word-stickers { display: flex; gap: 8px; margin-bottom: 16px; }
+    .word-sticker { flex: 1; background: var(--t-soft); border-radius: 14px; padding: 10px 6px; display: flex; flex-direction: column; align-items: center; gap: 6px; }
+    .word-sticker img { width: 44px; height: 38px; object-fit: contain; }
+    .word-sticker .wen { font-family: var(--t-en); font-size: 11px; font-weight: 700; color: var(--t-bg); text-align: center; line-height: 1.3; }
+    .end-actions { display: flex; gap: 8px; }
+    .end-btn { flex: 1; padding: 13px 8px; border-radius: 14px; font-family: var(--t-kr); font-size: 14px; text-align: center; }
+    .end-btn.primary { background: var(--t-accent); color: var(--t-ink); font-weight: 400; }
+    .end-btn.secondary { background: var(--t-soft); color: var(--t-bg); }
+  </style>
+</head>
+<body class="t-split">
+
+  <!-- TOP BAR -->
+  <div class="top-bar">
+    <span class="ep-title">Brush, Brush, Brush!</span>
+    <div class="progress-dots" aria-label="6/6 장면">
+      <span class="dot done"></span>
+      <span class="dot done"></span>
+      <span class="dot done"></span>
+      <span class="dot done"></span>
+      <span class="dot done"></span>
+      <span class="dot active" aria-label="6번"></span>
+    </div>
+    <div class="skip-wrap">
+      <span>그냥 듣기</span>
+      <div class="track" role="switch" aria-checked="false" aria-label="그냥 듣기">
+        <div class="thumb"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- STAGE -->
+  <div class="stage" aria-label="잘 자 장면, 등을 눌러서 불을 꺼요">
+    <svg width="390" height="612" viewBox="0 0 390 612" xmlns="http://www.w3.org/2000/svg" stroke-linecap="round" stroke-linejoin="round">
+
+      <!-- Background (room wall, slightly different blue) -->
+      <rect width="390" height="612" style="fill: var(--t-bg)"/>
+      <!-- Ceiling/wall -->
+      <rect width="390" height="220" style="fill: var(--night); fill-opacity: 0.6"/>
+
+      <!-- Night window -->
+      <rect x="26" y="24" width="140" height="148" rx="14" style="fill: var(--night)"/>
+      <!-- Window frame (cross) -->
+      <rect x="24" y="22" width="144" height="152" rx="16" style="fill: none; stroke: var(--sky); stroke-width: 6; stroke-opacity: 0.5"/>
+      <line x1="96" y1="22" x2="96" y2="174" style="stroke: var(--sky); stroke-width: 5; stroke-opacity: 0.4"/>
+      <line x1="24" y1="96" x2="168" y2="96" style="stroke: var(--sky); stroke-width: 5; stroke-opacity: 0.4"/>
+      <!-- Moon in window -->
+      <circle cx="120" cy="60" r="26" style="fill: var(--star)"/>
+      <circle cx="134" cy="52" r="20" style="fill: var(--night)"/>
+      <!-- Stars in window -->
+      <circle class="star-a" cx="48" cy="42" r="3" style="fill: var(--star)"/>
+      <circle class="star-b" cx="72" cy="28" r="2.5" style="fill: var(--star)"/>
+      <circle class="star-c" cx="40" cy="72" r="2" style="fill: var(--star)"/>
+      <circle class="star-a" cx="60" cy="136" r="2" style="fill: var(--star)"/>
+      <circle class="star-b" cx="148" cy="44" r="2" style="fill: var(--star)"/>
+      <circle class="star-c" cx="154" cy="130" r="2.5" style="fill: var(--star)"/>
+
+      <!-- Lamp (right side — YELLOW = TOUCHABLE) -->
+      <!-- Lamp stand -->
+      <rect x="306" y="130" width="10" height="90" rx="5" style="fill: var(--card); fill-opacity: 0.7"/>
+      <rect x="290" y="214" width="42" height="10" rx="5" style="fill: var(--card); fill-opacity: 0.7"/>
+      <!-- Lamp shade (YELLOW = touchable) -->
+      <path d="M288 80 L300 130 L342 130 L354 80 Z" style="fill: var(--t-accent); stroke: var(--ink); stroke-width: 2.5"/>
+      <rect x="310" y="76" width="22" height="10" rx="5" style="fill: var(--t-accent); stroke: var(--ink); stroke-width: 2"/>
+      <!-- Lamp glow (warm light) -->
+      <ellipse class="lamp-glow" cx="321" cy="150" rx="58" ry="40" style="fill: var(--sun); fill-opacity: 0.22"/>
+      <ellipse class="lamp-glow" cx="321" cy="135" rx="38" ry="26" style="fill: var(--sun); fill-opacity: 0.18"/>
+
+      <!-- Lily in bed (sleeping, tucked in) -->
+      <!-- Bed frame -->
+      <rect x="20" y="340" width="300" height="200" rx="18" style="fill: var(--sky); stroke: var(--ink); stroke-width: 2.5; stroke-opacity: 0.6"/>
+      <!-- Headboard -->
+      <rect x="20" y="300" width="68" height="250" rx="14" style="fill: var(--sky); stroke: var(--ink); stroke-width: 2; stroke-opacity: 0.5"/>
+      <!-- Blanket -->
+      <rect x="20" y="410" width="300" height="130" rx="12" style="fill: var(--t-bg); fill-opacity: 0.45"/>
+      <!-- Blanket pattern line -->
+      <path d="M30 440 Q160 430 310 445" style="fill: none; stroke: var(--card); stroke-width: 2; stroke-opacity: 0.3"/>
+      <path d="M30 465 Q160 455 310 470" style="fill: none; stroke: var(--card); stroke-width: 2; stroke-opacity: 0.3"/>
+      <!-- Pillow -->
+      <rect x="30" y="355" width="120" height="64" rx="16" style="fill: var(--card); fill-opacity: 0.8"/>
+
+      <!-- Lily head on pillow -->
+      <circle cx="95" cy="390" r="46" style="fill: var(--skin); stroke: var(--ink); stroke-width: 2"/>
+      <!-- Hair -->
+      <path d="M52 382 q6 -46 43 -48 q37 2 43 48 q-22 -22 -43 -24 q-21 2 -43 24 z" style="fill: var(--hair)"/>
+      <!-- Single pigtail showing (one side visible) -->
+      <path d="M52 374 q-22 12 -18 44 q14 -10 18 -30" style="fill: var(--hair)"/>
+      <circle cx="35" cy="416" r="8" style="fill: var(--sun); stroke: var(--ink); stroke-width: 1.5"/>
+      <!-- Eyes closed (sleeping) -->
+      <path d="M78 392 q9 -8 18 0" style="fill: none; stroke: var(--ink); stroke-width: 2.5"/>
+      <path d="M96 392 q9 -8 18 0" style="fill: none; stroke: var(--ink); stroke-width: 2.5"/>
+      <!-- Lashes -->
+      <line x1="80" y1="390" x2="77" y2="386" style="stroke: var(--ink); stroke-width: 1.5"/>
+      <line x1="87" y1="389" x2="86" y2="385" style="stroke: var(--ink); stroke-width: 1.5"/>
+      <line x1="94" y1="389" x2="94" y2="385" style="stroke: var(--ink); stroke-width: 1.5"/>
+      <!-- Smile (content) -->
+      <path d="M80 404 q15 12 30 0" style="fill: none; stroke: var(--ink); stroke-width: 2.5"/>
+      <!-- Cheeks -->
+      <ellipse cx="68" cy="400" rx="11" ry="7" style="fill: var(--cheek); fill-opacity: 0.7"/>
+      <ellipse cx="120" cy="400" rx="11" ry="7" style="fill: var(--cheek); fill-opacity: 0.7"/>
+
+      <!-- Biscuit (at foot of bed, tiny) -->
+      <ellipse cx="286" cy="500" rx="38" ry="22" style="fill: var(--dog); stroke: var(--ink); stroke-width: 2"/>
+      <circle cx="286" cy="472" r="24" style="fill: var(--dog); stroke: var(--ink); stroke-width: 2"/>
+      <ellipse cx="268" cy="458" rx="10" ry="18" style="fill: var(--hair); stroke: var(--ink); stroke-width: 1.5"/>
+      <ellipse cx="304" cy="458" rx="10" ry="18" style="fill: var(--hair); stroke: var(--ink); stroke-width: 1.5"/>
+      <!-- Biscuit sleeping eyes -->
+      <path d="M278 472 q8 -6 16 0" style="fill: none; stroke: var(--ink); stroke-width: 2"/>
+      <!-- Biscuit tail curl -->
+      <path d="M322 496 q24 -16 20 -36" style="fill: none; stroke: var(--dog); stroke-width: 10; stroke-linecap: round"/>
+      <path d="M322 496 q24 -16 20 -36" style="fill: none; stroke: var(--ink); stroke-width: 2"/>
+
+      <!-- "Good night" text (soft, top right) -->
+      <text x="350" y="64" text-anchor="end" style="font-family: var(--t-en); font-size: 22px; font-weight: 700; fill: var(--card); fill-opacity: 0.7;">Good night!</text>
+    </svg>
+
+    <!-- End card with word stickers -->
+    <div class="end-card">
+      <div class="end-title">오늘 배운 말</div>
+      <div class="word-stickers">
+        <div class="word-sticker">
+          <img src="../assets/word-brush.svg" alt="brush my teeth">
+          <span class="wen">brush my<br>teeth</span>
+        </div>
+        <div class="word-sticker">
+          <img src="../assets/word-bubbles.svg" alt="bubbles">
+          <span class="wen">bubbles</span>
+        </div>
+        <div class="word-sticker">
+          <img src="../assets/word-clean.svg" alt="all clean">
+          <span class="wen">all clean</span>
+        </div>
+      </div>
+      <div class="end-actions">
+        <div class="end-btn primary" role="button" aria-label="한 번 더 듣기">한 번 더 듣기</div>
+        <div class="end-btn secondary" role="button" aria-label="부모님 화면으로">부모님 화면</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CAPTION STRIP -->
+  <div class="caption-strip">
+    <div class="wait-tag">
+      <svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true">
+        <circle cx="9" cy="9" r="7" style="fill: none; stroke: var(--t-bg); stroke-width: 2; stroke-opacity: 0.35"/>
+        <circle class="timer-arc" cx="9" cy="9" r="7" style="fill: none; stroke: var(--t-bg); stroke-width: 2; stroke-dasharray: 44 44;"/>
+      </svg>
+      릴리가 기다려요
+    </div>
+    <div class="caption-line"><span class="en">Good night, friend!</span></div>
+  </div>
+
+  <!-- PARENT CONTROLS -->
+  <div class="parent-ctrl" aria-label="재생 조작">
+    <div class="pp-btn" aria-label="재생">
+      <svg width="16" height="18" viewBox="0 0 16 18" aria-hidden="true">
+        <path d="M2 1 L15 9 L2 17 Z" style="fill: var(--card)"/>
+      </svg>
+    </div>
+    <div class="track-wrap">
+      <div class="audio-bar"><div class="audio-fill" style="width: 91%"></div></div>
+      <div class="audio-time"><span>2:12</span><span>2:19</span></div>
+    </div>
+    <div class="ctrl-btns">
+      <div class="ctrl-btn">3번 이어 듣기</div>
+      <div class="ctrl-btn">조금 천천히</div>
+    </div>
+  </div>
+
+  <!-- PARENT HINT -->
+  <div class="parent-hint">
+    아래로 내리면 부모님 화면
+    <svg width="12" height="8" viewBox="0 0 12 8" aria-hidden="true">
+      <path d="M1 1 L6 7 L11 1" style="fill: none; stroke: var(--t-sub); stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round"/>
+    </svg>
+  </div>
+
+</body>
+</html>

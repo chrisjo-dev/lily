@@ -1,0 +1,62 @@
+/* 릴리랑 디자인 토큰 (그림책 팔레트, B계열) */
+:root {
+  /* 배경/표면 */
+  --t-bg:      #eaf2f7;
+  --t-surface: #ffffff;
+  --t-card:    #ffffff;
+
+  /* 텍스트 */
+  --t-ink:     #24323d;
+  --t-sub:     #5b6b78;
+  --t-muted:   #8ca0ad;
+
+  /* 강조 */
+  --t-accent:  #2f7d6d;
+  --t-soft:    #d7ebe4;
+
+  /* 색조 */
+  --t-wash-1:  #bfe0f2;  /* 연파랑 */
+  --t-wash-2:  #ffd6c2;  /* 연분홍/복숭아 */
+  --t-wash-3:  #ffe8a0;  /* 연노랑 (아이 인터랙티브 요소 전용) */
+
+  /* 버튼 노랑 (아이가 누르는 것에만) */
+  --t-touch:   #ffcc00;
+  --t-touch-ink: #24323d;
+
+  /* 잠금/회원 */
+  --t-lock:    #c8d8e0;
+
+  /* 반지름 */
+  --r-sm:  10px;
+  --r-md:  16px;
+  --r-lg:  24px;
+  --r-xl:  32px;
+  --r-pill: 99px;
+
+  /* 그림자 */
+  --shadow-sm: 0 2px 8px rgba(36,50,61,0.08);
+  --shadow-md: 0 4px 20px rgba(36,50,61,0.12);
+
+  /* 폰트 */
+  --kr: "Gowun Dodum", "Apple SD Gothic Neo", "Noto Sans KR", sans-serif;
+  --en: "Andika", "Gowun Dodum", sans-serif;
+
+  /* 간격 */
+  --sp-xs: 4px;
+  --sp-sm: 8px;
+  --sp-md: 16px;
+  --sp-lg: 24px;
+  --sp-xl: 40px;
+}
+
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  background: var(--t-bg);
+  color: var(--t-ink);
+  font-family: var(--kr);
+  font-size: 16px;
+  line-height: 1.6;
+  word-break: keep-all;
+  overflow-wrap: anywhere;
+}

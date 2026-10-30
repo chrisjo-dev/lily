@@ -1,0 +1,457 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="color-scheme" content="light only">
+<meta name="robots" content="noindex, nofollow">
+<!-- 인라인 코드와 style 속성 없이 돈다. supabase 주소는 가입 레인과 함께 메인이 바꿈 -->
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.117.3/dist/umd/supabase.js; style-src 'self' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; media-src 'self'; connect-src 'self' https://supabase-project-ref.invalid; base-uri 'self'; object-src 'none'">
+<title>Yummy, Yummy! | 릴리랑 하루 5분 영어 그림책</title>
+<meta name="description" content="아이와 함께 하루 5분 영어 듣기. 아침밥 먹는 시간, 오늘의 단어 3개.">
+<link rel="icon" href="/brand/favicon.ico" sizes="any"><link rel="icon" href="/brand/favicon-32.png" type="image/png" sizes="32x32"><link rel="icon" href="/brand/favicon-16.png" type="image/png" sizes="16x16"><link rel="icon" href="/brand/icon-192.png" type="image/png" sizes="192x192"><link rel="apple-touch-icon" href="/brand/apple-touch-icon.png">
+<meta property="og:type" content="website"><meta property="og:site_name" content="릴리랑"><meta property="og:locale" content="ko_KR">
+<link rel="canonical" href="https://lilyrang.co.kr/ep04/">
+<meta property="og:url" content="https://lilyrang.co.kr/ep04/"><meta property="og:title" content="Yummy, Yummy! | 릴리랑"><meta property="og:description" content="아침밥 먹는 시간, 릴리랑 같이 듣고 누르며 노는 영어 그림책. 4~7세 아이와 부모님.">
+<!-- OG 그림: tools/build_og_episodes.py가 만든 ep04/og.jpg -->
+<meta property="og:image" content="https://lilyrang.co.kr/ep04/og.jpg"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta property="og:image:alt" content="릴리랑 Yummy, Yummy! 그림책 표지 그림">
+<meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="Yummy, Yummy! | 릴리랑"><meta name="twitter:description" content="아침밥 먹는 시간, 릴리랑 같이 듣고 누르며 노는 영어 그림책. 4~7세 아이와 부모님."><meta name="twitter:image" content="https://lilyrang.co.kr/ep04/og.jpg">
+
+<link rel="preload" as="image" href="art/bg-0-intro.webp" fetchpriority="high">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link id="lily-fonts" rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Andika:wght@400;700&family=Gowun+Batang&family=Gowun+Dodum&family=Jua&family=Gaegu:wght@700&display=swap">
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Andika:wght@400;700&family=Gowun+Batang&family=Gowun+Dodum&family=Jua&family=Gaegu:wght@700&display=swap"></noscript>
+<link rel="stylesheet" href="/src/shared/ui/tokens.css">
+<link rel="stylesheet" href="/src/widgets/player/engine.css">
+<!-- 가입과 맛보기(레인 D): 설정, 로그인, 잠금. 없으면 gate-default.js가 항상 허용 -->
+<script src="/src/shared/config/lily-config.js"></script>
+<script src="/src/shared/api/supabase.js"></script>
+<script src="/src/entities/session/session.js"></script>
+<script src="/src/entities/episode/catalog.js"></script>
+<script src="/src/features/gate/gate.js"></script>
+<script src="/src/features/gate/gate-default.js"></script>
+<script src="/src/widgets/player/engine.js"></script>
+<script src="/src/widgets/player/interactions/find.js"></script>
+<script src="/src/widgets/player/interactions/pop.js"></script>
+<script src="/src/widgets/player/interactions/say-sticker.js"></script>
+<script src="/src/widgets/player/interactions/tap-sparkle.js"></script>
+</head>
+<body>
+<div class="stage" id="stage">
+  <!-- 그림은 art/의 배경 한 장(1024x1536) + 누르는 레이어. 좌표는 그림 픽셀의 절반(viewBox 512x768, 그림도 512x768로 놓음).
+       엔진의 스티커(66), 반짝 별, 거품 글자, 손 모양 크기가 400~500 폭 좌표에 맞춰져 있어서 EP01과 같은 눈금을 씀 -->
+  <!-- 처음: 식탁 앞에서 배를 잡은 릴리 (아래 식탁 판은 큰 재생 단추 자리) -->
+  <svg class="scene" id="sc0" viewBox="0 0 512 768" preserveAspectRatio="xMidYMid slice">
+    <image href="art/bg-0-intro.webp" width="512" height="768"/>
+  </svg>
+
+  <!-- 장면 1: 시리얼 콕콕 (우유 면 위에 시리얼 다섯 개) -->
+  <svg class="scene" id="sc1" viewBox="0 0 512 768" preserveAspectRatio="xMidYMid slice" hidden>
+    <image data-src="art/bg-1-cereal.webp" width="512" height="768"/>
+    <g id="cereal"></g>
+    <g class="hand" transform="translate(262 372) scale(1.3)"><g><use href="#hand-shape"/></g></g>
+  </svg>
+
+  <!-- 장면 2: 토스트 찾기 (식탁보 오른쪽 아래 끝에서 나온 꼬리). 바닥까지 보이게 아래 맞춤 -->
+  <svg class="scene" id="sc2" viewBox="0 0 512 768" preserveAspectRatio="xMidYMax slice" hidden>
+    <image data-src="art/bg-2-find.webp" width="512" height="768"/>
+    <!-- 꼬리 그림 아래쪽의 파란 이불 조각은 이 장면 식탁보(흰색)와 달라서 잘라 냄 -->
+    <clipPath id="tail-clip"><polygon points="0,0 487,0 487,340 350,338 322,300 282,255 242,217 192,190 0,180"/></clipPath>
+    <g class="tgt" id="t-tail" role="button" tabindex="0" aria-label="식탁보 밑으로 나온 꼬리 누르기">
+      <circle class="halo" cx="434" cy="700" r="52"/>
+      <g class="pulse"><g id="tail"><g transform="translate(312 643) scale(.3)">
+        <image class="art" data-src="art/L-tail.webp" width="487" height="512" clip-path="url(#tail-clip)"/>
+      </g></g></g>
+      <circle class="hit" cx="432" cy="700" r="62"/>
+    </g>
+    <g class="hand" transform="translate(352 704) scale(1.3)"><g><use href="#hand-shape"/></g></g>
+  </svg>
+
+  <!-- 장면 3: 더 주세요 (누를 것 없음, 식탁 앞쪽에 글자) -->
+  <svg class="scene" id="sc3" viewBox="0 0 512 768" preserveAspectRatio="xMidYMid slice" hidden>
+    <image data-src="art/bg-3-more.webp" width="512" height="768"/>
+    <text class="fS" opacity=".8" x="258" y="691" font-size="46" text-anchor="middle">More please!</text>
+    <text class="fA" x="256" y="688" font-size="44" text-anchor="middle">More please!</text>
+  </svg>
+
+  <!-- 장면 4: 배불러 (빵빵한 배를 누르면 반짝) -->
+  <svg class="scene" id="sc4" viewBox="0 0 512 768" preserveAspectRatio="xMidYMid slice" hidden>
+    <image data-src="art/bg-4-full.webp" width="512" height="768"/>
+    <g class="tgt" id="t-tummy" role="button" tabindex="0" aria-label="빵빵한 배 누르기">
+      <ellipse class="halo" cx="272" cy="466" rx="104" ry="50"/>
+      <g class="pulse"><ellipse class="fN sT" stroke-width="4" cx="272" cy="466" rx="96" ry="44"/></g>
+      <ellipse class="hit" cx="272" cy="466" rx="124" ry="62"/>
+    </g>
+    <g id="sparks"></g>
+  </svg>
+
+  <!-- 장면 5: 친구 차례 (위 오른쪽 빈 벽: 말풍선, 아래 민트 판: 말했어요 단추와 스티커판) -->
+  <svg class="scene" id="sc5" viewBox="0 0 512 768" preserveAspectRatio="xMidYMid slice" hidden>
+    <image data-src="art/bg-5-turn.webp" width="512" height="768"/>
+    <rect class="fS sO" stroke-width="2" x="300" y="140" width="164" height="72" rx="22"/>
+    <path class="fS" d="M318 204 l-50 26 l72 -20 z"/>
+    <text class="fA" id="say-word" x="382" y="184" font-size="21" text-anchor="middle">Your turn!</text>
+    <g class="tgt" id="t-say" role="button" tabindex="0" aria-label="말했어요">
+      <circle class="halo" cx="112" cy="560" r="78"/>
+      <g class="pulse">
+        <circle class="fT sE" stroke-width="3" cx="112" cy="560" r="64"/>
+        <text class="kr fI" x="112" y="558" font-size="23" text-anchor="middle">말했어요</text>
+        <text class="fI" x="112" y="584" font-size="15" text-anchor="middle">I said it!</text>
+      </g>
+    </g>
+    <g class="hand" transform="translate(160 618) scale(1.4)"><g><use href="#hand-shape"/></g></g>
+    <!-- 스티커판: 엔진 스티커(66)를 1.2배로 보이게 판 전체를 키움. from은 이 판 좌표의 단추 중심 -->
+    <g transform="translate(218 492) scale(1.2)">
+      <text class="kr fU" x="107" y="0" font-size="12" text-anchor="middle">오늘의 스티커</text>
+      <g class="fN sU" stroke-width="2" stroke-dasharray="6 4">
+        <rect x="0" y="12" width="62" height="62" rx="31"/><rect x="76" y="12" width="62" height="62" rx="31"/><rect x="152" y="12" width="62" height="62" rx="31"/>
+      </g>
+      <g id="stickers"></g>
+      <g class="fU" font-size="11" text-anchor="middle"><text x="31" y="90">yummy</text><text x="107" y="90">all gone</text><text x="183" y="90">more please</text></g>
+    </g>
+  </svg>
+
+  <!-- 장면 6: 그릇 치우기 (식탁 앞쪽 가운데에 빈 그릇. 누르면 사라짐 = 싱크대로, 끝 동작) -->
+  <svg class="scene" id="sc6" viewBox="0 0 512 768" preserveAspectRatio="xMidYMid slice" hidden>
+    <image data-src="art/bg-6-sink.webp" width="512" height="768"/>
+    <g class="tgt" id="t-bowl" role="button" tabindex="0" aria-label="그릇 누르기">
+      <circle class="halo" cx="150" cy="462" r="62"/>
+      <g class="pulse" id="bowl"><image class="vanish-on-done" data-src="art/L-bowl.webp" x="90" y="412" width="120" height="99"/></g>
+      <circle class="hit" cx="150" cy="462" r="66"/>
+    </g>
+    <g class="hand" transform="translate(180 516) scale(1.4)"><g><use href="#hand-shape"/></g></g>
+  </svg>
+</div>
+
+<!-- 편 설정(JSON). 형식은 /src/entities/episode/README.md. 시각은 초(음악 도입 2.5초 포함), [[...]]는 오늘의 단어, 좌표는 장면 viewBox(그림 픽셀의 절반) -->
+<script type="application/json" id="lily-episode">
+{
+  "id": "ep04",
+  "title": "Yummy, Yummy!",
+  "audio": "ep04.mp3",
+  "duration": 146,
+  "offset": 2.5,
+  "free": false,
+  "previewUntil": 34.0,
+  "lines": [
+    [
+      2.5,
+      5.44,
+      "Hello, hello! It's Lily time!"
+    ],
+    [
+      5.84,
+      10.48,
+      "Hi, friend! 나는 릴리야. 꼬르륵, 배고파!"
+    ],
+    [
+      12.88,
+      16.16,
+      "친구도 배고파? 아침에 뭐 먹고 싶어?"
+    ],
+    [
+      18.56,
+      27.58,
+      "와, 아침밥이다! 동글동글 시리얼! 냠. [[Yummy]]. 맛있어. [[Yummy]]!"
+    ],
+    [
+      27.98,
+      34.0,
+      "우유에 시리얼이 동동 떠 있네. 친구가 하나씩 콕콕 눌러서 먹여 줄래?"
+    ],
+    [
+      35.8,
+      39.79,
+      "냠, 냠, 냠! [[Yummy]], [[yummy]]!"
+    ],
+    [
+      40.19,
+      46.61,
+      "어? 그릇이 텅 비었어! [[All gone]]. 다 먹었어. [[All gone]]!"
+    ],
+    [
+      49.01,
+      55.88,
+      "그런데 내 토스트는 어디 갔지? 접시에 있었는데! 친구가 같이 찾아 줄래?"
+    ],
+    [
+      59.28,
+      68.49,
+      "찾았다! 비스킷이 식탁 밑에서 내 토스트를 먹고 있었네! 비스킷, [[yummy]]?"
+    ],
+    [
+      68.89,
+      75.35,
+      "멍! 토스트도 [[all gone]]! 비스킷 꼬리가 살랑살랑."
+    ],
+    [
+      75.75,
+      83.97,
+      "나 조금 더 먹고 싶어. 이럴 땐 이렇게 말해. [[More please]]. 더 주세요. [[More please]]!"
+    ],
+    [
+      84.37,
+      88.76,
+      "딸기를 더 받았다! 친구도 말해 봐. [[More please]]!"
+    ],
+    [
+      91.16,
+      96.97,
+      "냠냠, [[yummy]]! 내 배를 톡 눌러 봐. 배가 빵빵해졌어!"
+    ],
+    [
+      99.37,
+      100.95,
+      "딸기도 [[all gone]]!"
+    ],
+    [
+      101.35,
+      109.37,
+      "이제 친구 차례야! 내가 말하면 따라 해 봐. 말할 때마다 스티커가 하나씩 붙어!"
+    ],
+    [
+      109.77,
+      110.6,
+      "[[Yummy]]."
+    ],
+    [
+      113.0,
+      113.83,
+      "[[All gone]]."
+    ],
+    [
+      116.23,
+      117.15,
+      "[[More please]]."
+    ],
+    [
+      119.55,
+      127.24,
+      "잘했어! 한 번 더, 노래처럼! [[Yummy]], [[yummy]], [[all gone]]. [[More please]], [[more please]]!"
+    ],
+    [
+      127.64,
+      132.9,
+      "다 먹은 그릇은 싱크대에 쏙! 친구가 그릇을 톡 눌러 줘!"
+    ],
+    [
+      135.1,
+      142.11,
+      "고마워! 오늘 아침 먹을 때 말해 봐. [[Yummy]]! Have a great day, friend! Bye-bye!"
+    ]
+  ],
+  "scenes": [
+    {
+      "id": "sc0",
+      "from": 0
+    },
+    {
+      "id": "sc1",
+      "from": 18.3,
+      "name": "시리얼"
+    },
+    {
+      "id": "sc2",
+      "from": 48.8,
+      "name": "토스트 찾기"
+    },
+    {
+      "id": "sc3",
+      "from": 75.5,
+      "name": "더 주세요"
+    },
+    {
+      "id": "sc4",
+      "from": 90.9,
+      "name": "배불러"
+    },
+    {
+      "id": "sc5",
+      "from": 101.1,
+      "name": "친구 차례"
+    },
+    {
+      "id": "sc6",
+      "from": 127.4,
+      "name": "그릇 치우기"
+    }
+  ],
+  "waits": [
+    {
+      "at": 34.0,
+      "type": "pop",
+      "label": "시리얼 먹기",
+      "word": "Yum!",
+      "into": "cereal",
+      "img": "art/L-cereal.webp",
+      "bubbles": [
+        [
+          170,
+          330,
+          46
+        ],
+        [
+          300,
+          320,
+          46
+        ],
+        [
+          230,
+          432,
+          46
+        ],
+        [
+          352,
+          440,
+          46
+        ],
+        [
+          128,
+          452,
+          46
+        ]
+      ]
+    },
+    {
+      "at": 55.88,
+      "type": "find",
+      "target": "t-tail",
+      "bounce": "tail"
+    },
+    {
+      "at": 110.6,
+      "type": "say-sticker",
+      "sticker": 0
+    },
+    {
+      "at": 113.83,
+      "type": "say-sticker",
+      "sticker": 1
+    },
+    {
+      "at": 117.15,
+      "type": "say-sticker",
+      "sticker": 2
+    },
+    {
+      "at": 132.9,
+      "type": "find",
+      "target": "t-bowl",
+      "bounce": "bowl",
+      "end": true
+    }
+  ],
+  "free_play": [
+    {
+      "scene": "sc4",
+      "type": "tap-sparkle",
+      "target": "t-tummy",
+      "into": "sparks",
+      "keyArea": [
+        180,
+        460,
+        180
+      ]
+    },
+    {
+      "scene": "sc5",
+      "type": "say-sticker",
+      "target": "t-say",
+      "label": "say-word",
+      "words": {
+        "14": "Your turn!",
+        "15": "Yummy.",
+        "16": "All gone.",
+        "17": "More please.",
+        "18": "Great job!"
+      },
+      "into": "stickers",
+      "from": [
+        -88,
+        57
+      ],
+      "slots": [
+        [
+          0,
+          12
+        ],
+        [
+          76,
+          12
+        ],
+        [
+          152,
+          12
+        ]
+      ],
+      "images": [
+        "art/L-sticker-yummy.webp",
+        "art/L-sticker-gone.webp",
+        "art/L-sticker-more.webp"
+      ]
+    }
+  ],
+  "end": {
+    "at": 142.01,
+    "title": "Have a great day!",
+    "sub": "오늘 모은 스티커",
+    "bg": "art/paper.webp",
+    "stickers": [
+      {
+        "img": "art/L-sticker-yummy.webp",
+        "label": "yummy"
+      },
+      {
+        "img": "art/L-sticker-gone.webp",
+        "label": "all gone"
+      },
+      {
+        "img": "art/L-sticker-more.webp",
+        "label": "more please"
+      }
+    ]
+  },
+  "words": [
+    {
+      "en": "yummy",
+      "ko": "맛있어",
+      "line": 3,
+      "icon": "art/L-sticker-yummy.webp"
+    },
+    {
+      "en": "all gone",
+      "ko": "다 먹었어",
+      "line": 6,
+      "icon": "art/L-sticker-gone.webp"
+    },
+    {
+      "en": "more please",
+      "ko": "더 주세요",
+      "line": 10,
+      "icon": "art/L-sticker-more.webp"
+    }
+  ],
+  "worksheet": null,
+  "tips": [
+    [
+      "여러 번 들려주세요.",
+      "해석해 주기보다 같은 이야기를 반복해서 듣는 게 오늘의 목표예요. '3번 이어 듣기'를 켜면 끝나고 처음부터 다시 나와요."
+    ],
+    [
+      "아침 먹을 때 한 번만.",
+      "\"Yummy!\", \"More please!\" 하고 그 상황에 말해 주면 소리와 상황이 이어져 더 오래 기억해요."
+    ],
+    [
+      "따라 하지 않아도 괜찮아요.",
+      "듣는 것만으로도 충분한 노출이에요."
+    ],
+    [
+      "멈춰서 기다리는 곳이 있어요.",
+      "아이가 화면을 누르면 이어져요. 그냥 들으려면 그냥 듣기를 켜 주세요."
+    ]
+  ]
+}
+</script>
+</body>
+</html>

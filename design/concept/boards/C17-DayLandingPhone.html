@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>C17 하루 시간표 랜딩 휴대폰</title>
+<link rel="stylesheet" href="../shared/tokens.css">
+<link rel="stylesheet" href="../shared/hl.css">
+<style>
+  /* 3. 하루 시간표: 아침 그림으로 시작해 내려갈수록 밤. 7편이 화면 폭을 다 쓰는 그림 띠로 이어지고, 무료 편 띠에만 맛보기 */
+  body { width: 390px; margin: 0 auto; background: #2b3550; }
+  .cover { position: relative; height: 844px; overflow: hidden; background: #fbf3df; }
+  .cover > img { width: 100%; height: 100%; object-fit: cover; object-position: center 35%; }
+  .cover::after { content: ''; position: absolute; left: 0; right: 0; bottom: 0; height: 360px; background: linear-gradient(to bottom, rgba(251,243,223,0), #fbf3df 66%); }
+  .cover-text { position: absolute; left: 24px; right: 24px; bottom: 36px; z-index: 1; }
+  .clock { font-family: var(--font-title); font-weight: 700; font-size: 18px; color: var(--brown); margin: 0; }
+  .logo { font-size: 48px; color: var(--brown); margin: 0; }
+  .promise { font-size: 27px; margin: var(--s2) 0 var(--s3); }
+  .sub { font-size: 15px; color: var(--ink-2); margin: 0; }
+  .down { font-size: 13px; color: var(--ink-2); margin: var(--s4) 0 0; }
+
+  .band { padding: 0 0 28px; }
+  .band > img { width: 100%; height: 300px; object-fit: cover; object-position: center 35%; }
+  .band .cap { padding: 16px 24px 0; display: grid; grid-template-columns: 1fr auto; align-items: end; gap: 8px; }
+  .band .when { font-size: 13px; }
+  .band b { display: block; font-family: var(--font-title); font-weight: 700; font-size: 26px; letter-spacing: -0.03em; line-height: 1.1; }
+  .band .ko { font-size: 14px; }
+  .band .lock { width: 18px; height: 18px; opacity: .8; }
+  .b1 { background: #fbf3df; color: var(--ink); } .b2 { background: #f7eed8; color: var(--ink); } .b3 { background: #f2e7d0; color: var(--ink); }
+  .b4 { background: #ece0c8; color: var(--ink); } .b5 { background: #e6d6bd; color: var(--ink); }
+  .b6 { background: #6d6f86; color: #f4efe6; } .b7 { background: #3a4462; color: #f4efe6; }
+  .b5 .free { padding: 18px 24px 0; }
+  .b5 .play b { color: var(--ink); }
+
+  .night { padding: 56px 24px 0; color: #f4efe6; }
+  .night h2 { font-size: 30px; margin: 0 0 var(--s4); color: #f4efe6; }
+  .night dt { font-family: var(--font-title); font-weight: 700; font-size: 21px; letter-spacing: -0.03em; }
+  .night dd { margin: 2px 0 var(--s4); font-size: 14px; color: #c9c4d6; }
+  .night .quiet { color: #9fd3cd; display: inline-block; margin-top: var(--s4); }
+  .foot { color: #a9a6b8; }
+</style>
+</head>
+<body>
+  <header class="cover">
+    <img src="../assets/hl/cover-ep02.webp" alt="아침, 침대에서 막 깨는 릴리">
+    <div class="cover-text">
+      <p class="clock">아침 7시</p>
+      <p class="t logo">릴리랑</p>
+      <h1 class="t promise">아이가 이야기에 끼어드는<br>2분 영어 그림책</h1>
+      <p class="sub">4~7세 아이와 하루 습관마다 한 편씩.</p>
+      <p class="down">아래로 내리면 릴리의 하루가 밤까지 이어져요</p>
+    </div>
+  </header>
+
+  <section class="band b2"><img src="../assets/hl/cover-ep03.webp" alt=""><div class="cap"><div><span class="when">아침, 세수하기</span><b>Splash, Splash!</b></div><i class="lock"></i></div></section>
+  <section class="band b3"><img src="../assets/hl/cover-ep04.webp" alt=""><div class="cap"><div><span class="when">아침, 아침 먹기</span><b>Yummy, Yummy!</b></div><i class="lock"></i></div></section>
+  <section class="band b4"><img src="../assets/hl/cover-ep05.webp" alt=""><div class="cap"><div><span class="when">아침, 옷 입기</span><b>Put On, Ready!</b></div><i class="lock"></i></div></section>
+  <section class="band b5">
+    <img src="../assets/hl/cover-ep01.webp" alt="EP01 이 닦기 첫 장면">
+    <div class="cap"><div><span class="when">이 닦기, 지금 무료</span><b>Brush, Brush, Brush!</b></div></div>
+    <div class="free"><a class="play"><img src="../assets/hl/btn-play.webp" alt=""><b>맛보기 바로 듣기<small>2분 19초, 로그인 없이</small></b></a></div>
+  </section>
+  <section class="band b6"><img src="../assets/hl/cover-ep06.webp" alt=""><div class="cap"><div><span class="when">저녁, 목욕하기</span><b>Rub-a-Dub, Bath Time!</b></div><i class="lock"></i></div></section>
+  <section class="band b7"><img src="../assets/hl/cover-ep07.webp" alt=""><div class="cap"><div><span class="when">밤, 잠자기</span><b>Sweet Dreams</b></div><i class="lock"></i></div></section>
+
+  <section class="night">
+    <h2 class="t">잠들기 전, 부모님께</h2>
+    <dl>
+      <dt>한 편이 2분이면 끝나요</dt><dd>화면 앞에 오래 두지 않아요.</dd>
+      <dt>아이 정보는 받지 않아요</dt><dd>아이 이름과 사진, 학교는 묻지 않아요.</dd>
+      <dt>시험도 점수도 없어요</dt><dd>따라 말하기는 권하지만 시키지 않아요.</dd>
+      <dt>가입도 무료예요</dt><dd>가입하면 일곱 편이 모두 열려요.</dd>
+    </dl>
+    <a class="quiet">무료로 가입하기</a>
+  </section>
+  <footer class="foot"><a>개인정보처리방침</a></footer>
+</body>
+</html>

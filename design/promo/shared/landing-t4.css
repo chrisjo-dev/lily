@@ -1,0 +1,127 @@
+/* 랜딩 T4: 사용자가 고른 참고(피터 래빗, 폭폭)의 결.
+   흰 종이 바탕 위에 테두리 없는 수채 그림(누끼 없음), 이야기 7편은 색 동그라미 안에, 시연 섹션만 하늘색 물결 띠. 노랑은 맛보기 단추와 무료 편에만. */
+:root {
+  --paper: #fefefd; --ink: #1f2a3a; --ink-2: #4f5b6b; --sky-band: #dcefff; --sky-deep: #2f6fb5; --honey: #b9781f;
+  --sun: #ffc531; --sun-edge: #6b4a33;
+  --c1: #ffe6a8; --c2: #d4ecff; --c3: #ffd9c4; --c4: #dff1d6; --c5: #fff1b3; --c6: #d9e4ff; --c7: #e6dcf5;
+}
+::selection { background: var(--c1); color: var(--ink); }
+body { margin: 0; background: var(--paper); color: var(--ink); font-family: var(--font-body); word-break: keep-all; -webkit-font-smoothing: antialiased; }
+img { display: block; max-width: 100%; }
+h1, h2, h3 { font-family: var(--font-head); font-weight: 400; margin: 0; letter-spacing: -0.02em; text-wrap: balance; }
+p { margin: 0; }
+a:focus-visible { outline: 3px solid var(--sky-deep); outline-offset: 4px; border-radius: 999px; }
+.wrap { padding: 0 22px; }
+.hand { font-family: var(--font-hand); font-weight: 700; letter-spacing: -0.03em; line-height: 1.05; }
+.btn { display: inline-flex; align-items: center; gap: 12px; background: var(--sun); color: var(--ink); border: 3px solid var(--sun-edge); border-radius: 999px; padding: 15px 30px; font-family: var(--font-head); font-size: 23px; line-height: 1; text-decoration: none; box-shadow: 0 6px 14px -6px rgba(107,74,51,.45); transition: transform .2s cubic-bezier(.2,.8,.2,1); }
+.btn::before { content: ''; border-left: 15px solid var(--sun-edge); border-top: 10px solid transparent; border-bottom: 10px solid transparent; }
+.btn:hover { transform: translateY(-2px); }
+
+/* 상단 줄 */
+.bar { display: flex; align-items: center; gap: 10px; padding: 16px 22px; }
+.bar img { height: 40px; }
+.bar span { font-family: var(--font-hand); font-weight: 700; font-size: 30px; color: var(--sky-deep); letter-spacing: -0.03em; }
+
+/* 1. 첫 화면 */
+.hero { padding: 8px 22px 30px; }
+.hero h1 { font-size: 40px; line-height: 1.16; }
+.hero h1 b { font-weight: 400; color: var(--sky-deep); }
+.hero .sub { font-size: 17px; line-height: 1.55; margin: 14px 0 0; color: var(--ink-2); }
+.hero .art { width: 100%; margin: 10px 0 6px; }
+.hero .go { text-align: center; }
+.hero .note { font-size: 14px; color: var(--ink-2); margin-top: 10px; text-align: center; }
+.hero .calls { position: relative; }
+.hero .call { position: absolute; font-size: 21px; color: var(--honey); }
+.hero .call.a { left: 0; top: -2%; font-size: 18px; } .hero .call.b { right: 0; top: 0; } .hero .call.c { right: 4%; bottom: 2%; }
+
+/* 2. 이야기 7편: 색 동그라미 */
+.stories { padding: 40px 0 46px; text-align: center; }
+.sec-title { font-size: 30px; line-height: 1.22; }
+.sec-lead { font-size: 16px; line-height: 1.6; color: var(--ink-2); margin-top: 10px; }
+.circles { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px 10px; margin-top: 28px; }
+.circle { text-decoration: none; color: inherit; }
+.circle .dot { position: relative; aspect-ratio: 1; border-radius: 50%; overflow: hidden; }
+.circle .dot img { width: 100%; height: 100%; object-fit: cover; mix-blend-mode: multiply; }
+.circle:nth-child(1) .dot { background: var(--c1); } .circle:nth-child(2) .dot { background: var(--c2); } .circle:nth-child(3) .dot { background: var(--c3); }
+.circle:nth-child(4) .dot { background: var(--c4); } .circle:nth-child(5) .dot { background: var(--c5); box-shadow: 0 0 0 4px var(--sun); } .circle:nth-child(6) .dot { background: var(--c6); } .circle:nth-child(7) .dot { background: var(--c7); }
+.circle b { display: block; font-family: var(--font-head); font-weight: 400; font-size: 18px; margin-top: 10px; }
+.circle small { display: block; font-size: 13px; color: var(--ink-2); }
+.circle .free { display: inline-block; margin-top: 4px; font-size: 13px; font-weight: 700; color: var(--sun-edge); background: var(--c5); border-radius: 999px; padding: 2px 10px; }
+
+/* 3. 시연: 하늘색 물결 띠 안에 실제 세 화면 */
+.wave { display: block; width: 100%; height: 30px; }
+.demo { background: var(--sky-band); padding: 26px 0 40px; }
+.demo .sec-title, .demo .sec-lead { text-align: center; }
+.frames { display: flex; gap: 14px; margin-top: 26px; overflow-x: auto; padding: 0 22px 10px; scroll-snap-type: x mandatory; }
+.frame { flex: none; width: 60%; margin: 0; scroll-snap-align: center; text-align: center; }
+.frame .scr { border-radius: 26px; overflow: hidden; border: 7px solid var(--white); aspect-ratio: 9 / 15; box-shadow: 0 16px 26px -16px rgba(31,42,58,.45); }
+.frame .scr img { width: 100%; height: 100%; object-fit: cover; object-position: center 40%; }
+.frame b { display: block; font-size: 26px; color: var(--sky-deep); margin-top: 12px; }
+.frame span { font-size: 15px; color: var(--ink-2); }
+.demo .after { text-align: center; font-size: 15px; color: var(--ink-2); margin-top: 18px; }
+
+/* 4. 귀에 익히는 방법: 큰 말과 짧은 풀이, 작은 그림 */
+.ways { padding: 54px 0 40px; }
+.ways .sec-title { text-align: center; }
+.ways .grid { display: grid; gap: 28px; margin-top: 30px; }
+.way { display: grid; grid-template-columns: 76px 1fr; gap: 16px; align-items: center; }
+.way img { width: 76px; height: 76px; object-fit: contain; }
+.way b { display: block; font-family: var(--font-head); font-weight: 400; font-size: 22px; }
+.way p { font-size: 15px; line-height: 1.6; color: var(--ink-2); margin-top: 4px; }
+.way q { font-family: var(--font-hand); font-weight: 700; font-size: 1.2em; color: var(--sky-deep); quotes: none; }
+
+/* 5. 질문 */
+.qa { padding: 40px 0 40px; }
+.qa .sec-title { text-align: center; }
+.qa dl { margin: 22px 0 0; display: grid; gap: 20px; }
+.qa dt { font-size: 18px; font-weight: 700; }
+.qa dd { margin: 6px 0 0; font-size: 16px; line-height: 1.6; color: var(--ink-2); }
+
+/* 6. 마지막 */
+.last { text-align: center; padding: 30px 22px 50px; }
+.last img { width: 70%; margin: 0 auto 10px; }
+.last h2 { font-size: 32px; line-height: 1.2; }
+.last p { font-size: 16px; color: var(--ink-2); margin: 12px 0 22px; }
+.foot { text-align: center; font-size: 14px; padding: 18px 0 30px; color: var(--ink-2); }
+.foot a { color: var(--ink-2); text-underline-offset: 3px; }
+
+@media (prefers-reduced-motion: reduce) { .btn { transition: none; } }
+
+@media (min-width: 900px) {
+  .wrap { max-width: 1180px; margin: 0 auto; padding: 0 48px; }
+  .btn { font-size: 29px; padding: 20px 42px; }
+  .bar { max-width: 1280px; margin: 0 auto; padding: 24px 48px; }
+  .bar img { height: 52px; } .bar span { font-size: 38px; }
+  .hero { max-width: 1280px; margin: 0 auto; padding: 0 0 40px 48px; display: grid; grid-template-columns: 1fr 1.25fr; align-items: center; }
+  .hero h1 { font-size: 72px; line-height: 1.1; }
+  .hero .sub { font-size: 23px; margin-top: 22px; }
+  .hero .go, .hero .note { text-align: left; }
+  .hero .go { margin-top: 36px; }
+  .hero .note { font-size: 16px; margin-left: 32px; }
+  .hero .calls { grid-row: 1 / span 4; grid-column: 2; }
+  .hero .art { margin: 0; }
+  .hero .call { font-size: 34px; }
+  .stories { padding: 70px 0 90px; }
+  .sec-title { font-size: 50px; } .sec-lead { font-size: 20px; }
+  .circles { grid-template-columns: repeat(7, 1fr); gap: 22px; margin-top: 50px; }
+  .circle b { font-size: 21px; } .circle small { font-size: 15px; }
+  .wave { height: 60px; }
+  .demo { padding: 50px 0 90px; }
+  .frames { justify-content: center; gap: 36px; overflow: visible; margin-top: 50px; }
+  .frame { width: 280px; }
+  .frame:nth-child(2) { transform: translateY(34px); }
+  .frame b { font-size: 32px; } .frame span { font-size: 17px; }
+  .demo .after { font-size: 18px; margin-top: 56px; }
+  .ways { padding: 110px 0 60px; }
+  .ways .grid { grid-template-columns: 1fr 1fr; gap: 50px 70px; margin-top: 56px; }
+  .way { grid-template-columns: 110px 1fr; gap: 24px; }
+  .way img { width: 110px; height: 110px; }
+  .way b { font-size: 28px; } .way p { font-size: 18px; }
+  .qa { padding: 70px 0; }
+  .qa .wrap { max-width: 900px; }
+  .qa dl { grid-template-columns: 1fr 1fr; gap: 36px 60px; margin-top: 44px; }
+  .qa dt { font-size: 22px; } .qa dd { font-size: 18px; }
+  .last { padding: 40px 0 90px; }
+  .last img { width: 520px; }
+  .last h2 { font-size: 58px; } .last p { font-size: 20px; }
+}

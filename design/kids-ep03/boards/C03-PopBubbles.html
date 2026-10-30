@@ -1,0 +1,146 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=390">
+  <title>Brush, Brush, Brush! — 거품 터뜨리기</title>
+  <link rel="stylesheet" href="../shared/tokens.css">
+  <style>
+    body { background: var(--t-bg); color: var(--t-ink); font-family: var(--t-body); width: 390px; margin: 0 auto; overflow-x: hidden; }
+    .top-bar { display: flex; align-items: center; justify-content: space-between; padding: 0 16px; height: 52px; background: var(--t-surface); border-bottom: 1.5px solid var(--t-line); }
+    .top-title { font-family: var(--t-en); font-size: 11px; color: var(--t-sub); letter-spacing: 0.03em; }
+    .prog-dots { display: flex; align-items: center; gap: 5px; }
+    .pdot { width: 8px; height: 8px; border-radius: 50%; background: var(--t-soft); }
+    .pdot.done { background: var(--t-accent); opacity: 0.38; }
+    .pdot.now { width: 22px; border-radius: 4px; background: var(--t-accent); }
+    .listen-sw { display: flex; align-items: center; gap: 5px; font-family: var(--t-kr); font-size: 10px; color: var(--t-sub); }
+    .sw-track { width: 28px; height: 16px; background: var(--t-soft); border-radius: 8px; position: relative; }
+    .sw-thumb { position: absolute; left: 2px; top: 2px; width: 12px; height: 12px; background: var(--t-surface-2); border-radius: 50%; }
+    .stage { width: 390px; height: 610px; position: relative; overflow: hidden; display: block; }
+    .caption-strip { background: var(--t-surface); padding: 12px 24px 10px; border-top: 1.5px solid var(--t-line); border-bottom: 1.5px solid var(--t-line); }
+    .caption-text { font-family: var(--t-kr); font-size: 19px; line-height: 1.55; color: var(--t-ink); margin: 0; text-align: center; word-break: keep-all; }
+    .en { font-family: var(--t-en); font-size: 21px; color: var(--t-accent); font-weight: 700; }
+    .controls { background: var(--t-bg); padding: 11px 18px 10px; }
+    .ctrl-top { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }
+    .play-btn { width: 38px; height: 38px; border-radius: 50%; background: var(--t-soft); border: none; display: flex; align-items: center; justify-content: center; flex-shrink: 0; cursor: pointer; }
+    .prog-wrap { flex: 1; }
+    .prog-track { height: 4px; background: var(--t-soft); border-radius: 2px; margin-bottom: 4px; }
+    .prog-fill { width: 46%; height: 100%; background: var(--t-accent); border-radius: 2px; }
+    .time-row { display: flex; justify-content: space-between; font-family: var(--t-en); font-size: 11px; color: var(--t-sub); }
+    .ctrl-btns { display: flex; gap: 7px; }
+    .ctrl-btn { flex: 1; border: 1.5px solid var(--t-line); background: var(--t-surface); border-radius: 10px; padding: 8px 6px; font-family: var(--t-kr); font-size: 11px; color: var(--t-sub); text-align: center; cursor: pointer; }
+    .bubble-ring { animation: hpulse 2.2s ease-in-out infinite; }
+    @keyframes hpulse { 0%,100%{ opacity: 0.55; } 50%{ opacity: 0.15; } }
+  </style>
+</head>
+<body class="t-night">
+
+  <header class="top-bar">
+    <span class="top-title">Brush, Brush, Brush!</span>
+    <div class="prog-dots" aria-label="진행 3/6">
+      <span class="pdot done"></span><span class="pdot done"></span>
+      <span class="pdot now"></span>
+      <span class="pdot"></span><span class="pdot"></span><span class="pdot"></span>
+    </div>
+    <div class="listen-sw">
+      <span>그냥 듣기</span>
+      <span class="sw-track"><span class="sw-thumb"></span></span>
+    </div>
+  </header>
+
+  <div class="stage" role="img" aria-label="거품 터뜨리기. 5개 거품 중 2개 터짐.">
+    <svg width="390" height="610" viewBox="0 0 390 610" xmlns="http://www.w3.org/2000/svg">
+
+      <!-- 배경 -->
+      <rect width="390" height="610" style="fill:var(--t-bg)"/>
+
+      <!-- 별 -->
+      <circle cx="30" cy="28" r="1.2" style="fill:var(--t-moon)" opacity="0.5"/>
+      <circle cx="80" cy="14" r="0.9" style="fill:var(--t-moon)" opacity="0.38"/>
+      <circle cx="145" cy="32" r="1.1" style="fill:var(--t-moon)" opacity="0.32"/>
+      <circle cx="220" cy="10" r="0.8" style="fill:var(--t-moon)" opacity="0.4"/>
+      <circle cx="310" cy="20" r="1.3" style="fill:var(--t-moon)" opacity="0.28"/>
+      <circle cx="370" cy="40" r="0.9" style="fill:var(--t-moon)" opacity="0.35"/>
+      <circle cx="52" cy="58" r="0.7" style="fill:var(--t-moon)" opacity="0.25"/>
+      <circle cx="360" cy="90" r="0.8" style="fill:var(--t-moon)" opacity="0.22"/>
+
+      <!-- "bubbles" 큰 텍스트 -->
+      <text x="195" y="62" style="font-family:var(--t-en); font-size:52px; fill:var(--t-accent); text-anchor:middle; font-weight:700">bubbles</text>
+
+      <!-- ===== 거품 1: 왼쪽 위 (온전함) ===== -->
+      <circle cx="90" cy="195" r="54" style="fill:var(--t-surface-2); stroke:var(--t-sub); stroke-width:1.5; opacity:0.75"/>
+      <!-- 광택 -->
+      <ellipse cx="106" cy="176" rx="13" ry="8" style="fill:var(--t-moon)" transform="rotate(-30 106 176)" opacity="0.28"/>
+      <!-- 호박색 글로우 링 -->
+      <circle cx="90" cy="195" r="66" class="bubble-ring" style="fill:none; stroke:var(--t-accent); stroke-width:2.5"/>
+
+      <!-- ===== 거품 2: 오른쪽 위 (온전함) ===== -->
+      <circle cx="305" cy="175" r="62" style="fill:var(--t-surface-2); stroke:var(--t-sub); stroke-width:1.5; opacity:0.75"/>
+      <ellipse cx="323" cy="154" rx="15" ry="9" style="fill:var(--t-moon)" transform="rotate(-30 323 154)" opacity="0.28"/>
+      <circle cx="305" cy="175" r="76" class="bubble-ring" style="fill:none; stroke:var(--t-accent); stroke-width:2.5"/>
+
+      <!-- ===== 거품 3: 중앙 (방금 터짐 - 팡!) ===== -->
+      <!-- 터진 광채 -->
+      <line x1="195" y1="298" x2="195" y2="258" style="stroke:var(--t-accent); stroke-width:3.5; stroke-linecap:round"/>
+      <line x1="195" y1="298" x2="195" y2="338" style="stroke:var(--t-accent); stroke-width:3.5; stroke-linecap:round"/>
+      <line x1="195" y1="298" x2="155" y2="298" style="stroke:var(--t-accent); stroke-width:3.5; stroke-linecap:round"/>
+      <line x1="195" y1="298" x2="235" y2="298" style="stroke:var(--t-accent); stroke-width:3.5; stroke-linecap:round"/>
+      <line x1="195" y1="298" x2="167" y2="270" style="stroke:var(--t-accent); stroke-width:3; stroke-linecap:round"/>
+      <line x1="195" y1="298" x2="223" y2="270" style="stroke:var(--t-accent); stroke-width:3; stroke-linecap:round"/>
+      <line x1="195" y1="298" x2="167" y2="326" style="stroke:var(--t-accent); stroke-width:3; stroke-linecap:round"/>
+      <line x1="195" y1="298" x2="223" y2="326" style="stroke:var(--t-accent); stroke-width:3; stroke-linecap:round"/>
+      <!-- 터진 중심 글로우 -->
+      <circle cx="195" cy="298" r="28" style="fill:var(--t-accent)" opacity="0.16"/>
+      <!-- 튀는 물방울 -->
+      <circle cx="166" cy="256" r="5" style="fill:var(--t-accent)" opacity="0.55"/>
+      <circle cx="228" cy="248" r="4" style="fill:var(--t-accent)" opacity="0.45"/>
+      <circle cx="238" cy="330" r="4" style="fill:var(--t-accent)" opacity="0.4"/>
+      <circle cx="155" cy="340" r="5" style="fill:var(--t-accent)" opacity="0.5"/>
+      <!-- "Pop!" 텍스트 -->
+      <text x="195" y="244" style="font-family:var(--t-en); font-size:28px; fill:var(--t-accent); text-anchor:middle; font-weight:700">Pop!</text>
+
+      <!-- ===== 거품 4: 오른쪽 아래 (이미 터짐, 희미함) ===== -->
+      <!-- 희미한 터진 자국 -->
+      <line x1="330" y1="460" x2="330" y2="432" style="stroke:var(--t-accent); stroke-width:2; stroke-linecap:round; opacity:0.28"/>
+      <line x1="330" y1="460" x2="330" y2="488" style="stroke:var(--t-accent); stroke-width:2; stroke-linecap:round; opacity:0.28"/>
+      <line x1="330" y1="460" x2="302" y2="460" style="stroke:var(--t-accent); stroke-width:2; stroke-linecap:round; opacity:0.28"/>
+      <line x1="330" y1="460" x2="358" y2="460" style="stroke:var(--t-accent); stroke-width:2; stroke-linecap:round; opacity:0.28"/>
+      <line x1="330" y1="460" x2="310" y2="440" style="stroke:var(--t-accent); stroke-width:1.5; stroke-linecap:round; opacity:0.22"/>
+      <line x1="330" y1="460" x2="350" y2="440" style="stroke:var(--t-accent); stroke-width:1.5; stroke-linecap:round; opacity:0.22"/>
+      <circle cx="330" cy="460" r="18" style="fill:var(--t-accent)" opacity="0.07"/>
+      <circle cx="316" cy="440" r="3" style="fill:var(--t-accent)" opacity="0.25"/>
+      <circle cx="346" cy="438" r="3" style="fill:var(--t-accent)" opacity="0.22"/>
+
+      <!-- ===== 거품 5: 왼쪽 아래 (온전함) ===== -->
+      <circle cx="72" cy="455" r="50" style="fill:var(--t-surface-2); stroke:var(--t-sub); stroke-width:1.5; opacity:0.75"/>
+      <ellipse cx="88" cy="436" rx="12" ry="7" style="fill:var(--t-moon)" transform="rotate(-30 88 436)" opacity="0.28"/>
+      <circle cx="72" cy="455" r="62" class="bubble-ring" style="fill:none; stroke:var(--t-accent); stroke-width:2.5"/>
+
+      <!-- 거품 수 표시 (오른쪽 아래) -->
+      <text x="362" y="596" style="font-family:var(--t-en); font-size:13px; fill:var(--t-sub); text-anchor:middle; opacity:0.5">2/5</text>
+
+    </svg>
+  </div>
+
+  <div class="caption-strip">
+    <p class="caption-text">와! <span class="en">Bubbles!</span> 거품이야! <span class="en">Pop, pop, pop!</span></p>
+  </div>
+
+  <div class="controls">
+    <div class="ctrl-top">
+      <button class="play-btn" aria-label="일시정지">
+        <svg width="16" height="16" viewBox="0 0 16 16"><rect x="3" y="2" width="3.5" height="12" rx="1.2" style="fill:var(--t-sub)"/><rect x="9.5" y="2" width="3.5" height="12" rx="1.2" style="fill:var(--t-sub)"/></svg>
+      </button>
+      <div class="prog-wrap">
+        <div class="prog-track"><div class="prog-fill"></div></div>
+        <div class="time-row"><span>1:08</span><span>2:19</span></div>
+      </div>
+    </div>
+    <div class="ctrl-btns">
+      <button class="ctrl-btn">3번 이어 듣기</button>
+      <button class="ctrl-btn">조금 천천히</button>
+    </div>
+  </div>
+
+</body>
+</html>

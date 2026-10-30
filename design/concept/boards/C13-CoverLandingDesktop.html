@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>C13 풀커버 표지 랜딩 PC</title>
+<link rel="stylesheet" href="../shared/tokens.css">
+<link rel="stylesheet" href="../shared/hl.css">
+<style>
+  /* 1. 풀커버 표지 PC: 화면 전체가 그림, 오른쪽이 종이색으로 번지며 글과 맛보기 */
+  body { width: 1280px; margin: 0 auto; }
+  .cover { position: relative; height: 800px; overflow: hidden; }
+  .cover > img { width: 100%; height: 100%; object-fit: cover; object-position: 0% 40%; }
+  .cover::after { content: ''; position: absolute; inset: 0; background: linear-gradient(to left, var(--paper) 26%, rgba(251,246,236,.85) 40%, rgba(251,246,236,0) 56%); }
+  .cover-text { position: absolute; right: 64px; top: 50%; transform: translateY(-50%); width: 430px; z-index: 1; }
+  .logo { font-size: 72px; color: var(--brown); margin: 0; }
+  .promise { font-size: 40px; margin: var(--s3) 0 var(--s4); }
+  .sub { font-size: 17px; color: var(--ink-2); margin: 0 0 var(--s8); }
+  .play img { width: 88px; height: 83px; }
+  .play b { font-size: 28px; }
+  .play small { font-size: 14px; }
+</style>
+</head>
+<body>
+  <header class="cover">
+    <img src="../assets/hl/home-hero-1280.webp" alt="릴리와 강아지 비스킷이 방에서 반기는 그림">
+    <div class="cover-text">
+      <p class="t logo">릴리랑</p>
+      <h1 class="t promise">아이가 이야기에 끼어드는<br>2분 영어 그림책</h1>
+      <p class="sub">4~7세 아이와 함께 듣고, 누르며 노는 영어.<br>아침부터 밤까지, 하루 습관마다 한 편.</p>
+      <a class="play"><img src="../assets/hl/btn-play.webp" alt=""><b>맛보기 바로 듣기<small>EP01 이 닦기, 2분 19초, 로그인 없이</small></b></a>
+    </div>
+  </header>
+</body>
+</html>

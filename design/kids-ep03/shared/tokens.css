@@ -1,0 +1,39 @@
+/* 매일 외국어 읽기 학습 페이지(en/날짜)와 같은 집. 아이용 방에서 쓰는 색 몇 개만 더한다 */
+@import url("https://fonts.googleapis.com/css2?family=Jua&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Andika:wght@400;700&family=Do+Hyeon&family=Gowun+Dodum&family=Gaegu:wght@400;700&family=Sunflower:wght@500;700&display=swap");
+:root {
+  /* 사이트 기본 */
+  --bg: #f2f4f6; --card: #ffffff; --ink: #191f28; --sub: #4e5968; --muted: #8b95a1; --line: #e5e8eb;
+  --blue: #3182f6; --blue-soft: #e8f3ff; --blue-press: #1b64da; --hl: #fff3c4; --coral: #f04452;
+  /* 아이용 추가 (일러스트에서 온 색) */
+  --sun: #ffc83d; --sun-soft: #fff6db; --skin: #ffe1c9; --cheek: #ffb3a7; --hair: #6b4226; --dog: #f3d1a2; --sky: #d6e6fd;
+  --night: #1f2a5a; --night-2: #2b3a7a; --star: #ffe9a3;
+  /* 글꼴 */
+  --font: Pretendard, -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Noto Sans KR", sans-serif;
+  --round: "Jua", Pretendard, "Apple SD Gothic Neo", sans-serif;
+  /* 간격, 모서리 */
+  --s1: 4px; --s2: 8px; --s3: 12px; --s4: 16px; --s5: 20px; --s6: 24px; --s8: 32px;
+  --r-card: 20px; --r-btn: 12px; --r-chip: 8px;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+body { font-family: var(--font); color: var(--ink); background: var(--bg); font-size: 16px; line-height: 1.6; letter-spacing: -0.01em; word-break: keep-all; }
+
+/* ===== 2라운드: 기존 사이트 규칙 없이, 시안마다 고유 테마 =====
+   보드의 body에 테마 클래스를 붙이고 --t-* 만 쓴다.
+   영어 글꼴 Andika는 처음 글을 배우는 아이용(한 층 a, g)으로 만든 글꼴. */
+:root { --t-en: "Andika", "Jua", sans-serif; }
+/* N01 토이 플레이어: 손에 쥐는 장난감 오디오 상자 */
+.t-toy   { --t-bg:#ffd84d; --t-surface:#e8473a; --t-surface-2:#c9362b; --t-ink:#1d1a16; --t-paper:#fffaf0; --t-accent:#1d1a16; --t-soft:#ffe98f; --t-screen:#16212b; --t-glow:#7ff0c4; --t-kr:"Do Hyeon", sans-serif; --t-body:"Gowun Dodum", sans-serif; }
+/* N02 펼친 그림책: 종이와 수채 블록 */
+.t-book  { --t-bg:#eaf2f7; --t-surface:#ffffff; --t-ink:#24323d; --t-sub:#5b6b78; --t-accent:#2f7d6d; --t-soft:#d7ebe4; --t-wash-1:#bfe0f2; --t-wash-2:#ffd6c2; --t-wash-3:#fff0a8; --t-kr:"Gowun Dodum", sans-serif; --t-body:"Gowun Dodum", sans-serif; }
+/* N03 밤 무드등: 낮은 자극, 호박색 빛 */
+.t-night { --t-bg:#211a33; --t-surface:#2d2445; --t-surface-2:#3a2f58; --t-ink:#f6eedc; --t-sub:#b9aecf; --t-accent:#ffb547; --t-soft:#4a3c6e; --t-moon:#fff1c1; --t-line:#3f3560; --t-kr:"Gowun Dodum", sans-serif; --t-body:"Gowun Dodum", sans-serif; }
+/* N04 보드게임 길: 장면이 칸, 릴리 말이 움직임 */
+.t-game  { --t-bg:#8fd3ff; --t-surface:#ffffff; --t-grass:#5cbf6a; --t-grass-2:#3f9e50; --t-path:#f6d58b; --t-ink:#1f2b1d; --t-accent:#ff6b4a; --t-soft:#e9f7ec; --t-star:#ffd23f; --t-kr:"Jua", sans-serif; --t-body:"Sunflower", sans-serif; }
+/* N05 단어 카드 먼저: 차분한 몬테소리 톤 */
+.t-card  { --t-bg:#fbfbf9; --t-surface:#ffffff; --t-ink:#2b2b2b; --t-sub:#6f6f6f; --t-line:#e6e4df; --t-accent:#6d5bd0; --t-soft:#efecfb; --t-sage:#8fb996; --t-mustard:#e3b23c; --t-kr:"Gowun Dodum", sans-serif; --t-body:"Gowun Dodum", sans-serif; }
+/* N06 아이 화면, 부모 화면 분리 */
+.t-split { --t-bg:#2f6bff; --t-surface:#ffffff; --t-ink:#101828; --t-sub:#475467; --t-line:#e4e7ec; --t-accent:#ffd400; --t-soft:#eef3ff; --t-kid:#2f6bff; --t-kr:"Jua", sans-serif; --t-body:"Sunflower", sans-serif; }
+/* N07 만화 컷: 대사 한 줄이 한 컷 */
+.t-comic { --t-bg:#fff6e0; --t-surface:#ffffff; --t-ink:#141414; --t-sub:#555555; --t-accent:#ff4f7b; --t-soft:#ffe3ea; --t-pop:#3ec5ff; --t-halftone:#ffd9a0; --t-kr:"Gaegu", sans-serif; --t-body:"Gowun Dodum", sans-serif; }

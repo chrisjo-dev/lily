@@ -1,0 +1,216 @@
+/* /hello/ 광고 랜딩. 캔버스 promo P44(휴대폰), P45(PC) 승인판(T5): 첫 화면은 남색 책 읽는 구석, 아래는 흰 종이. 원본 CSS는 design/promo/shared/landing-t4.css, landing-t5.css */
+:root {
+  --sky: #8ec3ea; --sky-deep: #3f86d0; --night: #1f2a4d; --cream: #fff8ea; --sun: #ffc531; --sun-edge: #6b4a33;
+  --wall: #86a3a6; --wall-soft: #dfe9e8; --ink: #1d2433; --ink-soft: #46506a; --white: #ffffff;
+  --font-head: "Jua", "Noto Sans KR", "Apple SD Gothic Neo", sans-serif; --font-hand: "Gaegu", "Jua", sans-serif; --font-body: "Noto Sans KR", "Apple SD Gothic Neo", sans-serif;
+}
+
+:root {
+  --paper: #fefefd; --ink: #1f2a3a; --ink-2: #4f5b6b; --sky-band: #dcefff; --sky-deep: #2f6fb5; --honey: #b9781f;
+  --sun: #ffc531; --sun-edge: #6b4a33;
+  --c1: #ffe6a8; --c2: #d4ecff; --c3: #ffd9c4; --c4: #dff1d6; --c5: #fff1b3; --c6: #d9e4ff; --c7: #e6dcf5;
+}
+::selection { background: var(--c1); color: var(--ink); }
+body { margin: 0; background: var(--paper); color: var(--ink); font-family: var(--font-body); word-break: keep-all; -webkit-font-smoothing: antialiased; }
+img { display: block; max-width: 100%; }
+h1, h2, h3 { font-family: var(--font-head); font-weight: 400; margin: 0; letter-spacing: -0.02em; text-wrap: balance; }
+p { margin: 0; }
+a:focus-visible { outline: 3px solid var(--sky-deep); outline-offset: 4px; border-radius: 999px; }
+.wrap { padding: 0 22px; }
+.hand { font-family: var(--font-hand); font-weight: 700; letter-spacing: -0.03em; line-height: 1.05; }
+.btn { display: inline-flex; align-items: center; gap: 12px; background: var(--sun); color: var(--ink); border: 3px solid var(--sun-edge); border-radius: 999px; padding: 15px 30px; font-family: var(--font-head); font-size: 23px; line-height: 1; text-decoration: none; box-shadow: 0 6px 14px -6px rgba(107,74,51,.45); transition: transform .2s cubic-bezier(.2,.8,.2,1); }
+.btn::before { content: ''; border-left: 15px solid var(--sun-edge); border-top: 10px solid transparent; border-bottom: 10px solid transparent; }
+.btn:hover { transform: translateY(-2px); }
+
+/* 상단 줄 */
+.bar { display: flex; align-items: center; gap: 10px; padding: 16px 22px; }
+.bar img { height: 40px; }
+.bar span { font-family: var(--font-hand); font-weight: 700; font-size: 30px; color: var(--sky-deep); letter-spacing: -0.03em; }
+
+/* 1. 첫 화면 */
+.hero { padding: 8px 22px 30px; }
+.hero h1 { font-size: 40px; line-height: 1.16; }
+.hero .sub { font-size: 17px; line-height: 1.55; margin: 14px 0 0; color: var(--ink-2); }
+.hero .art { width: 100%; margin: 10px 0 6px; }
+.hero .go { text-align: center; }
+.hero .note { font-size: 14px; color: var(--ink-2); margin-top: 10px; text-align: center; }
+.hero .calls { position: relative; }
+.hero .call { position: absolute; font-size: 21px; color: var(--honey); }
+.hero .call.a { left: 0; top: -2%; font-size: 18px; } .hero .call.b { right: 0; top: 0; } .hero .call.c { right: 4%; bottom: 2%; }
+
+/* 2. 이야기: 색 동그라미 */
+.stories { padding: 40px 0 46px; text-align: center; }
+.sec-title { font-size: 30px; line-height: 1.22; }
+.sec-lead { font-size: 16px; line-height: 1.6; color: var(--ink-2); margin-top: 10px; }
+.circles { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px 10px; margin-top: 28px; }
+.circle { text-decoration: none; color: inherit; }
+.circle .dot { position: relative; aspect-ratio: 1; border-radius: 50%; overflow: hidden; }
+.circle .dot img { width: 100%; height: 100%; object-fit: cover; mix-blend-mode: multiply; }
+.circle:nth-child(1) .dot { background: var(--c1); } .circle:nth-child(2) .dot { background: var(--c2); } .circle:nth-child(3) .dot { background: var(--c3); }
+.circle:nth-child(4) .dot { background: var(--c4); } .circle:nth-child(5) .dot { background: var(--c5); box-shadow: 0 0 0 4px var(--sun); } .circle:nth-child(6) .dot { background: var(--c6); } .circle:nth-child(7) .dot { background: var(--c7); }
+.circle b { display: block; font-family: var(--font-head); font-weight: 400; font-size: 18px; margin-top: 10px; }
+.circle small { display: block; font-size: 13px; color: var(--ink-2); }
+.circle .free { display: inline-block; margin-top: 4px; font-size: 13px; font-weight: 700; color: var(--sun-edge); background: var(--c5); border-radius: 999px; padding: 2px 10px; }
+
+/* 3. 시연: 하늘색 물결 띠 안에 실제 세 화면 */
+.wave { display: block; width: 100%; height: 30px; }
+.demo { background: var(--sky-band); padding: 26px 0 40px; }
+.demo .sec-title, .demo .sec-lead { text-align: center; }
+.frames { display: flex; gap: 14px; margin-top: 26px; overflow-x: auto; padding: 0 22px 10px; scroll-snap-type: x mandatory; }
+.frame { flex: none; width: 60%; margin: 0; scroll-snap-align: center; text-align: center; }
+.frame .scr { border-radius: 26px; overflow: hidden; border: 7px solid var(--white); aspect-ratio: 9 / 15; box-shadow: 0 16px 26px -16px rgba(31,42,58,.45); }
+.frame .scr img { width: 100%; height: 100%; object-fit: cover; object-position: center 40%; }
+.frame b { display: block; font-size: 26px; color: var(--sky-deep); margin-top: 12px; }
+.frame span { font-size: 15px; color: var(--ink-2); }
+.demo .after { text-align: center; font-size: 15px; color: var(--ink-2); margin-top: 18px; }
+
+/* 4. 귀에 익히는 방법: 큰 말과 짧은 풀이, 작은 그림 */
+.ways { padding: 54px 0 40px; }
+.ways .sec-title { text-align: center; }
+.ways .grid { display: grid; gap: 28px; margin-top: 30px; }
+.way { display: grid; grid-template-columns: 76px 1fr; gap: 16px; align-items: center; }
+.way img { width: 76px; height: 76px; object-fit: contain; }
+.way b { display: block; font-family: var(--font-head); font-weight: 400; font-size: 22px; }
+.way p { font-size: 15px; line-height: 1.6; color: var(--ink-2); margin-top: 4px; }
+.way q { font-family: var(--font-hand); font-weight: 700; font-size: 1.2em; color: var(--sky-deep); quotes: none; }
+
+/* 5. 질문 */
+.qa { padding: 40px 0 40px; }
+.qa .sec-title { text-align: center; }
+.qa dl { margin: 22px 0 0; display: grid; gap: 20px; }
+.qa dt { font-size: 18px; font-weight: 700; }
+.qa dd { margin: 6px 0 0; font-size: 16px; line-height: 1.6; color: var(--ink-2); }
+
+/* 6. 마지막 */
+.last { text-align: center; padding: 30px 22px 50px; }
+.last img { width: 70%; margin: 0 auto 10px; }
+.last h2 { font-size: 32px; line-height: 1.2; }
+.last p { font-size: 16px; color: var(--ink-2); margin: 12px 0 22px; }
+.foot { text-align: center; font-size: 14px; padding: 18px 0 30px; color: var(--ink-2); }
+.foot a { color: var(--ink-2); text-underline-offset: 3px; }
+
+@media (prefers-reduced-motion: reduce) { .btn { transition: none; } }
+
+@media (min-width: 900px) {
+  .wrap { max-width: 1180px; margin: 0 auto; padding: 0 48px; }
+  .btn { font-size: 29px; padding: 20px 42px; }
+  .bar { max-width: 1280px; margin: 0 auto; padding: 24px 48px; }
+  .bar img { height: 52px; } .bar span { font-size: 38px; }
+  .hero { max-width: 1280px; margin: 0 auto; padding: 0 0 40px 48px; display: grid; grid-template-columns: 1fr 1.25fr; align-items: center; }
+  .hero h1 { font-size: 72px; line-height: 1.1; }
+  .hero .sub { font-size: 23px; margin-top: 22px; }
+  .hero .go, .hero .note { text-align: left; }
+  .hero .go { margin-top: 36px; }
+  .hero .note { font-size: 16px; margin-left: 32px; }
+  .hero .calls { grid-row: 1 / span 4; grid-column: 2; }
+  .hero .art { margin: 0; }
+  .hero .call { font-size: 34px; }
+  .stories { padding: 70px 0 90px; }
+  .sec-title { font-size: 50px; } .sec-lead { font-size: 20px; }
+  .circles { grid-template-columns: repeat(7, 1fr); gap: 22px; margin-top: 50px; }
+  .circle b { font-size: 21px; } .circle small { font-size: 15px; }
+  .wave { height: 60px; }
+  .demo { padding: 50px 0 90px; }
+  .frames { justify-content: center; gap: 36px; overflow: visible; margin-top: 50px; }
+  .frame { width: 280px; }
+  .frame:nth-child(2) { margin-top: 34px; }
+  .frame b { font-size: 32px; } .frame span { font-size: 17px; }
+  .demo .after { font-size: 18px; margin-top: 56px; }
+  .ways { padding: 110px 0 60px; }
+  .ways .grid { grid-template-columns: 1fr 1fr; gap: 50px 70px; margin-top: 56px; }
+  .way { grid-template-columns: 110px 1fr; gap: 24px; }
+  .way img { width: 110px; height: 110px; }
+  .way b { font-size: 28px; } .way p { font-size: 18px; }
+  .qa { padding: 70px 0; }
+  .qa .wrap { max-width: 900px; }
+  .qa dl { grid-template-columns: 1fr 1fr; gap: 36px 60px; margin-top: 44px; }
+  .qa dt { font-size: 22px; } .qa dd { font-size: 18px; }
+  .last { padding: 40px 0 90px; }
+  .last img { width: 520px; }
+  .last h2 { font-size: 58px; } .last p { font-size: 20px; }
+}
+
+
+:root { --navy: #1b2a44; --navy-ink: #e9eef8; --navy-soft: #b9c6de; }
+.hero { position: relative; color: var(--navy-ink); background:
+  radial-gradient(60% 50% at 92% 4%, rgba(247,215,154,.40), rgba(247,215,154,0) 70%),
+  url(../../shared/ui/img/stars.svg) 0 0 / 120px 120px, var(--navy); overflow: hidden; }
+.hero .bar { display: flex; align-items: center; gap: 10px; padding: 18px 22px 0; }
+.hero .bar img { height: 40px; }
+.hero .bar span { font-family: var(--font-hand); font-weight: 700; font-size: 30px; color: var(--white); letter-spacing: -0.03em; }
+.hero .copy { padding: 22px 22px 0; }
+.hero h1 { font-size: 40px; line-height: 1.16; color: var(--white); }
+.hero .sub { font-size: 17px; line-height: 1.5; margin: 14px 0 22px; color: var(--navy-soft); }
+.hero .note { font-size: 14px; color: var(--navy-soft); margin-top: 12px; }
+.hero .art { display: block; width: 100%; margin-top: 20px; -webkit-mask-image: linear-gradient(to bottom, transparent, #000 14%); mask-image: linear-gradient(to bottom, transparent, #000 14%); }
+/* 첫 화면 그림 세 장(칫솔, 거품, 잠자리)은 같은 크기로 겹쳐 두고 차례로 바뀐다(motion.js).
+   세 장 모두 538x410 실제 그림(늘린 띠 없음). 물결 곡선의 가장 낮은 곳(높이의 40/56)보다 그림 아래 끝이 조금 아래에 오게 해서
+   물결이 그림을 곡선대로 덮는다. 음수 여백끼리는 겹쳐서 더 큰 쪽만 남으므로 폰은 물결(.edge) 쪽 여백으로 맞춘다 */
+.hero .stage { position: relative; margin-bottom: 0; }
+.hero .stage .art { aspect-ratio: 538 / 410; }
+.hero .stage .alt { position: absolute; left: 0; top: 0; opacity: 0; transition: opacity 1s ease-in-out; }
+.hero .stage .art.on { opacity: 1; }
+.hero .stage .art.off { opacity: 0; }
+.hero .stage .art { margin: 0; }
+.hero .stage { margin-top: 20px; }
+/* 폰: 홈과 같이 물결을 뒤집지 않고 130%로 넓혀, 그림 오른쪽 아래 글씨(이어져요)가 물결 골 위에 남게 한다.
+   그림 아래 끝은 물결 시작보다 25px(PC 46px) 아래, 위로 뜨는 움직임은 3px로 줄여 떠도 곡선 아래에 있게 한다 */
+.hero .edge { display: block; width: 130%; max-width: none; height: 28px; margin-top: -25px; position: relative; z-index: 1; }
+.hero { padding: 0; } .hero .go, .hero .note { text-align: left; }
+@media (min-width: 900px) {
+  .hero .bar { max-width: 1280px; margin: 0 auto; padding: 28px 48px 0; }
+  .hero .bar img { height: 52px; } .hero .bar span { font-size: 38px; }
+  /* 그림을 첫 화면 바닥에 붙이고 물결 밑까지 내려, 물결이 그림을 곡선대로 자르게 */
+  .hero .inner { max-width: 1280px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1.2fr; align-items: end; padding-bottom: 0; }
+  .hero .copy { align-self: center; }
+  .hero .copy { padding: 30px 0 30px 48px; }
+  .hero h1 { font-size: clamp(48px, 5vw, 72px); line-height: 1.1; }
+  .hero .sub { font-size: 23px; margin: 22px 0 36px; }
+  .hero .note { font-size: 16px; margin-left: 32px; }
+  /* 그림 네 변을 남색 벽으로 부드럽게 번지게(위, 왼쪽, 오른쪽은 길게, 아래는 물결이 덮음) */
+  .hero .art { margin-top: 10px; -webkit-mask-image: linear-gradient(to right, transparent, #000 18%, #000 80%, transparent), linear-gradient(to bottom, transparent, #000 24%); -webkit-mask-composite: source-in; mask-image: linear-gradient(to right, transparent, #000 18%, #000 80%, transparent), linear-gradient(to bottom, transparent, #000 24%); mask-composite: intersect; }
+  .hero .edge { width: 140%; height: 56px; margin-top: -55px; } /* PC도 글씨가 물결 골 위에 오게 */
+  .hero .stage { margin-top: 10px; margin-bottom: 9px; }
+  .hero { display: block; max-width: none; margin: 0; padding: 0; }
+  .hero .go { margin-top: 0; }
+}
+.hero .bar img { width: auto; }
+.hero .art { height: auto; }
+.hero .stage .art:first-child { transition: opacity 1s ease-in-out; }
+
+/* ===== 움직임 =====
+   첫 화면: 글이 차례로 떠오르고 "톡!"이 한 번 튄다, 그림은 천천히 숨 쉬듯 떠 있다(그림 자체는 처음부터 보임, LCP 보호).
+   아래: 화면에 들어올 때 차례로 떠오름(motion.js). 동그라미와 화면은 누르면 살짝 눌림. 움직임 줄이기 설정이면 모두 끔. */
+@keyframes rise { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: none; } }
+@keyframes riseT { from { transform: translateY(14px); } to { transform: none; } }
+@keyframes pop { 0%, 100% { transform: none; } 40% { transform: scale(1.18) rotate(-6deg); } 70% { transform: scale(.96) rotate(2deg); } }
+@keyframes drift { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-3px); } } /* 3px 넘게 뜨면 그림 아래 끝이나 글씨가 물결에 걸린다 */
+@keyframes shine { 0%, 82% { background-position: -140% 0; } 100% { background-position: 240% 0; } }
+.hero .copy > * { animation: rise .7s cubic-bezier(.2,.8,.2,1) both; }
+.hero .copy > h1 { animation-name: riseT; } /* 제목은 처음부터 보이게(LCP), 위치만 올라온다 */
+.hero .copy > :nth-child(2) { animation-delay: .12s; } .hero .copy > :nth-child(3) { animation-delay: .24s; } .hero .copy > :nth-child(4) { animation-delay: .34s; }
+.hero .stage { animation: drift 7s ease-in-out 1.2s infinite; }
+.hero .btn { background-image: linear-gradient(100deg, transparent 30%, rgba(255,255,255,.55) 50%, transparent 70%); background-size: 60% 100%; background-repeat: no-repeat; animation: shine 6s ease-in-out 2s infinite; }
+.motion .rv { opacity: 0; transform: translateY(22px); transition: opacity .6s ease-out, transform .7s cubic-bezier(.2,.8,.2,1); transition-delay: calc(var(--i, 0) * 70ms); }
+.motion .rv.in { opacity: 1; transform: none; }
+.circle .dot { transition: transform .25s cubic-bezier(.3,1.6,.5,1); }
+.circle:hover .dot, .circle:focus-visible .dot { transform: translateY(-6px) rotate(-3deg); }
+.circle:active .dot { transform: scale(.94); }
+.frame .scr { transition: transform .3s cubic-bezier(.2,.8,.2,1); }
+.frame:hover .scr { transform: translateY(-6px); }
+@media (prefers-reduced-motion: reduce) {
+  .hero .copy > *, .hero .stage, .hero .btn { animation: none; }
+  .hero .stage .alt { display: none; }
+  .circle .dot, .frame .scr { transition: none; }
+}
+
+/* T8 첫 화면: 손글씨 제목 그림(견본 6). 부제는 제목 그림 위에서 읽히게 그림자를 둔다 */
+.hero h1.title-art { line-height: 0; }
+.hero h1.title-art img { display: block; width: 300px; height: auto; margin-left: -2px; }
+.hero .copy > .sub { font-size: 15px; line-height: 1.5; margin: 12px 0 22px; color: var(--navy-ink); text-shadow: 0 1px 8px rgba(10,18,34,.6); text-wrap: balance; }
+@media (min-width: 600px) { .hero h1.title-art img { width: 340px; } }
+@media (min-width: 900px) {
+  .hero h1.title-art img { width: clamp(430px, 36vw, 540px); margin-left: -4px; }
+  .hero .inner { grid-template-columns: 1fr 1fr; }
+  .hero .copy > .sub { font-size: 21px; margin: 20px 0 36px; }
+}

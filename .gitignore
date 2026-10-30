@@ -2,3 +2,11 @@
 node_modules/
 __pycache__/
 *.log
+design/landing/render/.thumbs/
+.omc/
+dist/
+.wrangler/
+design/*/render/
+design/*/compare/
+*.env
+.env*

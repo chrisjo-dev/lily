@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=390">
+  <title>R21 개선안 EpisodeFirst</title>
+  <link rel="stylesheet" href="../shared/tokens.css">
+  <style>
+    html, body { margin: 0; width: 390px; min-height: 844px; background: var(--paper); }
+
+    /* 헤더 */
+    .hdr {
+      display: flex; align-items: center; gap: 10px;
+      padding: 8px 16px; height: 52px;
+      background: var(--paper); border-bottom: 1px solid var(--line);
+    }
+    .hdr .emblem {
+      width: 34px; height: 34px; border-radius: 50%;
+      object-fit: cover; border: 1.5px solid var(--line);
+      flex-shrink: 0;
+    }
+    .ep-info { flex: 1; }
+    .ep-num { font-size: 10px; color: var(--ink-2); font-family: var(--font-en); }
+    .ep-title { font-size: 13px; font-weight: 700; color: var(--ink); font-family: var(--font-en); }
+    .dots { display: flex; gap: 5px; align-items: center; }
+    .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--line); }
+    .dot.on { background: var(--teal); width: 14px; border-radius: 3px; }
+
+    /* 무대 */
+    .stage {
+      position: relative; width: 390px; height: 600px;
+      overflow: hidden; background: var(--sky);
+    }
+    .stage-art { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+    /* 재생 버튼 */
+    .play-btn {
+      position: absolute; left: 50%; top: 72%;
+      transform: translate(-50%, -50%);
+      width: 88px; height: 88px;
+      background: var(--touch); border-radius: 50%;
+      border: 4px solid var(--touch-edge);
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 4px 24px rgba(107,74,54,0.3);
+    }
+    .play-arrow {
+      width: 0; height: 0;
+      border-style: solid;
+      border-width: 16px 0 16px 28px;
+      border-color: transparent transparent transparent var(--touch-edge);
+      margin-left: 8px;
+    }
+
+    /* 본문 줄 */
+    .text-strip {
+      height: 140px; background: var(--paper);
+      border-top: 2px solid var(--line);
+      display: flex; align-items: center; justify-content: center;
+      padding: 0 28px;
+    }
+    .body-line {
+      font-family: var(--font-kr); font-size: 17px;
+      line-height: 1.75; color: var(--ink);
+      text-align: center; margin: 0;
+    }
+
+    /* 부모 서랍 손잡이 */
+    .drawer-pull {
+      height: 52px; background: var(--paper-2);
+      border-top: 1.5px solid var(--line);
+      display: flex; align-items: center; justify-content: center; gap: 10px;
+    }
+    .pull-bar { width: 32px; height: 3px; background: var(--line); border-radius: 2px; }
+    .pull-label { font-size: 12px; color: var(--teal); font-family: var(--font-kr); }
+    .pull-chevron {
+      width: 8px; height: 8px;
+      border-left: 1.5px solid var(--teal);
+      border-top: 1.5px solid var(--teal);
+      transform: rotate(45deg);
+      margin-top: 3px;
+    }
+  </style>
+</head>
+<body>
+  <header class="hdr">
+    <img class="emblem" src="../assets/brand-emblem.png" alt="릴리랑">
+    <div class="ep-info">
+      <div class="ep-num">EP01</div>
+      <div class="ep-title">Brush, Brush, Brush!</div>
+    </div>
+    <div class="dots">
+      <span class="dot on"></span>
+      <span class="dot"></span>
+      <span class="dot"></span>
+      <span class="dot"></span>
+      <span class="dot"></span>
+      <span class="dot"></span>
+    </div>
+  </header>
+
+  <div class="stage">
+    <img class="stage-art" src="../assets/ep01-bg-0-intro.webp" alt="이 닦기 그림책">
+    <div class="play-btn">
+      <div class="play-arrow"></div>
+    </div>
+  </div>
+
+  <div class="text-strip">
+    <p class="body-line">노란 동그라미를 누르면<br>릴리 이야기가 시작돼요.</p>
+  </div>
+
+  <div class="drawer-pull">
+    <div class="pull-bar"></div>
+    <span class="pull-label">부모 화면 열기</span>
+    <div class="pull-chevron"></div>
+  </div>
+</body>
+</html>

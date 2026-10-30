@@ -1,0 +1,158 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=390">
+  <title>R72 크레용 액자 CrayonEpisodeFirst</title>
+  <link rel="stylesheet" href="../shared/tokens.css">
+  <style>
+    html, body { margin: 0; width: 390px; height: 844px; overflow: hidden; background: var(--paper); }
+
+    /* 무대 (헤더 없음) */
+    .stage {
+      position: relative; width: 390px; height: 636px;
+      overflow: hidden;
+    }
+    .stage-art { width: 100%; height: 100%; object-fit: cover; object-position: top center; display: block; }
+
+    /* 진행 점 (아트 위 우상단) */
+    .progress-dots {
+      position: absolute; top: 14px; right: 16px; z-index: 5;
+      display: flex; gap: 5px; align-items: center;
+    }
+    .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--line); }
+    .dot.on { background: var(--brown); width: 14px; border-radius: 3px; }
+
+    /* 브랜드 엠블럼 (아트 위 좌상단) */
+    .brand {
+      position: absolute; top: 10px; left: 16px; z-index: 5;
+      width: 32px; height: 32px; border-radius: 50%;
+      object-fit: cover; border: 1.5px solid rgba(255,255,255,0.6);
+    }
+
+    /* 종이 띠 라벨 (제목) */
+    .title-label {
+      position: absolute; top: 16px; left: 56px; z-index: 5;
+      background: var(--paper);
+      border: 1px solid var(--brown);
+      padding: 5px 13px 6px;
+      transform: rotate(-1.5deg);
+      box-shadow: 1px 2px 8px rgba(107,74,54,0.22);
+      clip-path: polygon(1% 10%, 0% 0%, 98% 2%, 100% 0%, 99% 90%, 100% 100%, 3% 98%, 0% 100%);
+    }
+    .title-label .ep-num {
+      font-family: var(--font-en); font-size: 10px; color: var(--ink-2);
+      display: block; margin-bottom: 1px;
+    }
+    .title-label .ep-title {
+      font-family: var(--font-logo); font-size: 14px; color: var(--ink);
+      display: block;
+    }
+
+    /* 재생 버튼 (단추 그림 포함, 빛살과 삼각형은 그림 안에 있음) */
+    .big-play {
+      position: absolute; z-index: 4; right: 71px; bottom: 97px;
+      width: 96px; height: 96px; padding: 0; border-radius: 50%; cursor: pointer;
+      border: 0; background: none;
+      box-shadow: 0 4px 20px rgba(107,74,54,0.30);
+    }
+    .big-play::before {
+      content: ""; position: absolute; left: -19%; top: -31%; width: 138%; height: 131%;
+      pointer-events: none;
+      background: url(../assets/btn-play.webp) 0 0 / 100% 100% no-repeat;
+    }
+
+    /* 찢은 종이 가장자리 */
+    .torn-edge {
+      position: absolute; bottom: 0; left: 0; right: 0; z-index: 4;
+      line-height: 0;
+    }
+
+    /* 본문 줄 (Gowun Batang) */
+    .text-strip {
+      height: 152px; background: var(--paper);
+      display: flex; align-items: center; justify-content: center;
+      padding: 20px 32px 10px;
+    }
+    .body-line {
+      font-family: var(--font-book); font-size: 18px;
+      line-height: 1.75; color: var(--ink);
+      text-align: center; margin: 0;
+    }
+
+    /* 부모 접힌 탭 */
+    .parent-tab {
+      height: 56px; background: var(--paper-2);
+      border-top: 1.5px solid var(--line);
+      display: flex; align-items: center; justify-content: center; gap: 8px;
+      position: relative; cursor: pointer;
+    }
+    .tab-fold {
+      position: absolute; top: 0; right: 0;
+      width: 0; height: 0;
+      border-style: solid;
+      border-width: 0 20px 20px 0;
+      border-color: transparent var(--paper) transparent transparent;
+      filter: drop-shadow(-1px 1px 1px rgba(107,74,54,0.15));
+    }
+    .pull-bar { width: 32px; height: 3px; background: var(--line); border-radius: 2px; }
+    .pull-label { font-family: var(--font-kr); font-size: 13px; color: var(--teal); }
+    .pull-chevron {
+      width: 8px; height: 8px;
+      border-left: 1.5px solid var(--teal);
+      border-top: 1.5px solid var(--teal);
+      transform: rotate(225deg);
+      margin-bottom: 3px;
+    }
+  </style>
+  <link rel="stylesheet" href="../shared/crayon.css">
+</head>
+<body class="cr-ep">
+  <div class="stage">
+    <img class="stage-art" src="../assets/ep01-bg-0-intro.webp" alt="이 닦기 그림책">
+
+    <img class="brand" src="../assets/brand-emblem.png" alt="릴리랑">
+
+    <div class="progress-dots">
+      <span class="dot on"></span>
+      <span class="dot"></span>
+      <span class="dot"></span>
+      <span class="dot"></span>
+      <span class="dot"></span>
+      <span class="dot"></span>
+    </div>
+
+    <!-- 제목 종이 띠 라벨 -->
+    <div class="title-label">
+      <span class="ep-num">EP01</span>
+      <span class="ep-title">Brush, Brush, Brush!</span>
+    </div>
+
+    <!-- 재생 버튼 (빛살과 삼각형은 btn-play.webp 안에 포함) -->
+    <button class="big-play" id="play-btn" aria-label="재생"></button>
+
+    <!-- 찢은 종이 가장자리 (불규칙 베지어) -->
+    <div class="torn-edge">
+      <svg width="390" height="40" viewBox="0 0 390 40" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg" style="display:block">
+        <rect x="0" y="0" width="390" height="6" fill="rgba(36,50,61,0.05)"/>
+        <path d="M0,40 L0,30 C4,33 9,25 17,28 C25,31 29,22 38,19 C45,16 52,25 61,29 C69,33 75,23 84,20 C91,17 98,22 107,26 C115,30 121,34 130,29 C137,24 143,17 152,21 C161,25 167,32 175,29 C182,26 188,19 197,15 C205,11 212,22 221,27 C229,32 236,35 244,30 C252,25 258,17 267,21 C275,25 281,31 289,28 C297,25 303,19 311,23 C319,27 325,33 333,27 C340,21 347,16 356,20 C363,24 370,31 378,27 C383,24 387,21 390,23 L390,40 Z" style="fill:var(--paper)"/>
+        <path d="M0,31 C4,34 9,26 17,29 C25,32 29,23 38,20 C45,17 52,26 61,30 C69,34 75,24 84,21 C91,18 98,23 107,27 C115,31 121,35 130,30 C137,25 143,18 152,22 C161,26 167,33 175,30 C182,27 188,20 197,16 C205,12 212,23 221,28 C229,33 236,36 244,31 C252,26 258,18 267,22 C275,26 281,32 289,29 C297,26 303,20 311,24 C319,28 325,34 333,28 C340,22 347,17 356,21 C363,25 370,32 378,28 C383,25 387,22 390,24" stroke="var(--card)" stroke-width="1.2" fill="none" stroke-opacity="0.6"/>
+      </svg>
+    </div>
+  </div>
+
+  <!-- 본문 줄 -->
+  <div class="text-strip">
+    <p class="body-line">노란 동그라미를 누르면<br>릴리 이야기가 시작돼요.</p>
+  </div>
+
+  <!-- 부모 접힌 탭 -->
+  <div class="parent-tab" id="parent-tab">
+    <div class="tab-fold"></div>
+    <div class="pull-bar"></div>
+    <span class="pull-label">부모님</span>
+    <div class="pull-chevron"></div>
+  </div>
+  <div class="cr-overlay"></div>
+</body>
+</html>

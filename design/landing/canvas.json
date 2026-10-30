@@ -1,0 +1,227 @@
+{
+  "boards": {
+    "L01-L1-book-mobile.html": {
+      "x": 0,
+      "y": 0,
+      "w": 390,
+      "h": 2600,
+      "title": "L01-L1-book-mobile",
+      "group": "지난 시안",
+      "status": "rejected",
+      "note": "L3 선택으로 보류"
+    },
+    "L02-L1-book-desktop.html": {
+      "x": 430,
+      "y": 0,
+      "w": 1280,
+      "h": 2800,
+      "title": "L02-L1-book-desktop",
+      "group": "지난 시안",
+      "status": "rejected",
+      "note": "L3 선택으로 보류"
+    },
+    "L03-L2-timeline-mobile.html": {
+      "x": 1750,
+      "y": 0,
+      "w": 390,
+      "h": 2700,
+      "title": "L03-L2-timeline-mobile",
+      "group": "지난 시안",
+      "status": "rejected",
+      "note": "L3 선택으로 보류"
+    },
+    "L04-L2-timeline-desktop.html": {
+      "x": 2180,
+      "y": 0,
+      "w": 1280,
+      "h": 2600,
+      "title": "L04-L2-timeline-desktop",
+      "group": "지난 시안",
+      "status": "rejected",
+      "note": "L3 선택으로 보류"
+    },
+    "L05-L3-preview-mobile.html": {
+      "x": 3500,
+      "y": 0,
+      "w": 390,
+      "h": 2800,
+      "title": "L05-L3-preview-mobile",
+      "group": "지난 시안",
+      "status": "rejected",
+      "note": "대체됨: 뒤 시안(L17, L19, 홈 H01)으로 바뀜",
+      "impl": {
+        "route": "/",
+        "files": [
+          "index.html"
+        ],
+        "updated": "2026-10-22T08:00:01Z"
+      }
+    },
+    "L06-L3-preview-desktop.html": {
+      "x": 3930,
+      "y": 0,
+      "w": 1280,
+      "h": 2600,
+      "title": "L06-L3-preview-desktop",
+      "group": "지난 시안",
+      "status": "rejected",
+      "note": "대체됨: 뒤 시안(L17, L19, 홈 H01)으로 바뀜",
+      "impl": {
+        "route": "/",
+        "files": [
+          "index.html"
+        ],
+        "updated": "2026-10-22T08:00:01Z"
+      }
+    },
+    "L11-AdLandingPhone.html": {
+      "x": 5250,
+      "y": 0,
+      "w": 390,
+      "h": 4100,
+      "title": "L11-AdLandingPhone",
+      "group": "지난 시안",
+      "status": "rejected",
+      "note": "대체됨: 뒤 시안(L17, L19, 홈 H01)으로 바뀜"
+    },
+    "L12-AdLandingDesktop.html": {
+      "x": 5680,
+      "y": 0,
+      "w": 1280,
+      "h": 2560,
+      "title": "L12-AdLandingDesktop",
+      "group": "지난 시안",
+      "status": "rejected",
+      "note": "대체됨: 뒤 시안(L17, L19, 홈 H01)으로 바뀜"
+    },
+    "L13-PlayButtonOptions.html": {
+      "x": 7000,
+      "y": 0,
+      "w": 1760,
+      "h": 1700,
+      "title": "L13-PlayButtonOptions",
+      "group": "지금 랜딩 /hello/",
+      "status": "approved",
+      "note": "사용자 최종 선택 2026-10-28: 6번 책 위로 뜨는 해"
+    },
+    "L14-LineLayoutOptions.html": {
+      "x": 8800,
+      "y": 0,
+      "w": 2170,
+      "h": 1100,
+      "title": "L14-LineLayoutOptions",
+      "group": "지난 시안",
+      "status": "rejected",
+      "note": "눈에 안 띈다"
+    },
+    "L15-DividerOptions.html": {
+      "x": 11010,
+      "y": 0,
+      "w": 2170,
+      "h": 1100,
+      "title": "L15-DividerOptions",
+      "group": "지난 시안",
+      "status": "rejected",
+      "note": "눈에 안 띈다"
+    },
+    "L16-BoldLineLayoutOptions.html": {
+      "x": 13220,
+      "y": 0,
+      "w": 2170,
+      "h": 1100,
+      "title": "L16-BoldLineLayoutOptions",
+      "group": "지난 시안",
+      "status": "rejected",
+      "note": "OpenAI 시안 2번으로 감"
+    },
+    "L17-CrayonLandingPhone.html": {
+      "x": 15430,
+      "y": 0,
+      "w": 390,
+      "h": 2940,
+      "title": "L17-CrayonLandingPhone",
+      "group": "지금 랜딩 /hello/",
+      "status": "rejected",
+      "note": "/hello/는 promo T5(P44, P45)로 교체됨 2026-10-29"
+    },
+    "L18-CrayonVariants.html": {
+      "x": 15860,
+      "y": 0,
+      "w": 940,
+      "h": 1680,
+      "title": "L18-CrayonVariants",
+      "group": "지난 시안",
+      "status": "rejected",
+      "note": "사용자: 원래(L17)가 가장 낫다"
+    },
+    "L19-CrayonLandingDesktop.html": {
+      "x": 16840,
+      "y": 0,
+      "w": 1280,
+      "h": 2460,
+      "title": "L19-CrayonLandingDesktop",
+      "group": "지금 랜딩 /hello/",
+      "status": "rejected",
+      "note": "/hello/는 promo T5(P44, P45)로 교체됨 2026-10-29"
+    },
+    "L20-FontOptions.html": {
+      "x": 18160,
+      "y": 0,
+      "w": 1600,
+      "h": 1150,
+      "title": "L20-FontOptions",
+      "group": "글꼴 결정"
+    },
+    "L21-FontSpecimen.html": {
+      "x": 19800,
+      "y": 0,
+      "w": 1520,
+      "h": 1150,
+      "title": "L21-FontSpecimen",
+      "group": "글꼴 결정",
+      "status": "approved",
+      "note": "사용자 결정 2026-10-28: 제목과 큰 글씨만 개구 굵게, 나머지는 그대로"
+    }
+  },
+  "groups": [
+    {
+      "id": "L1 그림책",
+      "label": "L1 그림책"
+    },
+    {
+      "id": "L2 하루 시간표",
+      "label": "L2 하루 시간표"
+    },
+    {
+      "id": "L3 첫화면 놀이",
+      "label": "L3 첫화면 놀이"
+    },
+    {
+      "id": "광고 랜딩",
+      "label": "광고 랜딩"
+    },
+    {
+      "id": "글꼴",
+      "label": "글꼴"
+    },
+    {
+      "id": "지난 시안",
+      "label": "지난 시안"
+    },
+    {
+      "id": "지금 랜딩 /hello/",
+      "label": "지금 랜딩 /hello/"
+    },
+    {
+      "id": "글꼴 결정",
+      "label": "글꼴 결정"
+    }
+  ],
+  "links": [
+    {
+      "from": "L11-AdLandingPhone.html",
+      "to": "L12-AdLandingDesktop.html",
+      "label": "넓은 화면"
+    }
+  ]
+}

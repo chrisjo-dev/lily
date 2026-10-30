@@ -1,0 +1,163 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=390">
+  <title>D02 — 이 닦기</title>
+  <link rel="stylesheet" href="../shared/tokens.css">
+  <style>
+    body { width: 390px; max-width: 390px; min-height: 844px; max-height: 844px; overflow: hidden; margin: 0 auto; background: var(--t-bg); font-family: var(--t-kr); }
+
+    .top-bar { height: 52px; display: flex; align-items: center; justify-content: space-between; padding: 0 16px; background: var(--t-bg); }
+    .ep-title { font-family: var(--t-en); font-size: 13px; font-weight: 700; color: rgba(255,255,255,0.72); letter-spacing: 0.01em; }
+    .progress-dots { display: flex; gap: 5px; align-items: center; }
+    .dot { width: 10px; height: 10px; border-radius: 50%; background: rgba(255,255,255,0.28); }
+    .dot.active { width: 14px; height: 14px; background: var(--t-accent); }
+    .dot.done { background: rgba(255,255,255,0.55); }
+    .skip-wrap { display: flex; align-items: center; gap: 5px; font-size: 11px; font-family: var(--t-kr); color: rgba(255,255,255,0.6); }
+    .track { width: 34px; height: 18px; background: rgba(255,255,255,0.18); border-radius: 9px; position: relative; }
+    .thumb { width: 14px; height: 14px; border-radius: 50%; background: rgba(255,255,255,0.45); position: absolute; top: 2px; left: 2px; }
+
+    .stage { width: 390px; height: 636px; overflow: hidden; background: var(--t-bg); position: relative; }
+
+    .caption-strip { background: var(--t-surface); padding: 12px 20px 14px; height: 88px; display: flex; flex-direction: column; justify-content: center; gap: 5px; }
+    .caption-line { font-family: var(--t-kr); font-size: 20px; color: var(--t-ink); line-height: 1.4; }
+    .caption-line .en { font-family: var(--t-en); color: var(--t-bg); font-weight: 700; }
+
+    .parent-ctrl { height: 68px; background: var(--t-surface); border-top: 1.5px solid var(--t-line); display: flex; align-items: center; padding: 0 14px; gap: 8px; }
+    .pp-btn { width: 40px; height: 40px; border-radius: 50%; background: var(--t-bg); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+    .track-wrap { flex: 1; display: flex; flex-direction: column; gap: 3px; }
+    .audio-bar { height: 4px; background: var(--t-line); border-radius: 2px; overflow: hidden; }
+    .audio-fill { height: 100%; background: var(--t-bg); border-radius: 2px; }
+    .audio-time { font-family: var(--t-en); font-size: 11px; color: var(--t-sub); display: flex; justify-content: space-between; }
+    .ctrl-btns { display: flex; gap: 5px; }
+    .ctrl-btn { font-family: var(--t-kr); font-size: 10px; color: var(--t-sub); background: var(--t-soft); border-radius: 8px; padding: 5px 9px; white-space: nowrap; }
+
+    /* Brush text floats */
+    @keyframes float-up1 { 0% { transform: translateY(0) scale(1); opacity: 1; } 100% { transform: translateY(-30px) scale(1.1); opacity: 0.6; } }
+    @keyframes float-up2 { 0% { transform: translateY(0) scale(1); opacity: 1; } 100% { transform: translateY(-22px) scale(1.08); opacity: 0.7; } }
+    @keyframes float-up3 { 0% { transform: translateY(0) scale(1); opacity: 1; } 100% { transform: translateY(-18px) scale(1.05); opacity: 0.85; } }
+    .brush-word1 { animation: float-up1 1.4s ease-out infinite alternate; }
+    .brush-word2 { animation: float-up2 1.4s ease-out 0.3s infinite alternate; }
+    .brush-word3 { animation: float-up3 1.4s ease-out 0.6s infinite alternate; }
+  </style>
+</head>
+<body class="t-split">
+
+  <!-- TOP BAR -->
+  <div class="top-bar">
+    <span class="ep-title">Brush, Brush, Brush!</span>
+    <div class="progress-dots" aria-label="2/6 장면">
+      <span class="dot done"></span>
+      <span class="dot active" aria-label="2번"></span>
+      <span class="dot"></span>
+      <span class="dot"></span>
+      <span class="dot"></span>
+      <span class="dot"></span>
+    </div>
+    <div class="skip-wrap">
+      <span>그냥 듣기</span>
+      <div class="track" role="switch" aria-checked="false" aria-label="그냥 듣기">
+        <div class="thumb"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- STAGE -->
+  <div class="stage" aria-label="이 닦기 장면, 손가락으로 이를 문질러요">
+    <svg width="390" height="636" viewBox="0 0 390 636" xmlns="http://www.w3.org/2000/svg" stroke-linecap="round" stroke-linejoin="round">
+
+      <!-- Background -->
+      <rect width="390" height="636" style="fill: var(--t-bg)"/>
+
+      <!-- Giant mouth - outer lips frame (full width) -->
+      <!-- Upper lip -->
+      <path d="M0 0 L0 240 Q30 270 60 260 Q130 300 195 295 Q260 300 330 260 Q360 270 390 240 L390 0 Z" style="fill: var(--t-bg)"/>
+      <!-- Lower lip area -->
+      <path d="M0 636 L0 430 Q30 400 60 408 Q130 370 195 375 Q260 370 330 408 Q360 400 390 430 L390 636 Z" style="fill: var(--t-bg)"/>
+
+      <!-- Lip upper shape -->
+      <path d="M0 260 Q60 240 130 270 Q162 282 195 280 Q228 282 260 270 Q330 240 390 260 Q390 300 390 310 Q310 330 195 328 Q80 330 0 310 Z" style="fill: var(--cheek)"/>
+      <!-- Upper lip cupid's bow -->
+      <path d="M90 270 Q140 255 195 265 Q250 255 300 270" style="fill: none; stroke: var(--ink); stroke-width: 3; stroke-opacity: 0.4"/>
+
+      <!-- Lower lip -->
+      <path d="M0 400 Q80 380 195 378 Q310 380 390 400 Q390 420 390 430 Q310 420 195 418 Q80 420 0 430 Z" style="fill: var(--cheek)"/>
+
+      <!-- Teeth row - upper (big, clear) -->
+      <!-- Clean left half -->
+      <rect x="10" y="306" width="74" height="72" rx="8" style="fill: var(--card); stroke: var(--ink); stroke-width: 2"/>
+      <rect x="90" y="306" width="74" height="72" rx="8" style="fill: var(--card); stroke: var(--ink); stroke-width: 2"/>
+      <!-- Right half teeth (with germs) -->
+      <rect x="170" y="306" width="74" height="72" rx="8" style="fill: var(--card); stroke: var(--ink); stroke-width: 2"/>
+      <rect x="250" y="306" width="74" height="72" rx="8" style="fill: var(--card); stroke: var(--ink); stroke-width: 2"/>
+      <rect x="330" y="306" width="55" height="72" rx="8" style="fill: var(--card); stroke: var(--ink); stroke-width: 2"/>
+
+      <!-- Shine on clean left teeth -->
+      <line x1="26" y1="314" x2="38" y2="330" style="stroke: var(--sky); stroke-width: 2.5; stroke-opacity: 0.8"/>
+      <line x1="106" y1="314" x2="118" y2="330" style="stroke: var(--sky); stroke-width: 2.5; stroke-opacity: 0.8"/>
+
+      <!-- Germ blobs on right side teeth -->
+      <circle cx="198" cy="332" r="10" style="fill: var(--coral); fill-opacity: 0.8"/>
+      <circle cx="222" cy="352" r="7" style="fill: var(--coral); fill-opacity: 0.7"/>
+      <circle cx="278" cy="328" r="12" style="fill: var(--coral); fill-opacity: 0.85"/>
+      <circle cx="298" cy="352" r="8" style="fill: var(--coral); fill-opacity: 0.7"/>
+      <circle cx="352" cy="336" r="9" style="fill: var(--coral); fill-opacity: 0.75"/>
+      <!-- Germ faces (tiny) -->
+      <circle cx="196" cy="330" r="2" style="fill: var(--ink); fill-opacity: 0.7"/>
+      <circle cx="202" cy="330" r="2" style="fill: var(--ink); fill-opacity: 0.7"/>
+      <path d="M194 336 q4 4 8 0" style="fill: none; stroke: var(--ink); stroke-width: 1.5; stroke-opacity: 0.7"/>
+
+      <!-- Clean dividing "half-way" line (wipe trail effect) -->
+      <rect x="152" y="300" width="6" height="84" rx="3" style="fill: var(--card); fill-opacity: 0.5"/>
+
+      <!-- Gums between rows -->
+      <rect x="0" y="376" width="390" height="6" rx="0" style="fill: var(--cheek); fill-opacity: 0.8"/>
+
+      <!-- Lower teeth (partial, smaller) -->
+      <rect x="20" y="380" width="66" height="52" rx="7" style="fill: var(--card); stroke: var(--ink); stroke-width: 2"/>
+      <rect x="92" y="380" width="66" height="52" rx="7" style="fill: var(--card); stroke: var(--ink); stroke-width: 2"/>
+      <rect x="164" y="380" width="66" height="52" rx="7" style="fill: var(--card); stroke: var(--ink); stroke-width: 2"/>
+      <rect x="236" y="380" width="66" height="52" rx="7" style="fill: var(--card); stroke: var(--ink); stroke-width: 2"/>
+      <rect x="308" y="380" width="66" height="52" rx="7" style="fill: var(--card); stroke: var(--ink); stroke-width: 2"/>
+
+      <!-- Swipe trail (left to right across upper teeth) -->
+      <path d="M15 340 Q90 330 158 342" style="fill: none; stroke: var(--t-accent); stroke-width: 8; stroke-opacity: 0.6; stroke-linecap: round"/>
+      <!-- Finger/brush tip indicator -->
+      <circle cx="158" cy="342" r="14" style="fill: var(--t-accent); fill-opacity: 0.5; stroke: var(--t-accent); stroke-width: 3"/>
+      <circle cx="158" cy="342" r="6" style="fill: var(--t-accent)"/>
+    </svg>
+
+    <!-- "Brush, brush, brush" floating words (on top of SVG) -->
+    <div style="position: absolute; top: 180px; left: 0; width: 100%; display: flex; justify-content: space-around; padding: 0 24px; pointer-events: none;">
+      <span class="brush-word1" style="font-family: var(--t-en); font-size: 28px; font-weight: 700; color: var(--card); text-shadow: 0 2px 8px rgba(0,0,0,0.18);">Brush,</span>
+      <span class="brush-word2" style="font-family: var(--t-en); font-size: 32px; font-weight: 700; color: var(--card); text-shadow: 0 2px 8px rgba(0,0,0,0.18);">brush,</span>
+      <span class="brush-word3" style="font-family: var(--t-en); font-size: 26px; font-weight: 700; color: var(--card); text-shadow: 0 2px 8px rgba(0,0,0,0.18);">brush.</span>
+    </div>
+  </div>
+
+  <!-- CAPTION STRIP -->
+  <div class="caption-strip">
+    <div class="caption-line"><span class="en">Brush, brush, brush.</span> 친구도 같이!</div>
+  </div>
+
+  <!-- PARENT CONTROLS -->
+  <div class="parent-ctrl" aria-label="재생 조작">
+    <div class="pp-btn" aria-label="일시정지">
+      <svg width="14" height="18" viewBox="0 0 14 18" aria-hidden="true">
+        <rect x="1" y="1" width="4" height="16" rx="2" style="fill: var(--card)"/>
+        <rect x="9" y="1" width="4" height="16" rx="2" style="fill: var(--card)"/>
+      </svg>
+    </div>
+    <div class="track-wrap">
+      <div class="audio-bar"><div class="audio-fill" style="width: 37%"></div></div>
+      <div class="audio-time"><span>0:52</span><span>2:19</span></div>
+    </div>
+    <div class="ctrl-btns">
+      <div class="ctrl-btn">3번 이어 듣기</div>
+      <div class="ctrl-btn">조금 천천히</div>
+    </div>
+  </div>
+
+</body>
+</html>

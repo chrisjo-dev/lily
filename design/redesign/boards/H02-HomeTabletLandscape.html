@@ -1,0 +1,392 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=1024">
+  <title>H02 홈 개선안 3 태블릿 가로</title>
+  <link rel="stylesheet" href="../shared/tokens.css">
+  <style>
+    html, body {
+      margin: 0;
+      width: 1024px;
+      height: 768px;
+      overflow: hidden;
+    }
+
+    /* ── 히어로 ── */
+    .hero {
+      position: relative;
+      width: 1024px;
+      height: 400px;
+      overflow: hidden;
+    }
+    .hero-img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: left center;
+    }
+    /* 오른쪽 텍스트 패널: 흰 벽 영역에 오버레이 */
+    .hero-panel {
+      position: absolute;
+      right: 0;
+      top: 0;
+      width: 44%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: flex-start;
+      padding: 32px 40px 32px 20px;
+      gap: 10px;
+    }
+    .hero-logo {
+      font-family: var(--font-logo);
+      font-size: 52px;
+      color: var(--brown);
+      line-height: 1;
+      margin: 0;
+    }
+    .hero-tagline {
+      font-family: var(--font-kr);
+      font-size: 14px;
+      color: var(--ink);
+      line-height: 1.7;
+      margin: 0;
+    }
+    .play-row {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-top: 6px;
+    }
+    .big-play {
+      position: relative;
+      width: 88px;
+      height: 88px;
+      background: var(--touch);
+      border-radius: 50%;
+      border: 2.5px solid var(--brown);
+      flex-shrink: 0;
+      cursor: pointer;
+    }
+    .big-play::before {
+      content: '';
+      position: absolute;
+      left: -19%;
+      top: -31%;
+      width: 138%;
+      height: 131%;
+      background: url('../assets/btn-play.webp') center / contain no-repeat;
+      pointer-events: none;
+    }
+    .play-text { display: flex; flex-direction: column; gap: 4px; }
+    .play-label {
+      font-family: var(--font-kr);
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--ink);
+      margin: 0;
+    }
+    .play-sub {
+      font-family: var(--font-kr);
+      font-size: 12px;
+      color: var(--ink-2);
+      margin: 0;
+    }
+    .btn-join {
+      font-family: var(--font-kr);
+      font-size: 12px;
+      color: var(--teal);
+      background: none;
+      border: none;
+      padding: 0;
+      cursor: pointer;
+    }
+
+    /* ── 선반 섹션 ── */
+    .shelf-sec {
+      background: var(--paper);
+      border-top: 1px solid var(--line);
+      padding-top: 12px;
+    }
+    .shelf-head {
+      display: flex;
+      align-items: baseline;
+      gap: 10px;
+      padding: 0 32px 8px;
+    }
+    .shelf-title {
+      font-family: var(--font-logo);
+      font-size: 22px;
+      color: var(--ink);
+      margin: 0;
+    }
+    .shelf-sub {
+      font-family: var(--font-kr);
+      font-size: 12px;
+      color: var(--ink-2);
+      margin: 0;
+    }
+
+    /* 책들이 서 있는 줄 */
+    .books-stand {
+      display: flex;
+      align-items: flex-end;
+      gap: 8px;
+      padding: 0 32px;
+    }
+    .book-col {
+      flex: 1;
+      max-width: 100px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .book-wrap {
+      position: relative;
+      width: 100%;
+    }
+    .book-base {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+    .book-ep {
+      position: absolute;
+      left: 18%;
+      top: 4%;
+      width: 78%;
+      height: 86%;
+      object-fit: cover;
+      object-position: center top;
+    }
+    .book-lock {
+      position: absolute;
+      top: 5px;
+      right: 3px;
+      width: 14px;
+      height: auto;
+    }
+    .book-free-label {
+      position: absolute;
+      bottom: 7px;
+      left: 20%;
+      font-family: var(--font-kr);
+      font-size: 8px;
+      font-weight: 700;
+      color: var(--teal);
+      background: rgba(251,246,236,0.92);
+      border-radius: 2px;
+      padding: 1px 3px;
+    }
+
+    /* 비스킷 */
+    .biscuit-col {
+      flex: 0 0 72px;
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+    }
+    .biscuit-img {
+      width: 64px;
+      height: auto;
+    }
+
+    /* 선반 판 */
+    .shelf-board {
+      display: block;
+      width: 100%;
+      height: 60px;
+      object-fit: fill;
+    }
+
+    /* 편 이름 줄 */
+    .shelf-labels {
+      display: flex;
+      gap: 8px;
+      padding: 5px 32px 0;
+    }
+    .shelf-label {
+      flex: 1;
+      max-width: 100px;
+      font-family: var(--font-kr);
+      font-size: 11px;
+      color: var(--ink-2);
+      text-align: center;
+    }
+    .biscuit-label { flex: 0 0 72px; }
+
+    /* ── 부모 줄 ── */
+    .parent-bar {
+      height: 90px;
+      background: var(--paper-2);
+      border-top: 1.5px solid var(--line);
+      display: flex;
+      align-items: center;
+      justify-content: space-around;
+      padding: 0 40px;
+    }
+    .parent-item {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+    .parent-divider {
+      width: 1px;
+      height: 40px;
+      background: var(--line);
+    }
+    .parent-icon {
+      width: 44px;
+      height: 44px;
+      flex-shrink: 0;
+      object-fit: contain;
+    }
+    .parent-text { display: flex; flex-direction: column; gap: 2px; }
+    .parent-label {
+      font-family: var(--font-kr);
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--ink);
+      margin: 0;
+    }
+    .parent-desc {
+      font-family: var(--font-kr);
+      font-size: 11px;
+      color: var(--ink-2);
+      line-height: 1.5;
+      margin: 0;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- 히어로 -->
+  <section class="hero" aria-labelledby="hero-title">
+    <img class="hero-img" src="../assets/home-hero.webp" alt="릴리와 비스킷이 반기는 방">
+    <div class="hero-panel">
+      <h1 class="hero-logo" id="hero-title">릴리랑</h1>
+      <p class="hero-tagline">하루 2분, 영어 그림책.<br>4~7세 아이와 함께 들어요.</p>
+      <div class="play-row">
+        <div class="big-play" role="button" aria-label="맛보기 바로 듣기"></div>
+        <div class="play-text">
+          <p class="play-label">맛보기 바로 듣기</p>
+          <p class="play-sub">EP01 Brush, Brush, Brush! 무료</p>
+        </div>
+      </div>
+      <button class="btn-join" type="button">가입하고 7편 모두 보기</button>
+    </div>
+  </section>
+
+  <!-- 릴리의 하루 선반 -->
+  <section class="shelf-sec" aria-labelledby="shelf-title-h02">
+    <div class="shelf-head">
+      <h2 class="shelf-title" id="shelf-title-h02">릴리의 하루</h2>
+      <span class="shelf-sub">아침부터 밤까지, 하루 7권</span>
+    </div>
+
+    <!-- 책들 -->
+    <div class="books-stand">
+      <div class="book-col">
+        <div class="book-wrap">
+          <img class="book-base" src="../assets/home-book.webp" alt="">
+          <img class="book-ep" src="../assets/ep02-thumb.webp" alt="Wake Up!">
+          <img class="book-lock" src="../assets/brand-lock.webp" alt="잠김">
+        </div>
+      </div>
+      <div class="book-col">
+        <div class="book-wrap">
+          <img class="book-base" src="../assets/home-book.webp" alt="">
+          <img class="book-ep" src="../assets/ep03-thumb.webp" alt="Splash, Splash!">
+          <img class="book-lock" src="../assets/brand-lock.webp" alt="잠김">
+        </div>
+      </div>
+      <div class="book-col">
+        <div class="book-wrap">
+          <img class="book-base" src="../assets/home-book.webp" alt="">
+          <img class="book-ep" src="../assets/ep04-thumb.webp" alt="Yummy, Yummy!">
+          <img class="book-lock" src="../assets/brand-lock.webp" alt="잠김">
+        </div>
+      </div>
+      <div class="book-col">
+        <div class="book-wrap">
+          <img class="book-base" src="../assets/home-book.webp" alt="">
+          <img class="book-ep" src="../assets/ep05-thumb.webp" alt="Put On, Ready!">
+          <img class="book-lock" src="../assets/brand-lock.webp" alt="잠김">
+        </div>
+      </div>
+      <div class="book-col">
+        <div class="book-wrap">
+          <img class="book-base" src="../assets/home-book.webp" alt="">
+          <img class="book-ep" src="../assets/ep01-bg-0-intro.webp" alt="Brush, Brush, Brush!">
+          <span class="book-free-label">무료</span>
+        </div>
+      </div>
+      <div class="book-col">
+        <div class="book-wrap">
+          <img class="book-base" src="../assets/home-book.webp" alt="">
+          <img class="book-ep" src="../assets/ep06-thumb.webp" alt="Rub-a-Dub, Bath Time!">
+          <img class="book-lock" src="../assets/brand-lock.webp" alt="잠김">
+        </div>
+      </div>
+      <div class="book-col">
+        <div class="book-wrap">
+          <img class="book-base" src="../assets/home-book.webp" alt="">
+          <img class="book-ep" src="../assets/ep07-thumb.webp" alt="Sweet Dreams">
+          <img class="book-lock" src="../assets/brand-lock.webp" alt="잠김">
+        </div>
+      </div>
+      <!-- 비스킷 -->
+      <div class="biscuit-col">
+        <img class="biscuit-img" src="../assets/home-biscuit.webp" alt="" aria-hidden="true">
+      </div>
+    </div>
+
+    <!-- 선반 판 -->
+    <img class="shelf-board" src="../assets/home-shelf.webp" alt="">
+
+    <!-- 편 이름 -->
+    <div class="shelf-labels">
+      <span class="shelf-label">일어나기</span>
+      <span class="shelf-label">세수하기</span>
+      <span class="shelf-label">아침 먹기</span>
+      <span class="shelf-label">옷 입기</span>
+      <span class="shelf-label">이 닦기</span>
+      <span class="shelf-label">목욕하기</span>
+      <span class="shelf-label">잠자리 책</span>
+      <span class="biscuit-label"></span>
+    </div>
+  </section>
+
+  <!-- 부모 줄 -->
+  <div class="parent-bar" role="complementary" aria-label="부모님께">
+    <div class="parent-item">
+      <img class="parent-icon" src="../assets/home-ic-time.webp" alt="">
+      <div class="parent-text">
+        <p class="parent-label">하루 2분이면 충분해요</p>
+        <p class="parent-desc">자주 짧게 듣는 게 더 좋아요.</p>
+      </div>
+    </div>
+    <div class="parent-divider" aria-hidden="true"></div>
+    <div class="parent-item">
+      <img class="parent-icon" src="../assets/home-ic-safe.webp" alt="">
+      <div class="parent-text">
+        <p class="parent-label">아이 정보는 받지 않아요</p>
+        <p class="parent-desc">부모님 계정만 만들면 됩니다.</p>
+      </div>
+    </div>
+    <div class="parent-divider" aria-hidden="true"></div>
+    <div class="parent-item">
+      <img class="parent-icon" src="../assets/home-ic-grow.webp" alt="">
+      <div class="parent-text">
+        <p class="parent-label">생활 장면에서 한 번 더</p>
+        <p class="parent-desc">양치할 때 "Brush my teeth!"</p>
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>

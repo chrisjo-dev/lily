@@ -1,0 +1,796 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=390">
+  <title>Brush, Brush, Brush! — 매일 외국어 읽기</title>
+  <link rel="stylesheet" href="../shared/tokens.css">
+  <style>
+    body {
+      background: var(--t-bg);
+      color: var(--t-ink);
+      font-family: var(--t-body);
+      width: 390px;
+      margin: 0 auto;
+      overflow-x: hidden;
+    }
+
+    /* ── 브랜드 머리글 ── */
+    .book-brand {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 9px 20px;
+      background: var(--t-surface);
+      border-bottom: 1.5px solid var(--t-soft);
+    }
+    .brand-name {
+      font-family: var(--t-kr);
+      font-size: 11px;
+      color: var(--t-sub);
+      letter-spacing: 0.04em;
+    }
+    .ep-meta {
+      display: flex;
+      gap: 6px;
+      align-items: center;
+    }
+    .ep-tag {
+      font-family: var(--t-kr);
+      font-size: 11px;
+      color: var(--t-accent);
+      background: var(--t-soft);
+      padding: 3px 10px;
+      border-radius: 99px;
+    }
+
+    /* ── 그림책 일러스트 페이지 ── */
+    .book-scene {
+      position: relative;
+      width: 390px;
+      line-height: 0;
+    }
+    .scene-bg {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+    }
+    .scene-lily {
+      position: relative;
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+
+    /* ── 제목 띠 (일러스트 아래) ── */
+    .scene-title-strip {
+      background: var(--t-surface);
+      padding: 16px 24px 12px;
+      border-bottom: 1.5px solid var(--t-soft);
+      text-align: center;
+    }
+    .ep-title {
+      font-family: var(--t-en);
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--t-ink);
+      letter-spacing: 0.01em;
+      margin: 0 0 2px;
+    }
+    .ep-subtitle {
+      font-family: var(--t-kr);
+      font-size: 12px;
+      color: var(--t-sub);
+    }
+
+    /* ── 책 본문 텍스트 페이지 ── */
+    .book-page {
+      background: var(--t-surface);
+      padding: 30px 32px 24px;
+      border-bottom: 1.5px solid var(--t-soft);
+      text-align: center;
+    }
+    .book-sentence {
+      font-family: var(--t-kr);
+      font-size: 27px;
+      line-height: 1.6;
+      color: var(--t-ink);
+      word-break: keep-all;
+      margin: 0 0 14px;
+    }
+    .book-sentence .en {
+      font-family: var(--t-en);
+      font-size: 34px;
+      color: var(--t-accent);
+      font-weight: 700;
+      letter-spacing: -0.01em;
+    }
+    .book-page-foot {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+    }
+    .book-page-num {
+      font-family: var(--t-kr);
+      font-size: 12px;
+      color: var(--t-sub);
+    }
+    .page-dot-row {
+      display: flex;
+      gap: 5px;
+      align-items: center;
+    }
+    .pdot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--t-soft);
+    }
+    .pdot.done {
+      background: var(--t-accent);
+      opacity: 0.45;
+    }
+    .pdot.now {
+      width: 18px;
+      border-radius: 3px;
+      background: var(--t-accent);
+      opacity: 1;
+    }
+
+    /* ── 장면 진행 썸네일 줄 ── */
+    .scene-strip {
+      background: var(--t-surface);
+      padding: 14px 14px 12px;
+      border-bottom: 1.5px solid var(--t-soft);
+      overflow-x: auto;
+    }
+    .scene-strip-row {
+      display: flex;
+      gap: 6px;
+      align-items: flex-end;
+      width: max-content;
+    }
+    .scene-thumb {
+      width: 32px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 4px;
+      cursor: pointer;
+    }
+    .scene-thumb-box {
+      width: 32px;
+      height: 32px;
+      border-radius: 8px;
+      background: var(--t-bg);
+      border: 1.5px solid var(--t-soft);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .scene-thumb.read .scene-thumb-box {
+      background: var(--t-soft);
+      border-color: var(--t-accent);
+    }
+    .scene-thumb.now .scene-thumb-box {
+      background: var(--t-accent);
+      border-color: var(--t-accent);
+      width: 38px;
+      height: 38px;
+      border-radius: 10px;
+    }
+    .scene-thumb-label {
+      font-family: var(--t-kr);
+      font-size: 8px;
+      color: var(--t-sub);
+      text-align: center;
+      line-height: 1.25;
+      white-space: nowrap;
+    }
+    .scene-thumb.read .scene-thumb-label { color: var(--t-accent); }
+    .scene-thumb.now .scene-thumb-label {
+      color: var(--t-accent);
+      font-weight: 700;
+    }
+    /* 장면 아이콘 (인라인 SVG) */
+    .scene-icon { line-height: 0; }
+
+    /* ── 플레이어 컨트롤 ── */
+    .player-row {
+      background: var(--t-surface);
+      padding: 18px 20px 16px;
+      border-bottom: 1.5px solid var(--t-soft);
+    }
+    .player-main {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 14px;
+    }
+    .play-btn {
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      background: var(--t-accent);
+      border: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      cursor: pointer;
+    }
+    .progress-wrap {
+      flex: 1;
+    }
+    .progress-track {
+      width: 100%;
+      height: 6px;
+      background: var(--t-soft);
+      border-radius: 3px;
+      margin-bottom: 6px;
+      position: relative;
+    }
+    .progress-fill {
+      width: 47%;
+      height: 100%;
+      background: var(--t-accent);
+      border-radius: 3px;
+      position: relative;
+    }
+    .progress-thumb {
+      position: absolute;
+      right: -6px;
+      top: -5px;
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      background: var(--t-accent);
+      border: 3px solid var(--t-surface);
+    }
+    .progress-times {
+      display: flex;
+      justify-content: space-between;
+    }
+    .progress-times span {
+      font-family: var(--t-en);
+      font-size: 12px;
+      color: var(--t-sub);
+    }
+    .player-tools {
+      display: flex;
+      gap: 8px;
+    }
+    .tool-btn {
+      flex: 1;
+      border: 1.5px solid var(--t-soft);
+      background: var(--t-bg);
+      border-radius: 12px;
+      padding: 11px 8px;
+      font-family: var(--t-kr);
+      font-size: 13px;
+      color: var(--t-ink);
+      cursor: pointer;
+      text-align: center;
+      line-height: 1;
+    }
+
+    /* ── 단어 사전 섹션 ── */
+    .words-section {
+      background: var(--t-bg);
+    }
+    .words-header {
+      padding: 28px 24px 14px;
+      text-align: center;
+    }
+    .words-eyebrow {
+      font-family: var(--t-kr);
+      font-size: 11px;
+      color: var(--t-sub);
+      letter-spacing: 0.08em;
+      margin: 0 0 8px;
+    }
+    .words-rule {
+      width: 36px;
+      height: 2px;
+      background: var(--t-accent);
+      border-radius: 1px;
+      margin: 0 auto;
+    }
+    .word-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      padding: 0 18px 24px;
+    }
+    .word-entry {
+      background: var(--t-surface);
+      border-radius: 18px;
+      padding: 18px 20px;
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      border: 2px solid transparent;
+    }
+    .word-entry.now {
+      border-color: var(--t-accent);
+    }
+    .word-illus {
+      width: 76px;
+      height: 64px;
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .word-illus img {
+      width: 76px;
+      height: 64px;
+      object-fit: contain;
+    }
+    .word-text {
+      flex: 1;
+      min-width: 0;
+    }
+    .word-en {
+      font-family: var(--t-en);
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--t-ink);
+      line-height: 1.25;
+      margin: 0 0 4px;
+    }
+    .word-entry.now .word-en {
+      color: var(--t-accent);
+    }
+    .word-kr {
+      font-family: var(--t-kr);
+      font-size: 13px;
+      color: var(--t-sub);
+      margin: 0;
+    }
+    .word-play {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: var(--t-soft);
+      border: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      cursor: pointer;
+    }
+    .word-entry.now .word-play {
+      background: var(--t-accent);
+    }
+
+    /* ── 뒤표지: 부모 영역 ── */
+    .backcover {
+      background: var(--t-accent);
+      padding: 32px 20px 36px;
+    }
+    .backcover-label {
+      font-family: var(--t-kr);
+      font-size: 11px;
+      color: var(--t-soft);
+      letter-spacing: 0.1em;
+      margin: 0 0 18px 2px;
+    }
+
+    /* 학습지 카드 */
+    .ws-card {
+      background: var(--t-surface);
+      border-radius: 20px;
+      overflow: hidden;
+      margin-bottom: 12px;
+    }
+    .ws-preview {
+      display: block;
+      width: 100%;
+      height: 158px;
+      object-fit: cover; object-position: top;
+      background: var(--t-wash-3);
+    }
+    .ws-body {
+      padding: 16px 20px 18px;
+    }
+    .ws-eyebrow {
+      font-family: var(--t-kr);
+      font-size: 10px;
+      color: var(--t-sub);
+      letter-spacing: 0.08em;
+      margin: 0 0 4px;
+    }
+    .ws-title {
+      font-family: var(--t-en);
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--t-ink);
+      margin: 0 0 10px;
+    }
+    .ws-items {
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+      margin-bottom: 14px;
+    }
+    .ws-item {
+      font-family: var(--t-body);
+      font-size: 13px;
+      color: var(--t-sub);
+      margin: 0;
+    }
+    .ws-btn {
+      display: block;
+      width: 100%;
+      background: var(--t-accent);
+      color: var(--t-surface);
+      border: none;
+      border-radius: 12px;
+      padding: 14px 0;
+      font-family: var(--t-kr);
+      font-size: 15px;
+      cursor: pointer;
+      text-align: center;
+    }
+
+    /* 부모님께 */
+    .parent-tips {
+      background: var(--t-surface);
+      border-radius: 20px;
+      padding: 18px 20px;
+      margin-bottom: 10px;
+    }
+    .tips-label {
+      font-family: var(--t-kr);
+      font-size: 10px;
+      color: var(--t-sub);
+      letter-spacing: 0.08em;
+      margin: 0 0 12px;
+    }
+    .tip-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .tip {
+      font-family: var(--t-body);
+      font-size: 14px;
+      color: var(--t-ink);
+      line-height: 1.55;
+      padding-left: 14px;
+      position: relative;
+      margin: 0;
+    }
+    .tip::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 9px;
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: var(--t-accent);
+    }
+
+    /* 대본 보기 */
+    .script-fold {
+      background: var(--t-surface);
+      border-radius: 20px;
+      overflow: hidden;
+    }
+    .script-toggle {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 16px 20px;
+      background: none;
+      border: none;
+      cursor: pointer;
+    }
+    .script-toggle-label {
+      font-family: var(--t-kr);
+      font-size: 14px;
+      color: var(--t-ink);
+    }
+    .script-toggle-hint {
+      font-family: var(--t-kr);
+      font-size: 12px;
+      color: var(--t-sub);
+    }
+  </style>
+</head>
+<body class="t-book">
+
+  <!-- 브랜드 머리글 -->
+  <header class="book-brand">
+    <span class="brand-name">매일 외국어 읽기</span>
+    <div class="ep-meta">
+      <span class="ep-tag">5~8세</span>
+      <span class="ep-tag">2분</span>
+    </div>
+  </header>
+
+  <!-- 그림책 일러스트 페이지 -->
+  <div class="book-scene">
+    <!-- 수채화풍 평면 색 블록 배경 -->
+    <svg class="scene-bg" viewBox="0 0 390 257" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <!-- 하늘 wash -->
+      <rect x="0" y="0" width="390" height="257" style="fill:var(--t-wash-1)"/>
+      <!-- 바닥 wash -->
+      <rect x="0" y="168" width="390" height="89" style="fill:var(--t-wash-2)"/>
+      <!-- 경계 부드러운 타원 -->
+      <ellipse cx="195" cy="168" rx="240" ry="20" style="fill:var(--t-wash-2)"/>
+      <!-- 왼쪽 창문 블록 (wash-3) -->
+      <rect x="12" y="22" width="62" height="62" rx="10" style="fill:var(--t-wash-3)"/>
+      <!-- 창문 안 유리 블록 -->
+      <rect x="22" y="38" width="42" height="28" rx="5" style="fill:var(--t-wash-1)"/>
+      <!-- 오른쪽 장식 블록 -->
+      <rect x="318" y="12" width="48" height="48" rx="9" style="fill:var(--t-wash-3); opacity:0.55"/>
+      <!-- 별 모양 작은 원 -->
+      <circle cx="340" cy="36" r="7" style="fill:var(--t-surface); opacity:0.6"/>
+      <circle cx="52" cy="135" r="5" style="fill:var(--t-surface); opacity:0.5"/>
+      <circle cx="370" cy="90" r="4" style="fill:var(--t-surface); opacity:0.4"/>
+    </svg>
+    <!-- 릴리 일러스트 -->
+    <img class="scene-lily" src="../assets/lily-scene.svg" alt="릴리가 이를 닦는 장면. 거품이 가득해요.">
+  </div>
+
+  <!-- 제목 띠 -->
+  <div class="scene-title-strip">
+    <p class="ep-title">Brush, Brush, Brush!</p>
+    <p class="ep-subtitle">릴리의 이 닦기 이야기</p>
+  </div>
+
+  <!-- 책 본문 텍스트 페이지 -->
+  <div class="book-page">
+    <p class="book-sentence">와! <span class="en">Bubbles!</span><br>거품이야! <span class="en">Bubbles!</span></p>
+    <div class="book-page-foot">
+      <span class="book-page-num">5 / 10</span>
+      <div class="page-dot-row" aria-label="진행 상태">
+        <span class="pdot done"></span>
+        <span class="pdot done"></span>
+        <span class="pdot done"></span>
+        <span class="pdot done"></span>
+        <span class="pdot now"></span>
+        <span class="pdot"></span>
+        <span class="pdot"></span>
+        <span class="pdot"></span>
+        <span class="pdot"></span>
+        <span class="pdot"></span>
+      </div>
+    </div>
+  </div>
+
+  <!-- 장면 진행 썸네일 줄 (10장면) -->
+  <div class="scene-strip" role="navigation" aria-label="에피소드 장면">
+    <div class="scene-strip-row">
+      <!-- 읽은 장면 4개 -->
+      <div class="scene-thumb read">
+        <div class="scene-thumb-box">
+          <svg class="scene-icon" width="18" height="18" viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="9" cy="7" r="4" style="fill:var(--t-accent); opacity:0.5" stroke="none"/>
+            <rect x="4" y="13" width="10" height="3" rx="1.5" style="fill:var(--t-accent); opacity:0.5" stroke="none"/>
+          </svg>
+        </div>
+        <span class="scene-thumb-label">인사</span>
+      </div>
+      <div class="scene-thumb read">
+        <div class="scene-thumb-box">
+          <svg class="scene-icon" width="18" height="18" viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="9" cy="9" r="3" style="fill:var(--t-wash-1)" stroke="none"/>
+            <circle cx="5" cy="5" r="1.5" style="fill:var(--t-wash-3)" stroke="none"/>
+            <circle cx="13" cy="4" r="1" style="fill:var(--t-wash-3)" stroke="none"/>
+          </svg>
+        </div>
+        <span class="scene-thumb-label">밤이네</span>
+      </div>
+      <div class="scene-thumb read">
+        <div class="scene-thumb-box">
+          <svg class="scene-icon" width="18" height="18" viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg">
+            <rect x="3" y="7" width="12" height="4" rx="2" style="fill:var(--t-wash-3)" stroke="none"/>
+            <circle cx="9" cy="4" r="2.5" style="fill:var(--t-wash-2)" stroke="none"/>
+          </svg>
+        </div>
+        <span class="scene-thumb-label">칫솔 찾기</span>
+      </div>
+      <div class="scene-thumb read">
+        <div class="scene-thumb-box">
+          <svg class="scene-icon" width="18" height="18" viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg">
+            <path d="M4 14 q5 -8 10 0" style="fill:none; stroke:var(--t-accent); stroke-width:2; opacity:0.5"/>
+          </svg>
+        </div>
+        <span class="scene-thumb-label">이 닦기</span>
+      </div>
+      <!-- 현재 장면 -->
+      <div class="scene-thumb now">
+        <div class="scene-thumb-box">
+          <svg class="scene-icon" width="20" height="20" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="9" cy="11" r="5" style="fill:var(--t-surface); opacity:0.9" stroke="none"/>
+            <circle cx="15" cy="7" r="3" style="fill:var(--t-surface); opacity:0.7" stroke="none"/>
+            <circle cx="15" cy="15" r="2" style="fill:var(--t-surface); opacity:0.5" stroke="none"/>
+            <circle cx="5" cy="5" r="2" style="fill:var(--t-surface); opacity:0.5" stroke="none"/>
+          </svg>
+        </div>
+        <span class="scene-thumb-label">거품</span>
+      </div>
+      <!-- 남은 장면 5개 -->
+      <div class="scene-thumb">
+        <div class="scene-thumb-box">
+          <svg class="scene-icon" width="18" height="18" viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg">
+            <path d="M4 13 q5 -10 10 0" style="fill:var(--t-wash-1); stroke:none"/>
+          </svg>
+        </div>
+        <span class="scene-thumb-label">헹구기</span>
+      </div>
+      <div class="scene-thumb">
+        <div class="scene-thumb-box">
+          <svg class="scene-icon" width="18" height="18" viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg">
+            <path d="M5 10 l3 3 l5 -6" style="fill:none; stroke:var(--t-soft); stroke-width:2.5; stroke-linecap:round; stroke-linejoin:round"/>
+          </svg>
+        </div>
+        <span class="scene-thumb-label">깨끗해</span>
+      </div>
+      <div class="scene-thumb">
+        <div class="scene-thumb-box">
+          <svg class="scene-icon" width="18" height="18" viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg">
+            <path d="M4 9 q5 -5 10 0 q-5 5 -10 0" style="fill:var(--t-soft); stroke:none"/>
+          </svg>
+        </div>
+        <span class="scene-thumb-label">따라 말하기</span>
+      </div>
+      <div class="scene-thumb">
+        <div class="scene-thumb-box">
+          <svg class="scene-icon" width="18" height="18" viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="9" cy="9" r="5" style="fill:none; stroke:var(--t-soft); stroke-width:2"/>
+            <rect x="7" y="6" width="5" height="6" rx="1" style="fill:var(--t-soft); stroke:none"/>
+          </svg>
+        </div>
+        <span class="scene-thumb-label">노래</span>
+      </div>
+      <div class="scene-thumb">
+        <div class="scene-thumb-box">
+          <svg class="scene-icon" width="18" height="18" viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg">
+            <path d="M4 8 q5 -6 10 0" style="fill:none; stroke:var(--t-soft); stroke-width:2"/>
+            <rect x="6" y="10" width="6" height="4" rx="1" style="fill:var(--t-soft); stroke:none"/>
+          </svg>
+        </div>
+        <span class="scene-thumb-label">잘 자</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- 플레이어 컨트롤 -->
+  <div class="player-row">
+    <div class="player-main">
+      <!-- 일시정지 (재생 중) -->
+      <button class="play-btn" aria-label="일시정지">
+        <svg width="22" height="22" viewBox="0 0 22 22" xmlns="http://www.w3.org/2000/svg">
+          <rect x="5" y="4" width="4" height="14" rx="1.5" style="fill:var(--t-surface)"/>
+          <rect x="13" y="4" width="4" height="14" rx="1.5" style="fill:var(--t-surface)"/>
+        </svg>
+      </button>
+      <!-- 진행 바 -->
+      <div class="progress-wrap">
+        <div class="progress-track">
+          <div class="progress-fill">
+            <div class="progress-thumb"></div>
+          </div>
+        </div>
+        <div class="progress-times">
+          <span>1:08</span>
+          <span>2:19</span>
+        </div>
+      </div>
+    </div>
+    <div class="player-tools">
+      <button class="tool-btn">3번 이어 듣기</button>
+      <button class="tool-btn">조금 천천히</button>
+    </div>
+  </div>
+
+  <!-- 오늘의 단어: 그림 사전 페이지 -->
+  <section class="words-section">
+    <div class="words-header">
+      <p class="words-eyebrow">오늘의 단어</p>
+      <div class="words-rule"></div>
+    </div>
+    <div class="word-list">
+
+      <!-- brush my teeth -->
+      <div class="word-entry">
+        <div class="word-illus">
+          <img src="../assets/word-brush.svg" alt="칫솔 그림">
+        </div>
+        <div class="word-text">
+          <p class="word-en">brush my teeth</p>
+          <p class="word-kr">이를 닦아요</p>
+        </div>
+        <button class="word-play" aria-label="brush my teeth 듣기">
+          <svg width="18" height="18" viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg">
+            <polygon points="6,3 15,9 6,15" style="fill:var(--t-accent)"/>
+          </svg>
+        </button>
+      </div>
+
+      <!-- bubbles (현재 재생 중) -->
+      <div class="word-entry now">
+        <div class="word-illus">
+          <img src="../assets/word-bubbles.svg" alt="거품 그림">
+        </div>
+        <div class="word-text">
+          <p class="word-en">bubbles</p>
+          <p class="word-kr">거품</p>
+        </div>
+        <button class="word-play" aria-label="bubbles 듣기">
+          <svg width="18" height="18" viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg">
+            <polygon points="6,3 15,9 6,15" style="fill:var(--t-surface)"/>
+          </svg>
+        </button>
+      </div>
+
+      <!-- all clean -->
+      <div class="word-entry">
+        <div class="word-illus">
+          <img src="../assets/word-clean.svg" alt="깨끗해 그림">
+        </div>
+        <div class="word-text">
+          <p class="word-en">all clean</p>
+          <p class="word-kr">깨끗해</p>
+        </div>
+        <button class="word-play" aria-label="all clean 듣기">
+          <svg width="18" height="18" viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg">
+            <polygon points="6,3 15,9 6,15" style="fill:var(--t-accent)"/>
+          </svg>
+        </button>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 뒤표지: 부모 영역 -->
+  <section class="backcover" aria-label="부모님 자료">
+    <p class="backcover-label">부모님을 위한 자료</p>
+
+    <!-- 학습지 카드 -->
+    <div class="ws-card">
+      <img src="../assets/worksheet.png" class="ws-preview" alt="학습지 미리 보기">
+      <div class="ws-body">
+        <p class="ws-eyebrow">학습지</p>
+        <p class="ws-title">Brush, Brush, Brush!</p>
+        <div class="ws-items">
+          <p class="ws-item">1. 그림에서 칫솔 찾기</p>
+          <p class="ws-item">2. 오려서 노는 단어 카드</p>
+          <p class="ws-item">3. 말할 때마다 스티커</p>
+          <p class="ws-item">4. 릴리 색칠하기</p>
+        </div>
+        <button class="ws-btn">학습지 받기 (A4)</button>
+      </div>
+    </div>
+
+    <!-- 부모님께 -->
+    <div class="parent-tips">
+      <p class="tips-label">부모님께</p>
+      <div class="tip-list">
+        <p class="tip">여러 번 들려주세요. 반복이 가장 좋은 선생님이에요.</p>
+        <p class="tip">실제 양치 시간에 "Brush my teeth!"를 한 번 말해 주세요.</p>
+        <p class="tip">따라 하지 않아도 괜찮아요.</p>
+      </div>
+    </div>
+
+    <!-- 대본 보기 (접힌) -->
+    <div class="script-fold">
+      <button class="script-toggle" aria-expanded="false" aria-controls="script-body">
+        <span class="script-toggle-label">대본 보기</span>
+        <span class="script-toggle-hint">펼치기</span>
+      </button>
+    </div>
+
+  </section>
+
+</body>
+</html>

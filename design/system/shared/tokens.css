@@ -1,0 +1,30 @@
+/* 릴리랑 디자인 시스템 토큰. 값의 원본은 engine/ui/tokens.css, 규칙은 docs/DESIGN.md 4절.
+   시안은 이 변수만 쓴다. 글자 크기 단계는 이 보드에서 처음 정함(이슈 #9). */
+@import url("https://fonts.googleapis.com/css2?family=Gowun+Dodum&family=Gowun+Batang:wght@400;700&family=Jua&family=Gaegu:wght@700&family=Andika:wght@400;700&display=swap");
+
+:root {
+  --paper: #fbf6ec; --paper-2: #f3ece0; --sky: #e7f1f6; --mint: #dcefe7;
+  --ink: #24323d; --ink-2: #5b6b78; --line: #e2d8c8; --brown: #6b4a36;
+  --teal: #2f7d6d; --teal-soft: #d7ebe4;
+  --touch: #ffc83d; --touch-edge: #6b4a36;
+  --coral: #ef8a78; --card: #ffffff;
+  --shadow: rgba(107, 74, 54, .24);
+  --night: #1f2a44; --night-2: #2b3858; --night-ink: #f3ead8; --night-ink-2: #b9b2c9; --lamp: #ffd98a;
+  --desk: #c4b49a;
+
+  --font-logo: "Jua", "Gowun Dodum", sans-serif;
+  --font-title: "Gaegu", "Jua", "Gowun Dodum", sans-serif; /* 로고와 큰 제목만(리본 단추 글자 제외), 굵게(700), 자간 -0.06em, Jua 크기의 1.15~1.2배 */
+  --font-kr: "Gowun Dodum", "Apple SD Gothic Neo", sans-serif;
+  --font-en: "Andika", "Gowun Dodum", sans-serif;
+  --font-book: "Gowun Batang", "Gowun Dodum", serif;
+
+  /* 글자 크기 단계 */
+  --t-xs: 12px; --t-sm: 14px; --t-md: 16px; --t-lg: 20px; --t-xl: 28px; --t-2xl: 40px;
+
+  --s1: 4px; --s2: 8px; --s3: 12px; --s4: 16px; --s5: 20px; --s6: 24px; --s8: 32px; --s10: 40px; --s12: 48px; --s16: 64px;
+  --r-frame: 16px; --r-card: 20px; --r-btn: 14px;
+  --kid-target: 64px; --parent-target: 48px;
+}
+
+* { box-sizing: border-box; }
+body { margin: 0; font-family: var(--font-kr); color: var(--ink); background: var(--paper); -webkit-font-smoothing: antialiased; word-break: keep-all; line-height: 1.6; }

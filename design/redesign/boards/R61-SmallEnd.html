@@ -1,0 +1,256 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=375">
+  <title>R61 개선안 2 작은 휴대폰 EpisodeEnd 밤</title>
+  <link rel="stylesheet" href="../shared/tokens.css">
+  <style>
+    html, body { margin: 0; width: 375px; height: 667px; overflow: hidden; background: var(--night); }
+
+    .page {
+      width: 375px; height: 667px;
+      position: relative;
+      display: flex; flex-direction: column;
+      background: var(--night);
+    }
+
+    /* 메인 콘텐츠 */
+    .page-body {
+      flex: 1;
+      display: flex; flex-direction: column;
+      align-items: center;
+      padding: 16px 20px 8px;
+      gap: 8px;
+      justify-content: space-between;
+    }
+
+    /* 원형 액자 */
+    .torn-frame {
+      width: 110px; height: 110px;
+      position: relative; flex-shrink: 0;
+    }
+    .torn-frame-bg {
+      position: absolute; inset: 0;
+      width: 100%; height: 100%;
+      border-radius: 50%;
+      overflow: hidden;
+      box-shadow: 2px 3px 14px rgba(0,0,0,0.4);
+      border: 2.5px solid rgba(243,234,216,0.2);
+    }
+    .torn-frame-bg img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+    }
+
+    /* 제목 묶음 */
+    .end-title-block { text-align: center; }
+    .end-ep {
+      font-family: var(--font-en); font-size: 11px;
+      color: var(--night-ink-2); margin: 0 0 2px;
+    }
+    .end-title {
+      font-family: var(--font-logo); font-size: 19px;
+      color: var(--night-ink); margin: 0 0 6px;
+    }
+    .end-msg {
+      font-family: var(--font-book); font-size: 14px;
+      color: var(--night-ink); margin: 0; line-height: 1.55;
+    }
+
+    /* 스티커 리본 + 자리 */
+    .sticker-section { text-align: center; width: 100%; }
+
+    .ribbon-wrap {
+      position: relative;
+      width: 200px; height: 32px; margin: 0 auto 8px;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .ribbon-img {
+      position: absolute; inset: 0; width: 100%; height: 100%;
+      object-fit: fill; opacity: 0.9;
+    }
+    .ribbon-text {
+      position: relative; z-index: 1;
+      font-family: var(--font-logo); font-size: 12px; color: var(--brown);
+    }
+
+    .sticker-row {
+      display: flex; gap: 10px; justify-content: center; align-items: flex-start;
+    }
+    .sticker-col {
+      display: flex; flex-direction: column; align-items: center; gap: 3px;
+    }
+    .sticker-slot {
+      width: 68px; height: 68px;
+      position: relative;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .sticker-spot-img {
+      position: absolute; inset: 0; width: 100%; height: 100%;
+      object-fit: contain;
+    }
+    .sticker-icon {
+      position: relative; z-index: 2;
+      width: 54px; height: 54px;
+    }
+    .sticker-img {
+      position: relative; z-index: 2;
+      width: 58px; height: 58px; object-fit: contain;
+      filter: drop-shadow(0 2px 6px rgba(0,0,0,0.25));
+    }
+    .sticker-word {
+      font-family: var(--font-en); font-size: 9px; color: var(--night-ink-2);
+    }
+
+    /* 버튼 묶음 */
+    .btn-block {
+      width: 100%; display: flex; flex-direction: column;
+      align-items: center; gap: 4px;
+    }
+
+    /* 한 번 더: 알약 단추 + 빛살 */
+    .again-wrap {
+      position: relative; width: 190px; height: auto;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .again-btn {
+      position: relative;
+      width: 160px; height: 67px;
+      padding: 0 0 0 40px; border-radius: 34px; border: 0;
+      background: none; cursor: pointer;
+      color: var(--touch-edge); font-family: var(--font-logo); font-size: 20px;
+      display: flex; align-items: center; justify-content: center;
+      margin-top: 36px;
+      isolation: isolate;
+    }
+    /* btn-again-night.webp: 알약 모양 단추 그림(빛살+화살 아이콘 포함). 글자만 HTML */
+    .again-btn::before {
+      content: "";
+      position: absolute; z-index: -1;
+      left: 0; top: -65%; width: 100%; height: 168%;
+      pointer-events: none;
+      background: url('../assets/btn-again-night.webp') 0 0 / 100% 100% no-repeat;
+    }
+    .again-btn span {
+      position: relative; z-index: 1; font-family: var(--font-logo);
+      padding-left: 4px;
+    }
+
+    /* 부모님께 텍스트 링크 */
+    .btn-parent {
+      height: 36px;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .btn-parent span {
+      font-family: var(--font-kr); font-size: 14px; color: var(--lamp);
+      border-bottom: 1px solid var(--teal-soft);
+      padding-bottom: 1px;
+    }
+
+    /* 부모 생활 장면 연결 띠 */
+    .parent-tip {
+      background: rgba(255,255,255,0.06);
+      border-top: 1px solid rgba(243,234,216,0.1);
+      padding: 10px 24px;
+      text-align: center;
+    }
+    .tip-text {
+      font-family: var(--font-kr); font-size: 12px;
+      color: var(--night-ink-2); line-height: 1.6; margin: 0;
+    }
+    .tip-en { font-family: var(--font-en); }
+
+    /* 부모 화면 열기 핸들 */
+    .parent-handle {
+      height: 34px; flex-shrink: 0;
+      display: flex; align-items: center; justify-content: center; gap: 6px;
+      border-top: 1px solid rgba(243,234,216,0.1);
+    }
+    .handle-bar {
+      width: 28px; height: 3px; border-radius: 2px;
+      background: rgba(243,234,216,0.2);
+    }
+    .handle-text {
+      font-family: var(--font-kr); font-size: 12px;
+      color: var(--night-ink-2); opacity: 0.7;
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <div class="page-body">
+      <!-- 원형 액자: EP07 장면 -->
+      <div class="torn-frame">
+        <div class="torn-frame-bg">
+          <img src="../assets/ep07-bg-1-find.webp" alt="Sweet Dreams 이야기">
+        </div>
+      </div>
+
+      <!-- 제목 -->
+      <div class="end-title-block">
+        <p class="end-ep">EP07</p>
+        <p class="end-title">Sweet Dreams</p>
+        <p class="end-msg">오늘 이야기를 다 들었어요.</p>
+      </div>
+
+      <!-- 스티커 리본 + 세 장 (EP07: 책/달 테마 인라인 SVG) -->
+      <div class="sticker-section">
+        <div class="ribbon-wrap">
+          <img class="ribbon-img" src="../assets/ribbon.png" alt="">
+          <span class="ribbon-text">오늘 모은 스티커</span>
+        </div>
+        <div class="sticker-row">
+          <div class="sticker-col">
+            <div class="sticker-slot">
+              <img class="sticker-spot-img" src="../assets/sticker-spot.png" alt="">
+              <img class="sticker-img" src="../assets/ep07-L-sticker-read.webp" alt="">
+            </div>
+            <span class="sticker-word">read a book</span>
+          </div>
+          <div class="sticker-col">
+            <div class="sticker-slot">
+              <img class="sticker-spot-img" src="../assets/sticker-spot.png" alt="">
+              <img class="sticker-img" src="../assets/ep07-L-sticker-page.webp" alt="">
+            </div>
+            <span class="sticker-word">turn the page</span>
+          </div>
+          <div class="sticker-col">
+            <div class="sticker-slot">
+              <img class="sticker-spot-img" src="../assets/sticker-spot.png" alt="">
+              <img class="sticker-img" src="../assets/ep07-L-sticker-dreams.webp" alt="">
+            </div>
+            <span class="sticker-word">sweet dreams</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- 버튼 묶음 -->
+      <div class="btn-block">
+        <div class="again-wrap">
+          <button class="again-btn" type="button">
+            <span>한 번 더</span>
+          </button>
+        </div>
+        <div class="btn-parent">
+          <span>부모님께</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 부모 생활 연결 띠 -->
+    <div class="parent-tip">
+      <p class="tip-text">잠자리 책 읽을 때 <span class="tip-en">"Sweet dreams!"</span><br>한 번 더 말해 주세요.</p>
+    </div>
+
+    <!-- 부모 화면 열기 핸들 -->
+    <div class="parent-handle">
+      <div class="handle-bar"></div>
+      <span class="handle-text">부모 화면 열기</span>
+      <svg width="10" height="10" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg" style="opacity:0.45">
+        <path d="M2 7L5 4L8 7" stroke="var(--night-ink-2)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </div>
+  </div>
+</body>
+</html>

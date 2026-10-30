@@ -1,0 +1,11 @@
+/* T8 잠금 카드와 랜딩 첫 화면: 손글씨 제목(견본 6, 첫 줄 크림 / 둘째 줄 연하늘 / 강조 단어 산호)을 남색 띠에 얹는다 */
+.lamp h1.title-art.t8 img { width: 300px; margin-left: -2px; }
+@media (min-width: 600px) { .lamp h1.title-art.t8 img { width: 340px; } }
+@media (min-width: 900px) { .lamp h1.title-art.t8 img { width: clamp(430px, 36vw, 540px); margin-left: -4px; } .lamp .inner.t8 { grid-template-columns: 1fr 1fr; } }
+.lamp .t8-sub { font-size: 15px; text-wrap: balance; line-height: 1.5; margin-top: 12px; color: var(--navy-ink); text-shadow: 0 1px 8px rgba(10,18,34,.6); }
+@media (min-width: 900px) { .lamp .t8-sub { font-size: 21px; margin-top: 20px; } }
+.lamp .go .btn { text-decoration: none; }
+/* 잠금 카드: 첫 문장은 손글씨, 둘째 문장은 그대로 글자 */
+.sheet .top h2.title-art { line-height: 0; margin-top: 12px; }
+.sheet .top h2.title-art img { display: block; width: 100%; max-width: 292px; height: auto; margin-left: -2px; }
+.sheet .top .sub { margin: 10px 0 0; font-size: 16px; line-height: 1.5; color: var(--navy-ink); }

@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>L15 구분선 시안</title>
+<link rel="stylesheet" href="../shared/system-tokens.css">
+<link rel="stylesheet" href="../shared/paper.css">
+<style>
+  body { padding: var(--s10); background: var(--paper-2); }
+  img { display: block; }
+  .top h1 { font-family: var(--font-logo); font-weight: 400; font-size: var(--t-xl); margin: 0 0 var(--s2); }
+  .top p { font-size: var(--t-md); color: var(--ink-2); margin: 0 0 var(--s8); }
+  .grid { display: grid; grid-template-columns: repeat(5, 390px); gap: var(--s8); }
+  .opt > h2 { font-family: var(--font-logo); font-weight: 400; font-size: var(--t-lg); margin: 0; }
+  .opt > .why { font-size: var(--t-sm); color: var(--ink-2); margin: var(--s1) 0 var(--s3); min-height: 4.8em; }
+  .phone { width: 390px; height: 900px; overflow: hidden; border-radius: 28px; border: 1px solid var(--line); background: var(--paper); }
+
+  /* 같은 내용 */
+  .sec { padding: var(--s10) var(--s6); }
+  .sec h3 { font-family: var(--font-logo); font-weight: 400; font-size: var(--t-xl); margin: 0 0 var(--s5); line-height: 1.25; }
+  .item b { display: block; font-family: var(--font-logo); font-weight: 400; font-size: var(--t-md); margin-bottom: var(--s1); }
+  .item span { font-size: var(--t-sm); color: var(--ink-2); }
+  .assure { display: flex; gap: var(--s4); align-items: flex-start; }
+  .assure img { width: 44px; flex: none; }
+
+  /* A. 지금: 가는 밑줄 */
+  .a .care { background: var(--paper-2); }
+  .a .item { padding: var(--s4) 0; border-bottom: 1px solid var(--line); }
+  .a .item:last-child { border-bottom: 0; }
+
+  /* B. 선 없이 여백과 묶음 */
+  .b .care { background: var(--paper-2); }
+  .b .item + .item { margin-top: var(--s8); }
+  .b .faq .item b { color: var(--brown); }
+
+  /* C. 찢은 종이 쪽지 */
+  .c .care { background: var(--paper-2); }
+  .c .item { position: relative; background: var(--card); padding: var(--s4) var(--s5) var(--s5); margin-top: var(--s6); box-shadow: 0 1px 0 var(--shadow); }
+  .c .item::before { content: ''; position: absolute; left: 0; right: 0; top: -11px; height: 12px; background: var(--card); -webkit-mask: var(--m-torn) 0 0 / 100% 100% no-repeat; mask: var(--m-torn) 0 0 / 100% 100% no-repeat; }
+  .c .item:nth-child(odd) { transform: rotate(-0.6deg); }
+  .c .item:nth-child(even) { transform: rotate(0.5deg); }
+  .c .faq { background: var(--paper); }
+  .c .faq .item { background: var(--paper-2); }
+  .c .faq .item::before { background: var(--paper-2); }
+
+  /* D. 물결 손선 */
+  .d .care { background: var(--paper-2); }
+  .d .item { padding: var(--s4) 0 var(--s5); position: relative; }
+  .d .item:not(:last-child)::after { content: ''; position: absolute; left: 0; width: 72%; bottom: 0; height: 7px; background: var(--brown); opacity: .35; -webkit-mask: var(--m-torn-wave) 0 0 / 100% 100% no-repeat; mask: var(--m-torn-wave) 0 0 / 100% 100% no-repeat; }
+  .d .item:nth-child(even)::after { left: auto; right: 0; }
+
+  /* E. 바탕 번갈이 */
+  .e .sec { padding-left: 0; padding-right: 0; }
+  .e .sec h3 { padding: 0 var(--s6); }
+  .e .item { padding: var(--s5) var(--s6); }
+  .e .care .item:nth-child(even) { background: var(--paper-2); }
+  .e .care .item:nth-child(odd) { background: var(--sky); }
+  .e .faq .item:nth-child(even) { background: var(--paper-2); }
+  .e .faq .item:nth-child(odd) { background: var(--card); }
+</style>
+</head>
+<body>
+  <div class="top">
+    <h1>구분선 시안</h1>
+    <p>L11의 "부모님이 궁금해하는 것"과 "자주 묻는 질문"을 같은 글로 다섯 가지 나눔 방식에 넣어 비교. 모두 지금 있는 재료(종이색, 찢은 종이, 물결 종이)로만 만들었다.</p>
+  </div>
+  <div class="grid">
+    <div class="opt a">
+      <h2>A. 지금: 가는 밑줄</h2>
+      <p class="why">깔끔하지만 문서나 설정 화면 같다. 그림책 느낌이 없다.</p>
+      <div class="phone">
+        <div class="sec care"><h3>부모님이 궁금해하는 것</h3>
+          <div class="item assure"><img src="../assets/v2/home-ic-time.webp" alt=""><div><b>한 편이 2분이면 끝나요</b><span>화면 앞에 오래 두지 않아요.</span></div></div>
+          <div class="item assure"><img src="../assets/v2/home-ic-safe.webp" alt=""><div><b>아이 정보는 받지 않아요</b><span>부모님 계정만 만들면 돼요.</span></div></div>
+          <div class="item assure"><img src="../assets/v2/home-ic-grow.webp" alt=""><div><b>시험도 점수도 없어요</b><span>듣고 누르며 노는 게 전부예요.</span></div></div>
+        </div>
+        <div class="sec faq"><h3>자주 묻는 질문</h3>
+          <div class="item"><b>몇 살부터 할 수 있나요?</b><span>4~7세에 맞춰 만들었어요.</span></div>
+          <div class="item"><b>돈이 드나요?</b><span>EP01은 가입 없이 무료예요. 가입도 무료예요.</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="opt b">
+      <h2>B. 선 없이 여백만</h2>
+      <p class="why">가장 조용하다. 칸은 여백으로만 나눈다. 질문은 갈색 글자로 눈에 걸리게.</p>
+      <div class="phone">
+        <div class="sec care"><h3>부모님이 궁금해하는 것</h3>
+          <div class="item assure"><img src="../assets/v2/home-ic-time.webp" alt=""><div><b>한 편이 2분이면 끝나요</b><span>화면 앞에 오래 두지 않아요.</span></div></div>
+          <div class="item assure"><img src="../assets/v2/home-ic-safe.webp" alt=""><div><b>아이 정보는 받지 않아요</b><span>부모님 계정만 만들면 돼요.</span></div></div>
+          <div class="item assure"><img src="../assets/v2/home-ic-grow.webp" alt=""><div><b>시험도 점수도 없어요</b><span>듣고 누르며 노는 게 전부예요.</span></div></div>
+        </div>
+        <div class="sec faq"><h3>자주 묻는 질문</h3>
+          <div class="item"><b>몇 살부터 할 수 있나요?</b><span>4~7세에 맞춰 만들었어요.</span></div>
+          <div class="item"><b>돈이 드나요?</b><span>EP01은 가입 없이 무료예요. 가입도 무료예요.</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="opt c">
+      <h2>C. 찢은 종이 쪽지</h2>
+      <p class="why">하나하나가 찢어 붙인 쪽지. 이야기 화면의 찢은 종이와 같은 재료라 가장 "릴리랑"답다. 살짝 기울여 손으로 붙인 느낌.</p>
+      <div class="phone">
+        <div class="sec care"><h3>부모님이 궁금해하는 것</h3>
+          <div class="item assure"><img src="../assets/v2/home-ic-time.webp" alt=""><div><b>한 편이 2분이면 끝나요</b><span>화면 앞에 오래 두지 않아요.</span></div></div>
+          <div class="item assure"><img src="../assets/v2/home-ic-safe.webp" alt=""><div><b>아이 정보는 받지 않아요</b><span>부모님 계정만 만들면 돼요.</span></div></div>
+          <div class="item assure"><img src="../assets/v2/home-ic-grow.webp" alt=""><div><b>시험도 점수도 없어요</b><span>듣고 누르며 노는 게 전부예요.</span></div></div>
+        </div>
+        <div class="sec faq"><h3>자주 묻는 질문</h3>
+          <div class="item"><b>몇 살부터 할 수 있나요?</b><span>4~7세에 맞춰 만들었어요.</span></div>
+          <div class="item"><b>돈이 드나요?</b><span>EP01은 가입 없이 무료예요. 가입도 무료예요.</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="opt d">
+      <h2>D. 물결 손선</h2>
+      <p class="why">곧은 선 대신 짧은 물결 선을 좌우 번갈아. 손으로 그은 듯 가볍다.</p>
+      <div class="phone">
+        <div class="sec care"><h3>부모님이 궁금해하는 것</h3>
+          <div class="item assure"><img src="../assets/v2/home-ic-time.webp" alt=""><div><b>한 편이 2분이면 끝나요</b><span>화면 앞에 오래 두지 않아요.</span></div></div>
+          <div class="item assure"><img src="../assets/v2/home-ic-safe.webp" alt=""><div><b>아이 정보는 받지 않아요</b><span>부모님 계정만 만들면 돼요.</span></div></div>
+          <div class="item assure"><img src="../assets/v2/home-ic-grow.webp" alt=""><div><b>시험도 점수도 없어요</b><span>듣고 누르며 노는 게 전부예요.</span></div></div>
+        </div>
+        <div class="sec faq"><h3>자주 묻는 질문</h3>
+          <div class="item"><b>몇 살부터 할 수 있나요?</b><span>4~7세에 맞춰 만들었어요.</span></div>
+          <div class="item"><b>돈이 드나요?</b><span>EP01은 가입 없이 무료예요. 가입도 무료예요.</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="opt e">
+      <h2>E. 바탕색 번갈이</h2>
+      <p class="why">선 대신 줄마다 바탕색을 번갈아. 화면 끝까지 꽉 차서 시원하다. 색이 많아 보일 수 있다.</p>
+      <div class="phone">
+        <div class="sec care"><h3>부모님이 궁금해하는 것</h3>
+          <div class="item assure"><img src="../assets/v2/home-ic-time.webp" alt=""><div><b>한 편이 2분이면 끝나요</b><span>화면 앞에 오래 두지 않아요.</span></div></div>
+          <div class="item assure"><img src="../assets/v2/home-ic-safe.webp" alt=""><div><b>아이 정보는 받지 않아요</b><span>부모님 계정만 만들면 돼요.</span></div></div>
+          <div class="item assure"><img src="../assets/v2/home-ic-grow.webp" alt=""><div><b>시험도 점수도 없어요</b><span>듣고 누르며 노는 게 전부예요.</span></div></div>
+        </div>
+        <div class="sec faq"><h3>자주 묻는 질문</h3>
+          <div class="item"><b>몇 살부터 할 수 있나요?</b><span>4~7세에 맞춰 만들었어요.</span></div>
+          <div class="item"><b>돈이 드나요?</b><span>EP01은 가입 없이 무료예요. 가입도 무료예요.</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

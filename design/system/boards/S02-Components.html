@@ -1,0 +1,214 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>S02 부품</title>
+<link rel="stylesheet" href="../shared/tokens.css">
+<link rel="stylesheet" href="../shared/paper.css">
+<style>
+  body { padding: var(--s12) var(--s16); }
+  h1 { font-family: var(--font-logo); font-size: var(--t-2xl); color: var(--brown); font-weight: 400; margin: 0 0 var(--s2); line-height: 1.1; }
+  .lead { font-size: var(--t-md); color: var(--ink-2); margin: 0 0 var(--s12); max-width: 46em; }
+  .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--s8) var(--s10); }
+  .cell { border-top: 2px solid var(--brown); padding-top: var(--s4); }
+  .cell h2 { font-family: var(--font-logo); font-size: var(--t-lg); font-weight: 400; margin: 0; }
+  .cell .use { font-size: var(--t-sm); color: var(--ink-2); margin: var(--s1) 0 var(--s5); }
+  .demo { padding-bottom: var(--s4); min-height: 150px; display: flex; align-items: center; gap: var(--s5); flex-wrap: wrap; }
+  .wide { grid-column: span 2; }
+
+  /* 재생 단추 */
+  .big-play { position: relative; width: 96px; height: 96px; background: var(--touch); border-radius: 50%; border: 2.5px solid var(--brown); flex: none; }
+  .big-play::before { content: ''; position: absolute; left: -19%; top: -31%; width: 138%; height: 131%; background: url(../assets/btn-play.webp) center / contain no-repeat; }
+  .play-row { display: flex; align-items: center; gap: var(--s5); margin-top: var(--s5); }
+  .play-label { font-family: var(--font-logo); font-size: var(--t-lg); margin: 0; }
+  .play-sub { font-size: var(--t-xs); color: var(--ink-2); margin: 0; }
+
+  .cta { display: inline-flex; flex-direction: column; align-items: center; }
+  .cta-art { position: relative; display: block; width: 250px; aspect-ratio: 456 / 401; background: url(../assets/btn-sample-book.webp) center / contain no-repeat; }
+  .cta-art span { position: absolute; left: 22%; top: 55%; width: 56%; height: 16%; display: grid; place-items: center; font-family: var(--font-logo); font-size: 17px; color: var(--ink); white-space: nowrap; }
+  /* 부모 단추와 링크 */
+  .btn-parent { display: inline-flex; align-items: center; justify-content: center; min-height: var(--parent-target); padding: 0 var(--s6); border: 2px solid var(--teal); border-radius: var(--r-btn); color: var(--teal); font-family: var(--font-logo); font-size: var(--t-md); background: var(--card); }
+  .btn-parent.solid { background: var(--teal); color: var(--card); }
+  .link-quiet { color: var(--teal); font-size: var(--t-sm); border-bottom: 1px solid var(--teal-soft); padding-bottom: 2px; }
+  .stack { display: flex; flex-direction: column; gap: var(--s4); align-items: flex-start; }
+
+  /* 종이 띠 제목 */
+  .ribbon { display: grid; place-items: center; width: 280px; height: 48px; background: url(../assets/ribbon.webp) 0 0 / 100% 100% no-repeat; font-family: var(--font-logo); font-size: var(--t-lg); color: var(--brown); }
+  .sec-title { font-family: var(--font-logo); font-size: var(--t-xl); margin: 0; }
+  .sec-sub { font-size: var(--t-sm); color: var(--ink-2); margin: 0; }
+
+  /* 책 표지와 책장 */
+  .book { width: 104px; }
+  .cover { position: relative; }
+  .book .base { width: 100%; height: auto; display: block; }
+  .book .ep { position: absolute; left: 18%; top: 4%; width: 78%; height: 86%; object-fit: cover; object-position: center top; }
+  .book .lock { position: absolute; top: 6px; right: 6px; width: 20px; }
+  .book .free { position: absolute; left: 22%; bottom: 10px; font-size: var(--t-xs); background: var(--card); color: var(--teal); padding: 0 var(--s1); border-radius: 4px; }
+  .book p { font-size: var(--t-xs); color: var(--ink-2); text-align: center; margin: var(--s2) 0 0; }
+  .shelf { position: relative; width: 680px; }
+  .shelf .books { display: flex; gap: var(--s3); align-items: flex-end; padding: 0 var(--s6); position: relative; z-index: 1; }
+  .shelf .books .book { width: 72px; }
+  .shelf .board { display: block; width: 100%; height: 120px; object-fit: fill; margin-top: -10px; }
+  .biscuit { width: 60px; margin-left: auto; }
+
+  /* 3단계 */
+  .steps { display: flex; gap: var(--s4); align-items: flex-start; }
+  .step { width: 120px; text-align: center; }
+  .step .n { font-family: var(--font-en); color: var(--teal); font-size: var(--t-sm); }
+  .step .fr { width: 96px; height: 96px; margin: var(--s2) auto; -webkit-mask: var(--m-torn-round) center / 100% 100% no-repeat; mask: var(--m-torn-round) center / 100% 100% no-repeat; }
+  .step .fr img { width: 100%; height: 100%; object-fit: cover; }
+  .step b { display: block; font-family: var(--font-logo); font-weight: 400; font-size: var(--t-md); }
+  .step span { font-size: var(--t-xs); color: var(--ink-2); }
+
+  /* 부모 안심 줄 */
+  .assure { display: flex; gap: var(--s4); align-items: flex-start; max-width: 340px; }
+  .assure img { width: 48px; flex: none; }
+  .assure b { display: block; font-family: var(--font-logo); font-weight: 400; font-size: var(--t-md); }
+  .assure span { font-size: var(--t-sm); color: var(--ink-2); }
+
+  /* 질문 */
+  .faq { width: 100%; }
+  .faq div { padding: var(--s4) 0; border-bottom: 1px solid var(--line); }
+  .faq b { display: block; font-family: var(--font-logo); font-weight: 400; font-size: var(--t-md); }
+  .faq span { font-size: var(--t-sm); color: var(--ink-2); }
+
+  /* 바닥글 */
+  .foot { width: 100%; background: var(--paper-2); padding: var(--s5) var(--s6); border-radius: var(--r-card); font-size: var(--t-xs); color: var(--ink-2); }
+  .foot a { color: var(--ink-2); text-decoration: underline; }
+
+  /* 이야기 전용 */
+  .story-only { display: flex; gap: var(--s5); align-items: center; }
+  .story-only figure { margin: 0; text-align: center; font-size: var(--t-xs); color: var(--ink-2); }
+  .story-only img { height: 72px; display: block; margin: 0 auto var(--s1); }
+  .no { font-size: var(--t-sm); color: var(--ink); background: var(--card); border-left: 4px solid var(--coral); padding: var(--s3) var(--s4); border-radius: 0 var(--r-btn) var(--r-btn) 0; margin-top: var(--s4); }
+</style>
+</head>
+<body>
+  <h1>릴리랑 디자인 시스템 2. 부품</h1>
+  <p class="lead">홈과 이야기에서 이미 쓰는 부품을 모았다. 새 화면은 여기서 고르고, 없는 부품은 이 보드에 먼저 그린다. 단추와 빛살, 종이 띠, 아이콘은 손 SVG가 아니라 OpenAI로 그린 그림이다.</p>
+
+  <div class="grid">
+    <div class="cell">
+      <h2>맛보기 단추</h2>
+      <p class="use">홈과 랜딩의 첫 행동. 펼친 책 위로 노란 해가 뜨고, 리본에 실제 글자. 그림과 글 전체가 한 링크. 노랑은 한 화면에 이것 하나.</p>
+      <div class="demo">
+        <div class="cta"><span class="cta-art"><span>맛보기 바로 듣기</span></span><p class="play-sub">EP01 이 닦기, 2분 19초, 무료</p></div>
+      </div>
+    </div>
+    </div>
+    </div>
+
+    <div class="cell">
+      <h2>부모 단추와 조용한 링크</h2>
+      <p class="use">가입, 내 정보 같은 부모 행동. 높이 48 이상, 청록. 노랑을 쓰지 않는다.</p>
+      <div class="demo stack">
+        <span class="btn-parent solid">가입하고 7편 모두 보기</span>
+        <span class="btn-parent">부모님 계정으로 로그인</span>
+        <span class="link-quiet">가입하고 7편 모두 보기</span>
+      </div>
+    </div>
+
+    <div class="cell">
+      <h2>제목</h2>
+      <p class="use">섹션 제목은 Jua 28에 보조 한 줄. 종이 띠는 끝 카드처럼 이야기 안에서만.</p>
+      <div class="demo stack">
+        <div><p class="sec-title">릴리의 하루</p><p class="sec-sub">아침부터 밤까지, 하루 7권</p></div>
+        <span class="ribbon">오늘 모은 스티커</span>
+      </div>
+    </div>
+
+    <div class="cell">
+      <h2>책 표지</h2>
+      <p class="use">한 편 = 한 권. 무료는 청록 글자, 잠긴 편은 자물쇠 그림. 표지 글자는 12 이상.</p>
+      <div class="demo">
+        <div class="book"><div class="cover"><img class="base" src="../assets/home-book.webp" alt=""><img class="ep" src="../assets/thumb-ep01.webp" alt=""><span class="free">무료</span></div><p>이 닦기</p></div>
+        <div class="book"><div class="cover"><img class="base" src="../assets/home-book.webp" alt=""><img class="ep" src="../assets/thumb-ep02.webp" alt=""><img class="lock" src="../assets/brand-lock.webp" alt=""></div><p>일어나기</p></div>
+      </div>
+    </div>
+
+    <div class="cell wide">
+      <h2>책장</h2>
+      <p class="use">7편을 아침에서 밤 순서로. 끝에 비스킷. 휴대폰에서는 옆으로 넘긴다.</p>
+      <div class="demo">
+        <div class="shelf">
+          <div class="books">
+            <div class="book"><div class="cover"><img class="base" src="../assets/home-book.webp" alt=""><img class="ep" src="../assets/thumb-ep02.webp" alt=""><img class="lock" src="../assets/brand-lock.webp" alt=""></div></div>
+            <div class="book"><div class="cover"><img class="base" src="../assets/home-book.webp" alt=""><img class="ep" src="../assets/thumb-ep03.webp" alt=""><img class="lock" src="../assets/brand-lock.webp" alt=""></div></div>
+            <div class="book"><div class="cover"><img class="base" src="../assets/home-book.webp" alt=""><img class="ep" src="../assets/thumb-ep04.webp" alt=""><img class="lock" src="../assets/brand-lock.webp" alt=""></div></div>
+            <div class="book"><div class="cover"><img class="base" src="../assets/home-book.webp" alt=""><img class="ep" src="../assets/thumb-ep05.webp" alt=""><img class="lock" src="../assets/brand-lock.webp" alt=""></div></div>
+            <div class="book"><div class="cover"><img class="base" src="../assets/home-book.webp" alt=""><img class="ep" src="../assets/thumb-ep01.webp" alt=""><span class="free">무료</span></div></div>
+            <div class="book"><div class="cover"><img class="base" src="../assets/home-book.webp" alt=""><img class="ep" src="../assets/thumb-ep06.webp" alt=""><img class="lock" src="../assets/brand-lock.webp" alt=""></div></div>
+            <div class="book"><div class="cover"><img class="base" src="../assets/home-book.webp" alt=""><img class="ep" src="../assets/thumb-ep07.webp" alt=""><img class="lock" src="../assets/brand-lock.webp" alt=""></div></div>
+            <img class="biscuit" src="../assets/home-biscuit.webp" alt="">
+          </div>
+          <img class="board" src="../assets/home-shelf.webp" alt="">
+        </div>
+      </div>
+    </div>
+
+    <div class="cell">
+      <h2>세 단계</h2>
+      <p class="use">정말 순서가 있는 것에만 번호. 그림은 둥글게 찢은 액자.</p>
+      <div class="demo">
+        <div class="steps">
+          <div class="step"><span class="n">1</span><div class="fr"><img src="../assets/home-how-listen.webp" alt=""></div><b>들어요</b><span>이야기를 함께 들어요</span></div>
+          <div class="step"><span class="n">2</span><div class="fr"><img src="../assets/home-how-tap.webp" alt=""></div><b>눌러요</b><span>릴리가 기다리면 톡</span></div>
+          <div class="step"><span class="n">3</span><div class="fr"><img src="../assets/home-how-say.webp" alt=""></div><b>말해요</b><span>생활에서 한 번 더</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="cell">
+      <h2>부모 안심 줄</h2>
+      <p class="use">걱정 하나에 사실 한 줄. 아이콘은 OpenAI 그림, 굵은 제목은 Jua.</p>
+      <div class="demo stack">
+        <div class="assure"><img src="../assets/home-ic-time.webp" alt=""><div><b>하루 2분이면 충분해요</b><span>자주 짧게 듣는 게 더 좋아요.</span></div></div>
+        <div class="assure"><img src="../assets/home-ic-safe.webp" alt=""><div><b>아이 정보는 받지 않아요</b><span>부모님 계정만 만들면 됩니다.</span></div></div>
+      </div>
+    </div>
+
+    <div class="cell">
+      <h2>자주 묻는 질문</h2>
+      <p class="use">펼침 없이 다 보이게. 질문 Jua 16, 답 14.</p>
+      <div class="demo">
+        <div class="faq">
+          <div><b>몇 살부터 할 수 있나요?</b><span>4~7세가 가장 잘 맞아요.</span></div>
+          <div><b>무료인가요?</b><span>EP01은 무료로 들을 수 있어요.</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="cell">
+      <h2>바닥글</h2>
+      <p class="use">부모 브랜드와 개인정보처리방침. 종이 그늘 위 작은 글자.</p>
+      <div class="demo">
+        <div class="foot"><a>개인정보처리방침</a><br>매일 외국어 읽기가 만들어요</div>
+      </div>
+    </div>
+
+    <div class="cell wide">
+      <h2>이야기 안에서만 쓰는 것</h2>
+      <p class="use">홈과 랜딩에서는 쓰지 않는다. 랜딩에서 보여 줄 때는 실제 장면 캡처로.</p>
+      <div class="demo">
+        <div class="story-only">
+          <figure><img src="../assets/btn-play.webp" alt="">둥근 재생 단추</figure>
+          <figure><img src="../assets/hand-tap.webp" alt="">손 힌트</figure>
+          <figure><img src="../assets/btn-said.webp" alt="">말했어요 단추</figure>
+          <figure><img src="../assets/btn-again.webp" alt="">한 번 더</figure>
+          <figure><img src="../assets/sticker-spot.webp" alt="">스티커 자리</figure>
+          <figure><img src="../assets/sparkle.webp" alt="">반짝</figure>
+        </div>
+      </div>
+    </div>
+
+    <div class="cell">
+      <h2>쓰지 않는 것</h2>
+      <p class="use">P9과 랜딩 대원칙 L3, L4.</p>
+      <div class="demo">
+        <p class="no">영어 대문자 꼬리표, 알약 태그 묶음, 같은 둥근 카드 반복, 장식 그라디언트, 이모지, 가운데점, 지어낸 후기와 별점, 시간 제한 문구, 두 번째 노란 단추.</p>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

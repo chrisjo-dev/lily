@@ -1,0 +1,604 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=390, initial-scale=1.0">
+  <title>Brush, Brush, Brush! — 매일 외국어 읽기</title>
+  <link rel="stylesheet" href="../shared/tokens.css">
+  <style>
+    body {
+      background: var(--bg);
+      width: 390px;
+      max-width: 390px;
+      margin: 0 auto;
+      overflow-x: hidden;
+    }
+
+    /* ── 상단 바 ── */
+    .topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 var(--s5);
+      height: 52px;
+      background: var(--card);
+      border-bottom: 1px solid var(--line);
+      position: sticky;
+      top: 0;
+      z-index: 20;
+    }
+    .topbar-brand {
+      font-family: var(--round);
+      font-size: 15px;
+      color: var(--ink);
+      text-decoration: none;
+    }
+    .topbar-links {
+      display: flex;
+      gap: var(--s5);
+    }
+    .topbar-links a {
+      font-size: 13px;
+      color: var(--sub);
+      text-decoration: none;
+    }
+
+    /* ── 그림책 표지: 전폭 일러스트 ── */
+    .hero-wrap {
+      position: relative;
+      background: var(--night);
+      width: 100%;
+      overflow: hidden;
+    }
+    .hero-img {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+    /* 별 장식 (인라인 SVG 위에 겹치는 오버레이 없이, 대신 title block에서) */
+
+    /* ── 제목 블록: 그림책 표지 아래 제목 페이지 ── */
+    .title-block {
+      background: var(--card);
+      padding: var(--s8) var(--s6) var(--s6);
+      text-align: center;
+      border-bottom: 1px solid var(--line);
+    }
+    .ep-series {
+      font-size: 11px;
+      color: var(--muted);
+      letter-spacing: 0.08em;
+      margin-bottom: var(--s3);
+      font-weight: 600;
+    }
+    .ep-title {
+      font-family: var(--round);
+      font-size: 30px;
+      color: var(--ink);
+      line-height: 1.2;
+      margin: 0 0 var(--s4);
+    }
+    .ep-intro {
+      font-size: 15px;
+      color: var(--sub);
+      line-height: 1.65;
+      max-width: 300px;
+      margin: 0 auto var(--s5);
+    }
+    .ep-chips {
+      display: inline-flex;
+      gap: var(--s2);
+      justify-content: center;
+    }
+    .chip {
+      font-size: 12px;
+      color: var(--blue);
+      background: var(--blue-soft);
+      border-radius: var(--r-chip);
+      padding: 4px 12px;
+      font-weight: 600;
+    }
+
+    /* ── 플레이어: 책의 낭독 표시줄 ── */
+    .player-wrap {
+      background: var(--card);
+    }
+
+    /* 현재 낭독 줄: 그림책 텍스트처럼 크게 */
+    .reading-line {
+      padding: var(--s5) var(--s6) 0;
+    }
+    .reading-label {
+      font-size: 11px;
+      color: var(--muted);
+      margin-bottom: var(--s2);
+      font-weight: 600;
+      letter-spacing: 0.05em;
+    }
+    .reading-text {
+      font-family: var(--round);
+      font-size: 21px;
+      line-height: 1.45;
+      color: var(--ink);
+    }
+    .reading-text mark {
+      background: var(--hl);
+      border-radius: 4px;
+      padding: 1px 5px;
+      color: var(--ink);
+    }
+
+    /* 플레이어 컨트롤 줄 */
+    .player-controls {
+      display: flex;
+      align-items: center;
+      gap: var(--s4);
+      padding: var(--s4) var(--s6) var(--s5);
+    }
+    .play-btn {
+      flex-shrink: 0;
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      background: var(--blue);
+      border: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .play-btn:active {
+      background: var(--blue-press);
+    }
+    .player-track {
+      flex: 1;
+      min-width: 0;
+    }
+    .progress-row {
+      display: flex;
+      align-items: center;
+      gap: var(--s2);
+      margin-bottom: var(--s2);
+    }
+    .time-current {
+      font-size: 12px;
+      color: var(--blue);
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+    .progress-bg {
+      flex: 1;
+      height: 4px;
+      background: var(--line);
+      border-radius: 2px;
+      position: relative;
+    }
+    .progress-fill {
+      position: absolute;
+      left: 0;
+      top: 0;
+      height: 100%;
+      width: 46%;
+      background: var(--blue);
+      border-radius: 2px;
+    }
+    .time-total {
+      font-size: 12px;
+      color: var(--muted);
+      flex-shrink: 0;
+    }
+    .tool-row {
+      display: flex;
+      gap: var(--s2);
+    }
+    .tool-btn {
+      font-size: 12px;
+      color: var(--sub);
+      background: var(--bg);
+      border: none;
+      border-radius: var(--r-chip);
+      padding: 6px 12px;
+      cursor: pointer;
+      font-family: var(--font);
+      font-weight: 500;
+    }
+
+    /* ── 오늘의 단어: 가로 그림책 카드 3장 ── */
+    .words-section {
+      padding: var(--s6) var(--s3);
+      background: var(--bg);
+    }
+    .section-head {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--sub);
+      letter-spacing: 0.04em;
+      margin-bottom: var(--s4);
+      padding: 0 var(--s2);
+    }
+    .word-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: var(--s3);
+    }
+    .word-card {
+      background: var(--card);
+      border-radius: var(--r-card);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: var(--s4) var(--s2) var(--s3);
+      cursor: pointer;
+      border: 2.5px solid transparent;
+      transition: border-color 0.12s, box-shadow 0.12s;
+      min-width: 0;
+      overflow: hidden;
+    }
+    .word-card.now {
+      border-color: var(--blue);
+    }
+    .word-icon {
+      width: 80px;
+      max-width: 100%;
+      height: 66px;
+      margin-bottom: var(--s3);
+    }
+    .word-en {
+      font-family: var(--round);
+      font-size: 11px;
+      color: var(--ink);
+      text-align: center;
+      line-height: 1.35;
+      margin-bottom: 2px;
+      word-break: break-word;
+      overflow-wrap: anywhere;
+      width: 100%;
+    }
+    .word-ko {
+      font-size: 10px;
+      color: var(--sub);
+      text-align: center;
+      line-height: 1.3;
+    }
+    .word-play {
+      margin-top: var(--s2);
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      background: var(--blue-soft);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .word-play svg {
+      fill: var(--blue);
+    }
+
+    /* ── 학습지 ── */
+    .ws-card {
+      margin: 0 var(--s4) var(--s4);
+      background: var(--card);
+      border-radius: var(--r-card);
+      overflow: hidden;
+    }
+    .ws-thumb {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+      object-position: top;
+      display: block;
+    }
+    .ws-body {
+      padding: var(--s5);
+    }
+    .ws-title {
+      font-family: var(--round);
+      font-size: 17px;
+      color: var(--ink);
+      margin-bottom: var(--s3);
+    }
+    .ws-list {
+      list-style: none;
+      padding: 0;
+      margin: 0 0 var(--s5);
+    }
+    .ws-list li {
+      font-size: 14px;
+      color: var(--sub);
+      padding: 5px 0;
+      padding-left: 16px;
+      position: relative;
+      line-height: 1.5;
+    }
+    .ws-list li::before {
+      content: "";
+      position: absolute;
+      left: 2px;
+      top: 12px;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--blue);
+    }
+    .dl-btn {
+      display: block;
+      width: 100%;
+      padding: 15px;
+      background: var(--blue);
+      color: white;
+      border: none;
+      border-radius: var(--r-btn);
+      font-size: 15px;
+      font-family: var(--font);
+      font-weight: 600;
+      cursor: pointer;
+      text-align: center;
+      text-decoration: none;
+    }
+
+    /* ── 부모님께 ── */
+    .tips-card {
+      margin: 0 var(--s4) var(--s4);
+      background: var(--sun-soft);
+      border-radius: var(--r-card);
+      padding: var(--s5);
+      border-left: 4px solid var(--sun);
+    }
+    .tips-head {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--sub);
+      margin-bottom: var(--s4);
+      letter-spacing: 0.03em;
+    }
+    .tips-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    .tips-list li {
+      font-size: 14px;
+      color: var(--ink);
+      line-height: 1.65;
+      margin-bottom: var(--s3);
+      padding-left: 18px;
+      position: relative;
+    }
+    .tips-list li::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 9px;
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--sun);
+    }
+    .tips-list li:last-child {
+      margin-bottom: 0;
+    }
+
+    /* ── 대본 보기 ── */
+    .script-wrap {
+      margin: 0 var(--s4) var(--s4);
+    }
+    details.script {
+      border-radius: var(--r-card);
+      overflow: hidden;
+    }
+    details.script summary {
+      background: var(--card);
+      padding: var(--s4) var(--s5);
+      font-size: 14px;
+      color: var(--sub);
+      cursor: pointer;
+      list-style: none;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-radius: var(--r-card);
+    }
+    details.script summary::-webkit-details-marker { display: none; }
+    details.script[open] summary {
+      border-radius: var(--r-card) var(--r-card) 0 0;
+      border-bottom: 1px solid var(--line);
+    }
+    .script-chevron {
+      flex-shrink: 0;
+    }
+    details.script[open] .script-chevron {
+      transform: rotate(180deg);
+    }
+    .script-body {
+      background: var(--card);
+      padding: var(--s5) var(--s5) var(--s6);
+      border-radius: 0 0 var(--r-card) var(--r-card);
+      font-size: 14px;
+      color: var(--sub);
+      line-height: 1.9;
+    }
+    .script-line-en {
+      color: var(--ink);
+      font-weight: 600;
+    }
+
+    /* ── 푸터 ── */
+    .footer {
+      border-top: 1px solid var(--line);
+      padding: var(--s6) var(--s6);
+      text-align: center;
+      margin-top: var(--s4);
+    }
+    .footer a {
+      font-size: 13px;
+      color: var(--muted);
+      text-decoration: none;
+      margin: 0 var(--s3);
+    }
+    .footer-copy {
+      font-size: 12px;
+      color: var(--muted);
+      margin-top: var(--s3);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- 상단 바 -->
+  <header class="topbar">
+    <a class="topbar-brand" href="#">매일 외국어 읽기</a>
+    <nav class="topbar-links">
+      <a href="#">오늘의 읽기</a>
+      <a href="#">메일로 받기</a>
+    </nav>
+  </header>
+
+  <!-- 전폭 그림책 일러스트 -->
+  <div class="hero-wrap">
+    <img class="hero-img"
+         src="../assets/lily-scene.svg"
+         alt="릴리가 칫솔을 들고 이를 닦고 있어요. 강아지 비스킷도 옆에 있어요."
+         width="390">
+  </div>
+
+  <!-- 제목 페이지 -->
+  <div class="title-block">
+    <p class="ep-series">EP 03, 아이와 함께 2분 영어 듣기</p>
+    <h1 class="ep-title">Brush, Brush, Brush!</h1>
+    <p class="ep-intro">자기 전 이 닦기 시간이에요.<br>릴리랑 같이 듣고, 같이 말해 봐요.</p>
+    <div class="ep-chips">
+      <span class="chip">5~8세</span>
+      <span class="chip">2분</span>
+    </div>
+  </div>
+
+  <!-- 플레이어 -->
+  <div class="player-wrap">
+    <!-- 낭독 줄: 그림책 문장처럼 크게 -->
+    <div class="reading-line">
+      <div class="reading-label">지금 읽는 문장</div>
+      <p class="reading-text">와! <mark>Bubbles!</mark> 거품이야!<br>Bubbles!</p>
+    </div>
+    <!-- 컨트롤 -->
+    <div class="player-controls">
+      <button class="play-btn" aria-label="일시정지">
+        <!-- pause icon -->
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="white" xmlns="http://www.w3.org/2000/svg">
+          <rect x="6" y="4" width="4" height="16" rx="1.5"/>
+          <rect x="14" y="4" width="4" height="16" rx="1.5"/>
+        </svg>
+      </button>
+      <div class="player-track">
+        <div class="progress-row">
+          <span class="time-current">1:08</span>
+          <div class="progress-bg">
+            <div class="progress-fill"></div>
+          </div>
+          <span class="time-total">2:19</span>
+        </div>
+        <div class="tool-row">
+          <button class="tool-btn">3번 이어 듣기</button>
+          <button class="tool-btn">조금 천천히</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 오늘의 단어 -->
+  <div class="words-section">
+    <p class="section-head">오늘의 단어</p>
+    <div class="word-grid">
+
+      <div class="word-card" role="button" tabindex="0" aria-label="brush my teeth 듣기">
+        <img class="word-icon" src="../assets/word-brush.svg" alt="칫솔 그림">
+        <span class="word-en">brush<br>my teeth</span>
+        <span class="word-ko">이를 닦아요</span>
+        <div class="word-play" aria-hidden="true">
+          <svg width="10" height="12" viewBox="0 0 10 12">
+            <polygon points="0,0 10,6 0,12"/>
+          </svg>
+        </div>
+      </div>
+
+      <div class="word-card now" role="button" tabindex="0" aria-label="bubbles 듣기">
+        <img class="word-icon" src="../assets/word-bubbles.svg" alt="거품 그림">
+        <span class="word-en">bubbles</span>
+        <span class="word-ko">거품</span>
+        <div class="word-play" aria-hidden="true">
+          <svg width="10" height="12" viewBox="0 0 10 12">
+            <polygon points="0,0 10,6 0,12"/>
+          </svg>
+        </div>
+      </div>
+
+      <div class="word-card" role="button" tabindex="0" aria-label="all clean 듣기">
+        <img class="word-icon" src="../assets/word-clean.svg" alt="깨끗한 이 그림">
+        <span class="word-en">all clean</span>
+        <span class="word-ko">깨끗해</span>
+        <div class="word-play" aria-hidden="true">
+          <svg width="10" height="12" viewBox="0 0 10 12">
+            <polygon points="0,0 10,6 0,12"/>
+          </svg>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- 학습지 -->
+  <div class="ws-card">
+    <img class="ws-thumb" src="../assets/worksheet.png" alt="학습지 미리보기">
+    <div class="ws-body">
+      <h2 class="ws-title">학습지</h2>
+      <ul class="ws-list">
+        <li>그림에서 칫솔 찾기</li>
+        <li>오려서 노는 단어 카드</li>
+        <li>말할 때마다 스티커</li>
+        <li>릴리 색칠하기</li>
+      </ul>
+      <a class="dl-btn" href="#" role="button">학습지 받기 (A4)</a>
+    </div>
+  </div>
+
+  <!-- 부모님께 -->
+  <div class="tips-card" role="complementary" aria-label="부모님 활용 팁">
+    <p class="tips-head">부모님께</p>
+    <ul class="tips-list">
+      <li>여러 번 들려주세요. 처음엔 몰라도 괜찮아요.</li>
+      <li>실제 양치 시간에 "Brush my teeth!" 한 번만 말해 주세요.</li>
+      <li>따라 하지 않아도 충분히 잘하고 있는 거예요.</li>
+    </ul>
+  </div>
+
+  <!-- 대본 보기 (접힘) -->
+  <div class="script-wrap">
+    <details class="script">
+      <summary>
+        <span>대본 보기 (부모님용)</span>
+        <svg class="script-chevron" width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="#8b95a1" stroke-width="2" stroke-linecap="round">
+          <path d="M4 6l4 4 4-4"/>
+        </svg>
+      </summary>
+      <div class="script-body">
+        <p><span class="script-line-en">Lily: Time to brush my teeth!</span><br>릴리: 이 닦을 시간이에요!</p>
+        <p><span class="script-line-en">Biscuit: Woof woof!</span><br>비스킷: 왈왈!</p>
+        <p><span class="script-line-en">Lily: Brush, brush, brush!</span><br>릴리: 닦고, 닦고, 닦아요!</p>
+        <p><span class="script-line-en">Lily: Oh! Bubbles! Bubbles!</span><br>릴리: 와! 거품이야! 거품!</p>
+        <p><span class="script-line-en">Lily: All clean! All clean!</span><br>릴리: 깨끗해요! 깨끗해요!</p>
+        <p><span class="script-line-en">Lily: Good night, Biscuit!</span><br>릴리: 잘 자, 비스킷!</p>
+      </div>
+    </details>
+  </div>
+
+  <!-- 푸터 -->
+  <footer class="footer">
+    <div>
+      <a href="#">이용 안내</a>
+      <a href="#">개인정보처리방침</a>
+      <a href="#">문의</a>
+    </div>
+    <p class="footer-copy">매일 외국어 읽기</p>
+  </footer>
+
+</body>
+</html>

@@ -1,0 +1,485 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="color-scheme" content="light only">
+<meta name="robots" content="noindex, nofollow">
+<!-- 인라인 코드와 style 속성 없이 돈다. supabase 주소는 가입 레인과 함께 메인이 바꿈 -->
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.117.3/dist/umd/supabase.js; style-src 'self' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; media-src 'self'; connect-src 'self' https://supabase-project-ref.invalid; base-uri 'self'; object-src 'none'">
+<title>Rub-a-Dub, Bath Time! | 릴리랑 하루 5분 영어 그림책</title>
+<meta name="description" content="아이와 함께 하루 5분 영어 듣기. 저녁 목욕 시간, 오늘의 단어 3개.">
+<link rel="icon" href="/brand/favicon.ico" sizes="any"><link rel="icon" href="/brand/favicon-32.png" type="image/png" sizes="32x32"><link rel="icon" href="/brand/favicon-16.png" type="image/png" sizes="16x16"><link rel="icon" href="/brand/icon-192.png" type="image/png" sizes="192x192"><link rel="apple-touch-icon" href="/brand/apple-touch-icon.png">
+<meta property="og:type" content="website"><meta property="og:site_name" content="릴리랑"><meta property="og:locale" content="ko_KR">
+<link rel="canonical" href="https://lilyrang.co.kr/ep06/">
+<meta property="og:url" content="https://lilyrang.co.kr/ep06/"><meta property="og:title" content="Rub-a-Dub, Bath Time! | 릴리랑"><meta property="og:description" content="저녁 목욕 시간, 릴리랑 같이 듣고 누르며 노는 영어 그림책. 4~7세 아이와 부모님.">
+<!-- OG 그림: tools/build_og_episodes.py가 만든 ep06/og.jpg -->
+<meta property="og:image" content="https://lilyrang.co.kr/ep06/og.jpg"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta property="og:image:alt" content="릴리랑 Rub-a-Dub, Bath Time! 그림책 표지 그림">
+<meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="Rub-a-Dub, Bath Time! | 릴리랑"><meta name="twitter:description" content="저녁 목욕 시간, 릴리랑 같이 듣고 누르며 노는 영어 그림책. 4~7세 아이와 부모님."><meta name="twitter:image" content="https://lilyrang.co.kr/ep06/og.jpg">
+
+<link rel="preload" as="image" href="art/bg-0-intro.webp" fetchpriority="high">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link id="lily-fonts" rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Andika:wght@400;700&family=Gowun+Batang&family=Gowun+Dodum&family=Jua&family=Gaegu:wght@700&display=swap">
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Andika:wght@400;700&family=Gowun+Batang&family=Gowun+Dodum&family=Jua&family=Gaegu:wght@700&display=swap"></noscript>
+<link rel="stylesheet" href="/src/shared/ui/tokens.css">
+<link rel="stylesheet" href="/src/widgets/player/engine.css">
+<!-- 가입과 맛보기(레인 D): 설정, 로그인, 잠금. 없으면 gate-default.js가 항상 허용 -->
+<script src="/src/shared/config/lily-config.js"></script>
+<script src="/src/shared/api/supabase.js"></script>
+<script src="/src/entities/session/session.js"></script>
+<script src="/src/entities/episode/catalog.js"></script>
+<script src="/src/features/gate/gate.js"></script>
+<script src="/src/features/gate/gate-default.js"></script>
+<script src="/src/widgets/player/engine.js"></script>
+<script src="/src/widgets/player/interactions/find.js"></script>
+<script src="/src/widgets/player/interactions/pop.js"></script>
+<script src="/src/widgets/player/interactions/say-sticker.js"></script>
+<script src="/src/widgets/player/interactions/scrub.js"></script>
+<script src="/src/widgets/player/interactions/tap-sparkle.js"></script>
+</head>
+<body>
+<div class="stage" id="stage">
+  <!-- 그림은 art/의 배경 한 장(1024x1536) + 누르는 레이어. 좌표는 그림 픽셀의 절반(viewBox 512x768, 그림도 512x768로 놓음).
+       엔진의 스티커(66), 반짝 별, 거품 글자, 손 모양 크기가 400~500 폭 좌표에 맞춰져 있어서 EP01과 같은 눈금을 씀 -->
+  <!-- 처음: 꼬질꼬질한 릴리가 욕조에 물을 받음 (아래 욕조 앞판은 큰 재생 단추 자리) -->
+  <svg class="scene" id="sc0" viewBox="0 0 512 768" preserveAspectRatio="xMidYMid slice">
+    <image href="art/bg-0-intro.webp" width="512" height="768"/>
+  </svg>
+
+  <!-- 장면 1: 거품 터뜨리기 (욕조 위 빈 공간에 거품 다섯 개, EP01 거품 그림) -->
+  <svg class="scene" id="sc1" viewBox="0 0 512 768" preserveAspectRatio="xMidYMid slice" hidden>
+    <image data-src="art/bg-1-bubbles.webp" width="512" height="768"/>
+    <g id="bubs"></g>
+    <g class="hand" transform="translate(250 220) scale(1.3)"><g><use href="#hand-shape"/></g></g>
+  </svg>
+
+  <!-- 장면 2: 비스킷 풍덩 (누를 것 없음, 아래 욕조 앞에 글자) -->
+  <svg class="scene" id="sc2" viewBox="0 0 512 768" preserveAspectRatio="xMidYMid slice" hidden>
+    <image data-src="art/bg-2-jump.webp" width="512" height="768"/>
+    <text class="fS" opacity=".8" x="258" y="623" font-size="50" text-anchor="middle">Splash!</text>
+    <text class="fA" x="256" y="620" font-size="48" text-anchor="middle">Splash!</text>
+  </svg>
+
+  <!-- 장면 3: 문질문질 (비스킷 귀, 머리, 몸통의 진흙을 스펀지로. 스펀지 처음 자리는 오른쪽 아래 욕조 앞) -->
+  <svg class="scene" id="sc3" viewBox="0 0 512 768" preserveAspectRatio="xMidYMid slice" hidden>
+    <image data-src="art/bg-3-scrub.webp" width="512" height="768"/>
+    <g id="mud"></g>
+    <g id="floats"></g>
+    <g class="tgt" id="t-scrub" role="button" tabindex="0" aria-label="비스킷 씻기, 진흙을 문질러 보세요">
+      <g id="sponge" transform="translate(424 620)">
+        <circle class="halo" cx="0" cy="0" r="54"/>
+        <g class="pulse"><image data-src="art/L-sponge.webp" x="-52" y="-44" width="104" height="88"/></g>
+      </g>
+      <rect class="hit scrub" x="0" y="150" width="512" height="560"/>
+    </g>
+  </svg>
+
+  <!-- 장면 4: 아주 깨끗해 (안긴 비스킷을 누르면 반짝) -->
+  <svg class="scene" id="sc4" viewBox="0 0 512 768" preserveAspectRatio="xMidYMid slice" hidden>
+    <image data-src="art/bg-4-clean.webp" width="512" height="768"/>
+    <g class="tgt" id="t-biscuit" role="button" tabindex="0" aria-label="깨끗해진 비스킷 누르기">
+      <ellipse class="halo" cx="290" cy="350" rx="78" ry="66"/>
+      <ellipse class="hit" cx="290" cy="360" rx="92" ry="82"/>
+    </g>
+    <g id="sparks"></g>
+  </svg>
+
+  <!-- 장면 5: 친구 차례 (위 오른쪽: 말풍선, 아래 민트 판: 말했어요 단추와 스티커판) -->
+  <svg class="scene" id="sc5" viewBox="0 0 512 768" preserveAspectRatio="xMidYMid slice" hidden>
+    <image data-src="art/bg-5-turn.webp" width="512" height="768"/>
+    <rect class="fS sO" stroke-width="2" x="324" y="236" width="164" height="72" rx="22"/>
+    <path class="fS" d="M328 252 l-34 -14 l36 36 z"/>
+    <text class="fA" id="say-word" x="406" y="280" font-size="21" text-anchor="middle">Your turn!</text>
+    <g class="tgt" id="t-say" role="button" tabindex="0" aria-label="말했어요">
+      <circle class="halo" cx="112" cy="560" r="78"/>
+      <g class="pulse">
+        <circle class="fT sE" stroke-width="3" cx="112" cy="560" r="64"/>
+        <text class="kr fI" x="112" y="558" font-size="23" text-anchor="middle">말했어요</text>
+        <text class="fI" x="112" y="584" font-size="15" text-anchor="middle">I said it!</text>
+      </g>
+    </g>
+    <g class="hand" transform="translate(160 618) scale(1.4)"><g><use href="#hand-shape"/></g></g>
+    <!-- 스티커판: 엔진 스티커(66)를 1.2배로 보이게 판 전체를 키움. from은 이 판 좌표의 단추 중심 -->
+    <g transform="translate(218 492) scale(1.2)">
+      <text class="kr fU" x="107" y="0" font-size="12" text-anchor="middle">오늘의 스티커</text>
+      <g class="fN sU" stroke-width="2" stroke-dasharray="6 4">
+        <rect x="0" y="12" width="62" height="62" rx="31"/><rect x="76" y="12" width="62" height="62" rx="31"/><rect x="152" y="12" width="62" height="62" rx="31"/>
+      </g>
+      <g id="stickers"></g>
+      <g class="fU" font-size="11" text-anchor="middle"><text x="31" y="90">bath time</text><text x="107" y="90">rub-a-dub</text><text x="183" y="90">so clean</text></g>
+    </g>
+  </svg>
+
+  <!-- 장면 6: 물 빼기 (욕조 바닥 배수구 위의 노란 마개. 누르면 사라져 배수구가 보임, 끝 동작) -->
+  <svg class="scene" id="sc6" viewBox="0 0 512 768" preserveAspectRatio="xMidYMid slice" hidden>
+    <image data-src="art/bg-6-drain.webp" width="512" height="768"/>
+    <g class="tgt" id="t-plug" role="button" tabindex="0" aria-label="욕조 마개 누르기">
+      <circle class="halo" cx="330" cy="664" r="52"/>
+      <g class="pulse" id="plug"><image class="vanish-on-done" data-src="art/L-plug.webp" x="285" y="621" width="138" height="92"/></g>
+      <circle class="hit" cx="338" cy="664" r="60"/>
+    </g>
+    <g class="hand" transform="translate(392 628) scale(1.3)"><g><use href="#hand-shape"/></g></g>
+  </svg>
+</div>
+
+<!-- 편 설정(JSON). 형식은 /src/entities/episode/README.md. 시각은 초(음악 도입 2.5초 포함), [[...]]는 오늘의 단어, 좌표는 장면 viewBox(그림 픽셀의 절반) -->
+<script type="application/json" id="lily-episode">
+{
+  "id": "ep06",
+  "title": "Rub-a-Dub, Bath Time!",
+  "audio": "ep06.mp3",
+  "duration": 146,
+  "offset": 2.5,
+  "free": false,
+  "previewUntil": 37.88,
+  "lines": [
+    [
+      2.5,
+      5.21,
+      "Hello, hello! It's Lily time!"
+    ],
+    [
+      5.61,
+      10.16,
+      "Hi, friend! 나는 릴리야. 오늘 하루 신나게 놀았어!"
+    ],
+    [
+      12.56,
+      18.9,
+      "그래서 손도 발도 꼬질꼬질. 친구는 오늘 뭐 하고 놀았어?"
+    ],
+    [
+      21.3,
+      26.28,
+      "이제 목욕하자! [[Bath time]]. 목욕 시간. [[Bath time]]!"
+    ],
+    [
+      28.48,
+      37.88,
+      "따뜻한 물에 풍덩! 거품이 몽글몽글. 친구가 거품을 콕콕 터뜨려 줄래?"
+    ],
+    [
+      40.28,
+      42.18,
+      "퐁, 퐁, 퐁! [[Bath time]]은 정말 좋아!"
+    ],
+    [
+      42.58,
+      49.78,
+      "어? 누가 뛰어온다! 비스킷이다! 진흙투성이 비스킷이 욕조로 풍덩!"
+    ],
+    [
+      51.98,
+      56.2,
+      "비스킷! 너도 [[bath time]]이야? 멍멍!"
+    ],
+    [
+      56.6,
+      61.99,
+      "그럼 비스킷도 씻자. [[Rub-a-dub]]. 문질문질. [[Rub-a-dub]]!"
+    ],
+    [
+      62.39,
+      67.64,
+      "친구가 스펀지로 비스킷을 문질러 줄래? [[Rub-a-dub]], [[rub-a-dub]]!"
+    ],
+    [
+      71.04,
+      79.3,
+      "귀도, 발도, 꼬리도! [[Rub-a-dub]]-dub! 비스킷이 간지럽대. 멍!"
+    ],
+    [
+      79.7,
+      85.83,
+      "다 됐다! [[So clean]]. 아주 깨끗해. [[So clean]]!"
+    ],
+    [
+      86.23,
+      94.12,
+      "비스킷도 [[so clean]], 나도 [[so clean]]! 비스킷을 톡 눌러 봐. 반짝반짝!"
+    ],
+    [
+      96.52,
+      103.37,
+      "이제 친구 차례야! 내가 말하면 따라 해 봐. 말할 때마다 스티커가 하나씩 붙어!"
+    ],
+    [
+      103.77,
+      104.75,
+      "[[Bath time]]."
+    ],
+    [
+      107.15,
+      108.16,
+      "[[Rub-a-dub]]."
+    ],
+    [
+      110.56,
+      111.97,
+      "[[So clean]]!"
+    ],
+    [
+      114.37,
+      123.77,
+      "잘했어! 한 번 더, 노래처럼! [[Bath time]], [[bath time]], [[rub-a-dub]]-dub. [[So clean]], [[so clean]]!"
+    ],
+    [
+      124.17,
+      128.57,
+      "이제 물을 빼자. 친구가 욕조 마개를 톡 눌러 줘!"
+    ],
+    [
+      130.77,
+      142.02,
+      "꾸르륵, 물이 빠진다. 오늘 밤 목욕할 때 말해 봐. [[Bath time]]! 이제 잠옷 입으러 가자. See you at bedtime, friend! Bye-bye!"
+    ]
+  ],
+  "scenes": [
+    {
+      "id": "sc0",
+      "from": 0
+    },
+    {
+      "id": "sc1",
+      "from": 28.2,
+      "name": "거품"
+    },
+    {
+      "id": "sc2",
+      "from": 42.3,
+      "name": "비스킷 풍덩"
+    },
+    {
+      "id": "sc3",
+      "from": 56.4,
+      "name": "문질문질"
+    },
+    {
+      "id": "sc4",
+      "from": 79.5,
+      "name": "아주 깨끗해"
+    },
+    {
+      "id": "sc5",
+      "from": 96.3,
+      "name": "친구 차례"
+    },
+    {
+      "id": "sc6",
+      "from": 123.9,
+      "name": "물 빼기"
+    }
+  ],
+  "waits": [
+    {
+      "at": 37.88,
+      "type": "pop",
+      "into": "bubs",
+      "img": "art/L-bubble.png",
+      "bubbles": [
+        [
+          130,
+          160,
+          48
+        ],
+        [
+          280,
+          130,
+          50
+        ],
+        [
+          410,
+          190,
+          46
+        ],
+        [
+          200,
+          290,
+          48
+        ],
+        [
+          360,
+          320,
+          46
+        ]
+      ]
+    },
+    {
+      "at": 104.75,
+      "type": "say-sticker",
+      "sticker": 0
+    },
+    {
+      "at": 108.16,
+      "type": "say-sticker",
+      "sticker": 1
+    },
+    {
+      "at": 111.97,
+      "type": "say-sticker",
+      "sticker": 2
+    },
+    {
+      "at": 128.57,
+      "type": "find",
+      "target": "t-plug",
+      "bounce": "plug",
+      "end": true
+    }
+  ],
+  "free_play": [
+    {
+      "scene": "sc3",
+      "type": "scrub",
+      "target": "t-scrub",
+      "brush": "sponge",
+      "home": [
+        424,
+        620
+      ],
+      "into": "mud",
+      "floats": "floats",
+      "img": "art/L-mud.webp",
+      "word": "Rub!",
+      "reach": 36,
+      "germs": [
+        [
+          150,
+          330,
+          22
+        ],
+        [
+          345,
+          330,
+          22
+        ],
+        [
+          250,
+          258,
+          18
+        ],
+        [
+          212,
+          442,
+          22
+        ],
+        [
+          292,
+          446,
+          22
+        ]
+      ]
+    },
+    {
+      "scene": "sc4",
+      "type": "tap-sparkle",
+      "target": "t-biscuit",
+      "into": "sparks",
+      "keyArea": [
+        222,
+        330,
+        140
+      ]
+    },
+    {
+      "scene": "sc5",
+      "type": "say-sticker",
+      "target": "t-say",
+      "label": "say-word",
+      "words": {
+        "13": "Your turn!",
+        "14": "Bath time.",
+        "15": "Rub-a-dub.",
+        "16": "So clean!",
+        "17": "Great job!"
+      },
+      "into": "stickers",
+      "from": [
+        -88,
+        57
+      ],
+      "slots": [
+        [
+          0,
+          12
+        ],
+        [
+          76,
+          12
+        ],
+        [
+          152,
+          12
+        ]
+      ],
+      "images": [
+        "art/L-sticker-bath.webp",
+        "art/L-sticker-rub.webp",
+        "art/L-sticker-soclean.webp"
+      ]
+    }
+  ],
+  "end": {
+    "at": 141.92,
+    "title": "See you at bedtime!",
+    "sub": "오늘 모은 스티커",
+    "bg": "art/paper.webp",
+    "stickers": [
+      {
+        "img": "art/L-sticker-bath.webp",
+        "label": "bath time"
+      },
+      {
+        "img": "art/L-sticker-rub.webp",
+        "label": "rub-a-dub"
+      },
+      {
+        "img": "art/L-sticker-soclean.webp",
+        "label": "so clean"
+      }
+    ]
+  },
+  "words": [
+    {
+      "en": "bath time",
+      "ko": "목욕 시간",
+      "line": 3,
+      "icon": "art/L-sticker-bath.webp"
+    },
+    {
+      "en": "rub-a-dub",
+      "ko": "문질문질",
+      "line": 8,
+      "icon": "art/L-sticker-rub.webp"
+    },
+    {
+      "en": "so clean",
+      "ko": "아주 깨끗해",
+      "line": 11,
+      "icon": "art/L-sticker-soclean.webp"
+    }
+  ],
+  "worksheet": null,
+  "tips": [
+    [
+      "여러 번 들려주세요.",
+      "해석해 주기보다 같은 이야기를 반복해서 듣는 게 오늘의 목표예요. '3번 이어 듣기'를 켜면 끝나고 처음부터 다시 나와요."
+    ],
+    [
+      "목욕할 때 한 번만.",
+      "\"Bath time!\", \"Rub-a-dub!\" 하고 그 상황에 말해 주면 소리와 상황이 이어져 더 오래 기억해요."
+    ],
+    [
+      "따라 하지 않아도 괜찮아요.",
+      "듣는 것만으로도 충분한 노출이에요."
+    ],
+    [
+      "멈춰서 기다리는 곳이 있어요.",
+      "아이가 화면을 누르면 이어져요. 그냥 들으려면 그냥 듣기를 켜 주세요."
+    ]
+  ]
+}
+</script>
+</body>
+</html>

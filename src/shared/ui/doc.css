@@ -1,0 +1,54 @@
+/* 개인정보처리방침과 404(승인 시안 T8, 캔버스 promo P132~P135). shell.css 위에 얹는다. 원본은 design/promo/shared/pages-t8-info.css.
+   404 제목은 홈의 .lamp h1.title-art 규칙을 재사용하고 크기만 여기서 덮어쓴다. 개인정보 제목은 글자 h1 그대로. */
+.lamp.t8 .inner { display: block; min-height: 0; }
+.lamp.t8 .head { padding: 20px 22px 44px; }
+.lamp.t8 h1.title-art img { width: var(--tw, 220px); margin-left: -2px; }
+.lamp.t8 .sub { max-width: 330px; margin-top: 14px; }
+.lamp.t8 .edge { margin-top: -27px; }
+.t8-lost .head { --tw: 296px; }
+
+/* 개인정보처리방침: 목차는 칩, 항목은 번호 줄, 표는 얇은 카드 */
+.doc { max-width: 760px; margin: 0 auto; box-sizing: border-box; padding: 26px 22px 40px; }
+.t8 .toc { list-style: none; margin: 0; padding: 22px 22px 0; display: flex; flex-wrap: wrap; gap: 8px; }
+.t8 .toc a { display: inline-block; padding: 6px 12px; border-radius: 999px; background: #eef5fc; color: var(--sky-deep); text-decoration: none; font-size: 14px; }
+.doc h2 { font-size: 21px; line-height: 1.3; margin: 34px 0 10px; scroll-margin-top: 16px; padding-top: 26px; border-top: 1.5px solid #e6edf5; }
+.doc h2:first-of-type { margin-top: 0; border-top: 0; padding-top: 0; }
+.doc p, .doc li { font-size: 16px; line-height: 1.75; color: var(--ink); }
+.doc ul { margin: 8px 0 0; padding-left: 1.1em; }
+.doc li { margin-bottom: 6px; }
+.doc .row { background: #f6f9fc; border-radius: 14px; padding: 12px 14px; margin-top: 8px; }
+.doc .row b { display: block; font-size: 15px; }
+.doc .row span { display: block; font-size: 15px; line-height: 1.6; color: var(--ink-2); margin-top: 2px; }
+.doc .row em { display: block; margin-top: 4px; font-style: normal; font-size: 13px; color: var(--ink-2); }
+.doc .row + ul { margin-top: 16px; }
+.doc .todo { color: #9a5a1a; background: #fff3d6; border-radius: 6px; padding: 0 4px; }
+.doc .back { display: inline-block; margin-top: 34px; font-size: 15px; color: var(--sky-deep); }
+
+/* 404 */
+.t8 .lost { text-align: center; padding: 10px 22px 50px; }
+.t8 .lost img { width: 92%; max-width: 420px; height: auto; margin: 0 auto 8px; -webkit-mask-image: radial-gradient(closest-side, #000 64%, transparent); mask-image: radial-gradient(closest-side, #000 64%, transparent); }
+.t8 .lost p { font-size: 16px; line-height: 1.6; color: var(--ink-2); margin: 10px 0 26px; }
+.t8 .lost .home { display: inline-block; font-family: var(--font-head); font-size: 20px; color: var(--white); background: var(--sky-deep); border-radius: 999px; padding: 14px 30px; text-decoration: none; }
+
+@media (min-width: 900px) {
+  .lamp.t8 .head { padding: 28px 0 70px 0; }
+  .lamp.t8 h1.title-art img { width: var(--tw, 300px); }
+  .t8-lost .head { --tw: 440px; }
+  .lamp.t8 .sub { max-width: 560px; font-size: 20px; }
+  .lamp.t8 .edge { height: 56px; margin-top: -55px; }
+  .t8 .wide { max-width: 1180px; margin: 0 auto; padding: 24px 48px 80px; box-sizing: border-box; }
+  /* 개인정보: 왼쪽 목차(붙박이), 오른쪽 본문 */
+  .t8-privacy .wide { display: grid; grid-template-columns: 230px 1fr; gap: 80px; align-items: start; }
+  .t8-privacy .doc { padding: 0; max-width: 760px; }
+  .t8-privacy .toc { position: sticky; top: 30px; flex-direction: column; flex-wrap: nowrap; gap: 6px; margin: 0; padding: 0; align-items: flex-start; }
+  .t8-privacy .toc a { font-size: 16px; padding: 8px 16px; }
+  .t8-privacy .doc h2 { font-size: 26px; }
+  .t8-privacy .doc p, .t8-privacy .doc li { font-size: 17px; }
+  .t8-privacy .doc .row { display: grid; grid-template-columns: 220px 1fr; column-gap: 20px; align-items: baseline; }
+  .t8-privacy .doc .row em { grid-column: 2; }
+  /* 404: 그림 왼쪽, 글 오른쪽 */
+  .t8-lost .wide { display: grid; grid-template-columns: 1fr 1fr; gap: 70px; align-items: center; text-align: left; padding-top: 10px; }
+  .t8-lost .wide img { width: 100%; max-width: none; margin: 0; }
+  .t8-lost .wide p { font-size: 26px; line-height: 1.55; margin: 0 0 36px; }
+  .t8-lost .wide .home { font-size: 26px; padding: 18px 40px; }
+}

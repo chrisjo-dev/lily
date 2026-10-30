@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>O01 릴리랑 디자인 지도</title>
+<link rel="stylesheet" href="../shared/tokens.css">
+<style>
+  body { margin: 0; background: var(--paper-2); color: var(--ink); font-family: var(--font-kr); word-break: keep-all; line-height: 1.55; }
+  .page { padding: var(--s10) var(--s12) var(--s12); }
+  h1 { font-family: var(--font-title); font-size: 52px; color: var(--brown); margin: 0; line-height: 1.1; letter-spacing: -0.04em; }
+  .lead { font-size: 17px; margin: var(--s2) 0 var(--s10); color: var(--ink-2); }
+  h2 { font-family: var(--font-title); font-size: 32px; margin: 0 0 var(--s4); letter-spacing: -0.04em; }
+  section { margin-bottom: var(--s12); }
+  .row { display: flex; gap: var(--s6); align-items: flex-start; flex-wrap: wrap; }
+  figure { margin: 0; width: 210px; }
+  figure.wide { width: 430px; }
+  figure img { display: block; width: 100%; border-radius: 12px; background: var(--card); }
+  figcaption { font-size: 14px; margin-top: var(--s2); }
+  figcaption b { display: block; font-size: 16px; }
+  figcaption span { color: var(--ink-2); }
+  .tag { display: inline-block; font-size: 13px; padding: 0 var(--s2); border-radius: 6px; background: var(--card); color: var(--done); margin-top: var(--s1); }
+  .tag.warn { color: var(--warn); }
+  .cols { display: grid; grid-template-columns: 1fr 1fr; gap: var(--s8); }
+  .box { background: var(--card); border-radius: 16px; padding: var(--s6); }
+  .box ul { margin: 0; padding-left: 1.1em; font-size: 15px; }
+  .box li { margin-bottom: var(--s2); }
+  .box h3 { font-size: 17px; margin: 0 0 var(--s3); color: var(--brown); }
+  table { border-collapse: collapse; font-size: 15px; width: 100%; }
+  td { padding: var(--s2) var(--s3) var(--s2) 0; vertical-align: top; }
+  td:first-child { white-space: nowrap; color: var(--ink-2); }
+</style>
+</head>
+<body>
+<div class="page">
+  <h1>릴리랑 디자인 지도</h1>
+  <p class="lead">2026-10-29 기준. 지금 서비스에 들어간 화면, 정해진 규칙, 고민 중인 것, 지난 시안이 어디 있는지를 한 장에. 미리보기 http://localhost:4462/ (배포 전)</p>
+
+  <section>
+    <h2>지금 서비스 화면</h2>
+    <div class="row">
+      <figure><img src="../assets/live-home.webp" alt="지금 홈 휴대폰"><figcaption><b>홈 /</b><span>v3(H01) + 제목만 개구</span><br><span class="tag">구현됨</span></figcaption></figure>
+      <figure><img src="../assets/live-hello.webp" alt="지금 랜딩 휴대폰"><figcaption><b>랜딩 /hello/ 휴대폰</b><span>크레용 겹줄 액자(L17), 리본 글씨 그림에 구움</span><br><span class="tag">구현됨</span></figcaption></figure>
+      <figure class="wide"><img src="../assets/live-hellopc.webp" alt="지금 랜딩 PC"><figcaption><b>랜딩 /hello/ PC</b><span>L19</span><br><span class="tag">구현됨</span></figcaption></figure>
+      <figure><img src="../assets/live-ep01.webp" alt="이야기 첫 화면"><figcaption><b>이야기 첫 화면</b><span>개선안 2(R51) + 크레용(R72)</span><br><span class="tag">구현됨</span></figcaption></figure>
+      <figure><img src="../assets/R73-CrayonEpisodeWait.webp" alt="이야기 기다림 보드"><figcaption><b>이야기 기다림</b><span>R52 + R73, 효과음 10종</span><br><span class="tag">구현됨</span></figcaption></figure>
+      <figure><img src="../assets/R74-CrayonEpisodeEnd.webp" alt="끝 카드 보드"><figcaption><b>끝 카드</b><span>R54 + R74</span><br><span class="tag">구현됨</span></figcaption></figure>
+      <figure><img src="../assets/R75-CrayonGateCard.webp" alt="잠금 카드 보드"><figcaption><b>잠금 카드</b><span>R59 + R75</span><br><span class="tag">구현됨</span></figcaption></figure>
+      <figure><img src="../assets/live-join.webp" alt="가입 화면"><figcaption><b>가입 /join/</b><span>R43 + R76</span><br><span class="tag">구현됨</span></figcaption></figure>
+    </div>
+  </section>
+
+  <section class="cols">
+    <div class="box">
+      <h3>정해진 것 (결정 기록)</h3>
+      <ul>
+        <li>노랑은 아이가 누르는 것에만(P2). 디자인 원칙은 docs/DESIGN.md, 시스템 보드 S01, S02</li>
+        <li>맛보기 단추는 책 위로 뜨는 해(L13 6번)</li>
+        <li>크레용 겹줄 액자는 랜딩과 이야기, 잠금, 가입에만. 홈은 v3로 되돌림(R71 반려)</li>
+        <li>제목과 큰 글씨만 개구 굵게, 나머지 글꼴은 그대로(L21)</li>
+        <li>이야기 화면 누르는 장치 10종에 작은 효과음(studio/sfx-lab)</li>
+        <li>아이 상호작용 화면은 B 그림체 + D의 노랑 규칙(kids-ep03 B, D 세트)</li>
+      </ul>
+    </div>
+    <div class="box">
+      <h3>지금 고민 중</h3>
+      <ul>
+        <li>홈과 랜딩이 평범하고 밋밋하다. 홈(v3)과 랜딩(크레용)의 얼굴도 다르다</li>
+        <li>원인 진단: 디자인된 로고가 없음, 무료 한글 글꼴의 한계, 그림이 페이지용으로 그려지지 않음(한 장 돌려 씀), 기준 없이 시안만 반복</li>
+        <li>다음 단계 제안: 잘 만든 아동, 가족 브랜드 사이트 참고 판 → 고른 느낌으로 손글씨 로고와 첫 화면용 대표 그림 → 그다음 배치</li>
+        <li>컨셉 B(릴리의 방)처럼 휴대폰 풀커버는 좋다는 의견(C02)</li>
+      </ul>
+    </div>
+  </section>
+
+  <section>
+    <h2>기준과 참고</h2>
+    <div class="row">
+      <figure class="wide"><img src="../assets/S01-Foundations.webp" alt="시스템 기초 보드"><figcaption><b>S01 기초</b><span>색, 글꼴, 간격 (system)</span><br><span class="tag">승인</span></figcaption></figure>
+      <figure class="wide"><img src="../assets/S02-Components.webp" alt="시스템 부품 보드"><figcaption><b>S02 부품</b><span>단추, 카드, 표시 (system)</span><br><span class="tag">승인</span></figcaption></figure>
+      <figure class="wide"><img src="../assets/C02-LilysRoom.webp" alt="컨셉 B 릴리의 방"><figcaption><b>C02 릴리의 방</b><span>풀커버 참고 (concept)</span><br><span class="tag warn">참고</span></figcaption></figure>
+    </div>
+  </section>
+
+  <section class="box">
+    <h3>지난 시안은 어디에</h3>
+    <table>
+      <tr><td>landing</td><td>"지난 시안" 12장: 첫 랜딩 L1~L3, 선 레이아웃 시안, 크레용 변형, 이전 광고 랜딩 L11, L12</td></tr>
+      <tr><td>redesign</td><td>"지난 시안" 27장: 처음 화면 기록 R01~R13, 개선안 1, 크레용 홈 R71. 이야기 화면 바탕은 "이야기 화면 바탕(개선안 2)" 20장</td></tr>
+      <tr><td>concept</td><td>새 컨셉 C01~C03(참고), 홈과 랜딩 세 방향 C11~C19(반려)</td></tr>
+      <tr><td>taste</td><td>taste-skill 시안 T01~T03(반려), 검토 문서 system-review.md</td></tr>
+      <tr><td>kids-ep03</td><td>아이 상호작용 탐색 24장(지난 시안), 채택된 B, D 세트</td></tr>
+    </table>
+  </section>
+</div>
+</body>
+</html>

@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>L14 선 레이아웃 시안</title>
+<link rel="stylesheet" href="../shared/system-tokens.css">
+<style>
+  body { padding: var(--s10); background: var(--paper-2); }
+  img { display: block; max-width: 100%; }
+  .top h1 { font-family: var(--font-logo); font-weight: 400; font-size: var(--t-xl); margin: 0 0 var(--s2); }
+  .top p { font-size: var(--t-md); color: var(--ink-2); margin: 0 0 var(--s8); }
+  .grid { display: grid; grid-template-columns: repeat(5, 390px); gap: var(--s8); }
+  .opt > h2 { font-family: var(--font-logo); font-weight: 400; font-size: var(--t-lg); margin: 0; }
+  .opt > .why { font-size: var(--t-sm); color: var(--ink-2); margin: var(--s1) 0 var(--s3); min-height: 4.8em; }
+  .phone { width: 390px; height: 900px; overflow: hidden; border-radius: 28px; background: var(--paper); }
+
+  /* 같은 내용 */
+  .blk { padding: var(--s5); }
+  .logo { font-family: var(--font-logo); color: var(--brown); font-size: var(--t-md); margin: 0 0 var(--s2); }
+  .promise { font-family: var(--font-logo); font-weight: 400; font-size: 24px; line-height: 1.3; margin: 0 0 var(--s2); }
+  .psub { font-size: var(--t-sm); margin: 0; }
+  .cta { display: flex; flex-direction: column; align-items: center; margin-top: var(--s3); }
+  .cta-art { position: relative; width: 200px; aspect-ratio: 456 / 401; background: url(../assets/v2/btn-sample-book.webp) center / contain no-repeat; }
+  .cta-art span { position: absolute; left: 22%; top: 55%; width: 56%; height: 16%; display: grid; place-items: center; font-family: var(--font-logo); font-size: 14px; white-space: nowrap; }
+  .cta small { font-size: var(--t-xs); color: var(--ink-2); }
+  h3 { font-family: var(--font-logo); font-weight: 400; font-size: var(--t-lg); margin: 0 0 var(--s3); }
+  .two { display: grid; grid-template-columns: 1fr 1fr; }
+  .m img { width: 100%; height: 120px; object-fit: cover; object-position: center top; border-radius: 10px; }
+  .m b { display: block; font-family: var(--font-logo); font-weight: 400; font-size: var(--t-md); margin-top: var(--s2); }
+  .m .t { font-family: var(--font-en); font-weight: 700; color: var(--teal); font-size: var(--t-sm); }
+  .care { display: flex; gap: var(--s3); align-items: center; }
+  .care img { width: 40px; }
+  .care b { font-family: var(--font-logo); font-weight: 400; font-size: var(--t-md); display: block; }
+  .care span { font-size: var(--t-sm); color: var(--ink-2); }
+
+  /* A. 액자식: 화면 전체에 테두리 한 줄, 칸은 같은 선으로 */
+  .a .frame { margin: 12px; border: 1.5px solid var(--brown); border-radius: 20px; overflow: hidden; height: calc(100% - 24px); }
+  .a .blk + .blk { border-top: 1.5px solid var(--brown); }
+  .a .two { gap: var(--s3); }
+
+  /* B. 격자선: 화면 끝까지 가는 가는 선, 칸마다 나뉨, 교차점에 십자 */
+  .b .blk { border-bottom: 1px solid var(--brown); position: relative; }
+  .b .two { margin: 0 -20px; border-top: 1px solid var(--brown); }
+  .b .two .m { padding: var(--s4) var(--s5); }
+  .b .two .m + .m { border-left: 1px solid var(--brown); }
+  .b .plus { position: absolute; width: 11px; height: 11px; bottom: -6px; }
+  .b .plus::before, .b .plus::after { content: ''; position: absolute; background: var(--brown); }
+  .b .plus::before { left: 5px; top: 0; width: 1px; height: 11px; }
+  .b .plus::after { top: 5px; left: 0; height: 1px; width: 11px; }
+  .b .care { padding: var(--s3) 0; }
+  .b .care + .care { border-top: 1px solid var(--line); }
+
+  /* C. 잡지식 괘선: 굵은 윗줄과 가는 줄, 두 단 사이 세로줄 */
+  .c .blk:first-child { border-top: 4px solid var(--ink); margin: 0 var(--s5); padding: var(--s4) 0; }
+  .c .blk { margin: 0 var(--s5); padding: var(--s4) 0; border-top: 1px solid var(--ink); }
+  .c .two { gap: 0; }
+  .c .two .m:first-child { padding-right: var(--s4); border-right: 1px solid var(--ink); }
+  .c .two .m + .m { padding-left: var(--s4); }
+  .c h3 { font-size: var(--t-md); }
+
+  /* D. 테두리 상자: 덩어리마다 선 두른 상자, 사이는 여백 */
+  .d .phone { background: var(--paper-2); padding: var(--s3); }
+  .d .blk { background: var(--paper); border: 1.5px solid var(--brown); border-radius: 16px; margin-bottom: var(--s3); }
+  .d .two { gap: var(--s3); }
+
+  /* E. 겹줄 테두리: 옛 그림책 가장자리처럼 굵고 가는 두 줄 */
+  .e .frame { margin: 10px; height: calc(100% - 20px); border: 3px solid var(--brown); padding: 4px; border-radius: 6px; }
+  .e .inner { border: 1px solid var(--brown); height: 100%; border-radius: 3px; overflow: hidden; }
+  .e .blk + .blk { border-top: 1px solid var(--brown); box-shadow: inset 0 3px 0 var(--paper), inset 0 4px 0 var(--brown); padding-top: var(--s6); }
+  .e .two { gap: var(--s3); }
+</style>
+</head>
+<body>
+  <div class="top">
+    <h1>선 레이아웃 시안</h1>
+    <p>랜딩 휴대폰 화면(첫 화면, 2분 19초, 부모님 걱정)에 선으로 칸을 짜는 방식 다섯 가지를 같은 내용으로 넣어 비교.</p>
+  </div>
+  <div class="grid">
+    <div class="opt a">
+      <h2>A. 액자식</h2>
+      <p class="why">화면 전체에 갈색 테두리 한 줄을 두르고, 안쪽 칸도 같은 선으로 나눈다. 그림책 한 장을 액자에 넣은 느낌.</p>
+      <div class="phone"><div class="frame">
+        <div class="blk"><p class="logo">릴리랑</p><p class="promise">아이가 이야기에 끼어드는<br>2분 영어 그림책</p><p class="psub">4~7세 아이와 함께 듣고, 누르며 노는 영어.</p>
+          <div class="cta"><span class="cta-art"><span>맛보기 바로 듣기</span></span><small>EP01 이 닦기, 2분 19초, 무료</small></div></div>
+        <div class="blk"><h3>2분 19초 동안</h3><div class="two"><div class="m"><img src="../assets/v2/cap-wait0-find.webp" alt=""><span class="t">0:40</span><b>릴리가 기다려요</b></div><div class="m"><img src="../assets/v2/cap-wait1-pop.webp" alt=""><span class="t">1:19</span><b>거품을 터뜨려요</b></div></div></div>
+        <div class="blk"><div class="care"><img src="../assets/v2/home-ic-safe.webp" alt=""><div><b>아이 정보는 받지 않아요</b><span>부모님 계정만 만들면 돼요.</span></div></div></div>
+      </div></div>
+    </div>
+
+    <div class="opt b">
+      <h2>B. 격자선</h2>
+      <p class="why">화면 끝까지 가는 가는 선으로 칸을 짜고, 선이 만나는 곳에 작은 십자. 요즘 웹에서 많이 쓰는 "선이 보이는 격자".</p>
+      <div class="phone">
+        <div class="blk"><p class="logo">릴리랑</p><p class="promise">아이가 이야기에 끼어드는<br>2분 영어 그림책</p><p class="psub">4~7세 아이와 함께 듣고, 누르며 노는 영어.</p>
+          <div class="cta"><span class="cta-art"><span>맛보기 바로 듣기</span></span><small>EP01 이 닦기, 2분 19초, 무료</small></div><i class="plus" style="left:-6px"></i></div>
+        <div class="blk"><h3>2분 19초 동안</h3><div class="two"><div class="m"><img src="../assets/v2/cap-wait0-find.webp" alt=""><span class="t">0:40</span><b>릴리가 기다려요</b></div><div class="m"><img src="../assets/v2/cap-wait1-pop.webp" alt=""><span class="t">1:19</span><b>거품을 터뜨려요</b></div></div></div>
+        <div class="blk"><div class="care"><img src="../assets/v2/home-ic-safe.webp" alt=""><div><b>아이 정보는 받지 않아요</b><span>부모님 계정만 만들면 돼요.</span></div></div><div class="care"><img src="../assets/v2/home-ic-time.webp" alt=""><div><b>한 편이 2분이면 끝나요</b><span>화면 앞에 오래 두지 않아요.</span></div></div></div>
+      </div>
+    </div>
+
+    <div class="opt c">
+      <h2>C. 잡지식 괘선</h2>
+      <p class="why">맨 위 굵은 줄, 덩어리마다 가는 가로줄, 두 단 사이 세로줄. 신문이나 잡지처럼 단정하고 어른스럽다.</p>
+      <div class="phone">
+        <div class="blk"><p class="logo">릴리랑</p><p class="promise">아이가 이야기에 끼어드는<br>2분 영어 그림책</p><p class="psub">4~7세 아이와 함께 듣고, 누르며 노는 영어.</p>
+          <div class="cta"><span class="cta-art"><span>맛보기 바로 듣기</span></span><small>EP01 이 닦기, 2분 19초, 무료</small></div></div>
+        <div class="blk"><h3>2분 19초 동안</h3><div class="two"><div class="m"><img src="../assets/v2/cap-wait0-find.webp" alt=""><span class="t">0:40</span><b>릴리가 기다려요</b></div><div class="m"><img src="../assets/v2/cap-wait1-pop.webp" alt=""><span class="t">1:19</span><b>거품을 터뜨려요</b></div></div></div>
+        <div class="blk"><div class="care"><img src="../assets/v2/home-ic-safe.webp" alt=""><div><b>아이 정보는 받지 않아요</b><span>부모님 계정만 만들면 돼요.</span></div></div></div>
+      </div>
+    </div>
+
+    <div class="opt d">
+      <h2>D. 테두리 상자</h2>
+      <p class="why">덩어리마다 선 두른 상자, 상자 사이는 여백. 칸이 분명하고 손으로 오린 카드 같다.</p>
+      <div class="phone">
+        <div class="blk"><p class="logo">릴리랑</p><p class="promise">아이가 이야기에 끼어드는<br>2분 영어 그림책</p><p class="psub">4~7세 아이와 함께 듣고, 누르며 노는 영어.</p>
+          <div class="cta"><span class="cta-art"><span>맛보기 바로 듣기</span></span><small>EP01 이 닦기, 2분 19초, 무료</small></div></div>
+        <div class="blk"><h3>2분 19초 동안</h3><div class="two"><div class="m"><img src="../assets/v2/cap-wait0-find.webp" alt=""><span class="t">0:40</span><b>릴리가 기다려요</b></div><div class="m"><img src="../assets/v2/cap-wait1-pop.webp" alt=""><span class="t">1:19</span><b>거품을 터뜨려요</b></div></div></div>
+        <div class="blk"><div class="care"><img src="../assets/v2/home-ic-safe.webp" alt=""><div><b>아이 정보는 받지 않아요</b><span>부모님 계정만 만들면 돼요.</span></div></div></div>
+      </div>
+    </div>
+
+    <div class="opt e">
+      <h2>E. 겹줄 테두리</h2>
+      <p class="why">굵은 줄과 가는 줄 두 겹. 옛 그림책 표지나 동화책 가장자리 느낌. 칸 사이도 겹줄.</p>
+      <div class="phone"><div class="frame"><div class="inner">
+        <div class="blk"><p class="logo">릴리랑</p><p class="promise">아이가 이야기에 끼어드는<br>2분 영어 그림책</p><p class="psub">4~7세 아이와 함께 듣고, 누르며 노는 영어.</p>
+          <div class="cta"><span class="cta-art"><span>맛보기 바로 듣기</span></span><small>EP01 이 닦기, 2분 19초, 무료</small></div></div>
+        <div class="blk"><h3>2분 19초 동안</h3><div class="two"><div class="m"><img src="../assets/v2/cap-wait0-find.webp" alt=""><span class="t">0:40</span><b>릴리가 기다려요</b></div><div class="m"><img src="../assets/v2/cap-wait1-pop.webp" alt=""><span class="t">1:19</span><b>거품을 터뜨려요</b></div></div></div>
+        <div class="blk"><div class="care"><img src="../assets/v2/home-ic-safe.webp" alt=""><div><b>아이 정보는 받지 않아요</b><span>부모님 계정만 만들면 돼요.</span></div></div></div>
+      </div></div></div>
+    </div>
+  </div>
+</body>
+</html>

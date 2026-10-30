@@ -1,0 +1,601 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=390, initial-scale=1.0">
+  <title>Brush, Brush, Brush! — 매일 외국어 읽기</title>
+  <link rel="stylesheet" href="../shared/tokens.css">
+  <style>
+    body {
+      background: var(--t-bg);
+      width: 390px;
+      max-width: 390px;
+      margin: 0 auto;
+      overflow-x: hidden;
+      font-family: var(--t-body);
+      color: var(--t-ink);
+    }
+
+    /* ── 상단 헤더 ── */
+    .board-header {
+      background: var(--t-bg);
+      padding: 16px 20px 10px;
+      text-align: center;
+    }
+    .site-mark-top {
+      display: block;
+      font-family: var(--t-body);
+      font-size: 10px;
+      color: var(--t-ink);
+      opacity: 0.5;
+      letter-spacing: 0.04em;
+      margin-bottom: 4px;
+    }
+    .board-title {
+      display: block;
+      font-family: var(--t-en);
+      font-size: 24px;
+      font-weight: 700;
+      color: var(--t-ink);
+      line-height: 1.15;
+      margin-bottom: 4px;
+    }
+    .board-meta {
+      display: block;
+      font-family: var(--t-body);
+      font-size: 12px;
+      color: var(--t-ink);
+      opacity: 0.6;
+    }
+
+    /* ── 보드 랩 ── */
+    .board-wrap {
+      position: relative;
+      width: 390px;
+    }
+
+    /* ── 보드 SVG ── */
+    .board-svg {
+      display: block;
+      width: 390px;
+      height: 440px;
+    }
+
+    /* ── 현재 줄 말풍선 ── */
+    .speech-bubble {
+      position: absolute;
+      top: 48px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--t-surface);
+      border: 3px solid var(--t-accent);
+      border-radius: 18px;
+      padding: 10px 14px;
+      width: 230px;
+      text-align: center;
+      z-index: 8;
+    }
+    .speech-bubble::after {
+      content: "";
+      position: absolute;
+      bottom: -14px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 0;
+      height: 0;
+      border-left: 10px solid transparent;
+      border-right: 10px solid transparent;
+      border-top: 14px solid var(--t-accent);
+    }
+    .speech-bubble::before {
+      content: "";
+      position: absolute;
+      bottom: -9px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 0;
+      height: 0;
+      border-left: 8px solid transparent;
+      border-right: 8px solid transparent;
+      border-top: 11px solid var(--t-surface);
+      z-index: 1;
+    }
+    .bubble-line {
+      font-family: var(--t-en);
+      font-size: 14px;
+      line-height: 1.5;
+      color: var(--t-ink);
+    }
+    .bubble-line .kr {
+      font-family: var(--t-kr);
+      font-size: 13px;
+      color: var(--t-ink);
+    }
+
+    /* ── 플레이어 컨트롤 ── */
+    .player-zone {
+      background: var(--t-surface);
+      padding: 18px 20px 16px;
+      border-top: 2px solid var(--t-path);
+    }
+    .player-row {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 14px;
+    }
+    .play-btn {
+      width: 68px;
+      height: 68px;
+      border-radius: 50%;
+      background: var(--t-accent);
+      border: none;
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+    }
+    .play-btn svg { display: block; }
+    .progress-col { flex: 1; }
+    .progress-title {
+      font-family: var(--t-en);
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--t-ink);
+      margin-bottom: 6px;
+      line-height: 1.2;
+    }
+    .progress-bar-wrap {
+      position: relative;
+      height: 10px;
+      background: var(--t-soft);
+      border-radius: 5px;
+      overflow: hidden;
+      margin-bottom: 4px;
+    }
+    .progress-fill {
+      position: absolute;
+      left: 0; top: 0;
+      height: 100%;
+      width: 49%;
+      background: var(--t-accent);
+      border-radius: 5px;
+    }
+    .progress-times {
+      display: flex;
+      justify-content: space-between;
+      font-size: 11px;
+      color: var(--t-ink);
+      opacity: 0.65;
+    }
+    .tools-row { display: flex; gap: 10px; }
+    .tool-btn {
+      flex: 1;
+      height: 44px;
+      border-radius: 10px;
+      border: 2px solid var(--t-path);
+      background: var(--t-soft);
+      font-family: var(--t-kr);
+      font-size: 14px;
+      color: var(--t-ink);
+      cursor: pointer;
+      font-weight: 700;
+    }
+
+    /* ── 오늘의 단어 ── */
+    .words-zone {
+      background: var(--t-surface);
+      padding: 16px 20px 20px;
+      border-top: 2px solid var(--t-soft);
+    }
+    .words-label {
+      font-family: var(--t-kr);
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--t-ink);
+      opacity: 0.6;
+      margin-bottom: 12px;
+    }
+    .word-coins {
+      display: flex;
+      gap: 10px;
+      justify-content: space-between;
+    }
+    .word-coin {
+      flex: 1;
+      border-radius: 16px;
+      border: 3px solid var(--t-path);
+      background: var(--t-soft);
+      padding: 10px 8px 8px;
+      text-align: center;
+      cursor: pointer;
+      position: relative;
+    }
+    .word-coin.active {
+      border-color: var(--t-accent);
+      background: var(--t-surface);
+    }
+    .word-coin svg {
+      width: 52px;
+      height: 43px;
+      display: block;
+      margin: 0 auto 4px;
+    }
+    .coin-en {
+      font-family: var(--t-en);
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--t-ink);
+      line-height: 1.3;
+      display: block;
+    }
+    .coin-kr {
+      font-family: var(--t-body);
+      font-size: 10px;
+      color: var(--t-ink);
+      opacity: 0.7;
+      display: block;
+      margin-top: 2px;
+    }
+    .coin-playing {
+      position: absolute;
+      top: -8px; right: -6px;
+      background: var(--t-accent);
+      border-radius: 8px;
+      padding: 2px 6px;
+      font-size: 9px;
+      font-family: var(--t-kr);
+      color: var(--t-surface);
+      font-weight: 700;
+    }
+
+    /* ── 부모 영역 ── */
+    .parent-zone {
+      background: var(--t-surface);
+      border-top: 6px solid var(--t-soft);
+      padding: 20px 20px 24px;
+    }
+    .parent-section-title {
+      font-family: var(--t-kr);
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--t-ink);
+      opacity: 0.55;
+      margin-bottom: 12px;
+    }
+    .tips-list {
+      list-style: none;
+      padding: 0;
+      margin: 0 0 18px 0;
+    }
+    .tips-list li {
+      font-size: 13px;
+      color: var(--t-ink);
+      padding: 7px 0 7px 20px;
+      position: relative;
+      border-bottom: 1px solid var(--t-soft);
+      line-height: 1.55;
+    }
+    .tips-list li:last-child { border-bottom: none; }
+    .tips-list li::before {
+      content: "";
+      position: absolute;
+      left: 4px; top: 15px;
+      width: 7px; height: 7px;
+      border-radius: 50%;
+      background: var(--t-grass);
+    }
+    .worksheet-block {
+      border: 2px solid var(--t-path);
+      border-radius: 14px;
+      overflow: hidden;
+      margin-bottom: 16px;
+    }
+    .worksheet-img { display: block; width: 100%; height: auto; }
+    .worksheet-body { padding: 12px 14px 14px; }
+    .worksheet-items {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-bottom: 12px;
+    }
+    .ws-item {
+      font-size: 12px;
+      color: var(--t-ink);
+      background: var(--t-soft);
+      border-radius: 6px;
+      padding: 4px 10px;
+    }
+    .worksheet-btn {
+      display: block;
+      width: 100%;
+      height: 46px;
+      background: var(--t-accent);
+      border: none;
+      border-radius: 10px;
+      font-family: var(--t-kr);
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--t-surface);
+      cursor: pointer;
+    }
+    .script-toggle {
+      width: 100%;
+      height: 44px;
+      background: var(--t-soft);
+      border: none;
+      border-radius: 10px;
+      font-family: var(--t-kr);
+      font-size: 14px;
+      color: var(--t-ink);
+      opacity: 0.8;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body class="t-game">
+
+<!-- 상단 헤더 -->
+<header class="board-header">
+  <span class="site-mark-top">매일 외국어 읽기</span>
+  <span class="board-title">Brush, Brush, Brush!</span>
+  <span class="board-meta">5~8세 / 2분</span>
+</header>
+
+<!-- 보드 영역 -->
+<div class="board-wrap">
+
+  <!-- 말풍선: 현재 대사 -->
+  <div class="speech-bubble">
+    <p class="bubble-line">
+      <span class="kr">와!</span>
+      Bubbles!<br>
+      <span class="kr">거품이야!</span>
+      Bubbles!
+    </p>
+  </div>
+
+  <!-- 보드게임 길 SVG
+       Row 1 (L→R): S1(55,175) S2(195,170) S3(330,172)
+       Row 2 (R→L): S4(330,258) S5(195,262) S6(55,265)
+       Row 3 (L→R): S7(55,348) S8(195,344) S9(330,342)
+       End:         S10(330,415)
+  -->
+  <svg class="board-svg" viewBox="0 0 390 440" xmlns="http://www.w3.org/2000/svg">
+
+    <!-- 하늘 배경 -->
+    <rect width="390" height="440" style="fill: var(--t-bg)"/>
+
+    <!-- 구름 -->
+    <g style="fill: var(--t-surface); opacity: 0.85">
+      <ellipse cx="58" cy="22" rx="28" ry="14"/>
+      <ellipse cx="80" cy="16" rx="22" ry="12"/>
+      <ellipse cx="38" cy="18" rx="18" ry="11"/>
+      <ellipse cx="298" cy="16" rx="24" ry="12"/>
+      <ellipse cx="318" cy="11" rx="18" ry="10"/>
+      <ellipse cx="282" cy="13" rx="16" ry="10"/>
+    </g>
+
+    <!-- 잔디 -->
+    <path d="M0,278 Q32,268 64,276 Q96,284 128,272 Q160,260 192,270 Q224,280 256,266 Q288,252 320,262 Q352,272 390,258 L390,440 L0,440 Z"
+          style="fill: var(--t-grass)"/>
+    <path d="M0,298 Q44,290 88,296 Q132,302 176,294 Q220,286 264,294 Q308,302 352,292 L390,296 L390,440 L0,440 Z"
+          style="fill: var(--t-grass-2); opacity: 0.4"/>
+
+    <!-- 나무 (왼쪽) -->
+    <g transform="translate(10,260)">
+      <rect x="7" y="20" width="5" height="13" style="fill: var(--t-ink); opacity: 0.35"/>
+      <ellipse cx="9" cy="17" rx="11" ry="13" style="fill: var(--t-grass-2)"/>
+      <ellipse cx="9" cy="13" rx="8" ry="9" style="fill: var(--t-grass)"/>
+    </g>
+    <!-- 나무 (오른쪽) -->
+    <g transform="translate(360,248)">
+      <rect x="7" y="20" width="5" height="13" style="fill: var(--t-ink); opacity: 0.35"/>
+      <ellipse cx="9" cy="17" rx="11" ry="13" style="fill: var(--t-grass-2)"/>
+      <ellipse cx="9" cy="13" rx="8" ry="9" style="fill: var(--t-grass)"/>
+    </g>
+
+    <!-- ══ 모래 길 ══
+         Row1 L→R: x=55 → x=195 → x=330
+         U-turn right: C 358,172 358,258 330,258
+         Row2 R→L: x=330 → x=195 → x=55
+         U-turn left:  C 22,265 22,348 55,348
+         Row3 L→R: x=55 → x=195 → x=330
+         Drop right:   C 358,342 358,415 330,415
+    -->
+    <path d="
+      M 55,175 L 195,170 L 330,172
+      C 360,172 360,258 330,258
+      L 195,262 L 55,265
+      C 24,265 24,348 55,348
+      L 195,344 L 330,342
+      C 360,342 360,415 330,415
+    "
+      style="stroke: var(--t-path); fill: none"
+      stroke-width="28"
+      stroke-linecap="round"
+      stroke-linejoin="round"/>
+
+    <!-- 길 중앙 점선 -->
+    <path d="
+      M 55,175 L 195,170 L 330,172
+      C 360,172 360,258 330,258
+      L 195,262 L 55,265
+      C 24,265 24,348 55,348
+      L 195,344 L 330,342
+      C 360,342 360,415 330,415
+    "
+      style="stroke: var(--t-surface); fill: none; opacity: 0.3"
+      stroke-width="2"
+      stroke-dasharray="8 8"
+      stroke-linecap="round"/>
+
+    <!-- ══ 스테이션 ══ -->
+
+    <!-- S1 인사 (55,175) 완료 -->
+    <circle cx="55" cy="175" r="22" style="fill: var(--t-surface); stroke: var(--t-star)" stroke-width="3"/>
+    <text x="55" y="179" text-anchor="middle" font-size="16" style="fill: var(--t-star)">★</text>
+    <text x="55" y="203" text-anchor="middle" font-size="10" font-family="var(--t-kr)" style="fill: var(--t-ink)">인사</text>
+
+    <!-- S2 밤이네 (195,170) 완료 -->
+    <circle cx="195" cy="170" r="22" style="fill: var(--t-surface); stroke: var(--t-star)" stroke-width="3"/>
+    <text x="195" y="174" text-anchor="middle" font-size="16" style="fill: var(--t-star)">★</text>
+    <text x="195" y="198" text-anchor="middle" font-size="10" font-family="var(--t-kr)" style="fill: var(--t-ink)">밤이네</text>
+
+    <!-- S3 칫솔 찾기 (330,172) 완료 -->
+    <circle cx="330" cy="172" r="22" style="fill: var(--t-surface); stroke: var(--t-star)" stroke-width="3"/>
+    <text x="330" y="176" text-anchor="middle" font-size="16" style="fill: var(--t-star)">★</text>
+    <text x="330" y="200" text-anchor="middle" font-size="10" font-family="var(--t-kr)" style="fill: var(--t-ink)">칫솔 찾기</text>
+
+    <!-- S4 이 닦기 (330,258) 완료 -->
+    <circle cx="330" cy="258" r="22" style="fill: var(--t-surface); stroke: var(--t-star)" stroke-width="3"/>
+    <text x="330" y="262" text-anchor="middle" font-size="16" style="fill: var(--t-star)">★</text>
+    <text x="330" y="286" text-anchor="middle" font-size="10" font-family="var(--t-kr)" style="fill: var(--t-ink)">이 닦기</text>
+
+    <!-- S5 거품 (195,262) - 현재 위치 Lily 토큰 -->
+    <circle cx="195" cy="262" r="30" style="fill: var(--t-accent); opacity: 0.2"/>
+    <circle cx="195" cy="262" r="26" style="fill: var(--t-surface); stroke: var(--t-accent)" stroke-width="4"/>
+    <!-- 머리카락 -->
+    <path d="M 179,256 Q 179,241 195,240 Q 211,241 211,256" style="fill: var(--hair); stroke: none"/>
+    <!-- 얼굴 -->
+    <circle cx="195" cy="260" r="18" style="fill: var(--skin)"/>
+    <!-- 볼 -->
+    <circle cx="188" cy="265" r="4" style="fill: var(--cheek); opacity: 0.6"/>
+    <circle cx="202" cy="265" r="4" style="fill: var(--cheek); opacity: 0.6"/>
+    <!-- 눈 -->
+    <circle cx="190" cy="258" r="2.5" style="fill: var(--t-ink)"/>
+    <circle cx="200" cy="258" r="2.5" style="fill: var(--t-ink)"/>
+    <circle cx="191" cy="257" r="0.9" style="fill: var(--t-surface)"/>
+    <circle cx="201" cy="257" r="0.9" style="fill: var(--t-surface)"/>
+    <!-- 입 -->
+    <path d="M 191,265 Q 195,269 199,265" style="stroke: var(--t-ink); fill: none" stroke-width="1.5" stroke-linecap="round"/>
+    <!-- 거품 pill 라벨: 토큰 아래 여백에 배치 -->
+    <rect x="172" y="293" width="46" height="22" rx="11" style="fill: var(--t-accent)"/>
+    <text x="195" y="308" text-anchor="middle" font-size="12" font-weight="700" font-family="var(--t-kr)" style="fill: var(--t-surface)">거품</text>
+
+    <!-- S6 헹구기 (55,265) 앞으로 -->
+    <circle cx="55" cy="265" r="22" style="fill: var(--t-soft); stroke: var(--t-path)" stroke-width="3"/>
+    <text x="55" y="270" text-anchor="middle" font-size="11" font-family="var(--t-kr)" style="fill: var(--t-ink); opacity: 0.7">헹구기</text>
+
+    <!-- S7 깨끗해 (55,348) 앞으로 -->
+    <circle cx="55" cy="348" r="22" style="fill: var(--t-soft); stroke: var(--t-path)" stroke-width="3"/>
+    <text x="55" y="353" text-anchor="middle" font-size="11" font-family="var(--t-kr)" style="fill: var(--t-ink); opacity: 0.7">깨끗해</text>
+
+    <!-- S8 따라 말하기 (195,344) 앞으로 -->
+    <circle cx="195" cy="344" r="22" style="fill: var(--t-soft); stroke: var(--t-path)" stroke-width="3"/>
+    <text x="195" y="339" text-anchor="middle" font-size="9" font-family="var(--t-kr)" style="fill: var(--t-ink); opacity: 0.7">따라</text>
+    <text x="195" y="351" text-anchor="middle" font-size="9" font-family="var(--t-kr)" style="fill: var(--t-ink); opacity: 0.7">말하기</text>
+
+    <!-- S9 노래 (330,342) 앞으로 -->
+    <circle cx="330" cy="342" r="22" style="fill: var(--t-soft); stroke: var(--t-path)" stroke-width="3"/>
+    <text x="330" y="347" text-anchor="middle" font-size="11" font-family="var(--t-kr)" style="fill: var(--t-ink); opacity: 0.7">노래</text>
+
+    <!-- S10 잘 자 (330,415) 침대 -->
+    <circle cx="330" cy="415" r="24" style="fill: var(--t-soft); stroke: var(--t-path)" stroke-width="3"/>
+    <rect x="319" y="409" width="22" height="11" rx="2" style="fill: var(--t-path)" stroke-width="1.2"/>
+    <rect x="321" y="405" width="8" height="6" rx="2" style="fill: var(--t-path)" stroke-width="1.2"/>
+    <text x="330" y="408" text-anchor="middle" font-size="8" font-family="var(--t-kr)" style="fill: var(--t-ink); opacity: 0.55">침대</text>
+    <text x="330" y="437" text-anchor="middle" font-size="10" font-family="var(--t-kr)" style="fill: var(--t-ink)">잘 자</text>
+
+  </svg>
+</div>
+
+<!-- ── 플레이어 컨트롤 ── -->
+<div class="player-zone">
+  <div class="player-row">
+    <button class="play-btn" aria-label="일시정지">
+      <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
+        <rect x="7" y="6" width="5" height="16" rx="2.5" style="fill: var(--t-surface)"/>
+        <rect x="16" y="6" width="5" height="16" rx="2.5" style="fill: var(--t-surface)"/>
+      </svg>
+    </button>
+    <div class="progress-col">
+      <div class="progress-title">Brush, Brush, Brush!</div>
+      <div class="progress-bar-wrap">
+        <div class="progress-fill"></div>
+      </div>
+      <div class="progress-times">
+        <span>1:08</span>
+        <span>2:19</span>
+      </div>
+    </div>
+  </div>
+  <div class="tools-row">
+    <button class="tool-btn">3번 이어 듣기</button>
+    <button class="tool-btn">조금 천천히</button>
+  </div>
+</div>
+
+<!-- ── 오늘의 단어 ── -->
+<div class="words-zone">
+  <div class="words-label">오늘의 단어</div>
+  <div class="word-coins">
+
+    <div class="word-coin" role="button" aria-label="brush my teeth 듣기">
+      <svg viewBox="0 0 120 100" xmlns="http://www.w3.org/2000/svg" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M30 18 q-18 0 -18 24 q0 16 7 34 q4 12 9 0 l4 -16 q2 -6 4 0 l4 16 q5 12 9 0 q7 -18 7 -34 q0 -24 -18 -24 q-4 2 -9 2 q-5 0 -9 -2 z" style="fill: var(--t-surface); stroke: var(--t-ink)" stroke-width="3"/>
+        <rect x="66" y="54" width="50" height="9" rx="4.5" style="fill: var(--sun)" transform="rotate(-28 91 58)"/>
+        <path d="M70 46 l-5 -9 M76 43 l-5 -9 M82 40 l-5 -9" style="stroke: var(--blue)" fill="none" stroke-width="3"/>
+      </svg>
+      <span class="coin-en">brush my<br>teeth</span>
+      <span class="coin-kr">이를 닦아요</span>
+    </div>
+
+    <div class="word-coin active" role="button" aria-label="bubbles 듣기">
+      <span class="coin-playing">재생 중</span>
+      <svg viewBox="0 0 120 100" xmlns="http://www.w3.org/2000/svg" stroke-linecap="round">
+        <circle cx="48" cy="56" r="26" style="fill: var(--t-surface); stroke: var(--t-accent)" stroke-width="3"/>
+        <circle cx="88" cy="38" r="16" style="fill: var(--t-surface); stroke: var(--t-accent)" stroke-width="3"/>
+        <circle cx="94" cy="76" r="10" style="fill: var(--t-surface); stroke: var(--t-accent)" stroke-width="3"/>
+        <circle cx="22" cy="24" r="8" style="fill: var(--t-surface); stroke: var(--t-accent)" stroke-width="3"/>
+        <circle cx="112" cy="14" r="5" style="fill: var(--t-surface); stroke: var(--t-accent)" stroke-width="3"/>
+        <path d="M36 46 q5 -7 12 -7 M81 32 q4 -4 7 -4" fill="none" style="stroke: var(--sky)" stroke-width="2"/>
+      </svg>
+      <span class="coin-en">bubbles</span>
+      <span class="coin-kr">거품</span>
+    </div>
+
+    <div class="word-coin" role="button" aria-label="all clean 듣기">
+      <svg viewBox="0 0 120 100" xmlns="http://www.w3.org/2000/svg" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M44 14 q-20 0 -20 26 q0 18 7 36 q4 12 9 0 l4 -16 q2 -6 4 0 l4 16 q5 12 9 0 q7 -18 7 -36 q0 -26 -20 -26 q-4 2 -9 2 q-5 0 -9 -2 z" style="fill: var(--t-surface); stroke: var(--t-ink)" stroke-width="3"/>
+        <path d="M37 40 q8 9 18 0" fill="none" style="stroke: var(--t-ink)" stroke-width="3"/>
+        <path d="M92 16 v18 M83 25 h18 M106 50 v12 M100 56 h12 M90 70 v10 M85 75 h10" style="stroke: var(--sun)" stroke-width="4"/>
+      </svg>
+      <span class="coin-en">all clean</span>
+      <span class="coin-kr">깨끗해</span>
+    </div>
+
+  </div>
+</div>
+
+<!-- ── 부모 영역 ── -->
+<div class="parent-zone">
+
+  <p class="parent-section-title">부모님께</p>
+  <ul class="tips-list">
+    <li>저녁 양치 시간에 틀어 두세요. 여러 번 들어도 좋아요.</li>
+    <li>실제로 칫솔질하면서 "Brush my teeth!" 한 번 말해 주세요.</li>
+    <li>따라 하지 않아도 괜찮아요. 귀로 듣는 것만으로도 충분해요.</li>
+  </ul>
+
+  <p class="parent-section-title">학습지</p>
+  <div class="worksheet-block">
+    <img class="worksheet-img" src="../assets/worksheet.png" alt="학습지 미리보기" />
+    <div class="worksheet-body">
+      <div class="worksheet-items">
+        <span class="ws-item">그림에서 칫솔 찾기</span>
+        <span class="ws-item">단어 카드 오려서 놀기</span>
+        <span class="ws-item">말할 때마다 스티커</span>
+        <span class="ws-item">릴리 색칠하기</span>
+      </div>
+      <button class="worksheet-btn">학습지 받기 (A4)</button>
+    </div>
+  </div>
+
+  <button class="script-toggle">대본 보기</button>
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>C12 풀커버 표지 홈 휴대폰</title>
+<link rel="stylesheet" href="../shared/tokens.css">
+<link rel="stylesheet" href="../shared/hl.css">
+<style>
+  /* 1. 풀커버 표지 홈: 같은 표지(릴리의 방), 아래는 아침에서 밤 순서의 7편 표지를 가로로 넘김 */
+  body { width: 390px; margin: 0 auto; }
+  .cover { position: relative; height: 760px; overflow: hidden; }
+  .cover > img { width: 100%; height: 100%; object-fit: cover; object-position: center 30%; }
+  .cover::after { content: ''; position: absolute; left: 0; right: 0; bottom: 0; height: 300px; background: linear-gradient(to bottom, rgba(251,246,236,0), var(--paper) 70%); }
+  .top { position: absolute; top: 18px; left: 20px; right: 20px; z-index: 1; display: flex; justify-content: space-between; align-items: center; }
+  .top .logo { font-size: 30px; color: var(--brown); margin: 0; }
+  .top a { font-size: 13px; color: var(--ink); background: rgba(251,246,236,.85); padding: 6px 12px; border-radius: 999px; }
+  .cover-text { position: absolute; left: 24px; right: 24px; bottom: 28px; z-index: 1; }
+  .hello { font-size: 30px; margin: 0 0 var(--s3); }
+
+  .shelf { padding: var(--s6) 0 0; }
+  .shelf h2 { font-size: 26px; margin: 0 24px 4px; }
+  .shelf > p { font-size: 14px; color: var(--ink-2); margin: 0 24px var(--s4); }
+  .row { display: flex; gap: 12px; overflow: hidden; padding-left: 24px; }
+  .bk { margin: 0; flex: none; width: 150px; }
+  .bk .art { position: relative; }
+  .bk img { width: 150px; height: 200px; object-fit: cover; border-radius: 12px; }
+  .bk .lock { position: absolute; top: 8px; right: 8px; width: 22px; height: 22px; }
+  .bk .when { display: block; font-size: 12px; color: var(--ink-2); margin-top: 8px; }
+  .bk b { display: block; font-family: var(--font-title); font-weight: 700; font-size: 19px; letter-spacing: -0.03em; }
+  .bk.done .when::after { content: ' 다 들음'; color: var(--teal); }
+
+  .parent { margin: 64px 24px 0; padding-top: var(--s6); border-top: 1px solid var(--line); }
+  .parent h2 { font-size: 22px; margin: 0 0 var(--s3); }
+  .parent p { font-size: 14px; color: var(--ink-2); margin: 0 0 var(--s3); }
+</style>
+</head>
+<body>
+  <header class="cover">
+    <img src="../assets/hl/room.webp" alt="아침 햇살이 드는 릴리의 방, 손 흔드는 릴리와 비스킷">
+    <div class="top"><p class="t logo">릴리랑</p><a>내 정보</a></div>
+    <div class="cover-text">
+      <h1 class="t hello">지난번엔 이 닦기를<br>1분 19초까지 들었어요</h1>
+      <a class="play"><img src="../assets/hl/btn-play.webp" alt=""><b>이어서 듣기<small>EP01 Brush, Brush, Brush!</small></b></a>
+    </div>
+  </header>
+
+  <section class="shelf">
+    <h2 class="t">릴리의 하루</h2>
+    <p>아침부터 밤까지 7권. 옆으로 넘겨 보세요.</p>
+    <div class="row">
+      <figure class="bk"><div class="art"><img src="../assets/hl/cover-ep02.webp" alt=""><i class="lock"></i></div><span class="when">아침, 일어나기</span><b>Wake Up!</b></figure>
+      <figure class="bk"><div class="art"><img src="../assets/hl/cover-ep03.webp" alt=""><i class="lock"></i></div><span class="when">아침, 세수하기</span><b>Splash, Splash!</b></figure>
+      <figure class="bk"><div class="art"><img src="../assets/hl/cover-ep04.webp" alt=""><i class="lock"></i></div><span class="when">아침, 아침 먹기</span><b>Yummy, Yummy!</b></figure>
+    </div>
+  </section>
+
+  <section class="parent">
+    <h2 class="t">가입하면 7권 모두 열려요</h2>
+    <p>가입은 무료예요. 아이 이름과 사진은 받지 않아요.</p>
+    <a class="quiet">무료로 가입하기</a>
+  </section>
+  <footer class="foot"><a>개인정보처리방침</a></footer>
+</body>
+</html>

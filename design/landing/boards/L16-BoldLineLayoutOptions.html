@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>L16 굵은 선 레이아웃 시안</title>
+<link rel="stylesheet" href="../shared/system-tokens.css">
+<style>
+  body { padding: var(--s10); background: var(--paper-2); }
+  img { display: block; max-width: 100%; }
+  .top h1 { font-family: var(--font-logo); font-weight: 400; font-size: var(--t-xl); margin: 0 0 var(--s2); }
+  .top p { font-size: var(--t-md); color: var(--ink-2); margin: 0 0 var(--s8); }
+  .grid { display: grid; grid-template-columns: repeat(5, 390px); gap: var(--s8); }
+  .opt > h2 { font-family: var(--font-logo); font-weight: 400; font-size: var(--t-lg); margin: 0; }
+  .opt > .why { font-size: var(--t-sm); color: var(--ink-2); margin: var(--s1) 0 var(--s3); min-height: 4.8em; }
+  .phone { width: 390px; height: 900px; overflow: hidden; border-radius: 28px; background: var(--paper); }
+
+  /* 같은 내용 */
+  .blk { padding: var(--s5); }
+  .logo { font-family: var(--font-logo); color: var(--brown); font-size: var(--t-md); margin: 0 0 var(--s2); }
+  .promise { font-family: var(--font-logo); font-weight: 400; font-size: 24px; line-height: 1.3; margin: 0 0 var(--s2); }
+  .psub { font-size: var(--t-sm); margin: 0; }
+  .cta { display: flex; flex-direction: column; align-items: center; margin-top: var(--s3); }
+  .cta-art { position: relative; width: 200px; aspect-ratio: 456 / 401; background: url(../assets/v2/btn-sample-book.webp) center / contain no-repeat; }
+  .cta-art span { position: absolute; left: 22%; top: 55%; width: 56%; height: 16%; display: grid; place-items: center; font-family: var(--font-logo); font-size: 14px; white-space: nowrap; }
+  .cta small { font-size: var(--t-xs); color: var(--ink-2); }
+  h3 { font-family: var(--font-logo); font-weight: 400; font-size: var(--t-lg); margin: 0 0 var(--s3); }
+  .two { display: grid; grid-template-columns: 1fr 1fr; }
+  .m img { width: 100%; height: 120px; object-fit: cover; object-position: center top; border-radius: 10px; }
+  .m b { display: block; font-family: var(--font-logo); font-weight: 400; font-size: var(--t-md); margin-top: var(--s2); }
+  .m .t { font-family: var(--font-en); font-weight: 700; color: var(--teal); font-size: var(--t-sm); }
+  .care { display: flex; gap: var(--s3); align-items: center; }
+  .care img { width: 40px; }
+  .care b { font-family: var(--font-logo); font-weight: 400; font-size: var(--t-md); display: block; }
+  .care span { font-size: var(--t-sm); color: var(--ink-2); }
+
+  /* 공통: 굵은 먹선 */
+  :root { --bold: 4px solid var(--ink); }
+
+  /* A. 굵은 액자: 화면 둘레 4px, 칸 사이도 4px, 칸마다 바탕색 */
+  .a .frame { margin: 10px; border: var(--bold); border-radius: 22px; overflow: hidden; height: calc(100% - 20px); }
+  .a .blk + .blk { border-top: var(--bold); }
+  .a .blk:nth-child(2) { background: var(--sky); }
+  .a .blk:nth-child(3) { background: var(--peach); }
+  .a .two { gap: var(--s3); }
+  .a .m img { border: 3px solid var(--ink); }
+
+  /* B. 색 칸 격자: 굵은 선으로 짠 칸, 칸마다 다른 색(도시락 칸) */
+  .b .phone { border: var(--bold); }
+  .b .blk { border-bottom: var(--bold); }
+  .b .blk:nth-child(1) { background: var(--paper); }
+  .b .blk:nth-child(2) { padding: 0; }
+  .b .blk:nth-child(2) h3 { padding: var(--s4) var(--s5) var(--s3); margin: 0; background: var(--mint); border-bottom: var(--bold); }
+  .b .two { gap: 0; }
+  .b .two .m { padding: var(--s4); background: var(--sky); }
+  .b .two .m + .m { border-left: var(--bold); background: var(--peach); }
+  .b .blk:nth-child(3) { background: var(--teal-soft); }
+
+  /* C. 그림자 상자: 굵은 테두리 + 아래로 밀린 검은 그림자(만화책 칸) */
+  .c .phone { background: var(--sky); padding: var(--s4); }
+  .c .blk { background: var(--paper); border: 3px solid var(--ink); border-radius: 18px; box-shadow: 5px 6px 0 var(--ink); margin-bottom: var(--s5); }
+  .c .two { gap: var(--s3); }
+  .c .m img { border: 2px solid var(--ink); }
+
+  /* D. 제목 탭: 굵은 테두리 상자 윗변에 제목이 탭처럼 걸침 */
+  .d .phone { padding: var(--s4) var(--s3); }
+  .d .blk { position: relative; border: 3px solid var(--brown); border-radius: 18px; margin: var(--s8) 0 var(--s3); padding-top: var(--s6); }
+  .d .blk:first-child { margin-top: var(--s4); }
+  .d .blk h3, .d .blk .logo { position: absolute; top: -18px; left: 16px; margin: 0; background: var(--touch-edge); color: var(--paper); font-family: var(--font-logo); font-size: var(--t-md); padding: 4px 14px; border-radius: 10px; }
+  .d .two { gap: var(--s3); }
+
+  /* E. 굵은 겹줄: 바깥 6px, 안 2px, 칸 사이 굵은 겹줄 */
+  .e .frame { margin: 8px; height: calc(100% - 16px); border: 6px solid var(--brown); padding: 5px; border-radius: 10px; }
+  .e .inner { border: 2px solid var(--brown); height: 100%; border-radius: 4px; overflow: hidden; }
+  .e .blk + .blk { border-top: 2px solid var(--brown); box-shadow: inset 0 5px 0 var(--paper), inset 0 9px 0 var(--brown); padding-top: var(--s8); }
+  .e .two { gap: var(--s3); }
+  .e .m img { border: 2px solid var(--brown); }
+</style>
+</head>
+<body>
+  <div class="top">
+    <h1>굵은 선 레이아웃 시안</h1>
+    <p>L14가 눈에 안 띈다는 의견에 따라 선을 3~6px로 굵히고, 칸마다 색이나 그림자를 더했다. 디자인 원칙 P5(조용하고 따뜻하게)와 부딪힐 수 있어 함께 보고 고른다.</p>
+  </div>
+  <div class="grid">
+    <div class="opt a">
+      <h2>A. 굵은 액자</h2>
+      <p class="why">화면 둘레와 칸 사이를 4px 먹선으로. 칸마다 바탕색을 달리해 덩어리가 확 나뉜다.</p>
+      <div class="phone"><div class="frame">
+        <div class="blk"><p class="logo">릴리랑</p><p class="promise">아이가 이야기에 끼어드는<br>2분 영어 그림책</p><p class="psub">4~7세 아이와 함께 듣고, 누르며 노는 영어.</p>
+          <div class="cta"><span class="cta-art"><span>맛보기 바로 듣기</span></span><small>EP01 이 닦기, 2분 19초, 무료</small></div></div>
+        <div class="blk"><h3>2분 19초 동안</h3><div class="two"><div class="m"><img src="../assets/v2/cap-wait0-find.webp" alt=""><span class="t">0:40</span><b>릴리가 기다려요</b></div><div class="m"><img src="../assets/v2/cap-wait1-pop.webp" alt=""><span class="t">1:19</span><b>거품을 터뜨려요</b></div></div></div>
+        <div class="blk"><div class="care"><img src="../assets/v2/home-ic-safe.webp" alt=""><div><b>아이 정보는 받지 않아요</b><span>부모님 계정만 만들면 돼요.</span></div></div></div>
+      </div></div>
+    </div>
+
+    <div class="opt b">
+      <h2>B. 색 칸 격자</h2>
+      <p class="why">굵은 선으로 짠 칸에 칸마다 다른 색. 도시락 칸처럼 한눈에 들어온다. 가장 강하다.</p>
+      <div class="phone">
+        <div class="blk"><p class="logo">릴리랑</p><p class="promise">아이가 이야기에 끼어드는<br>2분 영어 그림책</p><p class="psub">4~7세 아이와 함께 듣고, 누르며 노는 영어.</p>
+          <div class="cta"><span class="cta-art"><span>맛보기 바로 듣기</span></span><small>EP01 이 닦기, 2분 19초, 무료</small></div></div>
+        <div class="blk"><h3>2분 19초 동안</h3><div class="two"><div class="m"><img src="../assets/v2/cap-wait0-find.webp" alt=""><span class="t">0:40</span><b>릴리가 기다려요</b></div><div class="m"><img src="../assets/v2/cap-wait1-pop.webp" alt=""><span class="t">1:19</span><b>거품을 터뜨려요</b></div></div></div>
+        <div class="blk"><div class="care"><img src="../assets/v2/home-ic-safe.webp" alt=""><div><b>아이 정보는 받지 않아요</b><span>부모님 계정만 만들면 돼요.</span></div></div><div class="care"><img src="../assets/v2/home-ic-time.webp" alt=""><div><b>한 편이 2분이면 끝나요</b><span>화면 앞에 오래 두지 않아요.</span></div></div></div>
+      </div>
+    </div>
+
+    <div class="opt c">
+      <h2>C. 그림자 상자</h2>
+      <p class="why">굵은 테두리에 아래로 밀린 검은 그림자. 만화책 칸처럼 튀어나와 보인다.</p>
+      <div class="phone">
+        <div class="blk"><p class="logo">릴리랑</p><p class="promise">아이가 이야기에 끼어드는<br>2분 영어 그림책</p><p class="psub">4~7세 아이와 함께 듣고, 누르며 노는 영어.</p>
+          <div class="cta"><span class="cta-art"><span>맛보기 바로 듣기</span></span><small>EP01 이 닦기, 2분 19초, 무료</small></div></div>
+        <div class="blk"><h3>2분 19초 동안</h3><div class="two"><div class="m"><img src="../assets/v2/cap-wait0-find.webp" alt=""><span class="t">0:40</span><b>릴리가 기다려요</b></div><div class="m"><img src="../assets/v2/cap-wait1-pop.webp" alt=""><span class="t">1:19</span><b>거품을 터뜨려요</b></div></div></div>
+        <div class="blk"><div class="care"><img src="../assets/v2/home-ic-safe.webp" alt=""><div><b>아이 정보는 받지 않아요</b><span>부모님 계정만 만들면 돼요.</span></div></div></div>
+      </div>
+    </div>
+
+    <div class="opt d">
+      <h2>D. 제목 탭</h2>
+      <p class="why">굵은 갈색 상자 윗변에 제목이 이름표처럼 걸린다. 공책 분류 탭 같다.</p>
+      <div class="phone">
+        <div class="blk"><p class="logo">릴리랑</p><p class="promise">아이가 이야기에 끼어드는<br>2분 영어 그림책</p><p class="psub">4~7세 아이와 함께 듣고, 누르며 노는 영어.</p>
+          <div class="cta"><span class="cta-art"><span>맛보기 바로 듣기</span></span><small>EP01 이 닦기, 2분 19초, 무료</small></div></div>
+        <div class="blk"><h3>2분 19초 동안</h3><div class="two"><div class="m"><img src="../assets/v2/cap-wait0-find.webp" alt=""><span class="t">0:40</span><b>릴리가 기다려요</b></div><div class="m"><img src="../assets/v2/cap-wait1-pop.webp" alt=""><span class="t">1:19</span><b>거품을 터뜨려요</b></div></div></div>
+        <div class="blk"><div class="care"><img src="../assets/v2/home-ic-safe.webp" alt=""><div><b>아이 정보는 받지 않아요</b><span>부모님 계정만 만들면 돼요.</span></div></div></div>
+      </div>
+    </div>
+
+    <div class="opt e">
+      <h2>E. 굵은 겹줄</h2>
+      <p class="why">바깥 6px, 안 2px 겹줄. 동화책 표지 테두리를 크게 키운 느낌.</p>
+      <div class="phone"><div class="frame"><div class="inner">
+        <div class="blk"><p class="logo">릴리랑</p><p class="promise">아이가 이야기에 끼어드는<br>2분 영어 그림책</p><p class="psub">4~7세 아이와 함께 듣고, 누르며 노는 영어.</p>
+          <div class="cta"><span class="cta-art"><span>맛보기 바로 듣기</span></span><small>EP01 이 닦기, 2분 19초, 무료</small></div></div>
+        <div class="blk"><h3>2분 19초 동안</h3><div class="two"><div class="m"><img src="../assets/v2/cap-wait0-find.webp" alt=""><span class="t">0:40</span><b>릴리가 기다려요</b></div><div class="m"><img src="../assets/v2/cap-wait1-pop.webp" alt=""><span class="t">1:19</span><b>거품을 터뜨려요</b></div></div></div>
+        <div class="blk"><div class="care"><img src="../assets/v2/home-ic-safe.webp" alt=""><div><b>아이 정보는 받지 않아요</b><span>부모님 계정만 만들면 돼요.</span></div></div></div>
+      </div></div></div>
+    </div>
+  </div>
+</body>
+</html>

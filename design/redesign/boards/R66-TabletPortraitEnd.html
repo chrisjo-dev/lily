@@ -1,0 +1,236 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=834">
+  <title>R66 개선안 2 TabletPortraitEnd</title>
+  <link rel="stylesheet" href="../shared/tokens.css">
+  <style>
+    html, body { margin: 0; width: 834px; height: 1194px; overflow: hidden; background: var(--night); }
+
+    /* 전체 페이지 */
+    .page {
+      width: 834px; height: 1194px;
+      position: relative;
+      display: flex; flex-direction: column;
+      background: var(--night);
+    }
+
+    /* 메인 콘텐츠 (세로 가운데) */
+    .page-body {
+      position: relative; z-index: 1;
+      flex: 1;
+      display: flex; flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 32px 28px 0;
+      gap: 16px;
+    }
+
+    /* 찢긴 종이 액자 260px */
+    .torn-frame {
+      width: 260px; height: 260px;
+      position: relative; flex-shrink: 0;
+    }
+    .torn-frame svg { display: block; filter: drop-shadow(2px 4px 18px rgba(0,0,0,0.38)); }
+    .torn-frame-bg {
+      position: absolute; inset: 0;
+      border-radius: 50%;
+      overflow: hidden;
+      box-shadow: 2px 4px 24px rgba(0,0,0,0.38);
+    }
+    .torn-frame-bg img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+    }
+    .torn-frame-edge {
+      position: absolute; inset: -8px; z-index: 2;
+      pointer-events: none;
+    }
+
+    /* 제목 묶음 */
+    .end-title-block { text-align: center; }
+    .end-ep {
+      font-family: var(--font-en); font-size: 14px;
+      color: var(--night-ink-2); margin: 0 0 4px;
+    }
+    .end-title {
+      font-family: var(--font-logo); font-size: 30px;
+      color: var(--night-ink); margin: 0 0 10px;
+    }
+    .end-msg {
+      font-family: var(--font-book); font-size: 18px;
+      color: var(--night-ink); margin: 0; line-height: 1.7;
+    }
+
+    /* 스티커 리본 + 자리 */
+    .sticker-section { text-align: center; width: 100%; }
+
+    .ribbon-wrap {
+      position: relative;
+      width: 340px; height: 56px; margin: 0 auto 14px;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .ribbon-img {
+      position: absolute; inset: 0; width: 100%; height: 100%;
+      object-fit: fill;
+    }
+    .ribbon-text {
+      position: relative; z-index: 1;
+      font-family: var(--font-logo); font-size: 18px; color: var(--brown);
+    }
+
+    .sticker-row {
+      display: flex; gap: 20px; justify-content: center; align-items: flex-start;
+    }
+    .sticker-col {
+      display: flex; flex-direction: column; align-items: center; gap: 7px;
+    }
+    .sticker-slot {
+      width: 120px; height: 120px;
+      position: relative;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .sticker-spot-img {
+      position: absolute; inset: 0; width: 100%; height: 100%;
+      object-fit: contain;
+    }
+    .sticker-img {
+      position: relative; z-index: 2;
+      width: 100px; height: 100px; object-fit: contain;
+      filter: drop-shadow(0 2px 8px rgba(0,0,0,0.22));
+    }
+    .sticker-word {
+      font-family: var(--font-en); font-size: 14px; color: var(--night-ink-2);
+    }
+
+    /* 단추 묶음 */
+    .btn-block {
+      width: 100%; display: flex; flex-direction: column;
+      align-items: center; gap: 10px;
+    }
+
+    /* 한 번 더: 200x84 알약 단추 (btn-again-night.webp) */
+    .btn-again {
+      position: relative; flex: none; width: 200px; height: 84px; margin-top: 40px;
+      padding: 0 0 0 48px; border-radius: 42px; cursor: pointer;
+      border: 0; background: none; color: var(--touch-edge);
+      font-family: var(--font-logo); font-size: 24px;
+      box-shadow: 0 4px 18px rgba(0,0,0,0.32);
+      isolation: isolate;
+    }
+    .btn-again::before {
+      content: ""; position: absolute; z-index: -1; left: 0; top: -65%; width: 100%; height: 168%;
+      pointer-events: none;
+      background: url(../assets/btn-again-night.webp) 0 0 / 100% 100% no-repeat;
+    }
+
+    /* 부모님께 링크 */
+    .btn-parent {
+      height: 48px;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .btn-parent span {
+      font-family: var(--font-kr); font-size: 18px; color: var(--lamp);
+      border-bottom: 1px solid rgba(255,217,138,0.3);
+      padding-bottom: 2px;
+    }
+
+    /* 부모 생활 연결 띠 */
+    .parent-tip {
+      position: relative; z-index: 1;
+      background: var(--night-2);
+      border-top: 1px solid rgba(255,255,255,0.06);
+      padding: 16px 36px;
+      text-align: center;
+      flex-shrink: 0;
+    }
+    .tip-text {
+      font-family: var(--font-kr); font-size: 16px;
+      color: var(--night-ink-2); line-height: 1.7; margin: 0;
+    }
+    .tip-en {
+      font-family: var(--font-en);
+      color: var(--night-ink);
+    }
+    .hint { height: 56px; flex: none; display: flex; align-items: center; justify-content: center; gap: 10px;
+      background: var(--night); font-family: var(--font-kr); font-size: 16px; color: var(--lamp); }
+    .hint-bar { width: 40px; height: 3px; border-radius: 2px; background: var(--night-2); }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <div class="page-body">
+      <!-- 액자 속 Lily 그림 -->
+      <div class="torn-frame">
+        <svg viewBox="-6 -6 194 200" width="260" height="260" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+          <defs>
+            <clipPath id="torn-clip">
+              <path d="M91,2 C91,2 105,0 113,6 C121,12 125,6 133,10 C141,14 144,8 152,14 C160,20 158,26 165,32 C172,38 178,36 180,46 C182,56 177,60 178,70 C179,80 183,84 181,94 C179,104 174,106 173,116 C172,126 176,130 172,139 C168,148 162,148 157,156 C152,164 154,170 147,175 C140,180 135,176 127,179 C119,182 117,187 109,188 C101,189 97,184 89,184 C81,184 77,189 69,188 C61,187 59,182 51,179 C43,176 38,180 31,175 C24,170 26,164 21,156 C16,148 10,148 6,139 C2,130 6,126 5,116 C4,106 -1,104 -3,94 C-5,84 -1,80 0,70 C1,60 -4,56 -2,46 C0,36 6,38 13,32 C20,26 18,20 26,14 C34,8 37,14 45,10 C53,6 57,12 65,6 C73,0 77,2 91,2 Z"/>
+            </clipPath>
+          </defs>
+          <image href="../assets/ep01-bg-0-intro.webp"
+            x="-6" y="-6" width="194" height="200"
+            preserveAspectRatio="xMidYMid slice"
+            clip-path="url(#torn-clip)"/>
+        </svg>
+      </div>
+
+      <!-- 제목 -->
+      <div class="end-title-block">
+        <p class="end-ep">EP01</p>
+        <p class="end-title">Brush, Brush, Brush!</p>
+        <p class="end-msg">오늘 이야기를 다 들었어요.</p>
+      </div>
+
+      <!-- 스티커 리본 + 세 장 -->
+      <div class="sticker-section">
+        <div class="ribbon-wrap">
+          <img class="ribbon-img" src="../assets/ribbon.png" alt="">
+          <span class="ribbon-text">오늘 모은 스티커</span>
+        </div>
+        <div class="sticker-row">
+          <div class="sticker-col">
+            <div class="sticker-slot">
+              <img class="sticker-spot-img" src="../assets/sticker-spot.png" alt="">
+              <img class="sticker-img" src="../assets/ep01-L-sticker-brush.webp" alt="">
+            </div>
+            <span class="sticker-word">brush my teeth</span>
+          </div>
+          <div class="sticker-col">
+            <div class="sticker-slot">
+              <img class="sticker-spot-img" src="../assets/sticker-spot.png" alt="">
+              <img class="sticker-img" src="../assets/ep01-L-sticker-bubbles.webp" alt="">
+            </div>
+            <span class="sticker-word">bubbles</span>
+          </div>
+          <div class="sticker-col">
+            <div class="sticker-slot">
+              <img class="sticker-spot-img" src="../assets/sticker-spot.png" alt="">
+              <img class="sticker-img" src="../assets/ep01-L-sticker-clean.webp" alt="">
+            </div>
+            <span class="sticker-word">all clean</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- 단추 묶음 -->
+      <div class="btn-block">
+        <button class="btn-again" id="again-btn">한 번 더</button>
+        <div class="btn-parent">
+          <span>부모님께</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 부모 생활 연결 띠 -->
+    <div class="parent-tip">
+      <p class="tip-text">오늘 양치할 때 <span class="tip-en">Brush my teeth!</span> 한 번 더 말해 주세요.</p>
+    </div>
+    <!-- 부모 서랍 손잡이 -->
+    <div class="hint">
+      <span class="hint-bar"></span><span>부모 화면 열기</span><span class="hint-car">&#8963;</span>
+    </div>
+  </div>
+</body>
+</html>

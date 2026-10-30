@@ -1,0 +1,36 @@
+/* 맛보기 잠금 카드(승인 시안 T6, 캔버스 promo P68). gate.js가 불러온다. 원본은 design/promo/shared/pages-misc.css의 잠금 카드.
+   이야기 화면 위에 막을 덮고, 아래에서 종이 한 장이 올라온다. 위는 남색 별무늬 띠(홈, 가입과 같은 얼굴), 아래는 흰 종이.
+   편 화면의 크레용 액자(z-index 99)까지 덮는다. 편 화면 토큰(tokens.css)과 값이 달라 색과 글꼴은 이 카드 안에서만 정한다. 넓은 화면에서는 같은 종이를 가운데 둔다. */
+#lilyGateCard {
+  --g-paper: #fefefd; --g-ink: #1f2a3a; --g-ink-2: #4f5b6b; --g-navy: #1b2a44; --g-navy-soft: #b9c6de; --g-teal: #2f7d6d;
+  --g-sun: #ffc531; --g-sun-edge: #6b4a33;
+  --g-head: "Jua", "Noto Sans KR", "Apple SD Gothic Neo", sans-serif; --g-hand: "Gaegu", "Jua", sans-serif;
+  --g-body: "Noto Sans KR", "Apple SD Gothic Neo", "Gowun Dodum", sans-serif;
+  position: fixed; inset: 0; z-index: 100; font-family: var(--g-body); color: var(--g-ink); line-height: normal; word-break: keep-all; -webkit-font-smoothing: antialiased;
+}
+#lilyGateCard * { box-sizing: border-box; }
+#lilyGateCard p, #lilyGateCard h2 { margin: 0; }
+.gate-shade { position: absolute; inset: 0; background: rgba(15,22,38,.55); }
+.gate-badge { position: absolute; left: 50%; top: 210px; transform: translateX(-50%); white-space: nowrap; font-size: 13px; color: #fff; background: rgba(15,22,38,.7); border-radius: 999px; padding: 7px 16px; }
+.gate-sheet { position: absolute; left: 0; right: 0; bottom: 0; margin: 0 auto; max-width: 480px; background: var(--g-paper); border-radius: 26px 26px 0 0; overflow: hidden; }
+.gate-top { background: radial-gradient(70% 120% at 90% 0, rgba(247,215,154,.38), rgba(247,215,154,0) 70%), url(../../shared/ui/img/stars.svg) 0 0 / 120px 120px, var(--g-navy); padding: 18px 24px 30px; color: #fff; }
+.gate-brand { display: flex; align-items: center; gap: 6px; font-family: var(--g-hand); font-weight: 700; font-size: 20px; color: var(--g-navy-soft); }
+.gate-brand img { width: 20px; height: 20px; object-fit: contain; }
+#lilyGateTitle { line-height: 0; margin-top: 12px; }
+#lilyGateTitle img { display: block; width: 100%; max-width: 292px; height: auto; margin-left: -2px; }
+.gate-sub { font-size: 16px; line-height: 1.5; color: #e9eef8; margin-top: 10px !important; }
+.gate-body { position: relative; margin-top: -14px; padding: 6px 24px calc(28px + env(safe-area-inset-bottom, 0px)); background: var(--g-paper); border-radius: 22px 22px 0 0; }
+.gate-more { font-size: 15px; font-weight: 700; margin: 16px 0 10px !important; }
+.gate-eps { display: flex; gap: 6px; }
+.gate-eps img { width: 48px; height: 48px; border-radius: 50%; object-fit: cover; }
+.gate-eps img:nth-child(1) { background: #d4ecff; } .gate-eps img:nth-child(2) { background: #ffd9c4; } .gate-eps img:nth-child(3) { background: #dff1d6; }
+.gate-eps img:nth-child(4) { background: #ffe6a8; } .gate-eps img:nth-child(5) { background: #d9e4ff; } .gate-eps img:nth-child(6) { background: #e6dcf5; }
+.gate-safe { font-size: 13px; color: var(--g-ink-2); margin-top: 12px !important; }
+.gate-act { display: flex; flex-direction: column; gap: 10px; margin-top: 22px; }
+#lilyGateJoin { display: block; text-align: center; font-family: var(--g-head); font-size: 21px; color: #fff; background: var(--g-teal); border-radius: 999px; padding: 15px 0; text-decoration: none; }
+#lilyGateFree { display: block; text-align: center; font-family: var(--g-head); font-size: 19px; color: var(--g-ink); background: var(--g-sun); border: 3px solid var(--g-sun-edge); border-radius: 999px; padding: 11px 0; text-decoration: none; }
+#lilyGateLater { font: inherit; font-size: 15px; color: var(--g-ink-2); background: none; border: 0; padding: 8px; min-height: 48px; cursor: pointer; }
+#lilyGateCard a:focus-visible, #lilyGateCard button:focus-visible { outline: 3px solid #2f6fb5; outline-offset: 3px; }
+/* 낮은 화면: 알림이 종이에 가리지 않게 위로 올린다 */
+@media (max-height: 760px) { .gate-badge { top: 64px; } }
+@media (max-height: 640px) { .gate-badge { top: 16px; } }

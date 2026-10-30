@@ -1,0 +1,311 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=390">
+  <title>Brush, Brush, Brush! — 칫솔 찾기</title>
+  <link rel="stylesheet" href="../shared/tokens.css">
+  <style>
+    body {
+      background: var(--t-bg);
+      color: var(--t-ink);
+      font-family: var(--t-body);
+      width: 390px;
+      margin: 0 auto;
+      overflow-x: hidden;
+    }
+
+    /* ── 상단 바 ── */
+    .top-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 16px;
+      height: 52px;
+      background: var(--t-surface);
+      border-bottom: 1.5px solid var(--t-soft);
+    }
+    .top-title {
+      font-family: var(--t-en);
+      font-size: 11px;
+      color: var(--t-sub);
+      letter-spacing: 0.03em;
+    }
+    .prog-dots {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+    .pdot {
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      background: var(--t-soft);
+    }
+    .pdot.done { background: var(--t-accent); opacity: 0.38; }
+    .pdot.now  { width: 22px; border-radius: 4px; background: var(--t-accent); }
+    .listen-sw {
+      display: flex; align-items: center; gap: 5px;
+      font-family: var(--t-kr); font-size: 10px; color: var(--t-sub);
+    }
+    .sw-track {
+      width: 28px; height: 16px;
+      background: var(--t-soft); border-radius: 8px; position: relative;
+    }
+    .sw-thumb {
+      position: absolute; left: 2px; top: 2px;
+      width: 12px; height: 12px;
+      background: var(--t-surface); border-radius: 50%;
+    }
+
+    /* ── 무대 ── */
+    .stage {
+      width: 390px; height: 538px;
+      position: relative; overflow: hidden;
+      display: block;
+    }
+
+    /* ── 캡션 띠 ── */
+    .caption-strip {
+      background: var(--t-surface);
+      padding: 12px 24px 10px;
+      border-top: 1.5px solid var(--t-soft);
+      border-bottom: 1.5px solid var(--t-soft);
+    }
+    .wait-tag {
+      display: inline-flex; align-items: center; gap: 6px;
+      background: var(--t-soft); border-radius: 99px;
+      padding: 3px 11px;
+      font-family: var(--t-kr); font-size: 11px; color: var(--t-accent);
+      margin-bottom: 7px;
+    }
+    .wait-dot {
+      width: 6px; height: 6px;
+      background: var(--t-accent); border-radius: 50%;
+      animation: blink 1.6s ease-in-out infinite;
+    }
+    @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.25} }
+    .caption-text {
+      font-family: var(--t-kr); font-size: 19px; line-height: 1.55;
+      color: var(--t-ink); margin: 0; text-align: center;
+      word-break: keep-all;
+    }
+    .en { font-family: var(--t-en); font-size: 21px; color: var(--t-accent); font-weight: 700; }
+
+    /* ── 하단 컨트롤 ── */
+    .controls {
+      background: var(--t-bg);
+      padding: 11px 18px 10px;
+    }
+    .ctrl-top {
+      display: flex; align-items: center; gap: 10px; margin-bottom: 8px;
+    }
+    .play-btn {
+      width: 38px; height: 38px; border-radius: 50%;
+      background: var(--t-accent); border: none;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0; cursor: pointer;
+    }
+    .prog-wrap { flex: 1; }
+    .prog-track {
+      height: 4px; background: var(--t-soft);
+      border-radius: 2px; margin-bottom: 4px; position: relative;
+    }
+    .prog-fill {
+      width: 22%; height: 100%;
+      background: var(--t-accent); border-radius: 2px;
+    }
+    .time-row {
+      display: flex; justify-content: space-between;
+      font-family: var(--t-en); font-size: 11px; color: var(--t-sub);
+    }
+    .ctrl-btns { display: flex; gap: 7px; }
+    .ctrl-btn {
+      flex: 1; border: 1.5px solid var(--t-soft);
+      background: var(--t-surface); border-radius: 10px;
+      padding: 8px 6px;
+      font-family: var(--t-kr); font-size: 11px; color: var(--t-sub);
+      text-align: center; cursor: pointer;
+    }
+
+    /* ── 부모 힌트 ── */
+    .parent-hint {
+      display: flex; align-items: center; justify-content: center; gap: 5px;
+      padding: 7px 16px 8px;
+      background: var(--t-bg);
+      font-family: var(--t-kr); font-size: 10px; color: var(--t-sub);
+    }
+
+    /* 5초 링 애니메이션 */
+    .ring-drain {
+      animation: drain5 5s linear;
+      transform-origin: 353px 44px;
+    }
+    @keyframes drain5 {
+      from { stroke-dashoffset: 0; }
+      to   { stroke-dashoffset: 126; }
+    }
+    /* 힌트 링 펄스 */
+    .hint-ring {
+      animation: hpulse 2s ease-in-out infinite;
+    }
+    @keyframes hpulse {
+      0%,100%{ opacity: 0.5; r: 30; }
+      50%    { opacity: 0.18; r: 36; }
+    }
+  </style>
+</head>
+<body class="t-book">
+
+  <!-- 상단 바 -->
+  <header class="top-bar">
+    <span class="top-title">Brush, Brush, Brush!</span>
+    <div class="prog-dots" aria-label="진행 1/6">
+      <span class="pdot now"></span>
+      <span class="pdot"></span><span class="pdot"></span>
+      <span class="pdot"></span><span class="pdot"></span><span class="pdot"></span>
+    </div>
+    <div class="listen-sw">
+      <span>그냥 듣기</span>
+      <span class="sw-track"><span class="sw-thumb"></span></span>
+    </div>
+  </header>
+
+  <!-- 무대 -->
+  <div class="stage" role="img" aria-label="욕실 장면. 비스킷이 칫솔을 입에 물고 있어요.">
+    <svg width="390" height="538" viewBox="0 0 390 538" xmlns="http://www.w3.org/2000/svg">
+
+      <!-- 벽 (wash-1 하늘빛 타일) -->
+      <rect x="0" y="0" width="390" height="538" style="fill:var(--t-wash-1)"/>
+
+      <!-- 타일 그리드 (subtle) -->
+      <line x1="0" y1="90" x2="390" y2="90" style="stroke:var(--t-surface); stroke-width:1; opacity:0.5"/>
+      <line x1="0" y1="180" x2="390" y2="180" style="stroke:var(--t-surface); stroke-width:1; opacity:0.5"/>
+      <line x1="0" y1="270" x2="390" y2="270" style="stroke:var(--t-surface); stroke-width:1; opacity:0.5"/>
+      <line x1="78" y1="0" x2="78" y2="330" style="stroke:var(--t-surface); stroke-width:1; opacity:0.5"/>
+      <line x1="156" y1="0" x2="156" y2="330" style="stroke:var(--t-surface); stroke-width:1; opacity:0.5"/>
+      <line x1="234" y1="0" x2="234" y2="330" style="stroke:var(--t-surface); stroke-width:1; opacity:0.5"/>
+      <line x1="312" y1="0" x2="312" y2="330" style="stroke:var(--t-surface); stroke-width:1; opacity:0.5"/>
+
+      <!-- 바닥 (wash-2 복숭아빛) -->
+      <rect x="0" y="400" width="390" height="138" style="fill:var(--t-wash-2)"/>
+      <!-- 세면대 선반 -->
+      <rect x="0" y="355" width="390" height="55" rx="0" style="fill:var(--t-surface)"/>
+      <!-- 세면대 그릇 -->
+      <ellipse cx="196" cy="368" rx="72" ry="22" style="fill:var(--t-wash-1); stroke:var(--t-soft); stroke-width:1.5"/>
+      <!-- 수도꼭지 -->
+      <rect x="182" y="348" width="28" height="10" rx="5" style="fill:var(--t-sub); opacity:0.5"/>
+
+      <!-- 거울 (벽에 걸린) -->
+      <rect x="120" y="32" width="150" height="106" rx="12" style="fill:var(--t-surface); stroke:var(--t-soft); stroke-width:2"/>
+      <rect x="128" y="40" width="134" height="90" rx="9" style="fill:var(--t-wash-1)"/>
+
+      <!-- 치약 튜브 -->
+      <rect x="72" y="342" width="52" height="16" rx="8" style="fill:var(--t-accent); opacity:0.7"/>
+      <circle cx="72" cy="350" r="8" style="fill:var(--t-soft)"/>
+
+      <!-- 컵 (wash-3 노란색) -->
+      <rect x="284" y="320" width="34" height="40" rx="5" style="fill:var(--t-wash-3)"/>
+      <rect x="284" y="320" width="34" height="9" rx="3" style="fill:var(--t-soft); opacity:0.6"/>
+
+      <!-- 비누 -->
+      <rect x="230" y="346" width="36" height="18" rx="9" style="fill:var(--t-wash-3); opacity:0.8"/>
+
+      <!-- 비스킷 강아지 (선반 위에 앉음) -->
+      <!-- 몸통 -->
+      <ellipse cx="200" cy="298" rx="54" ry="46" style="fill:var(--dog)"/>
+      <!-- 뒷다리 왼쪽 -->
+      <ellipse cx="158" cy="340" rx="18" ry="12" style="fill:var(--dog)"/>
+      <!-- 뒷다리 오른쪽 -->
+      <ellipse cx="242" cy="340" rx="18" ry="12" style="fill:var(--dog)"/>
+      <!-- 머리 -->
+      <circle cx="200" cy="228" r="42" style="fill:var(--dog)"/>
+      <!-- 왼쪽 귀 (처진) -->
+      <ellipse cx="162" cy="248" rx="20" ry="30" style="fill:var(--hair)"/>
+      <!-- 오른쪽 귀 (처진) -->
+      <ellipse cx="238" cy="248" rx="20" ry="30" style="fill:var(--hair)"/>
+      <!-- 눈 왼쪽 -->
+      <circle cx="186" cy="220" r="7" style="fill:var(--ink)"/>
+      <circle cx="188" cy="218" r="2.5" style="fill:var(--t-surface)"/>
+      <!-- 눈 오른쪽 -->
+      <circle cx="214" cy="220" r="7" style="fill:var(--ink)"/>
+      <circle cx="216" cy="218" r="2.5" style="fill:var(--t-surface)"/>
+      <!-- 코 -->
+      <ellipse cx="200" cy="234" rx="9" ry="6" style="fill:var(--ink)"/>
+      <!-- 입 -->
+      <path d="M193 244 q7 8 14 0" style="fill:none; stroke:var(--ink); stroke-width:2.5"/>
+      <!-- 칫솔 (입에서 튀어나옴) -->
+      <rect x="212" y="238" width="60" height="13" rx="6" style="fill:var(--t-accent)"/>
+      <rect x="262" y="232" width="24" height="22" rx="4" style="fill:var(--t-surface); stroke:var(--t-soft); stroke-width:1"/>
+      <!-- 칫솔모 -->
+      <rect x="265" y="229" width="4" height="6" rx="2" style="fill:var(--t-soft)"/>
+      <rect x="272" y="229" width="4" height="6" rx="2" style="fill:var(--t-soft)"/>
+      <rect x="279" y="229" width="4" height="6" rx="2" style="fill:var(--t-soft)"/>
+
+      <!-- 힌트 링 (칫솔 주변, 펄스) -->
+      <circle cx="274" cy="241" r="30" class="hint-ring"
+        style="fill:none; stroke:var(--t-accent); stroke-width:2.5"/>
+
+      <!-- 손가락 포인터 힌트 -->
+      <ellipse cx="274" cy="276" rx="10" ry="14" style="fill:var(--skin); stroke:var(--ink); stroke-width:1.5"/>
+      <rect x="268" y="264" width="7" height="12" rx="3" style="fill:var(--skin); stroke:var(--ink); stroke-width:1"/>
+      <rect x="275" y="262" width="7" height="14" rx="3" style="fill:var(--skin); stroke:var(--ink); stroke-width:1"/>
+
+      <!-- 5초 링 (상단 오른쪽) -->
+      <circle cx="353" cy="44" r="20"
+        style="fill:none; stroke:var(--t-soft); stroke-width:2"/>
+      <circle cx="353" cy="44" r="20" class="ring-drain"
+        style="fill:none; stroke:var(--t-accent); stroke-width:2;
+               stroke-dasharray:126; stroke-linecap:round;
+               transform:rotate(-90deg); transform-origin:353px 44px"/>
+      <text x="353" y="49" style="font-family:var(--t-en); font-size:11px; fill:var(--t-sub); text-anchor:middle">5</text>
+
+      <!-- 학습지 1번 태그 (상단 왼쪽) -->
+      <rect x="12" y="14" width="82" height="26" rx="13" style="fill:var(--t-wash-3)"/>
+      <text x="53" y="31" style="font-family:var(--t-kr); font-size:11px; fill:var(--t-ink); text-anchor:middle">학습지 1번</text>
+
+      <!-- 페이지 모서리 글로우 (오른쪽 아래) -->
+      <rect x="330" y="478" width="60" height="60" rx="30"
+        style="fill:var(--t-wash-3); opacity:0.35"/>
+
+    </svg>
+  </div>
+
+  <!-- 캡션 띠 -->
+  <div class="caption-strip">
+    <div class="wait-tag">
+      <span class="wait-dot"></span>
+      릴리가 기다려요
+    </div>
+    <p class="caption-text">칫솔이 어디 있지? 칫솔을 찾아볼까?</p>
+  </div>
+
+  <!-- 컨트롤 -->
+  <div class="controls">
+    <div class="ctrl-top">
+      <button class="play-btn" aria-label="일시정지">
+        <svg width="16" height="16" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+          <rect x="3" y="2" width="3.5" height="12" rx="1.2" style="fill:var(--t-surface)"/>
+          <rect x="9.5" y="2" width="3.5" height="12" rx="1.2" style="fill:var(--t-surface)"/>
+        </svg>
+      </button>
+      <div class="prog-wrap">
+        <div class="prog-track"><div class="prog-fill"></div></div>
+        <div class="time-row"><span>0:31</span><span>2:19</span></div>
+      </div>
+    </div>
+    <div class="ctrl-btns">
+      <button class="ctrl-btn">3번 이어 듣기</button>
+      <button class="ctrl-btn">조금 천천히</button>
+    </div>
+  </div>
+
+  <!-- 부모 힌트 -->
+  <div class="parent-hint">
+    <span>아래로 내리면 부모님 화면</span>
+    <svg width="12" height="12" viewBox="0 0 12 12" xmlns="http://www.w3.org/2000/svg">
+      <path d="M2 4 l4 4 l4 -4" style="fill:none; stroke:var(--t-sub); stroke-width:1.5; stroke-linecap:round"/>
+    </svg>
+  </div>
+
+</body>
+</html>

@@ -1,0 +1,169 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=390">
+  <title>R52 개선안 2 EpisodeWait</title>
+  <link rel="stylesheet" href="../shared/tokens.css">
+  <style>
+    html, body { margin: 0; width: 390px; height: 844px; overflow: hidden; background: var(--paper); }
+
+    /* 무대 */
+    .stage {
+      position: relative; width: 390px; height: 636px;
+      overflow: hidden; background: var(--sky);
+    }
+    .stage-art { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+    /* 진행 점 */
+    .progress-dots {
+      position: absolute; top: 14px; right: 16px; z-index: 5;
+      display: flex; gap: 5px; align-items: center;
+    }
+    .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--line); }
+    .dot.on { background: var(--brown); width: 14px; border-radius: 3px; }
+
+    /* 브랜드 엠블럼 */
+    .brand {
+      position: absolute; top: 10px; left: 16px; z-index: 5;
+      width: 32px; height: 32px; border-radius: 50%;
+      object-fit: cover; border: 1.5px solid rgba(255,255,255,0.6);
+    }
+
+    /* 칫솔 터치 타겟 */
+    .brush-wrap {
+      position: absolute;
+      right: 52px; bottom: 100px;
+      width: 96px; height: 96px;
+      display: flex; align-items: center; justify-content: center;
+      z-index: 5;
+    }
+
+    /* 숨쉬는 노랑 빛 */
+    .glow {
+      position: absolute; inset: -20px;
+      background: var(--touch);
+      border-radius: 50%;
+      opacity: 0;
+      animation: breathe 2.4s ease-in-out infinite;
+    }
+    @keyframes breathe {
+      0%, 100% { opacity: 0.0; transform: scale(0.85); }
+      50% { opacity: 0.32; transform: scale(1.1); }
+    }
+
+    /* 타이머 고리 */
+    .ring-svg {
+      position: absolute; top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 3; width: 136px; height: 136px;
+    }
+    .ring-track { fill: none; stroke: var(--line); stroke-width: 3; }
+    .ring-count {
+      fill: none; stroke: var(--touch); stroke-width: 3.5;
+      stroke-linecap: round;
+      stroke-dasharray: 377; stroke-dashoffset: 0;
+      transform-origin: center; transform: rotate(-90deg);
+      animation: countdown 8s linear forwards;
+    }
+    @keyframes countdown {
+      from { stroke-dashoffset: 0; }
+      to { stroke-dashoffset: 377; }
+    }
+
+    .brush-img {
+      position: relative; z-index: 4;
+      width: 88px; height: 88px; object-fit: contain;
+    }
+
+    /* 손 힌트 */
+    .hand-hint {
+      position: absolute; bottom: -10px; right: -16px;
+      width: 44px; height: 44px; object-fit: contain; z-index: 5;
+    }
+
+    /* 찢은 종이 가장자리 */
+    .torn-edge {
+      position: absolute; bottom: 0; left: 0; right: 0; z-index: 4; line-height: 0;
+    }
+
+    /* 본문 줄 (Gowun Batang) */
+    .text-strip {
+      height: 152px; background: var(--paper);
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      padding: 20px 32px 10px; gap: 6px;
+    }
+    .body-kr {
+      font-family: var(--font-book); font-size: 20px;
+      color: var(--ink); margin: 0; text-align: center; line-height: 1.6;
+    }
+    .body-en {
+      font-family: var(--font-en); font-size: 17px;
+      color: var(--ink-2); margin: 0; text-align: center;
+    }
+
+    /* 찾았어요 단추 + 서랍 손잡이 */
+    .bottom-zone {
+      height: 56px; background: var(--paper-2);
+      border-top: 1.5px solid var(--line);
+      display: flex; align-items: center; justify-content: center; gap: 10px;
+    }
+    .pull-bar { width: 32px; height: 3px; background: var(--line); border-radius: 2px; }
+    .pull-label { font-family: var(--font-kr); font-size: 13px; color: var(--teal); }
+    .pull-chevron {
+      width: 8px; height: 8px;
+      border-left: 1.5px solid var(--teal); border-top: 1.5px solid var(--teal);
+      transform: rotate(45deg); margin-top: 3px;
+    }
+  </style>
+</head>
+<body>
+  <div class="stage">
+    <img class="stage-art" src="../assets/ep01-bg-1-find.webp" alt="칫솔을 찾아봐요">
+
+    <img class="brand" src="../assets/brand-emblem.png" alt="릴리랑">
+    <div class="progress-dots">
+      <span class="dot"></span>
+      <span class="dot on"></span>
+      <span class="dot"></span>
+      <span class="dot"></span>
+      <span class="dot"></span>
+      <span class="dot"></span>
+    </div>
+
+    <!-- 칫솔 터치 타겟 -->
+    <div class="brush-wrap" id="brush-target">
+      <div class="glow"></div>
+      <svg class="ring-svg" viewBox="0 0 136 136">
+        <circle class="ring-track" cx="68" cy="68" r="60"/>
+        <circle class="ring-count" cx="68" cy="68" r="60"/>
+      </svg>
+      <img class="brush-img" src="../assets/ep01-L-brush.png" alt="칫솔">
+      <img class="hand-hint" src="../assets/engine-ui-hand-tap.webp" alt="">
+    </div>
+
+    <!-- 찢은 종이 가장자리 (불규칙 베지어) -->
+    <div class="torn-edge">
+      <svg width="390" height="40" viewBox="0 0 390 40" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg" style="display:block">
+        <rect x="0" y="0" width="390" height="6" fill="rgba(36,50,61,0.05)"/>
+        <path d="M0,40 L0,30 C4,33 9,25 17,28 C25,31 29,22 38,19 C45,16 52,25 61,29 C69,33 75,23 84,20 C91,17 98,22 107,26 C115,30 121,34 130,29 C137,24 143,17 152,21 C161,25 167,32 175,29 C182,26 188,19 197,15 C205,11 212,22 221,27 C229,32 236,35 244,30 C252,25 258,17 267,21 C275,25 281,31 289,28 C297,25 303,19 311,23 C319,27 325,33 333,27 C340,21 347,16 356,20 C363,24 370,31 378,27 C383,24 387,21 390,23 L390,40 Z" style="fill:var(--paper)"/>
+        <path d="M0,31 C4,34 9,26 17,29 C25,32 29,23 38,20 C45,17 52,26 61,30 C69,34 75,24 84,21 C91,18 98,23 107,27 C115,31 121,35 130,30 C137,25 143,18 152,22 C161,26 167,33 175,30 C182,27 188,20 197,16 C205,12 212,23 221,28 C229,33 236,36 244,31 C252,26 258,18 267,22 C275,26 281,32 289,29 C297,26 303,20 311,24 C319,28 325,34 333,28 C340,22 347,17 356,21 C363,25 370,32 378,28 C383,25 387,22 390,24" stroke="var(--card)" stroke-width="1.2" fill="none" stroke-opacity="0.6"/>
+      </svg>
+    </div>
+  </div>
+
+  <!-- 본문 줄: Gowun Batang -->
+  <div class="text-strip">
+    <p class="body-kr">칫솔이 어디 있지?</p>
+    <p class="body-en">Where is the toothbrush?</p>
+  </div>
+
+  <!-- 서랍 손잡이 -->
+  <div class="bottom-zone">
+    <div class="pull-bar"></div>
+    <span class="pull-label">부모 화면 열기</span>
+    <div class="pull-chevron"></div>
+  </div>
+</body>
+</html>

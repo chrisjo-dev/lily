@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>C16 그림책 출판사 랜딩 PC</title>
+<link rel="stylesheet" href="../shared/tokens.css">
+<link rel="stylesheet" href="../shared/hl.css">
+<style>
+  /* 2. 그림책 출판사 PC: 펼침면. 왼쪽 쪽은 그림이 꽉, 오른쪽 쪽은 종이 위 글 */
+  body { width: 1280px; margin: 0 auto; }
+  .spread { display: grid; grid-template-columns: 7fr 5fr; height: 800px; }
+  .spread > img { width: 100%; height: 100%; object-fit: cover; object-position: 30% 40%; }
+  .page { padding: 56px 64px; display: flex; flex-direction: column; }
+  .page .logo { font-size: 34px; color: var(--brown); margin: 0; }
+  .body { margin-top: auto; margin-bottom: auto; }
+  .kicker { font-size: 15px; color: var(--ink-2); margin: 0 0 var(--s4); }
+  h1 { font-size: 54px; margin: 0; }
+  .lead { font-size: 18px; line-height: 1.8; margin: var(--s6) 0 var(--s8); max-width: 26em; }
+  .play img { width: 84px; height: 79px; }
+  .play b { font-size: 27px; }
+  .play small { font-size: 14px; }
+  .meta { font-size: 13px; color: var(--ink-2); margin: 0; }
+</style>
+</head>
+<body>
+  <main class="spread">
+    <img src="../assets/hl/home-hero-1280.webp" alt="릴리와 강아지 비스킷이 방에서 반기는 그림">
+    <div class="page">
+      <p class="t logo">릴리랑</p>
+      <div class="body">
+        <p class="kicker">4~7세, 부모와 함께 듣는 영어 그림책</p>
+        <h1 class="t">아이가 이야기에<br>끼어드는 2분</h1>
+        <p class="lead">릴리가 이를 닦다 멈추면, 아이가 칫솔을 눌러 줘야 이야기가 이어져요. 하루 습관마다 한 편, 아침부터 밤까지 일곱 권.</p>
+        <a class="play"><img src="../assets/hl/btn-play.webp" alt=""><b>맛보기 바로 듣기<small>EP01 이 닦기, 2분 19초, 로그인 없이</small></b></a>
+      </div>
+      <p class="meta">아이 정보는 받지 않아요. 가입도 무료예요.</p>
+    </div>
+  </main>
+</body>
+</html>

@@ -1,0 +1,91 @@
+{
+  "boards": {
+    "R01-PeterRabbit.html": {
+      "x": 0,
+      "y": 0,
+      "w": 1460,
+      "h": 2134,
+      "title": "R01-PeterRabbit",
+      "group": "참고 사이트"
+    },
+    "R02-GuessHowMuch.html": {
+      "x": 1580,
+      "y": 0,
+      "w": 1460,
+      "h": 1967,
+      "title": "R02-GuessHowMuch",
+      "group": "참고 사이트"
+    },
+    "R03-Snowman.html": {
+      "x": 3160,
+      "y": 0,
+      "w": 1460,
+      "h": 2134,
+      "title": "R03-Snowman",
+      "group": "참고 사이트"
+    },
+    "R04-Gruffalo.html": {
+      "x": 4740,
+      "y": 0,
+      "w": 1460,
+      "h": 2134,
+      "title": "R04-Gruffalo",
+      "group": "참고 사이트"
+    },
+    "R05-GhibliMuseum.html": {
+      "x": 6320,
+      "y": 0,
+      "w": 1460,
+      "h": 2134,
+      "title": "R05-GhibliMuseum",
+      "group": "참고 사이트"
+    },
+    "R06-PokPok.html": {
+      "x": 0,
+      "y": 2300,
+      "w": 1460,
+      "h": 2134,
+      "title": "R06-PokPok",
+      "group": "참고 사이트"
+    },
+    "R07-KhanKids.html": {
+      "x": 1580,
+      "y": 2300,
+      "w": 1460,
+      "h": 2134,
+      "title": "R07-KhanKids",
+      "group": "참고 사이트"
+    },
+    "R08-Tinybop.html": {
+      "x": 3160,
+      "y": 2300,
+      "w": 1460,
+      "h": 1959,
+      "title": "R08-Tinybop",
+      "group": "참고 사이트"
+    },
+    "R09-Sakyejul.html": {
+      "x": 4740,
+      "y": 2300,
+      "w": 1460,
+      "h": 1596,
+      "title": "R09-Sakyejul",
+      "group": "참고 사이트"
+    },
+    "R10-Pinkfong.html": {
+      "x": 6320,
+      "y": 2300,
+      "w": 1460,
+      "h": 2134,
+      "title": "R10-Pinkfong",
+      "group": "참고 사이트"
+    }
+  },
+  "groups": [
+    {
+      "id": "참고 사이트",
+      "label": "참고 사이트"
+    }
+  ],
+  "links": []
+}

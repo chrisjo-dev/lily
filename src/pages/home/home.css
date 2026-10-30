@@ -1,0 +1,143 @@
+/* 홈(승인 시안 T6, 캔버스 promo P60 휴대폰, P61 PC). shell.css 위에 얹는다.
+   원본은 design/promo/shared/landing-t4.css(이야기 동그라미, 아래쪽 시연부터 마지막 권유까지), pages-t5.css(오늘 들어 볼 이야기) */
+.page { padding: 30px 22px 40px; }
+.page h2 { font-size: 24px; line-height: 1.25; }
+.block + .block { margin-top: 36px; }
+.quiet { color: var(--teal); text-decoration: underline; text-underline-offset: 3px; font-size: 16px; }
+
+/* 오늘 들어 볼 이야기 */
+.today { display: grid; gap: 16px; }
+.today .pic { position: relative; border-radius: 24px; overflow: hidden; }
+.today .pic img { width: 100%; height: auto; aspect-ratio: 4 / 3; object-fit: cover; object-position: 50% 88%; }
+/* 세로로 긴 그림을 4:3으로 자르므로 위 벽 대신 릴리 얼굴이 보이게 아래쪽을 보여 준다 */
+.today .label { font-family: var(--font-hand); font-weight: 700; font-size: 22px; color: var(--honey); }
+.today h2 { font-size: 30px; margin-top: 4px; }
+.today h2 small { display: block; font-family: var(--font-body); font-size: 15px; color: var(--ink-2); margin-top: 6px; }
+.today .go { margin-top: 18px; }
+.joinline { margin-top: 26px; font-size: 16px; line-height: 1.6; }
+
+/* 이야기 동그라미 */
+.stories { padding: 40px 0 46px; text-align: center; }
+.sec-title { font-size: 30px; line-height: 1.22; }
+.sec-lead { font-size: 16px; line-height: 1.6; color: var(--ink-2); margin-top: 10px; }
+.circle { text-decoration: none; color: inherit; }
+.circle .dot { position: relative; aspect-ratio: 1; border-radius: 50%; overflow: hidden; }
+.circle .dot > img { width: 100%; height: 100%; object-fit: cover; mix-blend-mode: multiply; }
+.circle:nth-child(1) .dot { background: var(--c1); } .circle:nth-child(2) .dot { background: var(--c2); } .circle:nth-child(3) .dot { background: var(--c3); }
+.circle:nth-child(4) .dot { background: var(--c4); } .circle:nth-child(5) .dot { background: var(--c5); box-shadow: 0 0 0 4px var(--sun); } .circle:nth-child(6) .dot { background: var(--c6); } .circle:nth-child(7) .dot { background: var(--c7); }
+.circle b { display: block; font-family: var(--font-head); font-weight: 400; font-size: 18px; margin-top: 10px; }
+.circle small { display: block; font-size: 13px; color: var(--ink-2); }
+.circle .free { display: inline-block; margin-top: 4px; font-size: 13px; font-weight: 700; color: var(--sun-edge); background: var(--c5); border-radius: 999px; padding: 2px 10px; }
+.circle .lockmark { position: absolute; right: 6%; bottom: 6%; width: 30%; aspect-ratio: 1; border-radius: 50%; background: rgba(255,255,255,.92); display: grid; place-items: center; }
+.circle .lockmark img { width: 58%; height: auto; mix-blend-mode: normal; }
+.circle.locked .dot > img { filter: saturate(.75); }
+.page .stories { text-align: center; }
+
+/* 이야기 줄(승인 시안 T7 A, 캔버스 promo P69 휴대폰, P70 PC). 원본은 design/promo/shared/stories-more.css.
+   넘김은 CSS 가로 스크롤과 scroll-snap, 진행 막대와 화살표만 stories-scroll.js가 붙인다(JS가 없으면 둘 다 숨김). */
+.sm-a .sec-title, .sm-a .sec-lead { text-align: left; }
+.sm-a .sm-join { margin-top: 26px; }
+.sm-ctrl { display: flex; align-items: center; justify-content: flex-end; margin-top: 18px; }
+.sm-swipe { display: inline-flex; align-items: center; gap: 6px; font-family: var(--font-hand); font-weight: 700; font-size: 18px; color: var(--honey); }
+.sm-swipe::after { content: ''; width: 9px; height: 9px; border-right: 2.5px solid currentColor; border-top: 2.5px solid currentColor; transform: rotate(45deg); }
+.sm-arrow { display: none; }
+.sm-strip { display: flex; gap: 14px; overflow-x: auto; scrollbar-width: none; margin: 16px -22px 0; padding: 6px 22px; scroll-snap-type: x mandatory; scroll-padding-inline: 22px; text-align: center; }
+.sm-strip::-webkit-scrollbar { display: none; }
+.sm-strip .circle { flex: none; width: 130px; scroll-snap-align: start; }
+.sm-strip .circle:focus-visible { outline-offset: -3px; }
+.sm-strip .circle small { min-height: 2.6em; }
+.sm-strip .sm-fade { opacity: .5; }
+/* 아직 없는 이야기: 점선 동그라미에 흐린 실루엣. 누를 수 없는 칸이라 노란색을 쓰지 않는다 */
+.sm-soon { color: #7a8697; }
+.sm-soon .dot { background: #f4f6f9; border: 2.5px dashed #c7d0db; box-sizing: border-box; }
+.circle.sm-soon .dot .sil { position: absolute; left: 50%; top: 16%; width: auto; height: 150%; object-fit: contain; transform: translateX(-50%); filter: brightness(0); opacity: .08; mix-blend-mode: normal; }
+.circle.sm-soon .dot .sil-biscuit { top: 26%; height: 96%; }
+.sm-soon b { color: #7a8697; }
+.sm-soon small { color: #9aa4b2; }
+/* 진행 막대: 폰에서만 보인다(PC는 화살표가 대신한다) */
+.sm-track { display: none; height: 4px; border-radius: 4px; background: var(--line-soft); margin-top: 12px; position: relative; overflow: hidden; }
+.sm-track i { position: absolute; left: 0; top: 0; bottom: 0; width: 28%; border-radius: 4px; background: var(--sky-deep); }
+.sm-js .sm-track { display: block; }
+.sm-js .sm-track i { width: calc(var(--sm-view, .28) * 100%); transform: translateX(calc(var(--sm-pos, 0) * (1 / var(--sm-view, .28) - 1) * 100%)); }
+/* 화면 끝까지 붙는 PC 줄이 스크롤 막대 폭만큼 넘쳐도 페이지가 옆으로 밀리지 않게 */
+body { overflow-x: clip; }
+
+/* 아래쪽: 시연, 듣는 방법, 부모님 질문, 마지막 권유(랜딩 T4/T5와 같은 모양, 캔버스 promo P60 휴대폰, P61 PC).
+   원본은 design/promo/shared/landing-t4.css, hello/hello.css의 같은 절. 홈은 정적이라 화면에 들어올 때 떠오르는 움직임은 없다 */
+.wrap { padding: 0 22px; }
+.hand { font-family: var(--font-hand); font-weight: 700; letter-spacing: -0.03em; line-height: 1.05; }
+.wave { display: block; width: 100%; height: 30px; }
+.demo { background: var(--sky-band); padding: 26px 0 40px; }
+.demo .sec-title, .demo .sec-lead { text-align: center; }
+/* 폰은 화면 세 컷을 가로로 넘긴다(CSS 스크롤과 scroll-snap) */
+.frames { display: flex; gap: 14px; margin-top: 26px; overflow-x: auto; padding: 0 22px 10px; scroll-snap-type: x mandatory; }
+.frame { flex: none; width: 60%; margin: 0; scroll-snap-align: center; text-align: center; }
+.frame .scr { border-radius: 26px; overflow: hidden; border: 7px solid var(--white); aspect-ratio: 9 / 15; box-shadow: 0 16px 26px -16px rgba(31,42,58,.45); transition: transform .3s cubic-bezier(.2,.8,.2,1); }
+.frame:hover .scr { transform: translateY(-6px); }
+.frame .scr img { width: 100%; height: 100%; object-fit: cover; object-position: center 40%; }
+.frame b { display: block; font-size: 26px; color: var(--sky-deep); margin-top: 12px; }
+.frame span { font-size: 15px; color: var(--ink-2); }
+.demo .after { text-align: center; font-size: 15px; color: var(--ink-2); margin-top: 18px; }
+.ways { padding: 54px 0 40px; }
+.ways .sec-title { text-align: center; }
+.ways .grid { display: grid; gap: 28px; margin-top: 30px; }
+.way { display: grid; grid-template-columns: 76px 1fr; gap: 16px; align-items: center; }
+.way img { width: 76px; height: 76px; object-fit: contain; }
+.way b { display: block; font-family: var(--font-head); font-weight: 400; font-size: 22px; }
+.way p { font-size: 15px; line-height: 1.6; color: var(--ink-2); margin-top: 4px; }
+.way q { font-family: var(--font-hand); font-weight: 700; font-size: 1.2em; color: var(--sky-deep); quotes: none; }
+.qa { padding: 40px 0 40px; }
+.qa .sec-title { text-align: center; }
+.qa dl { margin: 22px 0 0; display: grid; gap: 20px; }
+.qa dt { font-size: 18px; font-weight: 700; }
+.qa dd { margin: 6px 0 0; font-size: 16px; line-height: 1.6; color: var(--ink-2); }
+.last { text-align: center; padding: 30px 22px 50px; }
+.last img { width: 70%; height: auto; margin: 0 auto 10px; }
+.last h2 { font-size: 32px; line-height: 1.2; }
+.last p { font-size: 16px; color: var(--ink-2); margin: 12px 0 22px; }
+@media (prefers-reduced-motion: reduce) { .frame .scr { transition: none; } }
+
+@media (min-width: 900px) {
+  .page { max-width: 1180px; margin: 0 auto; padding: 60px 48px 80px; }
+  .page h2 { font-size: 36px; }
+  .block + .block { margin-top: 90px; }
+  .today { grid-template-columns: 1.1fr 1fr; gap: 56px; align-items: center; }
+  .today .label { font-size: 30px; } .today h2 { font-size: 48px; } .today h2 small { font-size: 19px; }
+  .stories { padding: 70px 0 90px; }
+  .sec-title { font-size: 50px; } .sec-lead { font-size: 20px; }
+  .circle b { font-size: 21px; } .circle small { font-size: 15px; }
+  .sm-ahead { display: flex; align-items: flex-end; justify-content: space-between; gap: 24px; }
+  .sm-ctrl { gap: 12px; margin-top: 0; }
+  .sm-swipe { display: none; }
+  .sm-js .sm-arrow { display: block; position: relative; width: 52px; height: 52px; padding: 0; border-radius: 50%; border: 1.5px solid #cfd6de; background: var(--white); cursor: pointer; }
+  .sm-arrow::after { content: ''; position: absolute; left: 50%; top: 50%; width: 11px; height: 11px; border-right: 2.5px solid var(--ink); border-top: 2.5px solid var(--ink); transform: translate(-65%, -50%) rotate(45deg); }
+  .sm-arrow.prev::after { transform: translate(-35%, -50%) rotate(-135deg); }
+  .sm-js .sm-arrow.next { background: var(--ink); border-color: var(--ink); } .sm-arrow.next::after { border-color: var(--white); }
+  .sm-arrow:disabled { opacity: .4; cursor: default; }
+  .sm-arrow:focus-visible { outline: 3px solid var(--sky-deep); outline-offset: 4px; }
+  /* 줄은 화면 오른쪽으로 붙되 보드 P70 폭(1262px)을 넘지 않게 해서, 넓은 화면에서도 마지막 칸이 잘려 보이게 한다 */
+  .sm-a .sm-strip { margin: 40px max(calc(50% - 50vw), calc(100% - 1262px)) 0 0; padding: 8px 48px 8px 0; scroll-padding-inline: 0; gap: 22px; -webkit-mask-image: linear-gradient(to right, #000 88%, transparent); mask-image: linear-gradient(to right, #000 88%, transparent); }
+  .sm-a .sm-strip .circle { width: 124px; }
+  .sm-js .sm-track { display: none; }
+  .sm-a .sm-join { margin-top: 34px; }
+  .wrap { max-width: 1180px; margin: 0 auto; padding: 0 48px; }
+  .wave { height: 60px; }
+  .demo { padding: 50px 0 90px; }
+  .frames { justify-content: center; gap: 36px; overflow: visible; margin-top: 50px; }
+  .frame { width: 280px; }
+  .frame:nth-child(2) { margin-top: 34px; }
+  .frame b { font-size: 32px; } .frame span { font-size: 17px; }
+  .demo .after { font-size: 18px; margin-top: 56px; }
+  .ways { padding: 110px 0 60px; }
+  .ways .grid { grid-template-columns: 1fr 1fr; gap: 50px 70px; margin-top: 56px; }
+  .way { grid-template-columns: 110px 1fr; gap: 24px; }
+  .way img { width: 110px; height: 110px; }
+  .way b { font-size: 28px; } .way p { font-size: 18px; }
+  .qa { padding: 70px 0; }
+  .qa .wrap { max-width: 900px; }
+  .qa dl { grid-template-columns: 1fr 1fr; gap: 36px 60px; margin-top: 44px; }
+  .qa dt { font-size: 22px; } .qa dd { font-size: 18px; }
+  .last { padding: 40px 0 90px; }
+  .last img { width: 520px; }
+  .last h2 { font-size: 58px; } .last p { font-size: 20px; }
+}

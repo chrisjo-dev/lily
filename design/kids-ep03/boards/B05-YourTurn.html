@@ -1,0 +1,204 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=390">
+  <title>Brush, Brush, Brush! — 친구 차례</title>
+  <link rel="stylesheet" href="../shared/tokens.css">
+  <style>
+    body {
+      background: var(--t-bg); color: var(--t-ink); font-family: var(--t-body);
+      width: 390px; margin: 0 auto; overflow-x: hidden;
+    }
+    .top-bar {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 16px; height: 52px;
+      background: var(--t-surface); border-bottom: 1.5px solid var(--t-soft);
+    }
+    .top-title { font-family: var(--t-en); font-size: 11px; color: var(--t-sub); letter-spacing: 0.03em; }
+    .prog-dots { display: flex; align-items: center; gap: 5px; }
+    .pdot { width: 8px; height: 8px; border-radius: 50%; background: var(--t-soft); }
+    .pdot.done { background: var(--t-accent); opacity: 0.38; }
+    .pdot.now  { width: 22px; border-radius: 4px; background: var(--t-accent); }
+    .listen-sw { display: flex; align-items: center; gap: 5px; font-family: var(--t-kr); font-size: 10px; color: var(--t-sub); }
+    .sw-track { width: 28px; height: 16px; background: var(--t-soft); border-radius: 8px; position: relative; }
+    .sw-thumb { position: absolute; left: 2px; top: 2px; width: 12px; height: 12px; background: var(--t-surface); border-radius: 50%; }
+
+    .stage { width: 390px; height: 538px; position: relative; overflow: hidden; display: block; }
+
+    .caption-strip {
+      background: var(--t-surface); padding: 12px 24px 10px;
+      border-top: 1.5px solid var(--t-soft); border-bottom: 1.5px solid var(--t-soft);
+    }
+    .wait-tag {
+      display: inline-flex; align-items: center; gap: 6px;
+      background: var(--t-soft); border-radius: 99px; padding: 3px 11px;
+      font-family: var(--t-kr); font-size: 11px; color: var(--t-accent); margin-bottom: 7px;
+    }
+    .wait-dot { width: 6px; height: 6px; background: var(--t-accent); border-radius: 50%; animation: blink 1.6s ease-in-out infinite; }
+    @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.25} }
+    .caption-text { font-family: var(--t-kr); font-size: 19px; line-height: 1.55; color: var(--t-ink); margin: 0; text-align: center; word-break: keep-all; }
+    .en { font-family: var(--t-en); font-size: 21px; color: var(--t-accent); font-weight: 700; }
+
+    .controls { background: var(--t-bg); padding: 11px 18px 10px; }
+    .ctrl-top { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }
+    .play-btn { width: 38px; height: 38px; border-radius: 50%; background: var(--t-accent); border: none; display: flex; align-items: center; justify-content: center; flex-shrink: 0; cursor: pointer; }
+    .prog-wrap { flex: 1; }
+    .prog-track { height: 4px; background: var(--t-soft); border-radius: 2px; margin-bottom: 4px; }
+    .prog-fill { width: 78%; height: 100%; background: var(--t-accent); border-radius: 2px; }
+    .time-row { display: flex; justify-content: space-between; font-family: var(--t-en); font-size: 11px; color: var(--t-sub); }
+    .ctrl-btns { display: flex; gap: 7px; }
+    .ctrl-btn { flex: 1; border: 1.5px solid var(--t-soft); background: var(--t-surface); border-radius: 10px; padding: 8px 6px; font-family: var(--t-kr); font-size: 11px; color: var(--t-sub); text-align: center; cursor: pointer; }
+
+    /* 5초 링 */
+    .ring-drain { animation: drain5 5s linear; transform-origin: 353px 44px; }
+    @keyframes drain5 { from { stroke-dashoffset: 0; } to { stroke-dashoffset: 126; } }
+    /* 말했어요 버튼 맥동 */
+    .say-btn-outer { animation: btnPulse 2s ease-in-out infinite; transform-origin: 195px 356px; }
+    @keyframes btnPulse {
+      0%,100% { opacity: 0.3; transform: scale(1); }
+      50%     { opacity: 0.12; transform: scale(1.08); }
+    }
+    /* 스티커 날아오기 */
+    .sticker-fly { animation: flyIn 0.6s cubic-bezier(.2,1.4,.4,1) both; animation-delay: 0.3s; }
+    @keyframes flyIn {
+      from { opacity: 0; transform: translate(-30px, -20px) scale(0.5) rotate(-12deg); }
+      to   { opacity: 1; transform: translate(0,0) scale(1) rotate(0deg); }
+    }
+  </style>
+</head>
+<body class="t-book">
+
+  <header class="top-bar">
+    <span class="top-title">Brush, Brush, Brush!</span>
+    <div class="prog-dots" aria-label="진행 5/6">
+      <span class="pdot done"></span><span class="pdot done"></span>
+      <span class="pdot done"></span><span class="pdot done"></span>
+      <span class="pdot now"></span><span class="pdot"></span>
+    </div>
+    <div class="listen-sw">
+      <span>그냥 듣기</span>
+      <span class="sw-track"><span class="sw-thumb"></span></span>
+    </div>
+  </header>
+
+  <div class="stage" role="img" aria-label="친구 차례. 릴리가 Bubbles라고 말하고 기다려요.">
+    <svg width="390" height="538" viewBox="0 0 390 538" xmlns="http://www.w3.org/2000/svg">
+
+      <!-- 배경 -->
+      <rect x="0" y="0" width="390" height="538" style="fill:var(--t-wash-1)"/>
+      <!-- 배경 아래 wash-3 띠 -->
+      <rect x="0" y="400" width="390" height="138" style="fill:var(--t-wash-3); opacity:0.5"/>
+
+      <!-- 릴리 (왼쪽, 작게) -->
+      <!-- 머리카락 -->
+      <ellipse cx="110" cy="195" rx="56" ry="60" style="fill:var(--hair)"/>
+      <!-- 얼굴 -->
+      <circle cx="110" cy="200" r="48" style="fill:var(--skin)"/>
+      <!-- 왼쪽 볼 -->
+      <ellipse cx="78" cy="224" rx="12" ry="8" style="fill:var(--cheek); opacity:0.7"/>
+      <!-- 오른쪽 볼 -->
+      <ellipse cx="142" cy="224" rx="12" ry="8" style="fill:var(--cheek); opacity:0.7"/>
+      <!-- 앞머리 -->
+      <path d="M62 180 q20 -48 48 -50 q28 -2 48 50 q-20 -16 -48 -18 q-28 2 -48 18 z"
+        style="fill:var(--hair)"/>
+      <!-- 왼 머리묶음 -->
+      <path d="M62 180 q-24 8 -20 38 q8 -4 12 -16" style="fill:var(--hair)"/>
+      <circle cx="42" cy="222" r="7" style="fill:var(--sun)"/>
+      <!-- 오른 머리묶음 -->
+      <path d="M158 180 q24 8 20 38 q-8 -4 -12 -16" style="fill:var(--hair)"/>
+      <circle cx="178" cy="222" r="7" style="fill:var(--sun)"/>
+      <!-- 눈 -->
+      <circle cx="94" cy="196" r="5" style="fill:var(--ink)"/>
+      <circle cx="126" cy="196" r="5" style="fill:var(--ink)"/>
+      <circle cx="96" cy="194" r="1.8" style="fill:var(--t-surface)"/>
+      <circle cx="128" cy="194" r="1.8" style="fill:var(--t-surface)"/>
+      <!-- 웃는 입 -->
+      <path d="M90 216 q20 22 40 0" style="fill:none; stroke:var(--ink); stroke-width:3; stroke-linecap:round"/>
+      <!-- 코 -->
+      <ellipse cx="110" cy="208" rx="5" ry="3.5" style="fill:var(--cheek); opacity:0.7"/>
+      <!-- 셔츠 -->
+      <path d="M58 276 q28 -18 52 -14 q24 -4 52 14 l8 90 l-120 0 z" style="fill:var(--t-wash-1)"/>
+
+      <!-- 말풍선 (오른쪽으로) -->
+      <rect x="168" y="142" width="172" height="80" rx="18" style="fill:var(--t-surface); stroke:var(--t-soft); stroke-width:2"/>
+      <!-- 꼬리 -->
+      <polygon points="176,186 166,202 194,192" style="fill:var(--t-surface); stroke:var(--t-soft); stroke-width:2"/>
+      <!-- Bubbles. 텍스트 -->
+      <text x="254" y="176" style="font-family:var(--t-en); font-size:28px; font-weight:700; fill:var(--t-accent); text-anchor:middle">Bubbles.</text>
+      <!-- 작은 물결 (말하는 중 표시) -->
+      <circle cx="312" cy="156" r="4" style="fill:var(--t-soft)"/>
+      <circle cx="326" cy="152" r="5" style="fill:var(--t-soft)"/>
+      <circle cx="340" cy="146" r="6" style="fill:var(--t-soft)"/>
+
+      <!-- 말했어요 버튼 (큰 원형) -->
+      <!-- 바깥 맥동 링 -->
+      <circle cx="195" cy="356" r="66" class="say-btn-outer"
+        style="fill:none; stroke:var(--t-accent); stroke-width:3"/>
+      <!-- 버튼 본체 -->
+      <circle cx="195" cy="356" r="58" style="fill:var(--t-accent)"/>
+      <!-- 버튼 텍스트 -->
+      <text x="195" y="349" style="font-family:var(--t-kr); font-size:18px; fill:var(--t-surface); text-anchor:middle; font-weight:700">말했어요</text>
+      <text x="195" y="373" style="font-family:var(--t-en); font-size:13px; fill:var(--t-surface); text-anchor:middle; opacity:0.85">I said it!</text>
+
+      <!-- 스티커 판 (아래) -->
+      <!-- 제목 -->
+      <text x="195" y="444" style="font-family:var(--t-kr); font-size:12px; fill:var(--t-sub); text-anchor:middle">오늘의 스티커</text>
+      <!-- 스티커 슬롯 3개 -->
+      <!-- 슬롯 1: 채워짐 (brush my teeth) -->
+      <rect x="80" y="452" width="64" height="64" rx="14" style="fill:var(--t-soft)"/>
+      <image href="../assets/word-brush.svg" x="88" y="460" width="48" height="48"/>
+      <!-- 슬롯 2: 날아오는 중 (bubbles) -->
+      <rect x="163" y="452" width="64" height="64" rx="14" style="fill:var(--t-soft)"/>
+      <g class="sticker-fly">
+        <rect x="163" y="452" width="64" height="64" rx="14" style="fill:var(--t-wash-3)"/>
+        <image href="../assets/word-bubbles.svg" x="171" y="460" width="48" height="48"/>
+      </g>
+      <!-- 슬롯 3: 빈 칸 -->
+      <rect x="246" y="452" width="64" height="64" rx="14"
+        style="fill:none; stroke:var(--t-soft); stroke-width:2; stroke-dasharray:6 4"/>
+
+      <!-- 학습지 3번 태그 -->
+      <rect x="246" y="466" width="58" height="36" rx="10"
+        style="fill:var(--t-wash-3); opacity:0.88"/>
+      <text x="275" y="481" style="font-family:var(--t-kr); font-size:9px; fill:var(--t-ink); text-anchor:middle">학습지 3번</text>
+      <text x="275" y="494" style="font-family:var(--t-kr); font-size:9px; fill:var(--t-ink); text-anchor:middle">에도 붙여요</text>
+
+      <!-- 5초 링 -->
+      <circle cx="353" cy="44" r="20" style="fill:none; stroke:var(--t-soft); stroke-width:2"/>
+      <circle cx="353" cy="44" r="20" class="ring-drain"
+        style="fill:none; stroke:var(--t-accent); stroke-width:2; stroke-dasharray:126; stroke-linecap:round; transform:rotate(-90deg); transform-origin:353px 44px"/>
+      <text x="353" y="49" style="font-family:var(--t-en); font-size:11px; fill:var(--t-sub); text-anchor:middle">5</text>
+
+      <!-- 페이지 모서리 글로우 -->
+      <rect x="330" y="478" width="60" height="60" rx="30" style="fill:var(--t-wash-2); opacity:0.35"/>
+
+    </svg>
+  </div>
+
+  <div class="caption-strip">
+    <div class="wait-tag"><span class="wait-dot"></span>릴리가 기다려요</div>
+    <p class="caption-text">이제 친구 차례야! 내가 말하면 따라 해 봐.</p>
+  </div>
+
+  <div class="controls">
+    <div class="ctrl-top">
+      <button class="play-btn" aria-label="일시정지">
+        <svg width="16" height="16" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+          <rect x="3" y="2" width="3.5" height="12" rx="1.2" style="fill:var(--t-surface)"/>
+          <rect x="9.5" y="2" width="3.5" height="12" rx="1.2" style="fill:var(--t-surface)"/>
+        </svg>
+      </button>
+      <div class="prog-wrap">
+        <div class="prog-track"><div class="prog-fill"></div></div>
+        <div class="time-row"><span>1:48</span><span>2:19</span></div>
+      </div>
+    </div>
+    <div class="ctrl-btns">
+      <button class="ctrl-btn">3번 이어 듣기</button>
+      <button class="ctrl-btn">조금 천천히</button>
+    </div>
+  </div>
+
+</body>
+</html>

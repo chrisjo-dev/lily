@@ -1,0 +1,154 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=390">
+  <title>Brush, Brush, Brush! — 반짝</title>
+  <link rel="stylesheet" href="../shared/tokens.css">
+  <style>
+    body { background: var(--t-bg); color: var(--t-ink); font-family: var(--t-body); width: 390px; margin: 0 auto; overflow-x: hidden; }
+    .top-bar { display: flex; align-items: center; justify-content: space-between; padding: 0 16px; height: 52px; background: var(--t-surface); border-bottom: 1.5px solid var(--t-line); }
+    .top-title { font-family: var(--t-en); font-size: 11px; color: var(--t-sub); letter-spacing: 0.03em; }
+    .prog-dots { display: flex; align-items: center; gap: 5px; }
+    .pdot { width: 8px; height: 8px; border-radius: 50%; background: var(--t-soft); }
+    .pdot.done { background: var(--t-accent); opacity: 0.38; }
+    .pdot.now { width: 22px; border-radius: 4px; background: var(--t-accent); }
+    .listen-sw { display: flex; align-items: center; gap: 5px; font-family: var(--t-kr); font-size: 10px; color: var(--t-sub); }
+    .sw-track { width: 28px; height: 16px; background: var(--t-soft); border-radius: 8px; position: relative; }
+    .sw-thumb { position: absolute; left: 2px; top: 2px; width: 12px; height: 12px; background: var(--t-surface-2); border-radius: 50%; }
+    .stage { width: 390px; height: 610px; position: relative; overflow: hidden; display: block; }
+    .caption-strip { background: var(--t-surface); padding: 12px 24px 10px; border-top: 1.5px solid var(--t-line); border-bottom: 1.5px solid var(--t-line); }
+    .caption-text { font-family: var(--t-kr); font-size: 19px; line-height: 1.55; color: var(--t-ink); margin: 0; text-align: center; word-break: keep-all; }
+    .en { font-family: var(--t-en); font-size: 21px; color: var(--t-accent); font-weight: 700; }
+    .controls { background: var(--t-bg); padding: 11px 18px 10px; }
+    .ctrl-top { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }
+    .play-btn { width: 38px; height: 38px; border-radius: 50%; background: var(--t-soft); border: none; display: flex; align-items: center; justify-content: center; flex-shrink: 0; cursor: pointer; }
+    .prog-wrap { flex: 1; }
+    .prog-track { height: 4px; background: var(--t-soft); border-radius: 2px; margin-bottom: 4px; }
+    .prog-fill { width: 64%; height: 100%; background: var(--t-accent); border-radius: 2px; }
+    .time-row { display: flex; justify-content: space-between; font-family: var(--t-en); font-size: 11px; color: var(--t-sub); }
+    .ctrl-btns { display: flex; gap: 7px; }
+    .ctrl-btn { flex: 1; border: 1.5px solid var(--t-line); background: var(--t-surface); border-radius: 10px; padding: 8px 6px; font-family: var(--t-kr); font-size: 11px; color: var(--t-sub); text-align: center; cursor: pointer; }
+  </style>
+</head>
+<body class="t-night">
+
+  <header class="top-bar">
+    <span class="top-title">Brush, Brush, Brush!</span>
+    <div class="prog-dots" aria-label="진행 4/6">
+      <span class="pdot done"></span><span class="pdot done"></span><span class="pdot done"></span>
+      <span class="pdot now"></span>
+      <span class="pdot"></span><span class="pdot"></span>
+    </div>
+    <div class="listen-sw">
+      <span>그냥 듣기</span>
+      <span class="sw-track"><span class="sw-thumb"></span></span>
+    </div>
+  </header>
+
+  <div class="stage" role="img" aria-label="릴리가 크게 웃어요. 깨끗한 치아에 반짝이 피드백.">
+    <svg width="390" height="610" viewBox="0 0 390 610" xmlns="http://www.w3.org/2000/svg">
+
+      <!-- 배경 -->
+      <rect width="390" height="610" style="fill:var(--t-bg)"/>
+
+      <!-- "All clean!" 큰 텍스트 -->
+      <text x="195" y="52" style="font-family:var(--t-en); font-size:40px; fill:var(--t-accent); text-anchor:middle; font-weight:700">All clean!</text>
+
+      <!-- 릴리 얼굴 클로즈업 (화면 가득) -->
+
+      <!-- 양 갈래 피그테일 (극단 클로즈업 — 화면 양쪽 가장자리에만 보임) -->
+      <path d="M 28 268 q -38 18 -28 140" style="fill:none; stroke:var(--hair); stroke-width:52; stroke-linecap:round"/>
+      <path d="M 362 268 q 38 18 28 140" style="fill:none; stroke:var(--hair); stroke-width:52; stroke-linecap:round"/>
+      <!-- 머리띠 (노란 원, 화면 가장자리) -->
+      <circle cx="8" cy="372" r="18" style="fill:var(--sun)"/>
+      <circle cx="382" cy="372" r="18" style="fill:var(--sun)"/>
+      <!-- 머리카락 돔 (더 높이 솟아올라 얼굴 위로 충분히 보임) -->
+      <path d="M 30 270 q 0 -220 165 -220 q 165 0 165 220 z" style="fill:var(--hair); stroke:none"/>
+
+      <!-- 목 -->
+      <rect x="162" y="478" width="66" height="52" rx="16" style="fill:var(--skin)"/>
+
+      <!-- 얼굴 -->
+      <circle cx="195" cy="310" r="165" style="fill:var(--skin)"/>
+
+      <!-- 귀 -->
+      <circle cx="30" cy="324" r="20" style="fill:var(--skin)"/>
+      <circle cx="360" cy="324" r="20" style="fill:var(--skin)"/>
+
+      <!-- 눈썹 왼쪽 -->
+      <path d="M 120 228 q 22 -16 44 -8" style="fill:none; stroke:var(--hair); stroke-width:5; stroke-linecap:round"/>
+      <!-- 눈썹 오른쪽 -->
+      <path d="M 226 220 q 22 -8 44 8" style="fill:none; stroke:var(--hair); stroke-width:5; stroke-linecap:round"/>
+
+      <!-- 눈 왼쪽 -->
+      <circle cx="143" cy="268" r="20" style="fill:var(--ink)"/>
+      <circle cx="148" cy="262" r="7" style="fill:var(--t-moon)"/>
+      <!-- 눈 오른쪽 -->
+      <circle cx="247" cy="268" r="20" style="fill:var(--ink)"/>
+      <circle cx="252" cy="262" r="7" style="fill:var(--t-moon)"/>
+
+      <!-- 볼 -->
+      <ellipse cx="98" cy="338" rx="34" ry="20" style="fill:var(--cheek)" opacity="0.55"/>
+      <ellipse cx="292" cy="338" rx="34" ry="20" style="fill:var(--cheek)" opacity="0.55"/>
+
+      <!-- 입 (크게 활짝) -->
+      <path d="M 108 370 q 87 96 174 0 z" style="fill:var(--ink)"/>
+      <!-- 치아 (깨끗한 크림색) -->
+      <path d="M 108 370 q 87 72 174 0 z" style="fill:var(--t-moon)"/>
+      <!-- 치아 경계선 -->
+      <line x1="140" y1="370" x2="145" y2="432" style="stroke:var(--t-sub); stroke-width:1; opacity:0.4"/>
+      <line x1="168" y1="370" x2="171" y2="438" style="stroke:var(--t-sub); stroke-width:1; opacity:0.4"/>
+      <line x1="195" y1="370" x2="195" y2="440" style="stroke:var(--t-sub); stroke-width:1; opacity:0.4"/>
+      <line x1="222" y1="370" x2="219" y2="438" style="stroke:var(--t-sub); stroke-width:1; opacity:0.4"/>
+      <line x1="250" y1="370" x2="245" y2="432" style="stroke:var(--t-sub); stroke-width:1; opacity:0.4"/>
+
+      <!-- 셔츠 (파란색, 화면 아래) -->
+      <path d="M 80 530 q -20 20 -20 80 l 270 0 q 0 -60 -20 -80 q -60 -30 -115 -30 q -55 0 -115 30 z" style="fill:var(--blue)"/>
+
+      <!-- ===== 반짝 피드백 (치아 위 별 4개) ===== -->
+      <!-- 반짝 1 -->
+      <path d="M 142 358 l 4 -14 l 4 14 l 14 4 l -14 4 l -4 14 l -4 -14 l -14 -4 z" style="fill:var(--t-accent)"/>
+      <!-- 반짝 2 -->
+      <path d="M 195 352 l 5 -17 l 5 17 l 17 5 l -17 5 l -5 17 l -5 -17 l -17 -5 z" style="fill:var(--t-accent)"/>
+      <!-- 반짝 3 -->
+      <path d="M 248 358 l 4 -14 l 4 14 l 14 4 l -14 4 l -4 14 l -4 -14 l -14 -4 z" style="fill:var(--t-accent)"/>
+      <!-- 작은 반짝 4 -->
+      <path d="M 168 344 l 3 -9 l 3 9 l 9 3 l -9 3 l -3 9 l -3 -9 l -9 -3 z" style="fill:var(--t-accent)" opacity="0.7"/>
+      <!-- 작은 반짝 5 -->
+      <path d="M 222 344 l 3 -9 l 3 9 l 9 3 l -9 3 l -3 9 l -3 -9 l -9 -3 z" style="fill:var(--t-accent)" opacity="0.7"/>
+
+      <!-- 반짝 아우라 -->
+      <circle cx="195" cy="400" r="90" style="fill:var(--t-accent)" opacity="0.04"/>
+
+      <!-- 주변 작은 별 -->
+      <path d="M 46 190 l 2.5 -7.5 l 2.5 7.5 l 7.5 2.5 l -7.5 2.5 l -2.5 7.5 l -2.5 -7.5 l -7.5 -2.5 z" style="fill:var(--t-moon)" opacity="0.4"/>
+      <path d="M 330 160 l 2 -6 l 2 6 l 6 2 l -6 2 l -2 6 l -2 -6 l -6 -2 z" style="fill:var(--t-moon)" opacity="0.35"/>
+      <path d="M 62 470 l 2 -6 l 2 6 l 6 2 l -6 2 l -2 6 l -2 -6 l -6 -2 z" style="fill:var(--t-accent)" opacity="0.3"/>
+      <path d="M 350 430 l 2.5 -7.5 l 2.5 7.5 l 7.5 2.5 l -7.5 2.5 l -2.5 7.5 l -2.5 -7.5 l -7.5 -2.5 z" style="fill:var(--t-accent)" opacity="0.3"/>
+
+    </svg>
+  </div>
+
+  <div class="caption-strip">
+    <p class="caption-text"><span class="en">All clean!</span> 깨끗해! 활짝 웃어 봐!</p>
+  </div>
+
+  <div class="controls">
+    <div class="ctrl-top">
+      <button class="play-btn" aria-label="일시정지">
+        <svg width="16" height="16" viewBox="0 0 16 16"><rect x="3" y="2" width="3.5" height="12" rx="1.2" style="fill:var(--t-sub)"/><rect x="9.5" y="2" width="3.5" height="12" rx="1.2" style="fill:var(--t-sub)"/></svg>
+      </button>
+      <div class="prog-wrap">
+        <div class="prog-track"><div class="prog-fill"></div></div>
+        <div class="time-row"><span>1:30</span><span>2:19</span></div>
+      </div>
+    </div>
+    <div class="ctrl-btns">
+      <button class="ctrl-btn">3번 이어 듣기</button>
+      <button class="ctrl-btn">조금 천천히</button>
+    </div>
+  </div>
+
+</body>
+</html>

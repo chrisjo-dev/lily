@@ -1,0 +1,146 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=390">
+  <title>Brush, Brush, Brush! — 이 닦기</title>
+  <link rel="stylesheet" href="../shared/tokens.css">
+  <style>
+    body { background: var(--t-bg); color: var(--t-ink); font-family: var(--t-body); width: 390px; margin: 0 auto; overflow-x: hidden; }
+    .top-bar { display: flex; align-items: center; justify-content: space-between; padding: 0 16px; height: 52px; background: var(--t-surface); border-bottom: 1.5px solid var(--t-line); }
+    .top-title { font-family: var(--t-en); font-size: 11px; color: var(--t-sub); letter-spacing: 0.03em; }
+    .prog-dots { display: flex; align-items: center; gap: 5px; }
+    .pdot { width: 8px; height: 8px; border-radius: 50%; background: var(--t-soft); }
+    .pdot.done { background: var(--t-accent); opacity: 0.38; }
+    .pdot.now { width: 22px; border-radius: 4px; background: var(--t-accent); }
+    .listen-sw { display: flex; align-items: center; gap: 5px; font-family: var(--t-kr); font-size: 10px; color: var(--t-sub); }
+    .sw-track { width: 28px; height: 16px; background: var(--t-soft); border-radius: 8px; position: relative; }
+    .sw-thumb { position: absolute; left: 2px; top: 2px; width: 12px; height: 12px; background: var(--t-surface-2); border-radius: 50%; }
+    .stage { width: 390px; height: 610px; position: relative; overflow: hidden; display: block; }
+    .caption-strip { background: var(--t-surface); padding: 12px 24px 10px; border-top: 1.5px solid var(--t-line); border-bottom: 1.5px solid var(--t-line); }
+    .caption-text { font-family: var(--t-kr); font-size: 19px; line-height: 1.55; color: var(--t-ink); margin: 0; text-align: center; word-break: keep-all; }
+    .en { font-family: var(--t-en); font-size: 21px; color: var(--t-accent); font-weight: 700; }
+    .controls { background: var(--t-bg); padding: 11px 18px 10px; }
+    .ctrl-top { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }
+    .play-btn { width: 38px; height: 38px; border-radius: 50%; background: var(--t-soft); border: none; display: flex; align-items: center; justify-content: center; flex-shrink: 0; cursor: pointer; }
+    .prog-wrap { flex: 1; }
+    .prog-track { height: 4px; background: var(--t-soft); border-radius: 2px; margin-bottom: 4px; }
+    .prog-fill { width: 37%; height: 100%; background: var(--t-accent); border-radius: 2px; }
+    .time-row { display: flex; justify-content: space-between; font-family: var(--t-en); font-size: 11px; color: var(--t-sub); }
+    .ctrl-btns { display: flex; gap: 7px; }
+    .ctrl-btn { flex: 1; border: 1.5px solid var(--t-line); background: var(--t-surface); border-radius: 10px; padding: 8px 6px; font-family: var(--t-kr); font-size: 11px; color: var(--t-sub); text-align: center; cursor: pointer; }
+  </style>
+</head>
+<body class="t-night">
+
+  <header class="top-bar">
+    <span class="top-title">Brush, Brush, Brush!</span>
+    <div class="prog-dots" aria-label="진행 2/6">
+      <span class="pdot done"></span>
+      <span class="pdot now"></span>
+      <span class="pdot"></span><span class="pdot"></span><span class="pdot"></span><span class="pdot"></span>
+    </div>
+    <div class="listen-sw">
+      <span>그냥 듣기</span>
+      <span class="sw-track"><span class="sw-thumb"></span></span>
+    </div>
+  </header>
+
+  <div class="stage" role="img" aria-label="이 닦기 장면. 치아 클로즈업, 왼쪽은 깨끗하고 오른쪽은 아직 닦는 중.">
+    <svg width="390" height="610" viewBox="0 0 390 610" xmlns="http://www.w3.org/2000/svg">
+
+      <!-- 어두운 배경 -->
+      <rect width="390" height="610" style="fill:var(--t-bg)"/>
+
+      <!-- 나타나는 텍스트 (각 칫솔질마다 한 단어씩) -->
+      <text x="55" y="38" style="font-family:var(--t-en); font-size:26px; fill:var(--t-accent); font-weight:700; opacity:0.38">Brush,</text>
+      <text x="170" y="60" style="font-family:var(--t-en); font-size:26px; fill:var(--t-accent); font-weight:700; opacity:0.65">brush,</text>
+      <text x="278" y="80" style="font-family:var(--t-en); font-size:26px; fill:var(--t-accent); font-weight:700">brush!</text>
+
+      <!-- ===== 친근한 그린 (닫힌 입꼬리 + 두 줄 치아) ===== -->
+
+      <!-- 윗입술 (피부색 두꺼운 호, 양 끝에서 위로 올라가는 미소) -->
+      <path d="M 8 202 Q 195 170 382 202" style="fill:none; stroke:var(--skin); stroke-width:26; stroke-linecap:round"/>
+      <!-- 윗 잇몸 -->
+      <rect x="0" y="202" width="390" height="20" style="fill:var(--cheek)" opacity="0.75"/>
+
+      <!-- 윗 치아 6개 -->
+      <!-- 깨끗한 치아 (왼쪽 3개) : t-moon 색 -->
+      <rect x="8" y="210" width="58" height="118" rx="12" style="fill:var(--t-moon); stroke:var(--t-sub); stroke-width:1"/>
+      <rect x="70" y="206" width="60" height="122" rx="12" style="fill:var(--t-moon); stroke:var(--t-sub); stroke-width:1"/>
+      <rect x="134" y="204" width="60" height="124" rx="12" style="fill:var(--t-moon); stroke:var(--t-sub); stroke-width:1"/>
+      <!-- 깨끗한 쪽 반짝 표시 -->
+      <circle cx="37" cy="238" r="5" style="fill:var(--t-accent)" opacity="0.5"/>
+      <circle cx="100" cy="232" r="4" style="fill:var(--t-accent)" opacity="0.4"/>
+
+      <!-- 더러운 치아 (오른쪽 3개) : t-soft 색 -->
+      <rect x="198" y="204" width="60" height="124" rx="12" style="fill:var(--t-soft); stroke:var(--t-line); stroke-width:1"/>
+      <rect x="262" y="206" width="60" height="122" rx="12" style="fill:var(--t-soft); stroke:var(--t-line); stroke-width:1"/>
+      <rect x="326" y="210" width="58" height="118" rx="12" style="fill:var(--t-soft); stroke:var(--t-line); stroke-width:1"/>
+
+      <!-- 세균 캐릭터 (치아 5번) -->
+      <circle cx="292" cy="260" r="22" style="fill:var(--t-surface-2); stroke:var(--t-line); stroke-width:1.5"/>
+      <circle cx="284" cy="255" r="3.5" style="fill:var(--ink)"/>
+      <circle cx="300" cy="255" r="3.5" style="fill:var(--ink)"/>
+      <path d="M 284 267 q 8 -5 16 0" style="fill:none; stroke:var(--ink); stroke-width:2"/>
+      <!-- 세균 캐릭터 (치아 6번) -->
+      <circle cx="352" cy="264" r="18" style="fill:var(--t-surface-2); stroke:var(--t-line); stroke-width:1.5"/>
+      <circle cx="344" cy="259" r="3" style="fill:var(--ink)"/>
+      <circle cx="358" cy="259" r="3" style="fill:var(--ink)"/>
+      <path d="M 345 271 q 7 -4 14 0" style="fill:none; stroke:var(--ink); stroke-width:1.5"/>
+
+      <!-- 입술이 맞닿는 부분 (어두운 갭) -->
+      <rect x="0" y="328" width="390" height="20" style="fill:var(--t-bg)"/>
+      <!-- 입꼬리 쉐도우 -->
+      <ellipse cx="6" cy="338" rx="14" ry="8" style="fill:var(--t-bg)" opacity="0.8"/>
+      <ellipse cx="384" cy="338" rx="14" ry="8" style="fill:var(--t-bg)" opacity="0.8"/>
+
+      <!-- 아랫 치아 6개 -->
+      <!-- 깨끗한 (왼쪽 3개) -->
+      <rect x="8" y="348" width="58" height="96" rx="12" style="fill:var(--t-moon); stroke:var(--t-sub); stroke-width:1"/>
+      <rect x="70" y="344" width="60" height="100" rx="12" style="fill:var(--t-moon); stroke:var(--t-sub); stroke-width:1"/>
+      <rect x="134" y="342" width="60" height="102" rx="12" style="fill:var(--t-moon); stroke:var(--t-sub); stroke-width:1"/>
+      <!-- 더러운 (오른쪽 3개) -->
+      <rect x="198" y="342" width="60" height="102" rx="12" style="fill:var(--t-soft); stroke:var(--t-line); stroke-width:1"/>
+      <rect x="262" y="344" width="60" height="100" rx="12" style="fill:var(--t-soft); stroke:var(--t-line); stroke-width:1"/>
+      <rect x="326" y="348" width="58" height="96" rx="12" style="fill:var(--t-soft); stroke:var(--t-line); stroke-width:1"/>
+
+      <!-- 아랫 잇몸 -->
+      <rect x="0" y="444" width="390" height="16" style="fill:var(--cheek)" opacity="0.75"/>
+      <!-- 아랫입술 (피부색 호) -->
+      <path d="M 8 458 Q 195 490 382 458" style="fill:none; stroke:var(--skin); stroke-width:22; stroke-linecap:round"/>
+
+      <!-- 칫솔질 궤적 (오른쪽에서 왼쪽 방향으로 쓸기) -->
+      <!-- 번짐 효과 -->
+      <path d="M 368 148 C 310 128 250 138 198 152" style="fill:none; stroke:var(--t-accent); stroke-width:18; opacity:0.18; stroke-linecap:round"/>
+      <!-- 궤적 선 -->
+      <path d="M 368 148 C 310 128 250 138 198 152" style="fill:none; stroke:var(--t-accent); stroke-width:5; opacity:0.75; stroke-linecap:round"/>
+      <!-- 궤적 끝 (현재 손가락 위치) -->
+      <circle cx="198" cy="152" r="16" style="fill:var(--t-accent)" opacity="0.22"/>
+      <circle cx="198" cy="152" r="10" style="fill:var(--t-accent)" opacity="0.45"/>
+
+    </svg>
+  </div>
+
+  <div class="caption-strip">
+    <p class="caption-text"><span class="en">Brush, brush, brush.</span> 친구도 같이!</p>
+  </div>
+
+  <div class="controls">
+    <div class="ctrl-top">
+      <button class="play-btn" aria-label="일시정지">
+        <svg width="16" height="16" viewBox="0 0 16 16"><rect x="3" y="2" width="3.5" height="12" rx="1.2" style="fill:var(--t-sub)"/><rect x="9.5" y="2" width="3.5" height="12" rx="1.2" style="fill:var(--t-sub)"/></svg>
+      </button>
+      <div class="prog-wrap">
+        <div class="prog-track"><div class="prog-fill"></div></div>
+        <div class="time-row"><span>0:52</span><span>2:19</span></div>
+      </div>
+    </div>
+    <div class="ctrl-btns">
+      <button class="ctrl-btn">3번 이어 듣기</button>
+      <button class="ctrl-btn">조금 천천히</button>
+    </div>
+  </div>
+
+</body>
+</html>

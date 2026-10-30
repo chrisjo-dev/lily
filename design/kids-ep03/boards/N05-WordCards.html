@@ -1,0 +1,594 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=390">
+  <title>Brush, Brush, Brush! — 매일 외국어 읽기</title>
+  <link rel="stylesheet" href="../shared/tokens.css">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body.t-card {
+      background: var(--t-bg);
+      font-family: var(--t-body);
+      color: var(--t-ink);
+      font-size: 16px;
+      line-height: 1.6;
+      letter-spacing: -0.01em;
+      word-break: keep-all;
+      max-width: 390px;
+      margin: 0 auto;
+    }
+
+    /* ===== TOPBAR ===== */
+    .topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 18px 20px 10px;
+    }
+    .brand-mark {
+      font-size: 11px;
+      color: var(--t-sub);
+      font-family: var(--t-kr);
+      letter-spacing: 0.04em;
+    }
+    .ep-chips {
+      display: flex;
+      gap: 5px;
+    }
+    .ep-chip {
+      font-size: 11px;
+      color: var(--t-sub);
+      border: 1px solid var(--t-line);
+      border-radius: 5px;
+      padding: 2px 7px;
+      line-height: 1.6;
+      font-family: var(--t-kr);
+    }
+
+    /* ===== WORDS SECTION HEAD ===== */
+    .section-head {
+      padding: 12px 20px 0;
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+    }
+    .section-label {
+      font-size: 12px;
+      font-family: var(--t-kr);
+      color: var(--t-sub);
+      letter-spacing: 0.06em;
+    }
+
+    /* ===== FLASH CARD CAROUSEL ===== */
+    .cards-viewport {
+      overflow: hidden;
+      padding: 16px 0 12px;
+    }
+    .cards-track {
+      display: flex;
+      gap: 12px;
+      /* 300px cards: card2 centered at (390-300)/2 = 45px from left.
+         card1 left edge = 45 - 300 - 12 = -267px. translateX = -267px.
+         Peek: card1 shows 0..33, card2 shows 45..345, card3 shows 357..390 (33px) */
+      transform: translateX(-267px);
+    }
+
+    .flash-card {
+      width: 300px;
+      flex-shrink: 0;
+      background: var(--t-surface);
+      border-radius: 24px;
+      border: 1.5px solid var(--t-line);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 0 24px 28px;
+      position: relative;
+      overflow: hidden;
+    }
+    /* Active card gets a subtle forward presence */
+    .flash-card.active {
+      border-color: var(--t-soft);
+      box-shadow: 0 4px 24px rgba(109, 91, 208, 0.10);
+    }
+    .flash-card.inactive {
+      opacity: 0.55;
+    }
+
+    /* Top accent bar */
+    .card-bar {
+      width: 100%;
+      height: 5px;
+      flex-shrink: 0;
+      margin-bottom: 28px;
+    }
+    .bar-mustard { background: var(--t-mustard); }
+    .bar-accent  { background: var(--t-accent); }
+    .bar-sage    { background: var(--t-sage); }
+
+    /* Icon area */
+    .card-icon {
+      width: 120px;
+      height: 100px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 18px;
+      flex-shrink: 0;
+    }
+    .card-icon img {
+      max-width: 100%;
+      max-height: 100%;
+      display: block;
+    }
+
+    /* English word */
+    .card-word-en {
+      font-family: var(--t-en);
+      font-size: 56px;
+      font-weight: 700;
+      color: var(--t-ink);
+      line-height: 1.05;
+      text-align: center;
+      margin-bottom: 8px;
+      width: 100%;
+    }
+    .card-word-en.small {
+      font-size: 34px;
+      line-height: 1.2;
+    }
+    .flash-card.active .card-word-en {
+      color: var(--t-accent);
+    }
+    .flash-card.inactive .card-word-en {
+      color: var(--t-sub);
+    }
+
+    /* Korean translation */
+    .card-word-ko {
+      font-family: var(--t-kr);
+      font-size: 14px;
+      color: var(--t-sub);
+      text-align: center;
+      margin-bottom: 28px;
+    }
+
+    /* Listen button */
+    .card-listen-btn {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      background: var(--t-soft);
+      border: none;
+      border-radius: 40px;
+      padding: 10px 20px;
+      font-size: 14px;
+      font-family: var(--t-kr);
+      color: var(--t-accent);
+      cursor: pointer;
+      flex-shrink: 0;
+    }
+    .flash-card.inactive .card-listen-btn {
+      background: transparent;
+      border: 1px solid var(--t-line);
+      color: var(--t-sub);
+    }
+
+    /* ===== PAGINATION DOTS ===== */
+    .card-dots {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 7px;
+      padding: 4px 0 20px;
+    }
+    .dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--t-line);
+    }
+    .dot.active {
+      width: 18px;
+      border-radius: 3px;
+      background: var(--t-accent);
+    }
+
+    /* ===== PLAYER SECTION ===== */
+    .player-section {
+      padding: 0 16px 28px;
+    }
+    .player-frame-label {
+      font-size: 11px;
+      font-family: var(--t-kr);
+      color: var(--t-sub);
+      letter-spacing: 0.06em;
+      margin-bottom: 10px;
+      padding-left: 2px;
+    }
+    .player-bar {
+      background: var(--t-surface);
+      border: 1.5px solid var(--t-line);
+      border-radius: 18px;
+      padding: 16px 16px 14px;
+    }
+    .player-ep-title {
+      font-size: 12px;
+      font-family: var(--t-en);
+      color: var(--t-sub);
+      margin-bottom: 12px;
+      letter-spacing: 0.01em;
+    }
+    .player-controls {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .play-btn {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: var(--t-accent);
+      border: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      cursor: pointer;
+    }
+    .player-progress-col {
+      flex: 1;
+      min-width: 0;
+    }
+    .progress-bar {
+      width: 100%;
+      height: 3px;
+      background: var(--t-line);
+      border-radius: 2px;
+      overflow: hidden;
+      margin-bottom: 6px;
+    }
+    .progress-fill {
+      width: 46%;
+      height: 100%;
+      background: var(--t-accent);
+      border-radius: 2px;
+    }
+    .player-time {
+      display: flex;
+      justify-content: space-between;
+      font-size: 11px;
+      font-family: var(--t-en);
+      color: var(--t-sub);
+    }
+    .player-current-line {
+      font-size: 14px;
+      font-family: var(--t-kr);
+      color: var(--t-ink);
+      line-height: 1.6;
+      padding: 11px 0 11px;
+      border-top: 1px solid var(--t-line);
+      margin-top: 12px;
+    }
+    .player-current-line em {
+      font-style: normal;
+      font-family: var(--t-en);
+      color: var(--t-accent);
+      font-weight: 700;
+    }
+    .player-tools {
+      display: flex;
+      gap: 7px;
+    }
+    .player-tool-btn {
+      font-size: 12px;
+      font-family: var(--t-kr);
+      color: var(--t-sub);
+      background: transparent;
+      border: 1px solid var(--t-line);
+      border-radius: 20px;
+      padding: 5px 12px;
+      cursor: pointer;
+      white-space: nowrap;
+    }
+    .player-tool-btn.primary {
+      color: var(--t-accent);
+      border-color: var(--t-soft);
+      background: var(--t-soft);
+    }
+
+    /* ===== PARENT AREA ===== */
+    .parent-area {
+      padding: 0 16px 32px;
+    }
+    .parent-divider {
+      height: 1px;
+      background: var(--t-line);
+      margin-bottom: 18px;
+    }
+    .parent-block-label {
+      font-size: 11px;
+      font-family: var(--t-kr);
+      color: var(--t-sub);
+      letter-spacing: 0.06em;
+      margin-bottom: 12px;
+      padding-left: 2px;
+    }
+
+    /* Worksheet */
+    .worksheet-row {
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+      margin-bottom: 14px;
+    }
+    .worksheet-thumb {
+      width: 96px;
+      flex-shrink: 0;
+      border-radius: 10px;
+      overflow: hidden;
+      border: 1px solid var(--t-line);
+    }
+    .worksheet-thumb img {
+      width: 100%;
+      display: block;
+    }
+    .worksheet-info { flex: 1; min-width: 0; }
+    .worksheet-title {
+      font-size: 14px;
+      font-family: var(--t-kr);
+      color: var(--t-ink);
+      font-weight: 700;
+      margin-bottom: 7px;
+    }
+    .worksheet-list {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+    .worksheet-list-item {
+      font-size: 12px;
+      font-family: var(--t-kr);
+      color: var(--t-sub);
+      line-height: 1.5;
+    }
+    .dl-btn {
+      display: block;
+      width: 100%;
+      padding: 12px 16px;
+      background: var(--t-ink);
+      color: var(--t-surface);
+      border: none;
+      border-radius: 10px;
+      font-size: 14px;
+      font-family: var(--t-kr);
+      text-align: center;
+      cursor: pointer;
+      text-decoration: none;
+      margin-bottom: 24px;
+    }
+
+    /* Tips for parents */
+    .tips-list {
+      display: flex;
+      flex-direction: column;
+      gap: 7px;
+      margin-bottom: 20px;
+    }
+    .tip-row {
+      display: flex;
+      align-items: flex-start;
+      gap: 9px;
+    }
+    .tip-mark {
+      width: 4px;
+      height: 4px;
+      border-radius: 50%;
+      background: var(--t-mustard);
+      flex-shrink: 0;
+      margin-top: 9px;
+    }
+    .tip-text {
+      font-size: 13px;
+      font-family: var(--t-kr);
+      color: var(--t-sub);
+      line-height: 1.6;
+    }
+
+    /* Script toggle */
+    .script-toggle {
+      width: 100%;
+      background: transparent;
+      border: 1px solid var(--t-line);
+      border-radius: 10px;
+      padding: 12px 14px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 13px;
+      font-family: var(--t-kr);
+      color: var(--t-sub);
+      cursor: pointer;
+    }
+
+    /* ===== FOOTER ===== */
+    .footer {
+      border-top: 1px solid var(--t-line);
+      padding: 14px 20px 32px;
+    }
+    .footer-copy {
+      font-size: 11px;
+      color: var(--t-sub);
+      font-family: var(--t-kr);
+      opacity: 0.65;
+    }
+  </style>
+</head>
+<body class="t-card">
+
+  <!-- Topbar -->
+  <header class="topbar">
+    <span class="brand-mark">매일 외국어 읽기</span>
+    <div class="ep-chips" aria-label="에피소드 정보">
+      <span class="ep-chip">5~8세</span>
+      <span class="ep-chip">2분</span>
+    </div>
+  </header>
+
+  <!-- Words section heading -->
+  <div class="section-head">
+    <span class="section-label">오늘의 단어</span>
+  </div>
+
+  <!-- Flash card carousel -->
+  <div class="cards-viewport" role="region" aria-label="단어 카드 목록">
+    <div class="cards-track">
+
+      <!-- Card 1: brush my teeth (inactive, peeking left) -->
+      <article class="flash-card inactive" aria-label="단어: brush my teeth">
+        <div class="card-bar bar-mustard"></div>
+        <div class="card-icon">
+          <img src="../assets/word-brush.svg" alt="칫솔 아이콘">
+        </div>
+        <div class="card-word-en small">brush my teeth</div>
+        <div class="card-word-ko">이를 닦아요</div>
+        <button class="card-listen-btn" aria-label="brush my teeth 발음 듣기">
+          <svg width="13" height="13" viewBox="0 0 14 14" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <path d="M3 1.5 L11 7 L3 12.5 Z" style="fill: var(--t-sub)"/>
+          </svg>
+          들어 보기
+        </button>
+      </article>
+
+      <!-- Card 2: bubbles (active) -->
+      <article class="flash-card active" aria-label="단어: bubbles (현재 재생 중)">
+        <div class="card-bar bar-accent"></div>
+        <div class="card-icon">
+          <img src="../assets/word-bubbles.svg" alt="거품 아이콘">
+        </div>
+        <div class="card-word-en">bubbles</div>
+        <div class="card-word-ko">거품</div>
+        <button class="card-listen-btn" aria-label="bubbles 발음 듣기" aria-pressed="true">
+          <svg width="13" height="13" viewBox="0 0 14 14" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <path d="M3 1.5 L11 7 L3 12.5 Z" style="fill: var(--t-accent)"/>
+          </svg>
+          들어 보기
+        </button>
+      </article>
+
+      <!-- Card 3: all clean (inactive, peeking right) -->
+      <article class="flash-card inactive" aria-label="단어: all clean">
+        <div class="card-bar bar-sage"></div>
+        <div class="card-icon">
+          <img src="../assets/word-clean.svg" alt="깨끗 아이콘">
+        </div>
+        <div class="card-word-en">all clean</div>
+        <div class="card-word-ko">깨끗해</div>
+        <button class="card-listen-btn" aria-label="all clean 발음 듣기">
+          <svg width="13" height="13" viewBox="0 0 14 14" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <path d="M3 1.5 L11 7 L3 12.5 Z" style="fill: var(--t-sub)"/>
+          </svg>
+          들어 보기
+        </button>
+      </article>
+
+    </div>
+  </div>
+
+  <!-- Pagination dots -->
+  <div class="card-dots" role="tablist" aria-label="단어 탐색">
+    <div class="dot" role="tab" aria-selected="false" aria-label="1번 단어"></div>
+    <div class="dot active" role="tab" aria-selected="true" aria-label="2번 단어 선택됨"></div>
+    <div class="dot" role="tab" aria-selected="false" aria-label="3번 단어"></div>
+  </div>
+
+  <!-- Player section -->
+  <div class="player-section" role="region" aria-label="오디오 플레이어">
+    <p class="player-frame-label">이야기 속에서 들어 보기</p>
+    <div class="player-bar">
+      <p class="player-ep-title">Brush, Brush, Brush!</p>
+      <div class="player-controls">
+        <button class="play-btn" aria-label="일시정지">
+          <svg width="17" height="17" viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <rect x="3" y="2" width="4" height="14" rx="2" style="fill: #ffffff"/>
+            <rect x="11" y="2" width="4" height="14" rx="2" style="fill: #ffffff"/>
+          </svg>
+        </button>
+        <div class="player-progress-col">
+          <div class="progress-bar" role="progressbar" aria-valuenow="68" aria-valuemin="0" aria-valuemax="139" aria-label="재생 위치">
+            <div class="progress-fill"></div>
+          </div>
+          <div class="player-time">
+            <span>1:08</span>
+            <span>2:19</span>
+          </div>
+        </div>
+      </div>
+      <div class="player-current-line" aria-live="polite">
+        와! <em>Bubbles!</em> 거품이야! <em>Bubbles!</em>
+      </div>
+      <div class="player-tools">
+        <button class="player-tool-btn primary">3번 이어 듣기</button>
+        <button class="player-tool-btn">조금 천천히</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Parent area -->
+  <div class="parent-area">
+
+    <div class="parent-divider"></div>
+    <p class="parent-block-label">학습지</p>
+
+    <div class="worksheet-row">
+      <div class="worksheet-thumb">
+        <img src="../assets/worksheet.png" alt="학습지 미리보기">
+      </div>
+      <div class="worksheet-info">
+        <p class="worksheet-title">오늘의 학습지</p>
+        <div class="worksheet-list">
+          <p class="worksheet-list-item">1  그림에서 칫솔 찾기</p>
+          <p class="worksheet-list-item">2  오려서 노는 단어 카드</p>
+          <p class="worksheet-list-item">3  말할 때마다 스티커</p>
+          <p class="worksheet-list-item">4  릴리 색칠하기</p>
+        </div>
+      </div>
+    </div>
+
+    <a href="#" class="dl-btn">학습지 받기 (A4)</a>
+
+    <div class="parent-divider"></div>
+    <p class="parent-block-label">부모님께</p>
+
+    <div class="tips-list">
+      <div class="tip-row">
+        <div class="tip-mark"></div>
+        <span class="tip-text">같은 음원을 여러 번 들려주세요. 한 번에 다 알아듣지 않아도 괜찮아요.</span>
+      </div>
+      <div class="tip-row">
+        <div class="tip-mark"></div>
+        <span class="tip-text">실제 양치 시간에 "Brush my teeth!" 한 번 말해 주세요.</span>
+      </div>
+      <div class="tip-row">
+        <div class="tip-mark"></div>
+        <span class="tip-text">따라 하지 않아도 괜찮아요.</span>
+      </div>
+    </div>
+
+    <button class="script-toggle" aria-expanded="false" aria-controls="script-block">
+      <span>대본 보기</span>
+      <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <path d="M3 5 L7 9 L11 5" stroke="var(--t-sub)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </button>
+
+  </div>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <p class="footer-copy">매일 외국어 읽기 read.wspace.ai.kr</p>
+  </footer>
+
+</body>
+</html>

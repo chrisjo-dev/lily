@@ -1,0 +1,566 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=390">
+  <title>R58 개선안 2 HomePhone</title>
+  <link rel="stylesheet" href="../shared/tokens.css">
+  <style>
+    html, body { margin: 0; width: 390px; }
+    a { color: inherit; text-decoration: none; }
+
+    /* ── 히어로 영역 감싸기 ── */
+    .hero-zone {
+      position: relative;
+      width: 390px;
+    }
+
+    /* ── 히어로 ── */
+    .hero {
+      position: relative;
+      width: 390px;
+      height: 320px;
+      overflow: hidden;
+    }
+    .hero-art {
+      position: absolute;
+      inset: 0;
+      width: 100%; height: 100%;
+      object-fit: cover;
+      object-position: center 20%;
+    }
+    /* 아래쪽 그라디언트 - 끝을 투명으로 (찢은 SVG가 종이색 담당) */
+    .hero-grad {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 120px;
+      background: linear-gradient(to bottom, transparent 0%, rgba(251,246,236,0.5) 50%, rgba(251,246,236,0.0) 100%);
+      pointer-events: none;
+    }
+
+    /* 종이 띠 라벨 (logo + title) */
+    .hero-labels {
+      position: absolute;
+      top: 52px;
+      left: 24px;
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .paper-label {
+      display: inline-flex;
+      align-items: center;
+      background: var(--paper);
+      border: 1.5px solid var(--brown);
+      padding: 6px 14px;
+      box-shadow: 2px 2px 6px rgba(107,74,54,0.16);
+    }
+    .label-logo {
+      border-radius: 3px 5px 4px 4px;
+      transform: rotate(-1.5deg);
+      padding: 5px 12px;
+    }
+    .label-logo img { height: 26px; width: auto; display: block; }
+    .label-title {
+      border-radius: 4px 3px 5px 3px;
+      transform: rotate(-0.8deg);
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 1px;
+      padding: 7px 14px;
+    }
+    .label-title-kr {
+      font-family: var(--font-kr);
+      font-size: 11px;
+      color: var(--ink-2);
+    }
+    .label-title-en {
+      font-family: var(--font-en);
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--ink);
+      line-height: 1.2;
+    }
+
+    /* 찢은 종이 가장자리 레이어 (hero 바깥, absolute to hero-zone) */
+    .tear-layer {
+      position: absolute;
+      bottom: -22px;
+      left: 0; right: 0;
+      height: 44px;
+      z-index: 4;
+      pointer-events: none;
+    }
+    .tear-layer svg { display: block; }
+
+    /* 단추 float (찢은 경계선에 반쯤 걸침) */
+    .btn-float {
+      position: absolute;
+      bottom: -40px;
+      left: 24px; right: 24px;
+      z-index: 5;
+    }
+
+    /* 큰 노란 맛보기 단추 */
+    .btn-sample {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      width: 100%;
+      height: 68px;
+      background: var(--touch);
+      border: 2.5px solid var(--brown);
+      border-radius: var(--r-btn);
+      cursor: pointer;
+      box-shadow: 0 4px 16px rgba(107,74,54,0.22);
+    }
+    .btn-sample-icon {
+      width: 40px; height: 40px;
+      border-radius: 50%;
+      background: var(--brown);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .btn-sample-icon svg { fill: var(--paper); display: block; margin-left: 2px; }
+    .btn-sample-text {
+      font-family: var(--font-logo);
+      font-size: 19px;
+      color: var(--ink);
+    }
+
+    /* ── 본문 종이 영역 ── */
+    .paper-body {
+      background: var(--paper);
+      padding-top: 56px; /* 단추(68px) 절반 + 여백 */
+    }
+
+    /* ── 릴리의 하루 에피소드 스트립 ── */
+    .ep-sec {
+      padding: 32px 20px 28px;
+    }
+    .sec-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 18px;
+    }
+    .sec-title {
+      font-family: var(--font-kr);
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--ink);
+      margin: 0;
+    }
+    .sec-note {
+      font-family: var(--font-kr);
+      font-size: 11px;
+      color: var(--teal);
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    /* 시간대 라벨 */
+    .time-band {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      margin: 14px 0 9px;
+    }
+    .time-label {
+      font-family: var(--font-kr);
+      font-size: 10px;
+      color: var(--ink-2);
+      white-space: nowrap;
+    }
+    .time-line {
+      flex: 1;
+      height: 1px;
+      background: var(--line);
+    }
+
+    /* 에피소드 카드 행 */
+    .ep-row {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 2px;
+    }
+    .ep-spacer { flex: 1; }
+
+    /* 소형 에피소드 카드 */
+    .ep-card {
+      flex: 1;
+      border-radius: var(--r-frame);
+      overflow: hidden;
+      border: 1.5px solid var(--line);
+      background: var(--paper-2);
+      position: relative;
+    }
+    .ep-card.free { border-color: var(--touch); border-width: 2px; }
+    .ep-thumb {
+      width: 100%;
+      aspect-ratio: 4 / 3;
+      object-fit: cover;
+      display: block;
+    }
+    .ep-body {
+      padding: 5px 7px 7px;
+    }
+    .ep-en {
+      font-family: var(--font-en);
+      font-size: 9px;
+      font-weight: 700;
+      color: var(--teal);
+      margin: 0 0 1px;
+      line-height: 1.3;
+    }
+    .ep-kr {
+      font-family: var(--font-kr);
+      font-size: 9px;
+      color: var(--ink-2);
+      margin: 0;
+    }
+    .ep-free-badge {
+      position: absolute;
+      top: 5px; left: 5px;
+      background: var(--touch);
+      border: 1.5px solid var(--touch-edge);
+      border-radius: 4px;
+      font-family: var(--font-kr);
+      font-size: 8px;
+      font-weight: 700;
+      color: var(--brown);
+      padding: 1px 4px;
+    }
+    .ep-lock {
+      position: absolute;
+      top: 5px; right: 5px;
+      width: 18px; height: 18px;
+      background: rgba(251,246,236,0.88);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* 가로로 넓은 카드 (낮/밤 단독 편) */
+    .ep-wide {
+      display: flex;
+      border-radius: var(--r-frame);
+      overflow: hidden;
+      border: 1.5px solid var(--line);
+      background: var(--paper-2);
+      position: relative;
+      margin-bottom: 2px;
+    }
+    .ep-wide-thumb {
+      width: 34%;
+      flex-shrink: 0;
+      object-fit: cover;
+      display: block;
+    }
+    .ep-wide-body {
+      flex: 1;
+      padding: 12px 14px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    .ep-wide-body .ep-en { font-size: 12px; margin-bottom: 3px; }
+    .ep-wide-body .ep-kr { font-size: 11px; }
+
+    .ep-signup {
+      font-family: var(--font-kr);
+      font-size: 13px;
+      color: var(--ink-2);
+      text-align: center;
+      margin: 18px 0 0;
+      line-height: 1.6;
+    }
+    .ep-signup a { color: var(--teal); font-weight: 700; }
+
+    /* ── 부모님께 ── */
+    .parent-sec {
+      padding: 28px 24px 32px;
+      background: var(--paper-2);
+      border-top: 1px solid var(--line);
+    }
+    .parent-sec-title {
+      font-family: var(--font-kr);
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--ink);
+      margin: 0 0 18px;
+    }
+    .qa-item { margin-bottom: 16px; }
+    .qa-item:last-child { margin-bottom: 0; }
+    .qa-q {
+      font-family: var(--font-kr);
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--teal);
+      margin: 0 0 4px;
+    }
+    .qa-a {
+      font-family: var(--font-kr);
+      font-size: 13px;
+      color: var(--ink);
+      line-height: 1.7;
+      margin: 0;
+    }
+
+    /* ── 자주 묻는 질문 ── */
+    .faq-sec {
+      padding: 28px 24px 32px;
+      background: var(--paper);
+      border-top: 1px solid var(--line);
+    }
+    .faq-sec-title {
+      font-family: var(--font-kr);
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--ink);
+      margin: 0 0 18px;
+    }
+    .faq-item {
+      border-bottom: 1px solid var(--line);
+      padding: 12px 0;
+    }
+    .faq-item:first-child { padding-top: 0; }
+    .faq-item:last-child { border-bottom: none; padding-bottom: 0; }
+    .faq-q {
+      font-family: var(--font-kr);
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--ink);
+      margin: 0 0 4px;
+    }
+    .faq-a {
+      font-family: var(--font-kr);
+      font-size: 12px;
+      color: var(--ink-2);
+      line-height: 1.65;
+      margin: 0;
+    }
+
+    /* ── 푸터 ── */
+    footer {
+      padding: 22px 24px 28px;
+      background: var(--paper-2);
+      border-top: 1px solid var(--line);
+    }
+    .footer-links {
+      display: flex;
+      gap: 18px;
+      margin-bottom: 7px;
+    }
+    .footer-links a {
+      font-family: var(--font-kr);
+      font-size: 11px;
+      color: var(--ink-2);
+      text-decoration: none;
+    }
+    .footer-by {
+      font-family: var(--font-kr);
+      font-size: 10px;
+      color: var(--ink-2);
+      margin: 0;
+    }
+
+    /* 자물쇠 SVG 단축 */
+    .lock-svg { display: block; }
+  </style>
+</head>
+<body>
+
+  <!-- 히어로 영역 (찢은 가장자리 + 단추 포함) -->
+  <div class="hero-zone">
+
+    <section class="hero">
+      <img class="hero-art" src="../assets/ep01-bg-0-intro.webp" alt="">
+      <div class="hero-grad"></div>
+
+      <!-- 종이 띠 라벨: 로고 + 제목 -->
+      <div class="hero-labels">
+        <div class="paper-label label-logo">
+          <img src="../assets/brand-logo-h.svg" alt="릴리랑">
+        </div>
+        <div class="paper-label label-title">
+          <span class="label-title-kr">이번 주 이야기</span>
+          <span class="label-title-en">Brush, Brush, Brush!</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- 찢은 종이 가장자리 (불규칙 곡선, 히어로 아래에 겹침) -->
+    <div class="tear-layer" aria-hidden="true">
+      <svg xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none"
+           viewBox="0 0 390 44" width="390" height="44">
+        <path d="M0,44 L0,22 Q14,8 28,18 Q42,28 56,12 Q70,2 84,16 Q98,28 112,13 Q126,2 140,15 Q154,27 168,13 Q182,3 196,17 Q210,29 224,13 Q238,2 252,16 Q266,28 280,13 Q294,3 308,17 Q322,28 336,13 Q350,2 364,16 Q378,28 390,20 L390,44 Z" fill="var(--paper)"/>
+      </svg>
+    </div>
+
+    <!-- 노란 단추: 찢은 경계선에 반쯤 걸침 -->
+    <div class="btn-float">
+      <div class="btn-sample" role="button" aria-label="맛보기 바로 듣기 2분 무료">
+        <div class="btn-sample-icon">
+          <svg width="14" height="16" viewBox="0 0 14 16"><path d="M2 1.5L13 8L2 14.5V1.5Z"/></svg>
+        </div>
+        <span class="btn-sample-text">맛보기 바로 듣기</span>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- 본문 -->
+  <div class="paper-body">
+
+    <!-- 릴리의 하루 에피소드 스트립 -->
+    <section class="ep-sec">
+      <div class="sec-head">
+        <h2 class="sec-title">릴리의 하루</h2>
+        <p class="sec-note" aria-label="가입하면 모두 들을 수 있어요">
+          <svg width="10" height="12" viewBox="0 0 10 12" fill="none" aria-hidden="true">
+            <rect x="0.75" y="5" width="8.5" height="6.25" rx="1.5" stroke="currentColor" stroke-width="1.2"/>
+            <path d="M2.25 5V3.5a2.75 2.75 0 015.5 0V5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
+          </svg>
+          가입하면 모두 들을 수 있어요
+        </p>
+      </div>
+
+      <!-- 아침 -->
+      <div class="time-band"><span class="time-label">아침</span><div class="time-line"></div></div>
+      <div class="ep-row">
+        <div class="ep-card">
+          <img class="ep-thumb" src="../assets/ep02-thumb.webp" alt="EP02 Wake Up!">
+          <div class="ep-lock" aria-label="가입 후 이용">
+            <svg class="lock-svg" width="9" height="11" viewBox="0 0 9 11" fill="none">
+              <rect x="0.5" y="4.5" width="8" height="6" rx="1.25" stroke="var(--brown)" stroke-width="1.1"/>
+              <path d="M2 4.5V3A2.5 2.5 0 017 3v1.5" stroke="var(--brown)" stroke-width="1.1" stroke-linecap="round"/>
+            </svg>
+          </div>
+          <div class="ep-body"><p class="ep-en">Wake Up!</p><p class="ep-kr">일어나기</p></div>
+        </div>
+        <div class="ep-card">
+          <img class="ep-thumb" src="../assets/ep03-thumb.webp" alt="EP03 Splash, Splash!">
+          <div class="ep-lock" aria-label="가입 후 이용">
+            <svg class="lock-svg" width="9" height="11" viewBox="0 0 9 11" fill="none">
+              <rect x="0.5" y="4.5" width="8" height="6" rx="1.25" stroke="var(--brown)" stroke-width="1.1"/>
+              <path d="M2 4.5V3A2.5 2.5 0 017 3v1.5" stroke="var(--brown)" stroke-width="1.1" stroke-linecap="round"/>
+            </svg>
+          </div>
+          <div class="ep-body"><p class="ep-en">Splash, Splash!</p><p class="ep-kr">세수하기</p></div>
+        </div>
+        <div class="ep-card">
+          <img class="ep-thumb" src="../assets/ep04-thumb.webp" alt="EP04 Yummy, Yummy!">
+          <div class="ep-lock" aria-label="가입 후 이용">
+            <svg class="lock-svg" width="9" height="11" viewBox="0 0 9 11" fill="none">
+              <rect x="0.5" y="4.5" width="8" height="6" rx="1.25" stroke="var(--brown)" stroke-width="1.1"/>
+              <path d="M2 4.5V3A2.5 2.5 0 017 3v1.5" stroke="var(--brown)" stroke-width="1.1" stroke-linecap="round"/>
+            </svg>
+          </div>
+          <div class="ep-body"><p class="ep-en">Yummy, Yummy!</p><p class="ep-kr">아침 먹기</p></div>
+        </div>
+      </div>
+
+      <!-- 낮 -->
+      <div class="time-band"><span class="time-label">낮</span><div class="time-line"></div></div>
+      <div class="ep-wide">
+        <img class="ep-wide-thumb" src="../assets/ep05-thumb.webp" alt="EP05 Put On, Ready!">
+        <div class="ep-lock" aria-label="가입 후 이용">
+          <svg class="lock-svg" width="9" height="11" viewBox="0 0 9 11" fill="none">
+            <rect x="0.5" y="4.5" width="8" height="6" rx="1.25" stroke="var(--brown)" stroke-width="1.1"/>
+            <path d="M2 4.5V3A2.5 2.5 0 017 3v1.5" stroke="var(--brown)" stroke-width="1.1" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <div class="ep-wide-body"><p class="ep-en">Put On, Ready!</p><p class="ep-kr">옷 입기</p></div>
+      </div>
+
+      <!-- 저녁 -->
+      <div class="time-band"><span class="time-label">저녁</span><div class="time-line"></div></div>
+      <div class="ep-row">
+        <div class="ep-card free">
+          <img class="ep-thumb" src="../assets/ep01-bg-0-intro.webp" alt="EP01 Brush, Brush, Brush!" style="object-position: center 20%;">
+          <div class="ep-free-badge">무료</div>
+          <div class="ep-body"><p class="ep-en">Brush, Brush, Brush!</p><p class="ep-kr">이 닦기</p></div>
+        </div>
+        <div class="ep-card">
+          <img class="ep-thumb" src="../assets/ep06-thumb.webp" alt="EP06 Rub-a-Dub, Bath Time!">
+          <div class="ep-lock" aria-label="가입 후 이용">
+            <svg class="lock-svg" width="9" height="11" viewBox="0 0 9 11" fill="none">
+              <rect x="0.5" y="4.5" width="8" height="6" rx="1.25" stroke="var(--brown)" stroke-width="1.1"/>
+              <path d="M2 4.5V3A2.5 2.5 0 017 3v1.5" stroke="var(--brown)" stroke-width="1.1" stroke-linecap="round"/>
+            </svg>
+          </div>
+          <div class="ep-body"><p class="ep-en">Rub-a-Dub, Bath Time!</p><p class="ep-kr">목욕하기</p></div>
+        </div>
+        <div class="ep-spacer"></div>
+      </div>
+
+      <!-- 밤 -->
+      <div class="time-band"><span class="time-label">밤</span><div class="time-line"></div></div>
+      <div class="ep-wide">
+        <img class="ep-wide-thumb" src="../assets/ep07-thumb.webp" alt="EP07 Sweet Dreams">
+        <div class="ep-lock" aria-label="가입 후 이용">
+          <svg class="lock-svg" width="9" height="11" viewBox="0 0 9 11" fill="none">
+            <rect x="0.5" y="4.5" width="8" height="6" rx="1.25" stroke="var(--brown)" stroke-width="1.1"/>
+            <path d="M2 4.5V3A2.5 2.5 0 017 3v1.5" stroke="var(--brown)" stroke-width="1.1" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <div class="ep-wide-body"><p class="ep-en">Sweet Dreams</p><p class="ep-kr">잠자리 책</p></div>
+      </div>
+
+      <p class="ep-signup">가입하면 7편 모두 들을 수 있어요.<br><a href="#">지금 시작하기</a></p>
+    </section>
+
+    <!-- 부모님께 -->
+    <section class="parent-sec">
+      <h2 class="parent-sec-title">부모님께</h2>
+      <div class="qa-item">
+        <p class="qa-q">왜 2분인가요?</p>
+        <p class="qa-a">아이의 집중 시간은 짧아요. 자주 짧게 듣는 게 오래 한 번 듣는 것보다 낫습니다.</p>
+      </div>
+      <div class="qa-item">
+        <p class="qa-q">왜 영어와 한국어를 섞나요?</p>
+        <p class="qa-a">처음 한 번만 한국어로 뜻을 짚어 주고, 그 뒤로는 영어만 들려요. 소리와 의미가 자연스럽게 붙습니다.</p>
+      </div>
+      <div class="qa-item">
+        <p class="qa-q">화면 시간이 걱정돼요</p>
+        <p class="qa-a">한 편 2분이에요. 양치할 때 틀어 주면 되고, 끝나면 화면도 꺼집니다.</p>
+      </div>
+    </section>
+
+    <!-- 자주 묻는 질문 -->
+    <section class="faq-sec">
+      <h2 class="faq-sec-title">자주 묻는 질문</h2>
+      <div class="faq-item">
+        <p class="faq-q">몇 살부터 할 수 있나요?</p>
+        <p class="faq-a">4~7세가 가장 잘 맞아요. 3세도 그림 보는 걸 좋아하면 함께 할 수 있어요.</p>
+      </div>
+      <div class="faq-item">
+        <p class="faq-q">아이 정보를 받나요?</p>
+        <p class="faq-a">아이 이름, 사진, 학교 정보는 받지 않아요. 부모님 계정만 만들면 됩니다.</p>
+      </div>
+      <div class="faq-item">
+        <p class="faq-q">무료인가요?</p>
+        <p class="faq-a">EP01은 무료로 들을 수 있어요. 가입하면 7편 모두 들을 수 있습니다.</p>
+      </div>
+    </section>
+
+    <!-- 푸터 -->
+    <footer>
+      <div class="footer-links">
+        <a href="#">개인정보처리방침</a>
+        <a href="#">문의</a>
+      </div>
+      <p class="footer-by">매일 외국어 읽기가 만들어요</p>
+    </footer>
+
+  </div>
+
+</body>
+</html>

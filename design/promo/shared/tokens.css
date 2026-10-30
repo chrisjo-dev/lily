@@ -1,0 +1,16 @@
+/* 홍보(광고) 토큰. docs/PROMO.md 기준: 색은 크게, 단추는 하나, 카피가 주인공 */
+@import url("https://fonts.googleapis.com/css2?family=Jua&family=Gaegu:wght@700&family=Noto+Sans+KR:wght@500;700;900&display=swap");
+:root {
+  --sky: #8ec3ea; --sky-deep: #3f86d0; --night: #1f2a4d; --cream: #fff8ea; --sun: #ffc531; --sun-edge: #6b4a33;
+  --wall: #86a3a6; --wall-soft: #dfe9e8; --ink: #1d2433; --ink-soft: #46506a; --white: #ffffff;
+  --font-head: "Jua", "Noto Sans KR", sans-serif; --font-hand: "Gaegu", "Jua", sans-serif; --font-body: "Noto Sans KR", sans-serif;
+}
+body { margin: 0; font-family: var(--font-body); color: var(--ink); word-break: keep-all; }
+.ad { position: relative; width: 1080px; overflow: hidden; }
+.feed { height: 1350px; }
+.story { height: 1920px; }
+.logo { height: 92px; display: block; }
+.cta { display: inline-flex; align-items: center; gap: 18px; background: var(--sun); color: var(--ink); border: 5px solid var(--sun-edge); border-radius: 999px; padding: 26px 56px; font-family: var(--font-head); font-size: 54px; line-height: 1; }
+.cta::before { content: ''; width: 0; height: 0; border-left: 30px solid var(--sun-edge); border-top: 19px solid transparent; border-bottom: 19px solid transparent; }
+.safe { position: absolute; left: 0; right: 0; height: 250px; background: repeating-linear-gradient(45deg, transparent 0 18px, rgba(255,0,80,.07) 18px 36px); pointer-events: none; }
+.safe.top { top: 0; } .safe.bot { bottom: 0; }

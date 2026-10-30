@@ -1,0 +1,18 @@
+{
+  "boards": {
+    "landing": {
+      "x": 0,
+      "y": 0,
+      "w": 1280,
+      "h": 2600,
+      "title": "landing",
+      "group": "L1 그림책"
+    }
+  },
+  "groups": [
+    {
+      "id": "L1 그림책",
+      "label": "L1 그림책"
+    }
+  ]
+}
