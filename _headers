@@ -3,9 +3,34 @@
   Referrer-Policy: strict-origin-when-cross-origin
   Permissions-Policy: camera=(), microphone=(), geolocation=()
   X-Frame-Options: DENY
+  Strict-Transport-Security: max-age=31536000
 
 /*.mp3
   Cache-Control: public, max-age=604800
 
 /brand/*
   Cache-Control: public, max-age=604800
+
+# 그림(이름에 해시가 없어 immutable은 쓰지 않고 1주). HTML, CSS, JS는 기본값(max-age=0, must-revalidate) 그대로
+/:ep/art/*
+  Cache-Control: public, max-age=604800, stale-while-revalidate=86400
+
+/src/*.webp
+  Cache-Control: public, max-age=604800, stale-while-revalidate=86400
+
+# 공유 썸네일(OG). 바꾸면 하루 안에 퍼지게 짧게
+/og.jpg
+  Cache-Control: public, max-age=86400
+
+/:ep/og.jpg
+  Cache-Control: public, max-age=86400
+
+# 검색과 AI가 읽는 안내 파일
+/llms.txt
+  Cache-Control: public, max-age=3600
+
+/robots.txt
+  Cache-Control: public, max-age=3600
+
+/sitemap.xml
+  Cache-Control: public, max-age=3600
