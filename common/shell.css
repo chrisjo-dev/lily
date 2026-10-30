@@ -84,3 +84,5 @@ a:focus-visible { outline: 3px solid var(--sky-deep); outline-offset: 4px; borde
 .foot2 { text-align: center; font-size: 14px; padding: 18px 0 30px; color: var(--ink-2); }
 .foot2 a { display: inline-block; padding: 14px 8px; margin: -14px 0; color: var(--ink-2); text-underline-offset: 3px; }
 .foot2 small { display: block; margin-top: 6px; }
+/* 물결 아래 끝이 소수점 픽셀에 걸리면 띠의 남색이 한 줄 비쳐 선처럼 보인다. 맨 아래 2px를 바탕색으로 덮는다 */
+.lamp::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 2px; background: #fefefd; z-index: 4; }
