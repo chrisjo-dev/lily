@@ -34,6 +34,12 @@ for s in 390x844 768x1024 834x1194 1024x768 1194x834; do python3 tests/lily/beha
 python3 tests/lily/behave.py http://127.0.0.1:4441/<옛페이지>/ --config-from http://127.0.0.1:4441/ep01/
 ```
 
+## 편 목록 검사
+
+```sh
+python3 tests/lily/catalog_check.py   # 홈과 랜딩의 정적 편 목록이 src/entities/episode/catalog.js와 같은지(브라우저 없음)
+```
+
 ## 캡처 비교
 
 ```sh

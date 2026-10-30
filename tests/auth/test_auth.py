@@ -225,7 +225,7 @@ async def run(br):
     fcp, lt = await perf(pg)
     ok("me: profile and listened episodes shown, unsafe episode id dropped",
        await pg.input_value("#nickname") == "하늘맘" and await pg.is_checked('input[name="age"][value="4-5"]')
-       and await pg.evaluate("document.querySelectorAll('#eps li').length") == 1 and await pg.evaluate("[...document.querySelectorAll('#eps img')].every(i => i.getAttribute('src') === '/hello/img/ep-wake.webp')"), f"FCP={fcp:.0f}ms lt={lt}")
+       and await pg.evaluate("document.querySelectorAll('#eps li').length") == 1 and await pg.evaluate("[...document.querySelectorAll('#eps img')].every(i => i.getAttribute('src') === '/src/entities/episode/img/ep-wake.webp')"), f"FCP={fcp:.0f}ms lt={lt}")
     await pg.click('input[name="age"][value="6-7"] >> xpath=..')
     await pg.fill("#nickname", "새 이름")
     await pg.click("#save"); await pg.wait_for_selector("#saveMsg:not([hidden])")

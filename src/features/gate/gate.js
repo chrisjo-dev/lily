@@ -3,7 +3,7 @@
 // - free 편은 언제나 허용. 아니면 previewUntil(초) 전까지 허용, 그 뒤는 회원만.
 // - 비회원이면 가입 카드. 다른 탭에서 로그인하면 카드를 닫고 바로 이어 재생.
 // - 같은 탭에서 가입하고 돌아오면 lilyGate.resumeAt(id) 가 멈췄던 초를 한 번 돌려준다(엔진이 시작할 때 물어보면 됨).
-// 화면 잠금일 뿐 파일은 공개돼 있다(계획 D6). 불러오는 순서: lily-config.js, supabase.js, session.js, gate.js, gate-default.js, engine.js
+// 화면 잠금일 뿐 파일은 공개돼 있다(계획 D6). 불러오는 순서: lily-config.js, supabase.js, session.js, catalog.js, gate.js, gate-default.js, engine.js
 (function () {
   "use strict";
 
@@ -87,8 +87,9 @@
   }
 
   // 카드 모양은 gate.css(시안 T6, promo P68). 인라인 style 없이 클래스만 붙인다
-  // 가입하면 이어지는 이야기 동그라미 그림(홈 목록과 같은 순서, 그림은 /hello/img의 것을 함께 씀)
-  var MORE = ["wake", "wash", "eat", "dress", "bath", "sleep"];
+  // 가입하면 이어지는 이야기 동그라미 그림: 편 목록(entities/episode, window.LilyEpisodes)에서 맛보기 편이 아닌 것
+  var EPS = window.LilyEpisodes;
+  var MORE = EPS ? EPS.list.filter(function (e) { return !e.free; }).map(EPS.img) : [];
   (function css() {
     if (document.querySelector('link[href="' + CSS + '"]')) return;
     var l = document.createElement("link");
@@ -129,9 +130,9 @@
     var more = el("p", "gate-more", "새 이야기가 계속 더해져요");
     var eps = el("div", "gate-eps");
     eps.setAttribute("aria-hidden", "true");
-    MORE.forEach(function (name) {
+    MORE.forEach(function (url) {
       var im = el("img");
-      im.src = "/hello/img/ep-" + name + ".webp"; im.alt = ""; im.width = 48; im.height = 48; im.decoding = "async";
+      im.src = url; im.alt = ""; im.width = 48; im.height = 48; im.decoding = "async";
       eps.appendChild(im);
     });
     var safe = el("p", "gate-safe", "아이 정보는 받지 않아요");
