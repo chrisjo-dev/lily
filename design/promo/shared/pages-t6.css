@@ -14,6 +14,9 @@
 .lamp h1 b { font-weight: 400; color: var(--sun); }
 .lamp .sub { font-size: 16px; line-height: 1.5; margin-top: 10px; color: var(--navy-ink); }
 .lamp h1, .lamp .sub, .lamp .note { text-shadow: 0 1px 8px rgba(10,18,34,.6); }
+.lamp h1.title-art { line-height: 0; text-shadow: none; }
+.lamp h1.title-art img { display: block; width: 216px; max-width: 100%; height: auto; margin-left: -3px; }
+@media (min-width: 600px) { .lamp h1.title-art img { width: 256px; } }
 .lamp .go { margin-top: 18px; }
 .lamp .note { font-size: 13px; color: var(--navy-soft); margin-top: 10px; }
 /* 그림: 가장자리 번짐, 아래는 물결 밑으로 들어가 잘림 */
@@ -30,6 +33,7 @@
   .lamp .inner { max-width: 1280px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1.2fr; align-items: end; }
   .lamp .head { align-self: center; padding: 20px 0 40px 48px; }
   .lamp h1 { font-size: clamp(44px, 4.6vw, 64px); line-height: 1.1; }
+  .lamp h1.title-art img { width: clamp(290px, 24vw, 350px); margin-left: -5px; }
   .lamp .sub { font-size: 21px; margin-top: 18px; }
   .lamp .go { margin-top: 30px; }
   .lamp .note { font-size: 15px; margin-left: 30px; }
