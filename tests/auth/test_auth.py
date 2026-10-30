@@ -112,7 +112,7 @@ async def run(br):
     need = ["받는 정보", "보관 기간", "지우는 방법", "처리 위탁", "Supabase", "카카오", "권리", "14세 미만", "담당", "탈퇴하면"]
     ok("privacy has every required section", all(w in txt for w in need), f"missing={[w for w in need if w not in txt]} FCP={fcp:.0f}ms")
     bad = []
-    for d in ("engine", "src", "join", "me", "privacy", "supabase", "tests/auth"):
+    for d in ("src", "join", "me", "privacy", "supabase", "tests/auth"):
         for dp, _, fs in os.walk(os.path.join(ROOT, d)):
             for f in fs:
                 if f.endswith((".html", ".js", ".css", ".sql", ".sh", ".py")):

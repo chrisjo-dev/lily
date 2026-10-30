@@ -1,7 +1,7 @@
 // scrub: 문지르면 세균이 사라지고 글자가 떠오른다. 그 장면에 들어올 때마다 세균이 다시 생긴다.
 // 자유 놀이: { scene: "sc2", type: "scrub", target: "t-scrub", brush: "brush2", home: [x, y], into: "germs", floats: "floats",
 //   img: "art/L-germ.png", word: "Brush!", reach: 40, germs: [[x, y, r], ...], rest: [x, y] }
-// hint(선택): [x, y, 배율] 문지르기 안내 손(engine/ui/hand-rub.webp)의 손끝 자리. 없으면 home 위, 배율은 장면 폭에 맞춤.
+// hint(선택): [x, y, 배율] 문지르기 안내 손(widgets/player/ui/hand-rub.webp)의 손끝 자리. 없으면 home 위, 배율은 장면 폭에 맞춤.
 //   그 장면에 들어와 아직 안 문질렀을 때만 보인다
 // rest(선택): 손을 떼면 brush가 가 있을 자리(얼굴을 가리지 않게 턱 아래 같은 곳). 없으면 마지막 자리에 둔다
 // 기다림으로도 쓸 수 있다: { at, type: "scrub", ...위와 같음 } 세균을 다 지우면 이어짐

@@ -1,8 +1,8 @@
 // 릴리랑 엔진: 어느 편이든 같은 것만 둔다(재생, 진행 막대, 기다림, 그냥 듣기, 3번 이어 듣기, 조금 천천히,
 // 바깥 되감기, 장면 전환, 자막, 단어 버튼, 대본, 부모 화면, 미리 불러오기, 잠금 훅).
-// 편 HTML은 장면 마크업(#stage)과 설정 JSON(<script type="application/json" id="lily-episode">)만 둔다. 형식은 engine/README.md.
+// 편 HTML은 장면 마크업(#stage)과 설정 JSON(<script type="application/json" id="lily-episode">)만 둔다. 형식은 src/entities/episode/README.md.
 // 실행되는 인라인 코드가 없어야 CSP에서 'unsafe-inline' 없이 돈다. 문서를 다 읽으면(DOMContentLoaded) 스스로 시작한다.
-// 상호작용은 engine/interactions/*.js가 window.LilyInteractions[종류]로 등록한다.
+// 상호작용은 widgets/player/interactions/*.js가 window.LilyInteractions[종류]로 등록한다.
 // 시험(tests/lily)이 쓰는 상태(audio, waiting, done, scene, endShown, playsLeft, seekTo, showEnd, enterWait)는 전역으로 둔다.
 window.LilyInteractions = window.LilyInteractions || {};
 
@@ -21,8 +21,8 @@ function el(tag, attrs, parent) {
 const PLAY_PATH = "M6.5 4.3v11.4a.8.8 0 0 0 1.2.7l9.2-5.7a.8.8 0 0 0 0-1.4L7.7 3.6a.8.8 0 0 0-1.2.7z";
 // 4~7세가 찾고 누를 시간. 고리 애니메이션(.ring .cnt, 8s)과 같이 바꾼다
 const AUTO_MS = 8000;
-// 화면 그림(손 안내, 반짝 별, 거품 터짐)은 engine/ui/에 있다. 편 주소와 상관없이 engine.js가 있는 곳을 기준으로 찾는다
-const UI = ((document.currentScript && document.currentScript.src) || "/engine/engine.js").replace(/[^/]*$/, "") + "ui/";
+// 화면 그림(손 안내, 반짝 별, 거품 터짐)은 widgets/player/ui/에 있다. 편 주소와 상관없이 engine.js가 있는 곳을 기준으로 찾는다
+const UI = ((document.currentScript && document.currentScript.src) || "/src/widgets/player/engine.js").replace(/[^/]*$/, "") + "ui/";
 
 // ---- 편 설정에서 채우는 값 ----
 let EP, LINES, WAITS, SCENES, SCENE_AT, END_AT, END_WAIT = -1, audio, stage, rows;
@@ -316,10 +316,10 @@ function loadLater() {
   document.querySelectorAll(".word img[data-src]").forEach((n) => { n.src = n.dataset.src; n.removeAttribute("data-src"); });
 }
 
-// ---- 효과음(engine/sfx/) ----
+// ---- 효과음(widgets/player/sfx/) ----
 // 누르는 장치마다 짧은 소리. Web Audio로 낸다(HTMLAudio는 iOS에서 늦게 울림). 내레이션 <audio>와는 따로라 그 볼륨과 재생에 손대지 않는다.
 // 첫 화면 무게를 늘리지 않게 첫 누름(pointerdown, keydown, click) 때 AudioContext를 만들고 그때 받는다.
-// 못 받거나 Web Audio가 없으면 조용히 넘어간다(소리만 없고 동작은 같다). 소리 원본과 다시 만드는 법: engine/README.md
+// 못 받거나 Web Audio가 없으면 조용히 넘어간다(소리만 없고 동작은 같다). 소리 원본과 다시 만드는 법: src/widgets/player/README.md
 const SFX_DIR = UI.replace(/ui\/$/, "sfx/");
 const SFX_NAMES = ["find", "sparkle", "pop", "scrub", "said", "sticker", "lamp", "play", "again", "parent"];
 const SFX_GAP = { scrub: 0.2 };          // 문지르기는 0.2초 넘게 띄우고, 앞 소리가 울리는 동안은 새로 내지 않는다

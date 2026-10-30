@@ -11,7 +11,7 @@ LilyInteractions.pop = (api, specs) => {
       api.el("circle", { class: "halo", r: r + 10 }, bob);
       api.el("image", { "data-src": s.img, x: -r * 1.095, y: -r * 1.095, width: r * 2.19, height: r * 2.19 }, bob);
       const burst = api.el("g", { class: "burst" }, g);
-      const R = r + 14;   // 물방울 터짐 그림(engine/ui/pop.webp, sprite의 #ui-pop)을 예전 터짐 선 끝까지
+      const R = r + 14;   // 물방울 터짐 그림(widgets/player/ui/pop.webp, sprite의 #ui-pop)을 예전 터짐 선 끝까지
       api.el("use", { href: "#ui-pop", x: -R, y: -R, width: 2 * R, height: 2 * R }, burst);
       if (s.word) api.el("text", { class: "fA", y: 7, "font-size": 20, "text-anchor": "middle" }, burst).textContent = s.word;
       api.el("circle", { r: Math.max(8, r), class: "hit" }, g);

@@ -20,7 +20,7 @@ python3 tests/lily/behave.py http://127.0.0.1:4441/ep01/
 - 8초 자동 진행, 소리 끝 끝 카드, 그냥 듣기(건너뜀, 다시 열어도 기억), 되감기(화면, 바깥), 단어 버튼은 그 줄만, 대본 줄은 그 줄 끝 기다림을 건너뜀, 3번 이어 듣기, 조금 천천히, 키보드 Enter
 - 자유 놀이(반짝, 문지르기), 성능(문지르기와 거품 FPS 55 이상, CPU 4배 느리게도 기록), 콘솔 오류 0, 4xx/5xx 응답 0
 - 마지막 줄 `SUMMARY 통과 / 전체`, 하나라도 실패하면 종료 코드 1
-- 레인 D 파일(`lily-config.js`, `auth.js`, `gate.js`)이 아직 없는 브랜치에서는 그 404만 따로 보고하게 `--allow-missing lily-config.js,auth.js,gate.js`를 붙입니다. 합친 뒤에는 이 옵션 없이 통과해야 합니다.
+- 가입과 잠금 파일(`lily-config.js`, `supabase.js`, `session.js`, `catalog.js`, `gate.js`)이 아직 없는 브랜치에서는 그 404만 따로 보고하게 `--allow-missing lily-config.js,supabase.js,session.js,catalog.js,gate.js`를 붙입니다. 합친 뒤에는 이 옵션 없이 통과해야 합니다.
 
 화면 크기는 `--size 너비x높이`(기본 390x844). 태블릿(700px 이상)에서는 무대 비율, 첫 화면 전체가 스크롤 없이 보이는지를 더 봅니다. 모든 크기에서 가로 스크롤 0과 아이 대상 64px 이상을 봅니다.
 

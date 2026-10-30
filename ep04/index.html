@@ -22,8 +22,8 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link id="lily-fonts" rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Andika:wght@400;700&family=Gowun+Batang&family=Gowun+Dodum&family=Jua&family=Gaegu:wght@700&display=swap">
 <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Andika:wght@400;700&family=Gowun+Batang&family=Gowun+Dodum&family=Jua&family=Gaegu:wght@700&display=swap"></noscript>
-<link rel="stylesheet" href="/engine/ui/tokens.css">
-<link rel="stylesheet" href="/engine/engine.css">
+<link rel="stylesheet" href="/src/shared/ui/tokens.css">
+<link rel="stylesheet" href="/src/widgets/player/engine.css">
 <!-- 가입과 맛보기(레인 D): 설정, 로그인, 잠금. 없으면 gate-default.js가 항상 허용 -->
 <script src="/src/shared/config/lily-config.js"></script>
 <script src="/src/shared/api/supabase.js"></script>
@@ -31,11 +31,11 @@
 <script src="/src/entities/episode/catalog.js"></script>
 <script src="/src/features/gate/gate.js"></script>
 <script src="/src/features/gate/gate-default.js"></script>
-<script src="/engine/engine.js"></script>
-<script src="/engine/interactions/find.js"></script>
-<script src="/engine/interactions/pop.js"></script>
-<script src="/engine/interactions/say-sticker.js"></script>
-<script src="/engine/interactions/tap-sparkle.js"></script>
+<script src="/src/widgets/player/engine.js"></script>
+<script src="/src/widgets/player/interactions/find.js"></script>
+<script src="/src/widgets/player/interactions/pop.js"></script>
+<script src="/src/widgets/player/interactions/say-sticker.js"></script>
+<script src="/src/widgets/player/interactions/tap-sparkle.js"></script>
 </head>
 <body>
 <div class="stage" id="stage">
@@ -124,7 +124,7 @@
   </svg>
 </div>
 
-<!-- 편 설정(JSON). 형식은 /engine/README.md. 시각은 초(음악 도입 2.5초 포함), [[...]]는 오늘의 단어, 좌표는 장면 viewBox(그림 픽셀의 절반) -->
+<!-- 편 설정(JSON). 형식은 /src/entities/episode/README.md. 시각은 초(음악 도입 2.5초 포함), [[...]]는 오늘의 단어, 좌표는 장면 viewBox(그림 픽셀의 절반) -->
 <script type="application/json" id="lily-episode">
 {
   "id": "ep04",
