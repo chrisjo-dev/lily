@@ -47,3 +47,19 @@
 }
 .lamp.noart .head { padding-bottom: 36px; }
 @media (min-width: 900px) { .lamp.noart .head { padding-bottom: 60px; } }
+
+/* 이렇게 함께해요: 세 단계 그림. 숫자는 실제 순서라 남색 동그라미로(누를 수 없으니 노란색은 쓰지 않는다) */
+.how-steps { list-style: none; padding: 0; margin: 20px 0 0; display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; text-align: center; }
+.how-steps img { display: block; width: 92px; height: auto; margin: 0 auto; }
+.how-steps i { position: relative; display: grid; place-items: center; width: 28px; height: 28px; margin: -12px auto 0; border-radius: 50%; background: var(--paper); border: 1.5px solid var(--ink); font-family: var(--font-head); font-style: normal; font-size: 16px; line-height: 1; color: var(--ink); }
+.how-steps b { display: block; margin-top: 8px; font-family: var(--font-head); font-weight: 400; font-size: 18px; line-height: 1.25; }
+.how-steps span { display: block; margin-top: 6px; font-size: 14px; line-height: 1.5; color: var(--ink-2); }
+/* 작은 그림은 좌우가 칼같이 잘리지 않게 가장자리를 바탕색으로 번지게 한다(오려 낸 캐릭터는 쓰지 않는다) */
+.how-steps img { -webkit-mask-image: radial-gradient(closest-side, #000 62%, transparent); mask-image: radial-gradient(closest-side, #000 62%, transparent); }
+@media (min-width: 900px) {
+  .how-steps { margin-top: 30px; gap: 36px; }
+  .how-steps img { width: 150px; }
+  .how-steps i { width: 36px; height: 36px; margin-top: -18px; font-size: 19px; }
+  .how-steps b { font-size: 24px; margin-top: 12px; }
+  .how-steps span { font-size: 17px; margin-top: 8px; }
+}
