@@ -31,23 +31,23 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-<link rel="preload" as="image" href="img/hero.webp" fetchpriority="high">
-<link rel="stylesheet" href="hello.css">
+<link rel="preload" as="image" href="/src/shared/ui/img/hero.webp" fetchpriority="high">
+<link rel="stylesheet" href="/src/pages/landing/hello.css">
 </head>
 <body>
   <header class="hero">
-    <div class="bar"><img src="img/emblem.webp" alt=""><span>릴리랑</span></div>
+    <div class="bar"><img src="/src/shared/ui/img/emblem.webp" alt=""><span>릴리랑</span></div>
     <div class="inner">
       <div class="copy">
-        <h1 class="title-art"><picture><source media="(max-width: 899px)" srcset="img/t8-landing-title-680.webp"><img src="img/t8-landing-title.webp" width="1323" height="441" alt="아이가 톡! 눌러야 이야기가 이어져요"></picture></h1>
+        <h1 class="title-art"><picture><source media="(max-width: 899px)" srcset="/src/pages/landing/img/t8-landing-title-680.webp"><img src="/src/pages/landing/img/t8-landing-title.webp" width="1323" height="441" alt="아이가 톡! 눌러야 이야기가 이어져요"></picture></h1>
         <p class="sub">하루 5분, 4~7세 아이와 부모가 함께 듣는 영어 그림책</p>
         <div class="go"><a class="btn" href="/ep01/">무료로 들어보기</a></div>
         <p class="note">로그인 없이 바로 시작해요</p>
       </div>
       <div class="stage">
-        <img class="art" src="img/hero.webp" width="538" height="474" fetchpriority="high" alt="릴리와 비스킷이 빛나는 휴대폰 속 칫솔을 톡 누르는 그림">
-        <img class="art alt" data-src="img/hero-2.webp" width="538" height="474" alt="">
-        <img class="art alt" data-src="img/hero-3.webp" width="538" height="474" alt="">
+        <img class="art" src="/src/shared/ui/img/hero.webp" width="538" height="474" fetchpriority="high" alt="릴리와 비스킷이 빛나는 휴대폰 속 칫솔을 톡 누르는 그림">
+        <img class="art alt" data-src="/src/shared/ui/img/hero-2.webp" width="538" height="474" alt="">
+        <img class="art alt" data-src="/src/shared/ui/img/hero-3.webp" width="538" height="474" alt="">
       </div>
     </div>
     <svg class="edge" viewBox="0 0 1440 56" preserveAspectRatio="none" aria-hidden="true"><path d="M0 56V30c160-22 320-26 480-12s320 30 480 18 320-30 480-22v42z" fill="#fefefd"/></svg>
@@ -73,9 +73,9 @@
   <section class="demo">
     <div class="wrap"><h2 class="sec-title">보기만 하는 영상이 아니에요</h2><p class="sec-lead">릴리가 묻고 기다리면, 아이가 그림을 눌러 이야기를 이어 가요.</p></div>
     <div class="frames">
-      <figure class="frame"><div class="scr"><img loading="lazy" decoding="async" src="img/cap-wait0-find.webp" alt="실제 화면: 칫솔이 빛나며 기다리는 장면"></div><b class="hand">릴리가 멈추면</b><span>찾을 그림이 노랗게 숨 쉬어요</span></figure>
-      <figure class="frame"><div class="scr"><img loading="lazy" decoding="async" src="img/cap-wait1-pop.webp" alt="실제 화면: 거품을 누르는 장면"></div><b class="hand">아이가 톡!</b><span>누르는 대로 거품이 퐁퐁</span></figure>
-      <figure class="frame"><div class="scr"><img loading="lazy" decoding="async" src="img/cap-end.webp" alt="실제 화면: 스티커 세 장을 모은 끝"></div><b class="hand">이야기가 이어져요</b><span>끝까지 들으면 스티커 세 장</span></figure>
+      <figure class="frame"><div class="scr"><img loading="lazy" decoding="async" src="/src/shared/ui/img/cap-wait0-find.webp" alt="실제 화면: 칫솔이 빛나며 기다리는 장면"></div><b class="hand">릴리가 멈추면</b><span>찾을 그림이 노랗게 숨 쉬어요</span></figure>
+      <figure class="frame"><div class="scr"><img loading="lazy" decoding="async" src="/src/shared/ui/img/cap-wait1-pop.webp" alt="실제 화면: 거품을 누르는 장면"></div><b class="hand">아이가 톡!</b><span>누르는 대로 거품이 퐁퐁</span></figure>
+      <figure class="frame"><div class="scr"><img loading="lazy" decoding="async" src="/src/shared/ui/img/cap-end.webp" alt="실제 화면: 스티커 세 장을 모은 끝"></div><b class="hand">이야기가 이어져요</b><span>끝까지 들으면 스티커 세 장</span></figure>
     </div>
     <p class="after">8초가 지나면 릴리가 대신 넘어가요. 틀리는 일은 없어요.</p>
   </section>
@@ -85,10 +85,10 @@
     <div class="wrap">
       <h2 class="sec-title">시험 대신, 하루 5분 귀에 익혀요</h2>
       <div class="grid">
-        <div class="way"><img loading="lazy" decoding="async" src="img/home-how-listen.webp" alt=""><div><b>같은 편을 여러 번</b><p>3번 이어 듣기를 켜 두면 연달아 들려줘요.</p></div></div>
-        <div class="way"><img loading="lazy" decoding="async" src="img/home-how-tap.webp" alt=""><div><b>아이 손으로 이어 가요</b><p>릴리가 기다리면 아이가 직접 눌러야 다음 장면이 나와요.</p></div></div>
-        <div class="way"><img loading="lazy" decoding="async" src="img/home-how-say.webp" alt=""><div><b>진짜 그 순간에 한 번 더</b><p>양치할 때 부모님이 <q>Brush my teeth!</q> 한마디면 들은 말이 생활로 이어져요.</p></div></div>
-        <div class="way"><img loading="lazy" decoding="async" src="img/L-sticker-clean.webp" alt=""><div><b>우리말은 처음 한 번만</b><p>그다음부터는 영어만 들려 뜻을 스스로 붙잡게 해요.</p></div></div>
+        <div class="way"><img loading="lazy" decoding="async" src="/src/shared/ui/img/home-how-listen.webp" alt=""><div><b>같은 편을 여러 번</b><p>3번 이어 듣기를 켜 두면 연달아 들려줘요.</p></div></div>
+        <div class="way"><img loading="lazy" decoding="async" src="/src/shared/ui/img/home-how-tap.webp" alt=""><div><b>아이 손으로 이어 가요</b><p>릴리가 기다리면 아이가 직접 눌러야 다음 장면이 나와요.</p></div></div>
+        <div class="way"><img loading="lazy" decoding="async" src="/src/shared/ui/img/home-how-say.webp" alt=""><div><b>진짜 그 순간에 한 번 더</b><p>양치할 때 부모님이 <q>Brush my teeth!</q> 한마디면 들은 말이 생활로 이어져요.</p></div></div>
+        <div class="way"><img loading="lazy" decoding="async" src="/src/shared/ui/img/L-sticker-clean.webp" alt=""><div><b>우리말은 처음 한 번만</b><p>그다음부터는 영어만 들려 뜻을 스스로 붙잡게 해요.</p></div></div>
       </div>
     </div>
   </section>
@@ -106,13 +106,13 @@
   </section>
 
   <section class="last">
-    <img loading="lazy" decoding="async" src="img/end.webp" alt="">
+    <img loading="lazy" decoding="async" src="/src/shared/ui/img/end.webp" alt="">
     <h2>오늘 습관 하나에<br>5분만 써 보세요</h2>
     <p>로그인 없이 바로 시작해요</p>
     <a class="btn" href="/ep01/">무료로 들어보기</a>
   </section>
   <footer class="foot"><a href="/join/">가입하고 모든 이야기 보기</a><br><a href="/privacy/">개인정보처리방침</a></footer>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gaegu:wght@700&family=Jua&family=Noto+Sans+KR:wght@400;700&display=swap">
-<script src="motion.js" defer></script>
+<script src="/src/pages/landing/motion.js" defer></script>
 </body>
 </html>

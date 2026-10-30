@@ -134,7 +134,7 @@ a:focus-visible { outline: 3px solid var(--sky-deep); outline-offset: 4px; borde
 :root { --navy: #1b2a44; --navy-ink: #e9eef8; --navy-soft: #b9c6de; }
 .hero { position: relative; color: var(--navy-ink); background:
   radial-gradient(60% 50% at 92% 4%, rgba(247,215,154,.40), rgba(247,215,154,0) 70%),
-  url(img/stars.svg) 0 0 / 120px 120px, var(--navy); overflow: hidden; }
+  url(../../shared/ui/img/stars.svg) 0 0 / 120px 120px, var(--navy); overflow: hidden; }
 .hero .bar { display: flex; align-items: center; gap: 10px; padding: 18px 22px 0; }
 .hero .bar img { height: 40px; }
 .hero .bar span { font-family: var(--font-hand); font-weight: 700; font-size: 30px; color: var(--white); letter-spacing: -0.03em; }

@@ -27,7 +27,7 @@ a:focus-visible { outline: 3px solid var(--sky-deep); outline-offset: 4px; borde
 .bar { display: flex; align-items: center; gap: 10px; }
 .lamp { position: relative; overflow: hidden; color: var(--navy-ink); background:
   radial-gradient(60% 50% at 92% 4%, rgba(247,215,154,.40), rgba(247,215,154,0) 70%),
-  url(../hello/img/stars.svg) 0 0 / 120px 120px, var(--navy); }
+  url(img/stars.svg) 0 0 / 120px 120px, var(--navy); }
 .lamp .bar { display: flex; align-items: center; justify-content: space-between; padding: 16px 22px 0; position: relative; z-index: 2; }
 .lamp .bar .brand { display: flex; align-items: center; gap: 10px; color: var(--white); text-decoration: none; }
 .lamp .bar img { height: 38px; width: auto; }

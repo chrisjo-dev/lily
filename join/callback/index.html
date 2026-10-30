@@ -9,24 +9,24 @@
 <meta name="robots" content="noindex, nofollow">
 <title>로그인 중 | 릴리랑</title>
 <link rel="icon" href="/brand/favicon.ico" sizes="any">
-<link rel="stylesheet" href="/common/shell.css">
-<link rel="stylesheet" href="/common/forms.css">
+<link rel="stylesheet" href="/src/shared/ui/shell.css">
+<link rel="stylesheet" href="/src/shared/ui/forms.css">
 </head>
 <body>
 <header class="lamp short noart t8j">
-  <div class="bar"><a class="brand" href="/"><img src="/hello/img/emblem.webp" width="288" height="221" alt=""><span>릴리랑</span></a></div>
-  <div class="inner"><div class="head"><h1 id="title" class="sr-title">로그인하고 있어요</h1><div class="title-art cbt" aria-hidden="true"><picture class="cbt-wait"><source media="(max-width: 899px)" srcset="/hello/img/t8-cb-680.webp"><img src="/hello/img/t8-cb.webp" width="600" height="313" alt=""></picture><picture class="cbt-fail"><source media="(max-width: 899px)" srcset="/hello/img/t8-cbfail-680.webp"><img src="/hello/img/t8-cbfail.webp" width="600" height="231" alt=""></picture></div></div></div>
+  <div class="bar"><a class="brand" href="/"><img src="/src/shared/ui/img/emblem.webp" width="288" height="221" alt=""><span>릴리랑</span></a></div>
+  <div class="inner"><div class="head"><h1 id="title" class="sr-title">로그인하고 있어요</h1><div class="title-art cbt" aria-hidden="true"><picture class="cbt-wait"><source media="(max-width: 899px)" srcset="/src/pages/join-callback/img/t8-cb-680.webp"><img src="/src/pages/join-callback/img/t8-cb.webp" width="600" height="313" alt=""></picture><picture class="cbt-fail"><source media="(max-width: 899px)" srcset="/src/pages/join-callback/img/t8-cbfail-680.webp"><img src="/src/pages/join-callback/img/t8-cbfail.webp" width="600" height="231" alt=""></picture></div></div></div>
   <svg class="edge" viewBox="0 0 1440 56" preserveAspectRatio="none" aria-hidden="true"><path d="M0 56V30c160-22 320-26 480-12s320 30 480 18 320-30 480-22v42z" fill="#fefefd"/></svg>
 </header>
 <main class="wait t8j-wait">
   <p class="lead" id="status" role="status" aria-live="polite">잠깐만 기다려 주세요.</p>
   <p class="dots" aria-hidden="true"><i></i><i></i><i></i></p>
-  <img class="vig" src="/hello/img/t8-cb-vig.webp" width="460" height="374" alt="">
+  <img class="vig" src="/src/pages/join-callback/img/t8-cb-vig.webp" width="460" height="374" alt="">
   <p class="part" id="retry" hidden><a class="act main" id="retryLink" href="/join/">다시 로그인하기</a></p>
 </main>
 <script src="/src/shared/config/lily-config.js"></script>
 <script src="/src/shared/api/supabase.js"></script>
 <script src="/src/entities/session/session.js"></script>
-<script src="/join/callback/callback.js"></script>
+<script src="/src/pages/join-callback/callback.js"></script>
 </body>
 </html>
