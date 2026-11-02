@@ -14,6 +14,6 @@
 5. 리디렉트 주소는 정확히 이것만 등록한다(와일드카드와 localhost는 운영 설정에 넣지 않음).
    - Supabase, Authentication > URL Configuration: Site URL `https://lilyrang.co.kr`, Redirect URLs `https://lilyrang.co.kr/join/callback/`
    - 카카오 개발자 콘솔, 카카오 로그인 > Redirect URI: `https://<ref>.supabase.co/auth/v1/callback`
-6. 카카오 동의항목: 프로필 사진(profile_image)을 "사용 안 함"으로 둔다. `privacy/index.html`의 "프로필 사진은 요청하지 않고 저장하지도 않아요." 문장은 이 설정을 전제로 한다. 프로필 사진을 받기로 바꾸면 그 문장을 지우고 수집 항목 표의 카카오 줄에 "프로필 사진 주소"를 다시 넣는다.
+6. 카카오 동의항목: Supabase가 카카오에 account_email, profile_image, profile_nickname을 항상 함께 요청하므로 셋 다 설정해야 한다(하나라도 빠지면 KOE205). 닉네임은 필수, 프로필 사진과 이메일은 선택 동의. 이메일은 비즈 앱 전환 뒤에 설정할 수 있다. Supabase의 external_kakao_email_optional은 켠다(이메일 없이도 가입). `privacy/index.html`의 카카오 선택 항목 줄과 프로필 사진 문장은 이 설정을 전제로 한다.
 7. 개인정보처리방침 빈칸 채우기: `privacy/index.html`의 담당자 이름, 연락처 이메일, 시행일. Supabase 리전이 서울이 아니면 HTML 주석에 남긴 국외 이전 절도 채워 넣는다.
 8. 실제 주소에서 카카오와 이메일로 가입, 로그인, 로그아웃, 탈퇴를 해 보고, 탈퇴 뒤 그 사용자의 행이 모두 0인지 확인한다.
