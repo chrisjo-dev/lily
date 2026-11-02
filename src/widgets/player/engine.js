@@ -123,7 +123,7 @@ function buildShell() {
     <div class="ebody">
       <div class="eleft"><div class="eframe"><img data-src="${esc(frame)}" alt="" width="170" height="170"></div>
       <div class="ehead"><p class="epn">${num}</p><p class="etitle">${esc(EP.title)}</p><p class="emsg">${esc(end.done || "오늘 이야기를 다 들었어요.")}</p></div></div>
-      <div class="eright">${end.stickers ? `<p class="ribbon">${esc(end.sub || "오늘의 스티커")}</p>
+      <div class="eright">${end.stickers ? `<p class="ribbon"><svg viewBox="0 0 ${RIB_BOX}"><image class="ui" data-ui="ribbon.webp" width="220" height="38" preserveAspectRatio="none"/>${ribPath("ribE", 0, 0, 220, 38)}<text class="rib" dominant-baseline="central"><textPath href="#ribE" startOffset="50%" text-anchor="middle">${esc(end.sub || "오늘의 스티커")}</textPath></text></svg></p>
       <div class="estk">${end.stickers.map((s) => `<span><i class="spot"><img data-src="${esc(s.img)}" alt="" width="66" height="66"></i>${esc(s.label)}</span>`).join("")}</div>` : ""}
       <button class="again" id="again" type="button">한 번 더</button>
       <button class="toparent" id="toParent" type="button">부모님께</button></div>
@@ -170,9 +170,30 @@ function buildShell() {
       <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 7.5l5 5 5-5"/></svg></summary>
     <div class="script" id="script"></div>
   </details>
-  <p class="maker"><a href="https://read.wspace.ai.kr/">릴리랑은 매일 외국어 읽기가 만들어요</a></p>
-  <footer class="site-footer"><a href="https://www.wspace.ai.kr/">wspace 홈</a><a href="https://www.wspace.ai.kr/about/">소개</a><a href="/privacy/">개인정보처리방침</a><a href="https://www.wspace.ai.kr/contact/">연락처</a></footer>
+  <p class="maker">릴리랑은 매일 외국어 읽기가 만들어요</p>
+  <footer class="site-footer"><a href="/">릴리랑 홈</a><a href="/privacy/">개인정보처리방침</a><a href="mailto:privacy@lilyrang.co.kr">연락처</a></footer>
 </main>`);
+}
+
+// 리본 글자: 리본 그림(ribbon.webp, 256x102) 앞 띠의 가운데 곡선을 그림 크기(x, y, w, h)에 맞춰 늘린 길을 따라 휜다.
+// 글자 폭이 띠 앞면(168)의 85%를 넘으면 글자를 줄인다(편마다 문구가 다르다). 시안 P125
+const RIB_BOX = "220 38";
+function ribPath(id, x, y, w, h) {
+  const p = (px, py) => `${(x + px * w / 256).toFixed(1)} ${(y + py * h / 102).toFixed(1)}`;
+  return `<path id="${id}" d="M${p(40, 48.5)} Q${p(128, 20.5)} ${p(216, 48.5)}" fill="none"/>`;
+}
+const ribCtx = document.createElement("canvas").getContext("2d");
+function fitRibbons() {
+  const fam = getComputedStyle(document.documentElement).getPropertyValue("--font-logo") || "sans-serif";
+  for (const t of document.querySelectorAll("text.rib")) {
+    const path = $(t.firstElementChild.getAttribute("href").slice(1)), d = path.getAttribute("d").match(/-?[\d.]+/g).map(Number);
+    const max = (d[4] - d[0]) * 168 / 176 * 0.85;
+    t.style.fontSize = "";
+    const size = parseFloat(getComputedStyle(t).fontSize) || 14;
+    ribCtx.font = `${size}px ${fam}`;
+    const w = ribCtx.measureText(t.textContent).width;
+    if (w > max) t.style.fontSize = `${(size * max / w).toFixed(1)}px`;
+  }
 }
 
 // 아이 차례(say-sticker) 장면: 편 그림 안의 "말했어요" 단추를 본문 줄 아래 큰 단추(같은 id)로 옮기고,
@@ -205,10 +226,12 @@ function decorateSay() {
     dash.remove();
   }
   if (label) {
-    const x = Number(label.getAttribute("x")), y = Number(label.getAttribute("y")) - 8;
-    label.setAttribute("y", y); label.classList.add("rib");
-    const rib = el("image", { class: "ui", "data-ui": "ribbon.webp", x: x - 95, y: y - 22, width: 190, height: 34, preserveAspectRatio: "none" });
-    P.insertBefore(rib, label); moved.unshift(rib, label);
+    const x = Number(label.getAttribute("x")) - 95, y = Number(label.getAttribute("y")) - 30;
+    const rib = el("image", { class: "ui", "data-ui": "ribbon.webp", x, y, width: 190, height: 34, preserveAspectRatio: "none" });
+    const g = el("g");
+    g.innerHTML = `${ribPath("ribS", x, y, 190, 34)}<text class="rib" dominant-baseline="central"><textPath href="#ribS" startOffset="50%" text-anchor="middle">${esc(label.textContent)}</textPath></text>`;
+    P.insertBefore(rib, label); P.insertBefore(g, label); label.remove();
+    moved.unshift(rib, g);
   }
   if (lo < hi) {
     const vb = sc.viewBox.baseVal, g = el("g", { transform: `translate(${(vb.x + vb.width / 2 - (lo + hi) / 2).toFixed(1)} 0)` });
@@ -506,6 +529,8 @@ function lilyMount() {
   done = WAITS.map(() => false);
   buildShell();
   decorateSay();
+  fitRibbons();
+  if (document.fonts) document.fonts.ready.then(fitRibbons);
   audio = $("audio"); stage = $("stage");
   for (const ev of ["pointerdown", "keydown", "scroll"]) window.addEventListener(ev, loadLater, { once: true, capture: true, passive: true });
   // 손 안내: 문지르는 장면(.hit.scrub가 있는 장면)의 손은 문지르기 손으로
@@ -626,5 +651,9 @@ function lilyMount() {
   f.addEventListener("load", on, { once: true });
   window.addEventListener("load", on, { once: true });   // 이 스크립트보다 먼저 받아 버렸을 때
 })();
-if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", lilyMount, { once: true });
-else lilyMount();
+// 편 페이지는 스크립트를 defer로 받는다. 그때 이 파일이 돌 때는 이미 "interactive"라도 뒤의 interactions/*.js가 아직 안 돌았으므로
+// DOMContentLoaded(defer 스크립트가 다 돈 뒤)를 기다린다. 그 뒤에 늦게 붙은 경우를 위해 load도 듣고, 한 번만 시작한다
+let mounted = false;
+const mountOnce = () => { if (!mounted) { mounted = true; lilyMount(); } };
+if (document.readyState === "complete") mountOnce();
+else { document.addEventListener("DOMContentLoaded", mountOnce, { once: true }); window.addEventListener("load", mountOnce, { once: true }); }
