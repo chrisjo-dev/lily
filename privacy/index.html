@@ -43,15 +43,14 @@
 <main class="doc">
 
   <h2 id="s1">1. 받는 정보와 쓰는 목적</h2>
-  <div class="row"><b>필수 (이메일 로그인)</b><span>이메일 주소</span><em>회원 확인, 로그인 링크 발송</em></div>
-  <div class="row"><b>필수 (카카오 로그인)</b><span>카카오 회원번호, 카카오 계정 이메일, 닉네임</span><em>회원 확인, 로그인</em></div>
+  <div class="row"><b>필수 (카카오 로그인)</b><span>카카오 회원번호, 닉네임</span><em>회원 확인, 로그인</em></div>
   <div class="row"><b>선택</b><span>닉네임, 아이 나이대(4~5세 또는 6~7세), 소식 받기 동의 여부</span><em>화면에 이름 표시, 나이에 맞는 편 안내, 새 편 소식 발송</em></div>
   <div class="row"><b>이용 기록</b><span>끝까지 들은 편과 그 시각, 가입과 로그인, 편 시작과 완료, 가입 안내 표시와 누름 기록</span><em>이어 듣기, 서비스 개선</em></div>
   <div class="row"><b>방문 통계 (가입하지 않아도)</b><span>방문한 페이지 주소, 이전 페이지 주소, 브라우저와 기기 종류, 페이지 로딩 성능 수치, 국가 수준 위치</span><em>방문 수와 페이지 속도를 합계로 보고 사이트 개선</em></div>
   <ul>
     <li>릴리랑은 IP 주소와 기기 정보를 따로 저장하지 않아요(방문 통계의 브라우저와 기기 종류는 합계로만 봐요). 다만 로그인 서비스(Supabase)가 보안을 위해 로그인 기록을 정해진 기간 동안 보관할 수 있어요.</li>
     <li>방문 통계는 Cloudflare Web Analytics로 모아요. 쿠키를 쓰지 않는 집계형 통계라서 릴리랑은 합계만 보고, 이 통계로 방문자 한 사람을 알아보지 않아요.</li>
-    <li>프로필 사진은 요청하지 않고 저장하지도 않아요.</li>
+    <li>프로필 사진과 카카오 계정 이메일은 요청하지 않고 저장하지도 않아요.</li>
     <li>전화번호는 지금 받지 않아요. 나중에 알림 메시지 기능을 만들면 그때 따로 동의를 받아요.</li>
   </ul>
 
@@ -69,9 +68,9 @@
   <p>전자 파일로 저장된 정보는 되살릴 수 없는 방법으로 데이터베이스에서 지워요. 종이로 출력해 보관하는 개인정보는 없어요.</p>
 
   <h2 id="s5">5. 처리 위탁</h2>
-  <div class="row"><b>Supabase, Inc.</b><span>회원 인증, 데이터베이스 보관, 로그인 메일 발송</span></div>
-  <div class="row"><b>Cloudflare, Inc.</b><span>사이트 전송, 방문 통계 집계(Cloudflare Web Analytics)</span></div>
-  <div class="row"><b>주식회사 카카오</b><span>카카오 로그인 인증(카카오 로그인을 고른 경우)</span></div>
+  <div class="row"><b>Supabase, Inc.</b><span>회원 인증, 데이터베이스 보관</span></div>
+  <div class="row"><b>Cloudflare, Inc.</b><span>사이트 전송, 카카오 로그인 코드 교환(저장하지 않음), 방문 통계 집계(Cloudflare Web Analytics)</span></div>
+  <div class="row"><b>주식회사 카카오</b><span>카카오 로그인 인증</span></div>
 
     <!--
       국외 이전: Supabase 프로젝트 리전이 서울(ap-northeast-2)이면 이 절은 넣지 않는다.

@@ -83,9 +83,12 @@
     c.from("profiles").update({ nickname: nick || null, child_age_band: band, marketing_opt_in: $("marketing").checked })
       .eq("user_id", uid).then(function (r) {
         if (r.error) throw r.error;
-        say("saveMsg", "저장했어요.");
-      }).catch(function () { say("saveMsg", "저장하지 못했어요. 잠시 뒤에 다시 해 주세요.", true); })
-      .then(function () { $("save").disabled = false; });
+        say("saveMsg", "저장했어요. 홈으로 갈게요.");
+        location.replace("/");
+      }).catch(function () {
+        say("saveMsg", "저장하지 못했어요. 잠시 뒤에 다시 해 주세요.", true);
+        $("save").disabled = false;
+      });
   });
 
   $("logout").addEventListener("click", function () {

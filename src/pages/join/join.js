@@ -1,18 +1,21 @@
-// 가입 화면: 필수 동의 뒤 카카오 또는 이메일 로그인 링크. 돌아올 곳(next)과 마케팅 동의는 콜백까지 localStorage로 넘긴다.
-// 리디렉트 주소는 언제나 정확히 <이 주소>/join/callback/ 하나(쿼리 없음). Supabase 허용 목록과 같아야 한다.
+// 가입 화면: 필수 동의 뒤 카카오 로그인(닉네임만, OpenID Connect). 돌아올 곳(next)과 마케팅 동의는 콜백까지 localStorage로 넘긴다.
+// Supabase 의 카카오 OAuth 는 이메일과 프로필 사진을 늘 함께 요청해서 쓰지 않는다. 카카오 인가는 여기서 직접 시작하고,
+// 콜백이 Worker(/api/kakao/token)로 id_token 을 받아 signInWithIdToken 으로 세션을 만든다.
+// 리디렉트 주소는 언제나 정확히 <이 주소>/join/callback/ 하나(쿼리 없음). 카카오 콘솔의 Redirect URI 와 같아야 한다.
 (function () {
   "use strict";
   var A = window.lilyAuth;
   var NEXT_KEY = "lilyrang-next";
-  var OTP_KEY = "lilyrang-otp-at";
-  var COOLDOWN = 60 * 1000;
+  var OIDC_KEY = "lilyrang-kakao-oidc";
+  var AUTHORIZE = "https://kauth.kakao.com/oauth/authorize";
   var CALLBACK = location.origin + "/join/callback/";
+  var cfg = window.LILY_CONFIG || {};
+  var clientId = typeof cfg.kakaoClientId === "string" ? cfg.kakaoClientId : "";
 
   function $(id) { return document.getElementById(id); }
-  var agree = $("agree"), marketing = $("marketing"), kakao = $("kakao"), form = $("emailForm"),
-    email = $("email"), emailBtn = $("emailBtn"), msg = $("msg");
+  var agree = $("agree"), marketing = $("marketing"), kakao = $("kakao"), msg = $("msg");
   var next = A.safeNext(new URLSearchParams(location.search).get("next") || "/");
-  var busy = false, timer = null;
+  var busy = false;
 
   function say(text, err) {
     msg.textContent = text;
@@ -20,22 +23,7 @@
     msg.hidden = !text;
   }
 
-  function lastSent() {
-    try { return Number(localStorage.getItem(OTP_KEY)) || 0; } catch (e) { return 0; }
-  }
-  function waitLeft() { return Math.max(0, lastSent() + COOLDOWN - Date.now()); }
-
-  function update() {
-    var ok = A.ready && agree.checked && !busy;
-    kakao.disabled = !ok;
-    var left = waitLeft();
-    emailBtn.disabled = !ok || left > 0;
-    emailBtn.textContent = left > 0 ? Math.ceil(left / 1000) + "초 뒤에 다시 보낼 수 있어요" : "이메일로 로그인 링크 받기";
-    if (left > 0 && !timer) timer = setInterval(function () {
-      if (waitLeft() === 0) { clearInterval(timer); timer = null; }
-      update();
-    }, 1000);
-  }
+  function update() { kakao.disabled = !(A.ready && clientId && agree.checked && !busy); }
 
   function remember() {
     try {
@@ -43,7 +31,19 @@
     } catch (e) { /* 저장이 막혀도 로그인은 되고, 돌아올 곳만 홈이 된다 */ }
   }
 
-  if (!A.ready) {
+  function random() {
+    var b = new Uint8Array(32);
+    crypto.getRandomValues(b);
+    return Array.prototype.map.call(b, function (x) { return ("0" + x.toString(16)).slice(-2); }).join("");
+  }
+  // 카카오에는 sha256(nonce) 를 보내고, Supabase 에는 원래 nonce 를 준다(Supabase 가 해시해서 id_token 의 nonce 와 비교)
+  function sha256hex(s) {
+    return crypto.subtle.digest("SHA-256", new TextEncoder().encode(s)).then(function (h) {
+      return Array.prototype.map.call(new Uint8Array(h), function (x) { return ("0" + x.toString(16)).slice(-2); }).join("");
+    });
+  }
+
+  if (!A.ready || !clientId) {
     $("notReady").hidden = false;
     $("joinBox").hidden = true;
     return;
@@ -62,35 +62,19 @@
     if (kakao.disabled) return;
     busy = true; update(); say("카카오로 이동하고 있어요.");
     remember();
-    A.client().then(function (c) {
-      return c.auth.signInWithOAuth({ provider: "kakao", options: { redirectTo: CALLBACK } });
-    }).then(function (r) {
-      if (r && r.error) throw r.error;
+    var state = random(), nonce = random();
+    sha256hex(nonce).then(function (hashed) {
+      sessionStorage.setItem(OIDC_KEY, JSON.stringify({ state: state, nonce: nonce, at: Date.now() }));
+      location.assign(AUTHORIZE + "?" + new URLSearchParams({
+        client_id: clientId,
+        redirect_uri: CALLBACK,
+        response_type: "code",
+        scope: "openid profile_nickname",
+        state: state,
+        nonce: hashed
+      }).toString());
     }).catch(function () {
       busy = false; update(); say("카카오 로그인을 시작하지 못했어요. 잠시 뒤에 다시 해 주세요.", true);
     });
-  });
-
-  form.addEventListener("submit", function (e) {
-    e.preventDefault();
-    if (emailBtn.disabled) return;
-    var v = email.value.trim();
-    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v) || v.length > 254) {
-      say("이메일 주소를 다시 확인해 주세요.", true);
-      email.focus();
-      return;
-    }
-    busy = true; update(); say("보내고 있어요.");
-    remember();
-    A.client().then(function (c) {
-      return c.auth.signInWithOtp({ email: v, options: { emailRedirectTo: CALLBACK, shouldCreateUser: true } });
-    }).then(function (r) {
-      if (r && r.error) throw r.error;
-      try { localStorage.setItem(OTP_KEY, String(Date.now())); } catch (e2) { /* 대기는 이 화면에서만 */ }
-      say("메일을 보냈어요. 메일의 링크를 이 휴대폰(이 브라우저)에서 눌러 주세요.");
-    }).catch(function (err) {
-      var limited = err && (err.status === 429 || /rate/i.test(String(err.message || "")));
-      say(limited ? "잠시 뒤에 다시 보내 주세요." : "메일을 보내지 못했어요. 잠시 뒤에 다시 해 주세요.", true);
-    }).then(function () { busy = false; update(); });
   });
 })();
