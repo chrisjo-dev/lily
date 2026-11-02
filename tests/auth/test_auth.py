@@ -25,11 +25,12 @@ def fake_jwt(payload): return b64({"alg": "HS256", "typ": "JWT"}) + "." + b64(pa
 ANON = fake_jwt({"role": "anon", "iss": "test"})  # 시험용 가짜 키(서명 없음)
 SERVICE = fake_jwt({"role": "service_role", "iss": "test"})
 
-def cfg_js(url, key): return f'window.LILY_CONFIG = {{ supabaseUrl: "{url}", supabaseAnonKey: "{key}" }};'
+KAKAO_ID = "testkakaoclientid"
+def cfg_js(url, key, kakao): return f'window.LILY_CONFIG = {{ supabaseUrl: "{url}", supabaseAnonKey: "{key}", kakaoClientId: "{kakao}" }};'
 
-async def use_config(pg, url, key):
+async def use_config(pg, url, key, kakao=KAKAO_ID):
     """lily-config.js 를 가짜 값으로 바꾸고, 페이지 CSP의 자리 표시를 그 주소로 바꾼다(메인이 실제로 할 일과 같다)."""
-    await pg.route("**/src/shared/config/lily-config.js", lambda r: r.fulfill(status=200, content_type="text/javascript", body=cfg_js(url, key)))
+    await pg.route("**/src/shared/config/lily-config.js", lambda r: r.fulfill(status=200, content_type="text/javascript", body=cfg_js(url, key, kakao)))
     async def html(route):
         resp = await route.fetch()
         body = re.sub(r"https://(supabase-project-ref\.invalid|[a-z0-9]+\.supabase\.co)", url, await resp.text())
@@ -88,7 +89,7 @@ async def page(br, **kw):
 async def run(br):
     # 1. 설정이 빈 상태(지금 저장소 그대로) ------------------------------------
     ctx, pg = await page(br)
-    await use_config(pg, "", "")  # 저장소에 실제 값이 들어가도 빈 설정 동작을 따로 본다
+    await use_config(pg, "", "", "")  # 저장소에 실제 값이 들어가도 빈 설정 동작을 따로 본다
     await pg.goto(B + "/join/?next=/ep02/"); await pg.wait_for_load_state("load")
     fcp, lt = await perf(pg)
     ok("empty config: join shows 준비 중, form hidden",
@@ -131,82 +132,87 @@ async def run(br):
         ok(f"config with {label} is refused (ready false)", await pg.evaluate("lilyAuth.ready===false") and await pg.is_visible("#notReady"))
         await ctx.close()
 
-    # 3. 설정이 있는 상태(가짜 Supabase): SRI 로드, 동의, 카카오, 이메일 재요청 대기 ----
+    # 3. 설정이 있는 상태(가짜 Supabase): 동의, 카카오 인가 주소(닉네임만, state, nonce) ---------
+    import hashlib
+    from urllib.parse import urlparse, parse_qs
     ctx, pg = await page(br)
     await use_config(pg, SB, ANON)
-    otp = []
-    async def otp_route(route):
-        otp.append(route.request.post_data); await route.fulfill(status=200, content_type="application/json", body="{}")
-    await pg.route(SB + "/auth/v1/otp*", otp_route)
     authz = []
     async def authz_route(route):
         authz.append(route.request.url); await route.fulfill(status=200, content_type="text/html", body="<p>kakao</p>")
-    await pg.route(SB + "/auth/v1/authorize*", authz_route)
+    await pg.route("https://kauth.kakao.com/oauth/authorize*", authz_route)
     await pg.goto(B + "/join/?next=/ep02/"); await pg.wait_for_load_state("load")
     fcp, lt = await perf(pg)
-    ok("configured join: ready, buttons locked until required consent",
-       await pg.evaluate("lilyAuth.ready") and await pg.is_disabled("#kakao") and await pg.is_disabled("#emailBtn"), f"FCP={fcp:.0f}ms lt={lt}")
+    ok("configured join: ready, kakao locked until required consent, no email form",
+       await pg.evaluate("lilyAuth.ready") and await pg.is_disabled("#kakao") and not await pg.query_selector("#email, #emailForm, #emailBtn"), f"FCP={fcp:.0f}ms lt={lt}")
     ok("configured join: first paint <= 1500ms, no long task", fcp <= 1500 and lt == 0)
     ok("configured join: anonymous visitor does not download supabase-js", not any("jsdelivr" in u for u in pg.reqs))
     await pg.check("#agree")
-    ok("consent checked: buttons enabled", not await pg.is_disabled("#kakao") and not await pg.is_disabled("#emailBtn"))
-    await pg.fill("#email", "parent@example.test")
-    await pg.click("#emailBtn")
-    await until(pg, "!document.getElementById('msg').hidden && /보냈어요/.test(document.getElementById('msg').textContent)")
-    ok("supabase-js loaded with SRI under CSP", await pg.evaluate("!!(window.supabase&&window.supabase.createClient)")
-       and any("supabase-js@2.117.3" in u for u in pg.reqs) and await pg.evaluate("window.__csp.length===0"), str(await pg.evaluate("window.__csp")))
-    body = json.loads(otp[0]) if otp else {}
-    ok("email link request: PKCE challenge, create user", body.get("code_challenge_method") in ("s256", "S256") and body.get("create_user") is True and body.get("email") == "parent@example.test", str({k: body.get(k) for k in ("code_challenge_method", "create_user")}))
-    t1 = await pg.inner_text("#emailBtn")
-    ok("resend locked for 60s with countdown", await pg.is_disabled("#emailBtn") and re.match(r"^(60|59|58)초 뒤", t1) is not None, t1)
-    await pg.reload(); await pg.wait_for_load_state("load"); await pg.check("#agree")
-    ok("resend lock survives reload", await pg.is_disabled("#emailBtn") and "초 뒤" in await pg.inner_text("#emailBtn"))
-    saved = json.loads(await pg.evaluate("localStorage.getItem('lilyrang-next')"))
-    ok("next and marketing choice kept for callback", saved["next"] == "/ep02/" and saved["marketing"] is False)
+    ok("consent checked: kakao enabled", not await pg.is_disabled("#kakao"))
     await pg.check("#marketing")
     await pg.click("#kakao")
-    await pg.wait_for_url(re.compile(r"testref\.supabase\.co/auth/v1/authorize"), timeout=8000)
-    u = authz[0] if authz else ""
-    from urllib.parse import urlparse, parse_qs
-    qs = parse_qs(urlparse(u).query)
-    rt = (qs.get("redirect_to") or [""])[0]
-    ok("kakao: provider kakao, PKCE s256, redirect to exact callback path",
-       qs.get("provider") == ["kakao"] and qs.get("code_challenge_method", [""])[0].lower() == "s256"
-       and rt.split("?")[0] == B + "/join/callback/", rt)
-    await ctx.close()
+    await pg.wait_for_url(re.compile(r"kauth\.kakao\.com/oauth/authorize"), timeout=8000)
+    qs = parse_qs(urlparse(authz[0] if authz else "").query)
+    q1 = lambda k: (qs.get(k) or [""])[0]
+    ok("kakao authorize: client id, exact callback, code, scope openid profile_nickname only",
+       q1("client_id") == KAKAO_ID and q1("redirect_uri") == B + "/join/callback/" and q1("response_type") == "code"
+       and q1("scope") == "openid profile_nickname", str({k: q1(k) for k in ("redirect_uri", "scope")}))
+    ok("kakao authorize: random state and sha256-hex nonce", re.fullmatch(r"[0-9a-f]{64}", q1("state")) is not None and re.fullmatch(r"[0-9a-f]{64}", q1("nonce")) is not None)
+    await pg.goto(B + "/privacy/"); await pg.wait_for_load_state("load")  # 같은 탭, 같은 주소로 돌아와 저장값을 읽는다
+    saved = json.loads(await pg.evaluate("localStorage.getItem('lilyrang-next')"))
+    ok("next and marketing choice kept for callback", saved["next"] == "/ep02/" and saved["marketing"] is True)
+    oidc = json.loads(await pg.evaluate("sessionStorage.getItem('lilyrang-kakao-oidc')"))
+    ok("state and raw nonce kept in this tab only", oidc["state"] == q1("state") and hashlib.sha256(oidc["nonce"].encode()).hexdigest() == q1("nonce"))
 
-    # 4. 콜백: 코드 교환, 마케팅 동의 반영, 가입 이벤트, next 로 이동 -----------------
-    ctx, pg = await page(br)
-    await use_config(pg, SB, ANON)
+    # 4. 콜백: Worker 로 id_token 받기, signInWithIdToken, 마케팅 동의 반영, 가입 이벤트, next 로 이동 -----
     uid = "aaaaaaaa-0000-0000-0000-000000000001"
     access = fake_jwt({"sub": uid, "role": "authenticated", "exp": int(time.time()) + 3600, "aud": "authenticated"})
-    user = {"id": uid, "aud": "authenticated", "role": "authenticated", "email": "parent@example.test",
-            "created_at": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()), "app_metadata": {}, "user_metadata": {}}
+    user = {"id": uid, "aud": "authenticated", "role": "authenticated",
+            "created_at": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()), "app_metadata": {"provider": "kakao"}, "user_metadata": {}}
     sess = {"access_token": access, "token_type": "bearer", "expires_in": 3600, "expires_at": int(time.time()) + 3600,
             "refresh_token": "r1", "user": user}
     calls = []
+    async def kakao_api(route):
+        rq = route.request
+        calls.append(("api", rq.url, rq.post_data, rq.method))
+        await route.fulfill(status=200, content_type="application/json", body=json.dumps({"id_token": "fake.id.token"}))
     async def token(route):
         calls.append(("token", route.request.url, route.request.post_data)); await route.fulfill(status=200, content_type="application/json", body=json.dumps(sess))
     async def rest(route):
         rq = route.request
         calls.append((rq.method, rq.url, rq.post_data, rq.headers.get("authorization", "")))
         await route.fulfill(status=201 if rq.method == "POST" else 204, body="")
+    await pg.route(B + "/api/kakao/token", kakao_api)
     await pg.route(SB + "/auth/v1/token*", token)
     await pg.route(SB + "/rest/v1/**", rest)
     await pg.route(B + "/ep02/", lambda r: r.fulfill(status=200, content_type="text/html", body="<!doctype html><title>ep02</title>"))
-    await pg.goto(B + "/join/")  # 같은 주소에서 저장소 준비
-    await pg.evaluate("""localStorage.setItem('lilyrang-next', JSON.stringify({next:'/ep02/', marketing:true, at:Date.now()}));
-      localStorage.setItem('lilyrang-auth-code-verifier', JSON.stringify('v'.repeat(56)));""")
-    await pg.goto(B + "/join/callback/?code=fakecode")
+    await pg.goto(B + "/join/callback/?code=fake_code-1&state=" + q1("state"))
     await pg.wait_for_url(B + "/ep02/", timeout=8000)
+    api = [c for c in calls if c[0] == "api"]
+    ok("callback sent only the code to the Worker", bool(api) and api[0][3] == "POST" and json.loads(api[0][2] or "{}") == {"code": "fake_code-1"})
     tok = [c for c in calls if c[0] == "token"]
-    ok("callback exchanged code with verifier (PKCE)", bool(tok) and "grant_type=pkce" in tok[0][1] and "fakecode" in (tok[0][2] or "") and "v" * 56 in (tok[0][2] or ""))
+    tb = json.loads(tok[0][2] or "{}") if tok else {}
+    ok("callback signed in with id_token: provider kakao, raw nonce matching authorize hash",
+       bool(tok) and "grant_type=id_token" in tok[0][1] and tb.get("provider") == "kakao" and tb.get("id_token") == "fake.id.token"
+       and tb.get("nonce") == oidc["nonce"] and hashlib.sha256(tb.get("nonce", "").encode()).hexdigest() == q1("nonce"), str({k: tb.get(k) for k in ("provider",)}))
     patch = [c for c in calls if c[0] == "PATCH" and "/profiles" in c[1]]
     ok("callback saved marketing consent to own profile", bool(patch) and "marketing_opt_in" in patch[0][2] and f"user_id=eq.{uid}" in patch[0][1] and access in patch[0][3])
     ev = [c for c in calls if c[0] == "POST" and "/events" in c[1]]
     ok("callback logged signup event as the user", bool(ev) and '"signup"' in ev[0][2] and uid in ev[0][2])
-    ok("callback went to next path, session stored under lily key",
-       pg.url == B + "/ep02/" and await pg.evaluate("localStorage.getItem('lilyrang-auth')!==null && localStorage.getItem('lilyrang-next')===null"))
+    ok("callback went to next path, session stored, one-time values cleared",
+       pg.url == B + "/ep02/" and await pg.evaluate("localStorage.getItem('lilyrang-auth')!==null && localStorage.getItem('lilyrang-next')===null && sessionStorage.getItem('lilyrang-kakao-oidc')===null"))
+
+    # 4b. state 가 다르면 교환하지 않는다(다른 탭, 위조된 콜백)
+    ctx2, pg2 = await page(br)
+    await use_config(pg2, SB, ANON)
+    hits = []
+    await pg2.route(B + "/api/kakao/token", lambda r: (hits.append(1), r.fulfill(status=200, content_type="application/json", body='{"id_token":"x"}'))[1])
+    await pg2.goto(B + "/join/")
+    await pg2.evaluate("sessionStorage.setItem('lilyrang-kakao-oidc', JSON.stringify({state:'a'.repeat(64), nonce:'n', at:Date.now()}))")
+    await pg2.goto(B + "/join/callback/?code=abc&state=" + "b" * 64); await pg2.wait_for_load_state("load")
+    await until(pg2, "!document.getElementById('retry').hidden")
+    ok("callback with wrong state: fails, Worker not called, code stripped", hits == [] and "code" not in pg2.url)
+    await ctx2.close()
 
     # 5. 내 정보: 프로필, 들은 편, 탈퇴 ------------------------------------------------
     calls.clear()

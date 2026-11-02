@@ -11,9 +11,11 @@
 3. RLS 시험: `supabase/tests/rls.sql`을 SQL Editor에 통째로 붙여 실행한다. 한 트랜잭션 안에서 돌고 끝에 rollback 하므로 시험 사용자와 스키마는 남지 않는다. 마지막 결과가 `ALL RLS TESTS PASSED`여야 하고, 중간에 `FAIL`이 나오면 멈춘다.
 4. RLS 미적용 테이블 0건: 대시보드 Table Editor의 RLS 경고가 없어야 한다. SQL로 확인하려면 아래를 실행해 0줄이어야 한다.
    `select relname from pg_class c join pg_namespace n on n.oid = c.relnamespace where n.nspname = 'public' and c.relkind = 'r' and not c.relrowsecurity;`
-5. 리디렉트 주소는 정확히 이것만 등록한다(와일드카드와 localhost는 운영 설정에 넣지 않음).
+5. 로그인은 카카오 하나뿐이다(이메일 로그인 없음). Supabase의 카카오 OAuth는 이메일과 프로필 사진을 늘 함께 요청해서 쓰지 않고, 가입 화면이 카카오 OpenID Connect를 직접 시작한 뒤 콜백이 Worker(`/api/kakao/token`)로 id_token을 받아 `signInWithIdToken`으로 세션을 만든다.
    - Supabase, Authentication > URL Configuration: Site URL `https://lilyrang.co.kr`, Redirect URLs `https://lilyrang.co.kr/join/callback/`
-   - 카카오 개발자 콘솔, 카카오 로그인 > Redirect URI: `https://<ref>.supabase.co/auth/v1/callback`
-6. 카카오 동의항목: Supabase가 카카오에 account_email, profile_image, profile_nickname을 항상 함께 요청하므로 셋 다 설정해야 한다(하나라도 빠지면 KOE205). 닉네임은 필수, 프로필 사진과 이메일은 선택 동의. 이메일은 비즈 앱 전환 뒤에 설정할 수 있다. Supabase의 external_kakao_email_optional은 켠다(이메일 없이도 가입). `privacy/index.html`의 카카오 선택 항목 줄과 프로필 사진 문장은 이 설정을 전제로 한다.
+   - Supabase, Providers: Kakao 켬(REST API 키를 Client ID로, id_token의 aud 확인에 쓰임), `external_kakao_email_optional` 켬, Email provider 끔.
+   - 카카오 개발자 콘솔, 카카오 로그인: OpenID Connect 활성화, Redirect URI `https://lilyrang.co.kr/join/callback/`(와일드카드와 localhost는 넣지 않음).
+   - Worker 비밀값: `npx wrangler secret put KAKAO_REST_API_KEY`, `npx wrangler secret put KAKAO_CLIENT_SECRET`. 저장소에는 넣지 않는다. `src/shared/config/lily-config.js`의 `kakaoClientId`는 같은 REST API 키(인가 주소에 실리는 공개값)다.
+6. 카카오 동의항목: 닉네임(profile_nickname)만 필수 동의. 요청 scope는 `openid profile_nickname` 둘뿐이라 이메일과 프로필 사진은 받지 않는다. `privacy/index.html`의 "카카오 회원번호, 닉네임" 줄과 "프로필 사진과 카카오 계정 이메일은 요청하지 않고" 문장은 이 설정을 전제로 한다.
 7. 개인정보처리방침 빈칸 채우기: `privacy/index.html`의 담당자 이름, 연락처 이메일, 시행일. Supabase 리전이 서울이 아니면 HTML 주석에 남긴 국외 이전 절도 채워 넣는다.
-8. 실제 주소에서 카카오와 이메일로 가입, 로그인, 로그아웃, 탈퇴를 해 보고, 탈퇴 뒤 그 사용자의 행이 모두 0인지 확인한다.
+8. 실제 주소에서 카카오로 가입, 로그인, 로그아웃, 탈퇴를 해 보고, 탈퇴 뒤 그 사용자의 행이 모두 0인지 확인한다.
