@@ -32,7 +32,7 @@ async def use_config(pg, url, key):
     await pg.route("**/src/shared/config/lily-config.js", lambda r: r.fulfill(status=200, content_type="text/javascript", body=cfg_js(url, key)))
     async def html(route):
         resp = await route.fetch()
-        body = (await resp.text()).replace("https://supabase-project-ref.invalid", url)
+        body = re.sub(r"https://(supabase-project-ref\.invalid|[a-z0-9]+\.supabase\.co)", url, await resp.text())
         await route.fulfill(response=resp, body=body)
     await pg.route(re.compile(r"^http://localhost:\d+/(join/|join/callback/|me/)(\?.*)?$"), html)
 
@@ -88,6 +88,7 @@ async def page(br, **kw):
 async def run(br):
     # 1. 설정이 빈 상태(지금 저장소 그대로) ------------------------------------
     ctx, pg = await page(br)
+    await use_config(pg, "", "")  # 저장소에 실제 값이 들어가도 빈 설정 동작을 따로 본다
     await pg.goto(B + "/join/?next=/ep02/"); await pg.wait_for_load_state("load")
     fcp, lt = await perf(pg)
     ok("empty config: join shows 준비 중, form hidden",

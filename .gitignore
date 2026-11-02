@@ -10,3 +10,4 @@ design/*/render/
 design/*/compare/
 *.env
 .env*
+supabase/.temp/
