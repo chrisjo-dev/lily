@@ -553,7 +553,14 @@
           "common/forms.css"
         ],
         "updated": "2026-10-29T15:30:12Z"
-      }
+      },
+      "comments": [
+        {
+          "text": "T8(P120, P123)로 대체. 승인 상태는 사용자 결정이라 그대로 둠",
+          "by": "worker",
+          "created": "2026-11-02T06:31:18Z"
+        }
+      ]
     },
     "P63-JoinDesktopT6.html": {
       "x": 450,
@@ -572,7 +579,14 @@
           "common/forms.css"
         ],
         "updated": "2026-10-29T15:30:12Z"
-      }
+      },
+      "comments": [
+        {
+          "text": "T8(P121, P124)로 대체. 승인 상태는 사용자 결정이라 그대로 둠",
+          "by": "worker",
+          "created": "2026-11-02T06:31:19Z"
+        }
+      ]
     },
     "P64-CallbackT6.html": {
       "x": 1950,
@@ -591,7 +605,14 @@
           "common/forms.css"
         ],
         "updated": "2026-10-29T15:30:12Z"
-      }
+      },
+      "comments": [
+        {
+          "text": "T8(P122)로 대체. 승인 상태는 사용자 결정이라 그대로 둠",
+          "by": "worker",
+          "created": "2026-11-02T06:31:19Z"
+        }
+      ]
     },
     "P65-MeT6.html": {
       "x": 0,
@@ -611,7 +632,14 @@
           "common/forms.css"
         ],
         "updated": "2026-10-29T15:30:12Z"
-      }
+      },
+      "comments": [
+        {
+          "text": "T8(P130, P131)로 대체. 승인 상태는 사용자 결정이라 그대로 둠",
+          "by": "worker",
+          "created": "2026-11-02T06:31:19Z"
+        }
+      ]
     },
     "P66-PrivacyT6.html": {
       "x": 450,
@@ -630,7 +658,14 @@
           "common/doc.css"
         ],
         "updated": "2026-10-29T15:30:12Z"
-      }
+      },
+      "comments": [
+        {
+          "text": "T8(P132, P133)로 대체. 승인 상태는 사용자 결정이라 그대로 둠",
+          "by": "worker",
+          "created": "2026-11-02T06:31:19Z"
+        }
+      ]
     },
     "P67-NotFoundT6.html": {
       "x": 900,
@@ -649,7 +684,14 @@
           "common/doc.css"
         ],
         "updated": "2026-10-29T15:30:12Z"
-      }
+      },
+      "comments": [
+        {
+          "text": "T8(P134, P135)로 대체. 승인 상태는 사용자 결정이라 그대로 둠",
+          "by": "worker",
+          "created": "2026-11-02T06:31:19Z"
+        }
+      ]
     },
     "P68-GateCardT6.html": {
       "x": 2890,
@@ -663,6 +705,11 @@
           "text": "움직임: 카드가 아래에서 올라옴(현재 gate.css와 같음)",
           "by": "pages-fix",
           "created": "2026-10-29T13:03:17Z"
+        },
+        {
+          "text": "T8(P140)로 대체. 승인 상태는 사용자 결정이라 그대로 둠",
+          "by": "worker",
+          "created": "2026-11-02T06:31:19Z"
         }
       ],
       "status": "approved",
@@ -1086,10 +1133,10 @@
       "impl": {
         "route": "편 페이지 잠금 카드",
         "files": [
-          "engine/gate.js",
-          "engine/ui/gate.css"
+          "src/features/gate/gate.js",
+          "src/features/gate/gate.css"
         ],
-        "updated": "2026-10-30T04:03:32Z"
+        "updated": "2026-11-02T06:31:15Z"
       }
     },
     "P141-LandingPhoneT8.html": {
@@ -1105,9 +1152,9 @@
         "route": "/hello/",
         "files": [
           "hello/index.html",
-          "hello/hello.css"
+          "src/pages/landing/hello.css"
         ],
-        "updated": "2026-10-30T04:03:32Z"
+        "updated": "2026-11-02T06:31:15Z"
       }
     },
     "P142-LandingDesktopT8.html": {
@@ -1123,9 +1170,9 @@
         "route": "/hello/",
         "files": [
           "hello/index.html",
-          "hello/hello.css"
+          "src/pages/landing/hello.css"
         ],
-        "updated": "2026-10-30T04:03:33Z"
+        "updated": "2026-11-02T06:31:16Z"
       }
     },
     "P120-JoinPhoneT8.html": {
@@ -1141,9 +1188,9 @@
         "route": "/join/",
         "files": [
           "join/index.html",
-          "common/forms.css"
+          "src/shared/ui/forms.css"
         ],
-        "updated": "2026-10-30T04:03:31Z"
+        "updated": "2026-11-02T06:31:16Z"
       }
     },
     "P121-JoinDesktopT8.html": {
@@ -1159,9 +1206,9 @@
         "route": "/join/",
         "files": [
           "join/index.html",
-          "common/forms.css"
+          "src/shared/ui/forms.css"
         ],
-        "updated": "2026-10-30T04:03:31Z"
+        "updated": "2026-11-02T06:31:16Z"
       }
     },
     "P122-CallbackT8.html": {
@@ -1177,9 +1224,9 @@
         "route": "/join/callback/",
         "files": [
           "join/callback/index.html",
-          "common/forms.css"
+          "src/shared/ui/forms.css"
         ],
-        "updated": "2026-10-30T04:03:31Z"
+        "updated": "2026-11-02T06:31:16Z"
       }
     },
     "P130-MePhoneT8.html": {
@@ -1195,9 +1242,9 @@
         "route": "/me/",
         "files": [
           "me/index.html",
-          "common/forms.css"
+          "src/shared/ui/forms.css"
         ],
-        "updated": "2026-10-30T04:03:31Z"
+        "updated": "2026-11-02T06:31:17Z"
       }
     },
     "P131-MeDesktopT8.html": {
@@ -1213,9 +1260,9 @@
         "route": "/me/",
         "files": [
           "me/index.html",
-          "common/forms.css"
+          "src/shared/ui/forms.css"
         ],
-        "updated": "2026-10-30T04:03:32Z"
+        "updated": "2026-11-02T06:31:17Z"
       }
     },
     "P132-PrivacyPhoneT8.html": {
@@ -1231,9 +1278,9 @@
         "route": "/privacy/",
         "files": [
           "privacy/index.html",
-          "common/doc.css"
+          "src/shared/ui/doc.css"
         ],
-        "updated": "2026-10-30T04:03:32Z"
+        "updated": "2026-11-02T06:31:17Z"
       }
     },
     "P133-PrivacyDesktopT8.html": {
@@ -1249,9 +1296,9 @@
         "route": "/privacy/",
         "files": [
           "privacy/index.html",
-          "common/doc.css"
+          "src/shared/ui/doc.css"
         ],
-        "updated": "2026-10-30T04:03:32Z"
+        "updated": "2026-11-02T06:31:18Z"
       }
     },
     "P134-NotFoundPhoneT8.html": {
@@ -1267,9 +1314,9 @@
         "route": "/404.html",
         "files": [
           "404.html",
-          "common/doc.css"
+          "src/shared/ui/doc.css"
         ],
-        "updated": "2026-10-30T04:03:32Z"
+        "updated": "2026-11-02T06:31:18Z"
       }
     },
     "P135-NotFoundDesktopT8.html": {
@@ -1285,9 +1332,9 @@
         "route": "/404.html",
         "files": [
           "404.html",
-          "common/doc.css"
+          "src/shared/ui/doc.css"
         ],
-        "updated": "2026-10-30T04:03:32Z"
+        "updated": "2026-11-02T06:31:18Z"
       }
     },
     "P123-JoinKakaoPhoneT8.html": {
@@ -1307,6 +1354,43 @@
       "title": "P124-JoinKakaoDesktopT8",
       "group": "가입 카카오 전용",
       "note": "P123과 같음, 데스크톱"
+    },
+    "P125-RibbonCurveT8.html": {
+      "x": 10930,
+      "y": 0,
+      "w": 1200,
+      "h": 520,
+      "title": "P125-RibbonCurveT8",
+      "group": "current",
+      "note": "리본 글자 곡선과 맞춤 수정안"
+    },
+    "P150-OgT8Hero.html": {
+      "x": 12170,
+      "y": 0,
+      "w": 1200,
+      "h": 630,
+      "title": "P150-OgT8Hero",
+      "group": "og thumbnail",
+      "note": "공유 썸네일 og.jpg로 채택(사용자 선택 2026-11-02)",
+      "status": "approved"
+    },
+    "P151-OgT8Three.html": {
+      "x": 13410,
+      "y": 0,
+      "w": 1200,
+      "h": 630,
+      "title": "P151-OgT8Three",
+      "group": "og thumbnail",
+      "note": "공유 썸네일 og.jpg 시안(T8), 사용자 선택 전"
+    },
+    "P152-OgT8Shelf.html": {
+      "x": 14650,
+      "y": 0,
+      "w": 1200,
+      "h": 630,
+      "title": "P152-OgT8Shelf",
+      "group": "og thumbnail",
+      "note": "공유 썸네일 og.jpg 시안(T8), 사용자 선택 전"
     }
   },
   "groups": [
@@ -1365,6 +1449,14 @@
     {
       "id": "가입 카카오 전용",
       "label": "가입 카카오 전용"
+    },
+    {
+      "id": "current",
+      "label": "current"
+    },
+    {
+      "id": "og thumbnail",
+      "label": "og thumbnail"
     }
   ],
   "links": [
