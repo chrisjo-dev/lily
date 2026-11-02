@@ -235,9 +235,12 @@ async def run(br):
        and await pg.evaluate("document.querySelectorAll('#eps li').length") == 1 and await pg.evaluate("[...document.querySelectorAll('#eps img')].every(i => i.getAttribute('src') === '/src/entities/episode/img/ep-wake.webp')"), f"FCP={fcp:.0f}ms lt={lt}")
     await pg.click('input[name="age"][value="6-7"] >> xpath=..')
     await pg.fill("#nickname", "새 이름")
-    await pg.click("#save"); await pg.wait_for_selector("#saveMsg:not([hidden])")
+    async with pg.expect_navigation(url=B + "/"):
+        await pg.click("#save")
     up = [c for c in calls if c[0] == "PATCH" and "/profiles" in c[1]]
     ok("me: save sends only own profile fields", bool(up) and f"user_id=eq.{uid}" in up[-1][1] and json.loads(up[-1][2]) == {"nickname": "새 이름", "child_age_band": "6-7", "marketing_opt_in": True}, up[-1][2] if up else "")
+    ok("me: save goes home", pg.url == B + "/")
+    await pg.goto(B + "/me/"); await pg.wait_for_selector("#signedIn:not([hidden])", timeout=8000)
     await pg.click("#leave")
     ok("me: delete asks for confirmation first", await pg.is_visible("#confirm") and not any("/rpc/" in c[1] for c in calls))
     await pg.click("#leaveYes")
