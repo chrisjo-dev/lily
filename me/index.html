@@ -11,6 +11,9 @@
 <link rel="icon" href="/brand/favicon.ico" sizes="any"><link rel="icon" href="/brand/favicon-32.png" type="image/png" sizes="32x32"><link rel="apple-touch-icon" href="/brand/apple-touch-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<!-- 내 정보는 늘 supabase-js 와 DB를 쓰니 미리 받는다(shared/api/supabase.js 의 LIB_URL, LIB_SRI 와 같아야 다시 받지 않는다) -->
+<link rel="preconnect" href="https://dtkgflrpeipvxxzszcky.supabase.co" crossorigin>
+<link rel="preload" as="script" href="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.117.3/dist/umd/supabase.js" integrity="sha384-BWcjm9OdFth9TbhCxZPdm+gAOUMAzQy9nmTs12ioXdCcbVnJaPMn+fMUoQCLt60R" crossorigin="anonymous" referrerpolicy="no-referrer">
 <link rel="stylesheet" id="fonts" media="print" href="https://fonts.googleapis.com/css2?family=Gaegu:wght@700&family=Jua&family=Noto+Sans+KR:wght@400;500;700&display=swap">
 <link rel="stylesheet" href="/src/shared/ui/shell.css">
 <link rel="stylesheet" href="/src/shared/ui/forms.css">
@@ -71,11 +74,11 @@
   </div>
 </main>
 <footer class="foot2"><a href="/privacy/">개인정보처리방침</a></footer>
-<script src="/src/shared/lib/fonts.js"></script>
-<script src="/src/shared/config/lily-config.js"></script>
-<script src="/src/shared/api/supabase.js"></script>
-<script src="/src/entities/session/session.js"></script>
-<script src="/src/entities/episode/catalog.js"></script>
-<script src="/src/pages/me/me.js"></script>
+<script src="/src/shared/lib/fonts.js" defer></script>
+<script src="/src/shared/config/lily-config.js" defer></script>
+<script src="/src/shared/api/supabase.js" defer></script>
+<script src="/src/entities/session/session.js" defer></script>
+<script src="/src/entities/episode/catalog.js" defer></script>
+<script src="/src/pages/me/me.js" defer></script>
 </body>
 </html>

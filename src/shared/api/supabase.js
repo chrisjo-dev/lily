@@ -1,7 +1,7 @@
 // 릴리랑 Supabase 연결(shared/api). Supabase 클라이언트는 이 파일 한 곳에서만 만든다.
 // 공개 이름: window.LilyShared.supabase 의 ready, client, hasStoredSession, insertAnon. 회원 상태는 entities/session 이 맡는다.
 // - shared/config/lily-config.js 가 먼저 와야 한다. 값이 비어 있으면 "준비 안 됨"(ready=false).
-// - supabase-js 는 고정 버전을 SRI 해시로 확인해 불러온다. 버전을 올리면 LIB_SRI 와 각 페이지 CSP 의 경로도 같이 바꾼다.
+// - supabase-js 는 고정 버전을 SRI 해시로 확인해 불러온다. 버전을 올리면 LIB_SRI 와 각 페이지 CSP 의 경로, me/index.html 의 preload 도 같이 바꾼다.
 //   해시 계산: curl -sL <LIB_URL> | openssl dgst -sha384 -binary | openssl base64 -A
 // - 로그인 흔적이 없는 방문자는 라이브러리를 아예 받지 않는다(첫 화면 성능).
 (function () {
