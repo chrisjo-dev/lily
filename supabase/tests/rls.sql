@@ -1,5 +1,5 @@
 -- RLS 시험. 마이그레이션을 올린 DB에서 슈퍼유저로 실행한다(역할은 시험 안에서 바꾼다).
--- 실행: supabase/tests/run-local.sh (docker postgres + mock_auth.sql)
+-- 실행: supabase/tests/run-local.sh (docker postgres + mock_auth.sql, 마이그레이션 0001, 0002 순서)
 --   또는 Supabase SQL Editor에 통째로 붙여 실행. 전체가 한 트랜잭션이고 끝에 rollback 하므로 시험 사용자와 스키마는 남지 않는다.
 --   성공하면 마지막 결과가 'ALL RLS TESTS PASSED', 실패하면 'FAIL ...' 오류로 멈춘다.
 -- 결과: 시험마다 "PASS ..." NOTICE. 하나라도 어긋나면 "FAIL ..." 예외로 멈춘다(ON_ERROR_STOP).
@@ -55,9 +55,9 @@ select t.ok('all public tables have RLS on (dashboard check equivalent)',
               where n.nspname = 'public' and c.relkind = 'r' and not c.relrowsecurity));
 
 insert into public.progress (user_id, episode, taps) values
-  ('bbbbbbbb-0000-0000-0000-000000000002', 'ep02', 5);
+  ('bbbbbbbb-0000-0000-0000-000000000002', 'daily/wake', 5);
 insert into public.events (user_id, name, episode) values
-  ('bbbbbbbb-0000-0000-0000-000000000002', 'episode_start', 'ep02');
+  ('bbbbbbbb-0000-0000-0000-000000000002', 'episode_start', 'daily/wake');
 
 -- 1. anon(비로그인) ------------------------------------------------------
 set role anon;
@@ -65,11 +65,11 @@ select t.must_fail('anon: select profiles denied', 'select * from public.profile
 select t.must_fail('anon: select progress denied', 'select * from public.progress', array['42501']);
 select t.must_fail('anon: select events denied',   'select * from public.events',   array['42501']);
 select t.must_fail('anon: insert progress denied',
-  $q$insert into public.progress (user_id, episode) values ('bbbbbbbb-0000-0000-0000-000000000002','ep03')$q$, array['42501']);
+  $q$insert into public.progress (user_id, episode) values ('bbbbbbbb-0000-0000-0000-000000000002','daily/wash')$q$, array['42501']);
 select t.must_fail('anon: update profiles denied',
   $q$update public.profiles set nickname = 'x'$q$, array['42501']);
 select t.rows_are('anon: insert event with allowed name',
-  $q$insert into public.events (name, episode) values ('gate_shown','ep02')$q$, 1);
+  $q$insert into public.events (name, episode) values ('gate_shown','daily/wake')$q$, 1);
 select t.must_fail('anon: insert event with unknown name rejected',
   $q$insert into public.events (name) values ('page_view')$q$, array['42501','23514']);
 select t.must_fail('anon: insert event with user_id rejected',
@@ -89,7 +89,7 @@ select t.ok('A: cannot see B events',   (select count(*) from public.events) = 0
 select t.must_fail('A: insert profile denied (trigger makes it)',
   $q$insert into public.profiles (user_id) values ('aaaaaaaa-0000-0000-0000-000000000001')$q$, array['42501']);
 select t.must_fail('A: insert progress as B rejected',
-  $q$insert into public.progress (user_id, episode) values ('bbbbbbbb-0000-0000-0000-000000000002','ep03')$q$, array['42501']);
+  $q$insert into public.progress (user_id, episode) values ('bbbbbbbb-0000-0000-0000-000000000002','daily/wash')$q$, array['42501']);
 select t.must_fail('A: insert event as B rejected',
   $q$insert into public.events (user_id, name) values ('bbbbbbbb-0000-0000-0000-000000000002','login')$q$, array['42501']);
 select t.rows_are('A: update B progress changes nothing',
@@ -101,11 +101,17 @@ select t.rows_are('A: delete B progress removes nothing',
 select t.must_fail('A: update profile user_id denied (column privilege)',
   $q$update public.profiles set user_id = 'bbbbbbbb-0000-0000-0000-000000000002'$q$, array['42501']);
 select t.rows_are('A: insert own progress',
-  $q$insert into public.progress (user_id, episode, taps) values ('aaaaaaaa-0000-0000-0000-000000000001','ep01',3)$q$, 1);
+  $q$insert into public.progress (user_id, episode, taps) values ('aaaaaaaa-0000-0000-0000-000000000001','daily/brush',3)$q$, 1);
 select t.must_fail('A: change own progress user_id to B rejected',
-  $q$update public.progress set user_id = 'bbbbbbbb-0000-0000-0000-000000000002' where episode = 'ep01'$q$, array['42501']);
+  $q$update public.progress set user_id = 'bbbbbbbb-0000-0000-0000-000000000002' where episode = 'daily/brush'$q$, array['42501']);
+select t.must_fail('A: bad episode id rejected (check)',
+  $q$insert into public.progress (user_id, episode) values ('aaaaaaaa-0000-0000-0000-000000000001','daily/../x')$q$, array['23514']);
+select t.must_fail('A: bad event episode id rejected (check)',
+  $q$insert into public.events (user_id, name, episode) values ('aaaaaaaa-0000-0000-0000-000000000001','episode_start','<img src=x>')$q$, array['23514']);
+select t.rows_are('A: old id still accepted during transition (0002)',
+  $q$insert into public.progress (user_id, episode) values ('aaaaaaaa-0000-0000-0000-000000000001','ep07')$q$, 1);
 select t.rows_are('A: insert own event',
-  $q$insert into public.events (user_id, name, episode) values ('aaaaaaaa-0000-0000-0000-000000000001','episode_complete','ep01')$q$, 1);
+  $q$insert into public.events (user_id, name, episode) values ('aaaaaaaa-0000-0000-0000-000000000001','episode_complete','daily/brush')$q$, 1);
 select t.must_fail('A: delete own events denied (only delete_my_account removes them)',
   $q$delete from public.events where user_id = 'aaaaaaaa-0000-0000-0000-000000000001'$q$, array['42501']);
 select t.must_fail('A: own event with unknown name rejected',
@@ -118,7 +124,7 @@ reset role;
 
 -- 트리거 단독 확인(권한 우회한 슈퍼유저도 user_id는 못 바꾼다)
 select t.must_fail('trigger: user_id change blocked even for owner role',
-  $q$update public.progress set user_id = 'bbbbbbbb-0000-0000-0000-000000000002' where episode = 'ep01'$q$, array['42501']);
+  $q$update public.progress set user_id = 'bbbbbbbb-0000-0000-0000-000000000002' where episode = 'daily/brush'$q$, array['42501']);
 select t.ok('B rows unchanged after A attempts',
   (select taps from public.progress where user_id = 'bbbbbbbb-0000-0000-0000-000000000002') = 5
   and (select nickname from public.profiles where user_id = 'bbbbbbbb-0000-0000-0000-000000000002') is null);
