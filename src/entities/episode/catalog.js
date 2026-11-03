@@ -10,13 +10,13 @@
   var IMG = (src ? new URL(src).pathname : "/src/entities/episode/catalog.js").replace(/[^/]*$/, "") + "img/";
 
   var list = [
-    { id: "ep01", title: "이 닦기", en: "Brush, Brush!", img: "brush", free: true },
+    { id: "ep01", title: "이 닦기", en: "Brush, Brush, Brush!", img: "brush", free: true },
     { id: "ep02", title: "일어나기", en: "Wake Up!", img: "wake", free: false },
     { id: "ep03", title: "세수하기", en: "Splash, Splash!", img: "wash", free: false },
     { id: "ep04", title: "아침 먹기", en: "Yummy, Yummy!", img: "eat", free: false },
     { id: "ep05", title: "옷 입기", en: "Put On, Ready!", img: "dress", free: false },
-    { id: "ep06", title: "목욕하기", en: "Bath Time!", img: "bath", free: false },
-    { id: "ep07", title: "잠자리 책", en: "Good night!", img: "sleep", free: false }
+    { id: "ep06", title: "목욕하기", en: "Rub-a-Dub, Bath Time!", img: "bath", free: false },
+    { id: "ep07", title: "잠자리 책", en: "Sweet Dreams", img: "sleep", free: false }
   ];
 
   function byId(id) {

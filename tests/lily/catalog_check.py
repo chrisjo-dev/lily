@@ -11,7 +11,6 @@ IMG = "/src/entities/episode/img/ep-"
 
 # 지금 화면 문구가 목록과 다른 곳(사용자 결정 전이라 화면은 그대로 둠). 정하면 HTML이나 catalog.js를 고치고 여기서 지운다
 KNOWN = {
-    ("index.html", "ep01", "en"): "Brush, Brush, Brush!",
     ("hello/index.html", "ep07", "title"): "잠자기",
 }
 
