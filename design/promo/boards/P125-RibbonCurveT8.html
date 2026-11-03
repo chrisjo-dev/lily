@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<title>P125 리본 글자 곡선</title>
+<link rel="stylesheet" href="../shared/tokens.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Jua&family=Noto+Sans+KR:wght@400;700&display=swap">
+<style>
+  body { margin: 0; width: 1200px; height: 520px; background: #f6f2e8; font-family: "Noto Sans KR", sans-serif; color: #4a3b2c; }
+  h1 { margin: 0; padding: 32px 48px 4px; font-size: 22px; }
+  p.note { margin: 0; padding: 0 48px 20px; font-size: 14px; color: #7a6a58; }
+  .grid { display: grid; grid-template-columns: 200px 1fr 1fr; gap: 18px 32px; padding: 0 48px; align-items: center; }
+  .grid h2 { margin: 0; font-size: 15px; }
+  .cap { font-size: 13px; color: #7a6a58; }
+  .col { font-size: 14px; font-weight: 700; }
+  svg { display: block; overflow: visible; }
+  .rib { font-family: "Jua", sans-serif; fill: #6b4a2f; }
+  .bad { fill: #6b4a2f; font-family: "Jua", sans-serif; }
+  .scene { background: #dcebe0; border-radius: 12px; padding: 18px 0; display: grid; place-items: center; }
+</style>
+</head>
+<body>
+<h1>"오늘의 스티커" 리본 글자: 띠의 곡선을 따라 휘고 띠 안에 들어가게</h1>
+<p class="note">리본 그림(256x102)의 앞 띠 가운데 곡선 M40 48.5 Q128 20.5 216 48.5 를 그림 크기에 맞춰 늘린 길을 글자가 따라간다. 글자 폭이 띠 앞면의 85%를 넘으면 글자 크기를 줄인다. 그림 크기와 위치는 지금 그대로.</p>
+<div class="grid">
+  <span></span><span class="col">지금</span><span class="col">바꾼 뒤</span>
+
+  <div><h2>장면 안 리본</h2><span class="cap">190x34, 화면에서 2배로 보임</span></div>
+  <div class="scene"><svg width="380" height="68" viewBox="0 0 190 34"><image href="../assets/ribbon.webp" width="190" height="34" preserveAspectRatio="none"/><text class="bad" x="95" y="21" font-size="14" text-anchor="middle">오늘의 스티커 모아요</text></svg></div>
+  <div class="scene"><svg width="380" height="68" viewBox="0 0 190 34"><image href="../assets/ribbon.webp" width="190" height="34" preserveAspectRatio="none"/><path id="a1" d="M29.7 16.2 Q95 6.8 160.3 16.2" fill="none"/><text class="rib" font-size="12.3" dominant-baseline="central"><textPath href="#a1" startOffset="50%" text-anchor="middle">오늘의 스티커 모아요</textPath></text></svg></div>
+
+  <div><h2>끝 카드 (폰)</h2><span class="cap">220x38</span></div>
+  <div><svg width="220" height="38" viewBox="0 0 220 38"><image href="../assets/ribbon.webp" width="220" height="38" preserveAspectRatio="none"/><text class="bad" x="110" y="22" font-size="14" text-anchor="middle">오늘 모은 스티커</text></svg></div>
+  <div><svg width="220" height="38" viewBox="0 0 220 38"><image href="../assets/ribbon.webp" width="220" height="38" preserveAspectRatio="none"/><path id="b1" d="M34.4 18.1 Q110 7.6 185.6 18.1" fill="none"/><text class="rib" font-size="14" dominant-baseline="central"><textPath href="#b1" startOffset="50%" text-anchor="middle">오늘 모은 스티커</textPath></text></svg></div>
+
+  <div><h2>끝 카드 (태블릿)</h2><span class="cap">340x56, 같은 그림을 비율대로 키움</span></div>
+  <div><svg width="340" height="56" viewBox="0 0 220 38" preserveAspectRatio="xMidYMid meet"><image href="../assets/ribbon.webp" width="220" height="38" preserveAspectRatio="none"/><text class="bad" x="110" y="22" font-size="12" text-anchor="middle">오늘 모은 스티커</text></svg></div>
+  <div><svg width="340" height="56" viewBox="0 0 220 38" preserveAspectRatio="xMidYMid meet"><image href="../assets/ribbon.webp" width="220" height="38" preserveAspectRatio="none"/><path id="c1" d="M34.4 18.1 Q110 7.6 185.6 18.1" fill="none"/><text class="rib" font-size="14" dominant-baseline="central"><textPath href="#c1" startOffset="50%" text-anchor="middle">오늘 모은 스티커</textPath></text></svg></div>
+
+  <div><h2>긴 문구</h2><span class="cap">띠를 넘으면 글자를 줄인다</span></div>
+  <div><svg width="220" height="38" viewBox="0 0 220 38"><image href="../assets/ribbon.webp" width="220" height="38" preserveAspectRatio="none"/><text class="bad" x="110" y="22" font-size="14" text-anchor="middle">오늘 이야기에서 모은 스티커들</text></svg></div>
+  <div><svg width="220" height="38" viewBox="0 0 220 38"><image href="../assets/ribbon.webp" width="220" height="38" preserveAspectRatio="none"/><path id="d1" d="M34.4 18.1 Q110 7.6 185.6 18.1" fill="none"/><text class="rib" font-size="10.4" dominant-baseline="central"><textPath href="#d1" startOffset="50%" text-anchor="middle">오늘 이야기에서 모은 스티커들</textPath></text></svg></div>
+</div>
+</body>
+</html>

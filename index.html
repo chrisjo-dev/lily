@@ -268,6 +268,8 @@
   </section>
 </main>
 <footer class="foot2"><a href="/privacy/">개인정보처리방침</a><small>매일 외국어 읽기가 만들어요</small></footer>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gaegu:wght@700&family=Jua&family=Noto+Sans+KR:wght@400;700&display=swap">
+<!-- 글꼴 CSS(약 70KB)가 첫 화면 CSS, 그림과 대역을 다투지 않게 print 로 낮은 순위로 받아 두었다가 fonts.js 가 all 로 바꾼다 -->
+<link rel="stylesheet" id="fonts" media="print" href="https://fonts.googleapis.com/css2?family=Gaegu:wght@700&family=Jua&family=Noto+Sans+KR:wght@400;700&display=swap">
+<script src="/src/shared/lib/fonts.js" defer></script>
 </body>
 </html>

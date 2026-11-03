@@ -1,0 +1,42 @@
+/* 공유 썸네일(og.jpg 1200x630) 시안 T8: /hello/ 첫 화면(P141, P142)과 같은 남색 별무늬 구석, 손글씨 제목.
+   카카오톡, 페이스북 미리보기에서 약 300px 폭으로 줄어도 제목이 읽히게 제목을 크게 둔다. 누르는 것이 없으니 노란색은 쓰지 않는다. */
+:root { --navy: #1b2a44; --navy-ink: #e9eef8; --navy-soft: #b9c6de; }
+html, body { margin: 0; }
+body { width: 1200px; height: 630px; overflow: hidden; }
+.og { position: relative; width: 1200px; height: 630px; overflow: hidden; color: var(--navy-ink); font-family: var(--font-body); background:
+  radial-gradient(55% 60% at 96% 0%, rgba(247,215,154,.42), rgba(247,215,154,0) 70%),
+  url(../assets/stars.svg) 0 0 / 120px 120px, var(--navy); }
+.og .brand { position: absolute; display: flex; align-items: center; gap: 12px; z-index: 2; }
+.og .brand img { height: 52px; width: auto; }
+.og .brand span { font-family: var(--font-hand); font-weight: 700; font-size: 40px; letter-spacing: -0.03em; color: var(--white); text-shadow: 0 1px 6px rgba(10,18,34,.5); }
+.og .title { position: absolute; z-index: 2; display: block; height: auto; }
+.og .sub { position: absolute; z-index: 2; margin: 0; font-weight: 500; color: var(--navy-ink); text-shadow: 0 1px 8px rgba(10,18,34,.6); letter-spacing: -0.02em; }
+
+/* A: 왼쪽 제목, 오른쪽 첫 화면 그림 한 장(가장자리 번짐) */
+.og.a .brand { left: 64px; top: 52px; }
+.og.a .title { left: 52px; top: 158px; width: 600px; }
+.og.a .sub { left: 66px; top: 386px; width: 560px; font-size: 30px; line-height: 1.45; }
+.og.a .art { position: absolute; right: 0; bottom: 0; width: 580px; height: auto;
+  -webkit-mask-image: linear-gradient(to right, transparent, #000 20%), linear-gradient(to bottom, transparent, #000 18%); -webkit-mask-composite: source-in;
+  mask-image: linear-gradient(to right, transparent, #000 20%), linear-gradient(to bottom, transparent, #000 18%); mask-composite: intersect; }
+
+/* B: 위 가운데 제목, 아래 그림 세 장(첫 화면에서 교대하는 세 장)을 종이 카드로 */
+.og.b .brand { left: 40px; top: 30px; }
+.og.b .brand img { height: 42px; }
+.og.b .brand span { font-size: 32px; }
+.og.b .title { left: 50%; top: 34px; width: 690px; margin-left: -345px; }
+.og.b .row { position: absolute; left: 0; right: 0; top: 330px; display: flex; justify-content: center; gap: 30px; z-index: 1; }
+.og.b .card { width: 316px; height: 240px; padding: 8px; background: var(--white); border-radius: 14px; box-shadow: 0 10px 26px rgba(6,12,26,.45); }
+.og.b .card img { display: block; width: 100%; height: 100%; object-fit: cover; border-radius: 9px; }
+.og.b .card:nth-child(1) { transform: rotate(-3deg) translateY(10px); }
+.og.b .card:nth-child(3) { transform: rotate(3deg) translateY(10px); }
+.og.b .sub { left: 0; right: 0; top: 272px; text-align: center; font-size: 26px; }
+
+/* C: 큰 제목 하나와 아래 이야기 책 표지 줄. 가장 작게 줄어도 읽히는 쪽 */
+.og.c .brand { left: 50%; top: 40px; margin-left: -88px; }
+.og.c .title { left: 50%; top: 112px; width: 860px; margin-left: -430px; }
+.og.c .sub { left: 0; right: 0; top: 408px; text-align: center; font-size: 32px; }
+.og.c .shelf { position: absolute; left: 0; right: 0; bottom: 30px; display: flex; justify-content: center; gap: 14px; }
+.og.c .shelf img { width: 150px; height: 117px; object-fit: cover; border-radius: 12px; border: 5px solid var(--white); box-shadow: 0 8px 20px rgba(6,12,26,.45); }
+.og.c .shelf img:nth-child(odd) { transform: rotate(-2deg); }
+.og.c .shelf img:nth-child(even) { transform: rotate(2deg) translateY(8px); }
