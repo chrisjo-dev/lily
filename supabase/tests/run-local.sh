@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# 로컬 Postgres(docker)에 auth 흉내 + 마이그레이션을 올리고 RLS 시험을 돌린다. 끝나면 컨테이너를 지운다.
+# 로컬 Postgres(docker)에 auth 흉내 + 마이그레이션(0001, 0002와 그 되돌리기)을 올리고 RLS 시험을 돌린다. 끝나면 컨테이너를 지운다.
 # 필요: docker. 포트를 열지 않고, 컨테이너 안 psql로만 접속한다.
 # 실제 Supabase(GoTrue, PostgREST)는 흉내 내지 않는다. 운영 확인은 대시보드에서 따로 한다.
 set -euo pipefail
@@ -21,4 +21,13 @@ sleep 1  # 이미지 초기화 뒤 서버가 한 번 다시 시작한다
 psql() { docker exec -i "$name" psql -U postgres -d postgres -v ON_ERROR_STOP=1 -q "$@"; }
 psql < "$here/mock_auth.sql"
 psql < "$root/supabase/migrations/0001_init.sql"
+# 0002 편 ID 전환: 옛 형식 기록을 넣고 → 올리고 → 되돌리고 → 다시 올려 본다
+mig() { psql -t -A -v phase="$1" < "$here/series_migration.sql" 2>&1 | sed 's/^psql:<stdin>:[0-9]*: //' | grep -v '^$' | grep -v '^t\.phase\|^seed$\|^new$\|^old$\|^cleanup$'; }
+mig seed
+psql < "$root/supabase/migrations/0002_series.sql"
+mig new
+psql < "$root/supabase/migrations/0002_series_down.sql"
+mig old
+psql < "$root/supabase/migrations/0002_series.sql"
+mig cleanup
 psql -t -A < "$here/rls.sql" 2>&1 | sed 's/^psql:<stdin>:[0-9]*: //' | grep -v '^$'

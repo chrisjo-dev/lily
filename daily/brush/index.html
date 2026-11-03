@@ -9,14 +9,14 @@
 <meta name="robots" content="index, follow, max-image-preview:large">
 <title>Brush, Brush, Brush! 자기 전 이 닦기 영어 그림책 | 릴리랑</title>
 <meta name="description" content="자기 전 이 닦기 시간에 아이와 함께 듣는 하루 5분 영어 그림책. 오늘의 단어 Brush my teeth, Bubbles, All clean. 릴리가 기다리면 아이가 그림을 눌러 이야기를 이어 가요. 로그인 없이 무료로 끝까지 들을 수 있어요.">
-<link rel="canonical" href="https://lilyrang.co.kr/ep01/">
+<link rel="canonical" href="https://lilyrang.co.kr/daily/brush/">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="릴리랑">
 <meta property="og:locale" content="ko_KR">
-<meta property="og:url" content="https://lilyrang.co.kr/ep01/">
+<meta property="og:url" content="https://lilyrang.co.kr/daily/brush/">
 <meta property="og:title" content="Brush, Brush, Brush! 자기 전 이 닦기 영어 그림책 | 릴리랑">
 <meta property="og:description" content="자기 전 이 닦기 시간에 아이와 함께 듣는 하루 5분 영어 그림책. 오늘의 단어 Brush my teeth, Bubbles, All clean. 릴리가 기다리면 아이가 그림을 눌러 이야기를 이어 가요. 로그인 없이 무료로 끝까지 들을 수 있어요.">
-<meta property="og:image" content="https://lilyrang.co.kr/ep01/og.jpg">
+<meta property="og:image" content="https://lilyrang.co.kr/daily/brush/og.jpg">
 <meta property="og:image:type" content="image/jpeg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
@@ -24,7 +24,7 @@
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Brush, Brush, Brush! 자기 전 이 닦기 영어 그림책 | 릴리랑">
 <meta name="twitter:description" content="자기 전 이 닦기 시간에 아이와 함께 듣는 하루 5분 영어 그림책. 오늘의 단어 Brush my teeth, Bubbles, All clean. 릴리가 기다리면 아이가 그림을 눌러 이야기를 이어 가요. 로그인 없이 무료로 끝까지 들을 수 있어요.">
-<meta name="twitter:image" content="https://lilyrang.co.kr/ep01/og.jpg">
+<meta name="twitter:image" content="https://lilyrang.co.kr/daily/brush/og.jpg">
 <meta name="twitter:image:alt" content="세면대 앞에서 하품하는 릴리 그림과 Brush, Brush, Brush! 제목">
 <link rel="icon" href="/brand/favicon.ico" sizes="any"><link rel="icon" href="/brand/favicon-32.png" type="image/png" sizes="32x32"><link rel="icon" href="/brand/favicon-16.png" type="image/png" sizes="16x16"><link rel="icon" href="/brand/icon-192.png" type="image/png" sizes="192x192"><link rel="apple-touch-icon" href="/brand/apple-touch-icon.png">
 
@@ -39,6 +39,7 @@
 <script src="/src/shared/config/lily-config.js" defer></script>
 <script src="/src/shared/api/supabase.js" defer></script>
 <script src="/src/entities/session/session.js" defer></script>
+<script src="/src/entities/episode/access.js" defer></script>
 <script src="/src/entities/episode/catalog.js" defer></script>
 <script src="/src/features/gate/gate.js" defer></script>
 <script src="/src/features/gate/gate-default.js" defer></script>
@@ -55,12 +56,12 @@
  "@graph": [
   {
    "@type": "Book",
-   "@id": "https://lilyrang.co.kr/ep01/#book",
+   "@id": "https://lilyrang.co.kr/daily/brush/#book",
    "name": "Brush, Brush, Brush!",
    "alternateName": "릴리랑 이 닦기",
-   "url": "https://lilyrang.co.kr/ep01/",
+   "url": "https://lilyrang.co.kr/daily/brush/",
    "description": "자기 전 이 닦기 시간에 아이와 함께 듣는 하루 5분 영어 그림책. 오늘의 단어 Brush my teeth, Bubbles, All clean. 릴리가 기다리면 아이가 그림을 눌러 이야기를 이어 가요. 로그인 없이 무료로 끝까지 들을 수 있어요.",
-   "image": "https://lilyrang.co.kr/ep01/og.jpg",
+   "image": "https://lilyrang.co.kr/daily/brush/og.jpg",
    "inLanguage": [
     "en",
     "ko"
@@ -92,7 +93,7 @@
    },
    "associatedMedia": {
     "@type": "AudioObject",
-    "contentUrl": "https://lilyrang.co.kr/ep01/ep01.mp3",
+    "contentUrl": "https://lilyrang.co.kr/daily/brush/ep01.mp3",
     "encodingFormat": "audio/mpeg",
     "duration": "PT2M19S",
     "inLanguage": [
@@ -114,7 +115,7 @@
      "@type": "ListItem",
      "position": 2,
      "name": "이 닦기 (Brush, Brush, Brush!)",
-     "item": "https://lilyrang.co.kr/ep01/"
+     "item": "https://lilyrang.co.kr/daily/brush/"
     }
    ]
   }
@@ -225,12 +226,12 @@
 <!-- 편 설정(JSON). 형식은 /src/entities/episode/README.md. 시각은 초(음악 도입 2.5초 포함), [[...]]는 오늘의 단어, 좌표는 그림 픽셀 -->
 <script type="application/json" id="lily-episode">
 {
-  "id": "ep01",
+  "id": "daily/brush",
+  "no": 1,
   "title": "Brush, Brush, Brush!",
   "audio": "ep01.mp3",
   "duration": 139,
   "offset": 2.5,
-  "free": true,
   "previewUntil": 40.6,
   "lines": [
     [2.5, 5.02, "Hello, hello! It's Lily time!"],

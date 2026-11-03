@@ -2,15 +2,15 @@
 
 > 아침, 양치, 잠자리처럼 습관 순간에 4~7세 아이와 부모가 함께 듣는 하루 5분 영어 그림책. 릴리가 기다리면 아이가 그림을 눌러 이야기를 이어 간다. 앱 설치 없이 브라우저에서 연다.
 
-## 이야기
+## 이야기: 릴리랑 일상 시리즈 (daily)
 
-- [Brush, Brush, Brush! 이 닦기](https://lilyrang.co.kr/ep01/): 자기 전 이 닦기 이야기. 오늘의 단어 Brush my teeth, Bubbles, All clean. 로그인 없이 무료로 끝까지 듣는다.
-- [Wake Up! 일어나기](https://lilyrang.co.kr/ep02/): 아침에 일어나는 이야기. 오늘의 단어 Wake up, Stretch, Good morning. 무료 가입 후 끝까지 듣는다.
-- [Splash, Splash! 세수하기](https://lilyrang.co.kr/ep03/): 아침 세수 이야기. 오늘의 단어 Wash my face, Splash, So fresh. 무료 가입 후 끝까지 듣는다.
-- [Yummy, Yummy! 아침 먹기](https://lilyrang.co.kr/ep04/): 아침밥 이야기. 오늘의 단어 Yummy, All gone, More please. 무료 가입 후 끝까지 듣는다.
-- [Put On, Ready! 옷 입기](https://lilyrang.co.kr/ep05/): 아침에 옷 입는 이야기. 오늘의 단어 Put on, My socks, Ready. 무료 가입 후 끝까지 듣는다.
-- [Rub-a-Dub, Bath Time! 목욕하기](https://lilyrang.co.kr/ep06/): 저녁 목욕 이야기. 오늘의 단어 Bath time, Rub-a-dub, So clean. 무료 가입 후 끝까지 듣는다.
-- [Sweet Dreams 잠자리 책](https://lilyrang.co.kr/ep07/): 잠자리에 책 읽는 이야기. 오늘의 단어 Read a book, Turn the page, Sweet dreams. 무료 가입 후 끝까지 듣는다.
+- [Brush, Brush, Brush! 이 닦기](https://lilyrang.co.kr/daily/brush/): 자기 전 이 닦기 이야기. 오늘의 단어 Brush my teeth, Bubbles, All clean. 로그인 없이 무료로 끝까지 듣는다.
+- [Wake Up! 일어나기](https://lilyrang.co.kr/daily/wake/): 아침에 일어나는 이야기. 오늘의 단어 Wake up, Stretch, Good morning. 무료 가입 후 끝까지 듣는다.
+- [Splash, Splash! 세수하기](https://lilyrang.co.kr/daily/wash/): 아침 세수 이야기. 오늘의 단어 Wash my face, Splash, So fresh. 무료 가입 후 끝까지 듣는다.
+- [Yummy, Yummy! 아침 먹기](https://lilyrang.co.kr/daily/eat/): 아침밥 이야기. 오늘의 단어 Yummy, All gone, More please. 무료 가입 후 끝까지 듣는다.
+- [Put On, Ready! 옷 입기](https://lilyrang.co.kr/daily/dress/): 아침에 옷 입는 이야기. 오늘의 단어 Put on, My socks, Ready. 무료 가입 후 끝까지 듣는다.
+- [Rub-a-Dub, Bath Time! 목욕하기](https://lilyrang.co.kr/daily/bath/): 저녁 목욕 이야기. 오늘의 단어 Bath time, Rub-a-dub, So clean. 무료 가입 후 끝까지 듣는다.
+- [Sweet Dreams 잠자리 책](https://lilyrang.co.kr/daily/sleep/): 잠자리에 책 읽는 이야기. 오늘의 단어 Read a book, Turn the page, Sweet dreams. 무료 가입 후 끝까지 듣는다.
 
 ## 소개
 

@@ -12,7 +12,7 @@ kill %1                                   # 끝나면 직접 끔
 ## 동작 시험
 
 ```sh
-python3 tests/lily/behave.py http://127.0.0.1:4441/ep01/
+python3 tests/lily/behave.py http://127.0.0.1:4441/daily/brush/
 ```
 
 - 첫 화면(큰 재생 단추, 스크롤 없음, FCP 1.5초 이하, 첫 화면은 장면 0, 1 그림만 받음, 긴 작업 100ms 미만), 모든 그림 decode, 무대 높이
@@ -25,13 +25,13 @@ python3 tests/lily/behave.py http://127.0.0.1:4441/ep01/
 화면 크기는 `--size 너비x높이`(기본 390x844). 태블릿(700px 이상)에서는 무대 비율, 첫 화면 전체가 스크롤 없이 보이는지를 더 봅니다. 모든 크기에서 가로 스크롤 0과 아이 대상 64px 이상을 봅니다.
 
 ```sh
-for s in 390x844 768x1024 834x1194 1024x768 1194x834; do python3 tests/lily/behave.py http://127.0.0.1:4441/ep01/ --size $s; done
+for s in 390x844 768x1024 834x1194 1024x768 1194x834; do python3 tests/lily/behave.py http://127.0.0.1:4441/daily/brush/ --size $s; done
 ```
 
 설정이 없는 옛 페이지(엔진 분리 전)는 설정을 다른 편에서 빌려 같은 시험을 돌립니다.
 
 ```sh
-python3 tests/lily/behave.py http://127.0.0.1:4441/<옛페이지>/ --config-from http://127.0.0.1:4441/ep01/
+python3 tests/lily/behave.py http://127.0.0.1:4441/<옛페이지>/ --config-from http://127.0.0.1:4441/daily/brush/
 ```
 
 ## 편 목록 검사
@@ -43,7 +43,7 @@ python3 tests/lily/catalog_check.py   # 홈과 랜딩의 정적 편 목록이 sr
 ## 캡처 비교
 
 ```sh
-python3 tests/lily/shots.py http://127.0.0.1:4441/ep01/ /tmp/after --freeze      # 첫 화면, 장면마다, 끝 카드
+python3 tests/lily/shots.py http://127.0.0.1:4441/daily/brush/ /tmp/after --freeze      # 첫 화면, 장면마다, 끝 카드
 python3 tests/lily/compare.py /tmp/before /tmp/after /tmp/diff                     # 픽셀 비교, 다르면 차이 그림
 python3 tests/lily/sheet.py /tmp/side.png /tmp/before/00-first.png /tmp/after/00-first.png   # 나란히 보기
 ```

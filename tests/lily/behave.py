@@ -1,7 +1,7 @@
 """릴리랑 편 동작 시험. 편 설정(window.LILY_EPISODE)에서 기다림 지점과 대상을 읽어 어느 편에나 돈다.
 
-    python3 tests/lily/behave.py http://127.0.0.1:4441/ep01/
-    python3 tests/lily/behave.py <설정 없는 옛 페이지> --config-from http://127.0.0.1:4441/ep01/
+    python3 tests/lily/behave.py http://127.0.0.1:4441/daily/brush/
+    python3 tests/lily/behave.py <설정 없는 옛 페이지> --config-from http://127.0.0.1:4441/daily/brush/
 
 마지막 줄 SUMMARY 통과/전체. 하나라도 실패하면 종료 코드 1.
 """
@@ -148,8 +148,10 @@ async def main():
         print("TARGETS smallest hit px", sorted(smallest)[:5])
         ok("child targets >= 64px", min(smallest) >= 64, str(min(smallest)))
 
-        # 맛보기 편이 아니면(free: false): 비회원은 previewUntil에서 멈추고 가입 카드. 그 뒤 시험은 gate.js를 비워 회원처럼(gate-default가 항상 허용)
-        if cfg.get("free") is False:
+        # 맛보기 편이 아니면(편 목록 catalog.json 의 free: false): 비회원은 previewUntil에서 멈추고 가입 카드. 그 뒤 시험은 gate.js를 비워 회원처럼(gate-default가 항상 허용)
+        is_free = await pg.evaluate("""(window.LilyEpisodes && window.LilyEpisodes.ready) ? window.LilyEpisodes.ready.then(E => { const e = E.byId((window.LILY_EPISODE||{}).id); return e ? e.free === true : null; }) : null""")
+        print("CATALOG free", is_free)
+        if is_free is False:
             pu = cfg["previewUntil"]
             await open_at(pg, pu - 1.0); await ctl(pg, "#play")
             hit = await until(pg, "!!document.getElementById('lilyGateCard')", 5000)

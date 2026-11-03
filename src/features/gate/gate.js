@@ -1,42 +1,58 @@
 // 맛보기 잠금. 엔진은 재생 위치가 바뀔 때마다 lilyGate.canPlayPast(t, episode) 를 묻고,
 // false 면 멈춘 뒤 lilyGate.onBlocked(t, episode, resume) 를 부른다. resume() 은 그 자리에서 이어 재생.
-// - free 편은 언제나 허용. 아니면 previewUntil(초) 전까지 허용, 그 뒤는 회원만.
+// - 누가 끝까지 듣나는 편 목록(entities/episode)의 canListen 과 catalog.json 의 policy 가 정한다(free 편은 누구나, 아니면 policy.locked 등급 이상).
+// - 끝까지 못 들으면 policy.preview 일 때 previewUntil(초) 전까지만 허용.
+// - 편 목록을 아직 못 받았거나 못 받으면 막지 않는다. 화면 잠금이라 파일은 어차피 공개라서, 목록 오류로 무료 편까지 막히는 쪽을 피한다.
 // - 비회원이면 가입 카드. 다른 탭에서 로그인하면 카드를 닫고 바로 이어 재생.
 // - 같은 탭에서 가입하고 돌아오면 lilyGate.resumeAt(id) 가 멈췄던 초를 한 번 돌려준다(엔진이 시작할 때 물어보면 됨).
-// 화면 잠금일 뿐 파일은 공개돼 있다(계획 D6). 불러오는 순서: lily-config.js, supabase.js, session.js, catalog.js, gate.js, gate-default.js, engine.js
+// 화면 잠금일 뿐 파일은 공개돼 있다(계획 D6, 서버 차단은 plans/series-access-spec.md 2단계).
+// 불러오는 순서: lily-config.js, supabase.js, session.js, access.js, catalog.js, gate.js, gate-default.js, engine.js
 (function () {
   "use strict";
 
-  var FREE_URL = "/ep01/"; // 맛보기 편(계획 D5, D10)
   var RESUME_KEY = "lilyrang-resume";
   var RESUME_TTL = 2 * 60 * 60 * 1000;
   // 카드 CSS와 그림은 이 파일 옆에 있다. 편 주소와 상관없이 gate.js가 있는 곳을 기준으로 찾는다(engine.js의 UI와 같은 방식)
   var BASE = ((document.currentScript && document.currentScript.src) || "/src/features/gate/gate.js").replace(/[^/]*$/, "");
   var CSS = BASE + "gate.css";
 
-  var member = null; // null: 아직 모름
+  var tier = "guest"; // "guest" | "member" | "subscriber". 확인 전에는 guest
   var pending = null; // { t, ep, resume }
   var card = null;
   var hooked = false;
 
   function auth() { return window.lilyAuth || null; }
+  function catalog() { return window.LilyEpisodes || null; }
+
+  // 편 목록의 항목(free, series). 목록을 아직 못 받았으면 null
+  function infoOf(ep) {
+    var E = catalog();
+    return E && ep && typeof E.byId === "function" ? E.byId(ep.id) : null;
+  }
+
+  function fullOk(ep) {
+    var E = catalog(), info = infoOf(ep);
+    if (!E || typeof E.canListen !== "function" || !info) return true;
+    return E.canListen(info, tier, E.policy);
+  }
 
   function hook() {
     var a = auth();
     if (hooked || !a || typeof a.onChange !== "function") return;
     hooked = true;
     a.onChange(function (m) {
-      member = !!m;
-      if (member && pending) continueNow();
+      tier = m ? "member" : "guest";
+      if (pending && fullOk(pending.ep)) continueNow();
     });
   }
 
   function refresh() {
     hook();
     var a = auth();
-    if (!a || typeof a.isMember !== "function") { member = false; return Promise.resolve(false); }
-    return Promise.resolve(a.isMember()).then(function (m) { member = !!m; return member; },
-      function () { member = false; return false; });
+    if (!a || typeof a.isMember !== "function") { tier = "guest"; return Promise.resolve(tier); }
+    var ask = typeof a.tier === "function" ? a.tier() : Promise.resolve(a.isMember()).then(function (m) { return m ? "member" : "guest"; });
+    return Promise.resolve(ask).then(function (t) { tier = t || "guest"; return tier; },
+      function () { tier = "guest"; return tier; });
   }
 
   function limitOf(ep) {
@@ -44,17 +60,18 @@
   }
 
   function canPlayPast(t, ep) {
-    if (!ep || ep.free === true) return true;
-    if (typeof t === "number" && t < limitOf(ep)) return true;
-    return member === true;
+    if (!ep || fullOk(ep)) return true;
+    var E = catalog();
+    var preview = !E || typeof E.previewOn !== "function" || E.previewOn(E.policy);
+    return preview && typeof t === "number" && t < limitOf(ep);
   }
 
   function onBlocked(t, ep, resume) {
     if (pending) { pending.resume = resume; return; }
     pending = { t: t, ep: ep, resume: resume };
-    refresh().then(function (m) {
+    refresh().then(function () {
       if (!pending) return;
-      if (m) continueNow(); else show();
+      if (fullOk(pending.ep)) continueNow(); else show();
     });
   }
 
@@ -87,9 +104,6 @@
   }
 
   // 카드 모양은 gate.css(시안 T6, promo P68). 인라인 style 없이 클래스만 붙인다
-  // 가입하면 이어지는 이야기 동그라미 그림: 편 목록(entities/episode, window.LilyEpisodes)에서 맛보기 편이 아닌 것
-  var EPS = window.LilyEpisodes;
-  var MORE = EPS ? EPS.list.filter(function (e) { return !e.free; }).map(EPS.img) : [];
   (function css() {
     if (document.querySelector('link[href="' + CSS + '"]')) return;
     var l = document.createElement("link");
@@ -130,7 +144,10 @@
     var more = el("p", "gate-more", "새 이야기가 계속 더해져요");
     var eps = el("div", "gate-eps");
     eps.setAttribute("aria-hidden", "true");
-    MORE.forEach(function (url) {
+    // 가입하면 이어지는 이야기 동그라미 그림: 편 목록에서 맛보기 편이 아닌 것. 목록은 비동기로 오므로 카드를 그릴 때 읽는다
+    var E = catalog();
+    var moreImgs = E && E.list ? E.list.filter(function (e) { return !e.free; }).map(E.img) : [];
+    moreImgs.forEach(function (url) {
       var im = el("img");
       im.src = url; im.alt = ""; im.width = 48; im.height = 48; im.decoding = "async";
       eps.appendChild(im);
@@ -143,7 +160,10 @@
     join.addEventListener("click", function () { saveResume(); log("gate_join_click"); });
     var free = el("a", "", "맛보기 다시 듣기");
     free.id = "lilyGateFree";
-    free.href = FREE_URL;
+    // 맛보기 편: 지금 편과 같은 시리즈의 첫 무료 편, 없으면 다른 시리즈의 무료 편, 그것도 없으면 홈
+    var info = pending && infoOf(pending.ep);
+    var freeEp = E && typeof E.firstFree === "function" ? E.firstFree(info && info.series) : null;
+    free.href = freeEp ? "/" + freeEp.id + "/" : "/";
     var later = el("button", "", "나중에");
     later.type = "button";
     later.id = "lilyGateLater";

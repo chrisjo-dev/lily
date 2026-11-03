@@ -61,7 +61,7 @@ function tipHTML(s) {
 const SAY = () => (EP.free_play || []).find((f) => f.type === "say-sticker");
 
 function buildShell() {
-  const st = $("stage"), end = EP.end || {}, ws = EP.worksheet, num = esc(String(EP.id || "").toUpperCase());
+  const st = $("stage"), end = EP.end || {}, ws = EP.worksheet, num = esc(typeof EP.no === "number" ? "EP" + String(EP.no).padStart(2, "0") : String(EP.id || "").toUpperCase());
   // 화면 그림은 sprite에 한 번만 두고 장면에서는 <use>로 가리킨다(장면마다 같은 그림을 다시 받지 않음).
   // 손 #hand-shape(누르기)와 #hand-rub(문지르기)는 손끝이 (0, -2)에 오는 크기, 별과 터짐은 symbol이라 <use>의 x, y, width, height로 놓는다.
   // href는 첫 재생이나 첫 기다림에서 넣는다(loadUi). 첫 화면에서 받는 양은 그대로

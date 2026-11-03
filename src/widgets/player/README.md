@@ -1,17 +1,17 @@
 # 릴리랑 편 재생기(widgets/player)
 
-편마다 같은 동작(재생, 진행 막대, 기다림과 8초 자동 진행, 그냥 듣기, 3번 이어 듣기, 조금 천천히, 바깥 되감기, 장면 전환, 자막, 단어 버튼, 대본, 부모님 화면, 그림 미리 받기, 잠금 훅)은 여기 있고, 편 HTML에는 **장면 그림 마크업과 설정 하나**만 둡니다. 예시는 `/ep01/index.html`.
+편마다 같은 동작(재생, 진행 막대, 기다림과 8초 자동 진행, 그냥 듣기, 3번 이어 듣기, 조금 천천히, 바깥 되감기, 장면 전환, 자막, 단어 버튼, 대본, 부모님 화면, 그림 미리 받기, 잠금 훅)은 여기 있고, 편 HTML에는 **장면 그림 마크업과 설정 하나**만 둡니다. 예시는 `/daily/brush/index.html`.
 
 ## 새 편 만들기
 
-1. `/ep01/index.html`을 복사해 `/epNN/index.html`로 둡니다.
-2. `<head>`: 제목, 설명, OG(`https://lilyrang.co.kr/epNN/...`), canonical, 첫 장면 그림 preload만 바꿉니다. 화면 토큰(`/src/shared/ui/tokens.css`), 엔진 CSS, 글꼴(Andika, Gowun Batang, Gowun Dodum, Jua), 스크립트 줄(아래 "잠금 훅"의 순서)은 그대로 둡니다.
+1. `/daily/brush/index.html`을 복사해 `/<시리즈>/<편>/index.html`로 둡니다. 설정의 `id`(`<시리즈>/<편>`)와 `no`를 바꾸고, `src/entities/episode/catalog.json`에 편을 더합니다(무료 여부 `free`는 거기에만).
+2. `<head>`: 제목, 설명, OG와 JSON-LD(`https://lilyrang.co.kr/<시리즈>/<편>/...`, 파일 안 절대 주소 전부), canonical, 첫 장면 그림 preload만 바꿉니다. 화면 토큰(`/src/shared/ui/tokens.css`), 엔진 CSS, 글꼴(Andika, Gowun Batang, Gowun Dodum, Jua), 스크립트 줄(아래 "잠금 훅"의 순서)은 그대로 둡니다.
 3. `<body>`:
    - `<div class="stage" id="stage">` 안에 장면마다 `<svg class="scene" id="scN" viewBox="그림 픽셀">`. 첫 장면 그림만 `href`, 나머지는 `data-src`(엔진이 장면 직전에 받아 둠). 첫 장면 말고는 `hidden`.
    - 설정 JSON 블록 `<script type="application/json" id="lily-episode">{...}</script>`. 실행되는 코드가 아니라 데이터라 CSP에 걸리지 않습니다. JSON이라 주석과 끝 쉼표는 못 씁니다. 엔진이 문서를 다 읽은 뒤 스스로 시작하고, 읽은 설정을 `window.LILY_EPISODE`에도 둡니다.
 4. CSP: head의 `Content-Security-Policy` meta를 그대로 둡니다(`'unsafe-inline'` 없음). 그래서 인라인 `<script>` 코드, `onload=` 같은 속성, `style=` 속성, `<style>`을 쓰지 않습니다. 모양은 `engine.css`의 클래스로, 동적 스타일은 모듈에서 `api.el(..., { style: "..." })`(CSSOM으로 넣음)로 합니다. 글꼴 링크는 `id="lily-fonts"`인 preload를 엔진이 붙입니다.
 5. 무대 위 조각(엠블럼, 제목 종이 띠, 진행 점), 칩, 8초 고리, 큰 재생 단추, 본문 줄, 아이 차례의 큰 "말했어요" 단추, 부모 서랍(재생, 3번 이어 듣기, 조금 천천히, 그냥 듣기, 대본), 끝 카드, 부모님 화면, 화면 그림 sprite(손 `#hand-shape`, `#hand-rub`, 별 `#ui-sparkle`, 터짐 `#ui-pop`)는 엔진이 만듭니다. 마크업에 넣지 않습니다.
-6. 시험: `python3 tests/lily/behave.py http://127.0.0.1:4441/epNN/` 전부 통과(tests/lily/README.md).
+6. 시험: `python3 tests/lily/behave.py http://127.0.0.1:4441/<시리즈>/<편>/` 전부 통과, `python3 tests/lily/catalog_check.py` 0 mismatches(tests/lily/README.md).
 
 ## 화면 크기
 
@@ -64,7 +64,7 @@
 
 - 엔진은 `api.sfx(이름, 늦춤초)`로 냅니다. 8초 자동 진행처럼 아이가 누르지 않은 동작에는 소리를 내지 않습니다.
 - Web Audio로 냅니다. 첫 누름(pointerdown, touchend, click, keydown) 때 AudioContext를 만들고 그때 파일을 받으므로 첫 화면 무게는 그대로입니다. 내레이션 `<audio>`와는 따로라 그 볼륨과 재생에 영향이 없습니다. 못 받거나 Web Audio가 없으면 소리만 빠지고 동작은 같습니다. 같은 출처 fetch라 CSP `connect-src 'self'`로 충분합니다.
-- 크기: 내레이션(ep01 -16.8 LUFS)보다 최대 순간 음량이 약 14~16 dB 낮고, 부모 틱은 약 19 dB 낮습니다. mp3 44.1kHz 모노 96kbps, 파일당 2~6KB.
+- 크기: 내레이션(daily/brush -16.8 LUFS)보다 최대 순간 음량이 약 14~16 dB 낮고, 부모 틱은 약 19 dB 낮습니다. mp3 44.1kHz 모노 96kbps, 파일당 2~6KB.
 - 원본은 외부 소리 없이 합성했습니다. 다시 만들기: `python3 lilyrang/studio/sfx-lab/build_sfx.py`(결과는 `sfx-lab/sfx/`, 측정표 `sfx-lab/measurements.md`, 후보 시청 페이지 `sfx-lab/index.html`). 고른 후보를 위 이름으로 복사합니다(`find-wood-toktok`, `sparkle-bell-twin`, `pop-soft-plop`, `scrub-brush-shh`, `said-kalimba-up`, `sticker-pat-ting`, `lamp-chain-click`, `play-soft-up`, `again-wood-tok-up`, `parent-paper-tick`).
 
 새 종류가 필요하면 파일 하나를 더합니다.
@@ -92,7 +92,7 @@ LilyInteractions["my-kind"] = (api, specs, episode) => {
 - 허락을 기억하지 않습니다. 잠금 카드를 "나중에"로 닫고 다시 재생을 누르면 다음 프레임에 또 묻고, 여전히 `false`면 다시 멈추고 `onBlocked`를 부릅니다.
 - 선택 훅: 시작할 때 `typeof lilyGate.resumeAt === "function"`이면 `lilyGate.resumeAt(편id)`를 부르고, 숫자를 돌려주면 그 시각에서 멈춘 채 엽니다(같은 탭에서 가입하고 돌아온 사람이 막혔던 자리부터). 주소에 `?t=`가 있으면 그쪽이 우선입니다.
 - `src/features/gate/gate-default.js`는 `window.lilyGate`가 없을 때만 "항상 허용"을 넣습니다. 실제 잠금은 `src/features/gate/gate.js`가 그보다 먼저 `window.lilyGate`를 둡니다.
-- 불러오는 순서(모든 편 같음): `lily-config.js` → `supabase.js` → `session.js` → `catalog.js` → `gate.js` → `gate-default.js` → `engine.js` → `interactions/*.js`(경로는 `src/README.md`). 앞의 다섯은 가입과 잠금 파일이라 없거나 404여도 페이지는 깨지지 않습니다(그 경우 항상 허용).
+- 불러오는 순서(모든 편 같음): `lily-config.js` → `supabase.js` → `session.js` → `access.js` → `catalog.js` → `gate.js` → `gate-default.js` → `engine.js` → `interactions/*.js`(경로는 `src/README.md`). 앞의 여섯은 가입과 잠금 파일이라 없거나 404여도 페이지는 깨지지 않습니다(그 경우 항상 허용). 편 목록(`catalog.json`)을 못 받아도 잠금은 막지 않습니다(화면 잠금이라, 목록 오류로 무료 편이 막히는 쪽을 피함).
 
 ## 확인용 주소
 

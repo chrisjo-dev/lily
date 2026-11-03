@@ -1,8 +1,8 @@
 // 시험용 가짜 엔진: 레인 A 약속대로 재생 위치가 바뀔 때마다 canPlayPast 를 묻고, false 면 멈추고 onBlocked.
-// ?free=1 이면 맛보기 편, ?until=초 로 previewUntil.
+// ?free=1 이면 맛보기 편(daily/brush, 무료 여부는 편 목록 catalog.json 이 정함), 아니면 daily/wake. ?until=초 로 previewUntil.
 (function () {
   var q = new URLSearchParams(location.search);
-  var ep = { id: "ep02", free: q.get("free") === "1", previewUntil: Number(q.get("until") || 2) };
+  var ep = { id: q.get("free") === "1" ? "daily/brush" : "daily/wake", previewUntil: Number(q.get("until") || 2) };
   window.__ep = ep;
   var audio = document.getElementById("audio");
   var out = document.getElementById("t");

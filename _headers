@@ -12,7 +12,7 @@
   Cache-Control: public, max-age=604800
 
 # 그림(이름에 해시가 없어 immutable은 쓰지 않고 1주). HTML, CSS, JS는 기본값(max-age=0, must-revalidate) 그대로
-/:ep/art/*
+/:series/:ep/art/*
   Cache-Control: public, max-age=604800, stale-while-revalidate=86400
 
 /src/*.webp
@@ -22,7 +22,7 @@
 /og.jpg
   Cache-Control: public, max-age=86400
 
-/:ep/og.jpg
+/:series/:ep/og.jpg
   Cache-Control: public, max-age=86400
 
 # 검색과 AI가 읽는 안내 파일

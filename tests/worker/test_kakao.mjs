@@ -62,7 +62,7 @@ for (const body of [JSON.stringify({ code: 'a b' }), JSON.stringify({ code: '' }
 {
   const bytes = new Uint8Array(100).map((_, i) => i);
   const env = { ASSETS: { fetch: async () => new Response(bytes, { status: 200, headers: { 'Content-Type': 'audio/mpeg' } }) } };
-  const r = await worker.fetch(new Request(SITE + '/ep01/a.mp3', { headers: { Range: 'bytes=10-19' } }), env);
+  const r = await worker.fetch(new Request(SITE + '/daily/brush/a.mp3', { headers: { Range: 'bytes=10-19' } }), env);
   const b = new Uint8Array(await r.arrayBuffer());
   ok('range regression: 206 with exact slice', r.status === 206 && r.headers.get('Content-Range') === 'bytes 10-19/100' && b.length === 10 && b[0] === 10);
   const r2 = await worker.fetch(new Request(SITE + '/api/other'), env);

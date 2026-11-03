@@ -1,6 +1,6 @@
 """장면 캡처: 첫 화면, 장면마다 한 장(기다림이 있으면 기다림 화면), 끝 카드. 기본 390x844 @2x, --size로 바꿈.
 
-    python3 tests/lily/shots.py http://127.0.0.1:4441/ep01/ 저장폴더 [--config-from 설정있는편주소] [--freeze]
+    python3 tests/lily/shots.py http://127.0.0.1:4441/daily/brush/ 저장폴더 [--config-from 설정있는편주소] [--freeze]
 
 --freeze는 모든 애니메이션을 0초에 세워 두 캡처를 픽셀로 비교할 수 있게 한다(compare.py).
 """
