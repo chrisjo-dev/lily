@@ -30,8 +30,10 @@
       var band = p.child_age_band || "";
       Array.prototype.forEach.call(document.querySelectorAll('input[name="age"]'), function (n) { n.checked = n.value === band; });
       $("marketing").checked = !!p.marketing_opt_in;
-      showEpisodes(rs[1].data || []);
-      $("loading").hidden = true; $("signedIn").hidden = false;
+      return EPS.ready.then(function () {
+        showEpisodes(rs[1].data || []);
+        $("loading").hidden = true; $("signedIn").hidden = false;
+      });
     });
   }).catch(function () {
     $("loading").textContent = "정보를 불러오지 못했어요. 잠시 뒤에 다시 열어 주세요.";
@@ -40,17 +42,25 @@
   A.onChange(function (m) { if (!m && uid) { uid = null; signedOut(); } });
 
   // 끝까지 들은 이야기: 동그라미 그림, 우리말 이름, 영어 제목, 날짜(시안 P65). 모르는 편은 그림 없이 편 번호만
-  // 편 이름과 그림은 entities/episode 의 목록(window.LilyEpisodes)에서 읽는다
-  var EPS = window.LilyEpisodes || { byId: function () { return null; } };
+  // 편 이름과 그림은 entities/episode 의 목록(window.LilyEpisodes)에서 읽는다(목록은 비동기로 온다)
+  // DB 전환 기간에는 옛 ID(ep02)로 남은 기록도 있을 수 있어 목록의 legacy 로 새 편에 맞추고, 같은 편은 한 번만 보인다
+  var none = function () { return null; };
+  var EPS = window.LilyEpisodes || {};
+  EPS = { ready: EPS.ready || Promise.resolve(), byId: EPS.byId || none, byLegacy: EPS.byLegacy || none, img: EPS.img,
+    ID_RE: EPS.ID_RE || /^$/, LEGACY_RE: EPS.LEGACY_RE || /^$/ };
   function showEpisodes(rows) {
     var ul = $("eps");
     ul.textContent = "";
+    var seen = {};
     rows.forEach(function (row) {
-      if (!/^ep[0-9]{2}$/.test(row.episode)) return;
-      var info = EPS.byId(row.episode);
+      var info = null, id = null;
+      if (EPS.ID_RE.test(row.episode)) { id = row.episode; info = EPS.byId(id); }
+      else if (EPS.LEGACY_RE.test(row.episode)) { info = EPS.byLegacy(row.episode); id = info ? info.id : null; }
+      if (!id || seen[id]) return;
+      seen[id] = true;
       var li = document.createElement("li");
       var a = document.createElement("a");
-      a.href = "/" + row.episode + "/";
+      a.href = "/" + id + "/";
       if (info) {
         var im = document.createElement("img");
         im.src = EPS.img(info); im.alt = ""; im.width = 56; im.height = 56; im.decoding = "async";
@@ -60,7 +70,7 @@
       }
       var name = document.createElement("span");
       var b = document.createElement("b");
-      b.textContent = info ? info.title : row.episode.toUpperCase();
+      b.textContent = info ? info.title : id;
       name.appendChild(b);
       if (info) { var sm = document.createElement("small"); sm.textContent = info.en; name.appendChild(sm); }
       a.appendChild(name);

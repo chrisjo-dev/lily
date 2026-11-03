@@ -1,0 +1,19 @@
+# 옛 편 주소(/epNN/)를 시리즈 주소로. 원천은 src/entities/episode/catalog.json 의 legacy(tests/lily/catalog_check.py가 같은지 본다).
+# 옛 mp3 주소는 Worker를 먼저 지나므로 worker/access.js 가 같은 목록으로 301 한다.
+# 고정 주소 규칙을 먼저, splat 규칙을 뒤에(wrangler 안내: 고정 규칙이 위에 있어야 빠름). /daily 는 시리즈 목록 화면이 생기기 전까지 홈으로(plans/series-access-spec.md Q8)
+/ep01 /daily/brush/ 301
+/ep02 /daily/wake/ 301
+/ep03 /daily/wash/ 301
+/ep04 /daily/eat/ 301
+/ep05 /daily/dress/ 301
+/ep06 /daily/bath/ 301
+/ep07 /daily/sleep/ 301
+/daily/ / 302
+/daily / 302
+/ep01/* /daily/brush/:splat 301
+/ep02/* /daily/wake/:splat 301
+/ep03/* /daily/wash/:splat 301
+/ep04/* /daily/eat/:splat 301
+/ep05/* /daily/dress/:splat 301
+/ep06/* /daily/bath/:splat 301
+/ep07/* /daily/sleep/:splat 301

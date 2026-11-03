@@ -1,7 +1,7 @@
 """기다림의 "end": true 시험. EP01 페이지를 받아 설정만 바꿔(불 끄기 기다림을 빼고 칫솔 찾기를 마지막 행동으로) 띄운다.
 파일을 복사하지 않고 Playwright route로 설정 JSON만 고친다.
 
-    python3 tests/lily/end-flag.py http://127.0.0.1:4441/ep01/
+    python3 tests/lily/end-flag.py http://127.0.0.1:4441/daily/brush/
 
 확인: 누르면 바로 끝 카드, 8초 자동도 끝 카드, 앞으로 되감으면 끝 카드가 사라지고 다시 기다림.
 """
@@ -40,7 +40,7 @@ async def main():
             cfg["waits"][0]["end"] = True          # 칫솔 찾기가 마지막 행동
             cfg["end"].pop("at", None)             # 끝 시각은 그 기다림 0.1초 전으로 정해짐
             await route.fulfill(response=r, body=html[:m.start(2)] + json.dumps(cfg, ensure_ascii=False) + html[m.end(2):])
-        await pg.route(re.compile(r".*/ep01/(\?.*)?$"), fixture)
+        await pg.route(re.compile(r".*/daily/brush/(\?.*)?$"), fixture)
 
         at = 40.6
         # 1 누르면 바로 끝 카드(소리가 끝날 때까지 기다리지 않음)

@@ -1,4 +1,4 @@
-// 릴리랑 로그인 상태(entities/session). 다른 코드는 window.lilyAuth 의 isMember, onChange, logEvent 만 쓴다.
+// 릴리랑 로그인 상태(entities/session). 다른 코드는 window.lilyAuth 의 isMember, tier, onChange, logEvent 만 쓴다.
 // - shared/config/lily-config.js, shared/api/supabase.js 가 먼저 와야 한다. 준비 안 됨이면 누구나 비회원, 기록 안 함.
 // - Supabase 클라이언트는 shared/api 가 만들고, 여기서는 받아서 로그인 상태 변화를 듣기만 한다.
 (function () {
@@ -9,7 +9,8 @@
   // supabase/migrations/0001_init.sql 의 lily_event_name_ok 와 같은 목록
   var EVENTS = ["signup", "login", "logout", "delete_account",
     "episode_start", "episode_complete", "gate_shown", "gate_join_click"];
-  var EPISODE_RE = /^ep[0-9]{2}$/;
+  // 편 ID "<시리즈>/<편>". entities/episode/access.js 의 ID_RE, supabase/migrations/0002_series.sql 과 같은 식(같은 계층이라 직접 부르지 않고 복사, tests/lily/catalog_check.py가 같은지 본다)
+  var EPISODE_RE = /^[a-z][a-z0-9-]{0,23}\/[a-z][a-z0-9-]{0,31}$/;
 
   function hasStoredSession() { return sb.hasStoredSession(); }
 
@@ -18,6 +19,7 @@
     if (typeof v !== "string" || v.length > 100) return "/";
     if (!/^\/[A-Za-z0-9._\/-]*$/.test(v)) return "/";
     if (v.indexOf("//") !== -1 || v.indexOf("..") !== -1) return "/";
+    if (v.indexOf("\\") !== -1) return "/"; // 위 정규식이 이미 막지만, 식을 고칠 때 풀리지 않게 한 번 더
     return v;
   }
 
@@ -51,6 +53,11 @@
 
   function isMember() {
     return session().then(function (s) { notify(!!s); return !!s; }, function () { return false; });
+  }
+
+  // 등급: "guest" | "member" | "subscriber". 지금은 로그인이면 member. 구독을 들이면 여기서 Supabase my_access() 로 구독자를 가린다(plans/series-access-spec.md 4절)
+  function tier() {
+    return isMember().then(function (m) { return m ? "member" : "guest"; }, function () { return "guest"; });
   }
 
   function onChange(cb) {
@@ -87,6 +94,7 @@
 
   window.lilyAuth = {
     isMember: isMember,
+    tier: tier,
     onChange: onChange,
     logEvent: logEvent,
     // 아래는 릴리랑 가입 페이지(join, me)만 쓴다

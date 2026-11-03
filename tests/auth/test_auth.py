@@ -90,7 +90,7 @@ async def run(br):
     # 1. 설정이 빈 상태(지금 저장소 그대로) ------------------------------------
     ctx, pg = await page(br)
     await use_config(pg, "", "", "")  # 저장소에 실제 값이 들어가도 빈 설정 동작을 따로 본다
-    await pg.goto(B + "/join/?next=/ep02/"); await pg.wait_for_load_state("load")
+    await pg.goto(B + "/join/?next=/daily/wake/"); await pg.wait_for_load_state("load")
     fcp, lt = await perf(pg)
     ok("empty config: join shows 준비 중, form hidden",
        await pg.is_visible("#notReady") and not await pg.is_visible("#joinBox"), f"FCP={fcp:.0f}ms longtasks>100ms={lt}")
@@ -98,8 +98,8 @@ async def run(br):
     ok("empty config: isMember false, logEvent false, ready false",
        await pg.evaluate("Promise.all([lilyAuth.isMember(), lilyAuth.logEvent('login')]).then(a=>a[0]===false&&a[1]===false&&lilyAuth.ready===false)"))
     ok("empty config: supabase-js not downloaded", not any("jsdelivr" in u for u in pg.reqs))
-    nexts = await pg.evaluate("""[['/ep02/','/ep02/'],['/me/','/me/'],['//evil.com','/'],['https://evil.com','/'],['/\\\\evil.com','/'],
-      ['/ep02/?x=1','/'],['/../x','/'],['javascript:alert(1)','/'],['',"/"],[null,'/'],['/'+'a'.repeat(120),'/']]
+    nexts = await pg.evaluate("""[['/daily/wake/','/daily/wake/'],['/me/','/me/'],['//evil.com','/'],['https://evil.com','/'],['/\\\\evil.com','/'],
+      ['/daily/wake/?x=1','/'],['/\\\\daily/wake/','/'],['/daily\\\\wake/','/'],['/../x','/'],['javascript:alert(1)','/'],['',"/"],[null,'/'],['/'+'a'.repeat(120),'/']]
       .filter(([i,o])=>lilyAuth.safeNext(i)!==o).map(x=>x[0])""")
     ok("safeNext allows only same-site paths", nexts == [], str(nexts))
     ok("empty config: no CSP violation, no console error", await pg.evaluate("window.__csp.length===0") and pg.errs == [], str(pg.errs))
@@ -141,7 +141,7 @@ async def run(br):
     async def authz_route(route):
         authz.append(route.request.url); await route.fulfill(status=200, content_type="text/html", body="<p>kakao</p>")
     await pg.route("https://kauth.kakao.com/oauth/authorize*", authz_route)
-    await pg.goto(B + "/join/?next=/ep02/"); await pg.wait_for_load_state("load")
+    await pg.goto(B + "/join/?next=/daily/wake/"); await pg.wait_for_load_state("load")
     fcp, lt = await perf(pg)
     ok("configured join: ready, kakao locked until required consent, no email form",
        await pg.evaluate("lilyAuth.ready") and await pg.is_disabled("#kakao") and not await pg.query_selector("#email, #emailForm, #emailBtn"), f"FCP={fcp:.0f}ms lt={lt}")
@@ -160,7 +160,7 @@ async def run(br):
     ok("kakao authorize: random state and sha256-hex nonce", re.fullmatch(r"[0-9a-f]{64}", q1("state")) is not None and re.fullmatch(r"[0-9a-f]{64}", q1("nonce")) is not None)
     await pg.goto(B + "/privacy/"); await pg.wait_for_load_state("load")  # 같은 탭, 같은 주소로 돌아와 저장값을 읽는다
     saved = json.loads(await pg.evaluate("localStorage.getItem('lilyrang-next')"))
-    ok("next and marketing choice kept for callback", saved["next"] == "/ep02/" and saved["marketing"] is True)
+    ok("next and marketing choice kept for callback", saved["next"] == "/daily/wake/" and saved["marketing"] is True)
     oidc = json.loads(await pg.evaluate("sessionStorage.getItem('lilyrang-kakao-oidc')"))
     ok("state and raw nonce kept in this tab only", oidc["state"] == q1("state") and hashlib.sha256(oidc["nonce"].encode()).hexdigest() == q1("nonce"))
 
@@ -185,9 +185,9 @@ async def run(br):
     await pg.route(B + "/api/kakao/token", kakao_api)
     await pg.route(SB + "/auth/v1/token*", token)
     await pg.route(SB + "/rest/v1/**", rest)
-    await pg.route(B + "/ep02/", lambda r: r.fulfill(status=200, content_type="text/html", body="<!doctype html><title>ep02</title>"))
+    await pg.route(B + "/daily/wake/", lambda r: r.fulfill(status=200, content_type="text/html", body="<!doctype html><title>wake</title>"))
     await pg.goto(B + "/join/callback/?code=fake_code-1&state=" + q1("state"))
-    await pg.wait_for_url(B + "/ep02/", timeout=8000)
+    await pg.wait_for_url(B + "/daily/wake/", timeout=8000)
     api = [c for c in calls if c[0] == "api"]
     ok("callback sent only the code to the Worker", bool(api) and api[0][3] == "POST" and json.loads(api[0][2] or "{}") == {"code": "fake_code-1"})
     tok = [c for c in calls if c[0] == "token"]
@@ -200,7 +200,7 @@ async def run(br):
     ev = [c for c in calls if c[0] == "POST" and "/events" in c[1]]
     ok("callback logged signup event as the user", bool(ev) and '"signup"' in ev[0][2] and uid in ev[0][2])
     ok("callback went to next path, session stored, one-time values cleared",
-       pg.url == B + "/ep02/" and await pg.evaluate("localStorage.getItem('lilyrang-auth')!==null && localStorage.getItem('lilyrang-next')===null && sessionStorage.getItem('lilyrang-kakao-oidc')===null"))
+       pg.url == B + "/daily/wake/" and await pg.evaluate("localStorage.getItem('lilyrang-auth')!==null && localStorage.getItem('lilyrang-next')===null && sessionStorage.getItem('lilyrang-kakao-oidc')===null"))
 
     # 4b. state 가 다르면 교환하지 않는다(다른 탭, 위조된 콜백)
     ctx2, pg2 = await page(br)
@@ -222,7 +222,7 @@ async def run(br):
         if rq.method == "GET" and "/profiles" in rq.url:
             await route.fulfill(status=200, content_type="application/json", body=json.dumps({"nickname": "하늘맘", "child_age_band": "4-5", "marketing_opt_in": True}))
         elif rq.method == "GET" and "/progress" in rq.url:
-            await route.fulfill(status=200, content_type="application/json", body=json.dumps([{"episode": "ep02", "completed_at": "2026-10-20T09:00:00Z"}, {"episode": "<img src=x>", "completed_at": "2026-10-19T09:00:00Z"}]))
+            await route.fulfill(status=200, content_type="application/json", body=json.dumps([{"episode": "daily/eat", "completed_at": "2026-11-04T09:00:00Z"}, {"episode": "daily/wake", "completed_at": "2026-10-21T09:00:00Z"}, {"episode": "ep02", "completed_at": "2026-10-20T09:00:00Z"}, {"episode": "<img src=x>", "completed_at": "2026-10-19T09:00:00Z"}]))
         else:
             await route.fulfill(status=204 if rq.method != "POST" or "/rpc/" in rq.url else 201, body="")
     await pg.unroute(SB + "/rest/v1/**")
@@ -230,9 +230,10 @@ async def run(br):
     await pg.route(SB + "/auth/v1/logout*", lambda r: r.fulfill(status=204, body=""))
     await pg.goto(B + "/me/"); await pg.wait_for_selector("#signedIn:not([hidden])", timeout=8000)
     fcp, lt = await perf(pg)
-    ok("me: profile and listened episodes shown, unsafe episode id dropped",
+    shown = await pg.evaluate("[...document.querySelectorAll('#eps li')].map(li => [li.querySelector('a').getAttribute('href'), li.querySelector('img').getAttribute('src')])")
+    ok("me: profile and listened episodes shown, old id mapped, duplicate and unsafe id dropped",
        await pg.input_value("#nickname") == "하늘맘" and await pg.is_checked('input[name="age"][value="4-5"]')
-       and await pg.evaluate("document.querySelectorAll('#eps li').length") == 1 and await pg.evaluate("[...document.querySelectorAll('#eps img')].every(i => i.getAttribute('src') === '/src/entities/episode/img/ep-wake.webp')"), f"FCP={fcp:.0f}ms lt={lt}")
+       and shown == [["/daily/eat/", "/src/entities/episode/img/ep-eat.webp"], ["/daily/wake/", "/src/entities/episode/img/ep-wake.webp"]], f"{shown} FCP={fcp:.0f}ms lt={lt}")
     await pg.click('input[name="age"][value="6-7"] >> xpath=..')
     await pg.fill("#nickname", "새 이름")
     async with pg.expect_navigation(url=B + "/"):
@@ -261,7 +262,8 @@ async def run(br):
     ok("non-member: stops at previewUntil and shows card", 2.0 <= at <= 2.25 and await pg.evaluate("__audio.paused"), f"blockedAt={at:.3f}")
     ok("card text and links", "가입하면 바로 이어 들을 수 있어요" in await pg.inner_text("#lilyGateCard")
        and await pg.get_attribute("#lilyGateJoin", "href") == "/join/?next=%2Ftests%2Fauth%2Fgate-harness.html"
-       and await pg.get_attribute("#lilyGateFree", "href") == "/ep01/")
+       and await pg.get_attribute("#lilyGateFree", "href") == "/daily/brush/")
+    ok("card shows next stories from catalog (non-free episodes)", await pg.evaluate("document.querySelectorAll('#lilyGateCard .gate-eps img').length") == 6)
     f_card = await fps(pg)
     ok("card shown: frame rate >= 55, no long task", f_card >= 55 and await pg.evaluate("window.__lt.filter(d=>d>100).length") == 0, f"{f_card:.1f} fps")
     ok("card works under CSP without inline style", await pg.evaluate("window.__csp.length===0") and pg.errs == [], str(await pg.evaluate("window.__csp")) + str(pg.errs))
@@ -272,7 +274,7 @@ async def run(br):
     ok("login while blocked: card closes and resumes from same spot",
        not await pg.query_selector("#lilyGateCard") and not await pg.evaluate("__audio.paused") and 2.0 <= t <= 3.2, f"t={t:.2f}")
     ev = json.loads(await pg.evaluate("sessionStorage.getItem('fakeEvents')"))
-    ok("gate_shown logged with episode id", ["gate_shown", "ep02"] in ev, str(ev))
+    ok("gate_shown logged with episode id", ["gate_shown", "daily/wake"] in ev, str(ev))
     await ctx.close()
 
     ctx, pg = await page(br)
@@ -284,10 +286,10 @@ async def run(br):
     ok("play again while non-member: blocked again", await pg.evaluate("__audio.paused"))
     await pg.click("#lilyGateJoin"); await pg.wait_for_url(re.compile(r"/join/\?next="), timeout=4000)
     ev = json.loads(await pg.evaluate("sessionStorage.getItem('fakeEvents')"))
-    ok("join click: goes to join with next, logs gate_join_click", ["gate_join_click", "ep02"] in ev and "next=%2Ftests%2Fauth%2Fgate-harness.html" in pg.url)
+    ok("join click: goes to join with next, logs gate_join_click", ["gate_join_click", "daily/wake"] in ev and "next=%2Ftests%2Fauth%2Fgate-harness.html" in pg.url)
     # 같은 탭에서 가입하고 돌아온 것처럼(회원으로 다시 열기)
     await pg.goto(H + "?until=2&member=1"); await pg.wait_for_load_state("load")
-    r = await pg.evaluate("[lilyGate.resumeAt('ep02'), lilyGate.resumeAt('ep02')]")
+    r = await pg.evaluate("[lilyGate.resumeAt('daily/wake'), lilyGate.resumeAt('daily/wake')]")
     ok("after join in same tab: resumeAt gives stop time once", r[0] is not None and 2.0 <= r[0] <= 2.25 and r[1] is None, str(r))
     await pg.evaluate("__audio.currentTime = %f" % r[0]); await pg.evaluate("__play()")
     await pg.wait_for_timeout(1200)
@@ -328,7 +330,7 @@ async def sizes(br):
         if "/profiles" in u: body = {"nickname": "하늘맘", "child_age_band": "4-5", "marketing_opt_in": False}
         else: body = [{"episode": "ep0%d" % i, "completed_at": "2026-10-2%dT09:00:00Z" % i} for i in (1, 2, 3)]
         await route.fulfill(status=200, content_type="application/json", body=json.dumps(body))
-    pages = [("join", "/join/?next=/ep02/", True, None), ("join-empty", "/join/", False, None), ("callback", "/join/callback/?error=access_denied", True, None),
+    pages = [("join", "/join/?next=/daily/wake/", True, None), ("join-empty", "/join/", False, None), ("callback", "/join/callback/?error=access_denied", True, None),
              ("me", "/me/", True, "#signedIn:not([hidden])"), ("privacy", "/privacy/", False, None), ("gate", "/tests/auth/gate-harness.html?until=1", False, "#lilyGateCard")]
     for w, h in SIZES:
         for name, path, configured, wait in pages:
