@@ -117,9 +117,12 @@ for old in legacy_lines:
         bad.append(f"_redirects: 목록에 없는 옛 주소 {old}")
 if re.search(r"ep\[0-9\]|/ep[0-9]{2}", sitemap + llms):
     bad.append("sitemap.xml 또는 llms.txt 에 옛 주소가 남음")
+# 빌드는 시리즈 폴더를 catalog.json의 series에서 읽는다(손으로 적은 목록이 아님)
+if "catalog.json" not in build or not re.search(r"^for d in [^;]*\$SERIES\b", build, re.M):
+    bad.append("scripts/build-site.sh: 시리즈 폴더를 catalog.json에서 읽어 배포하지 않음")
 for s in series:
-    if not re.search(r"^for d in [^;]*\b" + re.escape(s) + r"\b", build, re.M):
-        bad.append(f"scripts/build-site.sh: 시리즈 폴더 {s} 가 허용 목록에 없음")
+    if not os.path.isdir(os.path.join(ROOT, s)):
+        bad.append(f"{s}/: 목록의 시리즈 폴더가 없음")
 
 # 4. 편 ID 정규식 세 곳
 def grab(p, pat):

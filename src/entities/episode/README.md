@@ -1,6 +1,6 @@
 # 편(entities/episode)
 
-편 목록의 원천은 `catalog.json` 하나입니다(브라우저는 `catalog.js`로 받아 `window.LilyEpisodes`에, Worker는 import). 편 동그라미 그림은 `img/ep-*.webp`입니다. 편을 더하면 `catalog.json`의 `episodes`에 한 줄(`id`=`<시리즈>/<편>`, `series`, `slug`, `no`, 제목, 영어 제목, `img`, `free`)을 더하고, 편 폴더 `<시리즈>/<편>/`를 만들고, 홈(`index.html`), 랜딩(`hello/index.html`), `sitemap.xml`, `llms.txt`도 맞춥니다. 새 시리즈는 `series`에 더하고 `scripts/build-site.sh` 허용 목록에 시리즈 폴더를 넣습니다.
+편 목록의 원천은 `catalog.json` 하나입니다(브라우저는 `catalog.js`로 받아 `window.LilyEpisodes`에, Worker는 import). 편 동그라미 그림은 `img/ep-*.webp`입니다. 편을 더하면 `catalog.json`의 `episodes`에 한 줄(`id`=`<시리즈>/<편>`, `series`, `slug`, `no`, 제목, 영어 제목, `img`, `free`)을 더하고, 편 폴더 `<시리즈>/<편>/`를 만들고, 홈(`index.html`), 랜딩(`hello/index.html`), `sitemap.xml`, `llms.txt`도 맞춥니다. 새 시리즈는 `series`에 더하고 같은 이름의 폴더를 만들면 `scripts/build-site.sh`가 목록에서 읽어 배포에 넣습니다(폴더가 없으면 빌드가 멈춤).
 
 누가 끝까지 듣나는 `access.js`의 `canListen`과 `catalog.json`의 `policy` 한 곳이 정합니다. `locked`는 무료가 아닌 편을 끝까지 듣는 등급(지금 `member`, 구독 도입 때 `subscriber`), `preview`는 무료가 아닌 편의 앞부분 미리듣기(지금 `true`). 무료 여부(`free`)는 편마다 `catalog.json`에만 둡니다. `python3 tests/lily/catalog_check.py`가 차이를 잡습니다. 편 HTML 만드는 법과 재생기는 `src/widgets/player/README.md`.
 
