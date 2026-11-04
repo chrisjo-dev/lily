@@ -26,7 +26,7 @@ mig() { psql -t -A -v phase="$1" < "$here/series_migration.sql" 2>&1 | sed 's/^p
 mig seed
 psql < "$root/supabase/migrations/0002_series.sql"
 mig new
-psql < "$root/supabase/migrations/0002_series_down.sql"
+psql < "$root/supabase/rollback/0002_series_down.sql"
 mig old
 psql < "$root/supabase/migrations/0002_series.sql"
 mig cleanup
