@@ -1,6 +1,12 @@
 SITE ?= https://lilyrang.co.kr
 
-.PHONY: build deploy smoke
+.PHONY: build deploy smoke migrate
+
+# supabase/migrations 중 원격 DB에 아직 없는 것을 적용한다. 먼저 무엇이 적용될지 보여 주고, 적용 전에 supabase가 [Y/n]으로 묻는다.
+# 코드가 새 DB 규칙에 기대는 변경이면 migrate 바로 다음에 deploy 한다. 되돌리기는 supabase/rollback/
+migrate:
+	supabase db push --linked --dry-run
+	supabase db push --linked
 
 # 허용 목록으로 dist/ 를 만든다
 build:
