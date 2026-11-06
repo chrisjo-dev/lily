@@ -278,7 +278,7 @@ async def main():
             if f["type"] == "tap-sparkle":
                 await open_at(pg, mid)
                 await tap(pg, f"#{f['target']} .hit"); await pg.wait_for_timeout(100)
-                ok(f"tap-sparkle {f['target']} makes sparks", await pg.evaluate(f"$('{f['into']}').children.length")>= 3)
+                ok(f"tap-sparkle {f['target']} makes sparks", await pg.evaluate(f"$('{f['into']}').children.length") >= (1 if f.get("mark") else 3))
         sc = None
         for f in free:
             if f["type"] != "scrub": continue

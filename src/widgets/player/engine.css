@@ -75,6 +75,11 @@ body::after {
 /* find: 찾은 것은 흐리게, 누르면 통통 */
 .tgt.done .art { filter: grayscale(1) brightness(1.08); }
 .bounce { transform-box: fill-box; transform-origin: center; animation: bounce .7s ease-out; }
+/* 튈 때 발밑 선: 편 마크업 .hoplines 를 누를 대상(.tgt) 뒤에 두면 다 했을 때 한 번 나온다 */
+.hoplines { fill: none; stroke: var(--card); stroke-width: 6; stroke-linecap: round; opacity: 0; pointer-events: none; }
+.tgt.done ~ .hoplines { animation: hoplines .7s ease-out; }
+@keyframes hoplines { 30% { opacity: 1; } 60% { opacity: 0; } 80% { opacity: .7; } }
+.stage text.tl { font-family: var(--font-en); font-weight: 700; }
 @keyframes bounce { 30% { transform: translateY(-28px) rotate(-10deg) scale(1.12); } 60% { transform: translateY(0) rotate(0) scale(1); } 80% { transform: translateY(-7px); } }
 /* scrub: 문지르면 세균이 사라짐 */
 .scrub { touch-action: none; }
@@ -189,6 +194,7 @@ body > .stage { visibility: hidden; }
 .said { display: none; }
 .turn .cap { flex: 1 0 80px; padding: 0 32px; }
 .turn .cap p { flex-direction: column-reverse; gap: 4px; }
+.cap .kr > .en { all: unset; font-family: var(--font-en); }   /* inlineEn 편: 문장 속 영어는 줄을 나누지 않고 글꼴만 영어 */
 .turn .cap .en { font-weight: 700; font-size: 20px; color: var(--ink); -webkit-line-clamp: 1; }
 .turn .cap .kr { font-size: 14px; line-height: 1.5; color: var(--ink-2); -webkit-line-clamp: 2; }
 .turn .said { display: flex; flex: none; height: 180px; align-items: center; justify-content: center; border-top: 1px solid var(--line); background: var(--paper); }
@@ -265,6 +271,13 @@ body > .stage { visibility: hidden; }
 .estk span { display: flex; flex-direction: column; align-items: center; gap: 5px; width: 78px; font-family: var(--font-en); font-size: 10px; line-height: 1.2; color: var(--ink-2); text-align: center; }
 .spot { display: grid; place-items: center; width: 78px; height: 78px; background: url(ui/sticker-spot.webp) center / contain no-repeat; }
 .spot img { display: block; width: 66px; height: 66px; object-fit: contain; }
+/* 스티커 4칸: 휴대폰에서 칸을 줄여 한 줄에 둔다(4칸 318px) */
+@media (max-width: 899px) {
+  .estk.many { gap: 10px; }
+  .estk.many span { width: 72px; }
+  .estk.many .spot { width: 72px; height: 72px; }
+  .estk.many .spot img { width: 60px; height: 60px; }
+}
 .again {
   position: relative; flex: none; width: 160px; height: 67px; margin-top: 36px; padding: 0 0 0 40px; border-radius: 34px; cursor: pointer;
   border: 0; background: none; color: var(--touch-edge); font-family: var(--font-title); font-weight: 700; letter-spacing: -0.06em; font-size: 23px; box-shadow: 0 4px 14px var(--shadow);
