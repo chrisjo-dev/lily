@@ -41,6 +41,11 @@
     <image:image><image:loc>https://lilyrang.co.kr/daily/sleep/og.jpg</image:loc></image:image>
   </url>
   <url>
+    <loc>https://lilyrang.co.kr/tori/hello/</loc>
+    <lastmod>2026-11-06</lastmod>
+    <image:image><image:loc>https://lilyrang.co.kr/tori/hello/og.jpg</image:loc></image:image>
+  </url>
+  <url>
     <loc>https://lilyrang.co.kr/privacy/</loc>
     <lastmod>2026-10-30</lastmod>
   </url>

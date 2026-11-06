@@ -59,6 +59,10 @@
 .sm-track i { position: absolute; left: 0; top: 0; bottom: 0; width: 28%; border-radius: 4px; background: var(--sky-deep); }
 .sm-js .sm-track { display: block; }
 .sm-js .sm-track i { width: calc(var(--sm-view, .28) * 100%); transform: translateX(calc(var(--sm-pos, 0) * (1 / var(--sm-view, .28) - 1) * 100%)); }
+/* 다른 시리즈 칸(보드 T13): 장면 그림은 바탕과 섞지 않고 그대로 */
+.circle .dot.scene { background: var(--mint); }
+.circle .dot.scene > img, .circle.locked .dot.scene > img { mix-blend-mode: normal; filter: none; }
+.shelf.stories { padding-top: 0; }
 /* 화면 끝까지 붙는 PC 줄이 스크롤 막대 폭만큼 넘쳐도 페이지가 옆으로 밀리지 않게 */
 body { overflow-x: clip; }
 
