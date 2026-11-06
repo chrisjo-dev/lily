@@ -358,7 +358,17 @@
       "w": 390,
       "h": 300,
       "title": "T16-LandingShelf",
-      "group": "홈"
+      "group": "홈",
+      "status": "approved",
+      "note": "사용자 승인(2026-11-06)",
+      "impl": {
+        "route": "/hello/",
+        "files": [
+          "hello/index.html",
+          "src/pages/landing/hello.css"
+        ],
+        "updated": "2026-11-06T04:21:46Z"
+      }
     }
   },
   "groups": [
