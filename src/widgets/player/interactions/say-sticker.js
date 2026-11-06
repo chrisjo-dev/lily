@@ -1,6 +1,6 @@
 // say-sticker: "말했어요"를 누르면 스티커가 판으로 날아간다. 대사 차례가 오기 전에 누르면 고개를 젓는다.
 // 판(free_play에 하나): { scene: "sc5", type: "say-sticker", target: "t-say", label: "say-word",
-//   words: { 줄번호: "말풍선 글" }, into: "stickers", from: [x, y], slots: [[x, y], ...], images: ["스티커 그림", ...] }
+//   words: { 줄번호: "말풍선 글" }, into: "stickers", from: [x, y], slots: [[x, y], ...], images: ["스티커 그림", ...], size(선택): 스티커 한 변 }
 // 기다림(스티커마다): { at, type: "say-sticker", sticker: 0 }  at은 따라 말할 줄이 끝나는 시각
 LilyInteractions["say-sticker"] = (api, specs) => {
   const B = specs.find((s) => s.wait < 0);
@@ -8,11 +8,12 @@ LilyInteractions["say-sticker"] = (api, specs) => {
     const ln = api.lines.find((l) => Math.abs(l[1] - w.at) < 0.01);
     return Object.assign(w, { from: ln ? ln[0] : w.at });
   });
+  const S = B.size || 66;   // 스티커 한 변(장면 좌표), 슬롯은 왼쪽 위 기준이고 가운데는 늘 x + 31
   const earned = B.slots.map(() => false);
   const els = B.slots.map(([x, y], k) => {
     const o = api.el("g", { transform: `translate(${x} ${y})` }, api.$(B.into));
     const i = api.el("g", { class: "stk", style: `--dx:${B.from[0] - x - 31}px;--dy:${B.from[1] - y - 31}px` }, o);
-    api.el("image", { "data-src": B.images[k], x: -2, y: -2, width: 66, height: 66 }, i);
+    api.el("image", { "data-src": B.images[k], x: 31 - S / 2, y: 31 - S / 2, width: S, height: S }, i);
     o.toggleAttribute("hidden", true);
     return o;
   });

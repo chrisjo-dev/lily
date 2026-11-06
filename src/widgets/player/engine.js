@@ -41,15 +41,18 @@ const each = (hook, ...a) => { for (const m of mods) if (m[hook]) m[hook](...a);
 // 휴대폰: 위 무대(그림) + 본문 줄 + 접힌 서랍 손잡이. 서랍을 열면 재생, 3번 이어 듣기, 조금 천천히, 그냥 듣기, 대본.
 // 태블릿 가로: 펼친 책(왼쪽 그림, 오른쪽 본문과 부모 조작 줄). 같은 요소를 CSS 격자로 옮겨 놓는다(engine.css)
 const EN_RE = /[A-Za-z][A-Za-z'\-]*(?:[ ,.!?]*[A-Za-z][A-Za-z'\-]*)*[.!?,]*/g;
+const inSentence = (m, before, after) => /[가-힣",]\s*$/.test(before) || /^"/.test(after) || (!/[.!?,]$/.test(m) && /^\s*[가-힣]/.test(after));
 // 본문 줄: 한국어와 영어를 두 줄로 나눈다. 같은 영어가 되풀이되면 한 번만(예: "Brush my teeth. ... Brush my teeth!")
 function capHTML(s) {
   const en = [], keys = [];
-  const kr = plain(s).replace(EN_RE, (m) => {
+  const kr = plain(s).replace(EN_RE, (m, at, all) => {
+    // inlineEn 편: 한국어 문장 속 영어(토리 "river에는", "너무 lonely해", "먼저 hello! 해 봐요")는 빼면 문장이 끊기므로 그 자리에 둔다
+    if (EP.inlineEn && inSentence(m, all.slice(0, at), all.slice(at + m.length))) return m;
     const k = m.toLowerCase().replace(/[^a-z' ]/g, "").trim();
     if (!keys.some((x) => x.includes(k))) { keys.push(k); en.push(m); }
     return " ";
   }).replace(/\s+/g, " ").replace(/\s([.,!?])/g, "$1").trim();
-  return (kr ? `<span class="kr">${esc(kr)}</span>` : "") + (en.length ? `<span class="en">${esc(en.join(" "))}</span>` : "");
+  return (kr ? `<span class="kr">${EP.inlineEn ? tipHTML(kr) : esc(kr)}</span>` : "") + (en.length ? `<span class="en">${esc(en.join(" "))}</span>` : "");
 }
 // 부모님 글(팁) 안의 영어만 영어 글꼴로
 function tipHTML(s) {
@@ -89,12 +92,12 @@ function buildShell() {
       <img src="${UI}${icon}.webp" width="32" height="32" alt="" loading="lazy" decoding="async">
       <span class="lab"><b class="long">${name}</b><b class="short">${short}</b><small>${sub}</small></span><span class="tog" aria-hidden="true"></span>
     </button>`;
-  const tips = EP.tips || [], t1 = end.tip || (Array.isArray(tips[1]) ? tips[1].join(" ") : tips[1] || "");
-  const art0 = $(SCENES[0].id).querySelector("image"), frame = art0 ? art0.getAttribute("href") || art0.dataset.src : "";
+  const HOST = EP.host || "릴리", tips = EP.tips || [], t1 = end.tip || (Array.isArray(tips[1]) ? tips[1].join(" ") : tips[1] || "");
+  const art0 = $(SCENES[0].id).querySelector("image"), frame = end.frame || (art0 ? art0.getAttribute("href") || art0.dataset.src : "");
   kid.insertAdjacentHTML("beforeend", `<div class="ring" id="ring" hidden aria-hidden="true"><svg viewBox="0 0 136 136"><circle class="trk" cx="68" cy="68" r="60"/><circle class="cnt" cx="68" cy="68" r="60"/></svg></div>
   <div class="cap" id="cap">
-    <span class="wtag" id="wtag" hidden>릴리가 기다려요</span>
-    <p id="capText" aria-live="polite"><span class="kr">노란 동그라미를 누르면<br>릴리 이야기가 시작돼요.</span></p>
+    <span class="wtag" id="wtag" hidden>${esc(HOST)}가 기다려요</span>
+    <p id="capText" aria-live="polite"><span class="kr">노란 동그라미를 누르면<br>${esc(HOST)} 이야기가 시작돼요.</span></p>
     <div class="expr"><p class="xlab">오늘의 표현</p><p class="xword" id="xword">${esc(((EP.words || [])[0] || {}).en || "")}</p></div>
   </div>
   ${SAY() ? `<div class="said" id="said"></div>` : ""}
@@ -124,7 +127,7 @@ function buildShell() {
       <div class="eleft"><div class="eframe"><img data-src="${esc(frame)}" alt="" width="170" height="170"></div>
       <div class="ehead"><p class="epn">${num}</p><p class="etitle">${esc(EP.title)}</p><p class="emsg">${esc(end.done || "오늘 이야기를 다 들었어요.")}</p></div></div>
       <div class="eright">${end.stickers ? `<p class="ribbon"><svg viewBox="0 0 ${RIB_BOX}"><image class="ui" data-ui="ribbon.webp" width="220" height="38" preserveAspectRatio="none"/>${ribPath("ribE", 0, 0, 220, 38)}<text class="rib" dominant-baseline="central"><textPath href="#ribE" startOffset="50%" text-anchor="middle">${esc(end.sub || "오늘의 스티커")}</textPath></text></svg></p>
-      <div class="estk">${end.stickers.map((s) => `<span><i class="spot"><img data-src="${esc(s.img)}" alt="" width="66" height="66"></i>${esc(s.label)}</span>`).join("")}</div>` : ""}
+      <div class="estk${end.stickers.length > 3 ? " many" : ""}">${end.stickers.map((s) => `<span><i class="spot"><img data-src="${esc(s.img)}" alt="" width="66" height="66"></i>${esc(s.label)}</span>`).join("")}</div>` : ""}
       <button class="again" id="again" type="button">한 번 더</button>
       <button class="toparent" id="toParent" type="button">부모님께</button></div>
     </div>

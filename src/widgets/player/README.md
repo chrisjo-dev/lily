@@ -32,12 +32,12 @@
 
 | 종류 | 하는 일 | 쓰는 곳 | 주요 설정 |
 |---|---|---|---|
-| `find` | 숨은 것을 찾아 누르면 통통 튀고 흐려짐 | waits | `target`, `bounce` |
+| `find` | 숨은 것을 찾아 누르면 통통 튀고 흐려짐 | waits | `target`, `bounce`. 대상 뒤에 `.hoplines`를 두면 튈 때 발밑 선이 한 번 나옴 |
 | `pop` | 거품 여러 개 터뜨리기, 칩에 개수. 터지면 물방울 그림(`ui/pop.webp`), `word`가 있으면 그 글자도 | waits | `into`, `img`, `bubbles: [[x, y, r]]`, `word` |
-| `say-sticker` | "말했어요" 누르면 스티커가 판으로 | 판은 free_play 하나, 스티커마다 waits | 판: `target`, `label`, `words`, `into`, `from`, `slots`, `images` / 기다림: `sticker` |
+| `say-sticker` | "말했어요" 누르면 스티커가 판으로 | 판은 free_play 하나, 스티커마다 waits | 판: `target`, `label`, `words`, `into`, `from`, `slots`, `images`, `size`(선택, 스티커 한 변) / 기다림: `sticker` |
 | `lamp-end` | 불을 끄면 어두워지고 끝 카드 | waits(마지막) | `target` |
 | `scrub` | 문지르면 세균이 사라지고 글자가 떠오름. 아직 안 문질렀으면 문지르기 손(`ui/hand-rub.webp`)이 좌우로 | free_play(waits도 가능) | `target`, `brush`, `home`, `into`, `floats`, `img`, `word`, `germs`, `hint` |
-| `tap-sparkle` | 누른 곳에 별 반짝(`ui/sparkle.webp`) | free_play(waits도 가능) | `target`, `into`, `keyArea` |
+| `tap-sparkle` | 누른 곳에 별 반짝(`ui/sparkle.webp`) | free_play(waits도 가능) | `target`, `into`, `keyArea`, `mark`(선택, 별 대신 띄울 sprite), `sound`(선택, 효과음 이름) |
 
 누를 것은 `<g class="tgt" role="button" tabindex="0" aria-label="...">` 안에 `.halo`(숨쉬는 노란 테두리), `.pulse`, 넓은 `.hit`을 둡니다. 다 하면 사라질 그림 레이어(커튼, 그릇, 문, 마개처럼 치우는 것)는 그 `<image>`에 `class="vanish-on-done"`을 붙입니다. 노란 빛을 두르고, 기다림이 채워져 대상에 `.done`이 붙으면 0.4초 동안 흐려져 사라집니다(종류와 상관없이 `find`, `tap-sparkle` 등에 모두 씀). `lamp-end`의 켠 그림 `.lamp-on-img`도 같은 모양이고, 끈 그림 `.lamp-off-img`는 그때 나타납니다. 노란색(`fT`, `--touch`)은 아이가 누르는 것에만 씁니다. 손 모양 안내는 `<g class="hand" transform="..."><g><use href="#hand-shape"/></g></g>`(기다릴 때만 보임). 손끝이 `transform`의 원점 바로 위(0, -2)에 오고 손등은 오른쪽 아래로 놓입니다. 손은 안내일 뿐 누르는 것이 아니라 노란색이 아닙니다. 문지르는 장면(`.hit.scrub`가 있는 장면)의 손은 엔진이 `#hand-rub`로 바꿉니다.
 

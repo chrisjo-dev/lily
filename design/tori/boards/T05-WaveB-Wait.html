@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>T05 손 흔들기 B 기다림</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Andika:wght@400;700&family=Gowun+Batang&family=Gowun+Dodum&family=Jua&family=Gaegu:wght@700&family=Noto+Sans+KR:wght@400;700&display=swap">
+<link rel="stylesheet" href="../shared/tokens.css">
+<link rel="stylesheet" href="../shared/engine.css">
+<link rel="stylesheet" href="../shared/tori.css">
+
+</head>
+<body>
+<div class="kid " id="kid"><a class="logo" aria-label="릴리랑 처음으로"><img src="../assets/emblem.png" width="32" height="32" alt=""></a>
+<div class="eplabel"><span class="epn">EP01</span><h1>Hello!</h1></div><div class="dots" role="img" aria-label="장면"><i class="past"></i><i class="past"></i><i class="past"></i><i class="now"></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i></div>
+<div class="stage waiting" id="stage">
+<svg class="scene" viewBox="0 0 390 585" preserveAspectRatio="xMidYMin slice"><image href="../assets/art/sc4-bank.jpg" width="390" height="585"/><ellipse cx="150" cy="450" rx="86" ry="14" fill="var(--brown)" opacity=".28"/><image href="../assets/art/tori-tail.png" x="24" y="384" width="62" height="60"/><image href="../assets/art/tori-front.png" x="50" y="248" width="200" height="202"/><g class="tgt"><circle class="halo" cx="140" cy="362" r="46"/></g><g class="hand" transform="translate(150 388)"><g><image href="../assets/ui/hand-tap.webp" width="64" height="64"/></g></g></svg>
+</div><div class="ring" aria-hidden="true" data-pos style="left:88px;top:310px;width:104px;height:104px"><svg viewBox="0 0 136 136"><circle class="trk" cx="68" cy="68" r="60"/><circle class="cnt" cx="68" cy="68" r="60"/></svg></div>
+<div class="cap" id="cap"><p id="capText"><span class="kr">친구도 손을 흔들면서, hello!</span><span class="en">Hello!</span></p><div class="expr"><p class="xlab">오늘의 표현</p><p class="xword">hello</p></div></div>
+<div class="said" id="said"></div>
+<button class="hintrow" type="button"><i class="bar"></i><span>부모 화면 열기</span><i class="chev"></i></button>
+<section class="drawer" id="drawer" aria-label="부모님 조작" inert="">
+    <button class="grab" id="drawerClose" type="button" aria-label="부모 화면 닫기"><i></i></button>
+    <div class="prow">
+      <button class="pp" id="play" type="button" aria-label="재생">
+        <svg id="ic-play" viewBox="0 0 20 20" fill="currentColor"><path d="M6.5 4.3v11.4a.8.8 0 0 0 1.2.7l9.2-5.7a.8.8 0 0 0 0-1.4L7.7 3.6a.8.8 0 0 0-1.2.7z"></path></svg>
+        <svg id="ic-pause" viewBox="0 0 20 20" fill="currentColor" hidden=""><rect x="5" y="4" width="3.6" height="12" rx="1.2"></rect><rect x="11.4" y="4" width="3.6" height="12" rx="1.2"></rect></svg>
+      </button>
+      <div class="prog">
+        <div class="times"><span class="time" id="cur">2:41</span><span class="time" id="dur">3:36</span></div>
+        <input id="seek" type="range" min="0" max="139.797052" step="0.1" value="0" aria-label="재생 위치" style="--p: 75%;">
+      </div>
+    </div>
+    <div class="opts">
+      <button class="opt" id="times3" type="button" aria-pressed="false">
+      <img src="../assets/ui/ic-repeat.webp" width="32" height="32" alt="" loading="lazy" decoding="async">
+      <span class="lab"><b class="long">3번 이어 듣기</b><b class="short">반복</b><small>끝나면 처음부터 다시 들어요</small></span><span class="tog" aria-hidden="true"></span>
+    </button>
+      <button class="opt" id="slow" type="button" aria-pressed="false">
+      <img src="../assets/ui/ic-slow.webp" width="32" height="32" alt="" loading="lazy" decoding="async">
+      <span class="lab"><b class="long">조금 천천히</b><b class="short">천천히</b><small>재생 속도 0.85x</small></span><span class="tog" aria-hidden="true"></span>
+    </button>
+      <button class="opt" id="justListen" type="button" role="switch" aria-checked="false">
+      <img src="../assets/ui/ic-listen.webp" width="32" height="32" alt="" loading="lazy" decoding="async">
+      <span class="lab"><b class="long">그냥 듣기</b><b class="short">그냥 듣기</b><small>아이 차례에도 멈추지 않아요</small></span><span class="tog" aria-hidden="true"></span>
+    </button>
+    </div>
+    <a class="opt link" id="toScript" href="#parent"><img src="../assets/ui/ic-script.webp" width="32" height="32" alt="" loading="lazy" decoding="async"><span class="lab"><b>대본 보기</b></span><i class="chev"></i></a>
+  </section>
+
+</div>
+</body>
+</html>

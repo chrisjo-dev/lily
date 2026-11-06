@@ -1,0 +1,444 @@
+{
+  "boards": {
+    "T01-FindPhone.html": {
+      "x": 0,
+      "y": 0,
+      "w": 390,
+      "h": 844,
+      "title": "T01-FindPhone",
+      "group": "장면",
+      "comments": [
+        {
+          "text": "임시 그림: 사용자 참고 그림과 캐릭터 시트 C를 잘라 합성했고 금빛은 색을 바꿔 뺐다. 구성 확인용이며 실제 장면 그림이 아니다.",
+          "by": "작업자",
+          "created": "2026-11-04T04:37:46Z"
+        }
+      ],
+      "status": "approved",
+      "note": "실제 그림 기준 사용자 승인(2026-11-05)",
+      "impl": {
+        "route": "/tori/hello/",
+        "files": [
+          "tori/hello/index.html",
+          "src/widgets/player/engine.css"
+        ],
+        "updated": "2026-11-06T04:08:08Z"
+      }
+    },
+    "T02-SwimPhone.html": {
+      "x": 430,
+      "y": 0,
+      "w": 390,
+      "h": 844,
+      "title": "T02-SwimPhone",
+      "group": "장면",
+      "comments": [
+        {
+          "text": "임시 그림: 사용자 참고 그림과 캐릭터 시트 C를 잘라 합성했고 금빛은 색을 바꿔 뺐다. 구성 확인용이며 실제 장면 그림이 아니다.",
+          "by": "작업자",
+          "created": "2026-11-04T04:37:46Z"
+        }
+      ],
+      "status": "approved",
+      "note": "실제 그림 기준 사용자 승인(2026-11-05)",
+      "impl": {
+        "route": "/tori/hello/",
+        "files": [
+          "tori/hello/index.html",
+          "src/widgets/player/engine.css"
+        ],
+        "updated": "2026-11-06T04:08:08Z"
+      }
+    },
+    "T03-WaveA-Wait.html": {
+      "x": 860,
+      "y": 0,
+      "w": 390,
+      "h": 844,
+      "title": "T03-WaveA-Wait",
+      "group": "장면",
+      "comments": [
+        {
+          "text": "임시 그림: 사용자 참고 그림과 캐릭터 시트 C를 잘라 합성했고 금빛은 색을 바꿔 뺐다. 구성 확인용이며 실제 장면 그림이 아니다.",
+          "by": "작업자",
+          "created": "2026-11-04T04:37:46Z"
+        },
+        {
+          "text": "권장. 코드 추가 없이 find로 된다. 단 find의 .art 는 누른 뒤 회색이 되므로 토리 그림에 .art 를 쓰면 안 된다.",
+          "by": "작업자",
+          "created": "2026-11-04T04:37:48Z"
+        }
+      ],
+      "status": "approved",
+      "note": "실제 그림 기준 사용자 승인(2026-11-05)",
+      "impl": {
+        "route": "/tori/hello/",
+        "files": [
+          "tori/hello/index.html",
+          "src/widgets/player/engine.css"
+        ],
+        "updated": "2026-11-06T04:08:09Z"
+      }
+    },
+    "T04-WaveA-Done.html": {
+      "x": 1290,
+      "y": 0,
+      "w": 390,
+      "h": 844,
+      "title": "T04-WaveA-Done",
+      "group": "장면",
+      "comments": [
+        {
+          "text": "임시 그림: 사용자 참고 그림과 캐릭터 시트 C를 잘라 합성했고 금빛은 색을 바꿔 뺐다. 구성 확인용이며 실제 장면 그림이 아니다.",
+          "by": "작업자",
+          "created": "2026-11-04T04:37:46Z"
+        }
+      ],
+      "status": "approved",
+      "note": "실제 그림 기준 사용자 승인(2026-11-05)",
+      "impl": {
+        "route": "/tori/hello/",
+        "files": [
+          "tori/hello/index.html",
+          "src/widgets/player/engine.css"
+        ],
+        "updated": "2026-11-06T04:08:09Z"
+      }
+    },
+    "T05-WaveB-Wait.html": {
+      "x": 1720,
+      "y": 0,
+      "w": 390,
+      "h": 844,
+      "title": "T05-WaveB-Wait",
+      "group": "old drafts",
+      "comments": [
+        {
+          "text": "임시 그림: 사용자 참고 그림과 캐릭터 시트 C를 잘라 합성했고 금빛은 색을 바꿔 뺐다. 구성 확인용이며 실제 장면 그림이 아니다.",
+          "by": "작업자",
+          "created": "2026-11-04T04:37:46Z"
+        },
+        {
+          "text": "손이 실제로 흔들리려면 interactions/wave.js 와 그림 2장이 더 필요하다. 팔 내린 손은 작아 대상이 몸과 겹친다.",
+          "by": "작업자",
+          "created": "2026-11-04T04:37:48Z"
+        }
+      ],
+      "status": "rejected",
+      "note": "A 선택으로 뺌(2026-11-04)"
+    },
+    "T06-WaveB-Done.html": {
+      "x": 2150,
+      "y": 0,
+      "w": 390,
+      "h": 844,
+      "title": "T06-WaveB-Done",
+      "group": "old drafts",
+      "comments": [
+        {
+          "text": "임시 그림: 사용자 참고 그림과 캐릭터 시트 C를 잘라 합성했고 금빛은 색을 바꿔 뺐다. 구성 확인용이며 실제 장면 그림이 아니다.",
+          "by": "작업자",
+          "created": "2026-11-04T04:37:46Z"
+        }
+      ],
+      "status": "rejected",
+      "note": "A 선택으로 뺌(2026-11-04)"
+    },
+    "T07-TurnPhone.html": {
+      "x": 2580,
+      "y": 0,
+      "w": 390,
+      "h": 844,
+      "title": "T07-TurnPhone",
+      "group": "장면",
+      "comments": [
+        {
+          "text": "임시 그림: 사용자 참고 그림과 캐릭터 시트 C를 잘라 합성했고 금빛은 색을 바꿔 뺐다. 구성 확인용이며 실제 장면 그림이 아니다.",
+          "by": "작업자",
+          "created": "2026-11-04T04:37:47Z"
+        }
+      ],
+      "status": "approved",
+      "note": "실제 그림 기준 사용자 승인(2026-11-05)",
+      "impl": {
+        "route": "/tori/hello/",
+        "files": [
+          "tori/hello/index.html",
+          "src/widgets/player/engine.css"
+        ],
+        "updated": "2026-11-06T04:08:10Z"
+      }
+    },
+    "T08-TurnDesktop.html": {
+      "x": 3010,
+      "y": 0,
+      "w": 1440,
+      "h": 900,
+      "title": "T08-TurnDesktop",
+      "group": "장면",
+      "comments": [
+        {
+          "text": "임시 그림: 사용자 참고 그림과 캐릭터 시트 C를 잘라 합성했고 금빛은 색을 바꿔 뺐다. 구성 확인용이며 실제 장면 그림이 아니다.",
+          "by": "작업자",
+          "created": "2026-11-04T04:37:47Z"
+        }
+      ],
+      "status": "approved",
+      "note": "실제 그림 기준 사용자 승인(2026-11-05)",
+      "impl": {
+        "route": "/tori/hello/",
+        "files": [
+          "tori/hello/index.html",
+          "src/widgets/player/engine.css"
+        ],
+        "updated": "2026-11-06T04:08:11Z"
+      }
+    },
+    "T09-EndA-Phone.html": {
+      "x": 4490,
+      "y": 0,
+      "w": 390,
+      "h": 844,
+      "title": "T09-EndA-Phone",
+      "group": "끝 카드",
+      "comments": [
+        {
+          "text": "임시 그림: 사용자 참고 그림과 캐릭터 시트 C를 잘라 합성했고 금빛은 색을 바꿔 뺐다. 구성 확인용이며 실제 장면 그림이 아니다.",
+          "by": "작업자",
+          "created": "2026-11-04T04:37:47Z"
+        },
+        {
+          "text": "권장. 칸 72px, 간격 10px, 합 318px. 390, 360, 320 폭에서 가로 넘침 없음. 지금 값(78px, 14px, 354px)은 390에서 들어가지만 360에서 여백 3px, 320에서 페이지가 324px로 넘친다.",
+          "by": "작업자",
+          "created": "2026-11-04T04:37:48Z"
+        }
+      ],
+      "status": "approved",
+      "note": "실제 그림 기준 사용자 승인(2026-11-05)",
+      "impl": {
+        "route": "/tori/hello/",
+        "files": [
+          "tori/hello/index.html",
+          "src/widgets/player/engine.css"
+        ],
+        "updated": "2026-11-06T04:08:11Z"
+      }
+    },
+    "T11-EndB-Phone.html": {
+      "x": 4920,
+      "y": 0,
+      "w": 390,
+      "h": 844,
+      "title": "T11-EndB-Phone",
+      "group": "old drafts",
+      "comments": [
+        {
+          "text": "임시 그림: 사용자 참고 그림과 캐릭터 시트 C를 잘라 합성했고 금빛은 색을 바꿔 뺐다. 구성 확인용이며 실제 장면 그림이 아니다.",
+          "by": "작업자",
+          "created": "2026-11-04T04:37:47Z"
+        },
+        {
+          "text": "두 줄이라 높이가 약 100px 늘어 그림 틀을 110px로 줄였다. 844 높이에서는 들어가지만 740 높이는 스크롤이 생긴다.",
+          "by": "작업자",
+          "created": "2026-11-04T04:37:48Z"
+        }
+      ],
+      "status": "rejected",
+      "note": "A 선택으로 뺌(2026-11-04)"
+    },
+    "T10-EndA-Desktop.html": {
+      "x": 5350,
+      "y": 0,
+      "w": 1440,
+      "h": 900,
+      "title": "T10-EndA-Desktop",
+      "group": "끝 카드",
+      "comments": [
+        {
+          "text": "임시 그림: 사용자 참고 그림과 캐릭터 시트 C를 잘라 합성했고 금빛은 색을 바꿔 뺐다. 구성 확인용이며 실제 장면 그림이 아니다.",
+          "by": "작업자",
+          "created": "2026-11-04T04:37:47Z"
+        }
+      ],
+      "status": "approved",
+      "note": "실제 그림 기준 사용자 승인(2026-11-05)",
+      "impl": {
+        "route": "/tori/hello/",
+        "files": [
+          "tori/hello/index.html",
+          "src/widgets/player/engine.css"
+        ],
+        "updated": "2026-11-06T04:08:12Z"
+      }
+    },
+    "T12-EndB-Desktop.html": {
+      "x": 6830,
+      "y": 0,
+      "w": 1440,
+      "h": 900,
+      "title": "T12-EndB-Desktop",
+      "group": "old drafts",
+      "comments": [
+        {
+          "text": "임시 그림: 사용자 참고 그림과 캐릭터 시트 C를 잘라 합성했고 금빛은 색을 바꿔 뺐다. 구성 확인용이며 실제 장면 그림이 아니다.",
+          "by": "작업자",
+          "created": "2026-11-04T04:37:47Z"
+        }
+      ],
+      "status": "rejected",
+      "note": "A 선택으로 뺌(2026-11-04)"
+    },
+    "T13-HomeA-TwoShelves.html": {
+      "x": 8310,
+      "y": 0,
+      "w": 390,
+      "h": 2394,
+      "title": "T13-HomeA-TwoShelves",
+      "group": "홈",
+      "comments": [
+        {
+          "text": "임시 그림: 사용자 참고 그림과 캐릭터 시트 C를 잘라 합성했고 금빛은 색을 바꿔 뺐다. 구성 확인용이며 실제 장면 그림이 아니다.",
+          "by": "작업자",
+          "created": "2026-11-04T04:37:47Z"
+        },
+        {
+          "text": "위아래는 지금 홈 캡처. 시리즈 칸만 더했다. 한 편뿐이라 칸이 비어 보일 수 있다.",
+          "by": "작업자",
+          "created": "2026-11-04T04:37:48Z"
+        }
+      ],
+      "status": "approved",
+      "note": "실제 그림 기준 사용자 승인(2026-11-05)",
+      "impl": {
+        "route": "/",
+        "files": [
+          "index.html",
+          "src/pages/home/home.css"
+        ],
+        "updated": "2026-11-06T04:08:13Z"
+      }
+    },
+    "T14-HomeB-TabLily.html": {
+      "x": 8740,
+      "y": 0,
+      "w": 390,
+      "h": 2090,
+      "title": "T14-HomeB-TabLily",
+      "group": "old drafts",
+      "comments": [
+        {
+          "text": "임시 그림: 사용자 참고 그림과 캐릭터 시트 C를 잘라 합성했고 금빛은 색을 바꿔 뺐다. 구성 확인용이며 실제 장면 그림이 아니다.",
+          "by": "작업자",
+          "created": "2026-11-04T04:37:48Z"
+        }
+      ],
+      "status": "rejected",
+      "note": "A 선택으로 뺌(2026-11-04)"
+    },
+    "T15-HomeB-TabTori.html": {
+      "x": 9170,
+      "y": 0,
+      "w": 390,
+      "h": 1922,
+      "title": "T15-HomeB-TabTori",
+      "group": "old drafts",
+      "comments": [
+        {
+          "text": "임시 그림: 사용자 참고 그림과 캐릭터 시트 C를 잘라 합성했고 금빛은 색을 바꿔 뺐다. 구성 확인용이며 실제 장면 그림이 아니다.",
+          "by": "작업자",
+          "created": "2026-11-04T04:37:48Z"
+        }
+      ],
+      "status": "rejected",
+      "note": "A 선택으로 뺌(2026-11-04)"
+    },
+    "T16-LandingShelf.html": {
+      "x": 9600,
+      "y": 0,
+      "w": 390,
+      "h": 300,
+      "title": "T16-LandingShelf",
+      "group": "홈",
+      "status": "approved",
+      "note": "사용자 승인(2026-11-06)",
+      "impl": {
+        "route": "/hello/",
+        "files": [
+          "hello/index.html",
+          "src/pages/landing/hello.css"
+        ],
+        "updated": "2026-11-06T04:21:46Z"
+      }
+    }
+  },
+  "groups": [
+    {
+      "id": "장면",
+      "label": "장면"
+    },
+    {
+      "id": "끝 카드",
+      "label": "끝 카드"
+    },
+    {
+      "id": "홈",
+      "label": "홈"
+    },
+    {
+      "id": "old drafts",
+      "label": "old drafts"
+    }
+  ],
+  "links": [
+    {
+      "from": "T01-FindPhone.html",
+      "to": "T02-SwimPhone.html",
+      "label": "토리 찾기"
+    },
+    {
+      "from": "T02-SwimPhone.html",
+      "to": "T03-WaveA-Wait.html",
+      "label": "물 밖으로"
+    },
+    {
+      "from": "T03-WaveA-Wait.html",
+      "to": "T04-WaveA-Done.html",
+      "label": "손 누르기 A"
+    },
+    {
+      "from": "T02-SwimPhone.html",
+      "to": "T05-WaveB-Wait.html",
+      "label": "물 밖으로"
+    },
+    {
+      "from": "T05-WaveB-Wait.html",
+      "to": "T06-WaveB-Done.html",
+      "label": "손 누르기 B"
+    },
+    {
+      "from": "T04-WaveA-Done.html",
+      "to": "T07-TurnPhone.html",
+      "label": "친구 차례"
+    },
+    {
+      "from": "T06-WaveB-Done.html",
+      "to": "T07-TurnPhone.html",
+      "label": "친구 차례"
+    },
+    {
+      "from": "T07-TurnPhone.html",
+      "to": "T09-EndA-Phone.html",
+      "label": "끝 A"
+    },
+    {
+      "from": "T07-TurnPhone.html",
+      "to": "T11-EndB-Phone.html",
+      "label": "끝 B"
+    },
+    {
+      "from": "T14-HomeB-TabLily.html",
+      "to": "T15-HomeB-TabTori.html",
+      "label": "토리 탭"
+    }
+  ]
+}

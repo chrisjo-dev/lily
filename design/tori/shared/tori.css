@@ -1,0 +1,27 @@
+/* 토리 보드 전용: engine.css(재생기 사본)는 그대로 두고 보드에서 달라지는 것만 여기에 쓴다 */
+.ring .cnt { animation: none; }
+.stage text.tl { font-family: var(--font-en); font-weight: 700; }
+body > .stage { visibility: visible; }
+.stage svg.scene { position: absolute; inset: 0; width: 100%; height: 100%; }
+/* 끝 카드 배경: 일상 시리즈 종이 재사용 */
+.endcard { background-image: url(../assets/art/paper.webp); }
+.ended > .stage { visibility: hidden; }
+/* A: 한 줄 4칸, 폰에서만 칸을 줄인다(4칸 318px) */
+@media (max-width: 899px) {
+  .one-row .estk { gap: 10px; }
+  .one-row .estk span { width: 72px; }
+  .one-row .spot { width: 72px; height: 72px; }
+  .one-row .spot img { width: 60px; height: 60px; }
+}
+/* B: 2칸씩 두 줄 */
+.two-rows .estk { display: grid; grid-template-columns: repeat(2, 78px); gap: 6px 14px; }
+@media (min-width: 900px) and (min-height: 600px) and (orientation: landscape) {
+  .two-rows .estk { grid-template-columns: repeat(2, 110px); gap: 10px 20px; }
+}
+/* 파일로 열어도 그림이 보이게 찢은 종이 틀을 data URI로(값은 ui/torn-round.svg 그대로) */
+.eframe { -webkit-mask-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9Ii02IC02IDE5NCAyMDAiPjxwYXRoIGQ9Ik05MSwyIEM5MSwyIDEwNSwwIDExMyw2IEMxMjEsMTIgMTI1LDYgMTMzLDEwIEMxNDEsMTQgMTQ0LDggMTUyLDE0IEMxNjAsMjAgMTU4LDI2IDE2NSwzMiBDMTcyLDM4IDE3OCwzNiAxODAsNDYgQzE4Miw1NiAxNzcsNjAgMTc4LDcwIEMxNzksODAgMTgzLDg0IDE4MSw5NCBDMTc5LDEwNCAxNzQsMTA2IDE3MywxMTYgQzE3MiwxMjYgMTc2LDEzMCAxNzIsMTM5IEMxNjgsMTQ4IDE2MiwxNDggMTU3LDE1NiBDMTUyLDE2NCAxNTQsMTcwIDE0NywxNzUgQzE0MCwxODAgMTM1LDE3NiAxMjcsMTc5IEMxMTksMTgyIDExNywxODcgMTA5LDE4OCBDMTAxLDE4OSA5NywxODQgODksMTg0IEM4MSwxODQgNzcsMTg5IDY5LDE4OCBDNjEsMTg3IDU5LDE4MiA1MSwxNzkgQzQzLDE3NiAzOCwxODAgMzEsMTc1IEMyNCwxNzAgMjYsMTY0IDIxLDE1NiBDMTYsMTQ4IDEwLDE0OCA2LDEzOSBDMiwxMzAgNiwxMjYgNSwxMTYgQzQsMTA2IC0xLDEwNCAtMyw5NCBDLTUsODQgLTEsODAgMCw3MCBDMSw2MCAtNCw1NiAtMiw0NiBDMCwzNiA2LDM4IDEzLDMyIEMyMCwyNiAxOCwyMCAyNiwxNCBDMzQsOCAzNywxNCA0NSwxMCBDNTMsNiA1NywxMiA2NSw2IEM3MywwIDc3LDIgOTEsMiBaIi8+PC9zdmc+Cg==); mask-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9Ii02IC02IDE5NCAyMDAiPjxwYXRoIGQ9Ik05MSwyIEM5MSwyIDEwNSwwIDExMyw2IEMxMjEsMTIgMTI1LDYgMTMzLDEwIEMxNDEsMTQgMTQ0LDggMTUyLDE0IEMxNjAsMjAgMTU4LDI2IDE2NSwzMiBDMTcyLDM4IDE3OCwzNiAxODAsNDYgQzE4Miw1NiAxNzcsNjAgMTc4LDcwIEMxNzksODAgMTgzLDg0IDE4MSw5NCBDMTc5LDEwNCAxNzQsMTA2IDE3MywxMTYgQzE3MiwxMjYgMTc2LDEzMCAxNzIsMTM5IEMxNjgsMTQ4IDE2MiwxNDggMTU3LDE1NiBDMTUyLDE2NCAxNTQsMTcwIDE0NywxNzUgQzE0MCwxODAgMTM1LDE3NiAxMjcsMTc5IEMxMTksMTgyIDExNywxODcgMTA5LDE4OCBDMTAxLDE4OSA5NywxODQgODksMTg0IEM4MSwxODQgNzcsMTg5IDY5LDE4OCBDNjEsMTg3IDU5LDE4MiA1MSwxNzkgQzQzLDE3NiAzOCwxODAgMzEsMTc1IEMyNCwxNzAgMjYsMTY0IDIxLDE1NiBDMTYsMTQ4IDEwLDE0OCA2LDEzOSBDMiwxMzAgNiwxMjYgNSwxMTYgQzQsMTA2IC0xLDEwNCAtMyw5NCBDLTUsODQgLTEsODAgMCw3MCBDMSw2MCAtNCw1NiAtMiw0NiBDMCwzNiA2LDM4IDEzLDMyIEMyMCwyNiAxOCwyMCAyNiwxNCBDMzQsOCAzNywxNCA0NSwxMCBDNTMsNiA1NywxMiA2NSw2IEM3MywwIDc3LDIgOTEsMiBaIi8+PC9zdmc+Cg==); }
+/* B는 두 줄이라 높이가 약 100px 늘어난다. 폰에서는 그림 틀을 줄여 부모님께 단추가 팁 띠에 가리지 않게 한다 */
+@media (max-width: 899px) {
+  .two-rows .eframe { width: 110px; height: 110px; }
+  .two-rows .again { margin-top: 30px; }
+}

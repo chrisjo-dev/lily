@@ -1,7 +1,8 @@
 {
   "policy": { "locked": "member", "preview": true },
   "series": [
-    { "slug": "daily", "title": "릴리랑 일상 시리즈" }
+    { "slug": "daily", "title": "릴리랑 일상 시리즈" },
+    { "slug": "tori", "title": "오리너구리 토리" }
   ],
   "episodes": [
     { "id": "daily/brush", "series": "daily", "slug": "brush", "no": 1, "legacy": "ep01", "title": "이 닦기", "en": "Brush, Brush, Brush!", "img": "brush", "free": true },
@@ -10,6 +11,7 @@
     { "id": "daily/eat", "series": "daily", "slug": "eat", "no": 4, "legacy": "ep04", "title": "아침 먹기", "en": "Yummy, Yummy!", "img": "eat", "free": false },
     { "id": "daily/dress", "series": "daily", "slug": "dress", "no": 5, "legacy": "ep05", "title": "옷 입기", "en": "Put On, Ready!", "img": "dress", "free": false },
     { "id": "daily/bath", "series": "daily", "slug": "bath", "no": 6, "legacy": "ep06", "title": "목욕하기", "en": "Rub-a-Dub, Bath Time!", "img": "bath", "free": false },
-    { "id": "daily/sleep", "series": "daily", "slug": "sleep", "no": 7, "legacy": "ep07", "title": "잠자리 책", "en": "Sweet Dreams", "img": "sleep", "free": false }
+    { "id": "daily/sleep", "series": "daily", "slug": "sleep", "no": 7, "legacy": "ep07", "title": "잠자리 책", "en": "Sweet Dreams", "img": "sleep", "free": false },
+    { "id": "tori/hello", "series": "tori", "slug": "hello", "no": 1, "title": "친구 만들기", "en": "Hello!", "img": "hello", "free": false }
   ]
 }

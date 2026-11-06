@@ -9,6 +9,8 @@
 | 필드 | 뜻 |
 |---|---|
 | `id`, `no`, `title` | 편 id(`daily/brush`, 주소 경로와 같음, `catalog.json`과 같아야 함), 시리즈 안 번호(제목 띠와 끝 카드에 `EP01`처럼), 제목 |
+| `host` | 선택. 시작 안내와 기다림 표에 쓰는 주인공 이름(없으면 "릴리"). 토리 시리즈는 `"토리"` |
+| `inlineEn` | 선택. `true`면 한국어 문장 속 영어를 본문 줄 그 자리에 둔다(없으면 영어는 모두 아래 줄로). 영어 단어가 문장 안에 섞이는 토리 시리즈용 |
 | `night` | 선택. `true`면 편 전체를 밤 화면(어두운 종이, 램프 빛 고리)으로. 장면 하나만이면 그 장면에 `"night": true` |
 | `audio`, `duration` | 음원 파일(편 폴더 기준), 길이(초, 메타데이터 받기 전 진행 막대용) |
 | `offset` | 음악 도입 길이(기록용, 시각은 이미 포함) |
@@ -17,7 +19,7 @@
 | `scenes` | `{ id, from, name, chip, worksheetChip }` 시작 시각 순. `name`은 진행 점의 읽기 글, `chip`은 무대 왼쪽 위 작은 표(없으면 숨김), `worksheetChip`은 학습지가 있을 때만 보이는 표("학습지 1번" 같은 것) |
 | `waits` | 멈춰 기다리는 곳 `{ at, type, ... }`. `at`은 보통 그 줄의 끝 시각. 아래 상호작용 표. 편의 마지막 행동인 기다림에는 `"end": true`(아래) |
 | `free_play` | 기다리지 않고 언제든 노는 것 `{ scene, type, ... }` |
-| `end` | 끝 카드 `{ at, sub, bg, stickers: [{ img, label }], done, tip }`. `at`부터(마지막 기다림이 채워졌을 때) 카드가 나옴. `sub`는 리본 글, `done`은 제목 아래 한 줄(없으면 "오늘 이야기를 다 들었어요."), `tip`은 아래 부모 띠(없으면 `tips`의 둘째 문단). 액자 그림은 장면 0 그림 |
+| `end` | 끝 카드 `{ at, sub, bg, frame, stickers: [{ img, label }], done, tip }`. `at`부터(마지막 기다림이 채워졌을 때) 카드가 나옴. `sub`는 리본 글, `done`은 제목 아래 한 줄(없으면 "오늘 이야기를 다 들었어요."), `tip`은 아래 부모 띠(없으면 `tips`의 둘째 문단). 액자 그림은 `frame`(없으면 장면 0 그림). 스티커가 4개 이상이면 휴대폰에서 칸을 줄여 한 줄에 둠 |
 | `words` | 오늘의 단어 `{ en, ko, line, icon }`. `line`은 `lines`의 번호(0부터), `icon`은 그 단어의 스티커 그림(`art/L-sticker-*.webp`, 끝 카드 스티커와 같은 것). `#symbol-id`도 되지만 지금 편은 모두 스티커 |
 | `worksheet` | 선택. `{ pdf, preview, alt, items: [...], hint }`. 없거나 `null`이면 학습지 칸, `worksheetChip`, 학습지 팁을 모두 빼요. 잠시 끄려면 `"worksheet": null`로 두고 내용은 다른 이름(`worksheet_hidden`)으로 남겨 둡니다(엔진은 읽지 않음) |
 | `tips` | 부모님께 문단. `["굵은 첫 문장", "나머지"]` 또는 글 하나. 학습지 이야기는 `{ "worksheet": true, "text": [...] }`로 두면 학습지가 있을 때만 보여요 |
