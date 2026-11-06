@@ -1,0 +1,26 @@
+/* 토리 홈 보드: 위아래는 지금 홈 캡처, 바뀌는 구역만 home.css 값으로 다시 그린다 */
+body { margin: 0; width: 390px; background: #fefefc; color: #1f2a3a; font-family: "Noto Sans KR", sans-serif; word-break: keep-all; }
+.crop { display: block; width: 390px; height: auto; }
+.block { padding: 40px 22px 46px; }
+.block.head { padding-bottom: 0; }
+.sec-title { margin: 0; font-family: "Jua", sans-serif; font-weight: 400; font-size: 24px; line-height: 30px; color: #1f2a3a; }
+.sec-lead { margin: 10px 0 0; font-size: 16px; line-height: 26px; color: #4f5b6b; }
+.swipe { margin-top: 18px; text-align: right; letter-spacing: -0.02em; font-family: var(--font-title); font-weight: 700; font-size: 18px; line-height: 23px; color: #b9781f; }
+.strip { display: flex; gap: 16px; margin-top: 22px; }
+.circle { display: flex; flex-direction: column; width: 130px; text-align: center; }
+.circle .dot { position: relative; width: 130px; height: 130px; border-radius: 50%; overflow: hidden; background: var(--mint); }
+.circle .dot > img { width: 100%; height: 100%; object-fit: contain; padding: 12px; box-sizing: border-box; }
+.circle .dot.scene > img { padding: 0; object-fit: cover; }
+.lockmark { position: absolute; right: 6%; bottom: 6%; width: 30%; aspect-ratio: 1; border-radius: 50%; background: rgba(255,255,255,.92); display: grid; place-items: center; }
+.lockmark img { width: 58%; height: auto; }
+.circle b { margin-top: 10px; font-family: "Jua", sans-serif; font-weight: 400; font-size: 18px; line-height: 23px; }
+.circle small { font-size: 13px; line-height: 17px; color: #4f5b6b; }
+/* B: 글자 탭, 지금 탭 아래 크레용 줄 */
+.tabs { display: flex; gap: 24px; margin-bottom: 18px; }
+.tab { display: flex; align-items: center; min-height: 48px; font-family: "Jua", sans-serif; font-size: 19px; color: #4f5b6b; }
+.tab.on { color: #1f2a3a; box-shadow: inset 0 -3px var(--teal); }
+/* T13: 둘째 선반 제목은 홈 첫 선반(.sec-title)과 같은 값. T14, T15에는 닿지 않는다 */
+.block.shelf .sec-title { font-family: "Jua", "Noto Sans KR", sans-serif; font-size: 24px; line-height: 1.25; letter-spacing: -0.02em; }
+/* T16: 랜딩은 가운데 맞춤 */
+.block.shelf.center { text-align: center; }
+.block.shelf.center .strip { justify-content: center; }
